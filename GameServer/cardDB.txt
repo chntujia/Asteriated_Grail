@@ -1,0 +1,150 @@
+0	magic	earth	幻	圣盾	card/shengDunDi.png	0		
+1	magic	earth	圣	圣盾	card/shengDunDi.png	0		
+2	magic	earth	咏	圣盾	card/shengDunDi.png	0		
+3	magic	earth	技	虚弱	card/xuRuoDi.png	0		
+4	magic	earth	咏	中毒	card/zhongDuDi.png	0		
+5	magic	wind	幻	魔弹	card/moDanFeng.png	0		
+6	magic	wind	圣	圣盾	card/shengDunFeng.png	0		
+7	magic	wind	血	圣盾	card/shengDunFeng.png	0		
+8	magic	wind	咏	圣盾	card/shengDunFeng.png	0		
+9	magic	wind	幻	虚弱	card/xuRuoFeng.png	0		
+10	magic	wind	圣	中毒	card/zhongDuFeng.png	0		
+11	magic	light	圣	圣光	card/shengGuang.png	1	治疗术	
+12	magic	light	圣	圣光	card/shengGuang.png	1	治疗术	
+13	magic	light	圣	圣光	card/shengGuang.png	1	治愈之光	
+14	magic	light	幻	圣光	card/shengGuang.png	0		
+15	magic	light	幻	圣光	card/shengGuang.png	0		
+16	magic	light	技	圣光	card/shengGuang.png	0		
+17	magic	light	技	圣光	card/shengGuang.png	0		
+18	magic	light	技	圣光	card/shengGuang.png	0		
+19	magic	light	血	圣光	card/shengGuang.png	0		
+20	magic	light	血	圣光	card/shengGuang.png	0		
+21	magic	light	血	圣光	card/shengGuang.png	0		
+22	magic	fire	咏	魔弹	card/moDanHuo.png	0		
+23	magic	fire	技	圣盾	card/shengDunHuo.png	0		
+24	magic	fire	血	圣盾	card/shengDunHuo.png	0		
+25	magic	fire	圣	虚弱	card/xuRuoHuo.png	0		
+26	magic	fire	血	虚弱	card/xuRuoHuo.png	0		
+27	magic	thunder	技	魔弹	card/moDanLei.png	0		
+28	magic	thunder	圣	魔弹	card/moDanLei.png	0		
+29	magic	thunder	幻	圣盾	card/shengDunLei.png	0		
+30	magic	thunder	血	圣盾	card/shengDunLei.png	0		
+31	magic	thunder	技	中毒	card/zhongDuLei.png	0		
+32	magic	water	幻	魔弹	card/moDanShui.png	0		
+33	magic	water	血	魔弹	card/moDanShui.png	0		
+34	magic	water	血	虚弱	card/xuRuoShui.png	0		
+35	magic	water	咏	虚弱	card/xuRuoShui.png	0		
+36	magic	water	幻	中毒	card/zhongDuShui.png	0		
+37	magic	water	技	中毒	card/zhongDuShui.png	0		
+38	magic	water	圣	中毒	card/zhongDuShui.png	0		
+39	attack	darkness	圣	暗灭	card/anMie.png	0		
+40	attack	darkness	圣	暗灭	card/anMie.png	0		
+41	attack	darkness	圣	暗灭	card/anMie.png	0		
+42	attack	darkness	圣	暗灭	card/anMie.png	0		
+43	attack	darkness	咏	暗灭	card/anMie.png	0		
+44	attack	darkness	咏	暗灭	card/anMie.png	0		
+45	attack	earth	幻	地裂斩	card/diLieZhan.png	2	地之封印	灵魂赐予
+46	attack	earth	幻	地裂斩	card/diLieZhan.png	2	地之封印	灵魂赐予
+47	attack	earth	幻	地裂斩	card/diLieZhan.png	2	地之封印	灵魂震爆
+48	attack	earth	幻	地裂斩	card/diLieZhan.png	2	地之封印	灵魂震爆
+49	attack	earth	技	地裂斩	card/diLieZhan.png	2	烈风技	精准射击
+50	attack	earth	技	地裂斩	card/diLieZhan.png	2	烈风技	精准射击
+51	attack	earth	技	地裂斩	card/diLieZhan.png	2	烈风技	精准射击
+52	attack	earth	技	地裂斩	card/diLieZhan.png	2	烈风技	精准射击
+53	attack	earth	技	地裂斩	card/diLieZhan.png	2	烈风技	精准射击
+54	attack	earth	圣	地裂斩	card/diLieZhan.png	2	天使之墙	治愈之光
+55	attack	earth	咏	地裂斩	card/diLieZhan.png	2	威力赐福	陨石
+56	attack	earth	咏	地裂斩	card/diLieZhan.png	2	威力赐福	陨石
+57	attack	earth	血	地裂斩	card/diLieZhan.png	2	血腥咆哮	血之悲鸣
+58	attack	earth	血	地裂斩	card/diLieZhan.png	2	血腥咆哮	血之悲鸣
+59	attack	earth	血	地裂斩	card/diLieZhan.png	2	血影狂刀	血之悲鸣
+60	attack	earth	血	地裂斩	card/diLieZhan.png	2	血影狂刀	血之悲鸣
+61	attack	earth	血	地裂斩	card/diLieZhan.png	2	血影狂刀	血之悲鸣
+62	attack	earth	咏	地裂斩	card/diLieZhan.png	2	迅捷赐福	陨石
+63	attack	earth	咏	地裂斩	card/diLieZhan.png	2	迅捷赐福	陨石
+64	attack	earth	圣	地裂斩	card/diLieZhan.png	1	治愈之光	
+65	attack	earth	圣	地裂斩	card/diLieZhan.png	1	治愈之光	
+66	attack	wind	幻	风神斩	card/fengShenZhan.png	2	风之封印	灵魂赐予
+67	attack	wind	幻	风神斩	card/fengShenZhan.png	2	风之封印	灵魂赐予
+68	attack	wind	幻	风神斩	card/fengShenZhan.png	2	风之封印	灵魂赐予
+69	attack	wind	幻	风神斩	card/fengShenZhan.png	2	风之封印	灵魂赐予
+70	attack	wind	技	风神斩	card/fengShenZhan.png	2	疾风技	精准射击
+71	attack	wind	技	风神斩	card/fengShenZhan.png	2	疾风技	精准射击
+72	attack	wind	技	风神斩	card/fengShenZhan.png	2	疾风技	精准射击
+73	attack	wind	技	风神斩	card/fengShenZhan.png	2	烈风技	精准射击
+74	attack	wind	技	风神斩	card/fengShenZhan.png	2	烈风技	精准射击
+75	attack	wind	圣	风神斩	card/fengShenZhan.png	2	天使之墙	治愈之光
+76	attack	wind	圣	风神斩	card/fengShenZhan.png	2	天使之墙	治愈之光
+77	attack	wind	圣	风神斩	card/fengShenZhan.png	2	天使之墙	治愈之光
+78	attack	wind	血	风神斩	card/fengShenZhan.png	2	血腥咆哮	血之悲鸣
+79	attack	wind	血	风神斩	card/fengShenZhan.png	2	血腥咆哮	血之悲鸣
+80	attack	wind	血	风神斩	card/fengShenZhan.png	2	血腥咆哮	血之悲鸣
+81	attack	wind	血	风神斩	card/fengShenZhan.png	2	血腥咆哮	血之悲鸣
+82	attack	wind	咏	风神斩	card/fengShenZhan.png	2	迅捷赐福	风刃
+83	attack	wind	咏	风神斩	card/fengShenZhan.png	2	迅捷赐福	风刃
+84	attack	wind	咏	风神斩	card/fengShenZhan.png	2	迅捷赐福	风刃
+85	attack	wind	咏	风神斩	card/fengShenZhan.png	2	迅捷赐福	风刃
+86	attack	wind	咏	风神斩	card/fengShenZhan.png	2	迅捷赐福	风刃
+87	attack	fire	幻	火焰斩	card/huoYanZhan.png	2	火之封印	灵魂震爆
+88	attack	fire	幻	火焰斩	card/huoYanZhan.png	2	火之封印	灵魂震爆
+89	attack	fire	幻	火焰斩	card/huoYanZhan.png	2	火之封印	灵魂震爆
+90	attack	fire	幻	火焰斩	card/huoYanZhan.png	2	火之封印	灵魂震爆
+91	attack	fire	幻	火焰斩	card/huoYanZhan.png	2	火之封印	灵魂震爆
+92	attack	fire	技	火焰斩	card/huoYanZhan.png	2	疾风技	闪光陷阱
+93	attack	fire	技	火焰斩	card/huoYanZhan.png	2	疾风技	闪光陷阱
+94	attack	fire	技	火焰斩	card/huoYanZhan.png	2	疾风技	闪光陷阱
+95	attack	fire	技	火焰斩	card/huoYanZhan.png	2	疾风技	闪光陷阱
+96	attack	fire	圣	火焰斩	card/huoYanZhan.png	2	天使之墙	治愈术
+97	attack	fire	圣	火焰斩	card/huoYanZhan.png	2	天使之墙	治愈术
+98	attack	fire	圣	火焰斩	card/huoYanZhan.png	2	天使之墙	治愈术
+99	attack	fire	圣	火焰斩	card/huoYanZhan.png	2	天使之墙	治愈术
+100	attack	fire	咏	火焰斩	card/huoYanZhan.png	2	威力赐福	火球
+101	attack	fire	咏	火焰斩	card/huoYanZhan.png	2	威力赐福	火球
+102	attack	fire	咏	火焰斩	card/huoYanZhan.png	2	威力赐福	火球
+103	attack	fire	咏	火焰斩	card/huoYanZhan.png	2	威力赐福	火球
+104	attack	fire	血	火焰斩	card/huoYanZhan.png	2	血腥咆哮	血之悲鸣
+105	attack	fire	血	火焰斩	card/huoYanZhan.png	2	血腥咆哮	血之悲鸣
+106	attack	fire	血	火焰斩	card/huoYanZhan.png	2	血腥咆哮	血之悲鸣
+107	attack	fire	血	火焰斩	card/huoYanZhan.png	2	血腥咆哮	血之悲鸣
+108	attack	thunder	技	雷光斩	card/leiGuangZhan.png	2	疾风技	精准射击
+109	attack	thunder	技	雷光斩	card/leiGuangZhan.png	2	疾风技	精准射击
+110	attack	thunder	幻	雷光斩	card/leiGuangZhan.png	2	雷之封印	灵魂震爆
+111	attack	thunder	幻	雷光斩	card/leiGuangZhan.png	2	雷之封印	灵魂震爆
+112	attack	thunder	幻	雷光斩	card/leiGuangZhan.png	2	雷之封印	灵魂震爆
+113	attack	thunder	幻	雷光斩	card/leiGuangZhan.png	2	雷之封印	灵魂震爆
+114	attack	thunder	幻	雷光斩	card/leiGuangZhan.png	2	雷之封印	灵魂震爆
+115	attack	thunder	技	雷光斩	card/leiGuangZhan.png	2	烈风技	精准射击
+116	attack	thunder	技	雷光斩	card/leiGuangZhan.png	2	烈风技	精准射击
+117	attack	thunder	圣	雷光斩	card/leiGuangZhan.png	2	天使之墙	治愈术
+118	attack	thunder	圣	雷光斩	card/leiGuangZhan.png	2	天使之墙	治愈术
+119	attack	thunder	圣	雷光斩	card/leiGuangZhan.png	2	天使之墙	治愈术
+120	attack	thunder	圣	雷光斩	card/leiGuangZhan.png	2	天使之墙	治愈术
+121	attack	thunder	血	雷光斩	card/leiGuangZhan.png	2	血影狂刀	血之悲鸣
+122	attack	thunder	血	雷光斩	card/leiGuangZhan.png	2	血影狂刀	血之悲鸣
+123	attack	thunder	血	雷光斩	card/leiGuangZhan.png	2	血影狂刀	血之悲鸣
+124	attack	thunder	血	雷光斩	card/leiGuangZhan.png	2	血影狂刀	血之悲鸣
+125	attack	thunder	咏	雷光斩	card/leiGuangZhan.png	2	迅捷赐福	雷击
+126	attack	thunder	咏	雷光斩	card/leiGuangZhan.png	2	迅捷赐福	雷击
+127	attack	thunder	咏	雷光斩	card/leiGuangZhan.png	2	迅捷赐福	雷击
+128	attack	thunder	咏	雷光斩	card/leiGuangZhan.png	2	迅捷赐福	雷击
+129	attack	water	技	水涟斩	card/shuiLianZhan.png	2	疾风技	闪光陷阱
+130	attack	water	技	水涟斩	card/shuiLianZhan.png	2	疾风技	闪光陷阱
+131	attack	water	技	水涟斩	card/shuiLianZhan.png	2	疾风技	闪光陷阱
+132	attack	water	技	水涟斩	card/shuiLianZhan.png	2	疾风技	闪光陷阱
+133	attack	water	幻	水涟斩	card/shuiLianZhan.png	2	水之封印	灵魂赐予
+134	attack	water	幻	水涟斩	card/shuiLianZhan.png	2	水之封印	灵魂赐予
+135	attack	water	幻	水涟斩	card/shuiLianZhan.png	2	水之封印	灵魂震爆
+136	attack	water	幻	水涟斩	card/shuiLianZhan.png	2	水之封印	灵魂震爆
+137	attack	water	圣	水涟斩	card/shuiLianZhan.png	2	天使之墙	治愈之光
+138	attack	water	圣	水涟斩	card/shuiLianZhan.png	2	天使之墙	治愈之光
+139	attack	water	圣	水涟斩	card/shuiLianZhan.png	2	天使之墙	治愈之光
+140	attack	water	咏	水涟斩	card/shuiLianZhan.png	2	威力赐福	冰冻
+141	attack	water	咏	水涟斩	card/shuiLianZhan.png	2	威力赐福	冰冻
+142	attack	water	咏	水涟斩	card/shuiLianZhan.png	2	威力赐福	冰冻
+143	attack	water	咏	水涟斩	card/shuiLianZhan.png	2	威力赐福	冰冻
+144	attack	water	咏	水涟斩	card/shuiLianZhan.png	2	威力赐福	冰冻
+145	attack	water	咏	水涟斩	card/shuiLianZhan.png	2	威力赐福	冰冻
+146	attack	water	血	水涟斩	card/shuiLianZhan.png	2	血影狂刀	血之悲鸣
+147	attack	water	血	水涟斩	card/shuiLianZhan.png	2	血影狂刀	血之悲鸣
+148	attack	water	血	水涟斩	card/shuiLianZhan.png	2	血影狂刀	血之悲鸣
+149	attack	water	血	水涟斩	card/shuiLianZhan.png	2	血影狂刀	血之悲鸣
