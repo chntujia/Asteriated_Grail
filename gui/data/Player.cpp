@@ -6,6 +6,7 @@ Player::Player(int ID, int isRed):id(ID),handCardsMax(6),crossNum(0),crossMax(2)
     gem=0;
     crystal=0;
     handCardsNum=0;
+    tokenMax[1]=tokenMax[0]=token[1]=token[0]=0;
     for(int i=0;i<5;i++ )
         specials[i]=false;
 }
@@ -44,6 +45,11 @@ void Player::setRole(int roleID)
     case 9:
         name=tr("[魔剑]");
         tapSource="resource/anying.png";
+        break;
+    case 11:
+        name=tr("[元素师]");
+        tokenName[0]=tr("元素");
+        tokenMax[0]=3;
         break;
     case 12:
         name=tr("[冒险家]");

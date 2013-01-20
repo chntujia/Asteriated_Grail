@@ -28,6 +28,7 @@ public:
     void setRole(int roleID);
     void setTap(bool flag){tap=flag;}
     void setSpecial(int type,bool flag);
+    void setToken(int id,int howMany){token[id]=howMany;}
     void changeHandCardNum(int increase){handCardsNum+=increase;}
     void addStatus(int type,Card* card);
     void removeStatus(Card* card);
@@ -37,6 +38,7 @@ public:
     void setName(QString name){this->name=name;}
     int getID();
     QString getName();
+    QString getTokenName(int id){return tokenName[id];}
     int getHandCardMax();
     int getHandCardNum();
     int getCrossNum();
@@ -47,6 +49,8 @@ public:
     int getEnergyMax();
     int getColor();
     int getRoleID(){return roleID;}
+    int getToken(int id){return token[id];}
+    int getTokenMax(int id){return tokenMax[id];}
     bool getSpecial(int type){return specials[type];}
     bool getTap(){return tap;}
     QString getFaceSource(){return faceSource;}
@@ -67,11 +71,14 @@ protected:
     int energyMax;
     int color;
     int roleID;
+    int tokenMax[3];
+    int token[3];
     bool tap;
     bool specials[5];
     QList<Status*> statusList;
     QString faceSource;
     QString tapSource;
+    QString tokenName[3];
 
 };
 

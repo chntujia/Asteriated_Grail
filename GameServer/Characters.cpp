@@ -1143,10 +1143,11 @@ void MoJian::HeiAnZhenChan1(QList<void*> args)
     if(this != (PlayerEntity*)args[0]||HeiAnZhenChanUsed||gem<=0||!*(bool*)args[4])
         return;
     coder.askForSkill(id,"黑暗震颤");
+    HeiAnZhenChanUsed=false;
     if(messageBuffer::readInfor() == 0)
         return;
     *((int*)args[5]) = NOREPLY;
-    gem--;
+    setGem(gem-1);
     coder.energyNotice(id,gem,crystal);
     coder.notice("魔剑发动【黑暗震颤】");
     HeiAnZhenChanUsed=true;
@@ -1156,7 +1157,15 @@ void MoJian::HeiAnZhenChan2(QList<void*> args)
 {
     if(this != (PlayerEntity*)args[0]||!HeiAnZhenChanUsed)
         return;
+    HeiAnZhenChanUsed=false;
     engine->drawCards(getHandCardMax()-getHandCardNum(),0,this);
+}
+
+void MoJian::HeiAnZhenChan3(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0]||!HeiAnZhenChanUsed)
+        return;
+    HeiAnZhenChanUsed=false;
 }
 
 //修罗连斩
@@ -1250,10 +1259,10 @@ void MoJian::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(XiuLuoLianZhan2(QList<void*>)));
     connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(HeiAnZhenChan1(QList<void*>)));
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(HeiAnZhenChan2(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(HeiAnZhenChan3(QList<void*>)));
     connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(AnYingNingJu(QList<void*>)));
     connect(engine,SIGNAL(timeLine3SIG(QList<void*>)),this,SLOT(AnYingZhiLi(QList<void*>)));
-
 }
 
 MaoXian::MaoXian(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
@@ -1346,4 +1355,133 @@ void MaoXian::MaoXianZheTianTang(QList<void *> args)
     teamArea.setCrystal(color,teamArea.getCrystal(color)-magic->infor3);
     coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
     coder.energyNotice(magic->dstID,dst->getGem(),dst->getCrystal());
+}
+
+YuanSu::YuanSu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID = 11;
+    this->star = 3.5;
+    tokenMax[0]=3;
+    ignite=false;
+    this->makeConnection(engine);
+}
+void YuanSu::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(YuanSuFaShu(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(YuanSuDianRan(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(YueGuang(QList<void*>)));
+    connect(engine,SIGNAL(timeLine3SIG(QList<void*>)),this,SLOT(YuanSuXiShou(QList<void*>)));
+}
+
+//元素吸收
+void YuanSu::YuanSuXiShou(QList<void*> args)
+{
+    if(this != (PlayerEntity*)args[0] || token[0]==3)
+        return;
+    if(ignite){
+        ignite=false;
+        return;
+    }
+    Harm* h=(Harm*)args[2];
+    if(h->type==MAGICHARM)
+    {
+        setToken(0,token[0]+1);
+        coder.notice("元素师发动【元素吸收】");
+        coder.tokenNotice(id,0,token[0]);
+    }
+}
+
+//元素法术
+void YuanSu::YuanSuFaShu(QList<void*> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 1101)
+        return;
+    int harmPoint=magic->infor3;
+    QString skill;
+    switch(magic->infor2)
+    {
+    case 1:
+        skill="风刃";
+        break;
+    case 2:
+        skill="冰冻";
+        break;
+    case 3:
+        skill="火球";
+        harmPoint++;
+        break;
+    case 4:
+        skill="陨石";
+        break;
+    case 5:
+        skill="雷击";
+        break;
+    }
+    coder.notice("元素师对玩家"+QString::number(magic->dstID)+"发动【"+skill+"】");
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    if(magic->infor3==2)
+        cards << getCardByID(magic->infor4);
+    coder.discardNotice(id,magic->infor3,"y",cards);
+    this->removeHandCards(cards,true);
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    Harm harm;
+    harm.harmPoint = harmPoint;
+    harm.type = MAGIC;
+    this->engine->timeLine3(harm,this,dst,skill);
+    switch(magic->infor2)
+    {
+    case 1:
+        engine->addActionNum(ATTACK);
+        break;
+    case 2:
+        dst=engine->getPlayerByID(magic->infor5);
+        dst->setCrossNum(dst->getCrossNum()+1);
+        coder.crossChangeNotice(magic->infor5,dst->getCrossNum());
+        break;
+    case 4:
+        engine->addActionNum(MAGIC);
+        break;
+    case 5:
+        teamArea.setGem(color,teamArea.getGem(color)+1);
+        coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
+        break;
+    }
+}
+
+//元素点燃
+void YuanSu::YuanSuDianRan(QList<void*> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id||magic->infor1 != 1102)
+        return;
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    Harm harm;
+    harm.harmPoint = 2;
+    harm.type = MAGIC;
+    coder.notice("元素师对玩家"+QString::number(magic->dstID)+"发动【元素点燃】");
+    setToken(0,0);
+    ignite=true;
+    coder.tokenNotice(id,0,0);
+    engine->timeLine3(harm,this,dst,"元素点燃");
+    engine->addActionNum(MAGIC);
+}
+
+//月光
+void YuanSu::YueGuang(QList<void*> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id||magic->infor1 != 1103)
+        return;
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    coder.notice("元素师对玩家"+QString::number(magic->dstID)+"发动【月光】");
+    setGem(gem-1);
+    coder.energyNotice(id,gem,crystal);
+    Harm harm;
+    harm.harmPoint = gem+crystal+1;
+    harm.type = MAGIC;
+    engine->timeLine3(harm,this,dst,"月光");
 }

@@ -38,6 +38,9 @@ PlayerEntity::PlayerEntity(BackgroundEngine *engine,int ID, int isRed)
     gem=0;
     crystal=0;
     handCardsMax=6;
+    token[0]=tokenMax[0]=0;
+    token[1]=tokenMax[1]=0;
+    token[2]=tokenMax[2]=0;
     this->setTap(false);
     this->setHandCardsMaxFixed(false);
 

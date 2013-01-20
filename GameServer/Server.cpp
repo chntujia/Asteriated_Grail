@@ -623,6 +623,37 @@ void Server::decoder(int id, QString message)
     case 903:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
+//元素法术
+    case 1101:
+        action.reply=MAGIC;
+        action.infor1=1101;
+        action.infor2=infor.at(1).toInt();
+        action.dstID = infor.at(2).toInt();
+        action.srcID = infor.at(3).toInt();
+        action.infor3=infor.at(4).toInt();
+        action.CardID=infor.at(5).toInt();
+        if(action.infor3==2)
+            action.infor4=infor.at(6).toInt();
+        if(action.infor2==2)
+            action.infor5=infor.at(5+action.infor3).toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//元素点燃
+    case 1102:
+        action.reply=MAGIC;
+        action.infor1=1102;
+        action.dstID = infor.at(1).toInt();
+        action.srcID = infor.at(2).toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//月光
+    case 1103:
+        action.reply=MAGIC;
+        action.infor1=1103;
+        action.dstID = infor.at(1).toInt();
+        action.srcID = infor.at(2).toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
 //欺诈
     case 1201:
         action.reply=ATTACKSKILL;

@@ -85,6 +85,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 9:
         return new MoJian(engine,id,color);
         break;
+    case 11:
+        return new YuanSu(engine,id,color);
+        break;
     case 12:
         return new MaoXian(engine,id,color);
         break;
@@ -99,7 +102,7 @@ void BackgroundEngine::randomize(QList<int> *queue)
     int choosen;
     for(int i=n-1;i>0;i--)
     {
-        choosen=qrand() % i;
+        choosen=qrand() % (i+1);
         queue->swap(i,choosen);
     }
 }
@@ -115,6 +118,7 @@ void BackgroundEngine::seatArrange()
     QList<int> roles;
     for(int i=1; i<= 9 ;i++)
         roles<<i;
+    roles<<11;
     roles<<12;
     randomize(&roles);
     int colors[]={1,0,1,0,0,1};

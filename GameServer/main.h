@@ -138,6 +138,7 @@ public:
     void handcardMaxNotice(int ID,int howMany){emit this->sendMessage(-1,combMessage("40",TOQSTR(ID),TOQSTR(howMany)));}
     void tapNotice(int ID,int flag,QString content){emit this->sendMessage(-1,combMessage("39",TOQSTR(ID),TOQSTR(flag),tr(content.toStdString().c_str())));}
     void specialNotice(int ID,int type,int flag){emit this->sendMessage(-1,combMessage("43",TOQSTR(ID),TOQSTR(type),TOQSTR(flag)));}
+    void tokenNotice(int ID,int tokenID,int howMany){emit this->sendMessage(-1,combMessage("45",TOQSTR(ID),TOQSTR(tokenID),TOQSTR(howMany)));}
 signals:
     void sendMessage(int,QString);
 

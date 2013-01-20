@@ -39,6 +39,7 @@ public:
     int getSeatNum(){return this->seatNum;}
     //设置横置
     void setTap(bool tap){this->tap = tap;}
+    void setToken(int id,int howMany){token[id]=howMany<=tokenMax[id]?howMany:tokenMax[id];}
     //设置下一个玩家
     void setNext(PlayerEntity* nextPlayer){this->nextPlayer = nextPlayer;}
     //在该玩家前增加基础效果
@@ -57,6 +58,7 @@ public:
     int getCrystal();
     int getEnergy();
     int getColor();
+    int getToken(int id){return token[id];}
     //获取该玩家面前的基础效果牌
     QList<CardEntity*> getBasicEffect(){return this->basicEffect;}
     //返回玩家星数
@@ -105,6 +107,8 @@ protected:
     bool handCardsMaxFixed;//是否锁定手牌上限
     bool yourTurn;
     int seatNum;
+    int token[3];
+    int tokenMax[3];
     PlayerEntity* nextPlayer;//下家
     //QList<Status*> status;
     //QString info;

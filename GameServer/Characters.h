@@ -180,6 +180,7 @@ public slots:
     //黑暗震颤
     void HeiAnZhenChan1(QList<void*> args);
     void HeiAnZhenChan2(QList<void*> args);
+    void HeiAnZhenChan3(QList<void *> args);
     //修罗连斩
     void XiuLuoLianZhan1(QList<void*> args);
     void XiuLuoLianZhan2(QList<void*> args);
@@ -211,6 +212,28 @@ public slots:
     void MaoXianZheTianTang(QList<void*> args);
 signals:
 private:
+    \
+};
+//元素
+class YuanSu : public PlayerEntity
+{
+    Q_OBJECT
+public :
+    YuanSu(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine* engine);
+public slots:
+    //元素吸收
+    void YuanSuXiShou(QList<void*> args);
+    //元素法术
+    void YuanSuFaShu(QList<void*> args);
+    //元素点燃
+    void YuanSuDianRan(QList<void*> args);
+    //月光
+    void YueGuang(QList<void*> args);
+
+signals:
+private:
+    bool ignite;
     \
 };
 #endif // CHARACTERS_H

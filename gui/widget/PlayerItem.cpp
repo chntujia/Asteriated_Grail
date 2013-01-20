@@ -80,6 +80,20 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     offset=width*0.35+i*9;
     for(i=0;i<player->getCrystal();i++)
         painter->drawPixmap(i*9+offset,height*0.86,crystal.scaled(9,13));
+    if(player->getTokenMax(0)>0)
+    {
+        painter->drawPixmap(0,0,QPixmap("resource/token1.png"));
+        entry=player->getTokenName(0)+"£º";
+        entry+=QString::number(player->getToken(0))+'/'+QString::number(player->getTokenMax(0));
+        painter->drawText(width*0.55,height*0.73,entry);
+    }
+    if(player->getTokenMax(1)>0)
+    {
+        painter->drawPixmap(0,0,QPixmap("resource/token2.png"));
+        entry=player->getTokenName(1)+"£º";
+        entry+=QString::number(player->getToken(1))+'/'+QString::number(player->getTokenMax(1));
+        painter->drawText(width*0.55,height*0.82,entry);
+    }
     if(player->getTap())
         painter->drawPixmap(0,0,QPixmap(player->getTapSource()));
     if(player->getSpecial(0))
