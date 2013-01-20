@@ -174,6 +174,7 @@ void Role::normal()
     int n=handcards.count();
 
     state=1;
+    actionFlag=0;
     playerArea->setQuota(1);
     handArea->setQuota(1);
 
@@ -224,6 +225,7 @@ void Role::attackAction()
     gui->reset();
 
     state=10;
+    actionFlag=1;
     playerArea->setQuota(1);
     handArea->setQuota(1);
     handArea->enableAttack();
@@ -235,6 +237,7 @@ void Role::magicAction()
     gui->reset();
 
     state=11;
+    actionFlag=2;
     playerArea->setQuota(1);
     handArea->setQuota(1);
     handArea->enableMagic();
@@ -248,6 +251,7 @@ void Role::attackOrMagic()
     gui->reset();
 
     state=12;
+    actionFlag=4;
     playerArea->setQuota(1);
     handArea->setQuota(1);
     handArea->enableAll();
@@ -1047,7 +1051,6 @@ void Role::decipher(QString command)
         else
         {
             gui->setEnable(1);
-            actionFlag=flag.toInt();
             if(flag=="0")
                 normal();
             else if(flag=="1")
@@ -1108,6 +1111,7 @@ void Role::decipher(QString command)
             playerList[targetID]->setTap(1);
             msg=playerList[targetID]->getName()+tr("进入")+arg[3];
         }
+        playerArea->update();
         gui->logAppend(msg);
         gui->reset();
         gui->setEnable(0);
@@ -1154,6 +1158,15 @@ void Role::decipher(QString command)
         targetID=arg[1].toInt();
         msg=arg[2];
         playerList.at(targetID)->setSpecial(msg.toInt(),arg[3].toInt());
+        playerArea->update();
+        break;
+//标记变更
+    case 45:
+        targetID=arg[1].toInt();
+        flag=arg[2];
+        howMany=arg[3].toInt();
+        playerList.at(targetID)->setToken(flag.toInt(),howMany);
+        playerArea->update();
         break;
 //天使祝福
     case 750:

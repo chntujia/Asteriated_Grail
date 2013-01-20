@@ -34,6 +34,9 @@ void MaoXian::normal()
 {
     Role::normal();
     Player* myself=dataInterface->getMyself();
+
+    if(dataInterface->getMyTeam()->getEnergy()>0)
+        buttonArea->enable(2);
 //欺诈
     QList<Card*>handcards=dataInterface->getHandCards();
     for(int i=0;i<handcards.size()-1;i++)
@@ -232,12 +235,12 @@ void MaoXian::onOkClicked()
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
             actionFlag=4;
-            actions.removeOne(tr("1.攻击或法术行动(特殊加工）"));
+            actions.removeOne(tr("1.攻击或法术行动（特殊加工）"));
             attackOrMagic();
         }
         else if(text[0]=='2'){
             actionFlag=4;
-            actions.removeOne(tr("2.攻击或法术行动(偷天换日）"));
+            actions.removeOne(tr("2.攻击或法术行动（偷天换日）"));
             attackOrMagic();
         }
         break;
@@ -422,9 +425,9 @@ void MaoXian::decipher(QString command)
         if(targetID==myID)
         {            
             if(state==1202)
-                actions.append(tr("1.攻击或法术行动(特殊加工）"));
+                actions.append(tr("1.攻击或法术行动（特殊加工）"));
             if(state==1203)
-                actions.append(tr("2.攻击或法术行动(偷天换日）"));
+                actions.append(tr("2.攻击或法术行动（偷天换日）"));
 
             foreach(QString ptr,actions)
                 tipArea->addBoxItem(ptr);

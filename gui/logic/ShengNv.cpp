@@ -214,7 +214,7 @@ void ShengNv::onOkClicked()
         //攻击或法术行动
         if(text[0]=='1'){
             actionFlag=4;
-            actions.removeOne(tr("1.攻击或法术行动(圣疗）"));
+            actions.removeOne(tr("1.攻击或法术行动（圣疗）"));
             attackOrMagic();
         }
         break;
@@ -354,7 +354,7 @@ void ShengNv::decipher(QString command)
         if(targetID==myID)
         {
             if(state==653){
-                actions.append(tr("1.攻击或法术行动(圣疗）"));
+                actions.append(tr("1.攻击或法术行动（圣疗）"));
             }
             foreach(QString ptr,actions)
                 tipArea->addBoxItem(ptr);

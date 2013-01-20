@@ -10,6 +10,7 @@
 #include "TianShi.h"
 #include "MoDao.h"
 #include "MoJian.h"
+#include "YuanSu.h"
 #include "MaoXian.h"
 
 #define LOGINPERMIT 1
@@ -55,6 +56,9 @@ void Logic::setMyRole(int roleID)
         break;
     case 9:
         new MoJian;
+        break;
+    case 11:
+        new YuanSu;
         break;
     case 12:
         new MaoXian;

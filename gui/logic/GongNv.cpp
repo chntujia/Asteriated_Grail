@@ -131,7 +131,7 @@ void GongNv::onOkClicked()
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
             attackAction();
-            actions.removeOne(tr("1.¹¥»÷ÐÐ¶¯(¾Ñ»÷£©"));
+            actions.removeOne(tr("1.¹¥»÷ÐÐ¶¯£¨¾Ñ»÷£©"));
         }
         break;
 //¹á´©Ñ¯ÎÊ
@@ -240,7 +240,7 @@ void GongNv::decipher(QString command)
         if(targetID==myID)
         {
             if(state==303)
-                actions.append(tr("1.¹¥»÷ÐÐ¶¯(¾Ñ»÷£©"));
+                actions.append(tr("1.¹¥»÷ÐÐ¶¯£¨¾Ñ»÷£©"));
 
             foreach(QString ptr,actions)
                 tipArea->addBoxItem(ptr);
