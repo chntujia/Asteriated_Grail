@@ -12,6 +12,7 @@
 #include "MoJian.h"
 #include "YuanSu.h"
 #include "MaoXian.h"
+#include "YongZhe.h"
 
 #define LOGINPERMIT 1
 #define GAMESTART 2
@@ -62,6 +63,9 @@ void Logic::setMyRole(int roleID)
         break;
     case 12:
         new MaoXian;
+        break;
+    case 21:
+        new YongZhe;
         break;
     }
 }

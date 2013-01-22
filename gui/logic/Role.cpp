@@ -58,6 +58,7 @@ void Role::cardAnalyse()
 {
     int i;
     QList<Card*> selectedCards=handArea->getSelectedCards();
+    Player* myself=dataInterface->getMyself();
     QString cardName;
     switch (state)
     {
@@ -98,8 +99,17 @@ void Role::cardAnalyse()
             playerArea->enableEnemy();
             QList<Player*> players=dataInterface->getPlayerList();
             for(i=0;i<players.size();i++)
+            {
                 if(players[i]->getRoleID()==5 && players[i]->getTap()==1)
                     playerArea->disablePlayerItem(i);
+                if(players[i]->getRoleID()==21 && myself->getSpecial(1) == 1)
+                {
+                    playerArea->disableAll();
+                    playerArea->enablePlayerItem(i);
+                    handArea->disableMagic();
+                    decisionArea->enable(3);
+                }
+            }
         }
     break;
 //attacked reply
@@ -181,7 +191,7 @@ void Role::normal()
     handArea->enableAll();
     handArea->disableElement("light");
 
-    if(n+3 <= myself->getHandCardMax() && start==false)
+    if(n+3 <= myself->getHandCardMax() && start==false && myself->getSpecial(1)!=1)
     {
 //¹ºÂò
         buttonArea->enable(0);
@@ -190,7 +200,7 @@ void Role::normal()
             buttonArea->enable(1);
     }
 //ÌáÁ¶
-    if(myself->getEnergy()<myself->getEnergyMax() && myTeam->getEnergy()>0 && start==false)
+    if(myself->getEnergy()<myself->getEnergyMax() && myTeam->getEnergy()>0 && start==false && myself->getSpecial(1)!=1)
         buttonArea->enable(2);
     tipArea->setMsg(tr("ÂÖµ½ÄãÁË"));
     unactionalCheck();
@@ -849,6 +859,7 @@ void Role::decipher(QString command)
                 card=dataInterface->getCard(cardID);
                 msg+=card->getName()+"-"+card->getProperty()+" ";
                 cards<<card;
+                dataInterface->removeHandCard(card);
             }
             showArea->showCards(cards);
         }

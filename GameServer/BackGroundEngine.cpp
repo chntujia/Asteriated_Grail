@@ -91,6 +91,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 12:
         return new MaoXian(engine,id,color);
         break;
+    case 21:
+        return new YongZhe(engine,id,color);
+        break;
     }
 }
 void BackgroundEngine::randomize(QList<int> *queue)
@@ -116,10 +119,29 @@ void BackgroundEngine::seatArrange()
         ids<<i;
     randomize(&ids);
     QList<int> roles;
+/*    QList<int> roles2;//这是测试用
+    roles2<<2;
+    roles2<<3;
+    roles2<<6;
+    roles2<<7;
+    roles2<<8;
+    roles2<<9;
+    roles2<<11;
+    roles2<<12;
+    randomize(&roles2);
+    for(int i=0;i<2;i++)
+    {
+        roles<<roles2[i];
+    }*/
     for(int i=1; i<= 9 ;i++)
-        roles<<i;
+       roles<<i;
     roles<<11;
     roles<<12;
+    roles<<21;
+//    roles<<21;
+  //  roles<<1;
+    //roles<<5;
+    //roles<<4;
     randomize(&roles);
     int colors[]={1,0,1,0,0,1};
     this->playerList.clear();
@@ -542,6 +564,8 @@ void BackgroundEngine::actionPhase()
     //这个标记表明是否行动过，如果已经行动过，那么追加的各种行动机会可以放弃
     bool acted = false;
     bool firstTime=true;
+    bool act=false;
+
 
     this->checkEffect(this->currentPlayer);
     QList<void*> args;
@@ -552,10 +576,14 @@ void BackgroundEngine::actionPhase()
         //根据允许的行动类别询问client
         if(firstTime){
             emit actionPhaseSIG(args);
+            emit tiaoXinPhaseSIG(currentPlayer,&act);
             firstTime=false;
         }
         if(!acted){
-            coder.askForAction(currentPlayer->getID(),0,acted);
+            if(!act)
+                coder.askForAction(currentPlayer->getID(),0,acted);
+            else
+                coder.askForAction(currentPlayer->getID(),1,acted);
         }
         else
             coder.askForAdditionalAction(currentPlayer->getID());
@@ -664,6 +692,7 @@ void BackgroundEngine::actionPhase()
             this->acted(SPECIAL);
         }
     }
+    emit turnEndPhaseSIG(currentPlayer);
 }
 
 void BackgroundEngine::turnEndPhase()
@@ -1148,3 +1177,5 @@ void BackgroundEngine::toDiscardPileSLOT(QList<CardEntity*> cards,bool show)
             this->discardPileCovered << cards.at(i);
     }
 }
+
+

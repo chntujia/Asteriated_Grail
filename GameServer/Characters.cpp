@@ -1485,3 +1485,296 @@ void YuanSu::YueGuang(QList<void*> args)
     harm.type = MAGIC;
     engine->timeLine3(harm,this,dst,"月光");
 }
+
+YongZhe::YongZhe(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=21;
+    this->star=4.5;
+    tokenMax[0]=4;
+    tokenMax[1]=4;
+    fireNum=0;
+    tiaoXinID=-1;
+    crystal=2;
+    nuHouUsed=false;
+    tiaoXinUsed=false;
+    tiaoXinChuFa=false;
+    jinDuanUsed=false;
+    this->makeConnection(engine);
+}
+
+void YongZhe::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(NuHou(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(NuHou1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(NuHou2(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(MingJingZhiShui(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(JinDuanZhiLi1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(JinDuanZhiLi2(QList<void*>)));
+    connect(engine,SIGNAL(timeLine6DrawedSIG(QList<void*>)),this,SLOT(SiDou(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(TiaoXin1(QList<void*>)));
+    connect(engine,SIGNAL(tiaoXinPhaseSIG(PlayerEntity*,bool*)),this,SLOT(TiaoXin2(PlayerEntity*,bool*)));
+    connect(engine,SIGNAL(turnEndPhaseSIG(PlayerEntity*)),this,SLOT(TiaoXin3(PlayerEntity*)));
+    //connect(engine,SIGNAL(turnEndPhaseSIG(QList<void*>)),this,SLOT(TiaoXin4(QList<void*>)));
+    connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(JingPiLiJie1(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(JingPiLiJie2(QList<void*>)));
+}
+
+//怒吼询问
+void YongZhe::NuHou(QList<void *> args)
+{
+    if(this !=(PlayerEntity*)args[0] || this->getToken(0)== 0)
+        return;
+    this->nuHouUsed=false;
+    if(!*(bool*)args[4])
+        return;
+    coder.askForSkill(this->getID(),"怒吼");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    setToken(0,token[0]-1);
+    coder.notice("勇者发动【怒吼】");
+    this->nuHouUsed=true;
+    coder.tokenNotice(id,0,token[0]);
+}
+
+//怒吼命中
+void YongZhe::NuHou1(QList<void *> args)
+{
+    if(this !=(PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(!this->nuHouUsed)
+        return;
+    Harm* harm=(Harm*)args[2];
+    harm->harmPoint+=2;
+}
+
+//怒吼未命中
+void YongZhe::NuHou2(QList<void *> args)
+{
+    if(this!=(PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(!this->nuHouUsed)
+        return;
+    if(this->getToken(1)!=4)
+    {
+        setToken(1,token[1]+1);
+        coder.tokenNotice(id,1,token[1]);
+    }
+}
+
+//明镜止水
+void YongZhe::MingJingZhiShui(QList<void *> args)
+{
+    if(this !=(PlayerEntity*)args[0] || this->getToken(1)<4)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    coder.askForSkill(this->getID(),"明镜止水");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    setToken(1,0);
+    coder.notice("勇者发动【明镜止水】");
+    coder.tokenNotice(id,1,0);
+    *(int*)args[5] = NOREPLY;
+}
+
+//禁断命中
+void YongZhe::JinDuanZhiLi1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0] || this->getEnergy()==0)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(this->getHandCards().length()== 0)
+        return;
+    coder.askForSkill(this->getID(),"禁断之力");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    if(this->getCrystal()>0)
+        setCrystal(crystal-1);
+    else
+        setGem(gem-1);
+    coder.energyNotice(id,gem,crystal);
+    coder.notice("勇者发动【禁断之力】");
+    jinDuanUsed=true;
+    for(int i=0;i < this->getHandCards().length();i++)
+    {
+        if(this->getHandCards().at(i)->getType() != "attack")
+        {
+            if(this->getToken(0)!=4)
+                setToken(0,token[0]+1);
+        }
+        if(this->getHandCards().at(i)->getElement() == "fire")
+            fireNum++;
+    }
+    coder.tokenNotice(id,0,token[0]);
+    coder.discardNotice(this->getID(),this->getHandCards().length(),tr("y"),this->getHandCards());
+    this->removeHandCards(this->getHandCards(),true,true);
+    Harm* harm=(Harm*)args[2];
+    harm->harmPoint+=fireNum;
+    Harm jinduanzhili;
+    jinduanzhili.harmPoint=fireNum;
+    jinduanzhili.type=MAGICHARM;
+    if(fireNum != 0){
+        engine->timeLine3(jinduanzhili,this,this,"禁断之力");
+        if(engine->checkEnd())
+            return;
+    }
+    setTap(1);
+    fireNum=0;
+}
+
+//禁断未命中
+void YongZhe::JinDuanZhiLi2(QList<void *> args)
+{
+    if(this !=(PlayerEntity*)args[0] || this->getEnergy()==0)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(this->getHandCards().length()== 0)
+        return;
+    coder.askForSkill(this->getID(),"禁断之力");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    if(this->getCrystal()>0)
+        setCrystal(crystal-1);
+    else
+        setGem(gem-1);
+    coder.energyNotice(id,gem,crystal);
+    coder.notice("勇者发动【禁断之力】");
+    jinDuanUsed=true;
+    for(int i=0;i < this->getHandCards().length();i++)
+    {
+        if(this->getHandCards().at(i)->getType() != "attack")
+        {
+            if(this->getToken(0)!=4)
+                setToken(0,token[0]+1);
+        }
+        if(this->getHandCards().at(i)->getElement() == "water")
+        {
+            if(this->getToken(1)!=4)
+                setToken(1,token[1]+1);
+        }
+    }
+    coder.tokenNotice(id,0,token[0]);
+    coder.tokenNotice(id,1,token[1]);
+    coder.discardNotice(this->getID(),this->getHandCards().length(),tr("y"),this->getHandCards());
+    this->removeHandCards(this->getHandCards(),true,true);
+    setTap(1);
+}
+
+//死斗
+void YongZhe::SiDou(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[1] || ((Harm*)args[2])->type != MAGICHARM || this->getGem()==0)
+        return;
+    coder.askForSkill(this->getID(),"死斗");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    setGem(gem-1);
+    coder.energyNotice(this->getID(),gem,crystal);
+    coder.notice("勇者发动【死斗】");
+    if(token[0]+3<=4)
+        setToken(0,token[0]+3);
+    else
+        setToken(0,4);
+    coder.tokenNotice(id,0,token[0]);
+}
+
+//挑衅放置
+void YongZhe::TiaoXin1(QList<void *> args)
+{
+    BatInfor* magic= (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2101)
+        return;
+    if(tiaoXinUsed)
+        return;
+    setToken(0,token[0]-1);
+    setToken(1,token[1]+1);
+    tiaoXinID=magic->dstID;
+    coder.tokenNotice(id,0,token[0]);
+    coder.tokenNotice(id,1,token[1]);
+    coder.notice("勇者对玩家"+QString::number(tiaoXinID)+"发动【挑衅】");
+    coder.specialNotice(tiaoXinID,1,1);
+    tiaoXinUsed=true;
+}
+
+//挑衅触发判定1
+void YongZhe::TiaoXin2(PlayerEntity *player, bool *act)
+{
+    if(player->getID() != tiaoXinID)
+        return;
+    *act=true;
+    if(!tiaoXinUsed)
+        return;
+    tiaoXinChuFa=true;
+}
+
+//挑衅移除
+void YongZhe::TiaoXin3(PlayerEntity *player)
+{
+    if(player->getID() != tiaoXinID)
+        return;
+    if(!tiaoXinUsed)
+        return;
+    if(!tiaoXinChuFa)
+        return;
+    coder.specialNotice(tiaoXinID,1,0);
+    tiaoXinID=-1;
+    tiaoXinUsed=false;
+}
+
+/*挑衅移除
+void YongZhe::TiaoXin4(QList<void *> args)
+{
+    if(this->getID() != tiaoXinID)
+        return;
+    if(!tiaoXinUsed)
+        return;
+    if(!tiaoXinChuFa)
+        return;
+    coder.specialNotice(tiaoXinID,1,0);
+    tiaoXinID=-1;
+    tiaoXinUsed=false;
+    tiaoXinChuFa=false;
+}*/
+
+//精疲力竭触发
+void YongZhe::JingPiLiJie1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->tap != 1)
+        return;
+    if(jinDuanUsed){
+    coder.tapNotice(this->getID(),1,"【精疲力竭】");
+    this->setHandCardsMax(4);
+    coder.handcardMaxNotice(id,4);
+    this->setHandCardsMaxFixed(true);
+    jinDuanUsed=false;
+    engine->addActionNum(ATTACK);
+    }
+}
+
+//精疲力竭结算
+void YongZhe::JingPiLiJie2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->tap != 1)
+        return;
+    setTap(0);
+    coder.tapNotice(this->getID(),0,"【普通形态】");
+    this->setHandCardsMaxFixed(false);
+    this->setHandCardsMax(6);
+    coder.handcardMaxNotice(id,6);
+    Harm jingpilijie;
+    jingpilijie.harmPoint=3;
+    jingpilijie.type=MAGICHARM;
+    engine->timeLine3(jingpilijie,this,this,"精疲力竭");
+    if(engine->checkEnd())
+        return;
+}

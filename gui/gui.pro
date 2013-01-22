@@ -40,7 +40,8 @@ HEADERS += client/Client.h \
            widget/TipArea.h \
     logic/MoJian.h \
     logic/MaoXian.h \
-    logic/YuanSu.h
+    logic/YuanSu.h \
+    logic/YongZhe.h
 FORMS += client/ClientUI.ui
 SOURCES += main.cpp \
            client/Client.cpp \
@@ -74,4 +75,5 @@ SOURCES += main.cpp \
            widget/TipArea.cpp \
     logic/MoJian.cpp \
     logic/MaoXian.cpp \
-    logic/YuanSu.cpp
+    logic/YuanSu.cpp \
+    logic/YongZhe.cpp

@@ -236,4 +236,37 @@ private:
     bool ignite;
     \
 };
+//ÓÂÕß
+class YongZhe : public PlayerEntity
+{
+    Q_OBJECT
+public:
+    YongZhe(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    //Å­ºð
+    void NuHou(QList<void*> args);
+    void NuHou1(QList<void*> args);
+    void NuHou2(QList<void*> args);
+    //Ã÷¾µÖ¹Ë®
+    void MingJingZhiShui(QList<void*> args);
+    //½û¶ÏÖ®Á¦
+    void JinDuanZhiLi1(QList<void*> args);
+    void JinDuanZhiLi2(QList<void*> args);
+    //ËÀ¶·
+    void SiDou(QList<void*> args);
+    //ÌôÐÆ
+    void TiaoXin1(QList<void*> args);
+    void TiaoXin2(PlayerEntity*,bool*);
+    void TiaoXin3(PlayerEntity*);
+    //void TiaoXin4(QList<void *> args);
+    //¾«Æ£Á¦½ß
+    void JingPiLiJie1(QList<void*> args);
+    void JingPiLiJie2(QList<void *> args);
+private:
+    int tiaoXinID,fireNum;
+    bool nuHouUsed,tiaoXinUsed,tiaoXinChuFa;
+    bool jinDuanUsed;
+};
+
 #endif // CHARACTERS_H
