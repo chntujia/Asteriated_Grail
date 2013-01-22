@@ -96,6 +96,7 @@ protected:
     QString name;
     int handCardsMax;
 
+
     int crossNum;
     int crossMax;
     int gem;

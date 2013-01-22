@@ -98,6 +98,8 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         painter->drawPixmap(0,0,QPixmap(player->getTapSource()));
     if(player->getSpecial(0))
         painter->drawPixmap(115,20,QPixmap("resource/shufu.png"));
+    if(player->getSpecial(1))
+        painter->drawPixmap(115,40,QPixmap("resource/tiaoxin.png"));
     if(selected)
         painter->drawPixmap(-5,-5,QPixmap("resource/playerSelected.png"));
 

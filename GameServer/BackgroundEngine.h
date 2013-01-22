@@ -131,10 +131,11 @@ signals:
     //回合开始阶段信号
     void turnBeginPhaseSIG(QList<void*> args);
     //回合结束阶段信号
-    void turnEndPhaseSIG(QList<void*> args);
+    void turnEndPhaseSIG(PlayerEntity*);
     //行动阶段信号
     void weakSIG(PlayerEntity*, bool*);
     void actionPhaseSIG(QList<void*> args);
+    void tiaoXinPhaseSIG(PlayerEntity*, bool*);
     //连接玩家对象信号-槽的信号
     void makePlayerConnectSIG(int);
     //发送通讯信息

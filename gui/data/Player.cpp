@@ -54,6 +54,15 @@ void Player::setRole(int roleID)
     case 12:
         name=tr("[冒险家]");
         break;
+    case 21:
+        name=tr("[勇者]");
+        tapSource="resource/jingpilijie.png";
+        tokenName[0]=tr("怒气");
+        tokenMax[0]=4;
+        tokenName[1]=tr("知性");
+        tokenMax[1]=4;
+        crystal=2;
+        break;
     }
 }
 
