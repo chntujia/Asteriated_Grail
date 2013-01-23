@@ -464,6 +464,7 @@ void AnSha::QianXing(QList<void*> args)
         coder.tapNotice(id,0,"【普通形态】");
         handCardsMax++;
         coder.handcardMaxNotice(id,handCardsMax);
+        setHandCardsMax(handCardsMax);
     }
     if(getGem()==0)
         return;
@@ -473,6 +474,7 @@ void AnSha::QianXing(QList<void*> args)
         return;
     this->gem--;
     coder.energyNotice(id,this->getGem(),this->getCrystal());
+    coder.notice("暗杀者发动【潜行】");
     setTap(1);
     coder.tapNotice(id,1,"【潜行形态】");
     handCardsMax--;
@@ -795,6 +797,7 @@ void Saintness::mercy(QList<void *> args)
         return;
     this->gem--;
     coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+    coder.notice("圣女发动【怜悯】");
     setTap(1);
     handCardsMax++;
     setHandCardsMax(handCardsMax);
@@ -1486,6 +1489,155 @@ void YuanSu::YueGuang(QList<void*> args)
     engine->timeLine3(harm,this,dst,"月光");
 }
 
+ZhongCai::ZhongCai(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=14;
+    this->star=3.5;
+    tokenMax[0]=4;
+    crystal=2;
+    startUsed=false;
+    this->makeConnection(engine);
+}
+
+void ZhongCai::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(YiShiZhongDuan(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(ZhongCaiYiShi1(QList<void*>)));
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(ZhongCaiYiShi2(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(MoRiShenPan(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(PanJueTianPing(QList<void*>)));
+    connect(engine,SIGNAL(timeLine6DrawedSIG(QList<void*>)),this,SLOT(ShenPanLangChao(QList<void*>)));
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
+
+//仪式中断
+void ZhongCai::YiShiZhongDuan(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(tap!=1 || startUsed)
+        return;
+    coder.askForSkill(this->getID(),"仪式中断");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    coder.notice("仲裁者发动【仪式中断】");
+    setTap(0);
+    coder.tapNotice(this->getID(),0,"【普通形态】");
+    startUsed=true;
+    setHandCardsMaxFixed(false);
+    handCardsMax++;
+    setHandCardsMax(handCardsMax);
+    coder.handcardMaxNotice(this->getID(),handCardsMax);
+    teamArea.setGem(color,teamArea.getGem(color)+1);
+    coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
+}
+
+//仲裁仪式发动
+void ZhongCai::ZhongCaiYiShi1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(tap!=0 || this->getGem()==0 || startUsed)
+        return;
+    coder.askForSkill(this->getID(),"仲裁仪式");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    coder.notice("仲裁者发动【仲裁仪式】");
+    setGem(gem-1);
+    coder.energyNotice(id,gem,crystal);
+    setTap(1);
+    coder.tapNotice(this->getID(),1,"【审判形态】");
+    startUsed=true;
+    handCardsMax--;
+    setHandCardsMax(handCardsMax);
+    setHandCardsMaxFixed(true);
+    coder.handcardMaxNotice(this->getID(),handCardsMax);
+}
+
+//仲裁仪式触发
+void ZhongCai::ZhongCaiYiShi2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(tap!=1)
+        return;
+    if(token[0]==4)
+        return;
+    setToken(0,token[0]+1);
+    coder.tokenNotice(id,0,token[0]);
+}
+
+//末日审判
+void ZhongCai::MoRiShenPan(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 1403)
+        return;
+    QString msg;
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    msg="仲裁者对玩家"+QString::number(magic->dstID)+"发动【末日审判】";
+    coder.notice(msg);
+    int tokenNum=token[0];
+    setToken(0,0);
+    coder.tokenNotice(id,0,0);
+    Harm harm;
+    harm.harmPoint=tokenNum;
+    harm.type=MAGICHARM;
+    engine->timeLine3(harm,this,dst,"末日审判");
+}
+
+//判决天平
+void ZhongCai::PanJueTianPing(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 1404)
+        return;
+    if(crystal>0)
+        crystal--;
+    else
+        gem--;
+    setGem(gem);
+    setCrystal(crystal);
+    coder.energyNotice(id,gem,crystal);
+    coder.notice("仲裁者发动【判决天平】");
+    setToken(0,token[0]+1);
+    coder.tokenNotice(id,0,token[0]);
+    if(magic->infor2)
+    {
+        int drawNum=this->getHandCardMax()-this->getHandCardNum();
+        for(int i=0;i<drawNum;i++)
+            engine->drawCards(1,0,this);
+        teamArea.setGem(color,teamArea.getGem(color)+1);
+        coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
+    }
+    else
+    {
+        coder.discardNotice(this->getID(),this->getHandCards().length(),tr("n"),this->getHandCards());
+        this->removeHandCards(this->getHandCards(),true,true);
+    }
+}
+
+//审判浪潮
+void ZhongCai::ShenPanLangChao(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[1])
+        return;
+    setToken(0,token[0]+1);
+    coder.tokenNotice(this->getID(),0,token[0]);
+}
+
+//重置启动
+void ZhongCai::skillReset(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    startUsed=false;
+}
+
 YongZhe::YongZhe(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
 {
     this->characterID=21;
@@ -1751,9 +1903,10 @@ void YongZhe::JingPiLiJie1(QList<void *> args)
         return;
     if(jinDuanUsed){
     coder.tapNotice(this->getID(),1,"【精疲力竭】");
-    this->setHandCardsMax(4);
-    coder.handcardMaxNotice(id,4);
-    this->setHandCardsMaxFixed(true);
+    handCardsMax-=2;
+    setHandCardsMax(handCardsMax);
+    setHandCardsMaxFixed(true);
+    coder.handcardMaxNotice(id,handCardsMax);
     jinDuanUsed=false;
     engine->addActionNum(ATTACK);
     }
@@ -1768,9 +1921,10 @@ void YongZhe::JingPiLiJie2(QList<void *> args)
         return;
     setTap(0);
     coder.tapNotice(this->getID(),0,"【普通形态】");
-    this->setHandCardsMaxFixed(false);
-    this->setHandCardsMax(6);
-    coder.handcardMaxNotice(id,6);
+    setHandCardsMaxFixed(false);
+    handCardsMax+=2;
+    setHandCardsMax(handCardsMax);
+    coder.handcardMaxNotice(id,handCardsMax);
     Harm jingpilijie;
     jingpilijie.harmPoint=3;
     jingpilijie.type=MAGICHARM;

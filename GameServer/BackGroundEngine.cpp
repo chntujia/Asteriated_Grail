@@ -91,6 +91,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 12:
         return new MaoXian(engine,id,color);
         break;
+    case 14:
+        return new ZhongCai(engine,id,color);
+        break;
     case 21:
         return new YongZhe(engine,id,color);
         break;
@@ -119,10 +122,11 @@ void BackgroundEngine::seatArrange()
         ids<<i;
     randomize(&ids);
     QList<int> roles;
-/*    QList<int> roles2;//这是测试用
+    QList<int> roles2;//这是测试用
+    roles2<<1;
     roles2<<2;
     roles2<<3;
-    roles2<<6;
+    roles2<<5;
     roles2<<7;
     roles2<<8;
     roles2<<9;
@@ -132,16 +136,17 @@ void BackgroundEngine::seatArrange()
     for(int i=0;i<2;i++)
     {
         roles<<roles2[i];
-    }*/
-    for(int i=1; i<= 9 ;i++)
+    }
+/*    for(int i=1; i<= 9 ;i++)
        roles<<i;
     roles<<11;
     roles<<12;
+    roles<<14;
+    roles<<21;*/
     roles<<21;
-//    roles<<21;
-  //  roles<<1;
-    //roles<<5;
-    //roles<<4;
+    roles<<14;
+    roles<<6;
+    roles<<4;
     randomize(&roles);
     int colors[]={1,0,1,0,0,1};
     this->playerList.clear();
