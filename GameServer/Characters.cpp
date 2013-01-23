@@ -1,6 +1,7 @@
 #include "Characters.h"
 #include "BackgroundEngine.h"
 #include "Server.h"
+
 Berserker::Berserker(BackgroundEngine *engine,int id,int color):PlayerEntity(engine,id,color)
 {
     this->characterID = BERSERKER;
@@ -1346,4 +1347,205 @@ void MaoXian::MaoXianZheTianTang(QList<void *> args)
     teamArea.setCrystal(color,teamArea.getCrystal(color)-magic->infor3);
     coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
     coder.energyNotice(magic->dstID,dst->getGem(),dst->getCrystal());
+}
+
+/******************
+  圣枪 10
+  *******************/
+ShengQiang::ShengQiang(BackgroundEngine *engine, int id, int color):PlayerEntity(engine, id, color)
+{
+    this->characterID = 10;
+    this->star = 3.5;
+    //神圣信仰
+    this->crossMax = 3;
+    this->makeConnection(engine);
+}
+
+//辉耀
+void ShengQiang::HuiYao(QList<void *> args)
+{
+     BatInfor *magic = (BatInfor*)args[0];
+     if(magic->srcID != this->getID())
+         return;
+     if(magic->infor1 != 1001)
+         return;
+
+     QList<CardEntity*> cards;
+     cards << getCardByID(magic->CardID);
+     coder.notice("圣枪发动【辉耀】");
+     this->removeHandCards(cards,true);
+     coder.discardNotice(this->getID(),1,"y",cards);
+     PlayerEntity* dst = this;
+     int cross, max;
+     do{
+         cross = dst->getCrossNum();
+         max = dst->getCrossMax();
+         if (cross<max)
+         {
+             cross++;
+             dst->setCrossNum(cross);
+             coder.crossChangeNotice(dst->getID(), cross);
+         }
+         dst = dst->getNext();
+     }while(dst!= this);
+     this->engine->addActionNum(ATTACK);
+}
+//惩戒
+void ShengQiang::ChengJie(QList<void *> args)
+{
+    BatInfor* magic =(BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 1002)
+        return;
+
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    coder.notice("圣枪对玩家"+QString::number(magic->dstID)+"发动【惩戒】");
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->getID(), 1, "y", cards);
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    int cross, max;
+    cross = dst->getCrossNum();
+    cross--;
+    dst->setCrossNum(cross);
+    coder.crossChangeNotice(dst->getID(), cross);
+    coder.notice("玩家"+QString::number(magic->dstID)+"减少1点治疗，圣枪增加1治疗");
+    cross = this->getCrossNum();
+    max = this->getCrossMax();
+    if (cross<max)
+    {
+        cross ++;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+    }
+    this->engine->addActionNum(ATTACK);
+}
+
+//圣击，只判断非主动攻击
+void ShengQiang::ShengJi(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]))
+        return;
+    if(*(bool*)args[4])
+        return;
+    int cross = this->getCrossNum();
+    int max = this->getCrossMax();
+    if(cross < max)
+    {
+        cross ++;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+    }
+    coder.notice("圣枪发动【圣击】，增加1治疗");
+}
+
+//天枪
+void ShengQiang::TianQiang(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]))
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(this->ShengGuangQiYuUsed)
+        return;
+    int cross = this->getCrossNum();
+    if(cross<2)
+        return;
+    coder.askForSkill(this->getID(),"天枪");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    cross-=2;
+    this->setCrossNum(cross);
+    coder.crossChangeNotice(this->getID(), cross);
+    coder.notice("圣枪发动【天枪】");
+    *(int*)args[5] = NOREPLY;
+}
+
+//地枪，不发动则发动圣击
+void ShengQiang::DiQiang(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]))
+        return;
+    if(!*(bool*)args[4])
+        return;
+    int cross = this->getCrossNum();
+    if(cross > 0)
+    {
+        coder.askForSkill(this->getID(),"地枪");
+        int reply = messageBuffer::readInfor();
+        if(reply != 0)
+        {
+            cross-=reply;
+            this->setCrossNum(cross);
+            coder.crossChangeNotice(this->getID(), cross);
+            coder.notice("圣枪发动【地枪】，使用"+QString::number(reply)+"点治疗");
+            Harm *harm = (Harm*)args[2];
+            harm->harmPoint += reply;
+        }
+        else
+        {
+            int max = this->getCrossMax();
+            if(cross < max)
+            {
+                cross++;
+                this->setCrossNum(cross);
+                coder.crossChangeNotice(this->getID(), cross);
+            }
+            coder.notice("圣枪发动【圣击】，增加1治疗");
+        }
+    }
+    else
+    {
+        int max = this->getCrossMax();
+        if(cross < max)
+        {
+            cross++;
+            this->setCrossNum(cross);
+            coder.crossChangeNotice(this->getID(), cross);
+        }
+        coder.notice("圣枪发动【圣击】，增加1治疗");
+    }
+
+}
+
+//圣光祈愈
+void ShengQiang::ShengGuangQiYu(QList<void *> args)
+{
+    BatInfor* magic =(BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 1006)
+        return;
+    if(getGem()==0)
+        return;
+    ShengGuangQiYuUsed = true;
+    coder.notice("圣枪发动【圣光祈愈】，增加2治疗");
+    this->gem--;
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+    int cross = this->getCrossNum();
+    cross+=2;
+    if(cross>5)
+        cross=5;
+    this->setCrossNum(cross);
+    coder.crossChangeNotice(this->getID(), cross);
+    this->engine->addActionNum(ATTACK);
+}
+
+void ShengQiang::skillReset(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]))
+        return;
+    ShengGuangQiYuUsed = false;
+}
+
+void ShengQiang::makeConnection(BackgroundEngine* engine)
+{
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(HuiYao(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ChengJie(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShengGuangQiYu(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(TianQiang(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(ShengJi(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(DiQiang(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
 }
