@@ -213,4 +213,38 @@ signals:
 private:
     \
 };
+//Ê¥Ç¹
+class ShengQiang: public PlayerEntity
+{
+    Q_OBJECT
+public:
+    ShengQiang(BackgroundEngine* engine, int id, int color);
+    void makeConnection(BackgroundEngine* engine);
+public slots:
+    void HuiYao(QList<void*> args);
+    void ChengJie(QList<void*> args);
+    void ShengJi(QList<void*> args);
+    void TianQiang(QList<void*> args);
+    void DiQiang(QList<void*> args);
+    void ShengGuangQiYu(QList<void*> args);
+    void skillReset(QList<void*> args);
+private:
+    bool ShengGuangQiYuUsed;
+};
+//Éñ¹Ù
+class ShenGuan: public PlayerEntity
+{
+    Q_OBJECT
+public:
+    ShenGuan(BackgroundEngine* engine, int id, int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void ShenShengQiShi(QList<void*> args);
+    void ShenShengQiFu(QList<void*> args);
+    void ShuiZhiShenLi(QList<void*> args);
+    void ShenShengQiYue(QList<void*> args);
+    void ShenShengLingYuZhiLiao(QList<void*> args);
+    void ShenShengLingYuFaShang(QList<void*> args);
+};
+
 #endif // CHARACTERS_H

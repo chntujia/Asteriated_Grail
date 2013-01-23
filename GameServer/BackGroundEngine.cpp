@@ -85,6 +85,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 9:
         return new MoJian(engine,id,color);
         break;
+    case 10:
+        return new ShengQiang(engine, id, color);
+        break;
     case 12:
         return new MaoXian(engine,id,color);
         break;
@@ -125,7 +128,7 @@ void BackgroundEngine::seatArrange()
         PlayerEntity* player;
         //²âÊÔ¹­Å®
 
-        player = setRole(roles[i],this,ids[i],colors[i]);
+        player = setRole(10,this,ids[i],colors[i]);
         code+=QString::number(ids[i]);
         //PlayerEntity* player = new PlayerEntity(this,code.at(i).digitValue(),code.at(i+this->playerNum).digitValue());
         this->playerList << player;
