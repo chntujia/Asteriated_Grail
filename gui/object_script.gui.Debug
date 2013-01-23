@@ -31,6 +31,8 @@ INPUT(
 ./debug\TipArea.o
 ./debug\MoJian.o
 ./debug\MaoXian.o
+./debug\YuanSu.o
+./debug\YongZhe.o
 ./debug\moc_Client.o
 ./debug\moc_ClientUI.o
 ./debug\moc_DataInterface.o
@@ -60,4 +62,6 @@ INPUT(
 ./debug\moc_TipArea.o
 ./debug\moc_MoJian.o
 ./debug\moc_MaoXian.o
+./debug\moc_YuanSu.o
+./debug\moc_YongZhe.o
 );

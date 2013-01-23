@@ -17,6 +17,7 @@ public slots:
     void onUnready();
     void cardAnalyse();
     void playerAnalyse();
+    void buy();
     void extract();
     void QiZha();
     void TeShuJiaGong();

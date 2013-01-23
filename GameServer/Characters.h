@@ -192,7 +192,7 @@ public slots:
     void AnYingZhiLi(QList<void*> args);
     void skillReset(QList<void*> args);
 private:
-    bool HeiAnZhenChanUsed,XiuLuoLianZhanUsed;
+    bool HeiAnZhenChanUsed,XiuLuoLianZhanUsed,isHeiAnZhenChan;
 };
 //Ã°ÏÕ
 class MaoXian : public PlayerEntity
@@ -257,7 +257,7 @@ public slots:
     void SiDou(QList<void*> args);
     //ÌôÐÆ
     void TiaoXin1(QList<void*> args);
-    void TiaoXin2(PlayerEntity*,bool*);
+    void TiaoXin2(PlayerEntity*,int*);
     void TiaoXin3(PlayerEntity*);
     //void TiaoXin4(QList<void *> args);
     //¾«Æ£Á¦½ß

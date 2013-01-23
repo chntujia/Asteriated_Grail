@@ -18,6 +18,27 @@ MaoXian::MaoXian()
     connect(teShuJiaGong,SIGNAL(buttonSelected(int)),this,SLOT(TeShuJiaGong()));
 }
 
+void MaoXian::buy()
+{
+    Team*team=dataInterface->getMyTeam();
+
+    int energy=team->getEnergy();
+
+    state=4;
+    decisionArea->enable(0);
+    decisionArea->enable(1);
+    handArea->reset();
+    playerArea->reset();
+    tipArea->reset();
+
+    if(energy<4)
+        tipArea->setMsg(tr("你摸3张牌，你方战绩区加两宝石"));
+    if(energy==4)
+        tipArea->setMsg(tr("战绩区星石已有4个，购买只增加一宝石"));
+    if(energy==5)
+        tipArea->setMsg(tr("战绩区星石数目已达上限，购买将不再增加星石"));
+}
+
 void MaoXian::extract()
 {
     state=1204;
@@ -28,6 +49,7 @@ void MaoXian::extract()
     decisionArea->enable(1);
     playerArea->enableMate(true);
     playerArea->setQuota(1);
+    tipArea->setMsg(tr("请先选择要给予的对象"));
 }
 
 void MaoXian::normal()
@@ -413,10 +435,10 @@ void MaoXian::decipher(QString command)
         flag=arg[2];
         if(targetID==myID)
         {
-            if(flag=="0"){
+            if(flag=="0")
                 normal();
-                actionFlag=0;
-            }
+            if(flag=="1")
+                attackAction();
         }
         break;
 //额外行动询问

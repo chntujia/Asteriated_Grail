@@ -93,22 +93,24 @@ void Role::cardAnalyse()
             }
         }
         else
-        case 10:
+    case 10:
         {
             playerArea->reset();
             playerArea->enableEnemy();
             QList<Player*> players=dataInterface->getPlayerList();
             for(i=0;i<players.size();i++)
-            {
-                if(players[i]->getRoleID()==5 && players[i]->getTap()==1)
+                if(players[i]->getRoleID()==5 && players[i]->getTap()==1){
                     playerArea->disablePlayerItem(i);
-                if(players[i]->getRoleID()==21 && myself->getSpecial(1) == 1)
-                {
-                    playerArea->disableAll();
-                    playerArea->enablePlayerItem(i);
-                    handArea->disableMagic();
-                    decisionArea->enable(3);
+                    break;
                 }
+            if(myself->getSpecial(1) == 1)
+            {
+                playerArea->disableAll();
+                for(i=0;i<players.size();i++)
+                    if(players[i]->getRoleID()==21){
+                        playerArea->enablePlayerItem(i);
+                        break;
+                    }
             }
         }
     break;

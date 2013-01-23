@@ -135,7 +135,7 @@ signals:
     //行动阶段信号
     void weakSIG(PlayerEntity*, bool*);
     void actionPhaseSIG(QList<void*> args);
-    void tiaoXinPhaseSIG(PlayerEntity*, bool*);
+    void tiaoXinPhaseSIG(PlayerEntity*, int*);
     //连接玩家对象信号-槽的信号
     void makePlayerConnectSIG(int);
     //发送通讯信息

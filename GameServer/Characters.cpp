@@ -1143,7 +1143,7 @@ void MoJian::HeiAnZhenChan1(QList<void*> args)
     if(this != (PlayerEntity*)args[0]||HeiAnZhenChanUsed||gem<=0||!*(bool*)args[4])
         return;
     coder.askForSkill(id,"ºÚ°µÕð²ü");
-    HeiAnZhenChanUsed=false;
+    isHeiAnZhenChan=false;
     if(messageBuffer::readInfor() == 0)
         return;
     *((int*)args[5]) = NOREPLY;
@@ -1151,21 +1151,22 @@ void MoJian::HeiAnZhenChan1(QList<void*> args)
     coder.energyNotice(id,gem,crystal);
     coder.notice("Ä§½£·¢¶¯¡¾ºÚ°µÕð²ü¡¿");
     HeiAnZhenChanUsed=true;
+    isHeiAnZhenChan=true;
 }
 
 void MoJian::HeiAnZhenChan2(QList<void*> args)
 {
-    if(this != (PlayerEntity*)args[0]||!HeiAnZhenChanUsed)
+    if(this != (PlayerEntity*)args[0]||!isHeiAnZhenChan)
         return;
-    HeiAnZhenChanUsed=false;
+    isHeiAnZhenChan=false;
     engine->drawCards(getHandCardMax()-getHandCardNum(),0,this);
 }
 
 void MoJian::HeiAnZhenChan3(QList<void *> args)
 {
-    if(this != (PlayerEntity*)args[0]||!HeiAnZhenChanUsed)
+    if(this != (PlayerEntity*)args[0]||!isHeiAnZhenChan)
         return;
-    HeiAnZhenChanUsed=false;
+    isHeiAnZhenChan=false;
 }
 
 //ÐÞÂÞÁ¬Õ¶
@@ -1192,6 +1193,7 @@ void MoJian::skillReset(QList<void*>args){
         return;
     XiuLuoLianZhanUsed=false;
     HeiAnZhenChanUsed=false;
+    isHeiAnZhenChan=false;
 }
 
 //°µÓ°Äý¾Û
@@ -1512,7 +1514,7 @@ void YongZhe::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(JinDuanZhiLi2(QList<void*>)));
     connect(engine,SIGNAL(timeLine6DrawedSIG(QList<void*>)),this,SLOT(SiDou(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(TiaoXin1(QList<void*>)));
-    connect(engine,SIGNAL(tiaoXinPhaseSIG(PlayerEntity*,bool*)),this,SLOT(TiaoXin2(PlayerEntity*,bool*)));
+    connect(engine,SIGNAL(tiaoXinPhaseSIG(PlayerEntity*,int*)),this,SLOT(TiaoXin2(PlayerEntity*,int*)));
     connect(engine,SIGNAL(turnEndPhaseSIG(PlayerEntity*)),this,SLOT(TiaoXin3(PlayerEntity*)));
     //connect(engine,SIGNAL(turnEndPhaseSIG(QList<void*>)),this,SLOT(TiaoXin4(QList<void*>)));
     connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(JingPiLiJie1(QList<void*>)));
@@ -1703,11 +1705,11 @@ void YongZhe::TiaoXin1(QList<void *> args)
 }
 
 //ÌôÐÆ´¥·¢ÅÐ¶¨1
-void YongZhe::TiaoXin2(PlayerEntity *player, bool *act)
+void YongZhe::TiaoXin2(PlayerEntity *player, int *act)
 {
     if(player->getID() != tiaoXinID)
         return;
-    *act=true;
+    *act=1;
     if(!tiaoXinUsed)
         return;
     tiaoXinChuFa=true;
