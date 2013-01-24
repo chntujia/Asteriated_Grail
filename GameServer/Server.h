@@ -58,13 +58,17 @@ class Server : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit Server(QObject *parent = 0, bool isIPv4=0, int port=0);
+    explicit Server(QObject *parent = 0, bool isIPv6=1, int port=0,int roleStrategy=1);
     void toDisplayPublic(QString content){emit this->toDisplay(content);}
+    int getRoleStrategy(){return roleStrategy;}
 
 signals:
     void gameStartSIG();
+    void seatPrearrangeSIG(int id, bool isRed);
     void seatArrangeSIG();
-    void characterNotice();
+    void roleStrategySIG();
+    void role3Pick1ReplySIG(int id,int roleID);
+    void roleNoticeSIG();
     void toDisplay(QString);
 public slots:
     //½âÂëÆ÷
@@ -79,5 +83,6 @@ private:
     QList<ClientSocket*> clientSocketList;
     QList<bool> ready;
     QList<int> socketDescriptorList;
+    int roleStrategy;
 };
 #endif // SERVER_H

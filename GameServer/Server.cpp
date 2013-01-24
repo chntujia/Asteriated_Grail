@@ -122,15 +122,17 @@ void ClientSocket::readMessage()
         //将接收到的数据存放到变量中
  }
 
-Server::Server(QObject *parent,bool isIPv4,int port) :
+Server::Server(QObject *parent,bool isIPv6,int port, int roleStrategy) :
     QTcpServer(parent)
 {
     this->clientSocketList.clear();
     this->ready.clear();
-    if(isIPv4)
+    if(!isIPv6)
         listen(QHostAddress::Any,port);
     else
         listen(QHostAddress::AnyIPv6,port);
+    this->roleStrategy=roleStrategy;
+
 }
 
 void Server::incomingConnection ( int socketDescriptor )
@@ -139,20 +141,7 @@ void Server::incomingConnection ( int socketDescriptor )
         return;
     ClientSocket* newSocket=new ClientSocket;
     newSocket->setSocketDescriptor(socketDescriptor);
-    /*
-    for(int i = 0;i < this->clientSocketList.size();i++)
-    {
 
-        if(this->clientSocketList.at(i)->peerAddress() == newSocket->peerAddress())
-        {
-            if(this->clientSocketList.at(i)->peerPort() == newSocket->peerPort())
-            {
-                delete newSocket;
-                return;
-            }
-        }
-    }
-    */
     clientSocketList.append(newSocket);
     ready.append(false);
     this->socketDescriptorList.append(socketDescriptor);
@@ -164,12 +153,15 @@ void Server::incomingConnection ( int socketDescriptor )
     connect(newSocket,SIGNAL(getMessage(int,QString)),this,SLOT(decoder(int,QString)));
 
     QString temp = "1;";
+    int howMany=clientSocketList.size();
     temp += QString::number(this->clientSocketList.size()-1);
     temp += ";";
     this->sendMessage(this->clientSocketList.size()-1,temp);
 
-    if(this->clientSocketList.size() == playerSum)
+    if(howMany == playerSum)
         emit this->seatArrangeSIG();
+    else
+        sendMessage(-1,tr("现有")+QString::number(howMany)+tr("名玩家进入房间，请耐心等候"));
 }
 
 //num=-1表示广播
@@ -240,6 +232,9 @@ void Server::decoder(int id, QString message)
 
     switch(infor.at(0).toInt())
     {
+    case 0:
+        emit seatPrearrangeSIG(id,infor.at(1).toInt());
+        break;
     case ACTIONCOMMAND:
 
         if(infor.at(1) == QString::number(ATTACK))
@@ -322,19 +317,25 @@ void Server::decoder(int id, QString message)
     break;
 
     case READYBEGIN:
-
         ready[id] = true;
         for(int i = 0;i < ready.size();i++)
-        {
             if(!ready.at(i))
                 return;
-        }
-        emit characterNotice();
-        emit this->gameStartSIG();
+        for(int i = 0;i < ready.size();i++)
+            ready[i]=false;
+        emit roleStrategySIG();
     break;
+    case 47:
+        ready[id] = true;
+        emit role3Pick1ReplySIG(id,infor.at(1).toInt());
+        for(int i = 0;i < ready.size();i++)
+            if(!ready.at(i))
+                return;
+        emit roleNoticeSIG();
+        emit gameStartSIG();
+        break;
 
     case WEAKCOMMAND:
-
         messageBuffer::writeInfor(infor[1].toInt());
     break;
 

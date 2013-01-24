@@ -108,8 +108,12 @@ public slots:
     //游戏开始槽
     void gameStart();
     //位次排列槽
+    void seatPrearrange(int id, bool isRed);
     void seatArrange();
-    void characterSynchron();
+    void role3Pick1();
+    void role3Pick1Reply(int id,int roleID);
+    void roleRandom();
+    void seatPostarrange();
     //游戏结束检查槽
     bool checkEnd();
     //弃牌加入弃牌堆槽
@@ -175,6 +179,9 @@ private:
     int playerNum;
     //游戏进行中标记
     bool playing;
+    QList<int> red,blue;
+    QString queue;
+    QList<int> roles;
 };
 
 #endif // BACKGROUNDENGINE_H

@@ -8,12 +8,7 @@ DataInterface::DataInterface(QObject *parent) :
     QObject(parent)
 {
     initCardDB();
-    /*
-    playerMax=6;
-    id=4;
-    initPlayerList(QString("143025101001"));
-    initTeam(15);
-*/
+    initRoleList();
 }
 void DataInterface::initCardDB()
 {
@@ -32,6 +27,36 @@ void DataInterface::initCardDB()
     }
     fp.close();
 }
+
+void DataInterface::initRoleList()
+{
+    roleList<<NULL;
+    roleList<<tr("[剑圣]");
+    roleList<<tr("[狂战士]");
+    roleList<<tr("[弓之女神]");
+    roleList<<tr("[封印师]");
+    roleList<<tr("[暗杀者]");
+    roleList<<tr("[圣女]");
+    roleList<<tr("[天使]");
+    roleList<<tr("[魔导师]");
+    roleList<<tr("[魔剑]");
+    roleList<<tr("[圣枪]");
+    roleList<<tr("[元素师]");
+    roleList<<tr("[冒险家]");
+    roleList<<tr("[死灵法师]");
+    roleList<<tr("[仲裁者]");
+    roleList<<tr("[神官]");
+    roleList<<tr("[祈祷师]");
+    roleList<<tr("[贤者]");
+    roleList<<tr("[灵符师]");
+    roleList<<tr("[剑帝]");
+    roleList<<tr("[格斗家]");
+    roleList<<tr("[勇者]");
+    roleList<<tr("[灵魂术士]");
+    roleList<<tr("[巫女]");
+    roleList<<tr("[蝶舞者]");
+}
+
 void DataInterface::initPlayerList(QString msg)
 {
     int i,isRed,pID,myPos;

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dialog.ui'
 **
-** Created: Tue Jan 22 15:18:07 2013
+** Created: Thu Jan 24 11:21:50 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -30,6 +30,8 @@ class Ui_Dialog
 public:
     QWidget *widget;
     QVBoxLayout *verticalLayout;
+    QLabel *label_3;
+    QComboBox *comboBox_2;
     QLabel *label;
     QComboBox *comboBox;
     QLabel *label_2;
@@ -40,13 +42,23 @@ public:
     {
         if (Dialog->objectName().isEmpty())
             Dialog->setObjectName(QString::fromUtf8("Dialog"));
-        Dialog->resize(178, 137);
+        Dialog->resize(178, 195);
         widget = new QWidget(Dialog);
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(10, 10, 158, 113));
+        widget->setGeometry(QRect(10, 20, 158, 157));
         verticalLayout = new QVBoxLayout(widget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
+        label_3 = new QLabel(widget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        verticalLayout->addWidget(label_3);
+
+        comboBox_2 = new QComboBox(widget);
+        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+
+        verticalLayout->addWidget(comboBox_2);
+
         label = new QLabel(widget);
         label->setObjectName(QString::fromUtf8("label"));
 
@@ -74,12 +86,11 @@ public:
 
         verticalLayout->addWidget(buttonBox);
 
-        buttonBox->raise();
-        comboBox->raise();
-        lineEdit->raise();
-        label->raise();
-        label_2->raise();
-        label->raise();
+#ifndef QT_NO_SHORTCUT
+        label_3->setBuddy(comboBox_2);
+        label->setBuddy(comboBox);
+        label_2->setBuddy(lineEdit);
+#endif // QT_NO_SHORTCUT
 
         retranslateUi(Dialog);
         QObject::connect(buttonBox, SIGNAL(accepted()), Dialog, SLOT(accept()));
@@ -90,7 +101,8 @@ public:
 
     void retranslateUi(QDialog *Dialog)
     {
-        Dialog->setWindowTitle(QApplication::translate("Dialog", "Dialog", 0, QApplication::UnicodeUTF8));
+        Dialog->setWindowTitle(QApplication::translate("Dialog", "Setting", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("Dialog", "\351\200\211\345\260\206\346\250\241\345\274\217", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("Dialog", "\347\233\221\345\220\254\347\232\204\345\215\217\350\256\256", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Dialog", "\347\233\221\345\220\254\347\232\204\347\253\257\345\217\243", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

@@ -7,20 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>257</width>
-    <height>117</height>
+    <height>310</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>ClientUI</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QLabel" name="board">
-     <property name="text">
-      <string>Please connect...</string>
-     </property>
-    </widget>
-   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -54,6 +47,26 @@
       <widget class="QLineEdit" name="port"/>
      </item>
     </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>抢队（不一定成功）</string>
+       </property>
+       <property name="buddy">
+        <cstring>comboBox</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTextBrowser" name="board"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">

@@ -22,6 +22,8 @@ Logic::Logic(QObject *parent) :
     QObject(parent)
 {
     count=0;
+    hasShownRole=false;
+    memset(roles,-1,sizeof(roles));
 }
 void Logic::readyToStart()
 {
@@ -73,7 +75,10 @@ void Logic::setMyRole(int roleID)
 void Logic::getCommand(QString command)
 {
     QStringList arg=command.split(';');
-    int myID,playerMax,targetID,roleID;
+    TipArea *tipArea;
+    DecisionArea* decisionArea;
+    int playerMax,targetID,roleID,howMany;
+
     switch (arg[0].toInt())
     {
     case LOGINPERMIT:
@@ -95,12 +100,58 @@ void Logic::getCommand(QString command)
     case 37:
         targetID=arg[1].toInt();
         roleID=arg[2].toInt();
-        dataInterface->getPlayerList().at(targetID)->setRole(roleID);
-        count++;
-        if (dataInterface->getID()==targetID)            
+        roles[targetID]=roleID;
+        if(arg[3]=="1"){
+            dataInterface->getPlayerList().at(targetID)->setRole(roleID);
+            gui->getPlayerArea()->update();
+            hasShownRole=true;
+        }
+        else if(targetID==myID){
+            dataInterface->getPlayerList().at(targetID)->setRole(roleID);
             setMyRole(roleID);
+            gui->getPlayerArea()->update();
+        }
+        count++;
         if(count==6)
-            disconnect(this);
+        {
+            disconnect(getClient(),0,this,0);
+            if(!hasShownRole){
+                for(int i=0;i<dataInterface->getPlayerMax();i++)
+                    dataInterface->getPlayerList().at(i)->setRole(roles[i]);
+                gui->getPlayerArea()->update();
+            }
+        }
+        break;
+//31选择角色
+    case 46:
+        state=46;
+        tipArea=gui->getTipArea();
+        decisionArea=gui->getDecisionArea();
+        tipArea->reset();
+        connect(decisionArea,SIGNAL(okClicked()),this,SLOT(onOkClicked()));
+        howMany=arg[1].toInt();
+        for(int i=0;i<howMany;i++){
+            roleID=arg[2+i].toInt();
+            tipArea->addBoxItem(QString::number(roleID)+"."+dataInterface->getRoleList().at(roleID));
+        }
+        tipArea->setMsg(tr("请选择角色："));
+        tipArea->showBox();
+        decisionArea->enable(0);
         break;
     }
+}
+void Logic::onOkClicked()
+{
+    switch(state)
+    {
+    case 46:
+        TipArea *tipArea=gui->getTipArea();
+        QStringList chosen=tipArea->getBoxCurrentText().split(".");
+        emit sendCommand("47;"+chosen[0]+";");
+        disconnect(gui->getDecisionArea(),SIGNAL(okClicked()),this,SLOT(onOkClicked()));;
+        gui->reset();
+        break;
+    }
+
+
 }

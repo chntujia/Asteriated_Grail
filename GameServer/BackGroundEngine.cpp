@@ -110,62 +110,89 @@ void BackgroundEngine::randomize(QList<int> *queue)
     }
 }
 
+void BackgroundEngine::seatPrearrange(int id, bool isRed)
+{
+    if(isRed && red.size()<playerSum/2)
+        red<<id;
+    if(!isRed && blue.size()<playerSum/2)
+        blue<<id;
+}
+
 void BackgroundEngine::seatArrange()
 {
-    //座位序列,测试期间没有采用随机生成,以后应该改为随机生成
-    QString code="";
+    queue="";
     QList<int> ids;
     for(int i=0;i<playerSum;i++)
         ids<<i;
     randomize(&ids);
-    QList<int> roles;
 
-    for(int i=1; i<= 3 ;i++)
-       roles<<i;
-    roles<<11;
-    roles<<21;
-    roles<<9;
-
-//    randomize(&roles);
     int colors[]={1,0,1,0,0,1};
-    this->playerList.clear();
-    setPlayerNum(playerSum);
+    for(int i=0;i<playerSum;i++)
+        if(!red.contains(ids[i])&& !blue.contains(ids[i]))
+            if(red.size()<playerSum/2)
+                red<<ids[i];
+            else
+                blue<<ids[i];
+    randomize(&red);
+    randomize(&blue);
+    for(int i=0;i<playerSum;i++)
+    {
+        if(colors[i]==1)
+            queue+=QString::number(red.takeFirst());
+        else
+            queue+=QString::number(blue.takeFirst());
+    }
+    queue+="101001";
+    coder.beginNotice(queue);
+    playerList.clear();
     for(int i = 0;i < this->getPlayerNum();i++)
-    {
-        PlayerEntity* player;
-        //测试弓女
+        playerList << NULL;
+    for(int i=1; i<= 9 ;i++)
+        roles<<i;
+    roles<<11;
+    roles<<12;
+    roles<<21;
+    randomize(&roles);
+}
 
-        player = setRole(roles[i],this,ids[i],colors[i]);
-        code+=QString::number(ids[i]);
-        //PlayerEntity* player = new PlayerEntity(this,code.at(i).digitValue(),code.at(i+this->playerNum).digitValue());
-        this->playerList << player;
-
-    }
-    code+="101001";
+void BackgroundEngine::seatPostarrange()
+{
     for(int i = 0;i < this->getPlayerNum() - 1;i++)
-    {
         this->playerList.at(i)->setNext(this->playerList.at(i+1));
-    }
     this->playerList.at(this->getPlayerNum()-1)->setNext(this->playerList.at(0));
-    emit makePlayerConnectSIG(this->getPlayerNum());
+//    emit makePlayerConnectSIG(this->getPlayerNum());
 
     for(int i = 0;i < this->playerList.size();i++)
-    {
         this->playerList[i]->setSeatNum(i);
-    }
+}
 
-    coder.beginNotice(code);
-}
-void BackgroundEngine::characterSynchron()
+void BackgroundEngine::roleRandom()
 {
-    foreach(PlayerEntity*ptr, playerList)
-    {
-        coder.characterNotice(ptr->getID(),ptr->getRoleID());
+    for(int i=0;i<playerSum;i++){
+        playerList[i]=setRole(roles[i],this,queue[i].digitValue(),queue[i+playerSum].digitValue());
+        coder.roleNotice(queue[i].digitValue(),roles[i]);
     }
-    QTime dieTime= QTime::currentTime().addSecs(1);
-    while( QTime::currentTime() < dieTime )
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    seatPostarrange();
+    gameStart();
 }
+
+void BackgroundEngine::role3Pick1()
+{    
+    for(int i=0;i<playerSum;i++)
+        coder.askForRolePick(i,2,&roles);
+}
+
+void BackgroundEngine::role3Pick1Reply(int id,int roleID)
+{
+    for(int i=0;i<playerSum;i++)
+        if(queue[i].digitValue()==id){
+            playerList[i]=setRole(roleID,this,id,queue[i+playerSum].digitValue());
+            coder.roleNotice(id,roleID);
+            break;
+        }
+}
+
+
 
 //游戏开始,游戏流程控制
 void BackgroundEngine::gameStart()
@@ -256,6 +283,7 @@ void BackgroundEngine::initial()
     //洗牌
     this->shuffle(false);
     fp.close();
+    setPlayerNum(playerSum);
 
 }
 

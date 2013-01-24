@@ -88,6 +88,14 @@ void Coder::moveCardNotice(int sum,QList<CardEntity*> cards,int srcID,int srcAre
     emit this->sendMessage(-1,message);
 }
 
+void Coder::askForRolePick(int ID,int howMany,QList<int>*roles)
+{
+    QString message="46;"+QString::number(howMany)+";";
+    for(int i=0;i<howMany;i++)
+        message+=QString::number(roles->takeFirst())+";";
+    emit sendMessage(ID,message);
+}
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -142,16 +150,26 @@ MyRoom::MyRoom(Server *server):QObject()
     //connect(backEngine,SIGNAL(askForHeal(int,int)),testUI,SLOT(healSLOT(int,int)));
     connect(backEngine,SIGNAL(toInforDisplay(QString)),testUI,SLOT(toDisplay(QString)));
 
-    connect(backEngine,SIGNAL(makePlayerConnectSIG(int)),this,SLOT(makeConnect(int)));
-    connect(serverModule,SIGNAL(gameStartSIG()),this->backEngine,SLOT(gameStart()));
     connect(serverModule,SIGNAL(seatArrangeSIG()),backEngine,SLOT(seatArrange()));
+    connect(serverModule,SIGNAL(seatPrearrangeSIG(int,bool)),backEngine,SLOT(seatPrearrange(int,bool)));
     connect(this->serverModule,SIGNAL(toDisplay(QString)),this->testUI,SLOT(toDisplay(QString)));
     connect(backEngine,SIGNAL(sendMessageSIG(int,QString)),this->serverModule,SLOT(sendMessage(int,QString)));
     connect(&coder,SIGNAL(sendMessage(int,QString)),this->serverModule,SLOT(sendMessage(int,QString)));
 
-    connect(this->serverModule,SIGNAL(characterNotice()),backEngine,SLOT(characterSynchron()));
+    switch(serverModule->getRoleStrategy())
+    {
+    case 0:
+        connect(this->serverModule,SIGNAL(roleStrategySIG()),backEngine,SLOT(roleRandom()));
+        break;
+    case 1:
+        connect(this->serverModule,SIGNAL(roleStrategySIG()),backEngine,SLOT(role3Pick1()));
+        connect(serverModule,SIGNAL(role3Pick1ReplySIG(int,int)),backEngine,SLOT(role3Pick1Reply(int,int)));
+        connect(serverModule,SIGNAL(gameStartSIG()),this->backEngine,SLOT(gameStart()));
+        connect(this->serverModule,SIGNAL(roleNoticeSIG()),backEngine,SLOT(seatPostarrange()));
+        break;
+    }
 
-    emit this->serverModule->toDisplayPublic("server IP:" + this->serverModule->serverAddress().toString());
+//    emit this->serverModule->toDisplayPublic("server IP:" + this->serverModule->serverAddress().toString());
     emit this->serverModule->toDisplayPublic("server port:" + QString::number(this->serverModule->serverPort()));
 }
 

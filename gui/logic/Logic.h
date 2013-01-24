@@ -15,12 +15,17 @@ public:
     Client* getClient(){return socket;}
 signals:
     void sendCommand(QString);
-    void gameStart();
+    void gameStart();    
 public slots:
+    void onOkClicked();
     void getCommand(QString command);
 private:
     Client* socket;
     int count;
+    int state;
+    int roles[8];
+    int myID;
+    bool hasShownRole;
 };
 extern Logic* logic;
 #endif // LOGIC_H

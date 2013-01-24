@@ -130,7 +130,7 @@ public:
     void crossChangeNotice(int playerID,int newValue){emit this->sendMessage(-1,combMessage(TOQSTR(CROSSCHANGENOTICE),TOQSTR(playerID),TOQSTR(newValue)));}
     void askForCross(int playerID,int hurtPoint,int type){emit this->sendMessage(-1,combMessage(TOQSTR(ASKFORCROSS),TOQSTR(playerID),TOQSTR(hurtPoint),TOQSTR(type)));}
     void askForSkill(int playerID,QString content,QString args=(QChar)0){emit this->sendMessage(-1,combMessage(TOQSTR(ASKFORSKILL),TOQSTR(playerID),tr(content.toStdString().c_str()),args));}
-    void characterNotice(int playerID,int roleID){emit this->sendMessage(-1,combMessage(TOQSTR(CHARACTERNOTICE),TOQSTR(playerID),TOQSTR(roleID)));}
+    void roleNotice(int playerID,int roleID,int show=0){emit this->sendMessage(-1,combMessage(TOQSTR(CHARACTERNOTICE),TOQSTR(playerID),TOQSTR(roleID),TOQSTR(show)));}
     void unactionalNotice(int playerID){emit this->sendMessage(-1,combMessage(TOQSTR(UNACTIONALNOTICE),TOQSTR(playerID)));}
     void notice(QString content){emit this->sendMessage(-1,combMessage(TOQSTR(NOTICE),tr(content.toStdString().c_str())));}
     void askForDiscardMagic(int ID){emit this->sendMessage(-1,combMessage("850",TOQSTR(ID)));}
@@ -139,6 +139,7 @@ public:
     void tapNotice(int ID,int flag,QString content){emit this->sendMessage(-1,combMessage("39",TOQSTR(ID),TOQSTR(flag),tr(content.toStdString().c_str())));}
     void specialNotice(int ID,int type,int flag){emit this->sendMessage(-1,combMessage("43",TOQSTR(ID),TOQSTR(type),TOQSTR(flag)));}
     void tokenNotice(int ID,int tokenID,int howMany){emit this->sendMessage(-1,combMessage("45",TOQSTR(ID),TOQSTR(tokenID),TOQSTR(howMany)));}
+    void askForRolePick(int ID,int howMany,QList<int> *roles);
 signals:
     void sendMessage(int,QString);
 

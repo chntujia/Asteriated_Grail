@@ -19,14 +19,13 @@ public:
 
 private slots:
     void link();
-    void on_addr_textChanged();
-    void on_port_textChanged();
     void startGame();
+    void showMessage(QString);
     void displayError(QAbstractSocket::SocketError);
 private:
     Client* tcpSocket;
+    int myID;
     Ui::ClientUI *ui;
-
 };
 
 #endif // CLIENTUI_H

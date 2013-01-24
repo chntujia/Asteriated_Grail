@@ -13,6 +13,7 @@ public:
     explicit DataInterface(QObject *parent = 0);    
     void initCardDB();
     void initPlayerList(QString msg);
+    void initRoleList();
     void initTeam(int moraleMax);
     void sortPlayers();
     void addHandCard(Card* card);
@@ -33,7 +34,7 @@ public:
     Team* getRedTeam();
     Team* getBlueTeam();
     QString getQueue(){return queue;}
-    QStringList getNameList(){return nameList;}
+    QStringList getRoleList(){return roleList;}
 
 private:
     QList<Card*> cardDB;
@@ -42,7 +43,7 @@ private:
     Player* myself;
     Team *red,*blue,*otherTeam,*myTeam;
     QString queue;
-    QStringList nameList;
+    QStringList roleList;
     int id;
     int playerMax;
     int firstPlayerID;

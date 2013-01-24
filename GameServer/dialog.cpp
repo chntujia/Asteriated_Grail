@@ -8,16 +8,15 @@ Dialog::Dialog(QWidget *parent) :
     ui->setupUi(this);
     ui->comboBox->addItem("ipv4");
     ui->comboBox->addItem("ipv6");
+    ui->comboBox_2->addItem(tr("Ëæ»ú"));
+    ui->comboBox_2->addItem(tr("2Ñ¡1"));
     ui->lineEdit->setText("50000");
     connect(ui->buttonBox->button(QDialogButtonBox::Ok),SIGNAL(clicked()), this, SLOT(onOK()));
 }
 
 void Dialog::onOK()
 {
-    if(ui->comboBox->currentIndex()==0)
-        server=new Server(0,1,ui->lineEdit->text().toInt());
-    else
-        server=new Server(0,0,ui->lineEdit->text().toInt());
+    server=new Server(0,ui->comboBox->currentIndex(),ui->lineEdit->text().toInt(),ui->comboBox_2->currentIndex());
 }
 
 Dialog::~Dialog()
