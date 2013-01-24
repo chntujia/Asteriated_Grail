@@ -48,6 +48,7 @@ void Player::setRole(int roleID)
         break;    
     case 10:
         name=tr("[ʥǹ]");
+        crossMax=3;
         break;
     case 11:
         name=tr("[Ԫ��ʦ]");

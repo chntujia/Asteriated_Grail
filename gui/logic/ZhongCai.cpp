@@ -156,8 +156,11 @@ void ZhongCai::onOkClicked()
     case 1404:
         command="1404;";
         text=tipArea->getBoxCurrentText();
-        if(text[0]=='1')
+        if(text[0]=='1'){
             command+="0;";
+            foreach(Card*ptr,dataInterface->getHandCards())
+                dataInterface->removeHandCard(ptr);
+        }
         else
             command+="1;";
         command+=QString::number(myID)+";";
