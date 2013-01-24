@@ -92,6 +92,8 @@ void Role::cardAnalyse()
                 playerArea->enablePlayerItem(nextCounterClockwise);
             }
         }
+//        if(myself->getID()==14&&myself->getToken(0)==4)
+//            handArea->disableAll();
         else
     case 10:
         {
@@ -204,6 +206,12 @@ void Role::normal()
 //ÌáÁ¶
     if(myself->getEnergy()<myself->getEnergyMax() && myTeam->getEnergy()>0 && start==false && myself->getSpecial(1)!=1)
         buttonArea->enable(2);
+//    if(myself->getID()==14 && myself->getToken(0)==4)
+//    {
+//        buttonArea->disable(0);
+//        buttonArea->disable(1);
+//        buttonArea->disable(2);
+//    }
     tipArea->setMsg(tr("ÂÖµ½ÄãÁË"));
     unactionalCheck();
 }
@@ -861,7 +869,6 @@ void Role::decipher(QString command)
                 card=dataInterface->getCard(cardID);
                 msg+=card->getName()+"-"+card->getProperty()+" ";
                 cards<<card;
-                dataInterface->removeHandCard(card);
             }
             showArea->showCards(cards);
         }

@@ -57,6 +57,13 @@ void Player::setRole(int roleID)
     case 12:
         name=tr("[√∞œ’º“]");
         break;
+    case 14:
+        name=tr("[÷Ÿ≤√’ﬂ]");
+        tapSource="resource/shenpan.png";
+        tokenName[0]=tr("…Û≈–");
+        tokenMax[0]=4;
+        crystal=2;
+        break;
     case 21:
         name=tr("[”¬’ﬂ]");
         tapSource="resource/jingpilijie.png";

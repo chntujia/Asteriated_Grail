@@ -85,7 +85,6 @@ void MoDao::HuiMeiFengBao()
     tipArea->reset();
 
     playerArea->setQuota(2);
-    handArea->setQuota(1);
 
     decisionArea->enable(1);
     decisionArea->disable(0);

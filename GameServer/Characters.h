@@ -237,6 +237,32 @@ private:
     bool ignite;
     \
 };
+//仲裁
+class ZhongCai : public PlayerEntity
+{
+    Q_OBJECT
+public:
+    ZhongCai(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    //仪式中断
+    void YiShiZhongDuan(QList<void*> args);
+    //末日审判
+    void MoRiShenPan(QList<void*> args);
+    //审判浪潮
+    void ShenPanLangChao(QList<void*> args);
+    //仲裁仪式
+    void ZhongCaiYiShi1(QList<void*> args);
+    void ZhongCaiYiShi2(QList<void *> args);
+    //判决天平
+    void PanJueTianPing(QList<void*> args);
+    //重置启动次数
+    void skillReset(QList<void*> args);
+signals:
+private:
+    bool startUsed;
+};
+
 //勇者
 class YongZhe : public PlayerEntity
 {

@@ -723,6 +723,30 @@ void Server::decoder(int id, QString message)
         action.infor3 = infor[4].toInt();
         messageBuffer::writeBatInfor(action);
         break;
+//仪式中断
+    case 1401:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
+//仲裁仪式
+    case 1402:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
+//末日审判
+    case 1403:
+        action.reply=MAGIC;
+        action.infor1=1403;
+        action.dstID = infor.at(1).toInt();
+        action.srcID = infor.at(2).toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//判决天平
+    case 1404:
+        action.reply = MAGIC;
+        action.infor1 = 1404;
+        action.infor2 = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
 //挑衅
     case 2101:
         ans.reply = MAGIC;
