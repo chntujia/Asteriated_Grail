@@ -153,13 +153,12 @@ void BackgroundEngine::seatArrange()
     playerList.clear();
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
-    for(int i=1; i<= 2 ;i++)
+    for(int i=1; i<= 12 ;i++)
         roles<<i;
-    roles<<11;
-    roles<<12;
     roles<<14;
     roles<<21;
     randomize(&roles);
+
 }
 
 void BackgroundEngine::seatPostarrange()

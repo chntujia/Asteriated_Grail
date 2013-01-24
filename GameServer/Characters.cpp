@@ -1920,9 +1920,10 @@ void YongZhe::JingPiLiJie2(QList<void *> args)
     if(engine->checkEnd())
         return;
 }
-/*
+
+/******************
   ʥǹ 10
-  */
+  *******************/
 ShengQiang::ShengQiang(BackgroundEngine *engine, int id, int color):PlayerEntity(engine, id, color)
 {
     this->characterID = 10;

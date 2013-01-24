@@ -215,6 +215,7 @@ private:
     \
 };
 
+
 //ÔªËØ
 class YuanSu : public PlayerEntity
 {
@@ -295,6 +296,7 @@ private:
     bool nuHouUsed,tiaoXinUsed,tiaoXinChuFa;
     bool jinDuanUsed;
 };
+
 //Ê¥Ç¹
 class ShengQiang: public PlayerEntity
 {

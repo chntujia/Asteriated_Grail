@@ -42,7 +42,8 @@ HEADERS += client/Client.h \
     logic/MaoXian.h \
     logic/YuanSu.h \
     logic/YongZhe.h \
-    logic/ZhongCai.h
+    logic/ZhongCai.h \
+    logic/ShengQiang.h
 FORMS += client/ClientUI.ui
 SOURCES += main.cpp \
            client/Client.cpp \
@@ -78,5 +79,6 @@ SOURCES += main.cpp \
     logic/MaoXian.cpp \
     logic/YuanSu.cpp \
     logic/YongZhe.cpp \
-    logic/ZhongCai.cpp
+    logic/ZhongCai.cpp \
+    logic/ShengQiang.cpp
 

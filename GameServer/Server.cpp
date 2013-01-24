@@ -652,6 +652,7 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
+
 //ÔªËØ·¨Êõ
     case 1101:
         action.reply=MAGIC;

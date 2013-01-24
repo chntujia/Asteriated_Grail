@@ -117,6 +117,8 @@ void YongZhe::onOkClicked()
     case 2102:
         jinDuanZhiLi++;
         command="2102;1;";
+        foreach(Card*ptr,dataInterface->getHandCards())
+            dataInterface->removeHandCard(ptr);
         emit sendCommand(command);
         gui->reset();
         break;
