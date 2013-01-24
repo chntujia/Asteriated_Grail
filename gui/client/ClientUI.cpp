@@ -16,6 +16,7 @@ ClientUI::ClientUI(QWidget *parent) :
              this,SLOT(displayError(QAbstractSocket::SocketError)));
     connect(tcpSocket,SIGNAL(getMessage(QString)),this,SLOT(showMessage(QString)));
 
+
     ui->addr->setText("192.168.1.104");
     //ui->addr->setText("2001:5C0:1000:B::7C63");
     ui->port->setText("50000");

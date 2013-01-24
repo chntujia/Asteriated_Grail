@@ -45,6 +45,9 @@ void Player::setRole(int roleID)
     case 9:
         name=tr("[Ä§½£]");
         tapSource="resource/anying.png";
+        break;    
+    case 10:
+        name=tr("[Ê¥Ç¹]");
         break;
     case 11:
         name=tr("[ÔªËØÊ¦]");

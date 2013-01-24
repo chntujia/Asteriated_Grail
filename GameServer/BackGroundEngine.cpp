@@ -85,6 +85,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 9:
         return new MoJian(engine,id,color);
         break;
+	case 10:
+        return new ShengQiang(engine, id, color);
+		break;
     case 11:
         return new YuanSu(engine,id,color);
         break;
