@@ -846,7 +846,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         use<<usedCard;
         this->useCard(use,getPlayerByID(temp.srcID),getPlayerByID(temp.dstID));
 
-        coder.hitNotice(BLOCKED,isActiveAttack,dst->getID(),src->getID());
+       // coder.hitNotice(BLOCKED,isActiveAttack,dst->getID(),src->getID());
         QList<void*> args;
         args << src;
         args << dst;
@@ -868,7 +868,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
             use<<usedCard;
             this->useCard(use,getPlayerByID(temp.srcID));
         }
-        coder.hitNotice(BLOCKED,isActiveAttack,dst->getID(),src->getID());
+      //  coder.hitNotice(BLOCKED,isActiveAttack,dst->getID(),src->getID());
         QList<void*> args;
         args << src;
         args << dst;
@@ -895,7 +895,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
                 coder.shieldNotic(dst->getID());
                 dst->removeBasicEffect(dst->getBasicEffect()[i]);
 
-                coder.hitNotice(BLOCKED,isActiveAttack,dst->getID(),src->getID());
+             //   coder.hitNotice(BLOCKED,isActiveAttack,dst->getID(),src->getID());
                 args.clear();
                 args << src;
                 args << dst;
@@ -906,7 +906,6 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
                 return;
             }
         }
-        //emit timeLine2hitSIG();
 
         coder.hitNotice(HIT,isActiveAttack,dst->getID(),src->getID());
         args.clear();
@@ -998,6 +997,8 @@ void BackgroundEngine::timeLine6(Harm harm,PlayerEntity *src,PlayerEntity *dst)
     if(harm.harmPoint == 0)
         return;
     this->drawCards(harm.harmPoint,harm.type,dst);
+    if(!playing)
+        return;
     emit timeLine6DrawedSIG(arg);
 }
 //查找对应ID的玩家

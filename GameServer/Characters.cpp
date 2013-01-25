@@ -1612,8 +1612,7 @@ void ZhongCai::PanJueTianPing(QList<void *> args)
     if(magic->infor2)
     {
         int drawNum=this->getHandCardMax()-this->getHandCardNum();
-        for(int i=0;i<drawNum;i++)
-            engine->drawCards(1,0,this);
+        engine->drawCards(drawNum,0,this);
         teamArea.setGem(color,teamArea.getGem(color)+1);
         coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
     }
@@ -1700,6 +1699,7 @@ void YongZhe::NuHou1(QList<void *> args)
         return;
     if(!this->nuHouUsed)
         return;
+    nuHouUsed=false;
     Harm* harm=(Harm*)args[2];
     harm->harmPoint+=2;
 }
@@ -1713,6 +1713,7 @@ void YongZhe::NuHou2(QList<void *> args)
         return;
     if(!this->nuHouUsed)
         return;
+    nuHouUsed=false;
     if(this->getToken(1)!=4)
     {
         setToken(1,token[1]+1);
@@ -2097,9 +2098,7 @@ void ShengQiang::ShengGuangQiYu(QList<void *> args)
     coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
     int cross = this->getCrossNum();
     cross+=2;
-    if(cross>5)
-        cross=5;
-    this->setCrossNum(cross);
+    this->setCrossNum(cross,5);
     coder.crossChangeNotice(this->getID(), cross);
     this->engine->addActionNum(ATTACK);
 }

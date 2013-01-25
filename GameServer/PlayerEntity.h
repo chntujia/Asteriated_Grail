@@ -30,7 +30,7 @@ public:
     //设置手牌上限
     void setHandCardsMax(int howMany);
     //设置治疗(未完成)
-    void setCrossNum(int howMany);
+    void setCrossNum(int howMany, int atMost=-1);
     void setGem(int howMany);
     void setCrystal(int howMany);
     //设置当前回合是否为该玩家回合

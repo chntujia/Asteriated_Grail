@@ -91,9 +91,12 @@ void PlayerEntity::setHandCardsMax(int howMany)
     if(this->handCards.size() > handCardsMax)
         this->cardsOverLoad(0);
 }
-void PlayerEntity::setCrossNum(int howMany)
+void PlayerEntity::setCrossNum(int howMany, int atMost)
 {
-    crossNum=howMany<=crossMax?howMany:crossMax;
+    if(atMost==-1)
+        crossNum=howMany<=crossMax?howMany:crossMax;
+    else
+        crossNum=howMany<=atMost?howMany:atMost;
 }
 
 void PlayerEntity::setGem(int howMany)
