@@ -13,7 +13,7 @@ public:
     explicit Role(QObject *parent = 0);    
     void attacked(QString element,int hitRate);
     void moDaned(int nextID);
-    void cure(int cross,int harmPoint,bool type);
+    void cure(int cross,int harmPoint,int type);
     void drop(int howMany);
     void normal();
     void addtionalAction();

@@ -408,7 +408,7 @@ void Role::moDaned(int nextID)
     decisionArea->enable(1);
 }
 
-void Role::cure(int cross,int harmPoint, bool type)
+void Role::cure(int cross,int harmPoint, int type)
 {
     int min=cross<harmPoint?cross:harmPoint;
     QString msg=tr("ÄãÊÜµ½")+QString::number(harmPoint)+tr("µã");

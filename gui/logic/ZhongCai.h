@@ -9,6 +9,7 @@ public:
     void normal();
     void YiShiZhongDuan();
     void ZhongCaiYiShi();
+    void attackAction();
 public slots:
     void MoRiShenPan();
     void PanJueTianPing();

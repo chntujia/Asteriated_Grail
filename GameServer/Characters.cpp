@@ -1619,8 +1619,8 @@ void ZhongCai::PanJueTianPing(QList<void *> args)
     }
     else
     {
-        coder.discardNotice(this->getID(),this->getHandCards().length(),tr("n"),this->getHandCards());
-        this->removeHandCards(this->getHandCards(),true,true);
+        coder.discardNotice(this->getID(),this->getHandCards().length(),"n",this->getHandCards());
+        this->removeHandCards(this->getHandCards(),false,true);
     }
 }
 

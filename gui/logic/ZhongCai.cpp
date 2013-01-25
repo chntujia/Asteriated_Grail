@@ -37,6 +37,14 @@ void ZhongCai::normal()
     unactionalCheck();
 }
 
+void ZhongCai::attackAction()
+{
+    if(dataInterface->getMyself()->getToken(0)==4)
+        handArea->disableAll();
+    else
+        Role::attackAction();
+}
+
 void ZhongCai::YiShiZhongDuan()
 {
     state=1401;
@@ -216,6 +224,8 @@ void ZhongCai::decipher(QString command)
         {
             if(flag=="0")
                 normal();
+            if(flag=="1")
+                attackAction();
         }
         break;
 //技能响应询问
