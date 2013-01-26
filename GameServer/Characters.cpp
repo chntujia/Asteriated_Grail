@@ -1446,6 +1446,7 @@ void YuanSu::YuanSuFaShu(QList<void*> args)
     case 2:
         dst=engine->getPlayerByID(magic->infor5);
         dst->setCrossNum(dst->getCrossNum()+1);
+        coder.notice("元素的【冰冻】为玩家"+QString::number(magic->infor5)+"增加1治疗");
         coder.crossChangeNotice(magic->infor5,dst->getCrossNum());
         break;
     case 4:

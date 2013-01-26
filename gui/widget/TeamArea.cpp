@@ -69,7 +69,7 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     for(i=0;i<blue->getCrystal();i++) //Ë®¾§
         painter->drawPixmap(Pcrystal.width()*i+offset,3,Pcrystal);
 
-    offset+=(Pcrystal.width()+4)*i;
+    offset+=Pcrystal.width()*i;
     for(i=0;i<blue->getGem();i++) //±¦Ê¯
         painter->drawPixmap(Pgem.width()*i+offset,2,Pgem);
 
