@@ -2213,3 +2213,112 @@ void ShengQiang::makeConnection(BackgroundEngine* engine)
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(DiQiang(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
 }
+
+/******************
+  神官 15
+  *******************/
+ShenGuan::ShenGuan(BackgroundEngine *engine, int id, int color):PlayerEntity(engine, id, color)
+{
+    this->characterID = 15;
+    this->star = 4;
+    //神圣信仰
+    this->crossMax = 6;
+    this->makeConnection(engine);
+}
+//神圣启示
+void ShenGuan::ShenShengQiShi(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]))
+        return;
+    coder.askForSkill(this->getID(), "神圣启示");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    int cross = this->getCrossNum();
+    int max = this->getCrossMax();
+    if(corss<max)
+    {
+        cross++;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+    }
+    coder.notice("神官发动【神圣启示】，增加1治疗");
+}
+//神圣祈福
+void ShenGuan::ShenShengQiFu(QList<void *> args)
+{
+    BatInfor* magic =(BatInfor*)args[0];
+    if(magic->srcID != this->getID()||magic->infor1 != 1502)
+        return;
+
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    cards << getCardByID(magic->infor2);
+    coder.notice("神官发动【神圣祈福】，增加2治疗");
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->getID(), 2, "y", cards);
+    int cross = this->getCrossNum();
+    int max = this->getCrossMax();
+    if(cross<max)
+    {
+        cross+=2;
+        if(cross>max)
+            cross=max;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+    }
+}
+//水之神力
+void ShenGuan::ShuiZhiShenLi(QList<void *> args)
+{
+    BatInfor* magic =(BatInfor*)args[0];
+    if(magic->srcID != this->getID()||magic->infor1 != 1503)
+        return;
+    dst = magic->dstID;
+    coder.notice("神官对玩家"+QString::number(dst)+"发动水之神力");
+
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    coder.discardNotice(this->getID(),1,"y",cards);
+    this->removeHandCards(cards,true);
+
+    PlayerEntity* ptr = engine->getPlayerByID(dst);
+    if(this->getHandCardNum()>0)
+    {
+        cards.clear();
+        coder.askToGiveCard(dst, 1);
+        cards=messageBuffer::readCardID(1);
+        this->giveHandCards(cards, ptr);
+    }
+    int cross = this->getCrossNum();
+    int max = this->getCrossMax();
+    if(corss<max)
+    {
+        cross++;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+    }
+    cross = ptr->getCrossNum();
+    max = ptr->getCrossMax();
+    if(corss<max)
+    {
+        cross++;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(dst, cross);
+    }
+    coder.notice("神官和目标各增加1治疗");
+}
+//神圣契约
+void ShenGuan::ShenShengQiYue(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0]||this->getEnergy()==0)
+        return;
+    coder.askForSkill(this->getID(),"神圣契约");
+    int reply=messageBuffer::readInfor();
+    if(reply==0)
+        return;
+    if(getCrystal()>0)
+        crystal--;
+    else
+        gem--;
+
+}

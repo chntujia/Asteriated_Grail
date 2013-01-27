@@ -327,4 +327,19 @@ private:
     bool ShengGuangQiYuUsed;
 };
 
+//Éñ¹Ù
+class ShenGuan: public PlayerEntity
+{
+    Q_OBJECT
+public:
+    ShenGuan(BackgroundEngine* engine, int id, int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void ShenShengQiShi(QList<void*> args);
+    void ShenShengQiFu(QList<void*> args);
+    void ShuiZhiShenLi(QList<void*> args);
+    void ShenShengQiYue(QList<void*> args);
+    void ShenShengLingYuZhiLiao(QList<void*> args);
+    void ShenShengLingYuFaShang(QList<void*> args);
+};
 #endif // CHARACTERS_H
