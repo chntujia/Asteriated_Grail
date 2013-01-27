@@ -166,8 +166,6 @@ void FengYin::playerAnalyse()
 
 void FengYin::onOkClicked()
 {
-    if(state==10&&flag==1)
-        state=404;
     Role::onOkClicked();
     QList<Card*>selectedCards;
     QList<Player*>selectedPlayers;
@@ -186,8 +184,9 @@ void FengYin::onOkClicked()
 //额外行动询问
     case 42:
         text=tipArea->getBoxCurrentText();
-        flag=text[0].digitValue();
-        if(flag){
+        if(text[0].digitValue()==1){
+            emit sendCommand("404;"+QString::number(myID)+";");
+            actions.removeOne(tr("1.法术激荡"));
             attackAction();
         }
         break;
@@ -231,19 +230,6 @@ void FengYin::onOkClicked()
         usedMagic=true;
         emit sendCommand(command);
         gui->reset();
-        break;
-//法术激荡
-    case 404:
-        cardID=QString::number(selectedCards[0]->getID());
-        targetID=QString::number(selectedPlayers[0]->getID());
-        sourceID=QString::number(myID);
-        command="404;"+cardID+";"+targetID+";"+sourceID+";";
-        dataInterface->removeHandCard(selectedCards[0]);
-        gui->reset();
-        usedAttack=true;
-        usedMagic=usedSpecial=false;
-        actions.removeOne(tr("1.法术激荡"));
-        emit sendCommand(command);
         break;
     }
 }

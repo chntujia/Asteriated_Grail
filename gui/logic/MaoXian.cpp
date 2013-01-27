@@ -256,11 +256,13 @@ void MaoXian::onOkClicked()
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
+            emit sendCommand("1205;"+QString::number(myID)+";");
             actionFlag=4;
             actions.removeOne(tr("1.攻击或法术行动（特殊加工）"));
             attackOrMagic();
         }
         else if(text[0]=='2'){
+            emit sendCommand("1206;"+QString::number(myID)+";");
             actionFlag=4;
             actions.removeOne(tr("2.攻击或法术行动（偷天换日）"));
             attackOrMagic();

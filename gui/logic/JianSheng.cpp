@@ -28,23 +28,11 @@ void JianSheng::LianXuJi()
 
 void JianSheng::JianYing(){
     attackAction();
-    Player*myself=dataInterface->getMyself();
     onceUsed2=true;
-    tipArea->setMsg(tr("请选择使用的能量："));
-    if(myself->getCrystal()>=1)
-        tipArea->addBoxItem(tr("1.水晶"));
-    if(myself->getGem()>=1)
-        tipArea->addBoxItem(tr("2.宝石"));
-
-    tipArea->showBox();
 }
 
 void JianSheng::onOkClicked()
 {
-    if(state==10&&flag==2)
-        state=101;
-    if(state==10&&flag==3)
-        state=102;
     QList<Card*> selectedCards=handArea->getSelectedCards();
     QList<Player*> selectedPlayers=playerArea->getSelectedPlayers();
     Role::onOkClicked();
@@ -68,55 +56,25 @@ void JianSheng::onOkClicked()
         break;
 //额外行动询问
     case 42:
-        text=tipArea->getBoxCurrentText();
-        flag=text[0].digitValue();
-        switch (flag){
+        text=tipArea->getBoxCurrentText();        
+        switch (text[0].digitValue()){
         case 1:
             JiFengJi--;
             actions.removeOne(tr("1.攻击行动（疾风技）"));
+            emit sendCommand("103;"+QString::number(myID)+";");
             attackAction();            
             break;
         case 2:
             actions.removeOne(tr("2.连续技"));
+            emit sendCommand("101;"+QString::number(myID)+";");
             LianXuJi();
             break;
         case 3:
             actions.removeOne(tr("3.剑影"));
+            emit sendCommand("102;"+QString::number(myID)+";");
             JianYing();
             break;
         }
-        break;
-//连续技
-    case 101:
-        cardID=QString::number(selectedCards[0]->getID());
-        targetID=QString::number(selectedPlayers[0]->getID());
-        sourceID=QString::number(myID);
-        command="101;"+cardID+";"+targetID+";"+sourceID+";";
-        if(selectedCards[0]->getSpecialityList().contains(tr("疾风技")))
-            JiFengJi++;
-        dataInterface->removeHandCard(selectedCards[0]);
-        gui->reset();
-        usedAttack=true;
-        usedMagic=usedSpecial=false;
-        emit sendCommand(command);
-        break;
-//剑影
-    case 102:
-        cardID=QString::number(selectedCards[0]->getID());
-        targetID=QString::number(selectedPlayers[0]->getID());
-        sourceID=QString::number(myID);
-        text=tipArea->getBoxCurrentText();
-        if(text[0]=='1')
-            command="102;"+cardID+";"+targetID+";"+sourceID+";0;";
-        else
-            command="102;"+cardID+";"+targetID+";"+sourceID+";1;";
-        if(selectedCards[0]->getSpecialityList().contains(tr("疾风技")))
-            JiFengJi++;
-        dataInterface->removeHandCard(selectedCards[0]);
-        gui->reset();
-        usedAttack=true;
-        usedMagic=usedSpecial=false;
-        emit sendCommand(command);
         break;
     }
 }

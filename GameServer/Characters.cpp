@@ -226,7 +226,7 @@ void BowLady::snipe(QList<void *> args)
         return;
     if(this->getGem() + this->getCrystal() < 1)
         return;
-    coder.notice("弓之女神发动【狙击】");
+    coder.notice("弓之女神对玩家"+QString::number(magic->dstID)+"发动【狙击】");
     switch(magic->infor2)
     {
     case 0:
@@ -248,6 +248,14 @@ void BowLady::snipe(QList<void *> args)
     this->engine->addActionNum(ATTACK);
 }
 
+void BowLady::snipe2(QList<void*>args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID!=id || skill->infor1!=304)
+        return;
+    coder.notice("弓之女神使用【狙击】的额外攻击行动");
+}
+
 void BowLady::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(accurateShoot(QList<void*>)));
@@ -255,6 +263,7 @@ void BowLady::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(transfixtion(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(trap(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(snipe(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(snipe2(QList<void*>)));
 }
 
 MoDao::MoDao(BackgroundEngine* engine,int id,int color):PlayerEntity(engine,id,color)
@@ -860,6 +869,13 @@ void Saintness::layOnHands(QList<void *> args)
     }
     this->engine->addActionNum(ATTACKORMAGIC);
 }
+void Saintness::layOnHands2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(id != skill->srcID||skill->infor1!=606)
+        return;
+    coder.notice("圣女使用【圣疗】的攻击或法术行动");
+}
 
 //
 void Saintness::makeConnection(BackgroundEngine *engine)
@@ -869,6 +885,7 @@ void Saintness::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(healingLight(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(mercy(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(layOnHands(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(layOnHands2(QList<void*>)));
 }
 
 JianSheng::JianSheng(BackgroundEngine *engine,int id,int color):PlayerEntity(engine,id,color)
@@ -915,7 +932,7 @@ void JianSheng::LieFengJi2(QList<void*> args)
 }
 
 //疾风技
-void JianSheng::JiFengJi(QList<void *> args)
+void JianSheng::JiFengJi1(QList<void *> args)
 {
     PlayerEntity* myself=(PlayerEntity*)args[0];
     if(this != myself ||!*(bool*)args[4])
@@ -926,6 +943,14 @@ void JianSheng::JiFengJi(QList<void *> args)
     coder.notice("剑圣发动【疾风技】");
     engine->addActionNum(ATTACK);
 }
+void JianSheng::JiFengJi2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID!=id || skill->infor1!=103)
+        return;
+    coder.notice("剑圣使用【疾风技】的额外攻击行动");
+}
+
 //连续技
 void JianSheng::LianXuJi1(QList<void *> args)
 {
@@ -939,7 +964,7 @@ void JianSheng::LianXuJi1(QList<void *> args)
 void JianSheng::LianXuJi2(QList<void *> args)
 {
     BatInfor *skill = (BatInfor*)args[0];
-    if(id != skill->srcID||skill->infor1!=101)
+    if(skill->srcID!=id || skill->infor1!=101)
         return;
     coder.notice("剑圣发动【连续技】");
 }
@@ -957,9 +982,9 @@ void JianSheng::JianYing1(QList<void *> args)
 void JianSheng::JianYing2(QList<void *> args)
 {
     BatInfor *skill = (BatInfor*)args[0];
-    if(id != skill->srcID||skill->infor1!=102)
+    if(skill->srcID!=id || skill->infor1!=102)
         return;
-    if(skill->infor2==0)
+    if(crystal>0)
         crystal--;
     else
         gem--;
@@ -989,12 +1014,13 @@ void JianSheng::makeConnection(BackgroundEngine *engine)
 {    
     connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(LieFengJi1(QList<void*>)));
     connect(engine,SIGNAL(shieldSIG(QList<void*>)),this,SLOT(LieFengJi2(QList<void*>)));
-    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(JiFengJi(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(JiFengJi1(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(JiFengJi2(QList<void*>)));
     connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(LianXuJi1(QList<void*>)));
-    connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(LianXuJi2(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(LianXuJi2(QList<void*>)));
     connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
     connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(JianYing1(QList<void*>)));
-    connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(JianYing2(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(JianYing2(QList<void*>)));
     connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(ShengJian(QList<void*>)));
 }
 
@@ -1131,7 +1157,7 @@ void FengYin::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(weakSIG(PlayerEntity*,bool*)),this,SLOT(WuXiShuFu2(PlayerEntity*,bool*)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(FengYinPoSui(QList<void*>)));
     connect(engine,SIGNAL(magicFinishSIG(QList<void*>)),this,SLOT(FaShuJiDang1(QList<void*>)));
-    connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(FaShuJiDang2(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(FaShuJiDang2(QList<void*>)));
 }
 
 MoJian::MoJian(BackgroundEngine *engine,int id,int color):PlayerEntity(engine,id,color)
@@ -1262,7 +1288,7 @@ void MoJian::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(AnYingLiuXing(QList<void*>)));
     connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(XiuLuoLianZhan1(QList<void*>)));
-    connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(XiuLuoLianZhan2(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(XiuLuoLianZhan2(QList<void*>)));
     connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(HeiAnZhenChan1(QList<void*>)));
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(HeiAnZhenChan2(QList<void*>)));
     connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(HeiAnZhenChan3(QList<void*>)));
@@ -1282,6 +1308,8 @@ void MaoXian::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(QiZha(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(TouTianHuanRi(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(TeShuJiaGong(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(TouTianHuanRi2(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(TeShuJiaGong2(QList<void*>)));
     connect(engine,SIGNAL(skillSpecial(QList<void*>)),this,SLOT(MaoXianZheTianTang(QList<void*>)));
 }
 
@@ -1324,6 +1352,13 @@ void MaoXian::TouTianHuanRi(QList<void *> args)
     coder.stoneNotice(other,teamArea.getGem(other),teamArea.getCrystal(other));
     engine->addActionNum(ATTACKORMAGIC);
 }
+void MaoXian::TouTianHuanRi2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID!=id || skill->infor1!=1203)
+        return;
+    coder.notice("冒险家使用【偷天换日】的额外攻击行动");
+}
 
 //特殊加工
 void MaoXian::TeShuJiaGong(QList<void *> args)
@@ -1344,6 +1379,13 @@ void MaoXian::TeShuJiaGong(QList<void *> args)
     teamArea.setGem(color,toChange+teamArea.getGem(color));
     coder.stoneNotice(color,teamArea.getGem(color),0);
     engine->addActionNum(ATTACKORMAGIC);
+}
+void MaoXian::TeShuJiaGong2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID!=id || skill->infor1!=1203)
+        return;
+    coder.notice("冒险家使用【偷天换日】的额外攻击行动");
 }
 //冒险者天堂
 void MaoXian::MaoXianZheTianTang(QList<void *> args)
@@ -1375,6 +1417,8 @@ void YuanSu::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(YuanSuFaShu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(YuanSuDianRan(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(YuanSuFaShu2(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(YuanSuDianRan2(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(YueGuang(QList<void*>)));
     connect(engine,SIGNAL(timeLine3SIG(QList<void*>)),this,SLOT(YuanSuXiShou(QList<void*>)));
 }
@@ -1458,6 +1502,16 @@ void YuanSu::YuanSuFaShu(QList<void*> args)
         break;
     }
 }
+void YuanSu::YuanSuFaShu2(QList<void*> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID!=id)
+        return;
+    if(skill->infor1==1104)
+        coder.notice("元素师使用【风刃】的额外攻击行动");
+    if(skill->infor1==1105)
+        coder.notice("元素师使用【陨石】的额外法术行动");
+}
 
 //元素点燃
 void YuanSu::YuanSuDianRan(QList<void*> args)
@@ -1475,6 +1529,13 @@ void YuanSu::YuanSuDianRan(QList<void*> args)
     coder.tokenNotice(id,0,0);
     engine->timeLine3(harm,this,dst,"元素点燃");
     engine->addActionNum(MAGIC);
+}
+void YuanSu::YuanSuDianRan2(QList<void*> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID!=id || skill->infor1==1106)
+        return;
+    coder.notice("元素师使用【元素点燃】的额外法术行动");
 }
 
 //月光
@@ -1672,6 +1733,7 @@ void YongZhe::makeConnection(BackgroundEngine *engine)
     //connect(engine,SIGNAL(turnEndPhaseSIG(QList<void*>)),this,SLOT(TiaoXin4(QList<void*>)));
     connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(JingPiLiJie1(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(JingPiLiJie2(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(JingPiLiJie3(QList<void*>)));
 }
 
 //怒吼询问
@@ -1922,6 +1984,13 @@ void YongZhe::JingPiLiJie2(QList<void *> args)
     if(engine->checkEnd())
         return;
 }
+void YongZhe::JingPiLiJie3(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID!=id || skill->infor1!=2103)
+        return;
+    coder.notice("勇者使用【精疲力竭】的额外攻击行动");
+}
 
 /******************
   圣枪 10
@@ -1964,6 +2033,14 @@ void ShengQiang::HuiYao(QList<void *> args)
      }while(dst!= this);
      this->engine->addActionNum(ATTACK);
 }
+void ShengQiang::HuiYao2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID!=id || skill->infor1!=1003)
+        return;
+    coder.notice("圣枪使用【辉耀】的额外攻击行动");
+}
+
 //惩戒
 void ShengQiang::ChengJie(QList<void *> args)
 {
@@ -1995,7 +2072,13 @@ void ShengQiang::ChengJie(QList<void *> args)
     }
     this->engine->addActionNum(ATTACK);
 }
-
+void ShengQiang::ChengJie2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID!=id || skill->infor1!=1004)
+        return;
+    coder.notice("圣枪使用【惩戒】的额外攻击行动");
+}
 //圣击，只判断非主动攻击
 void ShengQiang::ShengJi(QList<void *> args)
 {
@@ -2103,7 +2186,13 @@ void ShengQiang::ShengGuangQiYu(QList<void *> args)
     coder.crossChangeNotice(this->getID(), cross);
     this->engine->addActionNum(ATTACK);
 }
-
+void ShengQiang::ShengGuangQiYu2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID!=id || skill->infor1!=1007)
+        return;
+    coder.notice("圣枪使用【圣光祈愈】的额外攻击行动");
+}
 void ShengQiang::skillReset(QList<void *> args)
 {
     if(this != ((PlayerEntity*)args[0]))
@@ -2115,7 +2204,10 @@ void ShengQiang::makeConnection(BackgroundEngine* engine)
 {
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(HuiYao(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ChengJie(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(HuiYao2(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(ChengJie2(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShengGuangQiYu(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(ShengGuangQiYu2(QList<void*>)));
     connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(TianQiang(QList<void*>)));
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(ShengJi(QList<void*>)));
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(DiQiang(QList<void*>)));

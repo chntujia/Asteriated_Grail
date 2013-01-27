@@ -129,9 +129,10 @@ void GongNv::onOkClicked()
 //额外行动询问
     case 42:
         text=tipArea->getBoxCurrentText();
-        if(text[0]=='1'){
-            attackAction();
+        if(text[0]=='1'){            
             actions.removeOne(tr("1.攻击行动（狙击）"));
+            emit sendCommand("304;"+QString::number(myID)+";");
+            attackAction();
         }
         break;
 //贯穿询问

@@ -158,14 +158,17 @@ void YuanSu::onOkClicked()
         switch(text[0].digitValue())
         {
         case 1:
+            emit sendCommand("1105;"+QString::number(myID)+";");
             magicAction();
             actions.removeOne(tr("1.法术行动（陨石）"));
             break;
         case 2:
+            emit sendCommand("1106;"+QString::number(myID)+";");
             magicAction();
             actions.removeOne(tr("2.法术行动（元素点燃）"));
             break;
         case 3:
+            emit sendCommand("1104;"+QString::number(myID)+";");
             attackAction();
             actions.removeOne(tr("3.攻击行动（风刃）"));
             break;

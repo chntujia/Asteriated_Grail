@@ -152,17 +152,20 @@ void ShengQiang::onOkClicked()
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
             actionFlag=1;
+            emit sendCommand("1003;"+QString::number(myID)+";");
             actions.removeOne(tr("1.¹¥»÷ÐÐ¶¯(»ÔÒ«)"));
             attackAction();
         }
         else if(text[0]=='2'){
             actionFlag=1;
+            emit sendCommand("1004;"+QString::number(myID)+";");
             actions.removeOne(tr("2.¹¥»÷ÐÐ¶¯(³Í½ä)"));
             attackAction();
         }
         else if(text[0]=='3'){
             actionFlag=1;
-            actions.removeOne(tr("3.¹¥Ú¦ÐÐ¶¯(Ê¥¹âÆíÓú)"));
+            emit sendCommand("1007;"+QString::number(myID)+";");
+            actions.removeOne(tr("3.¹¥»÷ÐÐ¶¯(Ê¥¹âÆíÓú)"));
             attackAction();
         }
         break;

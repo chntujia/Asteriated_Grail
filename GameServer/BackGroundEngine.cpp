@@ -175,6 +175,8 @@ void BackgroundEngine::roleRandom()
     for(int i=0;i<playerSum;i++){
         playerList[i]=setRole(roles[i],this,queue[i].digitValue(),queue[i+playerSum].digitValue());
         coder.roleNotice(queue[i].digitValue(),roles[i]);
+        playerList[i]->setGem(2);
+        coder.energyNotice(queue[i].digitValue(),2,0);
     }
     seatPostarrange();
     gameStart();
@@ -598,8 +600,15 @@ void BackgroundEngine::actionPhase()
         if(!acted){
             coder.askForAction(currentPlayer->getID(),canGiveUp,acted);
         }
-        else
+        else{
             coder.askForAdditionalAction(currentPlayer->getID());
+            BatInfor chosen = messageBuffer::readBatInfor();
+            if(chosen.reply == FINISH)
+                break;
+            args.clear();
+            args<<&chosen;
+            emit additonalActionSIG(args);
+        }
 
         //¶ÁÈ¡clientµÄ»Ø¸´
         BatInfor bat = messageBuffer::readBatInfor();

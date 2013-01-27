@@ -99,6 +99,7 @@ void YongZhe::onOkClicked()
         text=tipArea->getBoxCurrentText();
         if(text[0].digitValue()==1)
         {
+            emit sendCommand("2103;"+QString::number(myID)+";");
             jinDuanZhiLi--;         
             actions.removeOne(tr("1.攻击行动（精疲力竭）"));
             attackAction();

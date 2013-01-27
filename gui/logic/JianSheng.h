@@ -16,7 +16,6 @@ public slots:
 private:
     bool onceUsed2;
     int JiFengJi;
-    int flag;
 };
 
 #endif // JIANSHENG_H

@@ -195,7 +195,7 @@ void Role::normal()
     handArea->enableAll();
     handArea->disableElement("light");
 
-    if(n+3 <= myself->getHandCardMax() && start==false && myself->getSpecial(1)!=1)
+    if(n+3 <= myself->getHandCardMax() && start==false)
     {
 //¹ºÂò
         buttonArea->enable(0);
@@ -204,14 +204,8 @@ void Role::normal()
             buttonArea->enable(1);
     }
 //ÌáÁ¶
-    if(myself->getEnergy()<myself->getEnergyMax() && myTeam->getEnergy()>0 && start==false && myself->getSpecial(1)!=1)
+    if(myself->getEnergy()<myself->getEnergyMax() && myTeam->getEnergy()>0 && start==false)
         buttonArea->enable(2);
-//    if(myself->getID()==14 && myself->getToken(0)==4)
-//    {
-//        buttonArea->disable(0);
-//        buttonArea->disable(1);
-//        buttonArea->disable(2);
-//    }
     tipArea->setMsg(tr("ÂÖµ½ÄãÁË"));
     unactionalCheck();
 }

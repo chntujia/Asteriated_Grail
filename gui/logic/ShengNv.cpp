@@ -214,6 +214,7 @@ void ShengNv::onOkClicked()
         //攻击或法术行动
         if(text[0]=='1'){
             actionFlag=4;
+            emit sendCommand("606;"+QString::number(myID)+";");
             actions.removeOne(tr("1.攻击或法术行动（圣疗）"));
             attackOrMagic();
         }

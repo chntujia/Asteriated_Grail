@@ -43,6 +43,7 @@ public slots:
     void accurateShoot(QList<void*> args);
     //狙击
     void snipe(QList<void*> args);
+    void snipe2(QList<void*> args);
 signals:
 private:
 
@@ -113,6 +114,7 @@ public slots:
     void mercy(QList<void*> args);
     //圣疗
     void layOnHands(QList<void*> args);
+    void layOnHands2(QList<void*> args);
 private:
     bool layOnHandsUsed;
 };
@@ -129,7 +131,8 @@ public slots:
     void LieFengJi1(QList<void*> args);
     void LieFengJi2(QList<void*> args);
     //疾风技
-    void JiFengJi(QList<void*> args);
+    void JiFengJi1(QList<void*> args);
+    void JiFengJi2(QList<void*> args);
     //连续技
     void LianXuJi1(QList<void*> args);
     void LianXuJi2(QList<void*> args);
@@ -206,8 +209,10 @@ public slots:
     void QiZha(QList<void*> args);
     //偷天换日
     void TouTianHuanRi(QList<void*> args);
+    void TouTianHuanRi2(QList<void*> args);
     //特殊加工
     void TeShuJiaGong(QList<void*> args);
+    void TeShuJiaGong2(QList<void*> args);
     //冒险者天堂
     void MaoXianZheTianTang(QList<void*> args);
 signals:
@@ -228,8 +233,10 @@ public slots:
     void YuanSuXiShou(QList<void*> args);
     //元素法术
     void YuanSuFaShu(QList<void*> args);
+    void YuanSuFaShu2(QList<void*> args);
     //元素点燃
     void YuanSuDianRan(QList<void*> args);
+    void YuanSuDianRan2(QList<void*> args);
     //月光
     void YueGuang(QList<void*> args);
 
@@ -291,6 +298,7 @@ public slots:
     //精疲力竭
     void JingPiLiJie1(QList<void*> args);
     void JingPiLiJie2(QList<void *> args);
+    void JingPiLiJie3(QList<void *> args);
 private:
     int tiaoXinID,fireNum;
     bool nuHouUsed,tiaoXinUsed,tiaoXinChuFa;
@@ -307,10 +315,13 @@ public:
 public slots:
     void HuiYao(QList<void*> args);
     void ChengJie(QList<void*> args);
+    void HuiYao2(QList<void*> args);
+    void ChengJie2(QList<void*> args);
     void ShengJi(QList<void*> args);
     void TianQiang(QList<void*> args);
     void DiQiang(QList<void*> args);
     void ShengGuangQiYu(QList<void*> args);
+    void ShengGuangQiYu2(QList<void*> args);
     void skillReset(QList<void*> args);
 private:
     bool ShengGuangQiYuUsed;

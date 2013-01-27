@@ -19,7 +19,6 @@ public slots:
     void onUnready();
 private:
     bool usedGem;
-    int flag;
 };
 
 #endif // FENGYIN_H

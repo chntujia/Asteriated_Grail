@@ -85,8 +85,6 @@ void MoJian::cardAnalyse()
 
 void MoJian::onOkClicked()
 {
-    if(state==10&&onceUsed==true)
-        state=901;
     Role::onOkClicked();
     QList<Card*>selectedCards;
     QList<Player*>selectedPlayers;
@@ -112,22 +110,10 @@ void MoJian::onOkClicked()
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
+            emit sendCommand("901;"+QString::number(myID)+";");
             actions.removeOne(tr("1.ÐÞÂÞÁ¬Õ¶"));
             XiuLuoLianZhan();
         }
-        break;
-//ÐÞÂÞÁ¬Õ¶
-    case 901:
-        command="901;";
-        cardID=QString::number(selectedCards[0]->getID());
-        targetID=QString::number(selectedPlayers[0]->getID());
-        sourceID=QString::number(myID);
-        command+=cardID+";"+targetID+";"+sourceID+";";
-        dataInterface->removeHandCard(selectedCards[0]);
-        usedAttack=true;
-        usedMagic=usedSpecial=false;
-        emit sendCommand(command);
-        gui->reset();
         break;
 //°µÓ°Á÷ÐÇ
     case 902:

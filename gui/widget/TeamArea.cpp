@@ -57,21 +57,21 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     for(i=0;i<red->getGrail();i++) //杯
         painter->drawPixmap(Rgrail.width()*i+offset,5,Rgrail);
 
-    offset+=Rgrail.width()*5+5;
+    offset+=Rgrail.width()*5+9;
     for(i=0;i<red->getCrystal();i++) //水晶
-        painter->drawPixmap(Pcrystal.width()*i+offset,3,Pcrystal);
+        painter->drawPixmap((Pcrystal.width()+4)*i+offset,4,Pcrystal);
 
-    offset+=Pcrystal.width()*i;
+    offset+=(Pcrystal.width()+4)*i;
     for(i=0;i<red->getGem();i++) //宝石
-        painter->drawPixmap(Pgem.width()*i+offset,2,Pgem);
+        painter->drawPixmap((Pgem.width()+4)*i+offset,4,Pgem);
 
-    offset=455;
+    offset=459;
     for(i=0;i<blue->getCrystal();i++) //水晶
-        painter->drawPixmap(Pcrystal.width()*i+offset,3,Pcrystal);
+        painter->drawPixmap((Pcrystal.width()+4)*i+offset,4,Pcrystal);
 
-    offset+=Pcrystal.width()*i;
+    offset+=(Pcrystal.width()+4)*i;
     for(i=0;i<blue->getGem();i++) //宝石
-        painter->drawPixmap(Pgem.width()*i+offset,2,Pgem);
+        painter->drawPixmap((Pgem.width()+4)*i+offset,4,Pgem);
 
     offset=598;
     for(i=0;i<blue->getGrail();i++) //杯
