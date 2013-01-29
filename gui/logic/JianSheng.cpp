@@ -3,6 +3,7 @@
 JianSheng::JianSheng()
 {
     makeConnection();
+setMyRole(this);
 }
 
 void JianSheng::LieFengJi()
@@ -48,29 +49,20 @@ void JianSheng::onOkClicked()
         if(selectedCards[0]->getSpecialityList().contains(tr("疾风技")))
             JiFengJi++;
         break;
-//烈风技询问
-    case 36:
-        command="36;1;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
 //额外行动询问
     case 42:
         text=tipArea->getBoxCurrentText();        
         switch (text[0].digitValue()){
         case 1:
-            JiFengJi--;
-            actions.removeOne(tr("1.攻击行动（疾风技）"));
+            JiFengJi--;           
             emit sendCommand("103;"+QString::number(myID)+";");
             attackAction();            
             break;
-        case 2:
-            actions.removeOne(tr("2.连续技"));
+        case 2:            
             emit sendCommand("101;"+QString::number(myID)+";");
             LianXuJi();
             break;
-        case 3:
-            actions.removeOne(tr("3.剑影"));
+        case 3:            
             emit sendCommand("102;"+QString::number(myID)+";");
             JianYing();
             break;
@@ -78,81 +70,26 @@ void JianSheng::onOkClicked()
         break;
     }
 }
-
-void JianSheng::onCancelClicked()
+void JianSheng::askForSkill(QString skill)
 {
-    Role::onCancelClicked();
-    QString command;
-    switch(state)
-    {
-//烈风技询问
-    case 36:
-        command="36;0;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
-    }
+    Role::askForSkill(skill);
+    if(skill==tr("烈风技"))
+        LieFengJi();
 }
 
-void JianSheng::decipher(QString command)
+void JianSheng::additionalAction()
 {
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
-
-    switch (arg[0].toInt())
-    {
-//回合开始
-    case 3:
-        targetID=arg[1].toInt();
-        if(targetID==myID){
-            onceUsed2=false;
-            JiFengJi=0;
-        }
-        break;
-//烈风技询问
-    case 35:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            gui->setEnable(1);
-            if(flag==tr("烈风技"))
-                LieFengJi();
-        }
-        break;
-//额外行动询问
-    case 42:
-        targetID=arg[1].toInt();
-        if(targetID==myID)
-        {
-            QList<Card*> handcards=dataInterface->getHandCards();
-
-            if(JiFengJi>0 && !actions.contains(tr("1.攻击行动（疾风技）"))){
-                actions.append(tr("1.攻击行动（疾风技）"));
-            }
-            if(!onceUsed&&usedAttack && !actions.contains(tr("2.连续技")))
-            {
-                foreach(Card*ptr,handcards)
-                    if(ptr->getElement()=="wind" && ptr->getType()=="attack")
-                    {
-                        actions.append(tr("2.连续技"));
-                        break;
-                    }
-            }
-            if(!onceUsed2 && dataInterface->getMyself()->getEnergy()>0 &&usedAttack &&!actions.contains(tr("3.剑影"))){
-                actions.append(tr("3.剑影"));
-            }
-            if(actions.size()==0)
-                decisionArea->disable(0);
-            foreach(QString ptr,actions)
-                tipArea->addBoxItem(ptr);
-            tipArea->showBox();
-
-            state=42;
-
-        }
-        break;
-    }
+    Role::additionalAction();
+    if(JiFengJi>0)
+        tipArea->addBoxItem(tr("1.攻击行动（疾风技）"));
+    if(!onceUsed&&usedAttack)
+        tipArea->addBoxItem(tr("2.连续技"));
+    if(!onceUsed2 && dataInterface->getMyself()->getEnergy()>0 &&usedAttack)
+        tipArea->addBoxItem(tr("3.剑影"));
+}
+void JianSheng::turnBegin()
+{
+    Role::turnBegin();
+    onceUsed2=false;
+    JiFengJi=0;
 }

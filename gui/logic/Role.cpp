@@ -1,5 +1,6 @@
 #include "Role.h"
 #include <QStringList>
+#include <QApplication>
 #include "data/DataInterface.h"
 #include "widget/GUI.h"
 #include "logic/Logic.h"
@@ -122,7 +123,7 @@ void Role::cardAnalyse()
         {
             playerArea->reset();
             playerArea->enableEnemy();
-            playerArea->disablePlayerItem(sourcePlayerID);
+            playerArea->disablePlayerItem(sourceID);
         }
         if(selectedCards[0]->getElement()=="light")
         {
@@ -390,16 +391,19 @@ void Role::extract()
     tipArea->showBox();
 }
 
-void Role::moDaned(int nextID)
+void Role::moDaned(int nextID,int sourceID,int howMany)
 {
     state=8;
+    gui->reset();
+    QString msg=dataInterface->getPlayerList().at(sourceID)->getName()+tr("对")+tr("你")+tr("使用了魔弹，目前伤害为：")+QString::number(howMany)+tr("点");
+    tipArea->setMsg(msg);
     playerArea->setQuota(1);
     handArea->setQuota(1);
 
     handArea->enableElement("light");
     handArea->enableMoDan();
-    moDanNextID=nextID;
     decisionArea->enable(1);
+    moDanNextID=nextID;
 }
 
 void Role::cure(int cross,int harmPoint, int type)
@@ -422,11 +426,30 @@ void Role::cure(int cross,int harmPoint, int type)
     tipArea->showBox();
 }
 
-void Role::addtionalAction(){
+void Role::turnBegin()
+{
+    isMyTurn=true;
+    onceUsed=false;
+    start=false;
+    usedAttack=usedMagic=usedSpecial=false;
+    QApplication::alert((QWidget*)playerArea->window());
+}
+
+void Role::additionalAction(){
     gui->reset();
     tipArea->setMsg(tr("是否执行额外行动？"));
+    if(dataInterface->getMyself()->checkStatus(5))
+        gui->getTipArea()->addBoxItem("0.迅捷赐福");
+    state=42;
+    tipArea->showBox();
     decisionArea->enable(0);
     decisionArea->enable(3);
+}
+
+void Role::askForSkill(QString skill)
+{
+    if(skill==tr("威力赐福"))
+        WeiLi();
 }
 
 void Role::TianShiZhuFu(int n)
@@ -448,6 +471,14 @@ void Role::MoBaoChongJi()
     decisionArea->enable(1);
 }
 
+void Role::WeiLi()
+{
+    state=36;
+    tipArea->setMsg(tr("是否发动威力赐福？"));
+    decisionArea->enable(0);
+    decisionArea->enable(1);
+}
+
 void Role::onCancelClicked()
 {
     QString command;
@@ -459,7 +490,7 @@ void Role::onCancelClicked()
     case 5:
     case 6:
         gui->reset();
-        normal();
+        myRole->normal();
         break;
 //ATTACKEDREPLY
     case 2:
@@ -485,7 +516,12 @@ void Role::onCancelClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-
+//简单的技能发动询问
+    case 36:
+        command="36;0;";
+        emit sendCommand(command);
+        gui->reset();
+        break;
 //魔爆冲击弃牌
     case 851:
         command="851;0;";
@@ -679,6 +715,20 @@ void Role::onOkClicked()
         gui->reset();
         emit sendCommand(command);
         break;
+//简单的技能发动询问
+    case 36:
+        command="36;1;";
+        emit sendCommand(command);
+        gui->reset();
+        break;
+//额外行动（迅捷）
+    case 42:
+        if(tipArea->getBoxCurrentText().at(0).digitValue()==0)
+        {
+            emit sendCommand("1607;"+QString::number(myID)+";");
+            myRole->attackAction();
+        }
+        break;
 //天使祝福
     case 751:
         command="751;"+QString::number(selectedCards.size())+";";
@@ -707,14 +757,14 @@ void Role::onOkClicked()
 
 void Role::decipher(QString command)
 {
+    this->command=command;
     QStringList arg=command.split(';');
     QStringList cardIDList;
     int targetID,targetArea;
-    int sourceID,sourceArea;
+    int sourceArea;
     int cardID;
-    int howMany;
     int hitRate;
-    int i;
+    int i,howMany;
     int team,gem,crystal;
 
     Card*card;
@@ -742,10 +792,7 @@ void Role::decipher(QString command)
             gui->setEnable(0);
         }
         else{
-            isMyTurn=true;
-            onceUsed=false;
-            start=false;
-            usedAttack=usedMagic=usedSpecial=false;
+            myRole->turnBegin();
         }
         break;
 //应战询问
@@ -770,10 +817,9 @@ void Role::decipher(QString command)
             if(hitRate==1)
                 msg+=tr("，该攻击无法应战");
 
-            sourcePlayerID=sourceID;
             gui->reset();
             tipArea->setMsg(msg);
-            attacked(card->getElement(),hitRate);
+            myRole->attacked(card->getElement(),hitRate);
         }
         break;
 //弃牌询问
@@ -963,8 +1009,12 @@ void Role::decipher(QString command)
                     playerList[targetID]->addStatus(1,card);
                 if(cardName==tr("圣盾")||card->getSpecialityList().contains(tr("天使之墙")))
                     playerList[targetID]->addStatus(2,card);
-                if(card->getType()=="attack"&&card->getProperty()=="幻")
+                if(card->getType()=="attack"&&card->getProperty()==tr("幻"))
                     playerList[targetID]->addStatus(3,card);
+                if(card->getSpecialityList().contains(tr("威力赐福")))
+                    playerList[targetID]->addStatus(4,card);
+                if(card->getSpecialityList().contains(tr("迅捷赐福")))
+                    playerList[targetID]->addStatus(5,card);
                 break;
             }
         }
@@ -1027,11 +1077,8 @@ void Role::decipher(QString command)
         }
         else
         {
-            gui->setEnable(1);
-            msg=playerList[sourceID]->getName()+tr("对")+tr("你")+tr("使用了魔弹，目前伤害为：")+arg[3]+tr("点");
-            gui->reset();
-            tipArea->setMsg(msg);
-            moDaned(nextID);
+            gui->setEnable(1);            
+            myRole->moDaned(nextID,sourceID,howMany);
         }
         break;
 //卡牌通告
@@ -1066,13 +1113,13 @@ void Role::decipher(QString command)
         {
             gui->setEnable(1);
             if(flag=="0")
-                normal();
+                myRole->normal();
             else if(flag=="1")
-                attackAction();
+                myRole->attackAction();
             else if(flag=="2")
-                magicAction();
+                myRole->magicAction();
             else if(flag=="4")
-                attackOrMagic();
+                myRole->attackOrMagic();
             if(arg[3]=="1")
                 decisionArea->enable(3);
         }
@@ -1096,7 +1143,7 @@ void Role::decipher(QString command)
         flag=arg[3];
         gui->reset();
         if(targetID==myID)
-            cure(playerList[myID]->getCrossNum(),howMany,flag.toInt());
+            myRole->cure(playerList[myID]->getCrossNum(),howMany,flag.toInt());
         break;
 //技能响应询问
     case 35:
@@ -1106,6 +1153,13 @@ void Role::decipher(QString command)
         gui->logAppend(msg);
         gui->reset();
         gui->setEnable(0);
+        if(targetID==myID)
+        {
+            gui->setEnable(1);
+            myRole->askForSkill(flag);
+        }
+        else
+            gui->setEnable(0);
         break;
 //信息通告
     case 38:
@@ -1162,7 +1216,7 @@ void Role::decipher(QString command)
         if(targetID==myID)
         {
             gui->setEnable(1);
-            addtionalAction();
+            myRole->additionalAction();
         }
         else
             gui->setEnable(0);

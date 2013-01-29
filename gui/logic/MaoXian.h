@@ -9,9 +9,10 @@ public:
     void normal();
     void attackOrMagic();
     void attackAction();
+    void additionalAction();
+    void turnBegin();
     void MaoXianZheTianTang();
 public slots:
-    void decipher(QString command);
     void onOkClicked();
     void onCancelClicked();
     void onUnready();
@@ -25,6 +26,7 @@ public slots:
 private:
     bool onceUsed2;
     bool qizha;
+    bool TouTianHuanRiAddition,TeShuJiaGongAddition;
 };
 
 #endif // MAOXIAN_H

@@ -7,12 +7,10 @@ class ShengQiang : public Role
     Q_OBJECT
 public:
     ShengQiang();
-    void BingShuangDaoYan();
-    void LianMin();
     void normal();
-    void attackOrMagic();
+    void askForSkill(QString skill);
+    void additionalAction();
 public slots:
-    void decipher(QString command);
     void onOkClicked();
     void onCancelClicked();
     void cardAnalyse();
@@ -21,6 +19,8 @@ public slots:
     void ShengGuangQiYu();
     void TianQiang();
     void DiQiang();
+private:
+    bool ChengJieAddition,HuiYaoAddition,ShengGuangQiYuAddition;
 
 };
 

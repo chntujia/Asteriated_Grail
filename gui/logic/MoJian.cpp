@@ -3,6 +3,7 @@
 MoJian::MoJian()
 {
     makeConnection();
+    setMyRole(this);
 
     Button *anYingLiuXing;
     anYingLiuXing=new Button(3,tr("暗影流星"));
@@ -100,18 +101,11 @@ void MoJian::onOkClicked()
 
     switch(state)
     {
-//黑暗震颤询问
-    case 36:
-        command="36;1;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
 //额外行动询问
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
-            emit sendCommand("901;"+QString::number(myID)+";");
-            actions.removeOne(tr("1.修罗连斩"));
+            emit sendCommand("901;"+QString::number(myID)+";");            
             XiuLuoLianZhan();
         }
         break;
@@ -144,14 +138,6 @@ void MoJian::onCancelClicked()
     QString command;
     switch(state)
     {
-//黑暗震颤询问
-    case 36:
-        command="36;0;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
-//特殊行动
-    case 1:
 //暗影流星
     case 902:
         normal();
@@ -165,61 +151,25 @@ void MoJian::onCancelClicked()
         break;
     }
 }
-
-void MoJian::decipher(QString command)
+void MoJian::askForSkill(QString skill)
 {
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
+    Role::askForSkill(skill);
+    if(skill==tr("暗影凝聚"))
+        AnYingNingJu();
+    else if(skill==tr("黑暗震颤"))
+        HeiAnZhenChan();
+}
 
-    switch (arg[0].toInt())
-    {
-//应战询问
-    case 5:
-        targetID=arg[3].toInt();
-        if(targetID==myID&&isMyTurn)
-            handArea->disableMagic();
-        break;
+void MoJian::additionalAction()
+{
+    Role::additionalAction();
+    if(usedAttack&&!onceUsed)
+        tipArea->addBoxItem(tr("1.修罗连斩"));
+}
 
-//行动阶段 flag 0-所有行动，1-攻击行动，2-法术行动，3-特殊行动，4-攻击或法术行动
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            if(flag=="0")
-                normal();
-        }
-        break;
-//技能响应询问
-    case 35:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            gui->setEnable(1);
-            if(flag==tr("暗影凝聚"))
-                AnYingNingJu();
-            else if(flag==tr("黑暗震颤"))
-                HeiAnZhenChan();
-        }
-        break;
-//额外行动询问
-    case 42:
-        targetID=arg[1].toInt();
-        if(targetID==myID)
-        {
-            if(usedAttack&&!onceUsed &&!actions.contains(tr("1.修罗连斩"))){
-                actions.append(tr("1.修罗连斩"));
-                tipArea->showBox();
-            }
-            foreach(QString ptr,actions)
-                tipArea->addBoxItem(ptr);
-            tipArea->showBox();
-
-            state=42;
-        }
-        break;
-    }
+void MoJian::attacked(QString element, int hitRate)
+{
+    Role::attacked(element,hitRate);
+    if(isMyTurn)
+        handArea->disableMagic();
 }

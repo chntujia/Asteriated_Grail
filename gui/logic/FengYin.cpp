@@ -3,6 +3,7 @@
 FengYin::FengYin()
 {
     makeConnection();
+setMyRole(this);
     connect(playerArea,SIGNAL(playerUnready()),this,SLOT(onUnready()));
 
     Button *fengYinFaShu,*wuXiShuFu,*fengYinPoSui;
@@ -125,6 +126,13 @@ void FengYin::onUnready()
     }
 }
 
+void FengYin::additionalAction()
+{
+    Role::additionalAction();
+    if(usedMagic)
+        tipArea->addBoxItem(tr("1.法术激荡"));
+}
+
 void FengYin::cardAnalyse()
 {
     Role::cardAnalyse();
@@ -141,7 +149,6 @@ void FengYin::cardAnalyse()
                     playerArea->disablePlayerItem(i);
                     break;
                 }
-        decisionArea->enable(1);
         break;
     }
 }
@@ -185,8 +192,7 @@ void FengYin::onOkClicked()
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0].digitValue()==1){
-            emit sendCommand("404;"+QString::number(myID)+";");
-            actions.removeOne(tr("1.法术激荡"));
+            emit sendCommand("404;"+QString::number(myID)+";");            
             attackAction();
         }
         break;
@@ -240,8 +246,6 @@ void FengYin::onCancelClicked()
     Role::onCancelClicked();
     switch(state)
     {
-//特殊行动
-    case 1:
 //封印法术
     case 401:
 //五系束缚
@@ -249,43 +253,6 @@ void FengYin::onCancelClicked()
 //封印破碎
     case 403:
         normal();
-        break;
-    }
-}
-
-void FengYin::decipher(QString command)
-{
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
-
-    switch (arg[0].toInt())
-    {
-//行动阶段 flag 0-所有行动，1-攻击行动，2-法术行动，3-特殊行动，4-攻击或法术行动
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            if(flag=="0")
-                normal();
-        }
-        break;
-//额外行动询问
-    case 42:
-        targetID=arg[1].toInt();
-        if(targetID==myID)
-        {
-            if(usedMagic)
-                actions.append(tr("1.法术激荡"));
-
-            foreach(QString ptr,actions)
-                tipArea->addBoxItem(ptr);
-            tipArea->showBox();
-
-            state=42;
-        }
         break;
     }
 }

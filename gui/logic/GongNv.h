@@ -9,13 +9,16 @@ public:
     void GuanChuanSheJi();
     void JingZhunSheJi();
     void normal();
+    void askForSkill(QString skill);
+    void additionalAction();
 public slots:
-    void decipher(QString command);
     void onOkClicked();
     void onCancelClicked();
     void cardAnalyse();
     void ShanGuangXianJing();
     void JuJi();
+private:
+    bool JuJiAdditon;
 };
 
 #endif // GONGNV_H

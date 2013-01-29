@@ -3,6 +3,7 @@
 KuangZhan::KuangZhan()
 {
     makeConnection();
+setMyRole(this);
 }
 
 void KuangZhan::SiLie()
@@ -30,63 +31,13 @@ void KuangZhan::XueYingKuangDao()
     decisionArea->enable(1);
 }
 
-void KuangZhan::onOkClicked()
+void KuangZhan::askForSkill(QString skill)
 {
-    Role::onOkClicked();
-    QString command;
-    switch(state)
-    {
-//ËºÁÑÑ¯ÎÊ
-//ÑªÓ°ÅØÏøÑ¯ÎÊ
-//ÑªÓ°¿ñµ¶Ñ¯ÎÊ
-    case 36:
-        command="36;1;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
-    }
-}
-
-void KuangZhan::onCancelClicked()
-{
-    Role::onCancelClicked();
-    QString command;
-    switch(state)
-    {
-//ËºÁÑÑ¯ÎÊ
-//ÑªÓ°ÅØÏøÑ¯ÎÊ
-//ÑªÓ°¿ñµ¶Ñ¯ÎÊ
-    case 36:
-        command="36;0;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
-    }
-}
-
-void KuangZhan::decipher(QString command)
-{
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
-
-    switch (arg[0].toInt())
-    {
-    case 35:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            gui->setEnable(1);
-            if(flag==tr("ËºÁÑ"))
-                SiLie();
-            else if(flag==tr("ÑªÐÈÅØÏø"))
-                XueXingPaoXiao();
-            else if(flag==tr("ÑªÓ°¿ñµ¶"))
-                XueYingKuangDao();
-        }
-        break;
-
-    }
+    Role::askForSkill(skill);
+    if(skill==tr("ËºÁÑ"))
+        SiLie();
+    else if(skill==tr("ÑªÐÈÅØÏø"))
+        XueXingPaoXiao();
+    else if(skill==tr("ÑªÓ°¿ñµ¶"))
+        XueYingKuangDao();
 }

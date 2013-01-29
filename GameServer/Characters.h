@@ -292,7 +292,7 @@ public slots:
     void SiDou(QList<void*> args);
     //ÌôÐÆ
     void TiaoXin1(QList<void*> args);
-    void TiaoXin2(PlayerEntity*,int*);
+    void TiaoXin2(PlayerEntity*,int*, bool *canGiveUp);
     void TiaoXin3(PlayerEntity*);
     //void TiaoXin4(QList<void *> args);
     //¾«Æ£Á¦½ß
@@ -326,5 +326,34 @@ public slots:
 private:
     bool ShengGuangQiYuUsed;
 };
+//Æíµ»Ê¦
+class QiDao : public PlayerEntity
+{
+    Q_OBJECT
+public :
+    QiDao(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine* engine);
+public slots:
+    //ÍþÁ¦´Í¸£
+    void WeiLiCiFu1(QList<void*> args);
+    void WeiLiCiFu2(QList<void*> args);
+    //Ñ¸½Ý´Í¸£
+    void XunJieCiFu1(QList<void*> args);
+    void XunJieCiFu2(QList<void*> args);
+    void XunJieCiFu3(QList<void *> args);
+    //¹â»ÔÐÅÑö
+    void GuangHuiXinYang(QList<void*> args);
+    //ÆáºÚÐÅÑö
+    void QiHeiXinYang(QList<void*> args);
+    //·¨Á¦³±Ï«
+    void FaLiChaoXi1(QList<void*> args);
+    void FaLiChaoXi2(QList<void*> args);
+    //Æô¶¯ Æíµ»
+    void Pray1(QList<void*> args);
+    void Pray2(QList<void*> args);
+    void skillReset(QList<void*> args);
+private:
+    bool FaLiChaoXiUsed;
 
+};
 #endif // CHARACTERS_H

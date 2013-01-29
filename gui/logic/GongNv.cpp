@@ -2,6 +2,7 @@
 GongNv::GongNv()
 {
     makeConnection();
+setMyRole(this);
 
     Button *shanGuangXianJing,*juJi;
     shanGuangXianJing=new Button(3,tr("闪光陷阱"));
@@ -25,6 +26,22 @@ void GongNv::normal()
     if(myself->getEnergy()>0)
         buttonArea->enable(4);
     unactionalCheck();
+}
+
+void GongNv::askForSkill(QString skill)
+{
+    Role::askForSkill(skill);
+    if(skill==tr("贯穿射击"))
+        GuanChuanSheJi();
+    else if(skill==tr("精准射击"))
+        JingZhunSheJi();
+}
+
+void GongNv::additionalAction()
+{
+    Role::additionalAction();
+    if(JuJiAdditon)
+        tipArea->addBoxItem(tr("1.攻击行动（狙击）"));
 }
 
 void GongNv::GuanChuanSheJi()
@@ -120,18 +137,12 @@ void GongNv::onOkClicked()
 
     switch(state)
     {
-//精准射击询问
-    case 36:
-        command="36;1;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
 //额外行动询问
     case 42:
         text=tipArea->getBoxCurrentText();
-        if(text[0]=='1'){            
-            actions.removeOne(tr("1.攻击行动（狙击）"));
+        if(text[0]=='1'){                        
             emit sendCommand("304;"+QString::number(myID)+";");
+            JuJiAdditon=false;
             attackAction();
         }
         break;
@@ -157,6 +168,7 @@ void GongNv::onOkClicked()
         break;
 //狙击
     case 303:
+        JuJiAdditon=true;
         command="303;";
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1')
@@ -179,76 +191,17 @@ void GongNv::onCancelClicked()
     QString command;
     switch(state)
     {
-//精准射击询问
-    case 36:
-        command="36;0;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
 //贯穿询问
     case 301:
         command="301;0;;";
         emit sendCommand(command);
         gui->reset();
         break;
-//特殊行动
-    case 1:
 //闪光陷阱
     case 302:
 //狙击
     case 303:
         normal();
-        break;
-    }
-}
-
-
-void GongNv::decipher(QString command)
-{
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
-
-    switch (arg[0].toInt())
-    {
-//行动阶段 flag 0-所有行动，1-攻击行动，2-法术行动，3-特殊行动，4-攻击或法术行动
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            if(flag=="0")
-                normal();            
-        }
-        break;
-//技能响应询问
-    case 35:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            gui->setEnable(1);
-            if(flag==tr("贯穿射击"))
-                GuanChuanSheJi();
-            else if(flag==tr("精准射击"))
-                JingZhunSheJi();
-        }
-        break;
-//额外行动询问
-    case 42:
-        targetID=arg[1].toInt();
-        if(targetID==myID)
-        {
-            if(state==303)
-                actions.append(tr("1.攻击行动（狙击）"));
-
-            foreach(QString ptr,actions)
-                tipArea->addBoxItem(ptr);
-            tipArea->showBox();
-
-            state=42;
-        }
         break;
     }
 }

@@ -7,8 +7,8 @@ class FengYin : public Role
 public:
     FengYin();
     void normal();
+    void additionalAction();
 public slots:
-    void decipher(QString command);
     void onOkClicked();
     void onCancelClicked();
     void cardAnalyse();

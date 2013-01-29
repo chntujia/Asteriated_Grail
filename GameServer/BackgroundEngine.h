@@ -140,7 +140,7 @@ signals:
     void weakSIG(PlayerEntity*, bool*);
     void actionPhaseSIG(QList<void*> args);
     void additonalActionSIG(QList<void*> args);
-    void tiaoXinPhaseSIG(PlayerEntity*, int*);
+    void tiaoXinPhaseSIG(PlayerEntity*, int*,bool*);
     //连接玩家对象信号-槽的信号
     void makePlayerConnectSIG(int);
     //发送通讯信息

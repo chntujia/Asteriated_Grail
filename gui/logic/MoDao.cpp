@@ -3,6 +3,7 @@
 MoDao::MoDao()
 {
     makeConnection();
+    setMyRole(this);
 
     Button *moDanRongHe,*moBaoChongJi,*huiMeiFengBao;
     moDanRongHe=new Button(3,tr("魔弹融合"));
@@ -43,7 +44,7 @@ MoDao::MoDao()
 
 void MoDao::MoDanRongHe()
 {
-    if(firstMoDan)
+    if(firstMoDan&&isMyTurn)
         state=801;
     else
         state=802;
@@ -107,10 +108,16 @@ void MoDao::normal()
         buttonArea->enable(5);
     unactionalCheck();
 }
-
-void MoDao::moDaned(int nextID)
+void MoDao::turnBegin()
 {
-    Role::moDaned(nextID);
+    Role::turnBegin();
+    firstMoDan=true;
+}
+
+void MoDao::moDaned(int nextID,int sourceID, int howMany)
+{
+    moDanHarm=howMany;
+    Role::moDaned(nextID,sourceID,howMany);
     firstMoDan=false;
 
     if (handArea->checkElement("earth")||handArea->checkElement("fire"))
@@ -159,7 +166,6 @@ void MoDao::onOkClicked()
     QString sourceID;
     QString targetID;
     QString targetID2;
-    QString text;
 
     selectedCards=handArea->getSelectedCards();
     selectedPlayers=playerArea->getSelectedPlayers();
@@ -167,7 +173,7 @@ void MoDao::onOkClicked()
     switch(state)
     {
 //魔弹融合(回合内）
-    case 801:
+    case 801:        
         command="801;";
         cardID=QString::number(selectedCards[0]->getID());
         sourceID=QString::number(myID);
@@ -211,6 +217,7 @@ void MoDao::onOkClicked()
         gui->reset();
         break;
     }
+    firstMoDan=false;
 }
 
 void MoDao::onCancelClicked()
@@ -218,8 +225,6 @@ void MoDao::onCancelClicked()
     Role::onCancelClicked();
     switch(state)
     {
-//特殊行动
-    case 1:
 //魔弹融合(回合内）
     case 801:
 //魔爆冲击
@@ -230,44 +235,8 @@ void MoDao::onCancelClicked()
         break;
 //魔弹融合(回合外）
     case 802:
-        MoDao::moDaned(moDanNextID);
+        moDaned(moDanNextID,sourceID,moDanHarm);
         break;
-    }
-}
-
-void MoDao::decipher(QString command)
-{
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
-
-    switch (arg[0].toInt())
-    {
-//回合开始
-    case 3:
-        targetID=arg[1].toInt();
-        if(targetID!=myID)
-            firstMoDan=false;
-        else
-            firstMoDan=true;
-        break;
-//魔弹询问
-    case 26:
-        int nextID;
-        targetID=arg[1].toInt();
-        nextID=arg[4].toInt();
-        if(targetID==myID)
-            moDaned(nextID);
-        break;
-//行动阶段 flag 0-所有行动，1-攻击行动，2-法术行动，3-特殊行动，4-攻击或法术行动
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID && flag=="0")
-            normal();
-        break;
-
     }
 }
 

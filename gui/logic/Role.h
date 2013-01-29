@@ -10,20 +10,23 @@ class Role : public QObject
 {
     Q_OBJECT
 public:
-    explicit Role(QObject *parent = 0);    
-    void attacked(QString element,int hitRate);
-    void moDaned(int nextID);
-    void cure(int cross,int harmPoint,int type);
+    explicit Role(QObject *parent = 0);
+    virtual void turnBegin();
+    virtual void normal();
+    virtual void makeConnection();
+    virtual void attackAction();
+    virtual void magicAction();
+    virtual void attackOrMagic();
+    virtual void additionalAction();
+    virtual void attacked(QString element,int hitRate);
+    virtual void moDaned(int nextID, int sourceID, int howMany);
+    virtual void cure(int cross,int harmPoint,int type);
+    virtual void askForSkill(QString skill);
     void drop(int howMany);
-    void normal();
-    void addtionalAction();
-    void makeConnection();
-    void attackAction();
-    void magicAction();
-    void attackOrMagic();
     void unactionalCheck();
     void TianShiZhuFu(int n);
     void MoBaoChongJi();
+    void WeiLi();
 signals:
     void sendCommand(QString);
 
@@ -38,10 +41,11 @@ public slots:
     void buy();
     void synthetize();
     void extract();
+    void setMyRole(Role* role){myRole=role;}
 protected:
     int myID;
     int state;
-    int sourcePlayerID;
+    int sourceID;
     int moDanNextID;
     int nextCounterClockwise;
     bool isMyTurn;
@@ -54,8 +58,8 @@ protected:
     TipArea*tipArea;
     TeamArea*teamArea;
     bool usedAttack,usedMagic,usedSpecial,start;
-    QStringList actions;
-
+    QString command;
+    Role* myRole;
 };
 
 

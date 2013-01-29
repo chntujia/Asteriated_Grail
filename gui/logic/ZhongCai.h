@@ -9,13 +9,12 @@ public:
     void normal();
     void YiShiZhongDuan();
     void ZhongCaiYiShi();
-    void attackAction();
+    void askForSkill(QString skill);
 public slots:
     void MoRiShenPan();
     void PanJueTianPing();
     void onOkClicked();
     void onCancelClicked();
-    void decipher(QString command);
 private:
 };
 

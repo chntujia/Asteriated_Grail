@@ -3,6 +3,7 @@
 YongZhe::YongZhe()
 {
     makeConnection();
+setMyRole(this);
 
     Button *tiaoXin;
     tiaoXin=new Button(3,tr("挑衅"));
@@ -86,22 +87,13 @@ void YongZhe::onOkClicked()
 
     switch(state)
     {
-    //怒吼答复
-    //明镜止水答复
-    //死斗答复
-    case 36:
-        command="36;1;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
     //额外行动询问
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0].digitValue()==1)
         {
             emit sendCommand("2103;"+QString::number(myID)+";");
-            jinDuanZhiLi--;         
-            actions.removeOne(tr("1.攻击行动（精疲力竭）"));
+            jinDuanZhiLi--;                     
             attackAction();
         }
         break;
@@ -132,17 +124,8 @@ void YongZhe::onCancelClicked()
     QString command;
     switch(state)
     {
-    case 1:
     case 2101:
         normal();
-        break;
-    //怒吼答复
-    //明镜止水答复
-    //死斗答复
-    case 36:
-        command="36;0;";
-        emit sendCommand(command);
-        gui->reset();
         break;
     //禁断之力
     case 2102:
@@ -154,62 +137,29 @@ void YongZhe::onCancelClicked()
         break;
     }
 }
-
-void YongZhe::decipher(QString command)
+void YongZhe::turnBegin()
 {
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
-
-    switch(arg[0].toInt())
-    {
-    //回合开始
-    case 3:
-        targetID=arg[1].toInt();
-        if(targetID==myID)
-            jinDuanZhiLi=0;
-        break;
-    //行动阶段
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            if(flag=="0")
-                normal();
-        }
-        break;
-    //技能响应询问
-    case 35:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            gui->setEnable(1);
-            if(flag==tr("怒吼"))
-                NuHou();
-            else if(flag==tr("明镜止水"))
-                MingJingZhiShui();
-            else if(flag==tr("禁断之力"))
-                JinDuanZhiLi();
-            else if(flag==tr("死斗"))
-                SiDou();
-        }
-        break;
-    //额外行动询问
-    case 42:
-        targetID=arg[1].toInt();
-        if(targetID==myID)
-        {
-            if(jinDuanZhiLi>0)
-                actions.append(tr("1.攻击行动（精疲力竭）"));
-
-            foreach(QString ptr,actions)
-                tipArea->addBoxItem(ptr);
-            tipArea->showBox();
-            state=42;
-        }
-        break;
-    }
+    Role::turnBegin();
+    jinDuanZhiLi=0;
 }
+
+void YongZhe::askForSkill(QString skill)
+{
+    Role::askForSkill(skill);
+    if(skill==tr("怒吼"))
+        NuHou();
+    else if(skill==tr("明镜止水"))
+        MingJingZhiShui();
+    else if(skill==tr("禁断之力"))
+        JinDuanZhiLi();
+    else if(skill==tr("死斗"))
+        SiDou();
+}
+
+void YongZhe::additionalAction()
+{
+    Role::additionalAction();
+    if(jinDuanZhiLi>0)
+        tipArea->addBoxItem(tr("1.攻击行动（精疲力竭）"));
+}
+

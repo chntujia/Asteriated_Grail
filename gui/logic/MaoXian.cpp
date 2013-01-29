@@ -2,6 +2,7 @@
 MaoXian::MaoXian()
 {
     makeConnection();
+    setMyRole(this);
     connect(playerArea,SIGNAL(playerUnready()),this,SLOT(onUnready()));
 
     Button *qiZha,*touTianHuanRi,*teShuJiaGong;
@@ -256,15 +257,13 @@ void MaoXian::onOkClicked()
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
+            TeShuJiaGongAddition=false;
             emit sendCommand("1205;"+QString::number(myID)+";");
-            actionFlag=4;
-            actions.removeOne(tr("1.攻击或法术行动（特殊加工）"));
             attackOrMagic();
         }
         else if(text[0]=='2'){
+            TouTianHuanRiAddition=false;
             emit sendCommand("1206;"+QString::number(myID)+";");
-            actionFlag=4;
-            actions.removeOne(tr("2.攻击或法术行动（偷天换日）"));
             attackOrMagic();
         }
         break;
@@ -317,6 +316,7 @@ void MaoXian::onOkClicked()
             command+="1;";
         command+=QString::number(myID)+";";
         onceUsed=true;
+        TeShuJiaGongAddition=true;
         emit sendCommand(command);
         gui->reset();
         break;
@@ -329,6 +329,7 @@ void MaoXian::onOkClicked()
         else
             command+="1;";
         command+=QString::number(myID)+";";
+        TouTianHuanRiAddition=true;
         onceUsed2=true;
         emit sendCommand(command);
         gui->reset();
@@ -395,7 +396,6 @@ void MaoXian::onCancelClicked()
     Role::onCancelClicked();
     switch(state)
     {
-    case 1:
 //欺诈
     case 10:
     case 1201:
@@ -414,51 +414,19 @@ void MaoXian::onCancelClicked()
     }
 }
 
-void MaoXian::decipher(QString command)
+void MaoXian::additionalAction()
 {
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
+    Role::additionalAction();
+    if(TeShuJiaGongAddition)
+        tipArea->addBoxItem(tr("1.攻击或法术行动（特殊加工）"));
+    if(TouTianHuanRiAddition)
+        tipArea->addBoxItem(tr("2.攻击或法术行动（偷天换日）"));
+}
 
-    switch (arg[0].toInt())
-    {
-//回合开始
-    case 3:
-        targetID=arg[1].toInt();
-        if(targetID==myID){
-            onceUsed2=false;
-            qizha=false;
-        }
-        break;
-//行动阶段 flag 0-所有行动，1-攻击行动，2-法术行动，3-特殊行动，4-攻击或法术行动
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            if(flag=="0")
-                normal();
-            if(flag=="1")
-                attackAction();
-        }
-        break;
-//额外行动询问
-    case 42:
-        targetID=arg[1].toInt();
-        if(targetID==myID)
-        {            
-            if(state==1202)
-                actions.append(tr("1.攻击或法术行动（特殊加工）"));
-            if(state==1203)
-                actions.append(tr("2.攻击或法术行动（偷天换日）"));
-
-            foreach(QString ptr,actions)
-                tipArea->addBoxItem(ptr);
-            tipArea->showBox();
-            state=42;
-        }
-        break;
-    }
+void MaoXian::turnBegin()
+{
+    Role::turnBegin();
+    onceUsed2=false;
+    qizha=false;
 }
 

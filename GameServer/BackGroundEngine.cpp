@@ -97,6 +97,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 14:
         return new ZhongCai(engine,id,color);
         break;
+    case 16:
+        return new QiDao(engine,id,color);
+        break;
     case 21:
         return new YongZhe(engine,id,color);
         break;
@@ -153,9 +156,10 @@ void BackgroundEngine::seatArrange()
     playerList.clear();
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
-    for(int i=1; i<= 12 ;i++)
+    for(int i=7; i<= 9 ;i++)
         roles<<i;
     roles<<14;
+    roles<<16;
     roles<<21;
     randomize(&roles);
 
@@ -582,7 +586,8 @@ void BackgroundEngine::actionPhase()
     //这个标记表明是否行动过，如果已经行动过，那么追加的各种行动机会可以放弃
     bool acted = false;
     bool firstTime=true;
-    int canGiveUp=0;
+    int actionFlag=0;
+    bool canGiveUp=false;
 
 
     this->checkEffect(this->currentPlayer);
@@ -594,11 +599,11 @@ void BackgroundEngine::actionPhase()
         //根据允许的行动类别询问client
         if(firstTime){
             emit actionPhaseSIG(args);
-            emit tiaoXinPhaseSIG(currentPlayer,&canGiveUp);
+            emit tiaoXinPhaseSIG(currentPlayer,&actionFlag,&canGiveUp);
             firstTime=false;
         }
         if(!acted){
-            coder.askForAction(currentPlayer->getID(),canGiveUp,acted);
+            coder.askForAction(currentPlayer->getID(),actionFlag,canGiveUp);
         }
         else{
             coder.askForAdditionalAction(currentPlayer->getID());

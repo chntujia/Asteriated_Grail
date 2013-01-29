@@ -1728,7 +1728,7 @@ void YongZhe::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(JinDuanZhiLi2(QList<void*>)));
     connect(engine,SIGNAL(timeLine6DrawedSIG(QList<void*>)),this,SLOT(SiDou(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(TiaoXin1(QList<void*>)));
-    connect(engine,SIGNAL(tiaoXinPhaseSIG(PlayerEntity*,int*)),this,SLOT(TiaoXin2(PlayerEntity*,int*)));
+    connect(engine,SIGNAL(tiaoXinPhaseSIG(PlayerEntity*,int*,bool*)),this,SLOT(TiaoXin2(PlayerEntity*,int*,bool*)));
     connect(engine,SIGNAL(turnEndPhaseSIG(PlayerEntity*)),this,SLOT(TiaoXin3(PlayerEntity*)));
     //connect(engine,SIGNAL(turnEndPhaseSIG(QList<void*>)),this,SLOT(TiaoXin4(QList<void*>)));
     connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(JingPiLiJie1(QList<void*>)));
@@ -1922,11 +1922,15 @@ void YongZhe::TiaoXin1(QList<void *> args)
 }
 
 //挑衅触发判定1
-void YongZhe::TiaoXin2(PlayerEntity *player, int *act)
+void YongZhe::TiaoXin2(PlayerEntity *player, int *act,bool* canGiveUp)
 {
     if(player->getID() != tiaoXinID)
         return;
-    *act=1;
+    if(player->getRoleID()==14 && player->getToken(0)==4)
+        *act=-1;
+    else
+        *act=1;
+    *canGiveUp=true;
     if(!tiaoXinUsed)
         return;
     tiaoXinChuFa=true;
@@ -1955,8 +1959,7 @@ void YongZhe::JingPiLiJie1(QList<void *> args)
         return;
     if(jinDuanUsed){
     coder.tapNotice(this->getID(),1,"【精疲力竭】");
-    handCardsMax-=2;
-    setHandCardsMax(handCardsMax);
+    setHandCardsMax(handCardsMax-2);
     setHandCardsMaxFixed(true);
     coder.handcardMaxNotice(id,handCardsMax);
     jinDuanUsed=false;
@@ -2211,5 +2214,182 @@ void ShengQiang::makeConnection(BackgroundEngine* engine)
     connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(TianQiang(QList<void*>)));
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(ShengJi(QList<void*>)));
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(DiQiang(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
+
+QiDao::QiDao(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID = 16;
+    this->star = 4;
+    this->makeConnection(engine);
+    tokenMax[0]=3;
+}
+//法力潮汐
+void QiDao::FaLiChaoXi1(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]) || FaLiChaoXiUsed || getEnergy()==0)
+        return;
+    if(getHandCardNum()<=0 && getToken(0)==0)
+        return;
+    FaLiChaoXiUsed=true;
+    engine->addActionNum(MAGIC);
+}
+void QiDao::FaLiChaoXi2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(id != skill->srcID||skill->infor1!=1606)
+        return;
+    coder.notice("祈祷师发动【法力潮汐】");
+}
+
+//威力赐福
+void QiDao::WeiLiCiFu1(QList<void*> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 1602)
+        return;
+    coder.notice("祈祷师发动【威力赐福】");
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    engine->useCard(cards,this,dst,true);
+}
+void QiDao::WeiLiCiFu2(QList<void*> args)
+{
+    PlayerEntity*user=(PlayerEntity*)args[0];
+    foreach(CardEntity*weili, user->getBasicEffect())
+        if(weili->getSpecialityList().contains(tr("威力赐福")))
+        {
+            //此处询问是否使用
+            coder.askForSkill(user->getID(),"威力赐福");
+            if(messageBuffer::readInfor() == 0)
+                return;
+            user->removeBasicEffect(weili);
+            coder.notice("玩家"+QString::number(user->getID())+"发动【威力赐福】");
+            Harm *harm = (Harm*)args[2];
+            harm->harmPoint += 2;
+            break;
+        }
+}
+
+//迅捷赐福
+void QiDao::XunJieCiFu1(QList<void*> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 1603)
+        return;
+    coder.notice("祈祷师发动【迅捷赐福】");
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    engine->useCard(cards,this,dst,true);
+}
+void QiDao::XunJieCiFu2(QList<void*> args)
+{
+    PlayerEntity*user=(PlayerEntity*)args[0];
+    foreach(CardEntity*xunjie, user->getBasicEffect())
+        if(xunjie->getSpecialityList().contains(tr("迅捷赐福"))){
+            engine->addActionNum(ATTACK);
+            break;
+        }
+}
+void QiDao::XunJieCiFu3(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->infor1!=1607)
+        return;
+    PlayerEntity*user=engine->getPlayerByID(skill->srcID);
+    foreach(CardEntity*xunjie, user->getBasicEffect())
+        if(xunjie->getSpecialityList().contains(tr("迅捷赐福"))){
+            user->removeBasicEffect(xunjie);
+            break;
+        }
+    coder.notice("玩家"+QString::number(skill->srcID)+"发动【迅捷赐福】");
+}
+
+//光辉信仰
+void QiDao::GuangHuiXinYang(QList<void*> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 1604)
+        return;
+    coder.notice("祈祷师对玩家"+QString::number(magic->dstID)+"发动【光辉信仰】");
+    token[0]--;
+    coder.tokenNotice(id,0,token[0]);
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    cards << getCardByID(magic->infor2);
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    coder.discardNotice(id,2,"n",cards);
+    this->removeHandCards(cards,false);
+    dst->setCrossNum(dst->getCrossNum()+1);
+    coder.crossChangeNotice(magic->dstID,dst->getCrossNum());
+}
+
+//漆黑信仰
+void QiDao::QiHeiXinYang(QList<void*> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 1605)
+        return;
+    coder.notice("祈祷师对玩家"+QString::number(magic->dstID)+"发动【漆黑信仰】");
+    token[0]--;
+    coder.tokenNotice(id,0,token[0]);
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    Harm harm;
+    harm.harmPoint = 2;
+    harm.type = MAGIC;
+    this->engine->timeLine3(harm,this,dst,"漆黑信仰");
+    if(engine->checkEnd())
+        return;
+    this->engine->timeLine3(harm,this,this,"漆黑信仰");
+}
+
+void QiDao::Pray1(QList<void*> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(tap == 1)
+        return;
+    if(getGem()==0)
+        return;
+    coder.askForSkill(this->getID(),"祈祷");
+    int reply=messageBuffer::readInfor();
+    if(reply==0)
+        return;
+    this->gem--;
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+    coder.notice("祈祷师发动【祈祷】");
+    setTap(1);
+    coder.tapNotice(id,1,"【祈祷形态】");
+}
+void QiDao::Pray2(QList<void*> args)
+{
+    if(this != (PlayerEntity*)args[0]||!*(bool*)args[4]||!tap)
+        return;
+    setToken(0,token[0]+2);
+    coder.tokenNotice(id,0,token[0]);
+}
+void QiDao::skillReset(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]))
+        return;
+    FaLiChaoXiUsed = false;
+}
+
+void QiDao::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(WeiLiCiFu1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(WeiLiCiFu2(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XunJieCiFu1(QList<void*>)));
+    connect(engine,SIGNAL(magicFinishSIG(QList<void*>)),this,SLOT(XunJieCiFu2(QList<void*>)));
+    connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(XunJieCiFu2(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(XunJieCiFu3(QList<void*>)));
+    connect(engine,SIGNAL(magicFinishSIG(QList<void*>)),this,SLOT(FaLiChaoXi1(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(FaLiChaoXi2(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(GuangHuiXinYang(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(QiHeiXinYang(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(Pray1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(Pray2(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
 }

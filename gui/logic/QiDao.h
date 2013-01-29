@@ -10,11 +10,12 @@ public:
     void magicAction();
     void QiDong();
     void FaLiChaoXi();
+    void askForSkill(QString skill);
+    void additionalAction();
 public slots:
-//    void decipher(QString command);
-//    void onOkClicked();
-//    void onCancelClicked();
-//    void cardAnalyse();
+    void onOkClicked();
+    void onCancelClicked();
+    void cardAnalyse();
     void GuangHuiXinYang();
     void QiHeiXinYang();
     void WeiLiCiFu();

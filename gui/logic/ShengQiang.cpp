@@ -3,6 +3,7 @@
 ShengQiang::ShengQiang()
 {
     makeConnection();
+setMyRole(this);
     Button *huiYao, *chengJie, *shengGuangQiYu;
     huiYao = new Button(3,tr("辉耀"));
     buttonArea->addButton(huiYao);
@@ -151,26 +152,24 @@ void ShengQiang::onOkClicked()
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
-            actionFlag=1;
-            emit sendCommand("1003;"+QString::number(myID)+";");
-            actions.removeOne(tr("1.攻击行动(辉耀)"));
+            HuiYaoAddition=false;
+            emit sendCommand("1003;"+QString::number(myID)+";");            
             attackAction();
         }
         else if(text[0]=='2'){
-            actionFlag=1;
-            emit sendCommand("1004;"+QString::number(myID)+";");
-            actions.removeOne(tr("2.攻击行动(惩戒)"));
+            ChengJieAddition=false;
+            emit sendCommand("1004;"+QString::number(myID)+";");           
             attackAction();
         }
         else if(text[0]=='3'){
-            actionFlag=1;
-            emit sendCommand("1007;"+QString::number(myID)+";");
-            actions.removeOne(tr("3.攻击行动(圣光祈愈)"));
+            ShengGuangQiYuAddition=false;
+            emit sendCommand("1007;"+QString::number(myID)+";");            
             attackAction();
         }
         break;
     case 1001:
         command="1001;";
+        HuiYaoAddition=true;
         cardID=QString::number(selectedCards[0]->getID());
         sourceID=QString::number(myID);
         command+=cardID+";"+sourceID+";";
@@ -180,16 +179,12 @@ void ShengQiang::onOkClicked()
         break;
     case 1002:
         command="1002;";
+        ChengJieAddition=true;
         cardID=QString::number(selectedCards[0]->getID());
         sourceID=QString::number(myID);
         targetID=QString::number(selectedPlayers[0]->getID());
         command+=cardID+";"+targetID+";"+sourceID+";";
         dataInterface->removeHandCard(selectedCards[0]);
-        emit sendCommand(command);
-        gui->reset();
-        break;
-    case 36:
-        command="36;1;";
         emit sendCommand(command);
         gui->reset();
         break;
@@ -200,6 +195,7 @@ void ShengQiang::onOkClicked()
         gui->reset();
         break;
     case 1006:
+        ShengGuangQiYuAddition=true;
         command="1006;";
         sourceID=QString::number(myID);
         command+=sourceID+";";
@@ -215,17 +211,11 @@ void ShengQiang::onCancelClicked()
     QString command;
     switch(state)
     {
-    case 36:
-        command="36;0;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
     case 1005:
         command="1005;0;";
         emit sendCommand(command);
         gui->reset();
         break;
-    case 1:
     case 1001:
     case 1002:
     case 1006:
@@ -236,57 +226,22 @@ void ShengQiang::onCancelClicked()
         break;
     }
 }
-
-void ShengQiang::decipher(QString command)
+void ShengQiang::askForSkill(QString skill)
 {
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
+    Role::askForSkill(skill);
+    if(skill==tr("天枪"))
+        TianQiang();
+    else if(skill==tr("地枪"))
+        DiQiang();
+}
+void ShengQiang::additionalAction()
+{
+    Role::additionalAction();
+    if(HuiYaoAddition)
+        tipArea->addBoxItem(tr("1.攻击行动(辉耀)"));
+    if(ChengJieAddition)
+        tipArea->addBoxItem(tr("2.攻击行动(惩戒)"));
+    if(ShengGuangQiYuAddition)
+        tipArea->addBoxItem(tr("3.攻击行动(圣光祈愈)"));
 
-    switch (arg[0].toInt())
-    {
-//行动阶段 flag 0-所有行动，1-攻击行动，2-法术行动，3-特殊行动，4-攻击或法术行动
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            if(flag=="0")
-                normal();
-        }
-        break;
-//技能响应询问
-    case 35:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            gui->setEnable(1);
-            if(flag==tr("天枪"))
-                TianQiang();
-            else if(flag==tr("地枪"))
-                DiQiang();
-        }
-        break;
-//额外行动询问
-    case 42:
-        targetID=arg[1].toInt();
-        if(targetID==myID)
-        {
-            if(state==1001){
-                actions.append(tr("1.攻击行动(辉耀)"));
-            }
-            if(state==1002){
-                actions.append(tr("2.攻击行动(惩戒)"));
-            }
-            if(state==1006){
-                actions.append(tr("3.攻击行动(圣光祈愈)"));
-            }
-            foreach(QString ptr,actions)
-                tipArea->addBoxItem(ptr);
-            tipArea->showBox();
-            state=42;
-        }
-    }
 }

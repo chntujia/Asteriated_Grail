@@ -3,6 +3,7 @@
 TianShi::TianShi()
 {
     makeConnection();
+setMyRole(this);
 
     connect(playerArea,SIGNAL(playerUnready()),this,SLOT(onUnready()));
     connect(handArea,SIGNAL(cardUnready()),this,SLOT(onUnready()));
@@ -362,8 +363,6 @@ void TianShi::onCancelClicked()
     QString command;
     switch(state)
     {
-//特殊行动
-    case 1:
 //风之洁净
     case 701:
 //天使祝福
@@ -406,41 +405,13 @@ void TianShi::onUnready()
         break;
     }
 }
-
-void TianShi::decipher(QString command)
+void TianShi::askForSkill(QString skill)
 {
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
-
-    switch (arg[0].toInt())
-    {
-//行动阶段 flag 0-所有行动，1-攻击行动，2-法术行动，3-特殊行动，4-攻击或法术行动
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            if(flag=="0")
-                normal();
-        }
-        break;
-//天使之歌
-//神之庇护
-    case 35:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            gui->setEnable(1);
-            if(flag==tr("天使之歌"))
-                TianShiZhiGe1();
-            else if(flag==tr("神之庇护"))
-                ShenZhiBiHu(arg[3].toInt());
-            else if(flag==tr("天使羁绊"))
-                TianShiJiBan();
-        }
-        break;
-    }
+    Role::askForSkill(skill);
+    if(skill==tr("天使之歌"))
+        TianShiZhiGe1();
+    else if(skill==tr("神之庇护"))
+        ShenZhiBiHu(command.split(';').at(3).toInt());
+    else if(skill==tr("天使羁绊"))
+        TianShiJiBan();
 }

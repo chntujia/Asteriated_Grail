@@ -11,11 +11,12 @@ public:
     void MingJingZhiShui();
     void JinDuanZhiLi();
     void SiDou();
+    void turnBegin();
+    void askForSkill(QString skill);
+    void additionalAction();
 public slots:
-    void decipher(QString command);
     void onOkClicked();
     void onCancelClicked();
- //   void cardAnalyse();
     void TiaoXin();
 private:
     int jinDuanZhiLi;

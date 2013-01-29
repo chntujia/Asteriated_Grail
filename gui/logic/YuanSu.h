@@ -8,8 +8,9 @@ public:
     YuanSu();
     void normal();
     void magicAction();
+    void additionalAction();
+    void turnBegin();
 public slots:
-    void decipher(QString command);
     void onOkClicked();
     void onCancelClicked();
     void cardAnalyse();

@@ -3,6 +3,7 @@
 YuanSu::YuanSu()
 {
     makeConnection();
+setMyRole(this);
 
     Button *yuanSuFaShu,*yuanSuDianRan,*yueGuang;
     yuanSuFaShu=new Button(3,tr("元素法术"));
@@ -158,19 +159,19 @@ void YuanSu::onOkClicked()
         switch(text[0].digitValue())
         {
         case 1:
+            earth=false;
             emit sendCommand("1105;"+QString::number(myID)+";");
             magicAction();
-            actions.removeOne(tr("1.法术行动（陨石）"));
             break;
         case 2:
+            ignite=false;
             emit sendCommand("1106;"+QString::number(myID)+";");
             magicAction();
-            actions.removeOne(tr("2.法术行动（元素点燃）"));
             break;
         case 3:
+            wind=false;
             emit sendCommand("1104;"+QString::number(myID)+";");
             attackAction();
-            actions.removeOne(tr("3.攻击行动（风刃）"));
             break;
         }
         break;
@@ -240,7 +241,6 @@ void YuanSu::onCancelClicked()
     Role::onCancelClicked();
     switch(state)
     {
-    case 1:
     case 1100:
     case 1102:
     case 1103:
@@ -254,59 +254,21 @@ void YuanSu::onCancelClicked()
         break;
     }
 }
-
-void YuanSu::decipher(QString command)
+void YuanSu::additionalAction()
 {
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
+    Role::additionalAction();
+    if(earth)
+        tipArea->addBoxItem(tr("1.法术行动（陨石）"));
+    if(ignite)
+        tipArea->addBoxItem(tr("2.法术行动（元素点燃）"));
+    if(wind)
+        tipArea->addBoxItem(tr("3.攻击行动（风刃）"));
+}
 
-    switch (arg[0].toInt())
-    {
-//回合开始
-    case 3:
-        targetID=arg[1].toInt();
-        if(targetID==myID){
-            wind=false;
-            earth=false;
-            ignite=false;
-        }
-        break;
-//行动阶段 flag 0-所有行动，1-攻击行动，2-法术行动，3-特殊行动，4-攻击或法术行动
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            if(flag=="0")
-                normal();
-        }
-        break;
-//额外行动询问
-    case 42:
-        targetID=arg[1].toInt();
-        if(targetID==myID)
-        {
-            if(earth){
-                actions.append(tr("1.法术行动（陨石）"));
-                earth=false;
-            }
-            if(ignite){
-                actions.append(tr("2.法术行动（元素点燃）"));
-                ignite=false;
-            }
-            if(wind){
-                actions.append(tr("3.攻击行动（风刃）"));
-                wind=false;
-            }
-
-            foreach(QString ptr,actions)
-                tipArea->addBoxItem(ptr);
-            tipArea->showBox();
-
-            state=42;
-        }
-        break;
-    }
+void YuanSu::turnBegin()
+{
+    Role::turnBegin();
+    wind=false;
+    earth=false;
+    ignite=false;
 }
