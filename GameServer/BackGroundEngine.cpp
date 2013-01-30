@@ -156,7 +156,7 @@ void BackgroundEngine::seatArrange()
     playerList.clear();
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
-    for(int i=7; i<= 9 ;i++)
+    for(int i=1; i<= 12 ;i++)
         roles<<i;
     roles<<14;
     roles<<16;
@@ -179,8 +179,6 @@ void BackgroundEngine::roleRandom()
     for(int i=0;i<playerSum;i++){
         playerList[i]=setRole(roles[i],this,queue[i].digitValue(),queue[i+playerSum].digitValue());
         coder.roleNotice(queue[i].digitValue(),roles[i]);
-        playerList[i]->setGem(2);
-        coder.energyNotice(queue[i].digitValue(),2,0);
     }
     seatPostarrange();
     gameStart();

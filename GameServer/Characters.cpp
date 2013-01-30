@@ -1976,16 +1976,13 @@ void YongZhe::JingPiLiJie2(QList<void *> args)
         return;
     setTap(0);
     coder.tapNotice(this->getID(),0,"【普通形态】");
-    setHandCardsMaxFixed(false);
-    handCardsMax+=2;
-    setHandCardsMax(handCardsMax);
+    setHandCardsMaxFixed(false);    
+    setHandCardsMax(6);
     coder.handcardMaxNotice(id,handCardsMax);
     Harm jingpilijie;
     jingpilijie.harmPoint=3;
     jingpilijie.type=MAGICHARM;
     engine->timeLine3(jingpilijie,this,this,"精疲力竭");
-    if(engine->checkEnd())
-        return;
 }
 void YongZhe::JingPiLiJie3(QList<void *> args)
 {
@@ -2324,6 +2321,8 @@ void QiDao::GuangHuiXinYang(QList<void*> args)
     this->removeHandCards(cards,false);
     dst->setCrossNum(dst->getCrossNum()+1);
     coder.crossChangeNotice(magic->dstID,dst->getCrossNum());
+    teamArea.setGem(color,teamArea.getGem(color)+1);
+    coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
 }
 
 //漆黑信仰

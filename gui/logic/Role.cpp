@@ -288,6 +288,7 @@ void Role::attacked(QString element,int hitRate)
     }
     handArea->disableMagic();
     handArea->enableElement("light");
+    QApplication::alert((QWidget*)playerArea->window());
 }
 
 void Role::drop(int howMany)
@@ -295,6 +296,7 @@ void Role::drop(int howMany)
     state=3;
     handArea->setQuota(howMany);
     handArea->enableAll();
+    QApplication::alert((QWidget*)playerArea->window());
 }
 
 void Role::buy()
@@ -404,6 +406,7 @@ void Role::moDaned(int nextID,int sourceID,int howMany)
     handArea->enableMoDan();
     decisionArea->enable(1);
     moDanNextID=nextID;
+    QApplication::alert((QWidget*)playerArea->window());
 }
 
 void Role::cure(int cross,int harmPoint, int type)
@@ -424,6 +427,7 @@ void Role::cure(int cross,int harmPoint, int type)
     for(;min>=0;min--)
         tipArea->addBoxItem(QString::number(min));
     tipArea->showBox();
+    QApplication::alert((QWidget*)playerArea->window());
 }
 
 void Role::turnBegin()
@@ -444,12 +448,14 @@ void Role::additionalAction(){
     tipArea->showBox();
     decisionArea->enable(0);
     decisionArea->enable(3);
+    QApplication::alert((QWidget*)playerArea->window());
 }
 
 void Role::askForSkill(QString skill)
 {
     if(skill==tr("威力赐福"))
         WeiLi();
+    QApplication::alert((QWidget*)playerArea->window());
 }
 
 void Role::TianShiZhuFu(int n)
@@ -459,6 +465,7 @@ void Role::TianShiZhuFu(int n)
     tipArea->setMsg(tr("给予天使")+QString::number(n)+tr("张牌"));
     handArea->setQuota(n);
     handArea->enableAll();
+    QApplication::alert((QWidget*)playerArea->window());
 }
 
 void Role::MoBaoChongJi()
@@ -469,6 +476,7 @@ void Role::MoBaoChongJi()
     handArea->setQuota(1);
     handArea->enableMagic();
     decisionArea->enable(1);
+    QApplication::alert((QWidget*)playerArea->window());
 }
 
 void Role::WeiLi()

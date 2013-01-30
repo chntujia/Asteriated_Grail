@@ -186,6 +186,7 @@ void MaoXian::cardAnalyse()
         foreach(Card*ptr,selectedCards)
             if(ptr->getElement()!=selectedCards[0]->getElement()){
                 playerArea->disableAll();
+                decisionArea->disable(0);
                 break;
             }            
         break;
