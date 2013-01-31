@@ -1533,7 +1533,7 @@ void YuanSu::YuanSuDianRan(QList<void*> args)
 void YuanSu::YuanSuDianRan2(QList<void*> args)
 {
     BatInfor *skill = (BatInfor*)args[0];
-    if(skill->srcID!=id || skill->infor1==1106)
+    if(skill->srcID!=id || skill->infor1!=1106)
         return;
     coder.notice("元素师使用【元素点燃】的额外法术行动");
 }
@@ -2236,6 +2236,11 @@ void QiDao::FaLiChaoXi2(QList<void *> args)
     BatInfor *skill = (BatInfor*)args[0];
     if(id != skill->srcID||skill->infor1!=1606)
         return;
+    if(crystal>0)
+        crystal--;
+    else if(gem>0)
+        gem--;
+    coder.energyNotice(id,gem,crystal);
     coder.notice("祈祷师发动【法力潮汐】");
 }
 
