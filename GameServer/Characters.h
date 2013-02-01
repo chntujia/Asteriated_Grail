@@ -355,6 +355,7 @@ public slots:
     void skillReset(QList<void*> args);
 private:
     bool FaLiChaoXiUsed;
+};
 
 //Éñ¹Ù
 class ShenGuan: public PlayerEntity
@@ -368,7 +369,6 @@ public slots:
     void ShenShengQiFu(QList<void*> args);
     void ShuiZhiShenLi(QList<void*> args);
     void ShenShengQiYue(QList<void*> args);
-    void ShenShengLingYuZhiLiao(QList<void*> args);
-    void ShenShengLingYuFaShang(QList<void*> args);
+    void ShenShengLingYu(QList<void*> args);
 };
 #endif // CHARACTERS_H

@@ -65,6 +65,10 @@ void Player::setRole(int roleID)
         tokenMax[0]=4;
         crystal=2;
         break;
+    case 15:
+        name=tr("[Éñ¹Ù]");
+        crossMax=6;
+        break;
     case 16:
         name=tr("[Æíµ»Ê¦]");
         tapSource="resource/qidao.png";

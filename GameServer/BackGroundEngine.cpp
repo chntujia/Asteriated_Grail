@@ -97,6 +97,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 14:
         return new ZhongCai(engine,id,color);
         break;
+    case 15:
+        return new ShenGuan(engine,id,color);
+        break;
     case 16:
         return new QiDao(engine,id,color);
         break;
@@ -159,6 +162,7 @@ void BackgroundEngine::seatArrange()
     for(int i=1; i<= 12 ;i++)
         roles<<i;
     roles<<14;
+    roles<<15;
     roles<<16;
     roles<<21;
     randomize(&roles);
@@ -682,6 +686,7 @@ void BackgroundEngine::actionPhase()
                 teamArea.setGem(color,teamArea.getGem(color) + bat.infor1);
                 teamArea.setCrystal(color,teamArea.getCrystal(color) + bat.infor2);                
                 coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
+                emit specialFinishSIG(args);
             }
             else if(bat.CardID == SYNTHESIZE)
             {
@@ -695,6 +700,7 @@ void BackgroundEngine::actionPhase()
                 coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
                 coder.cupNotice(color,teamArea.getCup(color));
                 coder.moraleNotice(!color,teamArea.getMorale(!color));
+                emit specialFinishSIG(args);
                 this->checkEnd();
             }
             else if(bat.CardID == EXTRACT)
@@ -707,6 +713,7 @@ void BackgroundEngine::actionPhase()
                 currentPlayer->setCrystal(currentPlayer->getCrystal()+bat.infor2);                
                 coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
                 coder.energyNotice(currentPlayer->getID(),currentPlayer->getGem(),currentPlayer->getCrystal());
+                emit specialFinishSIG(args);
             }
             else {
                 QList<void*> args;
