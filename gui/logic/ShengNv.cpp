@@ -3,6 +3,7 @@
 ShengNv::ShengNv()
 {
     makeConnection();
+setMyRole(this);
     Button *zhiLiaoShu, *zhiYuZhiGuang, *shengLiao;
     zhiLiaoShu = new Button(3,tr("治疗术"));
     buttonArea->addButton(zhiLiaoShu);
@@ -213,9 +214,8 @@ void ShengNv::onOkClicked()
         text=tipArea->getBoxCurrentText();
         //攻击或法术行动
         if(text[0]=='1'){
-            actionFlag=4;
+            ShengLiaoAddition=false;
             emit sendCommand("606;"+QString::number(myID)+";");
-            actions.removeOne(tr("1.攻击或法术行动（圣疗）"));
             attackOrMagic();
         }
         break;
@@ -282,6 +282,7 @@ void ShengNv::onOkClicked()
         sourceID=QString::number(myID);
         command+=sourceID+";";
         emit sendCommand(command);
+        ShengLiaoAddition=true;
         gui->reset();
         break;
     }
@@ -300,8 +301,6 @@ void ShengNv::onCancelClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//特殊行动
-    case 1:
 //冰霜祷言
 //治疗术
     case 602:
@@ -317,50 +316,19 @@ void ShengNv::onCancelClicked()
     }
 }
 
-void ShengNv::decipher(QString command)
+void ShengNv::askForSkill(QString skill)
 {
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
-
-    switch (arg[0].toInt())
-    {
-//行动阶段 flag 0-所有行动，1-攻击行动，2-法术行动，3-特殊行动，4-攻击或法术行动
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            if(flag=="0")
-                normal();
-        }
-        break;
-//技能响应询问
-    case 35:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            gui->setEnable(1);
-            if(flag==tr("冰霜祷言"))
-                BingShuangDaoYan();
-            else if(flag==tr("怜悯"))
-                LianMin();
-        }
-        break;
-//额外行动询问
-    case 42:
-        targetID=arg[1].toInt();
-        if(targetID==myID)
-        {
-            if(state==653){
-                actions.append(tr("1.攻击或法术行动（圣疗）"));
-            }
-            foreach(QString ptr,actions)
-                tipArea->addBoxItem(ptr);
-            tipArea->showBox();
-            state=42;
-        }
-    }
+    Role::askForSkill(skill);
+    if(skill==tr("冰霜祷言"))
+        BingShuangDaoYan();
+    else if(skill==tr("怜悯"))
+        LianMin();
 }
+
+void ShengNv::additionalAction()
+{
+    Role::additionalAction();
+    if(ShengLiaoAddition)
+        tipArea->addBoxItem(tr("1.攻击或法术行动（圣疗）"));
+}
+

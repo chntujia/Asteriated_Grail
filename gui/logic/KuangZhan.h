@@ -9,10 +9,7 @@ public:
     void SiLie();
     void XueXingPaoXiao();
     void XueYingKuangDao();
-public slots:
-    void decipher(QString command);
-    void onOkClicked();
-    void onCancelClicked();
+    void askForSkill(QString skill);
 };
 
 #endif // KUANGZHAN_H

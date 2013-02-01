@@ -8,8 +8,8 @@ public:
     AnSha();
     void ShuiYing();
     void QianXing();
+    void askForSkill(QString skill);
 public slots:
-    void decipher(QString command);
     void onOkClicked();
     void onCancelClicked();
     void cardAnalyse();

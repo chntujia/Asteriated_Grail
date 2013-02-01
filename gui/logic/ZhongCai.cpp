@@ -3,6 +3,7 @@
 ZhongCai::ZhongCai()
 {
     makeConnection();
+setMyRole(this);
 
     Button *moRiShenPan;
     moRiShenPan=new Button(3,tr("末日审判"));
@@ -35,14 +36,6 @@ void ZhongCai::normal()
         buttonArea->disable(4);
     }
     unactionalCheck();
-}
-
-void ZhongCai::attackAction()
-{
-    if(dataInterface->getMyself()->getToken(0)==4)
-        handArea->disableAll();
-    else
-        Role::attackAction();
 }
 
 void ZhongCai::YiShiZhongDuan()
@@ -206,40 +199,11 @@ void ZhongCai::onCancelClicked()
         break;
     }
 }
-
-void ZhongCai::decipher(QString command)
+void ZhongCai::askForSkill(QString skill)
 {
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
-
-    switch(arg[0].toInt())
-    {
-//行动阶段 flag 0-所有行动，1-攻击行动，2-法术行动，3-特殊行动，4-攻击或法术行动
-    case 29:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            if(flag=="0")
-                normal();
-            if(flag=="1")
-                attackAction();
-        }
-        break;
-//技能响应询问
-    case 35:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            gui->setEnable(1);
-            if(flag==tr("仪式中断"))
-                YiShiZhongDuan();
-            else if(flag==tr("仲裁仪式"))
-                ZhongCaiYiShi();
-        }
-        break;
-    }
+    Role::askForSkill(skill);
+    if(skill==tr("仪式中断"))
+        YiShiZhongDuan();
+    else if(skill==tr("仲裁仪式"))
+        ZhongCaiYiShi();
 }

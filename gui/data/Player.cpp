@@ -65,6 +65,12 @@ void Player::setRole(int roleID)
         tokenMax[0]=4;
         crystal=2;
         break;
+    case 16:
+        name=tr("[Æíµ»Ê¦]");
+        tapSource="resource/qidao.png";
+        tokenName[0]=tr("·ûÎÄ");
+        tokenMax[0]=3;
+        break;
     case 21:
         name=tr("[ÓÂÕß]");
         tapSource="resource/jingpilijie.png";

@@ -7,9 +7,9 @@ class MoDao : public Role
 public:
     MoDao();
     void normal();
-    void moDaned(int nextID);
+    void turnBegin();
+    void moDaned(int nextID, int sourceID, int howMany);
 public slots:
-    void decipher(QString command);
     void onOkClicked();
     void onCancelClicked();
     void cardAnalyse();
@@ -18,6 +18,7 @@ public slots:
     void HuiMeiFengBao();
 private:
     int nextClockwise;
+    int moDanHarm;
     bool firstMoDan;
 };
 

@@ -9,10 +9,11 @@ public:
     void LieFengJi();
     void LianXuJi();
     void JianYing();
+    void turnBegin();
+    void askForSkill(QString skill);
+    void additionalAction();
 public slots:
-    void decipher(QString command);
     void onOkClicked();
-    void onCancelClicked();
 private:
     bool onceUsed2;
     int JiFengJi;

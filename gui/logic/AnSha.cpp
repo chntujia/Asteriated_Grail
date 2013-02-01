@@ -3,6 +3,7 @@
 AnSha::AnSha()
 {
     makeConnection();
+setMyRole(this);
 }
 
 void AnSha::ShuiYing()
@@ -39,6 +40,16 @@ void AnSha::QianXing()
     if(flag)
         decisionArea->enable(0);
 }
+
+void AnSha::askForSkill(QString skill)
+{
+    Role::askForSkill(skill);
+    if(skill==tr("水影"))
+        ShuiYing();
+    else if(skill==tr("潜行"))
+        QianXing();
+}
+
 void AnSha::cardAnalyse()
 {
     Role::cardAnalyse();
@@ -108,31 +119,6 @@ void AnSha::onCancelClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-    }
-}
-
-void AnSha::decipher(QString command)
-{
-    Role::decipher(command);
-    QStringList arg=command.split(';');
-    int targetID;
-    QString flag;
-    switch (arg[0].toInt())
-    {
-//技能响应询问
-    case 35:
-        targetID=arg[1].toInt();
-        flag=arg[2];
-        if(targetID==myID)
-        {
-            gui->setEnable(1);
-            if(flag==tr("水影"))
-                ShuiYing();
-            else if(flag==tr("潜行"))
-                QianXing();
-        }
-        break;
-
     }
 }
 

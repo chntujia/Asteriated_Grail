@@ -10,8 +10,9 @@ public:
     void LianMin();
     void normal();
     void attackOrMagic();
+    void askForSkill(QString skill);
+    void additionalAction();
 public slots:
-    void decipher(QString command);
     void onOkClicked();
     void onCancelClicked();
     void cardAnalyse();
@@ -20,5 +21,7 @@ public slots:
     void ShengLiao();
     void ShengLiao2();
     void ShengLiao3();    
+private:
+    bool ShengLiaoAddition;
 };
 #endif // SHENGNV_H

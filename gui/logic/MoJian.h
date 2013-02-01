@@ -10,8 +10,10 @@ public:
     void XiuLuoLianZhan();
     void AnYingNingJu();
     void HeiAnZhenChan();
+    void askForSkill(QString skill);
+    void additionalAction();
+    void attacked(QString element, int hitRate);
 public slots:
-    void decipher(QString command);
     void onOkClicked();
     void onCancelClicked();
     void cardAnalyse();

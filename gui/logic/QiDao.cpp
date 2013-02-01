@@ -3,6 +3,7 @@
 QiDao::QiDao()
 {
     makeConnection();
+    setMyRole(this);
 
     Button *weiLi,*xunJie,*guangHui,*qiHei;
     weiLi=new Button(3,tr("ÍþÁ¦´Í¸£"));
@@ -118,6 +119,10 @@ void QiDao::GuangHuiXinYang()
     tipArea->reset();
 
     playerArea->setQuota(1);
+    int howMany=handArea->getHandCardItems().size();
+    howMany=2<howMany?2:howMany;
+    handArea->setQuota(howMany);
+    handArea->enableAll();
 
     decisionArea->enable(1);
     decisionArea->disable(0);
@@ -131,21 +136,163 @@ void QiDao::QiHeiXinYang()
     tipArea->reset();
 
     playerArea->setQuota(1);
+    playerArea->enableAll();
 
     decisionArea->enable(1);
     decisionArea->disable(0);
 }
 
-void QiDao::FaLiChaoXi()
+void QiDao::cardAnalyse()
 {
-    magicAction();
-    Player*myself=dataInterface->getMyself();
-    onceUsed=true;
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÊ¹ÓÃµÄÄÜÁ¿£º"));
-    if(myself->getCrystal()>=1)
-        tipArea->addBoxItem(tr("1.Ë®¾§"));
-    if(myself->getGem()>=1)
-        tipArea->addBoxItem(tr("2.±¦Ê¯"));
+    Role::cardAnalyse();
+    QList<Player*>players=dataInterface->getPlayerList();
+    switch (state)
+    {
+//ÍþÁ¦´Í¸£
+    case 1602:
+        playerArea->enableMate();
+        for(int i=0;i<players.size();i++)
+           if(players[i]->checkStatus(4)){
+               playerArea->disablePlayerItem(i);
+               break;
+           }
+        break;
+//Ñ¸½Ý´Í¸£
+    case 1603:
+        playerArea->enableMate();
+        for(int i=0;i<players.size();i++)
+           if(players[i]->checkStatus(5)){
+               playerArea->disablePlayerItem(i);
+               break;
+           }
+        break;
+//¹â»ÔÐÅÑö
+    case 1604:
+        playerArea->enableMate();
+        break;
+    }
+}
 
-    tipArea->showBox();
+void QiDao::onOkClicked()
+{
+    Role::onOkClicked();
+    QList<Card*>selectedCards;
+    QList<Player*>selectedPlayers;
+
+    QString command;
+    QString cardID;
+    QString sourceID;
+    QString targetID;
+    QString text;
+
+    selectedCards=handArea->getSelectedCards();
+    selectedPlayers=playerArea->getSelectedPlayers();
+
+    switch(state)
+    {
+//¶îÍâÐÐ¶¯Ñ¯ÎÊ
+    case 42:
+        text=tipArea->getBoxCurrentText();
+        if(text[0]=='1'){
+            onceUsed=true;
+            emit sendCommand("1606;"+QString::number(myID)+";");
+            magicAction();
+
+        }
+        break;
+//Æíµ»
+    case 1601:
+        command="1601;1;";
+        emit sendCommand(command);
+        gui->reset();
+        break;
+//ÍþÁ¦´Í¸£
+    case 1602:
+        command="1602;";
+        cardID=QString::number(selectedCards[0]->getID());
+        sourceID=QString::number(myID);
+        targetID=QString::number(selectedPlayers[0]->getID());
+        command+=cardID+";"+targetID+";"+sourceID+";";
+        dataInterface->removeHandCard(selectedCards[0]);
+        usedMagic=true;
+        emit sendCommand(command);
+        gui->reset();
+        break;
+//Ñ¸½Ý´Í¸£
+    case 1603:
+        command="1603;";
+        cardID=QString::number(selectedCards[0]->getID());
+        sourceID=QString::number(myID);
+        targetID=QString::number(selectedPlayers[0]->getID());
+        command+=cardID+";"+targetID+";"+sourceID+";";
+        dataInterface->removeHandCard(selectedCards[0]);
+        usedMagic=true;
+        emit sendCommand(command);
+        gui->reset();
+        break;
+//¹â»ÔÐÅÑö
+    case 1604:
+        command="1604;";
+        sourceID=QString::number(myID);
+        targetID=QString::number(selectedPlayers[0]->getID());
+        command+=targetID+";"+sourceID+";"+QString::number(selectedCards.size())+";";
+        foreach(Card*ptr,selectedCards){
+            command+=QString::number(ptr->getID())+";";
+            dataInterface->removeHandCard(ptr);
+        }
+        usedMagic=true;
+        emit sendCommand(command);
+        gui->reset();
+        break;
+//ÆáºÚÐÅÑö
+    case 1605:
+        command="1605;";
+        sourceID=QString::number(myID);
+        targetID=QString::number(selectedPlayers[0]->getID());
+        command+=targetID+";"+sourceID+";";
+        usedMagic=true;
+        emit sendCommand(command);
+        gui->reset();
+        break;
+    }
+}
+
+void QiDao::onCancelClicked()
+{
+    Role::onCancelClicked();
+    QString command;
+    switch(state)
+    {
+//Æíµ»
+    case 1601:
+        command="1601;0;;";
+        emit sendCommand(command);
+        gui->reset();
+        break;
+//ÍþÁ¦´Í¸£
+    case 1602:
+//Ñ¸½Ý´Í¸£
+    case 1603:
+//¹â»ÔÐÅÑö
+    case 1604:
+//ÆáºÚÐÅÑö
+    case 1605:
+        if(actionFlag==0)
+            normal();
+        else if(actionFlag==2)
+            magicAction();
+        break;
+    }
+}
+void QiDao::askForSkill(QString skill)
+{
+    Role::askForSkill(skill);
+    if(skill==tr("Æíµ»"))
+        QiDong();
+}
+void QiDao::additionalAction()
+{
+    Role::additionalAction();
+    if(usedMagic && dataInterface->getMyself()->getEnergy()>0 && !onceUsed)
+        tipArea->addBoxItem(tr("1.·¨Á¦³±Ï«"));
 }

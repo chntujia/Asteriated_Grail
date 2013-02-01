@@ -33,6 +33,12 @@ void StatusItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     case 3:
         painter->drawPixmap(0,0,QPixmap("resource/feng.png"));
         break;
+    case 4:
+        painter->drawPixmap(0,0,QPixmap("resource/wei.png"));
+        break;
+    case 5:
+        painter->drawPixmap(0,0,QPixmap("resource/xun.png"));
+        break;
     }
 
 }
