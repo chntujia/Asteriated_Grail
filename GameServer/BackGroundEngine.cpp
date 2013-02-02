@@ -158,6 +158,7 @@ void BackgroundEngine::seatArrange()
         playerList << NULL;
     for(int i=1; i<= 12 ;i++)
         roles<<i;
+
     roles<<14;
     roles<<16;
     roles<<21;

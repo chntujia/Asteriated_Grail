@@ -177,8 +177,6 @@ void ZhongCai::onCancelClicked()
     QString command;
     switch(state)
     {
-    //特殊行动
-    case 1:
     //末日审判
     case 1403:
     //判决天平

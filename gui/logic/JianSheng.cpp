@@ -3,7 +3,7 @@
 JianSheng::JianSheng()
 {
     makeConnection();
-setMyRole(this);
+    setMyRole(this);
 }
 
 void JianSheng::LieFengJi()
@@ -34,10 +34,11 @@ void JianSheng::JianYing(){
 
 void JianSheng::onOkClicked()
 {
-    QList<Card*> selectedCards=handArea->getSelectedCards();
-    QList<Player*> selectedPlayers=playerArea->getSelectedPlayers();
+    Card* usedCard;
+    if(!handArea->getSelectedCards().empty())
+        usedCard =handArea->getSelectedCards().at(0);
     Role::onOkClicked();
-    QString command,text,cardID,targetID,sourceID;
+    QString text;
 
     switch(state)
     {
@@ -46,7 +47,7 @@ void JianSheng::onOkClicked()
 //追加行动
     case 10:
     case 12:
-        if(selectedCards[0]->getSpecialityList().contains(tr("疾风技")))
+        if(usedCard->getSpecialityList().contains(tr("疾风技")))
             JiFengJi++;
         break;
 //额外行动询问

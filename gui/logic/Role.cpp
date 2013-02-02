@@ -1,5 +1,6 @@
 #include "Role.h"
 #include <QStringList>
+#include <QSound>
 #include <QApplication>
 #include "data/DataInterface.h"
 #include "widget/GUI.h"
@@ -289,6 +290,7 @@ void Role::attacked(QString element,int hitRate)
     handArea->disableMagic();
     handArea->enableElement("light");
     QApplication::alert((QWidget*)playerArea->window());
+    QSound::play("sound/Warning.wav");
 }
 
 void Role::drop(int howMany)
@@ -297,6 +299,7 @@ void Role::drop(int howMany)
     handArea->setQuota(howMany);
     handArea->enableAll();
     QApplication::alert((QWidget*)playerArea->window());
+
 }
 
 void Role::buy()
@@ -407,6 +410,7 @@ void Role::moDaned(int nextID,int sourceID,int howMany)
     decisionArea->enable(1);
     moDanNextID=nextID;
     QApplication::alert((QWidget*)playerArea->window());
+    QSound::play("sound/Warning.wav");
 }
 
 void Role::cure(int cross,int harmPoint, int type)
@@ -428,6 +432,7 @@ void Role::cure(int cross,int harmPoint, int type)
         tipArea->addBoxItem(QString::number(min));
     tipArea->showBox();
     QApplication::alert((QWidget*)playerArea->window());
+    QSound::play("sound/Warning.wav");
 }
 
 void Role::turnBegin()
@@ -437,6 +442,7 @@ void Role::turnBegin()
     start=false;
     usedAttack=usedMagic=usedSpecial=false;
     QApplication::alert((QWidget*)playerArea->window());
+    QSound::play("sound/Warning.wav");
 }
 
 void Role::additionalAction(){
@@ -449,6 +455,7 @@ void Role::additionalAction(){
     decisionArea->enable(0);
     decisionArea->enable(3);
     QApplication::alert((QWidget*)playerArea->window());
+    QSound::play("sound/Warning.wav");
 }
 
 void Role::askForSkill(QString skill)
@@ -456,6 +463,7 @@ void Role::askForSkill(QString skill)
     if(skill==tr("威力赐福"))
         WeiLi();
     QApplication::alert((QWidget*)playerArea->window());
+    QSound::play("sound/Warning.wav");
 }
 
 void Role::TianShiZhuFu(int n)
@@ -466,6 +474,7 @@ void Role::TianShiZhuFu(int n)
     handArea->setQuota(n);
     handArea->enableAll();
     QApplication::alert((QWidget*)playerArea->window());
+    QSound::play("sound/Warning.wav");
 }
 
 void Role::MoBaoChongJi()
@@ -477,6 +486,7 @@ void Role::MoBaoChongJi()
     handArea->enableMagic();
     decisionArea->enable(1);
     QApplication::alert((QWidget*)playerArea->window());
+    QSound::play("sound/Warning.wav");
 }
 
 void Role::WeiLi()
@@ -794,6 +804,8 @@ void Role::decipher(QString command)
         gui->logAppend("-----------------------------------");
         gui->logAppend(playerList[targetID]->getName()+tr("回合开始"));
         playerArea->setCurrentPlayerID(targetID);
+        if(targetID==dataInterface->getFirstPlayerID())
+            teamArea->addRoundBy1();
         if(targetID!=myID)
         {
             isMyTurn=0;
@@ -810,6 +822,7 @@ void Role::decipher(QString command)
         targetID=arg[3].toInt();
         sourceID=arg[4].toInt();
         card=dataInterface->getCard(cardID);
+        QSound::play("sound/Attack.wav");
 
         if(targetID!=myID)
         {
@@ -872,6 +885,7 @@ void Role::decipher(QString command)
 //牌堆重洗
     case 10:
         gui->logAppend(tr("牌堆已重洗"));
+        QSound::play("sound/Shuffle.wav");
         break;
 //士气改变
     case 11:
@@ -887,18 +901,19 @@ void Role::decipher(QString command)
             blue->setMorale(howMany);
             teamArea->update();
         }
-
+        QSound::play("sound/Morale.wav");
         break;
 //游戏结束
     case 12:
         team=arg[1].toInt();
-        msg=tr("游戏结束,");
+        msg=tr("游戏结束,");        
         if(team)
             msg+=tr("红队获胜");
         else
             msg+=tr("蓝队获胜");
         gui->logAppend(msg);
         tipArea->setMsg(msg);
+        QSound::play("sound/KO.wav");
         break;
 //弃牌公告
     case 13:
@@ -926,12 +941,13 @@ void Role::decipher(QString command)
     case 14:
         flag=arg[1];
         targetID=arg[3].toInt();
-        sourceID=arg[4].toInt();
+        sourceID=arg[4].toInt();        
         if(flag=="1")
             msg=playerList[sourceID]->getName()+tr("未命中")+playerList[targetID]->getName();
         else
             msg=playerList[sourceID]->getName()+tr("命中")+playerList[targetID]->getName();
         gui->logAppend(msg);
+        QSound::play("sound/Hit.wav");
         break;
 //星石改变
     case 15:
@@ -950,6 +966,7 @@ void Role::decipher(QString command)
             blue->setCrystal(crystal);
             teamArea->update();
         }
+        QSound::play("sound/Stone.wav");
         break;
 //星杯改变
     case 17:
@@ -1023,6 +1040,7 @@ void Role::decipher(QString command)
                     playerList[targetID]->addStatus(4,card);
                 if(card->getSpecialityList().contains(tr("迅捷赐福")))
                     playerList[targetID]->addStatus(5,card);
+                QSound::play("sound/Equip.wav");
                 break;
             }
         }
@@ -1143,6 +1161,7 @@ void Role::decipher(QString command)
         targetID=arg[1].toInt();
         howMany=arg[2].toInt();
         playerList[targetID]->setCrossNum(howMany);
+        QSound::play("sound/Cure.wav");
         break;
 //治疗询问
     case 33:
@@ -1172,6 +1191,8 @@ void Role::decipher(QString command)
 //信息通告
     case 38:
         gui->logAppend(arg[1]);
+        if(arg[1].contains(tr("发动")))
+            QSound::play("sound/Skill.wav");
         break;
 //角色形态转换通知
     case 39:

@@ -2238,7 +2238,7 @@ void QiDao::FaLiChaoXi2(QList<void *> args)
         return;
     if(crystal>0)
         crystal--;
-    else if(gem>0)
+    else
         gem--;
     coder.energyNotice(id,gem,crystal);
     coder.notice("祈祷师发动【法力潮汐】");
