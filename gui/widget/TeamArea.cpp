@@ -113,12 +113,13 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     for(i=0;i<blue->getGrail();i++) //±­
         painter->drawPixmap(Rgrail.width()*i+offset,5,Bgrail);
 
+    morale=blue->getMorale();
     offset=737;
     painter->drawPixmap(offset,4,Num[morale/10]);
     painter->drawPixmap(offset+Num[0].width(),4,Num[morale%10]);
 
     offset=788;
-    morale=blue->getMorale();
+
     for(i=0;i<morale/avg;i++) //Ê¿Æø
         painter->drawPixmap(i*(Bdice[1].width()+2)+offset,17,Bdice[avg-1]);
     offset+=i*(Bdice[1].width()+2);

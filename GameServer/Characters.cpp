@@ -2112,6 +2112,7 @@ void ShengQiang::TianQiang(QList<void *> args)
     coder.askForSkill(this->getID(),"天枪");
     if(messageBuffer::readInfor() == 0)
         return;
+    TianQiangUsed = true;
     cross-=2;
     this->setCrossNum(cross);
     coder.crossChangeNotice(this->getID(), cross);
@@ -2119,7 +2120,7 @@ void ShengQiang::TianQiang(QList<void *> args)
     *(int*)args[5] = NOREPLY;
 }
 
-//地枪，不发动则发动圣击
+//地枪，不发动且未发动天枪则发动圣击
 void ShengQiang::DiQiang(QList<void *> args)
 {
     if(this != ((PlayerEntity*)args[0]))
@@ -2154,6 +2155,8 @@ void ShengQiang::DiQiang(QList<void *> args)
     }
     else
     {
+        if(TianQiangUsed)
+            return;
         int max = this->getCrossMax();
         if(cross < max)
         {
@@ -2198,6 +2201,7 @@ void ShengQiang::skillReset(QList<void *> args)
     if(this != ((PlayerEntity*)args[0]))
         return;
     ShengGuangQiYuUsed = false;
+    TianQiangUsed = false;
 }
 
 void ShengQiang::makeConnection(BackgroundEngine* engine)
@@ -2396,4 +2400,200 @@ void QiDao::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(Pray1(QList<void*>)));
     connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(Pray2(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
+
+
+/******************
+  神官 15
+  *******************/
+ShenGuan::ShenGuan(BackgroundEngine *engine, int id, int color):PlayerEntity(engine, id, color)
+{
+    this->characterID = 15;
+    this->star = 4;
+    //神圣信仰
+    this->crossMax = 6;
+    this->makeConnection(engine);
+}
+
+//神圣启示
+void ShenGuan::ShenShengQiShi(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]))
+        return;
+    coder.askForSkill(this->getID(), "神圣启示");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    int cross = this->getCrossNum();
+    int max = this->getCrossMax();
+    if(cross<max)
+    {
+        cross++;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+    }
+    coder.notice("神官发动【神圣启示】，增加1治疗");
+}
+//神圣祈福
+void ShenGuan::ShenShengQiFu(QList<void *> args)
+{
+    BatInfor* magic =(BatInfor*)args[0];
+    if(magic->srcID != this->getID()||magic->infor1 != 1502)
+        return;
+
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    cards << getCardByID(magic->infor2);
+    coder.notice("神官发动【神圣祈福】，增加2治疗");
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->getID(), 2, "y", cards);
+    int cross = this->getCrossNum();
+    int max = this->getCrossMax();
+    if(cross<max)
+    {
+        cross+=2;
+        if(cross>max)
+            cross=max;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+    }
+}
+//水之神力
+void ShenGuan::ShuiZhiShenLi(QList<void *> args)
+{
+    BatInfor* magic =(BatInfor*)args[0];
+    if(magic->srcID != this->getID()||magic->infor1 != 1503)
+        return;
+    int dst = magic->dstID;
+    coder.notice("神官对玩家"+QString::number(dst)+"发动水之神力");
+
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    coder.discardNotice(this->getID(),1,"y",cards);
+    this->removeHandCards(cards,true);
+
+    PlayerEntity* ptr = engine->getPlayerByID(dst);
+    if(this->getHandCardNum()!=0)
+    {
+        coder.askForSkill(this->getID(), "水之神力给牌");
+        cards.clear();
+        cards << messageBuffer::readCardID(1);
+        this->giveHandCards(cards, ptr);
+    }
+    int cross = this->getCrossNum();
+    int max = this->getCrossMax();
+    if(cross<max)
+    {
+        cross++;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+    }
+    cross = ptr->getCrossNum();
+    max = ptr->getCrossMax();
+    if(cross<max)
+    {
+        cross++;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(dst, cross);
+    }
+    coder.notice("神官和目标各增加1治疗");
+}
+//神圣契约
+void ShenGuan::ShenShengQiYue(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0]||this->getCrossNum()==0||this->getEnergy()==0)
+        return;
+    coder.askForSkill(this->getID(),"神圣契约");
+    BatInfor start = messageBuffer::readBatInfor();
+    if(start.infor2==0)
+        return;
+    if(getCrystal()>0)
+        crystal--;
+    else
+        gem--;
+    coder.notice("神官对玩家"+QString::number(start.dstID)+"发动神圣契约，转移"+QString::number(start.infor3)+"点治疗");
+    int cross = this->getCrossNum();
+    cross-=start.infor3;
+    this->setCrossNum(cross);
+    coder.crossChangeNotice(this->getID(), cross);
+    PlayerEntity* dst = engine->getPlayerByID(start.dstID);
+    cross = dst->getCrossNum();
+    cross += start.infor3;
+    if(cross>4)
+        cross=4;
+    dst->setCrossNum(cross, 4);
+    coder.crossChangeNotice(start.dstID, cross);
+}
+
+//神圣领域
+void ShenGuan::ShenShengLingYu(QList<void *> args)
+{
+    BatInfor* magic =(BatInfor*)args[0];
+    if(magic->srcID != this->getID() || magic->infor1!=1505||this->getEnergy()==0)
+        return;
+    if(getCrystal()>0)
+        crystal--;
+    else
+        gem--;
+    coder.notice("神官对玩家"+QString::number(magic->dstID)+"发动神圣领域");
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    QList<CardEntity*> cards;
+    int n = 0;
+    if(magic->CardID!=-1)
+    {
+        cards << getCardByID(magic->CardID);
+        n++;
+    }
+    if(magic->infor3!=-1)
+    {
+        cards << getCardByID(magic->infor3);
+        n++;
+    }
+    if(n>0)
+    {
+        this->removeHandCards(cards,true);
+        coder.discardNotice(this->getID(), n, "n", cards);
+    }
+    if(magic->infor2 == 1)
+    {
+        int cross = this->getCrossNum();
+        cross--;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+        coder.notice("神官移除1点治疗");
+        Harm harm;
+        harm.harmPoint = 2;
+        harm.type = MAGIC;
+        this->engine->timeLine3(harm,this,dst,"神圣领域");
+    }
+    else
+    {
+        coder.notice("神官增加2点治疗，玩家"+QString::number(magic->dstID)+"增加1点治疗");
+        int cross = this->getCrossNum();
+        int max = this->getCrossMax();
+        if(cross<max)
+        {
+            cross+=2;
+            if(cross>max)
+                cross=max;
+            this->setCrossNum(cross);
+            coder.crossChangeNotice(this->getID(), cross);
+        }
+        cross = dst->getCrossNum();
+        max = dst->getCrossMax();
+        if(cross<max)
+        {
+            cross++;
+            dst->setCrossNum(cross);
+            coder.crossChangeNotice(dst->getID(), cross);
+        }
+    }
+}
+
+void ShenGuan::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(specialFinishSIG(QList<void*>)),this,SLOT(ShenShengQiShi(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShenShengQiFu(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShuiZhiShenLi(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(ShenShengQiYue(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShenShengLingYu(QList<void*>)));
 }

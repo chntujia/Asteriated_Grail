@@ -791,6 +791,50 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[2].toInt();
         messageBuffer::writeBatInfor(action);
         break;
+//神官
+//神圣祈福
+    case 1502:
+        action.reply = MAGIC;
+        action.infor1 = 1502;
+        action.CardID = infor[1].toInt();
+        action.infor2 = infor[2].toInt();
+        action.srcID = infor[3].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+ //水之神力
+    case 1531:
+        action.reply = MAGIC;
+        action.infor1 = 1503;
+        action.dstID = infor[1].toInt();
+        action.CardID = infor[2].toInt();
+        action.srcID = infor[3].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//水之神力给牌
+    case 1532:
+        cards<<infor[1].toInt();
+        messageBuffer::writeCardInfor(cards);
+        break;
+//神圣契约
+    case 1504:
+        action.infor1 = 1504;
+        action.infor2 = infor[1].toInt();
+        action.dstID = infor[2].toInt();
+        action.infor3 = infor[3].toInt();
+        action.srcID = infor[4].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//神圣领域
+    case 1505:
+        action.reply = MAGIC;
+        action.infor1 = 1505;
+        action.infor2 = infor[1].toInt();
+        action.dstID = infor[2].toInt();
+        action.CardID = infor[3].toInt();
+        action.infor3 = infor[4].toInt();
+        action.srcID = infor[5].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
 //祈祷
     case 1601:
         messageBuffer::writeInfor(infor[1].toInt());

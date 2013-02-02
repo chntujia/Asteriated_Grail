@@ -1,0 +1,28 @@
+#ifndef SHENGUAN_H
+#define SHENGUAN_H
+#include "Role.h"
+
+class ShenGuan: public Role{
+    Q_OBJECT
+public:
+    ShenGuan();
+    void normal();
+    void askForSkill(QString skill);
+    void ShenShengQiShi();
+    void ShuiZhiShenLi2();
+    void ShenShengQiYue1();
+    void ShenShengQiYue2();
+    void ShenShengLingYu2();
+    void cure(int cross, int harmPoint, int type);
+public slots:
+    void onOkClicked();
+    void onCancelClicked();
+    void cardAnalyse();
+    void ShenShengQiFu();
+    void ShuiZhiShenLi1();
+    void ShenShengLingYu1();
+private:
+    int lingYu;
+};
+
+#endif // SHENGUAN_H
