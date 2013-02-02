@@ -2472,10 +2472,11 @@ void ShenGuan::ShuiZhiShenLi(QList<void *> args)
     this->removeHandCards(cards,true);
 
     PlayerEntity* ptr = engine->getPlayerByID(dst);
-    if(magic->infor2 != -1)
+    if(this->getHandCardNum()!=0)
     {
+        coder.askForSkill(this->getID(), "水之神力给牌");
         cards.clear();
-        cards << getCardByID(magic->infor2);
+        cards << messageBuffer::readCardID(1);
         this->giveHandCards(cards, ptr);
     }
     int cross = this->getCrossNum();

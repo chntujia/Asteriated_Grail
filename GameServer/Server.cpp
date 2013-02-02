@@ -802,14 +802,18 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeBatInfor(action);
         break;
  //水之神力
-    case 1503:
+    case 1531:
         action.reply = MAGIC;
         action.infor1 = 1503;
         action.dstID = infor[1].toInt();
         action.CardID = infor[2].toInt();
         action.srcID = infor[3].toInt();
-        action.infor2 = infor[4].toInt();
         messageBuffer::writeBatInfor(action);
+        break;
+//水之神力给牌
+    case 1532:
+        cards<<infor[1].toInt();
+        messageBuffer::writeCardInfor(cards);
         break;
 //神圣契约
     case 1504:
