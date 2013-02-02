@@ -1,10 +1,13 @@
 #include "TeamArea.h"
 #include "data/DataInterface.h"
 #include <QPainter>
+#include <QFont>
 
 TeamArea::TeamArea()
 {
     round=0;
+    droppedCardNum=0;
+    leftCardNum=150;
     red=dataInterface->getRedTeam();
     blue=dataInterface->getBlueTeam();
     background=QPixmap("resource/teamArea.png");
@@ -121,4 +124,10 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     offset+=i*(Bdice[1].width()+2);
     if(morale%avg!=0)
         painter->drawPixmap(offset,17,Bdice[morale%avg-1]);
+
+    QFont font;
+    font.setBold(1);
+    painter->setFont(font);
+    painter->drawText(width+90,20,QString::number(leftCardNum));
+    painter->drawText(width+230,20,QString::number(droppedCardNum));
 }

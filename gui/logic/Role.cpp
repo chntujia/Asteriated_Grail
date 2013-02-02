@@ -885,6 +885,8 @@ void Role::decipher(QString command)
 //牌堆重洗
     case 10:
         gui->logAppend(tr("牌堆已重洗"));
+        teamArea->setLeftCardNum(arg[1].toInt());
+        teamArea->setDroppedCardNum(0);
         QSound::play("sound/Shuffle.wav");
         break;
 //士气改变
@@ -1044,6 +1046,16 @@ void Role::decipher(QString command)
                 break;
             }
         }
+        if(sourceID==-1 && sourceArea==1){
+            teamArea->changeLeftCardNum(-howMany);
+            teamArea->update();
+        }
+        if(targetID==-1)
+            if(targetArea==2||targetArea==3){
+                teamArea->changeDroppedCardNum(howMany);
+                teamArea->update();
+            }
+
         playerArea->update();
         break;
 //物伤通告

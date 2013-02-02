@@ -35,8 +35,7 @@ private:
     QComboBox *box;
     QGraphicsProxyWidget *boxItem;
     QList<CardItem*> cardItems;
-    Card* selectedCard;
-
+    Card* selectedCard;    
 };
 
 #endif // TIPAREA_H

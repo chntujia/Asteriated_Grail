@@ -157,11 +157,11 @@ void BackgroundEngine::seatArrange()
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
     for(int i=1; i<= 12 ;i++)
-        roles<<i;
+        roles<<12;
 
-    roles<<14;
-    roles<<16;
-    roles<<21;
+//    roles<<14;
+//    roles<<16;
+//    roles<<21;
     randomize(&roles);
 
 }
@@ -385,8 +385,7 @@ void BackgroundEngine::shuffle(bool reShuffle)
         }
         this->discardPile.clear();
         this->discardPileCovered.clear();
-        coder.reshuffleNotice();
-        //emit this->sendMessageSIG(-1,combMessage(QString::number(10)));
+        coder.reshuffleNotice(pile.size());
     }
 }
 //检查是否结束游戏
