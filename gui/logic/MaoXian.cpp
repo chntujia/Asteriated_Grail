@@ -234,7 +234,7 @@ void MaoXian::playerAnalyse()
 
 void MaoXian::onOkClicked()
 {
-    if(qizha)
+    if(qizha && state==10)
         state=1201;
     if(state==4)
         state=1205;
