@@ -44,7 +44,8 @@ HEADERS += client/Client.h \
            widget/ShowArea.h \
            widget/TeamArea.h \
            widget/TipArea.h \
-    logic/ShenGuan.h
+    logic/ShenGuan.h \
+    logic/SiLing.h
 FORMS += client/ClientUI.ui
 SOURCES += main.cpp \
            client/Client.cpp \
@@ -83,4 +84,5 @@ SOURCES += main.cpp \
            widget/ShowArea.cpp \
            widget/TeamArea.cpp \
            widget/TipArea.cpp \
-    logic/ShenGuan.cpp
+    logic/ShenGuan.cpp \
+    logic/SiLing.cpp

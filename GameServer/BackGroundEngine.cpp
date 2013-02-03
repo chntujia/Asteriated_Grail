@@ -94,6 +94,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 12:
         return new MaoXian(engine,id,color);
         break;
+    case 13:
+        return new SiLing(engine,id,color);
+        break;
     case 14:
         return new ZhongCai(engine,id,color);
         break;
@@ -159,12 +162,8 @@ void BackgroundEngine::seatArrange()
     playerList.clear();
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
-    for(int i=1; i<= 12 ;i++)
+    for(int i=1; i<= 16 ;i++)
         roles<<i;
-
-    roles<<14;
-    roles<<15;
-    roles<<16;
     roles<<21;
 
     randomize(&roles);
