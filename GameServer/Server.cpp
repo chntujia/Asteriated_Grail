@@ -934,5 +934,30 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
+        //法术反弹
+            case 1701:
+                messageBuffer::writeMsg(message);
+                break;
+        //魔道法典
+            case 1702:
+                action.reply = MAGIC;
+                action.infor1 = 1702;
+                action.dstID = infor[1].toInt();
+                action.srcID = infor[2].toInt();
+                action.infor2 = infor[3].toInt();
+                action.inforstr = infor[4];
+                messageBuffer::writeBatInfor(action);
+                break;
+        //圣洁法典
+            case 1703:
+                action.reply = MAGIC;
+                action.infor1 = 1703;
+                action.srcID = infor[1].toInt();
+                action.infor2 = infor[2].toInt();
+                action.infor3 = infor[3].toInt();
+                action.inforstr = infor[4];
+                action.inforstrp = infor[5];
+                messageBuffer::writeBatInfor(action);
+                break;
     }
 }

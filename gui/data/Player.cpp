@@ -79,6 +79,10 @@ void Player::setRole(int roleID)
         tokenName[0]=tr("ЗћЮФ");
         tokenMax[0]=3;
         break;
+    case 17:
+        name=tr("[ЯЭеп]");
+        energyMax=4;
+        break;
     case 21:
         name=tr("[гТеп]");
         tapSource="resource/jingpilijie.png";
