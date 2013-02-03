@@ -2597,3 +2597,134 @@ void ShenGuan::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(ShenShengQiYue(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShenShengLingYu(QList<void*>)));
 }
+
+
+/*
+  死灵 13
+  */
+SiLing::SiLing(BackgroundEngine *engine, int id, int color):PlayerEntity(engine, id, color)
+{
+    this->characterID = 13;
+    this->star = 3.5;
+    //圣渎
+    this->crossMax = 5;
+    this->makeConnection(engine);
+}
+//不朽
+void SiLing::BuXiu(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]))
+        return;
+    if(SiWangZhiChuUsed)
+        return;
+    coder.askForSkill(this->getID(), "不朽");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    int cross = this->getCrossNum();
+    int max = this->getCrossMax();
+    if(cross<max)
+    {
+        cross++;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+    }
+    coder.notice("死灵发动【不朽】，增加1治疗");
+}
+//瘟疫
+void SiLing::WenYi(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 1302)
+        return;
+
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    coder.notice("死灵法师发动【瘟疫】");
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->getID(),1,"y",cards);
+    PlayerEntity* dst = this->getNext();
+    do{
+        Harm harm;
+        harm.harmPoint = 1;
+        harm.type = MAGIC;
+        this->engine->timeLine3(harm,this,dst,"瘟疫");
+        if(engine->checkEnd())
+            break;
+        dst = dst->getNext();
+    }while(dst!= this);
+}
+//死亡之触
+void SiLing::SiWangZhiChu(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 1303)
+        return;
+    SiWangZhiChuUsed = true;
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    QStringList cardNum = magic->inforstr.split(":");
+    QList<CardEntity*> cards;
+    for(int i=0;i<magic->infor3;i++)
+        cards << getCardByID(cardNum[i].toInt());
+    coder.notice("死灵法师对玩家"+QString::number(magic->dstID)+"发动【死亡之触】，移除"+
+                 QString::number(magic->infor2)+"点治疗，弃"+QString::number(magic->infor3)+"张同系牌");
+    int cross = this->getCrossNum();
+    cross-=magic->infor2;
+    this->setCrossNum(cross);
+    coder.crossChangeNotice(magic->srcID, cross);
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->getID(), magic->infor3, "y", cards);
+    Harm harm;
+    harm.harmPoint = magic->infor2+magic->infor3-3;
+    harm.type = MAGIC;
+    this->engine->timeLine3(harm,this,dst,"死亡之触");
+}
+
+//墓碑陨落
+void SiLing::MuBeiYunLuo(QList<void *> args)
+{
+    BatInfor* magic =(BatInfor*)args[0];
+    if(magic->srcID != this->getID()||magic->infor1 != 1304||getGem()==0)
+        return;
+    coder.notice("死灵法师发动【墓碑陨落】");
+    this->gem--;
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+    PlayerEntity* dst = this->getNext();
+    do{
+        Harm harm;
+        harm.harmPoint = 2;
+        harm.type = MAGIC;
+        this->engine->timeLine3(harm,this,dst,"墓碑陨落");
+        if(engine->checkEnd())
+            break;
+        dst = dst->getNext();
+    }while(dst!= this);
+    int cross = this->getCrossNum();
+    int max = this->getCrossMax();
+    if(cross<max)
+    {
+        cross++;
+        this->setCrossNum(cross);
+        coder.crossChangeNotice(this->getID(), cross);
+    }
+    coder.notice("死灵法师发动【墓碑陨落】，增加1治疗");
+}
+
+void SiLing::skillReset(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]))
+        return;
+    SiWangZhiChuUsed = false;
+}
+
+void SiLing::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(magicFinishSIG(QList<void*>)),this,SLOT(BuXiu(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(WenYi(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(SiWangZhiChu(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(MuBeiYunLuo(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
