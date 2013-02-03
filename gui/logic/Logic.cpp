@@ -18,6 +18,7 @@
 #include "QiDao.h"
 #include "ShenGuan.h"
 #include "SiLing.h"
+#include "XianZhe.h"
 
 #define LOGINPERMIT 1
 #define GAMESTART 2
@@ -85,6 +86,9 @@ void Logic::setMyRole(int roleID)
         break;
     case 16:
         new QiDao;
+        break;
+    case 17:
+        new XianZhe;
         break;
     case 21:
         new YongZhe;

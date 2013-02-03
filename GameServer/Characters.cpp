@@ -2510,6 +2510,7 @@ void ShenGuan::ShenShengQiYue(QList<void *> args)
         crystal--;
     else
         gem--;
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
     coder.notice("神官对玩家"+QString::number(start.dstID)+"发动神圣契约，转移"+QString::number(start.infor3)+"点治疗");
     int cross = this->getCrossNum();
     cross-=start.infor3;
@@ -2534,6 +2535,7 @@ void ShenGuan::ShenShengLingYu(QList<void *> args)
         crystal--;
     else
         gem--;
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
     coder.notice("神官对玩家"+QString::number(magic->dstID)+"发动神圣领域");
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
     QList<CardEntity*> cards;
@@ -2727,4 +2729,103 @@ void SiLing::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(SiWangZhiChu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(MuBeiYunLuo(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
+void XianZhe::ZhiHuiFaDian(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[1] || ((Harm*)args[2])->type != MAGICHARM || ((Harm*)args[2])->harmPoint<=3)
+        return;
+    setGem(gem+2);
+    coder.energyNotice(id,gem,crystal);
+}
+
+void XianZhe::FaShuFanTan(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[1] || ((Harm*)args[2])->type != MAGICHARM || ((Harm*)args[2])->harmPoint!=1)
+        return;
+    if(this->getHandCards().size()<2)
+        return;
+    coder.askForSkill(id,"法术反弹");
+    QString msg=messageBuffer::readMsg();
+    QStringList arg=msg.split(";");
+    if(arg[1].toInt() == 0)
+        return;
+    if(arg[3].toInt() != id || arg[0].toInt() != 1701)
+        return;
+    QList<CardEntity*>cards;
+    for(int i=0;i<arg[4].toInt();i++)
+        cards.append(getCardByID(arg[i+5].toInt()));
+    coder.discardNotice(id,arg[4].toInt(),"y",cards);
+    this->removeHandCards(cards,true);
+    coder.notice("贤者对玩家"+QString::number(arg[2].toInt())+"发动【法术反弹】");
+    PlayerEntity* dst = engine->getPlayerByID(arg[2].toInt());
+    Harm harm;
+    harm.harmPoint = (arg[4].toInt())-1;
+    harm.type = MAGIC;
+    this->engine->timeLine3(harm,this,dst,"法术反弹");
+    if(engine->checkEnd())
+        return;
+    Harm harm1;
+    harm1.harmPoint = arg[4].toInt();
+    harm1.type = MAGIC;
+    this->engine->timeLine3(harm1,this,this,"法术反弹");
+}
+
+void XianZhe::MoDaoFaDian(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 1702)
+        return;
+    if(this->getGem()==0)
+        return;
+    setGem(gem-1);
+    coder.energyNotice(id,gem,crystal);
+    QStringList cardNum = magic->inforstr.split(":");
+    QList<CardEntity*>cards;
+    for(int i=0;i<magic->infor2;i++)
+        cards.append(getCardByID(cardNum[i].toInt()));
+    coder.discardNotice(id,magic->infor2,"y",cards);
+    this->removeHandCards(cards,true);
+    coder.notice("贤者对玩家"+QString::number(magic->dstID)+"发动【魔道法典】");
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    Harm harm;
+    harm.harmPoint = (magic->infor2)-1;
+    harm.type = MAGIC;
+    this->engine->timeLine3(harm,this,dst,"魔道法典");
+    if(engine->checkEnd())
+        return;
+    this->engine->timeLine3(harm,this,this,"魔道法典");
+}
+
+void XianZhe::ShengJieFaDian(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 1703)
+        return;
+    if(this->getGem()==0)
+        return;
+    setGem(gem-1);
+    coder.energyNotice(id,gem,crystal);
+    QStringList cardNum = magic->inforstr.split(":");
+    QStringList playerNum = magic->inforstrp.split(":");
+    QList<CardEntity*>cards;
+    QList<PlayerEntity*>players;
+    int i=0;
+    int j=0;
+    for(i;i<magic->infor2;i++)
+        cards.append(getCardByID(cardNum[i].toInt()));
+    for(j;j<magic->infor3;j++)
+        players.append(engine->getPlayerByID(playerNum[j].toInt()));
+    coder.discardNotice(id,magic->infor2,"y",cards);
+    this->removeHandCards(cards,true);
+    coder.notice("贤者发动【圣洁法典】");
+    foreach(PlayerEntity*ptr,players)
+    {
+        ptr->setCrossNum(ptr->getCrossNum()+2);
+        coder.crossChangeNotice(ptr->getID(),ptr->getCrossNum());
+        coder.notice("贤者使用【圣洁法典】为玩家"+TOQSTR(ptr->getID())+"增加2点治疗");
+    }
+    Harm harm;
+    harm.harmPoint = (magic->infor2)-1;
+    harm.type = MAGIC;
+    this->engine->timeLine3(harm,this,this,"圣洁法典");
 }
