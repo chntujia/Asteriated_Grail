@@ -2728,6 +2728,21 @@ void SiLing::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(MuBeiYunLuo(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
 }
+XianZhe::XianZhe(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID = 17;
+    this->star = 4;
+    this->makeConnection(engine);
+    energyMax=4;
+}
+
+void XianZhe::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(timeLine6DrawedSIG(QList<void*>)),this,SLOT(ZhiHuiFaDian(QList<void*>)));
+    connect(engine,SIGNAL(timeLine6DrawedSIG(QList<void*>)),this,SLOT(FaShuFanTan(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(MoDaoFaDian(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShengJieFaDian(QList<void*>)));
+}
 void XianZhe::ZhiHuiFaDian(QList<void *> args)
 {
     if(this != (PlayerEntity*)args[1] || ((Harm*)args[2])->type != MAGICHARM || ((Harm*)args[2])->harmPoint<=3)
