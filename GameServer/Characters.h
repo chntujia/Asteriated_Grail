@@ -371,4 +371,22 @@ public slots:
     void ShenShengQiYue(QList<void*> args);
     void ShenShengLingYu(QList<void*> args);
 };
+
+//À¿¡È
+class SiLing: public PlayerEntity
+{
+    Q_OBJECT
+public:
+    SiLing(BackgroundEngine* engine, int id, int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void BuXiu(QList<void*> args);
+    void WenYi(QList<void*> args);
+    void SiWangZhiChu(QList<void*> args);
+    void MuBeiYunLuo(QList<void*> args);
+    void skillReset(QList<void*> args);
+private:
+    bool SiWangZhiChuUsed;
+};
+
 #endif // CHARACTERS_H

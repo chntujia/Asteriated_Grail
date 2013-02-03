@@ -187,6 +187,7 @@ struct BatInfor
     int infor3;
     int infor4;
     int infor5;
+    QString inforstr;
 };
 
 class BackgroundEngine;

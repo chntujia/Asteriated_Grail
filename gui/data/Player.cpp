@@ -58,6 +58,10 @@ void Player::setRole(int roleID)
     case 12:
         name=tr("[冒险家]");
         break;
+    case 13:
+        name=tr("[死灵法师]");
+        crossMax = 5;
+        break;
     case 14:
         name=tr("[仲裁者]");
         tapSource="resource/shenpan.png";
