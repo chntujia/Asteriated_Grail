@@ -109,6 +109,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 17:
         return new XianZhe(engine,id,color);
         break;
+    case 20:
+        return new GeDouJia(engine,id,color);
+        break;
     case 21:
         return new YongZhe(engine,id,color);
         break;
@@ -168,7 +171,7 @@ void BackgroundEngine::seatArrange()
     for(int i=1; i<= 17 ;i++)
         roles<<i;
     roles<<21;
-
+    roles<<20;
     randomize(&roles);
 
 }
@@ -662,6 +665,10 @@ void BackgroundEngine::actionPhase()
 
         else if(bat.reply == MAGIC)
         {
+            PlayerEntity* src1 = getPlayerByID(bat.srcID);
+            args.clear();
+            args<<src1;
+            emit beforeMagicSIG(args);
             //使用法术牌
             if(bat.infor1 == COMMONMAGIC)
                 this->useMagicCard(bat.CardID,bat.srcID,bat.dstID);

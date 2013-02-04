@@ -2836,3 +2836,267 @@ void XianZhe::ShengJieFaDian(QList<void *> args)
     harm.type = MAGIC;
     this->engine->timeLine3(harm,this,this,"圣洁法典");
 }
+
+GeDouJia::GeDouJia(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=20;
+    this->star=4.5;
+    tokenMax[0]=6;
+    BaiShiTargetID=-1;
+    BaiShiUsed=false;
+    BaiShiFirst=false;
+    StartUsed=false;
+    XuLiUesd=false;
+    CangYanUsed=false;
+    this->makeConnection(engine);
+}
+
+void GeDouJia::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(timeLine3SIG(QList<void*>)),this,SLOT(NianQiLiChang(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(CangYanXuLi(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(XuLiYiJi2(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(XuLiYiJi3(QList<void*>)));
+    connect(engine,SIGNAL(magicFinishSIG(QList<void*>)),this,SLOT(NianDan(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(BaiShiHuanLingQuan1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(BaiShiHuanLingQuan2(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(BaiShiHuanLingQuan3(QList<void*>)));
+    connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(CangYanZhiHun2(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(DouShenTianQu(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1ProSIG(QList<void*>)),this,SLOT(BaiShiTargetSet(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1ProSIG(QList<void*>)),this,SLOT(BaiShiQuXiao1(QList<void*>)));
+    connect(engine,SIGNAL(beforeMagicSIG(QList<void*>)),this,SLOT(BaiShiQuXiao2(QList<void*>)));
+    connect(engine,SIGNAL(specialFinishSIG(QList<void*>)),this,SLOT(BaiShiQuXiao3(QList<void*>)));
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
+
+void GeDouJia::NianQiLiChang(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[1] || ((Harm*)args[2])->harmPoint<5)
+        return;
+    Harm* harm= (Harm*)args[2];
+    harm->harmPoint=4;
+    coder.notice(tr("格斗家发动【念气力场】"));
+}
+
+void GeDouJia::CangYanXuLi(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0] || this->getToken(0)==6)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    coder.askForSkill(id,"苍炎蓄力");
+    QString msg=messageBuffer::readMsg();
+    QStringList arg=msg.split(";");
+    if(arg[1].toInt()==0)
+        return;
+    if(arg[2].toInt()==0){
+    if(BaiShiUsed)
+    {
+        BaiShiUsed=false;
+        setTap(0);
+        coder.tapNotice(id,0,"【普通形态】");
+    }
+    coder.notice(tr("格斗家发动【蓄力一击】"));
+    setToken(0,token[0]+1);
+    coder.tokenNotice(id,0,token[0]);
+    XuLiUesd=true;
+    }
+    else
+    {
+        setToken(0,token[0]-1);
+        coder.tokenNotice(id,0,token[0]);
+        coder.notice(tr("格斗家发动【苍炎之魂】"));
+        *(int*)args[5]=NOREPLY;
+        CangYanUsed=true;
+    }
+}
+
+void GeDouJia::XuLiYiJi2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(!XuLiUesd)
+        return;
+    Harm* harm= (Harm*)args[2];
+    harm->harmPoint++;
+    XuLiUesd=false;
+}
+
+void GeDouJia::XuLiYiJi3(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(!XuLiUesd)
+        return;
+    Harm harm;
+    harm.type=MAGICHARM;
+    harm.harmPoint=this->getToken(0);
+    engine->timeLine3(harm,this,this,"蓄力一击");
+    XuLiUesd=false;
+}
+
+void GeDouJia::NianDan(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0] || this->getToken(0)==6)
+        return;
+    coder.askForSkill(id,"念弹");
+    QString msg=messageBuffer::readMsg();
+    QStringList arg=msg.split(";");
+    if(arg[1].toInt()==0)
+        return;
+    coder.notice(tr("格斗家发动【念弹】"));
+    setToken(0,token[0]+1);
+    coder.tokenNotice(id,0,token[0]);
+    PlayerEntity* ptr=engine->getPlayerByID(arg[2].toInt());
+    int cross=ptr->getCrossNum();
+    Harm harm;
+    harm.harmPoint=1;
+    harm.type=MAGICHARM;
+    engine->timeLine3(harm,this,ptr,"念弹");
+    if(cross==0)
+    {
+        Harm harm2;
+        harm2.harmPoint=this->getToken(0);
+        harm2.type=MAGICHARM;
+        engine->timeLine3(harm2,this,this,"念弹");
+    }
+}
+
+void GeDouJia::BaiShiHuanLingQuan1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0] || this->getToken(0)<3 || BaiShiUsed || StartUsed)
+        return;
+    coder.askForSkill(id,"百式幻龙拳");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    setToken(0,token[0]-3);
+    coder.tokenNotice(id,0,token[0]);
+    coder.notice(tr("格斗家发动【百式幻龙拳】"));
+    setTap(1);
+    coder.tapNotice(id,1,"【百式幻龙拳】");
+    BaiShiUsed=true;
+    BaiShiFirst=true;
+    StartUsed=true;
+}
+
+void GeDouJia::BaiShiHuanLingQuan2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0] || !BaiShiUsed)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    coder.notice(tr("格斗家发动【百式幻龙拳】"));
+    Harm* harm=(Harm*)args[2];
+    harm->harmPoint+=2;
+}
+
+void GeDouJia::BaiShiHuanLingQuan3(QList<void *> args)
+{
+    if(this !=(PlayerEntity*)args[0] || !BaiShiUsed)
+        return;
+    if(*(bool*)args[4])
+        return;
+    coder.notice(tr("格斗家发动【百式幻龙拳】"));
+    Harm* harm=(Harm*)args[2];
+    harm->harmPoint++;
+}
+
+
+void GeDouJia::CangYanZhiHun2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0] || !CangYanUsed)
+        return;
+    Harm harm;
+    harm.type=MAGICHARM;
+    harm.harmPoint=this->getToken(0);
+    if(this->getToken(0)!=0)
+        engine->timeLine3(harm,this,this,"苍炎之魂");
+    CangYanUsed=false;
+}
+
+void GeDouJia::DouShenTianQu(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0]||StartUsed||this->getEnergy()==0)
+        return;
+    coder.askForSkill(id,"斗神天驱");
+    QString msg=messageBuffer::readMsg();
+    QStringList arg=msg.split(";");
+    if(arg[1].toInt() == 0)
+        return;
+    if(this->getCrystal()>0)
+        crystal--;
+    else
+        gem--;
+    setGem(gem);
+    setCrystal(crystal);
+    coder.energyNotice(id,gem,crystal);
+    coder.notice(tr("格斗家发动【斗神天驱】"));
+    QList<CardEntity*>cards;
+    for(int i=0;i<arg[2].toInt();i++)
+        cards.append(getCardByID(arg[i+3].toInt()));
+    coder.discardNotice(id,arg[2].toInt(),"n",cards);
+    this->removeHandCards(cards,false);
+    this->setCrossNum(this->getCrossNum()+2);
+    coder.crossChangeNotice(id,this->getCrossNum());
+    coder.notice("格斗家使用【斗神天驱】为自己增加2点治疗");
+    StartUsed=true;
+}
+
+void GeDouJia::BaiShiTargetSet(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0] || !BaiShiUsed || !BaiShiFirst)
+        return;
+    PlayerEntity* dst=(PlayerEntity*)args[1];
+    BaiShiTargetID=dst->getID();
+    BaiShiFirst=false;
+}
+
+void GeDouJia::BaiShiQuXiao1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0] || BaiShiFirst || !BaiShiUsed)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    PlayerEntity*dst=(PlayerEntity*)args[1];
+    if(BaiShiTargetID==dst->getID())
+        return;
+    setTap(0);
+    coder.tapNotice(id,0,"【普通形态】");
+    BaiShiUsed=false;
+    BaiShiFirst=false;
+    BaiShiTargetID=-1;
+}
+
+void GeDouJia::BaiShiQuXiao2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0] || !BaiShiUsed)
+        return;
+    setTap(0);
+    coder.tapNotice(id,0,"【普通形态】");
+    BaiShiTargetID=-1;
+    BaiShiUsed=false;
+    BaiShiFirst=false;
+}
+
+void GeDouJia::BaiShiQuXiao3(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0] || !BaiShiUsed)
+        return;
+    setTap(0);
+    coder.tapNotice(id,0,"【普通形态】");
+    BaiShiFirst=false;
+    BaiShiUsed=false;
+    BaiShiTargetID=-1;
+}
+
+void GeDouJia::skillReset(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    StartUsed=false;
+}

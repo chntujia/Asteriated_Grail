@@ -164,7 +164,8 @@ signals:
     void attackFinishSIG(QList<void*> args);
     void magicFinishSIG(QList<void*> args);
     void specialFinishSIG(QList<void*> args);
-
+    //法术行动生效前
+    void beforeMagicSIG(QList<void*> args);
     //士气下降信号
     void loseMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
     void toInforDisplay(QString content);
