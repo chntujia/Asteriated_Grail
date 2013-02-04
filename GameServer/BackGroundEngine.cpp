@@ -167,7 +167,7 @@ void BackgroundEngine::seatArrange()
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
     for(int i=1; i<= 17 ;i++)
-        roles<<15;
+        roles<<i;
     roles<<21;
 
     randomize(&roles);

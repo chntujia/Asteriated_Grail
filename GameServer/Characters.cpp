@@ -2492,11 +2492,12 @@ void ShenGuan::ShuiZhiShenLi(QList<void *> args)
     if(cross<max)
     {
         cross++;
-        this->setCrossNum(cross);
+        ptr->setCrossNum(cross);
         coder.crossChangeNotice(dst, cross);
     }
     coder.notice("神官和目标各增加1治疗");
 }
+
 //神圣契约
 void ShenGuan::ShenShengQiYue(QList<void *> args)
 {
@@ -2844,3 +2845,14 @@ void XianZhe::ShengJieFaDian(QList<void *> args)
     harm.type = MAGIC;
     this->engine->timeLine3(harm,this,this,"圣洁法典");
 }
+
+
+WuNv::WuNv(BackgroundEngine *engine, int id, int color):PlayerEntity(engine, id, color)
+{
+    this->characterID = 23;
+    this->star = 5;
+    this->makeConnection(engine);
+    TongShengID = -1;
+    LiuXueXingTai = false;
+}
+
