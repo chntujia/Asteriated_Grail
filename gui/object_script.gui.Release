@@ -38,6 +38,7 @@ INPUT(
 ./release\TipArea.o
 ./release\ShenGuan.o
 ./release\SiLing.o
+./release\XianZhe.o
 ./release\moc_Client.o
 ./release\moc_ClientUI.o
 ./release\moc_DataInterface.o
@@ -74,4 +75,5 @@ INPUT(
 ./release\moc_TipArea.o
 ./release\moc_ShenGuan.o
 ./release\moc_SiLing.o
+./release\moc_XianZhe.o
 );

@@ -388,5 +388,18 @@ public slots:
 private:
     bool SiWangZhiChuUsed;
 };
-
+//ЯЭеп
+class XianZhe : public PlayerEntity
+{
+    Q_OBJECT
+public:
+    XianZhe(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void ZhiHuiFaDian(QList<void*> args);
+    void FaShuFanTan(QList<void*> args);
+    void MoDaoFaDian(QList<void*> args);
+    void ShengJieFaDian(QList<void*> args);
+private:
+};
 #endif // CHARACTERS_H

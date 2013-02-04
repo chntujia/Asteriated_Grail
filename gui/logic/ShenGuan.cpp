@@ -260,6 +260,7 @@ void ShenGuan::onOkClicked()
         targetID=QString::number(selectedPlayers[0]->getID());
         text=tipArea->getBoxCurrentText();
         command += targetID+";"+text+";"+sourceID+";";
+        start = true;
         emit sendCommand(command);
         gui->reset();
         break;
