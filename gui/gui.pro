@@ -46,7 +46,8 @@ HEADERS += client/Client.h \
            widget/TipArea.h \
     logic/ShenGuan.h \
     logic/SiLing.h \
-    logic/XianZhe.h
+    logic/XianZhe.h \
+    logic/WuNv.h
 FORMS += client/ClientUI.ui
 SOURCES += main.cpp \
            client/Client.cpp \
@@ -87,4 +88,5 @@ SOURCES += main.cpp \
            widget/TipArea.cpp \
     logic/ShenGuan.cpp \
     logic/SiLing.cpp \
-    logic/XianZhe.cpp
+    logic/XianZhe.cpp \
+    logic/WuNv.cpp

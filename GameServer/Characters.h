@@ -410,17 +410,16 @@ class WuNv: public PlayerEntity
 public:
     WuNv(BackgroundEngine* engine, int id, int color);
     void makeConnection(BackgroundEngine *engine);
-    void removeHandCards(QList<CardEntity *> oldCard, bool show, bool toDiscardPile);
-    void giveHandCards(QList<CardEntity *> oldCard, PlayerEntity *to);
 public slots:
     void TongShengGongSi(QList<void*> args);
     void XueZhiAiShang(QList<void*> args);
+    void ToPuTongXingtai(QList<void*> args);
+    void ToLiuXueXingTai(int harmed, int howMany, PlayerEntity* dst);
     void LiuXue(QList<void*> args);
     void NiLiu(QList<void*> args);
     void XueZhiBeiMing(QList<void*> args);
     void XueZhiZuZhou(QList<void*> args);
 private:
-    bool LiuXueXingTai;
     int TongShengID;
 };
 

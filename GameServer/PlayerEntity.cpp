@@ -91,6 +91,20 @@ void PlayerEntity::setHandCardsMax(int howMany)
     if(this->handCards.size() > handCardsMax)
         this->cardsOverLoad(0);
 }
+
+void PlayerEntity::handCardRange(int howMany)
+{
+    handCardsRange+=howMany;
+    if(handCardsMaxFixed)
+        return;
+    else
+        handCardsMax = 6 + handCardsRange;
+    if(handCardsMax<handCardsMin)
+        handCardsMax = handCardsMin;
+    if(this->handCards.size() > handCardsMax)
+        this->cardsOverLoad(0);
+}
+
 void PlayerEntity::setCrossNum(int howMany, int atMost)
 {
     if(atMost==-1)
@@ -217,6 +231,9 @@ void PlayerEntity::removeHandCards(QList<CardEntity*> oldCard, bool show,bool to
             this->handCards.removeOne(oldCard.at(i));
         }
     }
+    QList<int> args;
+    args<<this->getID();
+    emit handCardsChange(args);
     if(show)
         emit showHandCards(oldCard,this);
 }
@@ -271,6 +288,9 @@ void PlayerEntity::giveHandCards(QList<CardEntity*> cards,PlayerEntity* to)
         //qDebug("%d",cards.at(i)->getID());
     }
     coder.moveCardNotice(howMany,cards,id,HAND,toID,HAND);
+    QList<int> args;
+    args<<this->getID();
+    emit handCardsChange(args);
     coder.getCardNotice(howMany,cards,toID,false);
     if(to->getHandCardNum()>to->getHandCardMax())
         to->cardsOverLoad(0);

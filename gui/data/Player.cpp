@@ -92,6 +92,10 @@ void Player::setRole(int roleID)
         tokenMax[1]=4;
         crystal=2;
         break;
+    case 23:
+        name=tr("[Î×Å®]");
+        tapSource="resource/liuxuexingtai.png";
+        break;
     }
 }
 

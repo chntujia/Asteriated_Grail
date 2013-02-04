@@ -2844,6 +2844,187 @@ WuNv::WuNv(BackgroundEngine *engine, int id, int color):PlayerEntity(engine, id,
     this->star = 5;
     this->makeConnection(engine);
     TongShengID = -1;
-    LiuXueXingTai = false;
+    tap = false;
 }
 
+void WuNv::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(TongShengGongSi(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(XueZhiAiShang(QList<void*>)));
+    connect(engine,SIGNAL(handCardsChange(QList<int*>)),this,SLOT(ToPuTongXingtai(QList<void*>)));
+    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int,PlayerEntity*)),this,SLOT(ToLiuXueXingTai(QList<void*>)));
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(LiuXue(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XueZhiBeiMing(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XueZhiZuZhou(QList<void*>)));
+}
+
+void WuNv::TongShengGongSi(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 2301)
+        return;
+    coder.notice("巫女对玩家"+QString::number(magic->dstID)+"发动【同生共死】");
+    engine->drawCards(2, 0, this);
+    TongShengID = magic->dstID;
+//设置同生标志
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    int change;
+    if(tap)
+        change = 1;
+    else
+        change = -2;
+    this->handCardRange(1);
+    coder.handcardMaxNotice(this->getID(),this->getHandCardMax());
+    dst->handCardRange(1);
+    coder.handcardMaxNotice(dst->getID(),dst->getHandCardMax());
+}
+
+void WuNv::XueZhiAiShang(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    coder.askForSkill(this->getID(),"血之哀伤");
+    BatInfor start = messageBuffer::readBatInfor();
+    if(start.infor2 == 0)
+        return;
+
+    Harm harm;
+    harm.harmPoint = 2;
+    harm.type = MAGIC;
+    this->engine->timeLine3(harm,this,this,"血之哀伤");
+
+    PlayerEntity* oldDst = engine->getPlayerByID(TongShengID);
+    int change;
+    if(start->dstID == -1)
+    {
+        coder.notice("巫女取消【同生共死】");
+        //取消同生标志
+        if(tap)
+            change = -1;
+        else
+            change = 2;
+        this->handCardRange(change);
+        coder.handcardMaxNotice(this->getID(),this->getHandCardMax());
+        oldDst->handCardRange(change);
+        coder.handcardMaxNotice(oldDst->getID(),oldDst->getHandCardMax());
+    }
+    else
+    {
+        PlayerEntity* newDst = engine->getPlayerByID(start.dstID);
+        coder.notice("巫女将【同生共死】转移至玩家"+QString::number(start.dstID));
+        //转移同生标志
+        if(tap)
+            change = 1;
+        else
+            change = -2;
+        newDst->handCardRange(change);
+        coder.handcardMaxNotice(newDst->getID(), newDst->getHandCardMax());
+    }
+}
+
+void WuNv::ToPuTongXingtai(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->getHandCardNum()>2||!LiuXueXingTai)
+        return;
+    tap = false;
+    coder.tapNotice(this->getID(),0,"【普通形态】");
+    if(TongShengID!=-1)
+    {
+        PlayerEntity* dst = engine->getPlayerByID(TongShengID);
+        this->handCardRange(-3);
+        coder.handcardMaxNotice(this->getID(),this->getHandCardMax());
+        dst->handCardRange(-3);
+        coder.handcardMaxNotice(dst->getID(),dst->getHandCardMax());
+    }
+}
+
+void WuNv::ToLiuXueXingTai(int harmed, int howMany, PlayerEntity* dst)
+{
+    if(dst!=this||howMany<=0)
+        return;
+    tap = true;
+    coder.tapNotice(this->getID(),1,"【流血形态】");
+    if(TongShengID!=-1)
+    {
+        PlayerEntity* dst = engine->getPlayerByID(TongShengID);
+        this->handCardRange(3);
+        coder.handcardMaxNotice(this->getID(),this->getHandCardMax());
+        dst->handCardRange(3);
+        coder.handcardMaxNotice(dst->getID(),dst->getHandCardMax());
+    }
+    this->setCrossNum(this->getCrossNum()++);
+    coder.crossChangeNotice(this->getID(),this->getCrossNum());
+}
+
+void WuNv::LiuXue(QList<void *> args)
+{
+    Harm harm;
+    harm.harmPoint = 1;
+    harm.type = MAGIC;
+    this->engine->timeLine3(harm,this,this,"流血");
+}
+
+void WuNv::NiLiu(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 2303)
+        return;
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    cards << getCardByID(magic->infor2);
+    coder.notice("巫女发动【逆流】，弃2张牌，增加1治疗");
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->getID(), 2, "n", cards);
+    this->setCrossNum(this->getCrossNum()++);
+    coder.crossChangeNotice(this->getID(),this->getCrossNum());
+}
+
+void WuNv::XueZhiBeiMing(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 2304)
+        return;
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    coder.notice("巫女发动对玩家"+QString::number(magic->dstID)+"【血之悲鸣】");
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->getID(),1,"y",cards);
+    Harm harm;
+    harm.harmPoint = magic->infor2;
+    harm.type = MAGIC;
+    engine->timeLine3(harm,this,engine->getPlayerByID(magic->dstID),"血之悲鸣");
+    engine->timeLine3(harm,this,this,"血之悲鸣");
+}
+
+void WuNv::XueZhiZuZhou(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID())
+        return;
+    if(magic->infor1 != 2305)
+        return;
+
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    Harm harm;
+    harm.harmPoint = 2;
+    harm.type = MAGIC;
+    engine->timeLine3(harm,this,dst,"血之诅咒");
+
+    QStringList cardNum = magic->inforstr.split(":");
+    QList<CardEntity*> cards;
+    if(magic->infor2>0)
+    {
+        for(int i=0;i<magic->infor2;i++)
+            cards << getCardByID(cardNum[i].toInt());
+        this->removeHandCards(cards,true);
+        coder.discardNotice(this->getID(), magic->infor2, "n", cards);
+    }
+}

@@ -959,5 +959,50 @@ void Server::decoder(int id, QString message)
                 action.inforstrp = infor[5];
                 messageBuffer::writeBatInfor(action);
                 break;
+//巫女 23
+//同生共死
+    case 2301:
+        action.reply = MAGIC;
+        action.infor1 = 2301;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//血之哀伤
+    case 2302:
+        action.infor1 = 2302;
+        action.infor2 = infor[1].toInt();
+        action.dstID = infor[2].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//逆流
+    case 2303:
+        action.reply = MAGIC;
+        action.infor1 = 2303;
+        action.srcID = infor[1].toInt();
+        action.CardID = infor[2].toInt();
+        action.infor2 = infor[2].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+ //血之悲鸣
+    case 2304:
+        action.reply = MAGIC;
+        action.infor1 = 2304;
+        action.dstID = infor[1].toInt();
+        action.CardID = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        action.srcID = infor[4].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//血之诅咒
+    case 2305:
+        action.reply = MAGIC;
+        action.infor1 = 2305;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        action.inforstr = infor[4].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
     }
 }

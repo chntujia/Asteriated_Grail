@@ -112,6 +112,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 21:
         return new YongZhe(engine,id,color);
         break;
+    case 23:
+        return new WuNv(engine,id,color);
+        break;
     }
 }
 void BackgroundEngine::randomize(QList<int> *queue)
