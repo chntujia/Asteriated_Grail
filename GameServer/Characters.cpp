@@ -2492,11 +2492,12 @@ void ShenGuan::ShuiZhiShenLi(QList<void *> args)
     if(cross<max)
     {
         cross++;
-        this->setCrossNum(cross);
+        ptr->setCrossNum(cross);
         coder.crossChangeNotice(dst, cross);
     }
     coder.notice("神官和目标各增加1治疗");
 }
+
 //神圣契约
 void ShenGuan::ShenShengQiYue(QList<void *> args)
 {
