@@ -83,6 +83,12 @@ void Player::setRole(int roleID)
         name=tr("[贤者]");
         energyMax=4;
         break;
+    case 20:
+        name=tr("[格斗家]");
+        tapSource="resource/baishi.png";
+        tokenName[0]=tr("斗气");
+        tokenMax[0]=6;
+        break;
     case 21:
         name=tr("[勇者]");
         tapSource="resource/jingpilijie.png";

@@ -99,7 +99,7 @@ void XianZhe::cardAnalyse()
             foreach(Card*ptr,selectedCards)
                 for(int i=0;i<selectedCards.size();i++){
                     if(ptr->getElement()!=selectedCards[i]->getElement() && ptr->getID()!=selectedCards[i]->getID()){
-                        playerArea->disableAll();
+                        playerArea->reset();
                         decisionArea->disable(0);
                         cardReady=true;
                         break;
@@ -118,7 +118,7 @@ void XianZhe::cardAnalyse()
             foreach(Card*ptr,selectedCards)
                 for(int i=0;i<selectedCards.size();i++){
                     if(ptr->getElement()==selectedCards[i]->getElement() && ptr->getID()!=selectedCards[i]->getID()){
-                        playerArea->disableAll();
+                        playerArea->reset();
                         decisionArea->disable(0);
                         cardReady=true;
                         break;
@@ -137,7 +137,7 @@ void XianZhe::cardAnalyse()
             foreach(Card*ptr,selectedCards)
                 for(int i=0;i<selectedCards.size();i++){
                     if(ptr->getElement()==selectedCards[i]->getElement() && ptr->getID()!=selectedCards[i]->getID()){
-                        playerArea->disableAll();
+                        playerArea->reset();
                         decisionArea->disable(0);
                         cardReady=true;
                         break;

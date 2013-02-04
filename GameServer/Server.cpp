@@ -959,6 +959,22 @@ void Server::decoder(int id, QString message)
                 action.inforstrp = infor[5];
                 messageBuffer::writeBatInfor(action);
                 break;
+//苍炎蓄力
+    case 2001:
+        messageBuffer::writeMsg(message);
+        break;
+//念弹
+    case 2002:
+        messageBuffer::writeMsg(message);
+        break;
+//百式幻龙拳
+    case 2003:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
+//斗神天驱
+    case 2004:
+        messageBuffer::writeMsg(message);
+        break;
 //巫女 23
 //同生共死
     case 2301:

@@ -402,6 +402,37 @@ public slots:
     void ShengJieFaDian(QList<void*> args);
 private:
 };
+//格斗
+class GeDouJia : public PlayerEntity
+{
+    Q_OBJECT
+public:
+    GeDouJia(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void NianQiLiChang(QList<void*> args);
+    void CangYanXuLi(QList<void*> args);
+    void XuLiYiJi2(QList<void *> args);
+    void XuLiYiJi3(QList<void *> args);
+    void NianDan(QList<void*> args);
+    void CangYanZhiHun2(QList<void *> args);
+    void BaiShiHuanLingQuan1(QList<void*> args);
+    void BaiShiHuanLingQuan2(QList<void *> args);
+    void BaiShiHuanLingQuan3(QList<void *> args);
+    void DouShenTianQu(QList<void*> args);
+    void BaiShiTargetSet(QList<void*>args);
+    void BaiShiQuXiao1(QList<void*> args);//攻击其他人。。t2
+    void BaiShiQuXiao2(QList<void *> args);//法术行动
+    void BaiShiQuXiao3(QList<void *> args);//特殊行动。。
+    void skillReset(QList<void*> args);
+private:
+    int BaiShiTargetID;
+    bool BaiShiUsed;
+    bool XuLiUesd;
+    bool BaiShiFirst;
+    bool StartUsed;
+    bool CangYanUsed;
+};
 
 //巫女
 class WuNv: public PlayerEntity

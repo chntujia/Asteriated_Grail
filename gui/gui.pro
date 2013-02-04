@@ -47,6 +47,8 @@ HEADERS += client/Client.h \
     logic/ShenGuan.h \
     logic/SiLing.h \
     logic/XianZhe.h \
+    logic/XianZhe.h \
+    logic/GeDouJia.h
     logic/WuNv.h
 FORMS += client/ClientUI.ui
 SOURCES += main.cpp \
@@ -89,4 +91,6 @@ SOURCES += main.cpp \
     logic/ShenGuan.cpp \
     logic/SiLing.cpp \
     logic/XianZhe.cpp \
+    logic/XianZhe.cpp \
+    logic/GeDouJia.cpp
     logic/WuNv.cpp
