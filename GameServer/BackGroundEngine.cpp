@@ -157,7 +157,6 @@ void BackgroundEngine::seatArrange()
         else
             queue+=QString::number(blue.takeFirst());
     }
-    queue="012345";
     queue+="101001";
     coder.beginNotice(queue);
     playerList.clear();
