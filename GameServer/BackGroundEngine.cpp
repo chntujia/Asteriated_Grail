@@ -160,7 +160,6 @@ void BackgroundEngine::seatArrange()
         else
             queue+=QString::number(blue.takeFirst());
     }
-    queue="012345";
     queue+="101001";
     coder.beginNotice(queue);
     playerList.clear();
@@ -196,7 +195,7 @@ void BackgroundEngine::roleRandom()
 void BackgroundEngine::role3Pick1()
 {    
     for(int i=0;i<playerSum;i++)
-        coder.askForRolePick(i,2,&roles);
+        coder.askForRolePick(i,3,&roles);
 }
 
 void BackgroundEngine::role3Pick1Reply(int id,int roleID)

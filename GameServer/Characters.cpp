@@ -2423,14 +2423,10 @@ void ShenGuan::ShenShengQiShi(QList<void *> args)
     coder.askForSkill(this->getID(), "神圣启示");
     if(messageBuffer::readInfor() == 0)
         return;
-    int cross = this->getCrossNum();
-    int max = this->getCrossMax();
-    if(cross<max)
-    {
-        cross++;
-        this->setCrossNum(cross);
-        coder.crossChangeNotice(this->getID(), cross);
-    }
+
+    this->setCrossNum(crossNum+1);
+    coder.crossChangeNotice(id, crossNum);
+
     coder.notice("神官发动【神圣启示】，增加1治疗");
 }
 //神圣祈福
@@ -2623,14 +2619,9 @@ void SiLing::BuXiu(QList<void *> args)
     coder.askForSkill(this->getID(), "不朽");
     if(messageBuffer::readInfor() == 0)
         return;
-    int cross = this->getCrossNum();
-    int max = this->getCrossMax();
-    if(cross<max)
-    {
-        cross++;
-        this->setCrossNum(cross);
-        coder.crossChangeNotice(this->getID(), cross);
-    }
+
+    this->setCrossNum(crossNum+1);
+    coder.crossChangeNotice(this->getID(), crossNum);
     coder.notice("死灵发动【不朽】，增加1治疗");
 }
 //瘟疫

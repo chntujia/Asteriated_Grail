@@ -9,7 +9,7 @@ Dialog::Dialog(QWidget *parent) :
     ui->comboBox->addItem("ipv4");
     ui->comboBox->addItem("ipv6");
     ui->comboBox_2->addItem(tr("Ëæ»ú"));
-    ui->comboBox_2->addItem(tr("2Ñ¡1"));
+    ui->comboBox_2->addItem(tr("3Ñ¡1"));
     ui->lineEdit->setText("50000");
     connect(ui->buttonBox->button(QDialogButtonBox::Ok),SIGNAL(clicked()), this, SLOT(onOK()));
 }
