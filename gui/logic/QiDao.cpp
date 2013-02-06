@@ -199,6 +199,7 @@ void QiDao::onOkClicked()
 //Æíµ»
     case 1601:
         command="1601;1;";
+        start = true;
         emit sendCommand(command);
         gui->reset();
         break;
