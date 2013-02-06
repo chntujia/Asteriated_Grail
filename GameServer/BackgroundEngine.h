@@ -151,8 +151,9 @@ signals:
     void skillSpecial(QList<void*> args);
     void shieldSIG(QList<void*> args);
     void showHandCards(QList<CardEntity*> cards,PlayerEntity* user);
+
     //手牌变化信号（巫女使用）
-    void handCardsChange(QList<int*> args);
+    void handCardsChange(PlayerEntity* dst);
 
     //以下信号暂无作用
     //询问应战动作信号
@@ -171,7 +172,7 @@ signals:
     //士气下降信号
     void loseMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
     //真实士气下降信号（巫女红莲进入状态使用）
-    void trueLoseMoraleSIG(int harmed, int howMany, PlayerEntity* dst);
+    void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst);
     void toInforDisplay(QString content);
     void usedShield(int userID);
 private:

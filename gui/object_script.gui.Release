@@ -39,6 +39,8 @@ INPUT(
 ./release\ShenGuan.o
 ./release\SiLing.o
 ./release\XianZhe.o
+./release\GeDouJia.o
+./release\WuNv.o
 ./release\moc_Client.o
 ./release\moc_ClientUI.o
 ./release\moc_DataInterface.o
@@ -76,4 +78,6 @@ INPUT(
 ./release\moc_ShenGuan.o
 ./release\moc_SiLing.o
 ./release\moc_XianZhe.o
+./release\moc_GeDouJia.o
+./release\moc_WuNv.o
 );

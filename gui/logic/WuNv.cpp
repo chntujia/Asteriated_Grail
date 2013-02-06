@@ -4,6 +4,7 @@ WuNv::WuNv()
 {
     makeConnection();
     setMyRole(this);
+    tongShengID = -1;
     Button *tongShengGongSi, *niLiu, *xueZhiBeiMing, *xueZhiZuZhou;
     tongShengGongSi = new Button(3,tr("同生共死"));
     buttonArea->addButton(tongShengGongSi);
@@ -17,14 +18,9 @@ WuNv::WuNv()
     buttonArea->addButton(xueZhiBeiMing);
     connect(xueZhiBeiMing,SIGNAL(buttonSelected(int)),this,SLOT(XueZhiBeiMing()));
 
-    xueZhiZuZhou = new Button(6,tr("血之悲鸣"));
+    xueZhiZuZhou = new Button(6,tr("血之诅咒"));
     buttonArea->addButton(xueZhiZuZhou);
     connect(xueZhiZuZhou,SIGNAL(buttonSelected(int)),this,SLOT(XueZhiZuZhou()));
-}
-
-void WuNv::makeConnection()
-{
-
 }
 
 void WuNv::normal()
@@ -32,7 +28,7 @@ void WuNv::normal()
     Role::normal();
     Player* myself=dataInterface->getMyself();
     QList<Card*> handcards=dataInterface->getHandCards();
-    if(tongShengID!=-1)
+    if(tongShengID==-1)
         buttonArea->enable(3);
     if(myself->getTap())
         buttonArea->enable(4);
@@ -52,6 +48,7 @@ void WuNv::TongShengGongSi()
 
     playerArea->setQuota(1);
     playerArea->enableAll();
+    playerArea->disablePlayerItem(dataInterface->getMyself()->getID());
 
     decisionArea->enable(1);
     decisionArea->disable(0);
@@ -63,6 +60,8 @@ void WuNv::XueZhiAiShang()
     tipArea->setMsg(tr("是否发动血之哀伤？不选择目标并确定为移除【同生共死】"));
 
     playerArea->setQuota(0,1);
+    playerArea->enableAll();
+    playerArea->disablePlayerItem(dataInterface->getMyself()->getID());
 
     decisionArea->enable(0);
     decisionArea->enable(1);
@@ -76,6 +75,7 @@ void WuNv::NiLiu()
     tipArea->reset();
 
     handArea->setQuota(2);
+    handArea->enableAll();
 
     decisionArea->enable(1);
     decisionArea->disable(0);
@@ -126,7 +126,6 @@ void WuNv::XueZhiZuZhou()
 void WuNv::cardAnalyse()
 {
     Role::cardAnalyse();
-    QList<Card*> selectedCards=handArea->getSelectedCards();
     switch(state)
     {
     case 2301:
@@ -209,7 +208,7 @@ void WuNv::onOkClicked()
         gui->reset();
         break;
     case 2305:
-        command = "2305";
+        command = "2305;";
         sourceID=QString::number(myID);
         targetID=QString::number(selectedPlayers[0]->getID());
         command+=targetID+";"+sourceID+";"+QString::number(selectedCards.size())+";";
@@ -228,6 +227,8 @@ void WuNv::onCancelClicked()
 {
     Role::onCancelClicked();
     QString command;
+    switch(state)
+    {
     case 2301:
     case 2303:
     case 2304:
@@ -239,6 +240,7 @@ void WuNv::onCancelClicked()
         emit sendCommand(command);
         gui->reset();
         break;
+    }
 }
 
 void WuNv::askForSkill(QString skill)

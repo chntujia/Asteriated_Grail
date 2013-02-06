@@ -106,6 +106,8 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         painter->drawPixmap(115,20,QPixmap("resource/shufu.png"));
     if(player->getSpecial(1))
         painter->drawPixmap(115,40,QPixmap("resource/tiaoxin.png"));
+    if(player->getSpecial(3))
+        painter->drawPixmap(115,80,QPixmap("resource/tongsheng.png"));
     if(selected)
         painter->drawPixmap(-5,-5,QPixmap("resource/playerSelected.png"));
 

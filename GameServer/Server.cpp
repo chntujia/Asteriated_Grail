@@ -997,7 +997,7 @@ void Server::decoder(int id, QString message)
         action.infor1 = 2303;
         action.srcID = infor[1].toInt();
         action.CardID = infor[2].toInt();
-        action.infor2 = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
         messageBuffer::writeBatInfor(action);
         break;
  //ÑªÖ®±¯Ãù
@@ -1017,7 +1017,8 @@ void Server::decoder(int id, QString message)
         action.dstID = infor[1].toInt();
         action.srcID = infor[2].toInt();
         action.infor2 = infor[3].toInt();
-        action.inforstr = infor[4].toInt();
+        action.inforstr = infor[4];
+        coder.notice("2305;");
         messageBuffer::writeBatInfor(action);
         break;
     }

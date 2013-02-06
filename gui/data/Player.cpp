@@ -100,7 +100,7 @@ void Player::setRole(int roleID)
         break;
     case 23:
         name=tr("[Î×Å®]");
-        tapSource="resource/liuxuexingtai.png";
+        tapSource="resource/liuxue.png";
         break;
     }
 }

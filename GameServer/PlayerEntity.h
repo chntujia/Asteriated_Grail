@@ -27,10 +27,11 @@ public:
     void removeHandCards(QList<CardEntity*> oldCard,bool show,bool toDiscardPile = true);
     //给牌操作
     void giveHandCards(QList<CardEntity*> oldCard,PlayerEntity* to);
-    //设置手牌上限
-    void setHandCardsMax(int howMany);
+
+    //设定手牌上限是否锁定
+    void setHandCardsMaxFixed(bool fixed, int howmany=6);
     //设置手牌变化
-    void handCardRange(int howMany);
+    void addHandCardsRange(int howMany);
     //设置治疗
     void setCrossNum(int howMany, int atMost=-1);
     void setGem(int howMany);
@@ -46,8 +47,7 @@ public:
     void setNext(PlayerEntity* nextPlayer){this->nextPlayer = nextPlayer;}
     //在该玩家前增加基础效果
     void addBasicEffect(CardEntity* effectCard){this->basicEffect << effectCard;}
-    //设定手牌上限是否锁定
-    void setHandCardsMaxFixed(bool fixed){this->handCardsMaxFixed = fixed;}
+
     //移除基础效果
     bool removeBasicEffect(CardEntity* effect,int toWho=-1,int toWhere=DISCARDPILE);
     int getID();
@@ -83,9 +83,11 @@ signals:
     //暴牌询问信号(其实没什么用)
     void askForOverLoadSIG(QList<CardEntity*> hand,int overNum);
     //手牌变化信号（巫女使用）
-    void handCardsChange(QList<int*> args);
+    void handCardsChange(PlayerEntity* dst);
     //士气下降信号
     void loseMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
+    //真实士气下降信号（巫女红莲进入状态使用）
+    void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst);
     //检查结束信号
     void checkEndSIG();
     //发送通讯信息

@@ -11,6 +11,9 @@ public:
     void askForSkill(QString skill);
     void XueZhiAiShang();
 public slots:
+    void onOkClicked();
+    void onCancelClicked();
+    void cardAnalyse();
     void TongShengGongSi();
     void NiLiu();
     void XueZhiBeiMing();

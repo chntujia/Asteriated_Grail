@@ -444,8 +444,8 @@ public:
 public slots:
     void TongShengGongSi(QList<void*> args);
     void XueZhiAiShang(QList<void*> args);
-    void ToPuTongXingtai(QList<void*> args);
-    void ToLiuXueXingTai(int harmed, int howMany, PlayerEntity* dst);
+    void ToPuTongXingtai(PlayerEntity* dst);
+    void ToLiuXueXingTai(int harmed, int* howMany, PlayerEntity* dst);
     void LiuXue(QList<void*> args);
     void NiLiu(QList<void*> args);
     void XueZhiBeiMing(QList<void*> args);

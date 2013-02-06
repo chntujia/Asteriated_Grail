@@ -472,9 +472,8 @@ void AnSha::QianXing(QList<void*> args)
     {
         setTap(0);
         coder.tapNotice(id,0,"【普通形态】");
-        handCardsMax++;
+        this->addHandCardsRange(1);
         coder.handcardMaxNotice(id,handCardsMax);
-        setHandCardsMax(handCardsMax);
     }
     if(getGem()==0)
         return;
@@ -487,9 +486,8 @@ void AnSha::QianXing(QList<void*> args)
     coder.notice("暗杀者发动【潜行】");
     setTap(1);
     coder.tapNotice(id,1,"【潜行形态】");
-    handCardsMax--;
+    this->addHandCardsRange(-1);
     coder.handcardMaxNotice(id,handCardsMax);
-    setHandCardsMax(handCardsMax);
 }
 /*
 #define NOTHARMED  0
@@ -809,9 +807,7 @@ void Saintness::mercy(QList<void *> args)
     coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
     coder.notice("圣女发动【怜悯】");
     setTap(1);
-    handCardsMax++;
-    setHandCardsMax(handCardsMax);
-    setHandCardsMaxFixed(true);
+    setHandCardsMaxFixed(true, 7);
     coder.tapNotice(id,1,"【怜悯形态】");
     coder.handcardMaxNotice(id,handCardsMax);
 }
@@ -1590,8 +1586,6 @@ void ZhongCai::YiShiZhongDuan(QList<void *> args)
     coder.tapNotice(this->getID(),0,"【普通形态】");
     startUsed=true;
     setHandCardsMaxFixed(false);
-    handCardsMax++;
-    setHandCardsMax(handCardsMax);
     coder.handcardMaxNotice(this->getID(),handCardsMax);
     teamArea.setGem(color,teamArea.getGem(color)+1);
     coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
@@ -1613,9 +1607,7 @@ void ZhongCai::ZhongCaiYiShi1(QList<void *> args)
     setTap(1);
     coder.tapNotice(this->getID(),1,"【审判形态】");
     startUsed=true;
-    handCardsMax--;
-    setHandCardsMax(handCardsMax);
-    setHandCardsMaxFixed(true);
+    setHandCardsMaxFixed(true, 5);
     coder.handcardMaxNotice(this->getID(),handCardsMax);
 }
 
@@ -1959,8 +1951,7 @@ void YongZhe::JingPiLiJie1(QList<void *> args)
         return;
     if(jinDuanUsed){
     coder.tapNotice(this->getID(),1,"【精疲力竭】");
-    setHandCardsMax(handCardsMax-2);
-    setHandCardsMaxFixed(true);
+    setHandCardsMaxFixed(true, 4);
     coder.handcardMaxNotice(id,handCardsMax);
     jinDuanUsed=false;
     engine->addActionNum(ATTACK);
@@ -1976,8 +1967,7 @@ void YongZhe::JingPiLiJie2(QList<void *> args)
         return;
     setTap(0);
     coder.tapNotice(this->getID(),0,"【普通形态】");
-    setHandCardsMaxFixed(false);    
-    setHandCardsMax(6);
+    setHandCardsMaxFixed(false);
     coder.handcardMaxNotice(id,handCardsMax);
     Harm jingpilijie;
     jingpilijie.harmPoint=3;
@@ -3115,9 +3105,10 @@ void WuNv::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(TongShengGongSi(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(XueZhiAiShang(QList<void*>)));
-    connect(engine,SIGNAL(handCardsChange(QList<int*>)),this,SLOT(ToPuTongXingtai(QList<void*>)));
-    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int,PlayerEntity*)),this,SLOT(ToLiuXueXingTai(QList<void*>)));
+    connect(engine,SIGNAL(handCardsChange(PlayerEntity*)),this,SLOT(ToPuTongXingtai(PlayerEntity*)));
+    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(ToLiuXueXingTai(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(LiuXue(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(NiLiu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XueZhiBeiMing(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XueZhiZuZhou(QList<void*>)));
 }
@@ -3132,22 +3123,22 @@ void WuNv::TongShengGongSi(QList<void *> args)
     coder.notice("巫女对玩家"+QString::number(magic->dstID)+"发动【同生共死】");
     engine->drawCards(2, 0, this);
     TongShengID = magic->dstID;
-//设置同生标志
+    coder.specialNotice(TongShengID,3,1);
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
     int change;
     if(tap)
         change = 1;
     else
         change = -2;
-    this->handCardRange(1);
+    this->addHandCardsRange(change);
     coder.handcardMaxNotice(this->getID(),this->getHandCardMax());
-    dst->handCardRange(1);
+    dst->addHandCardsRange(change);
     coder.handcardMaxNotice(dst->getID(),dst->getHandCardMax());
 }
 
 void WuNv::XueZhiAiShang(QList<void *> args)
 {
-    if(this != (PlayerEntity*)args[0])
+    if(this != (PlayerEntity*)args[0]||TongShengID==-1)
         return;
     coder.askForSkill(this->getID(),"血之哀伤");
     BatInfor start = messageBuffer::readBatInfor();
@@ -3161,71 +3152,81 @@ void WuNv::XueZhiAiShang(QList<void *> args)
 
     PlayerEntity* oldDst = engine->getPlayerByID(TongShengID);
     int change;
-    if(start->dstID == -1)
+    if(start.dstID == -1)
     {
         coder.notice("巫女取消【同生共死】");
-        //取消同生标志
+        coder.specialNotice(TongShengID,3,0);
         if(tap)
             change = -1;
         else
             change = 2;
-        this->handCardRange(change);
+        this->addHandCardsRange(change);
         coder.handcardMaxNotice(this->getID(),this->getHandCardMax());
-        oldDst->handCardRange(change);
+        oldDst->addHandCardsRange(change);
         coder.handcardMaxNotice(oldDst->getID(),oldDst->getHandCardMax());
     }
     else
     {
         PlayerEntity* newDst = engine->getPlayerByID(start.dstID);
         coder.notice("巫女将【同生共死】转移至玩家"+QString::number(start.dstID));
-        //转移同生标志
+        coder.specialNotice(TongShengID,3,0);
+        if(tap)
+            change = -1;
+        else
+            change = 2;
+        oldDst->addHandCardsRange(change);
+        coder.handcardMaxNotice(oldDst->getID(),oldDst->getHandCardMax());
+        TongShengID = start.dstID;
+        coder.specialNotice(TongShengID,3,1);
         if(tap)
             change = 1;
         else
             change = -2;
-        newDst->handCardRange(change);
+        newDst->addHandCardsRange(change);
         coder.handcardMaxNotice(newDst->getID(), newDst->getHandCardMax());
     }
 }
 
-void WuNv::ToPuTongXingtai(QList<void *> args)
+void WuNv::ToPuTongXingtai(PlayerEntity *dst)
 {
-    if(this != (PlayerEntity*)args[0])
+    if(this != dst)
         return;
-    if(this->getHandCardNum()>2||!LiuXueXingTai)
+    if(this->getHandCardNum()>2||!tap)
         return;
     tap = false;
     coder.tapNotice(this->getID(),0,"【普通形态】");
     if(TongShengID!=-1)
     {
         PlayerEntity* dst = engine->getPlayerByID(TongShengID);
-        this->handCardRange(-3);
+        this->addHandCardsRange(-3);
         coder.handcardMaxNotice(this->getID(),this->getHandCardMax());
-        dst->handCardRange(-3);
+        dst->addHandCardsRange(-3);
         coder.handcardMaxNotice(dst->getID(),dst->getHandCardMax());
     }
 }
 
-void WuNv::ToLiuXueXingTai(int harmed, int howMany, PlayerEntity* dst)
+void WuNv::ToLiuXueXingTai(int harmed, int *howMany, PlayerEntity* dst)
 {
-    if(dst!=this||howMany<=0)
+    if(dst!=this||tap||harmed == 0||*howMany<=0)
         return;
     tap = true;
     coder.tapNotice(this->getID(),1,"【流血形态】");
     if(TongShengID!=-1)
     {
         PlayerEntity* dst = engine->getPlayerByID(TongShengID);
-        this->handCardRange(3);
+        this->addHandCardsRange(3);
         coder.handcardMaxNotice(this->getID(),this->getHandCardMax());
-        dst->handCardRange(3);
+        dst->addHandCardsRange(3);
         coder.handcardMaxNotice(dst->getID(),dst->getHandCardMax());
     }
-    this->setCrossNum(this->getCrossNum()++);
+    this->setCrossNum(this->getCrossNum()+1);
     coder.crossChangeNotice(this->getID(),this->getCrossNum());
 }
 
 void WuNv::LiuXue(QList<void *> args)
 {
+    if(this != (PlayerEntity*) args[0]||!tap)
+        return;
     Harm harm;
     harm.harmPoint = 1;
     harm.type = MAGIC;
@@ -3243,9 +3244,9 @@ void WuNv::NiLiu(QList<void *> args)
     cards << getCardByID(magic->CardID);
     cards << getCardByID(magic->infor2);
     coder.notice("巫女发动【逆流】，弃2张牌，增加1治疗");
-    this->removeHandCards(cards,true);
+    this->removeHandCards(cards,false);
     coder.discardNotice(this->getID(), 2, "n", cards);
-    this->setCrossNum(this->getCrossNum()++);
+    this->setCrossNum(this->getCrossNum()+1);
     coder.crossChangeNotice(this->getID(),this->getCrossNum());
 }
 

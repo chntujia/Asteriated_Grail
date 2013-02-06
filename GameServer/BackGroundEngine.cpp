@@ -175,6 +175,7 @@ void BackgroundEngine::seatArrange()
         roles<<i;
     roles<<21;
     roles<<20;
+    roles<<23;
     randomize(&roles);
 
 }
