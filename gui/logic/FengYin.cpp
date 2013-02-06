@@ -145,10 +145,8 @@ void FengYin::cardAnalyse()
         playerArea->enableEnemy();
         for(int i=0;i<players.size();i++)
             for(int j=0;j<players[i]->getStatus().size();j++)
-                if(players[i]->checkStatus(selectedCards[0]->getSpecialityList().at(0))){
+                if(players[i]->checkStatus(selectedCards[0]->getSpecialityList().at(0)))
                     playerArea->disablePlayerItem(i);
-                    break;
-                }
         break;
     }
 }
