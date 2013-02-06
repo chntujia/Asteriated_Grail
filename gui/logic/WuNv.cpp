@@ -48,7 +48,6 @@ void WuNv::TongShengGongSi()
 
     playerArea->setQuota(1);
     playerArea->enableAll();
-    playerArea->disablePlayerItem(dataInterface->getMyself()->getID());
 
     decisionArea->enable(1);
     decisionArea->disable(0);
@@ -61,7 +60,8 @@ void WuNv::XueZhiAiShang()
 
     playerArea->setQuota(0,1);
     playerArea->enableAll();
-    playerArea->disablePlayerItem(dataInterface->getMyself()->getID());
+    if(tongShengID!=-1)
+        playerArea->disablePlayerItem(tongShengID);
 
     decisionArea->enable(0);
     decisionArea->enable(1);

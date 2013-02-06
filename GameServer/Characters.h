@@ -453,5 +453,23 @@ public slots:
 private:
     int TongShengID;
 };
-
+/*
+//ºìÁ«ÆïÊ¿
+class HongLian:public PlayerEntity
+{
+    Q_OBJECT
+public:
+    HongLian(BackgroundEngine* engine, int id, int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void XingHongShengYue(QList<void*> args);
+    void XueXingDaoYan(QList<void*> args);
+    void ShaLuShengYan(QList<void*> args);
+    void ToReXueFeiTeng(int harmed, int* howMany, PlayerEntity* dst);
+    void ReXueFeiTeng(int harmed, int* howMany, PlayerEntity* dst);
+    void OutReXueFeiTeng(QList<void*> args);
+    void JieJiaoJieZao(QList<void*> args);
+    void XingHongShiZi(QList<void*> args);
+};
+*/
 #endif // CHARACTERS_H
