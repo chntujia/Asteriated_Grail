@@ -170,6 +170,7 @@ signals:
     //法术行动生效前
     void beforeMagicSIG(QList<void*> args);
     //士气下降信号
+    void loseMoraleHeChengSIG(int harmed, int *howMany, PlayerEntity *dst);
     void loseMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
     //真实士气下降信号（巫女红莲进入状态使用）
     void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst);

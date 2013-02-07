@@ -1020,5 +1020,55 @@ void Server::decoder(int id, QString message)
         action.inforstr = infor[4];
         messageBuffer::writeBatInfor(action);
         break;
+//¡ÈªÍ’Ÿªπ
+   case 2201:
+        action.reply = MAGIC;
+        action.infor1 = 2201;
+        action.srcID = infor[1].toInt();
+        action.infor2 = infor[2].toInt();
+        action.inforstr=infor[3];
+        messageBuffer::writeBatInfor(action);
+        break;
+//¡ÈªÍæµœÒ
+   case 2202:
+        action.reply = MAGIC;
+        action.infor1 = 2202;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        if(action.infor2!=0)
+            action.inforstr = infor[4];
+        messageBuffer::writeBatInfor(action);
+        break;
+//¡ÈªÍ’±¨
+   case 2203:
+        action.reply = MAGIC;
+        action.infor1 = 2203;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.CardID = infor[3].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//¡ÈªÍ¥Õ”Ë
+    case 2204:
+        action.reply = MAGIC;
+        action.infor1 = 2204;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.CardID = infor[3].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//¡ÈªÍ◊™ªª
+    case 2205:
+        messageBuffer::writeMsg(message);
+        break;
+//¡ÈªÍ¡¥Ω”
+    case 2206:
+        messageBuffer::writeMsg(message);
+        break;
+//¡ÈªÍ‘ˆ∑˘
+    case 2207:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
     }
 }

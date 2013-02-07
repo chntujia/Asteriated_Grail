@@ -472,4 +472,33 @@ public slots:
     void XingHongShiZi(QList<void*> args);
 };
 */
+//¡ÈªÍ
+class LingHun : public PlayerEntity
+{
+    Q_OBJECT
+public:
+    LingHun(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void LingHunTunShi(int harmed,int*howMany,PlayerEntity*dst);
+    void LingHunTunShi2(QList<void*> args);
+    void LingHunTunShi3(int harmed,int*howMany,PlayerEntity*dst);
+    void LingHunZhaoHuan(QList<void*> args);
+    void LingHunJingXiang(QList<void*> args);
+    void LingHunZhenBao(QList<void*> args);
+    void LingHunCiYu(QList<void*> args);
+    void LingHunZhuanHuan(QList<void*> args);
+    void LingHunLianJie1(QList<void*> args);
+    void LingHunLianJie2(QList<void*> args);
+    void LingHunLianJie3(QList<void *> args);
+    void LingHunZengFu(QList<void*> args);
+    void skillReset(QList<void*> args);
+private:
+    int LianJieID;
+    bool LianJieUsed;
+    bool StartUsed;
+    bool LianJieChuFa;
+    bool HeCheng;
+};
+
 #endif // CHARACTERS_H

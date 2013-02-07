@@ -1659,6 +1659,7 @@ void ZhongCai::ShenPanLangChao(QList<void *> args)
 {
     if(this != (PlayerEntity*)args[1])
         return;
+    coder.notice(tr("仲裁者发动【审判浪潮】"));
     setToken(0,token[0]+1);
     coder.tokenNotice(this->getID(),0,token[0]);
 }
@@ -2764,7 +2765,7 @@ void GeDouJia::NianQiLiChang(QList<void *> args)
 
 void GeDouJia::CangYanXuLi(QList<void *> args)
 {
-    if(this != (PlayerEntity*)args[0] || this->getToken(0)==6)
+    if(this != (PlayerEntity*)args[0])
         return;
     if(!*(bool*)args[4])
         return;
@@ -2832,7 +2833,7 @@ void GeDouJia::NianDan(QList<void *> args)
     QStringList arg=msg.split(";");
     if(arg[1].toInt()==0)
         return;
-    coder.notice(tr("格斗家发动【念弹】"));
+    coder.notice("格斗家对玩家"+QString::number(arg[2].toInt())+"发动【念弹】");
     setToken(0,token[0]+1);
     coder.tokenNotice(id,0,token[0]);
     PlayerEntity* ptr=engine->getPlayerByID(arg[2].toInt());
@@ -3208,4 +3209,283 @@ void WuNv::XueZhiZuZhou(QList<void *> args)
         this->removeHandCards(cards,false);
         coder.discardNotice(this->getID(), magic->infor2, "n", cards);
     }
+}
+
+//灵魂 ps.仲裁【审判浪潮】加发动广播 格斗【念弹】,【苍炎蓄力】小修
+LingHun::LingHun(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=22;
+    this->star=4.5;
+    tokenMax[0]=6;
+    tokenMax[1]=6;
+    LianJieID=-1;
+    LianJieUsed=false;
+    StartUsed=false;
+    LianJieChuFa=false;
+    HeCheng=false;
+    this->makeConnection(engine);
+}
+
+void LingHun::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(loseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(LingHunTunShi(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(specialFinishSIG(QList<void*>)),this,SLOT(LingHunTunShi2(QList<void*>)));
+    connect(engine,SIGNAL(loseMoraleHeChengSIG(int,int*,PlayerEntity*)),this,SLOT(LingHunTunShi3(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(LingHunZhaoHuan(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(LingHunJingXiang(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(LingHunZhenBao(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(LingHunCiYu(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(LingHunZhuanHuan(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(LingHunLianJie1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine6SIG(QList<void*>)),this,SLOT(LingHunLianJie2(QList<void*>)));
+    connect(engine,SIGNAL(timeLine6DrawedSIG(QList<void*>)),this,SLOT(LingHunLianJie3(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(LingHunZengFu(QList<void*>)));
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
+
+void LingHun::LingHunTunShi(int harmed, int *howMany, PlayerEntity *dst)
+{
+    if(dst->getColor()!=color || *howMany==0)
+        return;
+    setToken(0,token[0]+*howMany);
+    coder.tokenNotice(id,0,token[0]);
+    coder.notice(tr("灵魂术士发动【灵魂吞噬】"));
+}
+
+void LingHun::LingHunTunShi2(QList<void *> args)
+{
+    PlayerEntity* ptr=(PlayerEntity*)args[0];
+    if(ptr->getColor()==this->getColor())
+        return;
+    HeCheng=true;
+}
+
+void LingHun::LingHunTunShi3(int harmed, int *howMany, PlayerEntity *dst)
+{
+    if(!HeCheng)
+        return;
+    HeCheng=false;
+    if(dst->getColor()==color)
+        return;
+    setToken(0,token[0]+*howMany);
+    coder.tokenNotice(id,0,token[0]);
+    coder.notice(tr("灵魂术士发动【灵魂吞噬】"));
+}
+
+void LingHun::LingHunZhaoHuan(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2201)
+        return;
+    QStringList cardNum = magic->inforstr.split(":");
+    QList<CardEntity*>cards;
+    for(int i=0;i<magic->infor2;i++)
+        cards.append(getCardByID(cardNum[i].toInt()));
+    coder.discardNotice(id,magic->infor2,"y",cards);
+    this->removeHandCards(cards,true);
+    coder.notice(tr("灵魂术士发动【灵魂召还】"));
+    setToken(1,token[1]+1+magic->infor2);
+    coder.tokenNotice(id,1,token[1]);
+}
+
+void LingHun::LingHunJingXiang(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2202)
+        return;
+    setToken(0,token[0]-2);
+    coder.tokenNotice(id,1,token[1]);
+    QStringList cardNum = magic->inforstr.split(":");
+    QList<CardEntity*>cards;
+    coder.notice(tr("灵魂术士发动【灵魂镜像】"));
+    if(magic->infor2 != 0)
+    {
+        for(int i=0;i<magic->infor2;i++)
+            cards.append(getCardByID(cardNum[i].toInt()));
+        coder.discardNotice(id,magic->infor2,"y",cards);
+        this->removeHandCards(cards,true);
+    }
+    else
+    {
+        coder.discardNotice(this->getID(),this->getHandCards().length(),"n",this->getHandCards());
+        this->removeHandCards(this->getHandCards(),false,true);
+    }
+    PlayerEntity* dst=engine->getPlayerByID(magic->dstID);
+    int drawNum=3;
+    if(dst->getHandCardMax()-dst->getHandCardNum()>=3)
+        engine->drawCards(drawNum,0,dst);
+    else
+    {
+        drawNum=dst->getHandCardMax()-dst->getHandCardNum();
+        engine->drawCards(drawNum,0,dst);
+    }
+}
+
+void LingHun::LingHunZhenBao(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2203)
+        return;
+    setToken(0,token[0]-3);
+    coder.tokenNotice(id,0,token[0]);
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    coder.discardNotice(this->getID(),1,"y",cards);
+    this->removeHandCards(cards,true);
+    coder.notice("灵魂术士对玩家"+QString::number(magic->dstID)+"发动【灵魂震爆】");
+    PlayerEntity* dst=engine->getPlayerByID(magic->dstID);
+    Harm harm;
+    if(dst->getHandCardNum()<3 && dst->getHandCardMax()>5)
+        harm.harmPoint=5;
+    else
+        harm.harmPoint=3;
+    harm.type=MAGICHARM;
+    engine->timeLine3(harm,this,dst,"灵魂震爆");
+}
+
+void LingHun::LingHunCiYu(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2204)
+        return;
+    setToken(1,token[1]-3);
+    coder.tokenNotice(id,1,token[1]);
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    coder.discardNotice(this->getID(),1,"y",cards);
+    this->removeHandCards(cards,true);
+    coder.notice("灵魂术士对玩家"+QString::number(magic->dstID)+"发动【灵魂赐予】");
+    PlayerEntity* dst=engine->getPlayerByID(magic->dstID);
+    dst->setGem(dst->getGem()+2);
+    coder.energyNotice(magic->dstID,dst->getGem(),dst->getCrystal());
+}
+
+void LingHun::LingHunZhuanHuan(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(this->getToken(0)==0 && this->getToken(1)==0)
+        return;
+    coder.askForSkill(id,"灵魂转换");
+    QString msg=messageBuffer::readMsg();
+    QStringList arg=msg.split(";");
+    if(arg[1].toInt() == 0)
+        return;
+    coder.notice(tr("灵魂术士发动【灵魂转换】"));
+    if(arg[2].toInt() == 0)
+    {
+        setToken(0,token[0]-1);
+        setToken(1,token[1]+1);
+        coder.tokenNotice(id,0,token[0]);
+        coder.tokenNotice(id,1,token[1]);
+        coder.notice(tr("灵魂术士转换1点黄魂"));
+    }
+    else
+    {
+        setToken(0,token[0]+1);
+        setToken(1,token[1]-1);
+        coder.tokenNotice(id,0,token[0]);
+        coder.tokenNotice(id,1,token[1]);
+        coder.notice(tr("灵魂术士转换1点蓝魂"));
+    }
+}
+
+void LingHun::LingHunLianJie1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->getToken(0)==0 || this->getToken(1)==0)
+        return;
+    if(LianJieUsed || StartUsed)
+        return;
+    coder.askForSkill(id,"灵魂链接");
+    QString msg=messageBuffer::readMsg();
+    QStringList arg=msg.split(";");
+    if(arg[1].toInt() == 0)
+        return;
+    setToken(0,token[0]-1);
+    setToken(1,token[1]-1);
+    coder.tokenNotice(id,0,token[0]);
+    coder.tokenNotice(id,1,token[1]);
+    LianJieID=arg[2].toInt();
+    coder.notice("灵魂术士对玩家"+QString::number(LianJieID)+"发动【灵魂链接】");
+    coder.specialNotice(LianJieID,2,1);
+    LianJieUsed=true;
+    StartUsed=true;
+}
+
+void LingHun::LingHunLianJie2(QList<void *> args)
+{
+    if(LianJieChuFa || !LianJieUsed)
+        return;
+    Harm* harm=(Harm*)args[2];
+    PlayerEntity* dst=(PlayerEntity*)args[1];
+    PlayerEntity* src=(PlayerEntity*)args[0];
+    if(dst->getID()!=this->getID() && dst->getID()!=LianJieID)
+        return;
+    if(this->getToken(1)==0)
+        return;
+    if(harm->harmPoint==0)
+        return;
+    coder.askForSkill(id,"灵魂链接",QString::number(harm->harmPoint));
+    QString msg=messageBuffer::readMsg();
+    QStringList arg=msg.split(";");
+    if(arg[1].toInt() == 0 || arg[2].toInt() == 0)
+        return;
+    int howMany=arg[2].toInt();
+    coder.notice("灵魂术士发动【灵魂链接】，转移"+QString::number(howMany)+"点伤害");
+    LianJieChuFa=true;
+    setToken(1,token[1]-howMany);
+    coder.tokenNotice(id,1,token[1]);
+    harm->harmPoint-=howMany;
+    Harm zhuanyi;
+    zhuanyi.type=MAGICHARM;
+    zhuanyi.harmPoint=howMany;
+    int dstID;
+    if(dst->getID()==this->getID()){
+        dstID=LianJieID;
+        engine->timeLine6(zhuanyi,src,engine->getPlayerByID(dstID));
+    }
+    else
+        engine->timeLine6(zhuanyi,src,this);
+}
+
+void LingHun::LingHunLianJie3(QList<void *> args)
+{
+    if(!LianJieChuFa)
+        return;
+    PlayerEntity* dst=(PlayerEntity*)args[1];
+    if(dst->getID()!=this->getID() && dst->getID()!=LianJieID)
+        return;
+    LianJieChuFa=false;
+}
+
+void LingHun::LingHunZengFu(QList<void *> args)
+{
+    if(StartUsed)
+        return;
+    if(this->getGem()==0)
+        return;
+    if(this != (PlayerEntity*)args[0])
+        return;
+    coder.askForSkill(id,"灵魂增幅");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    setGem(gem-1);
+    coder.energyNotice(id,gem,crystal);
+    coder.notice(tr("灵魂术士发动【灵魂增幅】"));
+    StartUsed=true;
+    setToken(0,token[0]+2);
+    setToken(1,token[1]+2);
+    coder.tokenNotice(id,0,token[0]);
+    coder.tokenNotice(id,1,token[1]);
+}
+
+void LingHun::skillReset(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    StartUsed=false;
 }
