@@ -3205,8 +3205,7 @@ void WuNv::XueZhiZuZhou(QList<void *> args)
     {
         for(int i=0;i<magic->infor2;i++)
             cards << getCardByID(cardNum[i].toInt());
-        this->removeHandCards(cards,true);
+        this->removeHandCards(cards,false);
         coder.discardNotice(this->getID(), magic->infor2, "n", cards);
     }
 }
-

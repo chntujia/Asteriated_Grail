@@ -1018,7 +1018,6 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[2].toInt();
         action.infor2 = infor[3].toInt();
         action.inforstr = infor[4];
-        coder.notice("2305;");
         messageBuffer::writeBatInfor(action);
         break;
     }
