@@ -3228,7 +3228,7 @@ LingHun::LingHun(BackgroundEngine *engine, int id, int color):PlayerEntity(engin
 
 void LingHun::makeConnection(BackgroundEngine *engine)
 {
-    connect(engine,SIGNAL(loseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(LingHunTunShi(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(LingHunTunShi(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(specialFinishSIG(QList<void*>)),this,SLOT(LingHunTunShi2(QList<void*>)));
     connect(engine,SIGNAL(loseMoraleHeChengSIG(int,int*,PlayerEntity*)),this,SLOT(LingHunTunShi3(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(LingHunZhaoHuan(QList<void*>)));
