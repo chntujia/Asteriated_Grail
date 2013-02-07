@@ -433,4 +433,72 @@ private:
     bool StartUsed;
     bool CangYanUsed;
 };
+
+//Î×Å®
+class WuNv: public PlayerEntity
+{
+    Q_OBJECT
+public:
+    WuNv(BackgroundEngine* engine, int id, int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void TongShengGongSi(QList<void*> args);
+    void XueZhiAiShang(QList<void*> args);
+    void ToPuTongXingtai(PlayerEntity* dst);
+    void ToLiuXueXingTai(int harmed, int* howMany, PlayerEntity* dst);
+    void LiuXue(QList<void*> args);
+    void NiLiu(QList<void*> args);
+    void XueZhiBeiMing(QList<void*> args);
+    void XueZhiZuZhou(QList<void*> args);
+private:
+    int TongShengID;
+};
+/*
+//ºìÁ«ÆïÊ¿
+class HongLian:public PlayerEntity
+{
+    Q_OBJECT
+public:
+    HongLian(BackgroundEngine* engine, int id, int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void XingHongShengYue(QList<void*> args);
+    void XueXingDaoYan(QList<void*> args);
+    void ShaLuShengYan(QList<void*> args);
+    void ToReXueFeiTeng(int harmed, int* howMany, PlayerEntity* dst);
+    void ReXueFeiTeng(int harmed, int* howMany, PlayerEntity* dst);
+    void OutReXueFeiTeng(QList<void*> args);
+    void JieJiaoJieZao(QList<void*> args);
+    void XingHongShiZi(QList<void*> args);
+};
+*/
+//Áé»ê
+class LingHun : public PlayerEntity
+{
+    Q_OBJECT
+public:
+    LingHun(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void LingHunTunShi(int harmed,int*howMany,PlayerEntity*dst);
+    void LingHunTunShi2(QList<void*> args);
+    void LingHunTunShi3(int harmed,int*howMany,PlayerEntity*dst);
+    void LingHunZhaoHuan(QList<void*> args);
+    void LingHunJingXiang(QList<void*> args);
+    void LingHunZhenBao(QList<void*> args);
+    void LingHunCiYu(QList<void*> args);
+    void LingHunZhuanHuan(QList<void*> args);
+    void LingHunLianJie1(QList<void*> args);
+    void LingHunLianJie2(QList<void*> args);
+    void LingHunLianJie3(QList<void *> args);
+    void LingHunZengFu(QList<void*> args);
+    void skillReset(QList<void*> args);
+private:
+    int LianJieID;
+    bool LianJieUsed;
+    bool StartUsed;
+    bool LianJieChuFa;
+    bool HeCheng;
+};
+
 #endif // CHARACTERS_H

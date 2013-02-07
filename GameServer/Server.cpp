@@ -975,5 +975,100 @@ void Server::decoder(int id, QString message)
     case 2004:
         messageBuffer::writeMsg(message);
         break;
+//Î×Å® 23
+//Í¬Éú¹²ËÀ
+    case 2301:
+        action.reply = MAGIC;
+        action.infor1 = 2301;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//ÑªÖ®°§ÉË
+    case 2302:
+        action.infor1 = 2302;
+        action.infor2 = infor[1].toInt();
+        action.dstID = infor[2].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//ÄæÁ÷
+    case 2303:
+        action.reply = MAGIC;
+        action.infor1 = 2303;
+        action.srcID = infor[1].toInt();
+        action.CardID = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+ //ÑªÖ®±¯Ãù
+    case 2304:
+        action.reply = MAGIC;
+        action.infor1 = 2304;
+        action.dstID = infor[1].toInt();
+        action.CardID = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        action.srcID = infor[4].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//ÑªÖ®×çÖä
+    case 2305:
+        action.reply = MAGIC;
+        action.infor1 = 2305;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        action.inforstr = infor[4];
+        messageBuffer::writeBatInfor(action);
+        break;
+//Áé»êÕÙ»¹
+   case 2201:
+        action.reply = MAGIC;
+        action.infor1 = 2201;
+        action.srcID = infor[1].toInt();
+        action.infor2 = infor[2].toInt();
+        action.inforstr=infor[3];
+        messageBuffer::writeBatInfor(action);
+        break;
+//Áé»ê¾µÏñ
+   case 2202:
+        action.reply = MAGIC;
+        action.infor1 = 2202;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        if(action.infor2!=0)
+            action.inforstr = infor[4];
+        messageBuffer::writeBatInfor(action);
+        break;
+//Áé»êÕð±¬
+   case 2203:
+        action.reply = MAGIC;
+        action.infor1 = 2203;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.CardID = infor[3].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//Áé»ê´ÍÓè
+    case 2204:
+        action.reply = MAGIC;
+        action.infor1 = 2204;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.CardID = infor[3].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//Áé»ê×ª»»
+    case 2205:
+        messageBuffer::writeMsg(message);
+        break;
+//Áé»êÁ´½Ó
+    case 2206:
+        messageBuffer::writeMsg(message);
+        break;
+//Áé»êÔö·ù
+    case 2207:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
     }
 }

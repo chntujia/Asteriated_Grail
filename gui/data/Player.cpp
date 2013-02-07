@@ -98,6 +98,17 @@ void Player::setRole(int roleID)
         tokenMax[1]=4;
         crystal=2;
         break;
+    case 22:
+        name=tr("[¡ÈªÍ ı ø]");
+        tokenName[0]=tr("ª∆ªÍ");
+        tokenMax[0]=6;
+        tokenName[1]=tr("¿∂ªÍ");
+        tokenMax[1]=6;
+        break;
+    case 23:
+        name=tr("[Œ◊≈Æ]");
+        tapSource="resource/liuxue.png";
+        break;
     }
 }
 

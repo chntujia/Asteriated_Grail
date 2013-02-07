@@ -115,6 +115,12 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 21:
         return new YongZhe(engine,id,color);
         break;
+    case 22:
+        return new LingHun(engine,id,color);
+        break;
+    case 23:
+        return new WuNv(engine,id,color);
+        break;
     }
 }
 void BackgroundEngine::randomize(QList<int> *queue)
@@ -172,6 +178,8 @@ void BackgroundEngine::seatArrange()
         roles<<i;
     roles<<21;
     roles<<20;
+    roles<<22;
+    roles<<23;
     randomize(&roles);
 
 }
@@ -711,6 +719,8 @@ void BackgroundEngine::actionPhase()
                 coder.cupNotice(color,teamArea.getCup(color));
                 coder.moraleNotice(!color,teamArea.getMorale(!color));
                 emit specialFinishSIG(args);
+                int n=1;
+                emit loseMoraleHeChengSIG(0,&n,currentPlayer);
                 this->checkEnd();
             }
             else if(bat.CardID == EXTRACT)

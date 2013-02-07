@@ -152,6 +152,9 @@ signals:
     void shieldSIG(QList<void*> args);
     void showHandCards(QList<CardEntity*> cards,PlayerEntity* user);
 
+    //手牌变化信号（巫女使用）
+    void handCardsChange(PlayerEntity* dst);
+
     //以下信号暂无作用
     //询问应战动作信号
     void askForReply(QList<CardEntity*> hand,QString element,int userID);
@@ -167,7 +170,10 @@ signals:
     //法术行动生效前
     void beforeMagicSIG(QList<void*> args);
     //士气下降信号
+    void loseMoraleHeChengSIG(int harmed, int *howMany, PlayerEntity *dst);
     void loseMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
+    //真实士气下降信号（巫女红莲进入状态使用）
+    void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst);
     void toInforDisplay(QString content);
     void usedShield(int userID);
 private:
