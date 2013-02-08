@@ -3246,7 +3246,7 @@ LingHun::LingHun(BackgroundEngine *engine, int id, int color):PlayerEntity(engin
 
 void LingHun::makeConnection(BackgroundEngine *engine)
 {
-    connect(engine,SIGNAL(loseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(LingHunTunShi(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(LingHunTunShi(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(specialFinishSIG(QList<void*>)),this,SLOT(LingHunTunShi2(QList<void*>)));
     connect(engine,SIGNAL(loseMoraleHeChengSIG(int,int*,PlayerEntity*)),this,SLOT(LingHunTunShi3(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(LingHunZhaoHuan(QList<void*>)));
@@ -3458,16 +3458,46 @@ void LingHun::LingHunLianJie2(QList<void *> args)
     setToken(1,token[1]-howMany);
     coder.tokenNotice(id,1,token[1]);
     harm->harmPoint-=howMany;
-    Harm zhuanyi;
-    zhuanyi.type=MAGICHARM;
-    zhuanyi.harmPoint=howMany;
-    int dstID;
-    if(dst->getID()==this->getID()){
-        dstID=LianJieID;
-        engine->timeLine6(zhuanyi,src,engine->getPlayerByID(dstID));
-    }
-    else
-        engine->timeLine6(zhuanyi,src,this);
+    bool flag1,flag2;
+    flag1=flag2=true;
+    PlayerEntity* ptr = engine->getNext(src);
+    do
+    {
+        if(flag1 && ptr->getID()==id)
+        {
+            flag1=false;
+            Harm zhuanyi1;
+            zhuanyi1.type=MAGICHARM;
+            zhuanyi1.harmPoint=howMany;
+            Harm zhuanyi2;
+            zhuanyi2.type=harm->type;
+            zhuanyi2.harmPoint=harm->harmPoint;
+            if(dst->getID()==this->getID())
+                engine->timeLine6(zhuanyi2,src,this);
+            else
+                engine->timeLine6(zhuanyi1,src,this);
+            if(engine->checkEnd())
+                break;
+        }
+        else if(flag2 && ptr->getID()==LianJieID)
+        {
+            flag2=false;
+            Harm zhuanyi1;
+            zhuanyi1.type=MAGICHARM;
+            zhuanyi1.harmPoint=howMany;
+            Harm zhuanyi2;
+            zhuanyi2.type=harm->type;
+            zhuanyi2.harmPoint=harm->harmPoint;
+            if(dst->getID()==this->getID())
+                engine->timeLine6(zhuanyi2,src,engine->getPlayerByID(LianJieID));
+            else
+                engine->timeLine6(zhuanyi1,src,engine->getPlayerByID(LianJieID));
+            if(engine->checkEnd())
+                break;
+        }
+        ptr = engine->getNext(ptr);
+    }while(flag1||flag2);
+    harm->harmPoint=0;
 }
 
 void LingHun::LingHunLianJie3(QList<void *> args)
