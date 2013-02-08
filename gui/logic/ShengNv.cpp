@@ -332,3 +332,8 @@ void ShengNv::additionalAction()
         tipArea->addBoxItem(tr("1.攻击或法术行动（圣疗）"));
 }
 
+void ShengNv::turnBegin()
+{
+    Role::turnBegin();
+    ShengLiaoAddition = false;
+}

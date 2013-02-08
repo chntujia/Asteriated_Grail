@@ -323,26 +323,3 @@ void ShenGuan::askForSkill(QString skill)
     else if(skill==tr("水之神力给牌"))
         ShuiZhiShenLi2();
 }
-
-void ShenGuan::cure(int cross,int harmPoint, int type)
-{
-    int min=cross<harmPoint?cross:harmPoint;
-    if(min>1)
-        min = 1;
-    QString msg=tr("你受到")+QString::number(harmPoint)+tr("点");
-    if(type==1)
-        msg+=tr("攻击");
-    else
-        msg+=tr("法术");
-    msg+=tr("伤害，要使用多少个治疗抵御之？");
-
-    state=9;
-    decisionArea->enable(0);
-    decisionArea->enable(1);
-
-    tipArea->setMsg(msg);
-    for(;min>=0;min--)
-        tipArea->addBoxItem(QString::number(min));
-    tipArea->showBox();
-    QApplication::alert((QWidget*)playerArea->window());
-}

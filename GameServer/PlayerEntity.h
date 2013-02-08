@@ -84,6 +84,8 @@ signals:
     void askForOverLoadSIG(QList<CardEntity*> hand,int overNum);
     //手牌变化信号（巫女使用）
     void handCardsChange(PlayerEntity* dst);
+    //士气下降前（红莲骑士热血沸腾状态）
+    void beforeLoseMoralSIG(int harmed, int *howMany, PlayerEntity *dst);
     //士气下降信号
     void loseMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
     //真实士气下降信号（巫女红莲进入状态使用）

@@ -55,6 +55,11 @@ void DataInterface::initRoleList()
     roleList<<tr("[Áé»êÊõÊ¿]");
     roleList<<tr("[Î×Å®]");
     roleList<<tr("[µûÎèÕß]");
+    roleList<<tr("[]");
+    roleList<<tr("[Ä§¹­]");
+    roleList<<tr("[]");
+    roleList<<tr("[ºìÁ«ÆïÊ¿]");
+    roleList<<tr("[Ä§Ç¹]");
 }
 
 void DataInterface::initPlayerList(QString msg)

@@ -162,3 +162,4 @@ pip-log.txt
 # Mac crap
 .DS_Store
 /gui/ui_ClientUI.h
+/gui/object_script.gui.Release

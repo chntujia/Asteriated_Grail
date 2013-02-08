@@ -10,6 +10,7 @@ public:
     void LianMin();
     void normal();
     void attackOrMagic();
+    void turnBegin();
     void askForSkill(QString skill);
     void additionalAction();
 public slots:

@@ -128,7 +128,7 @@ public:
     void askForAction(int playerID,int actionTypeAllowed,bool acted);
     void askForAdditionalAction(int playerID){emit this->sendMessage(-1,"42;"+TOQSTR(playerID)+";");}
     void crossChangeNotice(int playerID,int newValue){emit this->sendMessage(-1,combMessage(TOQSTR(CROSSCHANGENOTICE),TOQSTR(playerID),TOQSTR(newValue)));}
-    void askForCross(int playerID,int hurtPoint,int type){emit this->sendMessage(-1,combMessage(TOQSTR(ASKFORCROSS),TOQSTR(playerID),TOQSTR(hurtPoint),TOQSTR(type)));}
+    void askForCross(int playerID,int hurtPoint,int type, int crossAvailable){emit this->sendMessage(-1,combMessage(TOQSTR(ASKFORCROSS),TOQSTR(playerID),TOQSTR(hurtPoint),TOQSTR(type),TOQSTR(crossAvailable)));}
     void askForSkill(int playerID,QString content,QString args=(QChar)0){emit this->sendMessage(-1,combMessage(TOQSTR(ASKFORSKILL),TOQSTR(playerID),tr(content.toStdString().c_str()),args));}
     void roleNotice(int playerID,int roleID,int show=0){emit this->sendMessage(-1,combMessage(TOQSTR(CHARACTERNOTICE),TOQSTR(playerID),TOQSTR(roleID),TOQSTR(show)));}
     void unactionalNotice(int playerID){emit this->sendMessage(-1,combMessage(TOQSTR(UNACTIONALNOTICE),TOQSTR(playerID)));}

@@ -1,6 +1,6 @@
 #ifndef CHARACTERS_H
 #define CHARACTERS_H
-
+#include "BackgroundEngine.h"
 #include "PlayerEntity.h"
 class BackgroundEntity;
 //øÒ’Ω ø
@@ -368,6 +368,7 @@ public slots:
     void ShenShengQiShi(QList<void*> args);
     void ShenShengQiFu(QList<void*> args);
     void ShuiZhiShenLi(QList<void*> args);
+    void ShengShiShouHu(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable);
     void ShenShengQiYue(QList<void*> args);
     void ShenShengLingYu(QList<void*> args);
 };
@@ -381,6 +382,7 @@ public:
     void makeConnection(BackgroundEngine *engine);
 public slots:
     void BuXiu(QList<void*> args);
+    void ShengDu(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable);
     void WenYi(QList<void*> args);
     void SiWangZhiChu(QList<void*> args);
     void MuBeiYunLuo(QList<void*> args);
@@ -453,8 +455,8 @@ public slots:
 private:
     int TongShengID;
 };
-/*
-//∫Ï¡´∆Ô ø
+
+//∫Ï¡´∆Ô ø 28
 class HongLian:public PlayerEntity
 {
     Q_OBJECT
@@ -463,15 +465,20 @@ public:
     void makeConnection(BackgroundEngine *engine);
 public slots:
     void XingHongShengYue(QList<void*> args);
+    void XingHongXinYang(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable);
     void XueXingDaoYan(QList<void*> args);
     void ShaLuShengYan(QList<void*> args);
     void ToReXueFeiTeng(int harmed, int* howMany, PlayerEntity* dst);
     void ReXueFeiTeng(int harmed, int* howMany, PlayerEntity* dst);
-    void OutReXueFeiTeng(QList<void*> args);
-    void JieJiaoJieZao(QList<void*> args);
+    void OutReXueFeiTeng(PlayerEntity* currunt);
+    void JieJiaoJieZao1(QList<void*> args);
+    void JieJiaoJieZao2(QList<void *> args);
     void XingHongShiZi(QList<void*> args);
+    void skillReset(QList<void*> args);
+private:
+    bool XingHongShengYueUsed;
 };
-*/
+
 //¡ÈªÍ
 class LingHun : public PlayerEntity
 {

@@ -121,6 +121,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 23:
         return new WuNv(engine,id,color);
         break;
+    case 28:
+        return new HongLian(engine,id,color);
+        break;
     }
 }
 void BackgroundEngine::randomize(QList<int> *queue)
@@ -175,11 +178,12 @@ void BackgroundEngine::seatArrange()
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
     for(int i=1; i<= 17 ;i++)
-        roles<<i;
+        roles<<28;
     roles<<21;
     roles<<20;
     roles<<22;
     roles<<23;
+    roles<<28;
     randomize(&roles);
 
 }
@@ -1001,9 +1005,11 @@ void BackgroundEngine::timeLine3(Harm harm, PlayerEntity *src, PlayerEntity *dst
 void BackgroundEngine::timeLine4(Harm harm,PlayerEntity *src,PlayerEntity *dst)
 {
     int crossUsed = 0;
-    if(dst->getCrossNum() != 0)
+    int crossAvailable = dst->getCrossNum();
+    emit askForHeal(harm,src,dst,&crossAvailable);
+    if(crossAvailable != 0)
     {
-        coder.askForCross(dst->getID(),harm.harmPoint,harm.type);
+        coder.askForCross(dst->getID(),harm.harmPoint,harm.type, crossAvailable);
         crossUsed = messageBuffer::readInfor();
     }
 

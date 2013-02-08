@@ -27,7 +27,6 @@ void WuNv::normal()
 {
     Role::normal();
     Player* myself=dataInterface->getMyself();
-    QList<Card*> handcards=dataInterface->getHandCards();
     if(tongShengID==-1)
         buttonArea->enable(3);
     if(myself->getTap())

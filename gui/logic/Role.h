@@ -20,7 +20,7 @@ public:
     virtual void additionalAction();
     virtual void attacked(QString element,int hitRate);
     virtual void moDaned(int nextID, int sourceID, int howMany);
-    virtual void cure(int cross,int harmPoint,int type);
+    virtual void cure(int cross,int harmPoint,int type, int crossAvailable);
     virtual void askForSkill(QString skill);
     void drop(int howMany);
     void unactionalCheck();

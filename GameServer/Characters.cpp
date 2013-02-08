@@ -2378,6 +2378,13 @@ void ShenGuan::ShenShengQiFu(QList<void *> args)
     this->setCrossNum(getCrossNum()+2);
     coder.crossChangeNotice(this->getID(), getCrossNum());
 }
+void ShenGuan::ShengShiShouHu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable)
+{
+    if(dst!=this)
+        return;
+    *crossAvailable = 1;
+}
+
 //水之神力
 void ShenGuan::ShuiZhiShenLi(QList<void *> args)
 {
@@ -2483,6 +2490,7 @@ void ShenGuan::ShenShengLingYu(QList<void *> args)
 void ShenGuan::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(specialFinishSIG(QList<void*>)),this,SLOT(ShenShengQiShi(QList<void*>)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*)),this,SLOT(ShengShiShouHu(Harm,PlayerEntity*,PlayerEntity*,int*)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShenShengQiFu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShuiZhiShenLi(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(ShenShengQiYue(QList<void*>)));
@@ -2516,6 +2524,15 @@ void SiLing::BuXiu(QList<void *> args)
     coder.crossChangeNotice(this->getID(), crossNum);
     coder.notice("死灵发动【不朽】，增加1治疗");
 }
+
+void SiLing::ShengDu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable)
+{
+    if(dst!=this)
+        return;
+    if(harm.type == ATTACK)
+        *crossAvailable=0;
+}
+
 //瘟疫
 void SiLing::WenYi(QList<void *> args)
 {
@@ -2601,6 +2618,7 @@ void SiLing::skillReset(QList<void *> args)
 void SiLing::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(magicFinishSIG(QList<void*>)),this,SLOT(BuXiu(QList<void*>)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*)),this,SLOT(ShengDu(Harm,PlayerEntity*,PlayerEntity*,int*)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(WenYi(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(SiWangZhiChu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(MuBeiYunLuo(QList<void*>)));
@@ -3488,4 +3506,202 @@ void LingHun::skillReset(QList<void *> args)
     if(this != (PlayerEntity*)args[0])
         return;
     StartUsed=false;
+}
+
+//红莲骑士 28
+HongLian::HongLian(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID = 28;
+    this->star = 4;
+    //猩红信仰
+    crossMax = 4;
+    tokenMax[0]=2;
+    XingHongShengYueUsed = false;
+    tap = false;
+    this->makeConnection(engine);
+}
+
+void HongLian::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(XingHongShengYue(QList<void*>)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*)),this,SLOT(XingHongXinYang(Harm,PlayerEntity*,PlayerEntity*,int*)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(XueXingDaoYan(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(ShaLuShengYan(QList<void*>)));
+    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(ToReXueFeiTeng(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(beforeLoseMoralSIG(int,int*,PlayerEntity*)),this,SLOT(ReXueFeiTeng(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(turnEndPhaseSIG(PlayerEntity*)),this,SLOT(OutReXueFeiTeng(PlayerEntity*)));
+    connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(JieJiaoJieZao1(QList<void*>)));
+    connect(engine,SIGNAL(magicFinishSIG(QList<void*>)),this,SLOT(JieJiaoJieZao1(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(JieJiaoJieZao2(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XingHongShiZi(QList<void*>)));
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
+
+void HongLian::XingHongShengYue(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0]))
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(XingHongShengYueUsed)
+        return;
+    coder.askForSkill(this->getID(), "猩红圣约");
+    if(messageBuffer::readInfor() == 0)
+        return;
+
+    this->setCrossNum(crossNum+1);
+    coder.crossChangeNotice(this->getID(), crossNum);
+    coder.notice("红莲骑士发动【猩红圣约】，增加1治疗");
+}
+
+void HongLian::XingHongXinYang(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable)
+{
+    if(dst!=this)
+        return;
+    if(src!=this)
+        *crossAvailable = 0;
+}
+
+void HongLian::XueXingDaoYan(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0]||this->getCrossNum()<=0)
+        return;
+    coder.askForSkill(this->getID(),"血腥祷言");
+    BatInfor start = messageBuffer::readBatInfor();
+    if(start.infor2 == 0||(start.infor3+start.infor5)<=0)
+        return;
+    setCrossNum(crossNum-start.infor3-start.infor5);
+    coder.crossChangeNotice(this->getID(),crossNum);
+
+    Harm harm;
+    harm.harmPoint = start.infor3+start.infor5;
+    harm.type = MAGIC;
+    engine->timeLine3(harm,this,this,"血腥祷言");
+
+    PlayerEntity* dst = engine->getPlayerByID(start.dstID);
+    dst->setCrossNum(dst->getCrossNum()+start.infor3);
+    coder.crossChangeNotice(start.dstID,dst->getCrossNum());
+    if(start.infor4!=-1)
+    {
+        dst = engine->getPlayerByID(start.infor4);
+        dst->setCrossNum(dst->getCrossNum()+start.infor5);
+        coder.crossChangeNotice(start.infor4,dst->getCrossNum());
+    }
+    setToken(0,token[0]+1);
+    coder.tokenNotice(id,0,token[0]);
+
+}
+
+void HongLian::ShaLuShengYan(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0])||token[0]<=0)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    coder.askForSkill(this->getID(),"杀戮盛宴");
+    if(messageBuffer::readInfor() == 0)
+        return;
+
+    coder.notice("红莲骑士发动【杀戮盛宴】");
+    setToken(0,token[0]-1);
+
+    Harm selfHarm;
+    selfHarm.harmPoint = 4;
+    selfHarm.type = MAGIC;
+    engine->timeLine3(selfHarm,this,this,"杀戮盛宴");
+
+    Harm *harm = (Harm*)args[2];
+    harm->harmPoint += 2;
+}
+
+void HongLian::ToReXueFeiTeng(int harmed, int *howMany, PlayerEntity *dst)
+{
+    if(dst!=this||tap||harmed == 0||*howMany<=0)
+        return;
+    tap = true;
+    coder.tapNotice(this->getID(),1,"【热血沸腾状态】");
+}
+
+void HongLian::ReXueFeiTeng(int harmed, int *howMany, PlayerEntity *dst)
+{
+    if(dst!=this||!tap||harmed == 0||*howMany<=0)
+        return;
+    *howMany = 0;
+    coder.notice("红莲骑士处于【热血沸腾状态】，承受伤害不造成士气下降");
+}
+
+void HongLian::OutReXueFeiTeng(PlayerEntity * currunt)
+{
+    if(currunt!=this||!tap)
+        return;
+    tap = false;
+    coder.tapNotice(this->getID(),0,"【普通形态】");
+
+    this->setCrossNum(crossNum+2);
+    coder.crossChangeNotice(this->getID(), crossNum);
+    coder.notice("红莲骑士脱离【热血沸腾状态】，增加2治疗");
+}
+
+void HongLian::JieJiaoJieZao1(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->infor1!=2802)
+        return;
+    if(this->getEnergy() <= 0)
+        return;
+    coder.notice("红莲骑士发动【戒骄戒躁】");
+    if(getCrystal()>0)
+        crystal--;
+    else
+        gem--;
+
+    tap = false;
+    coder.tapNotice(this->getID(),0,"【普通形态】");
+    engine->addActionNum(ATTACKORMAGIC);
+}
+
+void HongLian::JieJiaoJieZao2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(id != skill->srcID||skill->infor1!=2802)
+        return;
+    coder.notice("红莲骑士使用【戒骄戒躁】的攻击或法术行动");
+}
+
+void HongLian::XingHongShiZi(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2803||getEnergy()<=0)
+        return;
+
+    if(getCrystal()>0)
+        crystal--;
+    else
+        gem--;
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+    coder.notice("红莲骑士对玩家"+QString::number(magic->dstID)+"发动【猩红十字】");
+    setToken(0,token[0]-1);
+    coder.tokenNotice(this->getID(),0,token[0]);
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    cards << getCardByID(magic->infor2);
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->getID(), 2, "y", cards);
+
+    Harm selfHarm;
+    selfHarm.harmPoint = 4;
+    selfHarm.type = MAGIC;
+    engine->timeLine3(selfHarm,this,this,"猩红十字");
+
+    Harm harm;
+    harm.harmPoint = 3;
+    harm.type = MAGIC;
+    engine->timeLine3(harm,this,engine->getPlayerByID(magic->dstID),"猩红十字");
+}
+
+void HongLian::skillReset(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    XingHongShengYueUsed = false;
 }

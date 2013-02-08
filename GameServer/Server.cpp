@@ -1070,5 +1070,32 @@ void Server::decoder(int id, QString message)
     case 2207:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
+//ºìÁ«ÆïÊ¿ 28
+//ÑªÐÈµ»ÑÔ
+    case 2801:
+        action.infor1 = 2801;
+        action.infor2 = infor[1].toInt();
+        action.dstID = infor[2].toInt();
+        action.infor3 = infor[3].toInt();
+        action.infor4 = infor[4].toInt();
+        action.infor5 = infor[5].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//½ä½¾½äÔê
+    case 2802:
+        ans.infor1=2802;
+        ans.srcID=infor[1].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//ÐÉºìÊ®×Ö
+    case 2803:
+        action.reply = MAGIC;
+        action.infor1 = 2803;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.CardID = infor[3].toInt();
+        action.infor2 = infor[4].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
     }
 }

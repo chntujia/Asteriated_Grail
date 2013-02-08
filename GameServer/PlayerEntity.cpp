@@ -26,6 +26,7 @@ void PlayerEntity::makeConnection(BackgroundEngine *engine)
     connect(this,SIGNAL(checkEndSIG()),engine,SLOT(checkEnd()));
     connect(this,SIGNAL(sendMessageSIG(int,QString)),engine,SIGNAL(sendMessageSIG(int,QString)));
     connect(this,SIGNAL(toDiscardPileSIG(QList<CardEntity*>,bool)),engine,SLOT(toDiscardPileSLOT(QList<CardEntity*>,bool)));
+    connect(this,SIGNAL(beforeLoseMoralSIG(int,int*,PlayerEntity*)),engine,SIGNAL(beforeLoseMoralSIG(int,int*,PlayerEntity*)));
     connect(this,SIGNAL(loseMoraleSIG(int,int*,PlayerEntity*)),engine,SIGNAL(loseMoraleSIG(int,int*,PlayerEntity*)));
     connect(this,SIGNAL(showHandCards(QList<CardEntity*>,PlayerEntity*)),engine,SIGNAL(showHandCards(QList<CardEntity*>,PlayerEntity*)));
     connect(this,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)));
@@ -253,6 +254,7 @@ void PlayerEntity::cardsOverLoad(int harmed)
     cardChosen = messageBuffer::readCardID(overNum);
     this->removeHandCards(cardChosen,false);
     coder.discardNotice(id,overNum,"n",cardChosen);
+    emit beforeLoseMoralSIG(harmed,&overNum,this);
     emit loseMoraleSIG(harmed,&overNum,this);//应该要根据harmed参数分辨是否是伤害/哪种伤害造成的士气下降
     teamArea.setMorale(this->color,teamArea.getMorale(this->color) - overNum);
 

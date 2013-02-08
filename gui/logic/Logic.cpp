@@ -22,6 +22,7 @@
 #include "GeDouJia.h"
 #include "WuNv.h"
 #include "LingHun.h"
+#include "HongLian.h"
 
 #define LOGINPERMIT 1
 #define GAMESTART 2
@@ -104,6 +105,9 @@ void Logic::setMyRole(int roleID)
         break;
     case 23:
         new WuNv;
+        break;
+    case 28:
+        new HongLian;
         break;
     }
 }

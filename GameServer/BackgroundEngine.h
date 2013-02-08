@@ -159,7 +159,7 @@ signals:
     //询问应战动作信号
     void askForReply(QList<CardEntity*> hand,QString element,int userID);
     //询问治疗响应信号
-    void askForHeal(int cross,int harmPoint);
+    void askForHeal(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable);
     //询问行动信号
     void askForActSIG(QList<CardEntity*> hand,int currentID);
 
@@ -169,10 +169,12 @@ signals:
     void specialFinishSIG(QList<void*> args);
     //法术行动生效前
     void beforeMagicSIG(QList<void*> args);
+    //士气下降前（红莲骑士热血沸腾状态）
+    void beforeLoseMoralSIG(int harmed, int *howMany, PlayerEntity *dst);
     //士气下降信号
     void loseMoraleHeChengSIG(int harmed, int *howMany, PlayerEntity *dst);
     void loseMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
-    //真实士气下降信号（巫女红莲进入状态使用）
+    //真实士气下降信号（巫女红莲进入状态使用、灵魂长黄魂使用、魔枪幻影星辰【？】）
     void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst);
     void toInforDisplay(QString content);
     void usedShield(int userID);

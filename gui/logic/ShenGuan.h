@@ -13,7 +13,6 @@ public:
     void ShenShengQiYue1();
     void ShenShengQiYue2();
     void ShenShengLingYu2();
-    void cure(int cross, int harmPoint, int type);
 public slots:
     void onOkClicked();
     void onCancelClicked();

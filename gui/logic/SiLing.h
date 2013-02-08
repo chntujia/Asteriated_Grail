@@ -8,7 +8,6 @@ public:
     SiLing();
     void normal();
     void askForSkill(QString skill);
-    void cure(int cross, int harmPoint, int type);
     void BuXiu();
 public slots:
     void onOkClicked();

@@ -413,9 +413,9 @@ void Role::moDaned(int nextID,int sourceID,int howMany)
     QSound::play("sound/Warning.wav");
 }
 
-void Role::cure(int cross,int harmPoint, int type)
+void Role::cure(int cross,int harmPoint, int type, int crossAvailable)
 {
-    int min=cross<harmPoint?cross:harmPoint;
+    int min=crossAvailable<harmPoint?crossAvailable:harmPoint;
     QString msg=tr("你受到")+QString::number(harmPoint)+tr("点");
     if(type==1)
         msg+=tr("攻击");
@@ -1182,7 +1182,7 @@ void Role::decipher(QString command)
         flag=arg[3];
         gui->reset();
         if(targetID==myID)
-            myRole->cure(playerList[myID]->getCrossNum(),howMany,flag.toInt());
+            myRole->cure(playerList[myID]->getCrossNum(),howMany,flag.toInt(),arg[4].toInt());
         break;
 //技能响应询问
     case 35:

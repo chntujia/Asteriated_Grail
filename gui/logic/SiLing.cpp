@@ -188,25 +188,3 @@ void SiLing::askForSkill(QString skill)
     if(skill==tr("不朽"))
         BuXiu();
 }
-
-void SiLing::cure(int cross, int harmPoint, int type)
-{
-    int min=cross<harmPoint?cross:harmPoint;
-    QString msg=tr("你受到")+QString::number(harmPoint)+tr("点");
-    if(type==1)
-        msg+=tr("攻击");
-    else
-        msg+=tr("法术");
-    msg+=tr("伤害，要使用多少个治疗抵御之？");
-    if(type==1)
-        min = 0;
-    state=9;
-    decisionArea->enable(0);
-    decisionArea->enable(1);
-
-    tipArea->setMsg(msg);
-    for(;min>=0;min--)
-        tipArea->addBoxItem(QString::number(min));
-    tipArea->showBox();
-    QApplication::alert((QWidget*)playerArea->window());
-}
