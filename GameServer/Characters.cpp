@@ -722,7 +722,7 @@ void Saintness::prayerOfFrost(QList<void *> args)
     int dstID= ans.dstID;
     PlayerEntity* player= engine->getPlayerByID(dstID);
     coder.notice("圣女对玩家"+TOQSTR(dstID)+"发动【冰霜祷言】，增加1点治疗");
-    player->setCrossNum(player->getCrossMax()+1);
+    player->setCrossNum(player->getCrossNum()+1);
     coder.crossChangeNotice(dstID,player->getCrossNum());
 }
 
@@ -3312,7 +3312,7 @@ void LingHun::LingHunJingXiang(QList<void *> args)
     if(magic->srcID != id || magic->infor1 != 2202)
         return;
     setToken(0,token[0]-2);
-    coder.tokenNotice(id,1,token[1]);
+    coder.tokenNotice(id,0,token[0]);
     QStringList cardNum = magic->inforstr.split(":");
     QList<CardEntity*>cards;
     coder.notice(tr("灵魂术士发动【灵魂镜像】"));
@@ -3478,6 +3478,7 @@ void LingHun::LingHunLianJie2(QList<void *> args)
                 engine->timeLine6(zhuanyi1,src,this);
             if(engine->checkEnd())
                 break;
+            LianJieChuFa=true;
         }
         else if(flag2 && ptr->getID()==LianJieID)
         {
@@ -3494,10 +3495,12 @@ void LingHun::LingHunLianJie2(QList<void *> args)
                 engine->timeLine6(zhuanyi1,src,engine->getPlayerByID(LianJieID));
             if(engine->checkEnd())
                 break;
+            LianJieChuFa=true;
         }
         ptr = engine->getNext(ptr);
     }while(flag1||flag2);
     harm->harmPoint=0;
+    LianJieChuFa=false;
 }
 
 void LingHun::LingHunLianJie3(QList<void *> args)
