@@ -33,7 +33,9 @@ public:
     //设置手牌变化
     void addHandCardsRange(int howMany);
     //设置治疗
-    void setCrossNum(int howMany, int atMost=-1);
+    void addCrossNum(int howMany, int atMost=crossMax);
+    void subCrossNum(int howMany);
+
     void setGem(int howMany);
     void setCrystal(int howMany);
     //设置当前回合是否为该玩家回合

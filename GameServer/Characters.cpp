@@ -694,12 +694,8 @@ void TianShi::TianShiJiBan(int userID)
     int dstID=ans.dstID;
     PlayerEntity* player= engine->getPlayerByID(dstID);
     coder.notice("天使对玩家"+TOQSTR(dstID)+"发动【天使羁绊】");
-    int cross=player->getCrossNum();
-    if(player->getCrossMax()>cross)
-    {
-        player->setCrossNum(cross+1);
-        coder.crossChangeNotice(dstID,cross+1);
-    }
+    player->addCrossNum(1);
+    coder.crossChangeNotice(dstID,player->getCrossNum());
 }
 //圣女初始化
 Saintness::Saintness(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
@@ -722,7 +718,7 @@ void Saintness::prayerOfFrost(QList<void *> args)
     int dstID= ans.dstID;
     PlayerEntity* player= engine->getPlayerByID(dstID);
     coder.notice("圣女对玩家"+TOQSTR(dstID)+"发动【冰霜祷言】，增加1点治疗");
-    player->setCrossNum(player->getCrossMax()+1);
+    player->addCrossNum(1);
     coder.crossChangeNotice(dstID,player->getCrossNum());
 }
 
@@ -741,7 +737,7 @@ void Saintness::cure(QList<void *> args)
     int dstID=dst->getID();
     coder.notice("圣女对玩家"+TOQSTR(dstID)+"发动【治疗术】，增加2点治疗");
     this->engine->useCard(cards,this,dst);        
-    dst->setCrossNum(dst->getCrossNum()+2);
+    dst->addCrossNum(2);
     coder.crossChangeNotice(dstID, dst->getCrossNum());
 }
 
@@ -769,7 +765,7 @@ void Saintness::healingLight(QList<void *> args)
     {
         player = engine->getPlayerByID(dst[i]);
         coder.notice("圣女为玩家"+TOQSTR(dst[i])+"增加1点治疗");
-        player->setCrossNum(player->getCrossNum()+1);
+        player->addCrossNum(1);
         coder.crossChangeNotice(dst[i],player->getCrossNum());
     }
 }
@@ -836,7 +832,7 @@ void Saintness::layOnHands(QList<void *> args)
             continue;
         player = engine->getPlayerByID(dst[i]);
         coder.notice("圣女使用【圣疗】为玩家"+TOQSTR(dst[i])+"增加"+TOQSTR(addcross[i])+"点治疗");
-        player->setCrossNum(player->getCrossNum()+addcross[i]);
+        player->addCrossNum(addcross[i]);
         coder.crossChangeNotice(dst[i], player->getCrossNum());
     }
     this->engine->addActionNum(ATTACKORMAGIC);
@@ -1462,7 +1458,7 @@ void YuanSu::YuanSuFaShu(QList<void*> args)
         break;
     case 2:
         dst=engine->getPlayerByID(magic->infor5);
-        dst->setCrossNum(dst->getCrossNum()+1);
+        dst->addCrossNum(1);
         coder.notice("元素的【冰冻】为玩家"+QString::number(magic->infor5)+"增加1治疗");
         coder.crossChangeNotice(magic->infor5,dst->getCrossNum());
         break;
@@ -1988,7 +1984,7 @@ void ShengQiang::HuiYao(QList<void *> args)
      coder.discardNotice(this->getID(),1,"y",cards);
      PlayerEntity* dst = this;
      do{
-         dst->setCrossNum(dst->getCrossNum()+1);
+         dst->addCrossNum(1);
          coder.crossChangeNotice(dst->getID(), dst->getCrossNum());
          dst = dst->getNext();
      }while(dst!= this);
@@ -2017,10 +2013,10 @@ void ShengQiang::ChengJie(QList<void *> args)
     this->removeHandCards(cards,true);
     coder.discardNotice(this->getID(), 1, "y", cards);
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
-    dst->setCrossNum(dst->getCrossNum()-1);
+    dst->subCrossNum(1);
     coder.crossChangeNotice(dst->getID(), dst->getCrossNum());
     coder.notice("玩家"+QString::number(magic->dstID)+"减少1点治疗，圣枪增加1治疗");
-    this->setCrossNum(getCrossNum()+1);
+    this->addCrossNum(1);
     coder.crossChangeNotice(this->getID(), getCrossNum());
     this->engine->addActionNum(ATTACK);
 }
@@ -2038,7 +2034,7 @@ void ShengQiang::ShengJi(QList<void *> args)
         return;
     if(*(bool*)args[4])
         return;
-    this->setCrossNum(getCrossNum()+1);
+    this->addCrossNum(1);
     coder.crossChangeNotice(this->getID(), getCrossNum());
     coder.notice("圣枪发动【圣击】，增加1治疗");
 }
@@ -2059,7 +2055,7 @@ void ShengQiang::TianQiang(QList<void *> args)
     if(messageBuffer::readInfor() == 0)
         return;
     TianQiangUsed = true;
-    this->setCrossNum(getCrossNum()-2);
+    this->subCrossNum(2);
     coder.crossChangeNotice(this->getID(), getCrossNum());
     coder.notice("圣枪发动【天枪】");
     *(int*)args[5] = NOREPLY;
@@ -2079,7 +2075,7 @@ void ShengQiang::DiQiang(QList<void *> args)
         int reply = messageBuffer::readInfor();
         if(reply != 0)
         {
-            this->setCrossNum(getCrossNum()-reply);
+            this->subCrossNum(reply);
             coder.crossChangeNotice(this->getID(), getCrossNum());
             coder.notice("圣枪发动【地枪】，使用"+QString::number(reply)+"点治疗");
             Harm *harm = (Harm*)args[2];
@@ -2088,7 +2084,7 @@ void ShengQiang::DiQiang(QList<void *> args)
         else
             if(!TianQiangUsed)
         {
-            this->setCrossNum(getCrossNum()+1);
+            this->addCrossNum(1);
             coder.crossChangeNotice(this->getID(), getCrossNum());
             coder.notice("圣枪发动【圣击】，增加1治疗");
         }
@@ -2097,7 +2093,7 @@ void ShengQiang::DiQiang(QList<void *> args)
     {
         if(TianQiangUsed)
             return;
-        this->setCrossNum(getCrossNum()+1);
+        this->addCrossNum(1);
         coder.crossChangeNotice(this->getID(), getCrossNum());
         coder.notice("圣枪发动【圣击】，增加1治疗");
     }
@@ -2118,7 +2114,7 @@ void ShengQiang::ShengGuangQiYu(QList<void *> args)
     coder.notice("圣枪发动【圣光祈愈】，增加2治疗");
     this->gem--;
     coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
-    this->setCrossNum(getCrossNum()+2,5);
+    this->addCrossNum(2,5);
     coder.crossChangeNotice(this->getID(), getCrossNum());
     this->engine->addActionNum(ATTACK);
 }
@@ -2261,7 +2257,7 @@ void QiDao::GuangHuiXinYang(QList<void*> args)
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
     coder.discardNotice(id,cards.size(),"n",cards);
     this->removeHandCards(cards,false);
-    dst->setCrossNum(dst->getCrossNum()+1);
+    dst->addCrossNum(1);
     coder.crossChangeNotice(magic->dstID,dst->getCrossNum());
     teamArea.setGem(color,teamArea.getGem(color)+1);
     coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
@@ -2357,7 +2353,7 @@ void ShenGuan::ShenShengQiShi(QList<void *> args)
     if(messageBuffer::readInfor() == 0)
         return;
 
-    this->setCrossNum(getCrossNum()+1);
+    this->addCrossNum(1);
     coder.crossChangeNotice(id, getCrossNum());
 
     coder.notice("神官发动【神圣启示】，增加1治疗");
@@ -2375,7 +2371,7 @@ void ShenGuan::ShenShengQiFu(QList<void *> args)
     coder.notice("神官发动【神圣祈福】，增加2治疗");
     this->removeHandCards(cards,true);
     coder.discardNotice(this->getID(), 2, "y", cards);
-    this->setCrossNum(getCrossNum()+2);
+    this->addCrossNum(2);
     coder.crossChangeNotice(this->getID(), getCrossNum());
 }
 void ShenGuan::ShengShiShouHu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable)
@@ -2408,9 +2404,9 @@ void ShenGuan::ShuiZhiShenLi(QList<void *> args)
         cards << messageBuffer::readCardID(1);
         this->giveHandCards(cards, ptr);
     }
-    this->setCrossNum(getCrossNum()+1);
+    this->addCrossNum(1);
     coder.crossChangeNotice(this->getID(), getCrossNum());
-    ptr->setCrossNum(ptr->getCrossNum()+1);
+    ptr->addCrossNum(1);
     coder.crossChangeNotice(dst, ptr->getCrossNum());
     coder.notice("神官和目标各增加1治疗");
 }
@@ -2430,10 +2426,10 @@ void ShenGuan::ShenShengQiYue(QList<void *> args)
         gem--;
     coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
     coder.notice("神官对玩家"+QString::number(start.dstID)+"发动神圣契约，转移"+QString::number(start.infor3)+"点治疗");
-    this->setCrossNum(getCrossNum()-start.infor3);
+    this->subCrossNum(start.infor3);
     coder.crossChangeNotice(this->getID(), getCrossNum());
     PlayerEntity* dst = engine->getPlayerByID(start.dstID);
-    dst->setCrossNum(dst->getCrossNum()+start.infor3, 4);
+    dst->addCrossNum(start.infor3, 4);
     coder.crossChangeNotice(start.dstID, dst->getCrossNum());
 }
 
@@ -2469,7 +2465,7 @@ void ShenGuan::ShenShengLingYu(QList<void *> args)
     }
     if(magic->infor2 == 1)
     {
-        this->setCrossNum(getCrossNum()-1);
+        this->subCrossNum(1);
         coder.crossChangeNotice(this->getID(), getCrossNum());
         coder.notice("神官移除1点治疗");
         Harm harm;
@@ -2480,9 +2476,9 @@ void ShenGuan::ShenShengLingYu(QList<void *> args)
     else
     {
         coder.notice("神官增加2点治疗，玩家"+QString::number(magic->dstID)+"增加1点治疗");
-        this->setCrossNum(getCrossNum()+2);
+        this->addCrossNum(2);
         coder.crossChangeNotice(this->getID(), getCrossNum());
-        dst->setCrossNum(dst->getCrossNum()+1);
+        dst->addCrossNum(1);
         coder.crossChangeNotice(dst->getID(), dst->getCrossNum());
     }
 }
@@ -2520,7 +2516,7 @@ void SiLing::BuXiu(QList<void *> args)
     if(messageBuffer::readInfor() == 0)
         return;
 
-    this->setCrossNum(crossNum+1);
+    this->addCrossNum(1);
     coder.crossChangeNotice(this->getID(), crossNum);
     coder.notice("死灵发动【不朽】，增加1治疗");
 }
@@ -2574,7 +2570,7 @@ void SiLing::SiWangZhiChu(QList<void *> args)
         cards << getCardByID(cardNum[i].toInt());
     coder.notice("死灵法师对玩家"+QString::number(magic->dstID)+"发动【死亡之触】，移除"+
                  QString::number(magic->infor2)+"点治疗，弃"+QString::number(magic->infor3)+"张同系牌");
-    this->setCrossNum(getCrossNum()-magic->infor2);
+    this->subCrossNum(magic->infor2);
     coder.crossChangeNotice(magic->srcID, getCrossNum());
     this->removeHandCards(cards,true);
     coder.discardNotice(this->getID(), magic->infor3, "y", cards);
@@ -2603,7 +2599,7 @@ void SiLing::MuBeiYunLuo(QList<void *> args)
             break;
         dst = dst->getNext();
     }while(dst!= this);
-    this->setCrossNum(getCrossNum()+1);
+    this->addCrossNum(1);
     coder.crossChangeNotice(this->getID(), getCrossNum());
     coder.notice("死灵法师发动【墓碑陨落】，增加1治疗");
 }
@@ -2729,7 +2725,7 @@ void XianZhe::ShengJieFaDian(QList<void *> args)
     coder.notice("贤者发动【圣洁法典】");
     foreach(PlayerEntity*ptr,players)
     {
-        ptr->setCrossNum(ptr->getCrossNum()+2);
+        ptr->addCrossNum(2);
         coder.crossChangeNotice(ptr->getID(),ptr->getCrossNum());
         coder.notice("贤者使用【圣洁法典】为玩家"+TOQSTR(ptr->getID())+"增加2点治疗");
     }
@@ -2943,7 +2939,7 @@ void GeDouJia::DouShenTianQu(QList<void *> args)
         cards.append(getCardByID(arg[i+3].toInt()));
     coder.discardNotice(id,arg[2].toInt(),"n",cards);
     this->removeHandCards(cards,false);
-    this->setCrossNum(this->getCrossNum()+2);
+    this->addCrossNum(2);
     coder.crossChangeNotice(id,this->getCrossNum());
     coder.notice("格斗家使用【斗神天驱】为自己增加2点治疗");
     StartUsed=true;
@@ -3150,7 +3146,7 @@ void WuNv::ToLiuXueXingTai(int harmed, int *howMany, PlayerEntity* dst)
         dst->addHandCardsRange(3);
         coder.handcardMaxNotice(dst->getID(),dst->getHandCardMax());
     }
-    this->setCrossNum(this->getCrossNum()+1);
+    this->addCrossNum(1);
     coder.crossChangeNotice(this->getID(),this->getCrossNum());
 }
 
@@ -3177,7 +3173,7 @@ void WuNv::NiLiu(QList<void *> args)
     coder.notice("巫女发动【逆流】，弃2张牌，增加1治疗");
     this->removeHandCards(cards,false);
     coder.discardNotice(this->getID(), 2, "n", cards);
-    this->setCrossNum(this->getCrossNum()+1);
+    this->addCrossNum(1);
     coder.crossChangeNotice(this->getID(),this->getCrossNum());
 }
 
@@ -3312,7 +3308,7 @@ void LingHun::LingHunJingXiang(QList<void *> args)
     if(magic->srcID != id || magic->infor1 != 2202)
         return;
     setToken(0,token[0]-2);
-    coder.tokenNotice(id,1,token[1]);
+    coder.tokenNotice(id,0,token[0]);
     QStringList cardNum = magic->inforstr.split(":");
     QList<CardEntity*>cards;
     coder.notice(tr("灵魂术士发动【灵魂镜像】"));
@@ -3478,6 +3474,7 @@ void LingHun::LingHunLianJie2(QList<void *> args)
                 engine->timeLine6(zhuanyi1,src,this);
             if(engine->checkEnd())
                 break;
+            LianJieChuFa=true;
         }
         else if(flag2 && ptr->getID()==LianJieID)
         {
@@ -3494,10 +3491,12 @@ void LingHun::LingHunLianJie2(QList<void *> args)
                 engine->timeLine6(zhuanyi1,src,engine->getPlayerByID(LianJieID));
             if(engine->checkEnd())
                 break;
+            LianJieChuFa=true;
         }
         ptr = engine->getNext(ptr);
     }while(flag1||flag2);
     harm->harmPoint=0;
+    LianJieChuFa=false;
 }
 
 void LingHun::LingHunLianJie3(QList<void *> args)
@@ -3580,7 +3579,7 @@ void HongLian::XingHongShengYue(QList<void *> args)
         return;
 
     XingHongShengYueUsed = true;
-    this->setCrossNum(crossNum+1);
+    this->addCrossNum(1);
     coder.crossChangeNotice(this->getID(), crossNum);
     coder.notice("红莲骑士发动【猩红圣约】，增加1治疗");
 }
@@ -3601,7 +3600,7 @@ void HongLian::XueXingDaoYan(QList<void *> args)
     BatInfor start = messageBuffer::readBatInfor();
     if(start.infor2 == 0||(start.infor3+start.infor5)<=0)
         return;
-    setCrossNum(crossNum-start.infor3-start.infor5);
+    this->subCrossNum(start.infor3+start.infor5);
     coder.crossChangeNotice(this->getID(),crossNum);
 
     Harm harm;
@@ -3610,12 +3609,12 @@ void HongLian::XueXingDaoYan(QList<void *> args)
     engine->timeLine3(harm,this,this,"血腥祷言");
 
     PlayerEntity* dst = engine->getPlayerByID(start.dstID);
-    dst->setCrossNum(dst->getCrossNum()+start.infor3);
+    dst->addCrossNum(start.infor3);
     coder.crossChangeNotice(start.dstID,dst->getCrossNum());
     if(start.infor4!=-1)
     {
         dst = engine->getPlayerByID(start.infor4);
-        dst->setCrossNum(dst->getCrossNum()+start.infor5);
+        dst->addCrossNum(start.infor5);
         coder.crossChangeNotice(start.infor4,dst->getCrossNum());
     }
     setToken(0,token[0]+1);
@@ -3669,7 +3668,7 @@ void HongLian::OutReXueFeiTeng(PlayerEntity * currunt)
     tap = false;
     coder.tapNotice(this->getID(),0,"【普通形态】");
 
-    this->setCrossNum(crossNum+2);
+    this->addCrossNum(2);
     coder.crossChangeNotice(this->getID(), crossNum);
     coder.notice("红莲骑士脱离【热血沸腾状态】，增加2治疗");
 }

@@ -113,12 +113,21 @@ void PlayerEntity::addHandCardsRange(int howMany)
         this->cardsOverLoad(0);
 }
 
-void PlayerEntity::setCrossNum(int howMany, int atMost)
+void PlayerEntity::addCrossNum(int howMany, int atMost)
 {
-    if(atMost==-1)
-        crossNum=howMany<=crossMax?howMany:crossMax;
+    if(atMost>crossMax)
+        crossNum=(crossNum+howMany)<=atMost?(crossNum+howMany):atMost;
     else
-        crossNum=howMany<=atMost?howMany:atMost;
+    {
+        if(crossNum>crossMax)
+            return;
+        crossNum=(crossNum+howMany)<=atMost?(crossNum+howMany):atMost;
+    }
+}
+
+void PlayerEntity::subCrossNum(int howMany)
+{
+    crossNum-=howMany;
 }
 
 void PlayerEntity::setGem(int howMany)
