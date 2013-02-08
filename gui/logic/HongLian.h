@@ -12,6 +12,7 @@ public:
     void askForSkill(QString skill);
     void additionalAction();
     void cardAnalyse();
+    void turnBegin();
     void XingHongShengYue();
     void ShaLuShengYan();
     void XueXingDaoYan1();
@@ -24,6 +25,7 @@ public slots:
 private:
     int dst[2];
     int cross[2];
+    bool JieJiaoJieZaoUsed;
 };
 
 #endif // HONGLIAN_H

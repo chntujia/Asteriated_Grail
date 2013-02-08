@@ -3210,7 +3210,7 @@ void WuNv::XueZhiZuZhou(QList<void *> args)
 
     gem--;
     coder.energyNotice(id,gem,crystal);
-    coder.notice("Î×Å®¶ÔÍæ¼Ò"+QString::number(magic->dstID)+"Ê¹ÓÃÑªÖ®×çÖä");
+    coder.notice("Î×Å®¶ÔÍæ¼Ò"+QString::number(magic->dstID)+"·¢¶¯ÑªÖ®×çÖä");
 
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
     Harm harm;
@@ -3549,6 +3549,8 @@ HongLian::HongLian(BackgroundEngine *engine, int id, int color):PlayerEntity(eng
     XingHongShengYueUsed = false;
     tap = false;
     this->makeConnection(engine);
+
+    crystal = 2;
 }
 
 void HongLian::makeConnection(BackgroundEngine *engine)
@@ -3634,6 +3636,7 @@ void HongLian::ShaLuShengYan(QList<void *> args)
 
     coder.notice("ºìÁ«ÆïÊ¿·¢¶¯¡¾É±Â¾Ê¢Ñç¡¿");
     setToken(0,token[0]-1);
+    coder.tokenNotice(this->getID(),0,token[0]);
 
     Harm selfHarm;
     selfHarm.harmPoint = 4;
@@ -3674,10 +3677,10 @@ void HongLian::OutReXueFeiTeng(PlayerEntity * currunt)
 
 void HongLian::JieJiaoJieZao1(QList<void *> args)
 {
-    BatInfor *skill = (BatInfor*)args[0];
-    if(skill->infor1!=2802)
+    if(this != ((PlayerEntity*)args[0])||this->getEnergy() <= 0||!tap)
         return;
-    if(this->getEnergy() <= 0)
+    coder.askForSkill(this->getID(),"½ä½¾½äÔê");
+    if(messageBuffer::readInfor() == 0)
         return;
     coder.notice("ºìÁ«ÆïÊ¿·¢¶¯¡¾½ä½¾½äÔê¡¿");
     if(getCrystal()>0)

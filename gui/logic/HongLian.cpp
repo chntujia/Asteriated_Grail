@@ -82,7 +82,10 @@ void HongLian::ShaLuShengYan()
 
 void HongLian::JieJiaoJieZao()
 {
-    attackOrMagic();
+    state = 2802;
+    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯½ä½¾½äÔê£¿"));
+    decisionArea->enable(0);
+    decisionArea->enable(1);
 }
 
 void HongLian::XingHongShiZi()
@@ -132,8 +135,9 @@ void HongLian::onOkClicked()
         text=tipArea->getBoxCurrentText();
         switch (text[0].digitValue()){
         case 1:
+            JieJiaoJieZaoUsed = false;
             emit sendCommand("2802;"+QString::number(myID)+";");
-            JieJiaoJieZao();
+            attackOrMagic();
             break;
         }
         break;
@@ -157,6 +161,12 @@ void HongLian::onOkClicked()
         else
             command+="-1;0;";
         start = true;
+        emit sendCommand(command);
+        gui->reset();
+        break;
+    case 2802:
+        command = "36;1;";
+        JieJiaoJieZaoUsed = true;
         emit sendCommand(command);
         gui->reset();
         break;
@@ -185,6 +195,11 @@ void HongLian::onCancelClicked()
         break;
     case 2812:
         XueXingDaoYan1();
+        break;
+    case 2802:
+        command = "36;0;";
+        emit sendCommand(command);
+        gui->reset();
         break;
     case 2803:
         if(actionFlag==0)
@@ -219,12 +234,19 @@ void HongLian::askForSkill(QString skill)
         ShaLuShengYan();
     else if(skill==tr("ÑªĞÈµ»ÑÔ"))
         XueXingDaoYan1();
+    else if(skill==tr("½ä½¾½äÔê"))
+        JieJiaoJieZao();
 }
 
 void HongLian::additionalAction()
 {
     Role::additionalAction();
-    Player* myself = dataInterface->getMyself();
-    if(myself->getEnergy()>0&&myself->getTap())
-        tipArea->addBoxItem(tr("1.½ä½¾½äÔê"));
+    if(JieJiaoJieZaoUsed)
+        tipArea->addBoxItem(tr("1.¶îÍâ¹¥»÷»ò·¨Êõ£¨½ä½¾½äÔê£©"));
+}
+
+void HongLian::turnBegin()
+{
+    Role::turnBegin();
+    JieJiaoJieZaoUsed = false;
 }

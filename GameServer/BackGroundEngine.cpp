@@ -632,6 +632,7 @@ void BackgroundEngine::actionPhase()
                 break;
             args.clear();
             args<<&chosen;
+            coder.notice(QString::number(chosen.reply));
             emit additonalActionSIG(args);
         }
 

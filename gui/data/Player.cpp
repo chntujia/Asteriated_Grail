@@ -115,6 +115,7 @@ void Player::setRole(int roleID)
         tokenName[0]=tr("Ѫӡ");
         tokenMax[0]=2;
         crossMax=4;
+        crystal=2;
         break;
     }
 }
