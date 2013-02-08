@@ -406,6 +406,7 @@ void Server::decoder(int id, QString message)
     messageBuffer::writeBatInfor(ans);
     break;
     case 304:
+        ans.reply = ATTACK;
         ans.infor1=304;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
