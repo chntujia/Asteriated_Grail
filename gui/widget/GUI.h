@@ -25,6 +25,7 @@ public:
     void setButtonArea(ButtonArea* buttonArea);
     void setLogArea(LogArea* logArea);
     void setEnable(bool flag);
+    void setCoverArea(HandArea* coverArea){this->coverArea = coverArea;}
     void reset();
 
     HandArea* getHandArea();
@@ -35,10 +36,11 @@ public:
     DecisionArea* getDecisionArea();
     ButtonArea* getButtonArea();
     void logAppend(QString msg);
-
-signals:
-    
+    HandArea* getCoverArea(){return coverArea;}
 public slots:
+    void showCoverArea(bool show);
+    void showCoverArea();
+    void closeCoverArea();
 private:
     HandArea* handArea;
     PlayerArea* playerArea;
@@ -48,6 +50,8 @@ private:
     DecisionArea* decisionArea;
     ButtonArea* buttonArea;
     LogArea* logArea;
+
+    HandArea* coverArea;
 };
 extern GUI* gui;
 

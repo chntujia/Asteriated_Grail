@@ -976,6 +976,7 @@ void Server::decoder(int id, QString message)
                 action.inforstrp = infor[5];
                 messageBuffer::writeBatInfor(action);
                 break;
+
 //²ÔÑ×ÐîÁ¦
     case 2001:
         messageBuffer::writeMsg(message);
@@ -1115,5 +1116,62 @@ void Server::decoder(int id, QString message)
         action.infor2 = infor[4].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-    }
+
+        //ÄîÖä
+        case 1801:
+            ans.reply = infor[1].toInt();
+            if(ans.reply != 0)
+                ans.CardID = infor[2].toInt();
+            messageBuffer::writeBatInfor(ans);
+            break;
+        //·çÀ×Ë«·û
+        case 1802:
+                action.reply = MAGIC;
+                action.infor1 = 1802;
+                action.CardID = infor[1].toInt();
+                action.infor2 = infor[2].toInt();
+                action.infor3 = infor[3].toInt();
+                action.srcID = infor[4].toInt();
+                messageBuffer::writeBatInfor(action);
+                break;
+        case 1803:
+            action.reply = MAGIC;
+            action.infor1 = 1803;
+            action.CardID = infor[1].toInt();
+            action.infor2 = infor[2].toInt();
+            action.infor3 = infor[3].toInt();
+            action.srcID = infor[4].toInt();
+            messageBuffer::writeBatInfor(action);
+            break;
+        //ÁéÁ¦±À½â
+        case 1804:
+            ans.reply = infor[1].toInt();
+            if(ans.reply != 0)
+                ans.infor1 = infor[2].toInt();
+            messageBuffer::writeBatInfor(ans);
+            break;
+        //°Ù¹íÒ¹ÐÐ
+        case 1805:
+            ans.reply = infor[1].toInt();
+            if(ans.reply != 0)
+            {
+                ans.CardID = infor[2].toInt();             
+            }
+            messageBuffer::writeBatInfor(ans);
+            break;
+        //°Ù¹íÒ¹ÐÐ£¨»ð£©
+        case 180502:
+            ans.reply = infor[1].toInt();
+            ans.infor1 = infor[2].toInt();
+            if(ans.reply != 0)
+            {
+                ans.infor2 = infor[3].toInt();
+            }
+            messageBuffer::writeBatInfor(ans);
+            break;
+        //°Ù¹íÒ¹ÐÐ£¨ÆÕ£©
+        case 180504:
+            messageBuffer::writeInfor(infor[1].toInt());
+            break;
+  }
 }

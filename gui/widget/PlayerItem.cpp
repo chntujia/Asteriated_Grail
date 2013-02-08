@@ -1,6 +1,7 @@
 #include "PlayerItem.h"
 #include "data/DataInterface.h"
 #include <QPainter>
+#include <QPushButton.h>
 StatusItem::StatusItem(Status* status)
 {
     this->status=status;
@@ -56,6 +57,9 @@ PlayerItem::PlayerItem(Player* player):selected(0)
     this->height=frame.height();
     gem=QPixmap("resource/Egem.png");
     crystal=QPixmap("resource/Ecrystal.png");
+
+
+
 }
 QRectF PlayerItem::boundingRect() const
 {
@@ -100,16 +104,19 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         entry+=QString::number(player->getToken(1))+'/'+QString::number(player->getTokenMax(1));
         painter->drawText(width*0.55,height*0.82,entry);
     }
+    if(player->getTokenMax(2)>0)
+    {
+        painter->drawPixmap(0,0,QPixmap("resource/token3.png"));
+        entry=player->getTokenName(2)+"£º";
+        entry+=QString::number(player->getToken(2))+'/'+QString::number(player->getTokenMax(2));
+        painter->drawText(width*0.55,height*0.92,entry);
+    }
     if(player->getTap())
         painter->drawPixmap(0,0,QPixmap(player->getTapSource()));
     if(player->getSpecial(0))
         painter->drawPixmap(115,20,QPixmap("resource/shufu.png"));
     if(player->getSpecial(1))
-        painter->drawPixmap(115,35,QPixmap("resource/tiaoxin.png"));
-    if(player->getSpecial(2))
-        painter->drawPixmap(115,50,QPixmap("resource/lianjie.png"));
-    if(player->getSpecial(3))
-        painter->drawPixmap(115,65,QPixmap("resource/tongsheng.png"));
+        painter->drawPixmap(115,40,QPixmap("resource/tiaoxin.png"));
     if(selected)
         painter->drawPixmap(-5,-5,QPixmap("resource/playerSelected.png"));
 
@@ -173,3 +180,5 @@ bool PlayerItem::isSelected()
 {
     return selected;
 }
+
+

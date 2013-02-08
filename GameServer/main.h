@@ -140,6 +140,8 @@ public:
     void specialNotice(int ID,int type,int flag){emit this->sendMessage(-1,combMessage("43",TOQSTR(ID),TOQSTR(type),TOQSTR(flag)));}
     void tokenNotice(int ID,int tokenID,int howMany){emit this->sendMessage(-1,combMessage("45",TOQSTR(ID),TOQSTR(tokenID),TOQSTR(howMany)));}
     void askForRolePick(int ID,int howMany,QList<int> *roles);
+    void coverCardNotice(int playerID,int howMany,QList<CardEntity*> cards,bool remove,bool show);
+    void askForSkillNumber(int playerID,int skillNum){emit this->sendMessage(playerID,combMessage(TOQSTR(skillNum)));}
 signals:
     void sendMessage(int,QString);
 

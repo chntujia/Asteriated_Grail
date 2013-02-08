@@ -2739,6 +2739,7 @@ void XianZhe::ShengJieFaDian(QList<void *> args)
     this->engine->timeLine3(harm,this,this,"圣洁法典");
 }
 
+
 GeDouJia::GeDouJia(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
 {
     this->characterID=20;
@@ -3740,4 +3741,208 @@ void HongLian::skillReset(QList<void *> args)
     if(this != (PlayerEntity*)args[0])
         return;
     XingHongShengYueUsed = false;
+}
+LingFu::LingFu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID = 18;
+    this->star = 4;
+    this->makeConnection(engine);
+
+}
+
+void LingFu::nianZhou(QList<void *> args)
+{
+    if(this->coverCards.count() >= 2)
+        return;
+    coder.askForSkill(this->getID(),"念咒");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+    coder.notice("灵符师发动【念咒】");
+
+    CardEntity* yaoLi = getCardByID(ans.CardID);
+    QList<CardEntity*> yaoLis;
+    yaoLis << yaoLi;
+
+    engine->moveCardFrom(yaoLi);
+    engine->moveCardToCover(yaoLi,this->getID());
+    coder.moveCardNotice(1,yaoLis,this->getID(),HAND,this->id,COVERED);
+    coder.coverCardNotice(this->id,1,yaoLis,false,false);
+
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+}
+
+void LingFu::leiMing(QList<void *> args)
+{
+    BatInfor* action = (BatInfor*) args[0];
+    if(action->srcID != this->id)
+        return;
+    if(action->infor1 != 1802)
+        return;
+    coder.notice("灵符师发动【灵符-雷鸣】");
+
+    CardEntity* card = getCardByID(action->CardID);
+    QList<CardEntity*> cards;
+    cards << card;
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->id,1,"y",cards);
+
+    Harm harm;
+    harm.type = MAGIC;
+    harm.harmPoint = 1;
+    this->lingLiBengJie(harm);
+
+    PlayerEntity* target = this;
+    for(int counter = 0;counter < 2;target = target->getNext())
+    {
+        if(target->getID() != action->infor2 && target->getID() != action->infor3)
+            continue;
+        engine->timeLine3(harm,this,target,"灵符-雷鸣");
+        counter++;
+    }
+
+    this->nianZhou(args);
+}
+
+void LingFu::fengXing(QList<void *> args)
+{
+    BatInfor* action = (BatInfor*) args[0];
+    if(action->srcID != this->id)
+        return;
+    if(action->infor1 != 1803)
+        return;
+    coder.notice("灵符师发动【灵符-风行】");
+
+    CardEntity* card = getCardByID(action->CardID);
+    QList<CardEntity*> cards;
+    cards << card;
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->id,1,"y",cards);
+
+    Harm harm;
+    harm.type = MAGIC;
+    harm.harmPoint = 1;
+
+    this->lingLiBengJie(harm);
+    PlayerEntity* target = this;
+    for(int counter = 0;counter < 2;target = target->getNext())
+    {
+        if(target->getID() != action->infor2 && target->getID() != action->infor3)
+            continue;
+        counter++;
+
+        if(target->getHandCards().count() == 0)
+            continue;
+        coder.askForDiscard(target->getID(),1,"n");
+
+        QList<CardEntity*> cardChosen;
+        cardChosen = messageBuffer::readCardID(1);
+        target->removeHandCards(cardChosen,false);
+        coder.discardNotice(target->getID(),1,"n",cardChosen);
+
+    }
+
+    this->nianZhou(args);
+}
+
+void LingFu::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(leiMing(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(fengXing(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(baiGuiYeXing(QList<void*>)));
+}
+
+void LingFu::lingLiBengJie(Harm &hurt)
+{
+    if(this->getEnergy() <= 0)
+        return;
+    coder.askForSkill(this->getID(),"灵力崩解");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+
+    coder.notice("灵符师发动【灵力崩解】");
+    if(ans.infor1 == 0)
+        this->setCrystal(this->getCrystal()-1);
+    else
+        this->setGem(this->getGem()-1);
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+
+    hurt.harmPoint++;
+}
+
+void LingFu::baiGuiYeXing(QList<void *> args)
+{
+    PlayerEntity *src = (PlayerEntity*)args[0];
+    bool isActive = *(bool*)args[4];
+    if(src->getID() != this->getID())
+        return;
+    if(!isActive)
+        return;
+    if(this->getCoverCards().count() == 0)
+        return;
+
+    coder.askForSkill(this->getID(),"百鬼夜行");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+
+    coder.notice("灵符师发动【百鬼夜行】");
+
+    CardEntity *yaoLi = getCardByID(ans.CardID);
+    QList<CardEntity*> yaoLis;
+    yaoLis << yaoLi;
+    PlayerEntity *dst1,*dst2;
+    BatInfor ans2;
+
+
+
+
+    if(yaoLi->getElement() == "fire")
+    {
+        coder.askForSkillNumber(this->getID(),180501);
+        ans2 = messageBuffer::readBatInfor();
+        dst1 = engine->getPlayerByID(ans2.infor1);
+        if(ans2.reply != 0)
+        {
+            engine->moveCardFromCoverToDiscard(yaoLi,true);
+            this->setToken(2,this->getCoverCards().count());
+            coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+            coder.coverCardNotice(this->getID(),1,yaoLis,true,true);
+            dst2 = engine->getPlayerByID(ans2.infor2);
+            PlayerEntity *target = this;
+
+            Harm hurt;
+            hurt.type = MAGIC;
+            hurt.harmPoint = 1;
+            this->lingLiBengJie(hurt);
+
+            for(int counter = 0;counter < engine->getPlayerNum();counter++,target = target->getNext())
+            {
+                if(target->getID() == dst1->getID() || target->getID() == dst2->getID())
+                    continue;
+                engine->timeLine3(hurt,this,target,"百鬼夜行");
+            }
+            return;
+        }
+    }
+    else
+    {
+        coder.askForSkillNumber(this->getID(),180503);
+        int dstID = messageBuffer::readInfor();
+        dst1 = engine->getPlayerByID(dstID);
+    }
+
+    engine->moveCardFromCoverToDiscard(yaoLi,false);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),1,yaoLis,true,false);
+
+    Harm hurt;
+    hurt.type = MAGIC;
+    hurt.harmPoint = 1;
+    this->lingLiBengJie(hurt);
+    engine->timeLine3(hurt,this,dst1,"百鬼夜行");
+
 }

@@ -15,6 +15,13 @@ RoomScene::RoomScene()
 {
     setBackgroundBrush(QBrush(QPixmap("resource/background.png")));
 
+    coverArea = new HandArea;
+    addItem(coverArea);
+    coverArea->setPos(HandPos);
+    gui->setCoverArea(coverArea);
+    coverArea->disableAll();
+    coverArea->setVisible(false);
+
     handArea = new HandArea;
     addItem(handArea);
     handArea->setPos(HandPos);

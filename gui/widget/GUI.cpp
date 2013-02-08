@@ -1,4 +1,5 @@
 #include "widget/GUI.h"
+#include "DataInterface.h"
 GUI* gui=NULL;
 GUI::GUI(QObject *parent) :
     QObject(parent)
@@ -11,6 +12,8 @@ void GUI::reset()
     handArea->reset();
     tipArea->reset();
     decisionArea->reset();
+
+    coverArea->reset();
 }
 
 void GUI::setEnable(bool flag)
@@ -98,4 +101,22 @@ ButtonArea* GUI::getButtonArea()
 void GUI::logAppend(QString msg)
 {
     logArea->append(msg);
+}
+
+void GUI::showCoverArea(bool show)
+{
+    this->handArea->setVisible(!show);
+    this->coverArea->setVisible(show);
+}
+
+void GUI::showCoverArea()
+{
+    this->handArea->setVisible(false);
+    this->coverArea->setVisible(true);
+}
+
+void GUI::closeCoverArea()
+{
+    this->coverArea->setVisible(false);
+    this->handArea->setVisible(true);
 }

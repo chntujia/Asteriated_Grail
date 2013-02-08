@@ -133,6 +133,27 @@ void LingHun::LingHunLianJie(int harmPoint)
     tipArea->setMsg(tr("是否发动灵魂连接？如是请选择目标"));
     playerArea->enableMate();
     playerArea->setQuota(1);
+    decisionArea->disable(0);
+    QList<Card*> handcards=dataInterface->getHandCards();
+    Player *myself=dataInterface->getMyself();
+    bool flag=true;
+    int i;
+    int n=handcards.size();
+    decisionArea->enable(1);
+    if(n<4)
+    {
+        flag=false;
+        for(i=0;i<n;i++)
+            if(handcards[i]->getElement()!="light")
+            {
+                flag=true;
+                break;
+            }
+        if(myself->getToken(0)>1)
+            flag=true;
+    }
+    if(flag)
+        decisionArea->enable(0);
     }
     else
     {
@@ -149,8 +170,26 @@ void LingHun::LingHunZengFu()
 {
     state=2207;
     tipArea->setMsg(tr("是否发动灵魂增幅？"));
+    QList<Card*> handcards=dataInterface->getHandCards();
+    Player *myself=dataInterface->getMyself();
+    bool flag=true;
+    int i;
+    int n=handcards.size();
     decisionArea->enable(1);
-    decisionArea->enable(0);
+    if(n<4)
+    {
+        flag=false;
+        for(i=0;i<n;i++)
+            if(handcards[i]->getElement()!="light")
+            {
+                flag=true;
+                break;
+            }
+        if(myself->getToken(0)>1)
+            flag=true;
+    }
+    if(flag)
+        decisionArea->enable(0);
 }
 
 void LingHun::cardAnalyse()

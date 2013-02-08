@@ -3,6 +3,7 @@
 
 #include <QGraphicsObject>
 #include "data/Player.h"
+#include <QPushButton>
 class StatusItem : public QGraphicsObject
 {
     friend class PlayerItem;
@@ -27,6 +28,7 @@ public:
     void setSelected(bool yes);
     bool isSelected();
     void adjustStatusItems();
+
 public slots:
     void addStatusItem(Status* status);
     void removeStatusItem(Status* status);
@@ -43,6 +45,7 @@ private:
     int height;
     bool selected;
     QList<StatusItem*> statusItems;
+
 };
 
 #endif // PLAYERITEM_H

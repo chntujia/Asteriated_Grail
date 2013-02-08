@@ -301,5 +301,11 @@ void PlayerEntity::giveHandCards(QList<CardEntity*> cards,PlayerEntity* to)
         to->cardsOverLoad(0);
 }
 
-
+void PlayerEntity::addCardsToCover(QList<CardEntity*> cards)
+{
+    for(int i = 0;i < cards.count();i++)
+    {
+        this->coverCards << cards.at(i);
+    }
+}
 
