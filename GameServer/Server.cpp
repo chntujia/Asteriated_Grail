@@ -359,18 +359,21 @@ void Server::decoder(int id, QString message)
     break;
 //连续技
     case 101:
+        ans.reply = ATTACK;
         ans.infor1=101;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
 //剑影
     case 102:
+        ans.reply = ATTACK;
         ans.infor1=102;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
 //疾风技额外行动
     case 103:
+        ans.reply = ATTACK;
         ans.infor1=103;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
@@ -437,6 +440,7 @@ void Server::decoder(int id, QString message)
         break;
 //法术激荡
     case 404:
+        ans.reply = MAGIC;
         ans.srcID = infor.at(1).toInt();
         ans.infor1=404;
         messageBuffer::writeBatInfor(ans);
@@ -496,6 +500,7 @@ void Server::decoder(int id, QString message)
         break;
 //圣疗额外行动
     case 606:
+        ans.reply = ATTACKORMAGIC;
         ans.srcID = infor.at(1).toInt();
         ans.infor1=606;
         messageBuffer::writeBatInfor(ans);
@@ -609,6 +614,7 @@ void Server::decoder(int id, QString message)
         break;
 //修罗连斩
     case 901:
+        ans.reply = ATTACK;
         ans.srcID = infor.at(1).toInt();
         ans.infor1=901;
         messageBuffer::writeBatInfor(ans);
@@ -645,11 +651,13 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeBatInfor(ans);
         break;
     case 1003:
+        ans.reply = ATTACK;
         ans.infor1 = 1003;
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
     case 1004:
+        ans.reply = ATTACK;
         ans.infor1 = 1004;
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
@@ -666,6 +674,7 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeBatInfor(ans);
         break;
     case 1007:
+        ans.reply = ATTACK;
         ans.infor1 = 1007;
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
@@ -703,16 +712,19 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeBatInfor(action);
         break;
     case 1104:
+        ans.reply = ATTACK;
         ans.infor1 = 1104;
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
     case 1105:
+        ans.reply = MAGIC;
         ans.infor1 = 1105;
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
     case 1106:
+        ans.reply = MAGIC;
         ans.infor1 = 1106;
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
@@ -758,11 +770,13 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeBatInfor(action);
         break;
     case 1205:
+        ans.reply = ATTACKORMAGIC;
         ans.infor1 = 1205;
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
     case 1206:
+        ans.reply = ATTACKORMAGIC;
         ans.infor1 = 1206;
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
@@ -913,6 +927,7 @@ void Server::decoder(int id, QString message)
         break;
 //迅捷额外
     case 1607:
+        ans.reply = ATTACK;
         ans.infor1=1607;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
@@ -930,6 +945,7 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeInfor(infor[1].toInt());
         break;
     case 2103:
+        ans.reply = ATTACK;
         ans.infor1 = 2103;
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
@@ -1083,6 +1099,7 @@ void Server::decoder(int id, QString message)
         break;
 //戒骄戒躁
     case 2802:
+        ans.reply=ATTACKORMAGIC;
         ans.infor1=2802;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);

@@ -758,7 +758,7 @@ void Saintness::healingLight(QList<void *> args)
     cards << getCardByID(magic->CardID);
     PlayerEntity* player = engine->getPlayerByID(magic->dstID);
     this->engine->useCard(cards,this,player);
-    int dst[3], n, cross;
+    int dst[3], n;
     n=magic->infor2;
     dst[0] = magic->dstID;
     if (n>1)
@@ -2382,7 +2382,8 @@ void ShenGuan::ShengShiShouHu(Harm harm, PlayerEntity *src, PlayerEntity *dst, i
 {
     if(dst!=this)
         return;
-    *crossAvailable = 1;
+    if(crossNum>1)
+        *crossAvailable = 1;
 }
 
 //水之神力
@@ -2468,7 +2469,6 @@ void ShenGuan::ShenShengLingYu(QList<void *> args)
     }
     if(magic->infor2 == 1)
     {
-        int cross = this->getCrossNum();
         this->setCrossNum(getCrossNum()-1);
         coder.crossChangeNotice(this->getID(), getCrossNum());
         coder.notice("神官移除1点治疗");
@@ -3549,8 +3549,6 @@ HongLian::HongLian(BackgroundEngine *engine, int id, int color):PlayerEntity(eng
     XingHongShengYueUsed = false;
     tap = false;
     this->makeConnection(engine);
-
-    crystal = 2;
 }
 
 void HongLian::makeConnection(BackgroundEngine *engine)
@@ -3581,6 +3579,7 @@ void HongLian::XingHongShengYue(QList<void *> args)
     if(messageBuffer::readInfor() == 0)
         return;
 
+    XingHongShengYueUsed = true;
     this->setCrossNum(crossNum+1);
     coder.crossChangeNotice(this->getID(), crossNum);
     coder.notice("红莲骑士发动【猩红圣约】，增加1治疗");
@@ -3687,6 +3686,7 @@ void HongLian::JieJiaoJieZao1(QList<void *> args)
         crystal--;
     else
         gem--;
+    coder.energyNotice(this->getID(),gem,crystal);
 
     tap = false;
     coder.tapNotice(this->getID(),0,"【普通形态】");

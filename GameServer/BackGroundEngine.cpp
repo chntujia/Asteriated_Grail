@@ -178,7 +178,7 @@ void BackgroundEngine::seatArrange()
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
     for(int i=1; i<= 17 ;i++)
-        roles<<28;
+        roles<<10;
     roles<<21;
     roles<<20;
     roles<<22;
@@ -632,7 +632,6 @@ void BackgroundEngine::actionPhase()
                 break;
             args.clear();
             args<<&chosen;
-            coder.notice(QString::number(chosen.reply));
             emit additonalActionSIG(args);
         }
 
