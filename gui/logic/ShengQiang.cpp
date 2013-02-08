@@ -245,3 +245,11 @@ void ShengQiang::additionalAction()
         tipArea->addBoxItem(tr("3.¹¥»÷ĞĞ¶¯(Ê¥¹âÆíÓú)"));
 
 }
+
+void ShengQiang::turnBegin()
+{
+    Role::turnBegin();
+    HuiYaoAddition =false;
+    ChengJieAddition=false;
+    ShengGuangQiYuAddition=false;
+}

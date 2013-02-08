@@ -123,7 +123,8 @@ void QiDao::GuangHuiXinYang()
     howMany=2<howMany?2:howMany;
     handArea->setQuota(howMany);
     handArea->enableAll();
-
+    if(howMany==0)
+        playerArea->enableMate();
     decisionArea->enable(1);
     decisionArea->disable(0);
 }

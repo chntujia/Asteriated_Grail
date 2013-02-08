@@ -96,18 +96,15 @@ void HongLian::XingHongShiZi()
     tipArea->reset();
 
     handArea->setQuota(2);
-    playerArea->setQuota(1);
-
-    decisionArea->enable(1);
-    decisionArea->disable(0);
-
     handArea->enableMagic();
+    playerArea->setQuota(1);
+    decisionArea->enable(1);
 }
 
 void HongLian::cardAnalyse()
 {
     Role::cardAnalyse();
-    switch(state)
+    switch (state)
     {
     case 2803:
         playerArea->enableAll();

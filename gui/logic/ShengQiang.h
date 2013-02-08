@@ -10,6 +10,7 @@ public:
     void normal();
     void askForSkill(QString skill);
     void additionalAction();
+    void turnBegin();
 public slots:
     void onOkClicked();
     void onCancelClicked();

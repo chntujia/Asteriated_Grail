@@ -11,7 +11,6 @@ public:
     void attackOrMagic();
     void askForSkill(QString skill);
     void additionalAction();
-    void cardAnalyse();
     void turnBegin();
     void XingHongShengYue();
     void ShaLuShengYan();
@@ -21,6 +20,7 @@ public:
 public slots:
     void onOkClicked();
     void onCancelClicked();
+    void cardAnalyse();
     void XingHongShiZi();
 private:
     int dst[2];

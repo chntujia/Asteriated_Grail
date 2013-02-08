@@ -181,6 +181,8 @@ void ShenGuan::ShenShengLingYu2()
     }
 
     handArea->enableAll();
+    decisionArea->enable(1);
+    decisionArea->disable(0);
 }
 
 void ShenGuan::cardAnalyse()
