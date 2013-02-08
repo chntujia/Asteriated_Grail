@@ -6,7 +6,9 @@ Player::Player(int ID, int isRed):id(ID),handCardsMax(6),crossNum(0),crossMax(2)
     gem=0;
     crystal=0;
     handCardsNum=0;
-    tokenMax[1]=tokenMax[0]=token[1]=token[0]=0;
+    coverCardsMax = 0;
+    coverCardsNum = 0;
+    tokenMax[2]=tokenMax[1]=tokenMax[0]=token[2]=token[1]=token[0]=0;
     for(int i=0;i<5;i++ )
         specials[i]=false;
 }
@@ -83,6 +85,11 @@ void Player::setRole(int roleID)
         name=tr("[贤者]");
         energyMax=4;
         break;
+    case 18:
+        name = tr("[灵符师]");
+        tokenName[2] = tr("妖力");
+        tokenMax[2] = 2;
+        break;
     case 21:
         name=tr("[勇者]");
         tapSource="resource/jingpilijie.png";
@@ -133,6 +140,7 @@ void Player::setHandCardsMax(int howMany)
 {
     handCardsMax=howMany;
 }
+
 void Player::setCrossNum(int howMany)
 {
     crossNum=howMany;

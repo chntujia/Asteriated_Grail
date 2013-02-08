@@ -959,5 +959,61 @@ void Server::decoder(int id, QString message)
                 action.inforstrp = infor[5];
                 messageBuffer::writeBatInfor(action);
                 break;
+        //念咒
+        case 1801:
+            ans.reply = infor[1].toInt();
+            if(ans.reply != 0)
+                ans.CardID = infor[2].toInt();
+            messageBuffer::writeBatInfor(ans);
+            break;
+        //风雷双符
+        case 1802:
+                action.reply = MAGIC;
+                action.infor1 = 1802;
+                action.CardID = infor[1].toInt();
+                action.infor2 = infor[2].toInt();
+                action.infor3 = infor[3].toInt();
+                action.srcID = infor[4].toInt();
+                messageBuffer::writeBatInfor(action);
+                break;
+        case 1803:
+            action.reply = MAGIC;
+            action.infor1 = 1803;
+            action.CardID = infor[1].toInt();
+            action.infor2 = infor[2].toInt();
+            action.infor3 = infor[3].toInt();
+            action.srcID = infor[4].toInt();
+            messageBuffer::writeBatInfor(action);
+            break;
+        //灵力崩解
+        case 1804:
+            ans.reply = infor[1].toInt();
+            if(ans.reply != 0)
+                ans.infor1 = infor[2].toInt();
+            messageBuffer::writeBatInfor(ans);
+            break;
+        //百鬼夜行
+        case 1805:
+            ans.reply = infor[1].toInt();
+            if(ans.reply != 0)
+            {
+                ans.CardID = infor[2].toInt();             
+            }
+            messageBuffer::writeBatInfor(ans);
+            break;
+        //百鬼夜行（火）
+        case 180502:
+            ans.reply = infor[1].toInt();
+            ans.infor1 = infor[2].toInt();
+            if(ans.reply != 0)
+            {
+                ans.infor2 = infor[3].toInt();
+            }
+            messageBuffer::writeBatInfor(ans);
+            break;
+        //百鬼夜行（普）
+        case 180504:
+            messageBuffer::writeInfor(infor[1].toInt());
+            break;
     }
 }

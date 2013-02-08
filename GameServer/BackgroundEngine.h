@@ -119,6 +119,10 @@ public slots:
     //弃牌加入弃牌堆槽
     void toDiscardPileSLOT(QList<CardEntity*> cards,bool show);
 
+    void moveCardFrom(CardEntity* card);
+    void moveCardToCover(CardEntity* card,int dstPlayerID);
+    void moveCardFromCoverToDiscard(CardEntity* card,bool show);
+
 signals:
     //以下各时间点的信号
     void timeLine1ProSIG(QList<void*> args);

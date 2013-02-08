@@ -109,6 +109,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 17:
         return new XianZhe(engine,id,color);
         break;
+    case 18:
+        return new LingFu(engine,id,color);  //debug用
+        break;
     case 21:
         return new YongZhe(engine,id,color);
         break;
@@ -166,9 +169,9 @@ void BackgroundEngine::seatArrange()
     playerList.clear();
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
-    for(int i=1; i<= 17 ;i++)
-        roles<<i;
-    roles<<21;
+    for(int i=13; i<= 18 ;i++)
+        roles<<18;
+    //roles<<21;
 
     randomize(&roles);
 
@@ -1214,5 +1217,60 @@ void BackgroundEngine::toDiscardPileSLOT(QList<CardEntity*> cards,bool show)
             this->discardPileCovered << cards.at(i);
     }
 }
+//将某牌从原位置移走。不发送任何信息给client。
+void BackgroundEngine::moveCardFrom(CardEntity* card)
+{
+    bool test;
+    switch(card->getPlace())
+    {
+    case PILE:
+        this->pile.removeOne(card);
+        break;
+    case DISCARDPILE:
+        this->discardPile.removeOne(card);
+        break;
+    case DISCARDPILECOVERED:
+        this->discardPileCovered.removeOne(card);
+        break;
+    case HAND:
+        test = this->getPlayerByID(card->getOwner())->removeOneHandCard(card);
+        card->setOwner(OWNERLESS);
+        break;
+    case COVERED:
+        this->getPlayerByID(card->getOwner())->removeOneCoverCard(card);
+        card->setOwner(OWNERLESS);
+        break;
+    case EFFECT:
+        this->getPlayerByID(card->getOwner())->removeOneEffectCard(card);
+        card->setOwner(OWNERLESS);
+        card->setSrcUser(OWNERLESS);
+        break;
+    }
+}
+//将某牌移入某角色盖牌区。不发送任何信息给client。要求该卡牌应先从其他位置被移除。
+void BackgroundEngine::moveCardToCover(CardEntity* card,int dstPlayerID)
+{
+    card->setOwner(dstPlayerID);
+    card->setPlace(COVERED);
+    QList<CardEntity*> cards;
+    cards << card;
+    this->getPlayerByID(dstPlayerID)->addCardsToCover(cards);
 
+}
+//将某牌从盖牌区移到弃牌堆。不发送任何信息给client。
+void BackgroundEngine::moveCardFromCoverToDiscard(CardEntity* card,bool show)
+{
+    this->getPlayerByID(card->getOwner())->removeOneCoverCard(card);
+    card->setOwner(OWNERLESS);
+    if(show)
+    {
+        card->setPlace(DISCARDPILE);
+        this->discardPile << card;
+    }
+    else
+    {
+        card->setPlace(DISCARDPILECOVERED);
+        this->discardPileCovered << card;
+    }
+}
 

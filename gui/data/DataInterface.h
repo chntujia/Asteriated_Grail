@@ -17,7 +17,9 @@ public:
     void initTeam(int moraleMax);
     void sortPlayers();
     void addHandCard(Card* card);
+    void addCoverCard(Card* card);
     void removeHandCard(Card *card);
+    void removeCoverCard(Card *card);
     void setMyself(Player* player);
     void setID(int id);
     void setPlayerMax(int playerMax);
@@ -40,6 +42,7 @@ private:
     QList<Card*> cardDB;
     QList<Player*> playerList;
     QList<Card*> handcards;
+    QList<Card*> coverCards;
     Player* myself;
     Team *red,*blue,*otherTeam,*myTeam;
     QString queue;

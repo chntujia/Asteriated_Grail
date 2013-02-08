@@ -38,7 +38,7 @@ Role::Role(QObject *parent) :
     decisionArea=gui->getDecisionArea();
     tipArea=gui->getTipArea();
     teamArea=gui->getTeamArea();
-
+    coverArea = gui->getCoverArea();
 }
 void Role::makeConnection()
 {
@@ -53,7 +53,13 @@ void Role::makeConnection()
     connect(buttonArea->getButtons().at(2),SIGNAL(buttonSelected(int)),this,SLOT(extract()));
     connect(buttonArea,SIGNAL(buttonUnselected()),this,SLOT(onCancelClicked()));
     connect(handArea,SIGNAL(cardReady()),this,SLOT(cardAnalyse()));
+    connect(coverArea,SIGNAL(cardReady()),this,SLOT(coverCardAnalyse()));
     connect(playerArea,SIGNAL(playerReady()),this,SLOT(playerAnalyse()));
+}
+
+void Role::coverCardAnalyse()
+{
+
 }
 
 void Role::cardAnalyse()
@@ -784,6 +790,7 @@ void Role::decipher(QString command)
     int hitRate;
     int i,howMany;
     int team,gem,crystal;
+    int dir,show;
 
     Card*card;
     Player*player;
@@ -1016,6 +1023,11 @@ void Role::decipher(QString command)
                 card=dataInterface->getCard(cardID);
                 playerList[sourceID]->removeStatus(card);
                 break;
+            case 6:
+                player = playerList.at(sourceID);
+                player->changeCoverCardNum(-howMany);
+
+                break;
             }
         }
         if(targetID!=-1)
@@ -1044,10 +1056,24 @@ void Role::decipher(QString command)
                     playerList[targetID]->addStatus(5,card);
                 QSound::play("sound/Equip.wav");
                 break;
+            case 6:
+                player=playerList.at(targetID);
+                player->changeCoverCardNum(howMany);
+                break;
             }
         }
-        if(sourceID==-1 && sourceArea==1){
-            teamArea->changeLeftCardNum(-howMany);
+        if(sourceID==-1){
+            switch(sourceArea)
+            {
+            case 1:
+                teamArea->changeLeftCardNum(-howMany);
+                break;
+            case 2:
+
+            case 3:
+                teamArea->changeDroppedCardNum(-howMany);
+                break;
+            }
             teamArea->update();
         }
         if(targetID==-1)
@@ -1269,6 +1295,50 @@ void Role::decipher(QString command)
         playerList.at(targetID)->setSpecial(msg.toInt(),arg[3].toInt());
         playerArea->update();
         break;
+//盖牌通告
+    case 48:
+        targetID=arg[1].toInt();
+        howMany=arg[2].toInt();
+        dir = arg[4].toInt();
+        show = arg[5].toInt();
+        cardIDList=arg[3].split(',');
+
+//        if(targetID==myID)
+//        {
+
+//            for(i=0;i<howMany;i++)
+//            {
+//                cardID=cardIDList[i].toInt();
+//                card=dataInterface->getCard(cardID);
+//                if(dir == 0)
+//                    dataInterface->addCoverCard(card);
+//                else
+//                    dataInterface->removeCoverCard(card);
+//            }
+//        }
+
+        if(dir == 0)
+            gui->logAppend(arg[2]+tr("张牌加入玩家") + playerList[targetID]->getName()+tr("盖牌区"));
+        else
+        {
+            if(show == 0)
+                gui->logAppend(tr("玩家") + playerList[targetID]->getName() + tr("移除") + arg[2] + tr("张盖牌"));
+            else
+            {
+                QList<Card*> cards;
+
+                QString log = tr("玩家") + playerList[targetID]->getName() + tr("移除") + arg[2] + tr("张盖牌:");
+                for(int i = 0;i < howMany;i++)
+                {
+                    cards << dataInterface->getCard(cardIDList[i].toInt());
+                    log += tr("[") + cards.at(i)->getName() + tr("]");
+                }
+                gui->logAppend(log);
+                showArea->showCards(cards);
+            }
+        }
+
+        break;
 //标记变更
     case 45:
         targetID=arg[1].toInt();
@@ -1309,8 +1379,7 @@ void Role::decipher(QString command)
             gui->setEnable(1);
             MoBaoChongJi();
         }
-        break;
-
+        break;    
     }
 }
 

@@ -31,11 +31,12 @@ signals:
     void sendCommand(QString);
 
 public slots:
-    void decipher(QString command);
-    void onOkClicked();
-    void onCancelClicked();
-    void cardAnalyse();
-    void playerAnalyse();
+    virtual void decipher(QString command);
+    virtual void onOkClicked();
+    virtual void onCancelClicked();
+    virtual void cardAnalyse();
+    virtual void coverCardAnalyse();
+    virtual void playerAnalyse();
     void exchangeCards();
     void resign();
     void buy();
@@ -52,6 +53,7 @@ protected:
     bool onceUsed;
     int actionFlag;
     HandArea*handArea;
+    HandArea *coverArea;
     PlayerArea*playerArea;
     ButtonArea*buttonArea;
     DecisionArea*decisionArea;

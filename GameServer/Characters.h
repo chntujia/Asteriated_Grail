@@ -2,6 +2,9 @@
 #define CHARACTERS_H
 
 #include "PlayerEntity.h"
+
+
+struct Harm;
 class BackgroundEntity;
 //¿ñÕ½Ê¿
 class Berserker :public PlayerEntity
@@ -402,4 +405,21 @@ public slots:
     void ShengJieFaDian(QList<void*> args);
 private:
 };
+
+class LingFu:public PlayerEntity
+{
+    Q_OBJECT
+public:
+    LingFu(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void leiMing(QList<void*> args);
+    void fengXing(QList<void*> args);
+    void nianZhou(QList<void*> args);
+    void lingLiBengJie(Harm &hurt);
+    void baiGuiYeXing(QList<void*> args);
+private:
+
+};
+
 #endif // CHARACTERS_H
