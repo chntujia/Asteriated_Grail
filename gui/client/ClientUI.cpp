@@ -16,9 +16,9 @@ ClientUI::ClientUI(QWidget *parent) :
              this,SLOT(displayError(QAbstractSocket::SocketError)));
     connect(tcpSocket,SIGNAL(getMessage(QString)),this,SLOT(showMessage(QString)));
 
-    ui->addr->setText("25.85.25.210");
+    ui->addr->setText("127.0.0.1");
     //ui->addr->setText("2001:5C0:1000:B::7C63");
-    ui->port->setText("50000");
+    ui->port->setText("50001");
     ui->board->setText(tr("请连接服务器。若要抢队，请先选择队伍再连接"));
     ui->comboBox->addItem(tr("随机"));
     ui->comboBox->addItem(tr("红队"));
