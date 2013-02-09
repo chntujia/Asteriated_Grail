@@ -3742,8 +3742,6 @@ void HongLian::skillReset(QList<void *> args)
         return;
     XingHongShengYueUsed = false;
 }
-
-
 LingFu::LingFu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
 {
     this->characterID = 18;
@@ -3790,6 +3788,8 @@ void LingFu::leiMing(QList<void *> args)
     this->removeHandCards(cards,true);
     coder.discardNotice(this->id,1,"y",cards);
 
+    this->nianZhou(args);
+
     Harm harm;
     harm.type = MAGIC;
     harm.harmPoint = 1;
@@ -3804,7 +3804,6 @@ void LingFu::leiMing(QList<void *> args)
         counter++;
     }
 
-    this->nianZhou(args);
 }
 
 void LingFu::fengXing(QList<void *> args)
@@ -3822,11 +3821,8 @@ void LingFu::fengXing(QList<void *> args)
     this->removeHandCards(cards,true);
     coder.discardNotice(this->id,1,"y",cards);
 
-    Harm harm;
-    harm.type = MAGIC;
-    harm.harmPoint = 1;
+    this->nianZhou(args);
 
-    this->lingLiBengJie(harm);
     PlayerEntity* target = this;
     for(int counter = 0;counter < 2;target = target->getNext())
     {
@@ -3844,8 +3840,6 @@ void LingFu::fengXing(QList<void *> args)
         coder.discardNotice(target->getID(),1,"n",cardChosen);
 
     }
-
-    this->nianZhou(args);
 }
 
 void LingFu::makeConnection(BackgroundEngine *engine)
