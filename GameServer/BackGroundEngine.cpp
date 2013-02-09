@@ -775,7 +775,7 @@ bool BackgroundEngine::canAct()
         return true;
     for(int i = 0;i < this->currentPlayer->getHandCards().length();i++)
     {
-        if(this->currentPlayer->getHandCards().at(i)->getName() != tr("ê??a"))
+        if(this->currentPlayer->getHandCards().at(i)->getName() != tr("圣光"))
             return true;
     }
     return false;
@@ -804,7 +804,7 @@ void BackgroundEngine::effectApply(CardEntity* card,PlayerEntity* user,PlayerEnt
     user->removeHandCards(cards,true,false);
     coder.moveCardNotice(1,cards,userID,HAND,dstID,EFFECT);
     dst->addBasicEffect(card);
-    if(card->getName()==tr("ê??ü")||card->getSpecialityList().contains(tr("ììê?????")))
+    if(card->getName()==tr("圣盾")||card->getSpecialityList().contains(tr("天使之墙")))
         emit usedShield(userID);
 
 }
