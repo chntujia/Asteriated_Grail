@@ -115,7 +115,6 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
         break;
     case 18:
         return new LingFu(engine,id,color);  //debugó?
-
         break;
     case 21:
         return new YongZhe(engine,id,color);
@@ -1242,7 +1241,11 @@ void BackgroundEngine::toDiscardPileSLOT(QList<CardEntity*> cards,bool show)
             this->discardPileCovered << cards.at(i);
     }
 }
+<<<<<<< HEAD
 //???????ó?-????ò???????·??íè?????????client??
+=======
+//将某牌从原位置移走。不发送任何信息给client。
+>>>>>>> bb2ce59020d9cfa191ecf47af6c727d6bdbf1e11
 void BackgroundEngine::moveCardFrom(CardEntity* card)
 {
     bool test;
@@ -1272,7 +1275,11 @@ void BackgroundEngine::moveCardFrom(CardEntity* card)
         break;
     }
 }
+<<<<<<< HEAD
 //??????ò?è?????é???????????·??íè?????????client??ò??ó??????ó??è?ó????????±?ò?????
+=======
+//将某牌移入某角色盖牌区。不发送任何信息给client。要求该卡牌应先从其他位置被移除。
+>>>>>>> bb2ce59020d9cfa191ecf47af6c727d6bdbf1e11
 void BackgroundEngine::moveCardToCover(CardEntity* card,int dstPlayerID)
 {
     card->setOwner(dstPlayerID);
@@ -1282,7 +1289,11 @@ void BackgroundEngine::moveCardToCover(CardEntity* card,int dstPlayerID)
     this->getPlayerByID(dstPlayerID)->addCardsToCover(cards);
 
 }
+<<<<<<< HEAD
 //???????ó??????ò?”??ú????????·??íè?????????client??
+=======
+//将某牌从盖牌区移到弃牌堆。不发送任何信息给client。
+>>>>>>> bb2ce59020d9cfa191ecf47af6c727d6bdbf1e11
 void BackgroundEngine::moveCardFromCoverToDiscard(CardEntity* card,bool show)
 {
     this->getPlayerByID(card->getOwner())->removeOneCoverCard(card);

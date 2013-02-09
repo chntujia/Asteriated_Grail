@@ -3742,6 +3742,8 @@ void HongLian::skillReset(QList<void *> args)
         return;
     XingHongShengYueUsed = false;
 }
+
+
 LingFu::LingFu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
 {
     this->characterID = 18;

@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 #include "LingFu.h"
+=======
+
+#include "Lingfu.h"
+>>>>>>> bb2ce59020d9cfa191ecf47af6c727d6bdbf1e11
 
 LingFu::LingFu()
 {
@@ -132,7 +137,11 @@ void LingFu::onOkClicked()
         command = "180504;" + QString::number(selectedPlayers[0]->getID()) + ";";
 //        coverArea->removeCardItem(selectedCoverCards[0]);
 //        coverArea->reset();
+<<<<<<< HEAD
         emit sendCommand(command);
+=======
+        emit this->sendCommand(command);
+>>>>>>> bb2ce59020d9cfa191ecf47af6c727d6bdbf1e11
         gui->showCoverArea(false);
         gui->reset();
         break;
@@ -144,7 +153,11 @@ void LingFu::onCancelClicked()
     Role::onCancelClicked();
     QString command;
     switch(state)
+<<<<<<< HEAD
     {
+=======
+    {    
+>>>>>>> bb2ce59020d9cfa191ecf47af6c727d6bdbf1e11
     //ƒÓ÷‰
     case 1801:
         command = "1801;0;;";
@@ -353,4 +366,7 @@ void LingFu::decipher(QString command)
     }
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> bb2ce59020d9cfa191ecf47af6c727d6bdbf1e11

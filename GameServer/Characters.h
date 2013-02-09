@@ -64,7 +64,7 @@ public slots:
     void HuiMeiFengBao(QList<void*> args);
 signals:
 private:
-    \
+    
 };
 
 class AnSha : public PlayerEntity
@@ -80,7 +80,7 @@ public slots:
     void AttackCheck(QList<void*> args);
 signals:
 private:
-    \
+    
 };
 
 class TianShi : public PlayerEntity
@@ -98,7 +98,7 @@ public slots:
     void TianShiJiBan(int userID);
 signals:
 private:
-    \
+    
 };
 class Saintness : public PlayerEntity
 {
@@ -220,7 +220,7 @@ public slots:
     void MaoXianZheTianTang(QList<void*> args);
 signals:
 private:
-    \
+    
 };
 
 
@@ -246,7 +246,7 @@ public slots:
 signals:
 private:
     bool ignite;
-    \
+    
 };
 //÷Ÿ≤√
 class ZhongCai : public PlayerEntity
@@ -408,6 +408,7 @@ public slots:
 private:
 };
 
+
 //∏Ò∂∑
 class GeDouJia : public PlayerEntity
 {
@@ -525,7 +526,6 @@ public slots:
     void lingLiBengJie(Harm &hurt);
     void baiGuiYeXing(QList<void*> args);
 private:
-
 
 };
 

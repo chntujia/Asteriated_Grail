@@ -141,21 +141,25 @@ void DataInterface::addHandCard(Card* card)
     gui->getHandArea()->addCardItem(card);
 
 }
+
 void DataInterface::addCoverCard(Card* card)
 {
     coverCards << card;
     gui->getCoverArea()->addCardItem(card);
 }
+
 void DataInterface::removeHandCard(Card *card)
 {
     handcards.removeOne(card);
     gui->getHandArea()->removeCardItem(card);
 }
+
 void DataInterface::removeCoverCard(Card *card)
 {
     coverCards.removeOne(card);
     gui->getCoverArea()->removeCardItem(card);
 }
+
 Card* DataInterface::getCard(int id)
 {
     return cardDB.at(id);

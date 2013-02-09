@@ -62,6 +62,7 @@ void Role::coverCardAnalyse()
 {
 
 }
+
 void Role::cardAnalyse()
 {
     int i;
@@ -1339,6 +1340,7 @@ void Role::decipher(QString command)
         playerList.at(targetID)->setSpecial(msg.toInt(),arg[3].toInt());
         playerArea->update();
         break;
+
         //盖牌通告
             case 48:
                 targetID=arg[1].toInt();
@@ -1383,6 +1385,7 @@ void Role::decipher(QString command)
                 }
 
                 break;
+
 //标记变更
     case 45:
         targetID=arg[1].toInt();
@@ -1440,6 +1443,7 @@ void Role::decipher(QString command)
             gui->setEnable(1);
             ChongYing(color);
         }
+        break;    
     }
 }
 

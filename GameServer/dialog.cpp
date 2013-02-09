@@ -14,6 +14,7 @@ Dialog::Dialog(QWidget *parent) :
     ui->lineEdit->setText("50000");
 
    connect(ui->buttonBox->button(QDialogButtonBox::Ok),SIGNAL(clicked()), this, SLOT(onOK()));
+
 }
 
 void Dialog::onOK()

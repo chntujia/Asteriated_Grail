@@ -18,8 +18,9 @@ public:
     void sortPlayers();
     void addCoverCard(Card* card);
     void addHandCard(Card* card);
-    void removeCoverCard(Card *card);
+
     void removeHandCard(Card *card);
+    void removeCoverCard(Card *card);
     void setMyself(Player* player);
     void setID(int id);
     void setPlayerMax(int playerMax);

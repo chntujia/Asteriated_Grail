@@ -976,7 +976,6 @@ void Server::decoder(int id, QString message)
                 action.inforstrp = infor[5];
                 messageBuffer::writeBatInfor(action);
                 break;
-
 //²ÔÑ×ÐîÁ¦
     case 2001:
         messageBuffer::writeMsg(message);
@@ -1173,5 +1172,9 @@ void Server::decoder(int id, QString message)
         case 180504:
             messageBuffer::writeInfor(infor[1].toInt());
             break;
+
   }
+
+    }
+
 }
