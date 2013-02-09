@@ -128,7 +128,11 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 28:
         return new HongLian(engine,id,color);
         break;
+    case 29:
+        return new MoQiang(engine,id,color);
+        break;
     }
+
 }
 void BackgroundEngine::randomize(QList<int> *queue)
 {
@@ -189,6 +193,7 @@ void BackgroundEngine::seatArrange()
     roles<<22;
     roles<<23;
     roles<<28;
+    roles<<29;
     randomize(&roles);
 
 }
@@ -282,7 +287,7 @@ void BackgroundEngine::clearData()
     this->playerList.clear();
 }
 
-//??ê?????ê?
+
 void BackgroundEngine::initial()
 {
     this->pile.clear();
@@ -456,7 +461,7 @@ void BackgroundEngine::posionProcess(PlayerEntity* player,CardEntity* card)
     harm.harmPoint = 1;
     harm.type = MAGIC;
     //coder.magicHurtNotice(player->getID(),1,card->getSrcUser(),"????");
-    this->timeLine3(harm,getPlayerByID(card->getSrcUser()),player,"????");
+    this->timeLine3(harm,getPlayerByID(card->getSrcUser()),player,"中毒");
 
 }
 //?éè???àí
@@ -707,7 +712,7 @@ void BackgroundEngine::actionPhase()
             //ì?êa????
             if(bat.CardID == BUY)
             {
-                coder.notice("?????????ò??");
+                coder.notice("执行【购买】");
                 this->drawCards(3,0,this->getCurrentPlayer());
                 int color = this->currentPlayer->getColor();
                 teamArea.setGem(color,teamArea.getGem(color) + bat.infor1);
@@ -717,7 +722,7 @@ void BackgroundEngine::actionPhase()
             }
             else if(bat.CardID == SYNTHESIZE)
             {
-                coder.notice("?????????é??");
+                coder.notice("执行【合成】");
                 this->drawCards(3,0,currentPlayer);
                 int color = this->currentPlayer->getColor();
                 teamArea.setGem(color,teamArea.getGem(color) - bat.infor1);
@@ -734,7 +739,7 @@ void BackgroundEngine::actionPhase()
             }
             else if(bat.CardID == EXTRACT)
             {
-                coder.notice("??????ìáá???");
+                coder.notice("执行【提炼】");
                 int color = this->currentPlayer->getColor();
                 teamArea.setGem(color,teamArea.getGem(color) - bat.infor1);
                 teamArea.setCrystal(color,teamArea.getCrystal(color) - bat.infor2);
@@ -1176,7 +1181,7 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
             missileHurt.harmPoint = missilePoint;
             missileHurt.type = MAGIC;
             //??ê??ü,?ì?éé???
-            this->timeLine3(missileHurt,getPlayerByID(src),dstPlayer,"?§”?");
+            this->timeLine3(missileHurt,getPlayerByID(src),dstPlayer,"魔弹");
             break;
         }
         else if(reply.reply == 802)
@@ -1187,7 +1192,7 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
             missilePoint++;
             cards << getCardByID(reply.CardID);
             useCard(cards,getPlayerByID(src),getPlayerByID(dst));
-            coder.notice("?§”?ê?·??????§”?èú????");
+            coder.notice("魔导师发动【魔弹融合】");
             continue;
         }
 
@@ -1195,7 +1200,7 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
 
 }
 
-//?§”???”?
+
 void BackgroundEngine::missilePass(bool rightOrder,int dst,int src,bool* passed,int missilePoint)
 {
     int i;
@@ -1241,11 +1246,9 @@ void BackgroundEngine::toDiscardPileSLOT(QList<CardEntity*> cards,bool show)
             this->discardPileCovered << cards.at(i);
     }
 }
-<<<<<<< HEAD
-//???????ó?-????ò???????·??íè?????????client??
-=======
+
 //将某牌从原位置移走。不发送任何信息给client。
->>>>>>> bb2ce59020d9cfa191ecf47af6c727d6bdbf1e11
+
 void BackgroundEngine::moveCardFrom(CardEntity* card)
 {
     bool test;
@@ -1275,11 +1278,9 @@ void BackgroundEngine::moveCardFrom(CardEntity* card)
         break;
     }
 }
-<<<<<<< HEAD
-//??????ò?è?????é???????????·??íè?????????client??ò??ó??????ó??è?ó????????±?ò?????
-=======
+
 //将某牌移入某角色盖牌区。不发送任何信息给client。要求该卡牌应先从其他位置被移除。
->>>>>>> bb2ce59020d9cfa191ecf47af6c727d6bdbf1e11
+
 void BackgroundEngine::moveCardToCover(CardEntity* card,int dstPlayerID)
 {
     card->setOwner(dstPlayerID);
@@ -1289,11 +1290,10 @@ void BackgroundEngine::moveCardToCover(CardEntity* card,int dstPlayerID)
     this->getPlayerByID(dstPlayerID)->addCardsToCover(cards);
 
 }
-<<<<<<< HEAD
-//???????ó??????ò?”??ú????????·??íè?????????client??
-=======
+
+
 //将某牌从盖牌区移到弃牌堆。不发送任何信息给client。
->>>>>>> bb2ce59020d9cfa191ecf47af6c727d6bdbf1e11
+
 void BackgroundEngine::moveCardFromCoverToDiscard(CardEntity* card,bool show)
 {
     this->getPlayerByID(card->getOwner())->removeOneCoverCard(card);

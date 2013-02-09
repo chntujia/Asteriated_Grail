@@ -510,7 +510,7 @@ void Role::ChongYing(int color)
     gui->reset();
     state=2951;
     Player* myself=dataInterface->getMyself();
-    if(myself->getID()!=29)
+    if(myself->getName()!=tr("[魔枪]"))
         tipArea->setMsg(tr("弃一张牌，法术或雷将会为魔枪加1伤害"));
     else
         tipArea->setMsg(tr("弃一张牌"));

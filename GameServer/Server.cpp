@@ -1115,6 +1115,59 @@ void Server::decoder(int id, QString message)
         action.infor2 = infor[4].toInt();
         messageBuffer::writeBatInfor(action);
         break;
+        //≥‰”Ø£®∆˙≈∆£©
+            case 2951:
+                ans.reply = infor[1].toInt();
+                if(ans.reply==1){
+                ans.CardID = infor[2].toInt();
+                ans.infor1 = infor[3].toInt();
+                }
+                messageBuffer::writeBatInfor(ans);
+                break;
+        //∞µ÷ÆΩ‚∑≈
+            case 2901:
+                messageBuffer::writeInfor(infor[1].toInt());
+                break;
+        //ª√”∞–«≥Ω
+            case 2902:
+                ans.reply = infor[1].toInt();
+                if(ans.reply==1)
+                {
+                    ans.infor1 = infor[2].toInt();
+                    if(ans.infor1 == 1)
+                    {
+                        ans.dstID = infor[3].toInt();
+                        ans.srcID = infor[4].toInt();
+                    }
+                }
+                messageBuffer::writeBatInfor(ans);
+                break;
+        //∞µ÷Æ±⁄’œ
+            case 2903:
+                messageBuffer::writeMsg(message);
+                break;
+        //∆·∫⁄÷Æ«π
+            case 2904:
+                ans.reply = infor[1].toInt();
+                if(ans.reply!=0)
+                    ans.infor1 = infor[2].toInt();
+                messageBuffer::writeBatInfor(ans);
+                break;
+        //≥‰”Ø
+            case 2905:
+                action.reply = MAGIC;
+                action.infor1 = 2905;
+                action.srcID = infor[1].toInt();
+                action.CardID = infor[2].toInt();
+                messageBuffer::writeBatInfor(action);
+                break;
+        //≥‰”Ø◊∑º”
+            case 2906:
+                ans.reply = ATTACK;
+                ans.srcID = infor.at(1).toInt();
+                ans.infor1=2906;
+                messageBuffer::writeBatInfor(ans);
+                break;
 
         //ƒÓ÷‰
         case 1801:
@@ -1173,7 +1226,7 @@ void Server::decoder(int id, QString message)
             messageBuffer::writeInfor(infor[1].toInt());
             break;
 
-  }
+
 
     }
 

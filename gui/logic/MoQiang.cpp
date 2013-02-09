@@ -238,7 +238,7 @@ void MoQiang::onOkClicked()
         command="2905;";
         sourceID=QString::number(myID);
         command+=sourceID+";";
-        cardID=selectedCards[0]->getID();
+        cardID=QString::number(selectedCards[0]->getID());
         command+=cardID+";";
         dataInterface->removeHandCard(selectedCards[0]);
         emit sendCommand(command);

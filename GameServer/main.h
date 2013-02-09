@@ -135,6 +135,7 @@ public:
     void notice(QString content){emit this->sendMessage(-1,combMessage(TOQSTR(NOTICE),tr(content.toStdString().c_str())));}
     void askForDiscardMagic(int ID){emit this->sendMessage(-1,combMessage("850",TOQSTR(ID)));}
     void askToGiveCard(int ID,int n){emit this->sendMessage(-1,combMessage("750",TOQSTR(ID),TOQSTR(n)));}
+    void askForChongYing(int ID,int color){emit this->sendMessage(-1,combMessage("2950",TOQSTR(ID),TOQSTR(color)));}
     void handcardMaxNotice(int ID,int howMany){emit this->sendMessage(-1,combMessage("40",TOQSTR(ID),TOQSTR(howMany)));}
     void tapNotice(int ID,int flag,QString content){emit this->sendMessage(-1,combMessage("39",TOQSTR(ID),TOQSTR(flag),tr(content.toStdString().c_str())));}
     void specialNotice(int ID,int type,int flag){emit this->sendMessage(-1,combMessage("43",TOQSTR(ID),TOQSTR(type),TOQSTR(flag)));}

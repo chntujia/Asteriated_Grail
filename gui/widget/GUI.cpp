@@ -1,5 +1,5 @@
 #include "widget/GUI.h"
-#include "DataInterface.h"
+#include "data/DataInterface.h"
 GUI* gui=NULL;
 GUI::GUI(QObject *parent) :
     QObject(parent)

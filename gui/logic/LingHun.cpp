@@ -128,10 +128,8 @@ void LingHun::LingHunLianJie(int harmPoint)
     state=2206;
     Player *myself=dataInterface->getMyself();
     decisionArea->enable(1);
-    decisionArea->disable(0);
     if(!lianJieUsed){
     tipArea->setMsg(tr("是否发动灵魂连接？如是请选择目标"));
-    playerArea->enableMate();
     playerArea->setQuota(1);
     decisionArea->disable(0);
     QList<Card*> handcards=dataInterface->getHandCards();
@@ -153,7 +151,7 @@ void LingHun::LingHunLianJie(int harmPoint)
             flag=true;
     }
     if(flag)
-        decisionArea->enable(0);
+        playerArea->enableMate();
     }
     else
     {

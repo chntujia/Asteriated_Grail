@@ -529,4 +529,32 @@ private:
 
 };
 
+//ħǹ
+class MoQiang : public PlayerEntity
+{
+    Q_OBJECT
+public:
+    MoQiang(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void AnZhiJieFang1(QList<void*> args);
+    void AnZhiJieFang2(QList<void *> args);
+    void AnZhiJieFang3(QList<void *> args);
+    void HuanYingXingChen(QList<void*> args);
+    void HuanYingXingChen2(int harmed,int*howMany,PlayerEntity*dst);
+    void AnZhiBiZhang(QList<void*> args);
+    void ChongYing1(QList<void*> args);
+    void ChongYing2(QList<void *> args);
+    void ChongYing3(QList<void *> args);
+    void ChongYing4(QList<void *> args);
+    void QiHeiZhiQiang(QList<void*> args);
+    void skillReset(QList<void*> args);
+private:
+    bool JieFangUsed;
+    bool JieFangFirst;
+    bool HuanYingUsed;
+    bool ChongYingUsed;
+    bool StartUsed;
+    int AddAttackPoint;
+};
 #endif // CHARACTERS_H
