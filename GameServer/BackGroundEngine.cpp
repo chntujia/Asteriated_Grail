@@ -109,8 +109,12 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 17:
         return new XianZhe(engine,id,color);
         break;
+
     case 20:
         return new GeDouJia(engine,id,color);
+        break;
+    case 18:
+        return new LingFu(engine,id,color);  //debugó?
         break;
     case 21:
         return new YongZhe(engine,id,color);
@@ -124,7 +128,11 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 28:
         return new HongLian(engine,id,color);
         break;
+    case 29:
+        return new MoQiang(engine,id,color);
+        break;
     }
+
 }
 void BackgroundEngine::randomize(QList<int> *queue)
 {
@@ -177,13 +185,15 @@ void BackgroundEngine::seatArrange()
     playerList.clear();
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
-    for(int i=1; i<= 17 ;i++)
+
+    for(int i=1; i<= 18 ;i++)
         roles<<i;
     roles<<21;
     roles<<20;
     roles<<22;
     roles<<23;
     roles<<28;
+    roles<<29;
     randomize(&roles);
 
 }
@@ -225,7 +235,7 @@ void BackgroundEngine::role3Pick1Reply(int id,int roleID)
 
 
 
-//游戏开始,游戏流程控制
+//ó??·??ê?,ó??·á??ì????
 void BackgroundEngine::gameStart()
 {
     for(int i = 0;i < this->getPlayerNum();i++)
@@ -262,7 +272,7 @@ void BackgroundEngine::gameStart()
    }
    clearData();
 }
-//清空本局数据
+//????±???ê???
 void BackgroundEngine::clearData()
 {
     for(int i = 0;i < cardList.size();i++)
@@ -277,13 +287,13 @@ void BackgroundEngine::clearData()
     this->playerList.clear();
 }
 
-//初始化函数
+
 void BackgroundEngine::initial()
 {
     this->pile.clear();
     this->discardPile.clear();
     this->discardPileCovered.clear();
-    //读入卡牌文件
+    //?áè?????????
     QFile log("./log.txt");
     log.open(QIODevice::WriteOnly);
     QTextStream out(&log);
@@ -311,20 +321,20 @@ void BackgroundEngine::initial()
 
     out << cardList.length();
     log.close();
-    //洗牌
+    //????
     this->shuffle(false);
     fp.close();
     setPlayerNum(playerSum);
 
 }
 
-//把牌洗回牌堆
+//°???????????
 void BackgroundEngine::shuffle(bool reShuffle)
 {
     QFile fp("./log.txt");
     fp.open(QIODevice::WriteOnly);
     QTextStream out(&fp);
-    //用系统时间设置随机种子
+    //ó??”í?ê±??éè?????ú???ó
     QTime time;
     time= QTime::currentTime();
     qsrand(time.msec()+time.second()*1000);
@@ -410,7 +420,7 @@ void BackgroundEngine::shuffle(bool reShuffle)
         coder.reshuffleNotice(pile.size());
     }
 }
-//检查是否结束游戏
+//?ì?éê?·ń?áê?ó??·
 bool BackgroundEngine::checkEnd()
 {
     if(teamArea.getMorale(RED) <= 0 || teamArea.getCup(BLUE) == 5)
@@ -427,7 +437,7 @@ bool BackgroundEngine::checkEnd()
     }
     return !playing;
 }
-//摸牌函数
+//??????ê?
 void BackgroundEngine::drawCards(int num,int harmed,PlayerEntity* player)
 {
     QList<CardEntity*> newCards;
@@ -441,20 +451,20 @@ void BackgroundEngine::drawCards(int num,int harmed,PlayerEntity* player)
     }
 
     coder.drawNotice(player->getID(),num,newCards);
-    //命令该玩家增加手牌
+    //?üá???í??ò???óê???
     player->addHandCards(newCards,harmed);
 }
-//中毒处理
+//??????àí
 void BackgroundEngine::posionProcess(PlayerEntity* player,CardEntity* card)
 {
     Harm harm;
     harm.harmPoint = 1;
     harm.type = MAGIC;
-    //coder.magicHurtNotice(player->getID(),1,card->getSrcUser(),"中毒");
+    //coder.magicHurtNotice(player->getID(),1,card->getSrcUser(),"????");
     this->timeLine3(harm,getPlayerByID(card->getSrcUser()),player,"中毒");
 
 }
-//虚弱处理
+//?éè???àí
 void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
 {
     coder.askForWeak(player->getID(),howMany);
@@ -464,7 +474,7 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
 
     if(reply == 0)
     {
-        //跳过
+        //ì???
         this->attackLeft = 0;
         this->magicLeft = 0;
         this->specialLeft = 0;
@@ -475,13 +485,13 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
     }
     else if(reply == 1)
     {
-        //强摸
+        //????
         coder.weakNotice(player->getID(),1,howMany);
         this->drawCards(howMany,0,player);
     }
 }
 
-//回合开始时检测当前玩家面前的基础效果和专属效果
+//??????ê?ê±?ì?a”±?°í??ò???°”??ù???§???í??ê??§??
 void BackgroundEngine::checkEffect(PlayerEntity* player)
 {
     for(int i = 0;i < player->getBasicEffect().size();i++)
@@ -505,7 +515,7 @@ void BackgroundEngine::checkEffect(PlayerEntity* player)
         }    
 }
 
-//行动一次之后的处理，扣减相关行动的剩余行动次数
+//????ò??????ó”???àí???????à??????”?ê?óà??????ê?
 void BackgroundEngine::acted(int kind)
 {
     if(kind == ATTACK)
@@ -551,7 +561,7 @@ void BackgroundEngine::turnBeginPhase(PlayerEntity* currentPlayer)
 
     //checkEffect();
 }
-//以下各函数判定是否能执行相应行动
+//ò???????ê?????ê?·ń?ü?????àó?????
 bool BackgroundEngine::allowAttack()
 {
     if(this->actionLeft != 0 || this->attackOrMagicLeft != 0 || this->attackLeft != 0)
@@ -600,10 +610,10 @@ void BackgroundEngine::addActionNum(int kind)
 
 
 
-//行动阶段函数
+//??????????ê?
 void BackgroundEngine::actionPhase()
 {    
-    //这个标记表明是否行动过，如果已经行动过，那么追加的各种行动机会可以放弃
+    //?a??±ê??±í??ê?·ń????????è???ò??-?????????????·?ó”??????????ú?á?éò?·??ú
     bool acted = false;
     bool firstTime=true;
     int actionFlag=0;
@@ -616,7 +626,7 @@ void BackgroundEngine::actionPhase()
 
     while((this->allowAttack()||this->allowMagic()||this->allowSpecial())&&playing)
     {        
-        //根据允许的行动类别询问client
+        //?ù???ê?í”?????àà±????êclient
         if(firstTime){
             emit actionPhaseSIG(args);
             emit tiaoXinPhaseSIG(currentPlayer,&actionFlag,&canGiveUp);
@@ -635,23 +645,23 @@ void BackgroundEngine::actionPhase()
             emit additonalActionSIG(args);
         }
 
-        //读取client的回复
+        //?áè?client”?????
         BatInfor bat = messageBuffer::readBatInfor();
 
-        //放弃额外行动
+        //·??ú??ía????
         if(bat.reply == FINISH)
             break;
-        //无法行动
+        //??·?????
         if(bat.reply == UNACTIONAL)
         {                        
-            //弃牌重摸
+            //?ú??????
             this->reDraw();
             continue;
         }
 
         if(bat.reply == ATTACK || bat.reply==ATTACKSKILL)
         {
-            //使用攻击牌
+            //ê?ó???????
             CardEntity* usingCard = getCardByID(bat.CardID);
             PlayerEntity* dst = getPlayerByID(bat.dstID);
             PlayerEntity* src = getPlayerByID(bat.srcID);
@@ -681,7 +691,7 @@ void BackgroundEngine::actionPhase()
             args.clear();
             args<<src1;
             emit beforeMagicSIG(args);
-            //使用法术牌
+            //ê?ó?·?ê???
             if(bat.infor1 == COMMONMAGIC)
                 this->useMagicCard(bat.CardID,bat.srcID,bat.dstID);
             else
@@ -699,7 +709,7 @@ void BackgroundEngine::actionPhase()
         }
         else if(bat.reply == SPECIAL)
         {
-            //特殊行动
+            //ì?êa????
             if(bat.CardID == BUY)
             {
                 coder.notice("执行【购买】");
@@ -757,8 +767,8 @@ void BackgroundEngine::turnEndPhase()
 
 }
 
-//判定当前是否可以行动（如4圣光等情况）
-//此函数未使用，该功能交由client完成
+//????”±?°ê?·ń?éò???????è?4ê??a”è?é????
+//????ê???ê?ó????????ü??óéclientíê?é
 bool BackgroundEngine::canAct()
 {
     if(this->currentPlayer->getHandCards().length() <= this->currentPlayer->getHandCardMax() - 3)
@@ -780,7 +790,7 @@ void BackgroundEngine::reDraw()
     this->drawCards(cardNum,0,this->currentPlayer);
 }
 
-//设置基础效果到某玩家面前
+//éè???ù???§??”???í??ò???°
 void BackgroundEngine::effectApply(CardEntity* card,PlayerEntity* user,PlayerEntity* dst)
 {
     QList<CardEntity*> cards;
@@ -799,8 +809,8 @@ void BackgroundEngine::effectApply(CardEntity* card,PlayerEntity* user,PlayerEnt
 
 }
 
-//"使用"卡牌时调用此函数
-//第四个参数表明卡牌使用后是否留在场上（基础效果）
+//"ê?ó?"????ê±”?ó?????ê?
+//”ú??????ê?±í??????ê?ó??óê?·ńá??ú??é????ù???§????
 void BackgroundEngine::useCard(QList<CardEntity*> cards,PlayerEntity* user,PlayerEntity* dst,bool stay,int realCard)
 {    
     coder.useCardNotice(cards,(dst == NULL)?-1:dst->getID(),user->getID(),realCard);
@@ -845,7 +855,7 @@ void BackgroundEngine::useMagicCard(int cardID, int srcID, int dstID)
     }
 }
 
-//以下为时间轴函数
+//ò?????ê±???á??ê?
 void BackgroundEngine::timeLine1(CardEntity* attackCard,PlayerEntity* src,PlayerEntity* dst,bool isActiveAttack)
 {   
     Harm harm = getHarmFromCard(attackCard);
@@ -857,7 +867,7 @@ void BackgroundEngine::timeLine1(CardEntity* attackCard,PlayerEntity* src,Player
     args << attackCard;
     args << &isActiveAttack;
     args << &attackType;
-    emit timeLine1ProSIG(args);//此信号用于在伤害时间轴之前生效的技能
+    emit timeLine1ProSIG(args);//??????ó?óú?úé???ê±???á???°éú?§”????ü
     emit timeLine1SIG(args);
     timeLine2(attackCard,src,dst,isActiveAttack,attackType,harm);
 }
@@ -865,13 +875,13 @@ void BackgroundEngine::timeLine1(CardEntity* attackCard,PlayerEntity* src,Player
 void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEntity* dst,bool isActiveAttack,int attackType,Harm harm)
 {
     coder.askForReBat(attackType,harmCard->getID(),dst->getID(),src->getID());
-    //当攻击是必中时，不接受客户端回应
+    //”±????ê?±???ê±?????óêü?í?§????ó?
     //emit askForReply(dst->getHandCards(),element,dst->getID());
     BatInfor temp;
     bool checkShield=true;
     if(attackType != NOMISS)
     {
-        //战斗信息存储在temp中。若应战，则保存着应战的牌；若抵挡，则保存着圣光或圣盾
+        //???·?????????útemp????è?ó??????ò±?????ó???”?????è?”?”????ò±?????ê??a?òê??ü
         temp = messageBuffer::readBatInfor();
     }
     else
@@ -882,8 +892,8 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
 
     if(temp.reply == REPLYBATTLE)
     {
-        //应战
-        //似乎发射信号的时机还要商榷
+        //ó???
+        //????·?é?????”?ê±?ú??ò?éìè?
         CardEntity* usedCard = getCardByID(temp.CardID);
         QList<CardEntity*> use;
         use<<usedCard;
@@ -901,12 +911,12 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
     }
     else if(temp.reply == BLOCKED)
     {
-        //抵挡
+        //”?”?
         CardEntity* usedCard = getCardByID(temp.CardID);
 
         if(usedCard->getPlace() == HAND)
         {
-            //圣光
+            //ê??a
             QList<CardEntity*> use;
             use<<usedCard;
             this->useCard(use,getPlayerByID(temp.srcID));
@@ -923,7 +933,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
     }
     else if(temp.reply == HIT)
     {    
-        //命中的情况
+        //?ü??”??é??
 
         QList<void*> args;
         args << src;
@@ -932,8 +942,8 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         emit shieldSIG(args);
         for(int i = 0;i < dst->getBasicEffect().size()&& checkShield;i++)
         {
-            //检查是否有圣盾                        
-            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
+            //?ì?éê?·ńó?ê??ü                        
+            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("ììê?????")))
             {
                 coder.shieldNotic(dst->getID());
                 dst->removeBasicEffect(dst->getBasicEffect()[i]);
@@ -960,7 +970,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         emit timeLine2hitSIG(args);
 
         int color = src->getColor();
-        //增加星石
+        //???ó??ê?
         if((teamArea.getCrystal(color) + teamArea.getGem(color)) < 5)
         {
             if(isActiveAttack)
@@ -974,7 +984,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         this->timeLine3(harm,src,dst);
     }
 }
-//从卡牌中获取攻击伤害
+//?ó???????ńè?????é???
 Harm BackgroundEngine::getHarmFromCard(CardEntity* card)
 {
     Harm harm;
@@ -1021,9 +1031,8 @@ void BackgroundEngine::timeLine5(Harm harm,PlayerEntity *src,PlayerEntity *dst,i
     if(cross>0)
     {
         harm.harmPoint -= cross;
-        int newCross=dst->getCrossNum()-cross;
-        dst->setCrossNum(newCross);
-        coder.crossChangeNotice(dst->getID(),newCross);
+        dst->subCrossNum(cross);
+        coder.crossChangeNotice(dst->getID(),dst->getCrossNum());
     }
     if(harm.harmPoint == 0)
         return;
@@ -1046,11 +1055,11 @@ void BackgroundEngine::timeLine6(Harm harm,PlayerEntity *src,PlayerEntity *dst)
         return;
     emit timeLine6DrawedSIG(arg);
 }
-//查找对应ID的玩家
+//?é?ò??ó?ID”?í??ò
 PlayerEntity* BackgroundEngine::getPlayerByID(int ID)
 {
     PlayerEntity* one;
-    //待修改，i应该小于实际玩家数
+    //????????ió?????óúê”?êí??òê?
     for(int i = 0;i < this->playerNum;i++)
     {
         one = this->playerList.at(i);
@@ -1059,7 +1068,7 @@ PlayerEntity* BackgroundEngine::getPlayerByID(int ID)
     }
     return NULL;
 }
-//测试用
+//?aê?ó?
 void BackgroundEngine::showTest()
 {
     PlayerEntity* player;
@@ -1087,7 +1096,7 @@ void BackgroundEngine::showTest()
     tempStr.append(temp);
     emit this->toInforDisplay(tempStr);
 }
-//获取上家
+//?ńè?é??ò
 PlayerEntity* BackgroundEngine::getFront(PlayerEntity* player)
 {
     int seat;
@@ -1097,14 +1106,14 @@ PlayerEntity* BackgroundEngine::getFront(PlayerEntity* player)
         seat = this->playerList.size() - 1;
     return this->playerList[seat];
 }
-//魔弹处理
+//?§”???àí
 void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
 {
     bool rightOrder;
     BatInfor reply;
     PlayerEntity* nextOpponent;
 
-    //确定传递方向
+    //è·????”?·??ò
     nextOpponent = this->getCurrentPlayer()->getNext();
     while(nextOpponent->getColor() == this->currentPlayer->getColor())
         nextOpponent = nextOpponent->getNext();
@@ -1126,15 +1135,15 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
     do
     {
         cards.clear();
-        //魔弹传递到下家
+        //?§”???”?”????ò
         missilePass(rightOrder,dst,src,passed,missilePoint);
 
-        //读取用户回复
+        //?áè?ó??§????
         reply = messageBuffer::readBatInfor();
 
         if(reply.reply == 0)
         {
-            //继续传递
+            //?ì????”?
             src = dst;
             dst = reply.dstID;
             missilePoint++;
@@ -1144,20 +1153,20 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
         }
         else if(reply.reply == 1)
         {
-            //圣光
+            //ê??a
             cards << getCardByID(reply.CardID);
             this->useCard(cards,getPlayerByID(dst));
             break;
         }
         else if(reply.reply == 2)
         {
-            //无应对
+            //??ó???
             PlayerEntity* dstPlayer = getPlayerByID(dst);
             bool shieldBlocked = false;
-            //检查圣盾
+            //?ì?éê??ü
             for(int i = 0;i < dstPlayer->getBasicEffect().size();i++)
             {
-                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
+                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(tr("ììê?????")))
                 {
                     coder.shieldNotic(dst);
                     dstPlayer->removeBasicEffect(dstPlayer->getBasicEffect()[i]);
@@ -1170,13 +1179,13 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
             Harm missileHurt;
             missileHurt.harmPoint = missilePoint;
             missileHurt.type = MAGIC;
-            //无圣盾,造成伤害
+            //??ê??ü,?ì?éé???
             this->timeLine3(missileHurt,getPlayerByID(src),dstPlayer,"魔弹");
             break;
         }
         else if(reply.reply == 802)
         {
-            //继续传递
+            //?ì????”?
             src = dst;
             dst = reply.dstID;
             missilePoint++;
@@ -1190,7 +1199,7 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
 
 }
 
-//魔弹传递
+
 void BackgroundEngine::missilePass(bool rightOrder,int dst,int src,bool* passed,int missilePoint)
 {
     int i;
@@ -1225,7 +1234,7 @@ void BackgroundEngine::missilePass(bool rightOrder,int dst,int src,bool* passed,
         coder.askForMissile(dst,src,missilePoint,next->getID());
     }
 }
-//接收各模块移动卡牌到弃牌堆的信号
+//?óê??????éò???????”??ú????”?????
 void BackgroundEngine::toDiscardPileSLOT(QList<CardEntity*> cards,bool show)
 {
     for(int i = 0;i < cards.size();i++)
@@ -1237,4 +1246,66 @@ void BackgroundEngine::toDiscardPileSLOT(QList<CardEntity*> cards,bool show)
     }
 }
 
+//将某牌从原位置移走。不发送任何信息给client。
+
+void BackgroundEngine::moveCardFrom(CardEntity* card)
+{
+    bool test;
+    switch(card->getPlace())
+    {
+    case PILE:
+        this->pile.removeOne(card);
+        break;
+    case DISCARDPILE:
+        this->discardPile.removeOne(card);
+        break;
+    case DISCARDPILECOVERED:
+        this->discardPileCovered.removeOne(card);
+        break;
+    case HAND:
+        test = this->getPlayerByID(card->getOwner())->removeOneHandCard(card);
+        card->setOwner(OWNERLESS);
+        break;
+    case COVERED:
+        this->getPlayerByID(card->getOwner())->removeOneCoverCard(card);
+        card->setOwner(OWNERLESS);
+        break;
+    case EFFECT:
+        this->getPlayerByID(card->getOwner())->removeOneEffectCard(card);
+        card->setOwner(OWNERLESS);
+        card->setSrcUser(OWNERLESS);
+        break;
+    }
+}
+
+//将某牌移入某角色盖牌区。不发送任何信息给client。要求该卡牌应先从其他位置被移除。
+
+void BackgroundEngine::moveCardToCover(CardEntity* card,int dstPlayerID)
+{
+    card->setOwner(dstPlayerID);
+    card->setPlace(COVERED);
+    QList<CardEntity*> cards;
+    cards << card;
+    this->getPlayerByID(dstPlayerID)->addCardsToCover(cards);
+
+}
+
+
+//将某牌从盖牌区移到弃牌堆。不发送任何信息给client。
+
+void BackgroundEngine::moveCardFromCoverToDiscard(CardEntity* card,bool show)
+{
+    this->getPlayerByID(card->getOwner())->removeOneCoverCard(card);
+    card->setOwner(OWNERLESS);
+    if(show)
+    {
+        card->setPlace(DISCARDPILE);
+        this->discardPile << card;
+    }
+    else
+    {
+        card->setPlace(DISCARDPILECOVERED);
+        this->discardPileCovered << card;
+    }
+}
 

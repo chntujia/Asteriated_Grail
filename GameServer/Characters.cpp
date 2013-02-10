@@ -2735,6 +2735,7 @@ void XianZhe::ShengJieFaDian(QList<void *> args)
     this->engine->timeLine3(harm,this,this,"圣洁法典");
 }
 
+
 GeDouJia::GeDouJia(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
 {
     this->characterID=20;
@@ -3736,4 +3737,473 @@ void HongLian::skillReset(QList<void *> args)
     if(this != (PlayerEntity*)args[0])
         return;
     XingHongShengYueUsed = false;
+}
+LingFu::LingFu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID = 18;
+    this->star = 4;
+    this->makeConnection(engine);
+
+}
+
+void LingFu::nianZhou(QList<void *> args)
+{
+    if(this->coverCards.count() >= 2)
+        return;
+    coder.askForSkill(this->getID(),"念咒");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+    coder.notice("灵符师发动【念咒】");
+
+    CardEntity* yaoLi = getCardByID(ans.CardID);
+    QList<CardEntity*> yaoLis;
+    yaoLis << yaoLi;
+
+    engine->moveCardFrom(yaoLi);
+    engine->moveCardToCover(yaoLi,this->getID());
+    coder.moveCardNotice(1,yaoLis,this->getID(),HAND,this->id,COVERED);
+    coder.coverCardNotice(this->id,1,yaoLis,false,false);
+
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+}
+
+void LingFu::leiMing(QList<void *> args)
+{
+    BatInfor* action = (BatInfor*) args[0];
+    if(action->srcID != this->id)
+        return;
+    if(action->infor1 != 1802)
+        return;
+    coder.notice("灵符师发动【灵符-雷鸣】");
+
+    CardEntity* card = getCardByID(action->CardID);
+    QList<CardEntity*> cards;
+    cards << card;
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->id,1,"y",cards);
+
+    this->nianZhou(args);
+
+    Harm harm;
+    harm.type = MAGIC;
+    harm.harmPoint = 1;
+    this->lingLiBengJie(harm);
+
+    PlayerEntity* target = this;
+    for(int counter = 0;counter < 2;target = target->getNext())
+    {
+        if(target->getID() != action->infor2 && target->getID() != action->infor3)
+            continue;
+        engine->timeLine3(harm,this,target,"灵符-雷鸣");
+        counter++;
+    }
+
+}
+
+void LingFu::fengXing(QList<void *> args)
+{
+    BatInfor* action = (BatInfor*) args[0];
+    if(action->srcID != this->id)
+        return;
+    if(action->infor1 != 1803)
+        return;
+    coder.notice("灵符师发动【灵符-风行】");
+
+    CardEntity* card = getCardByID(action->CardID);
+    QList<CardEntity*> cards;
+    cards << card;
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->id,1,"y",cards);
+
+    this->nianZhou(args);
+
+    PlayerEntity* target = this;
+    for(int counter = 0;counter < 2;target = target->getNext())
+    {
+        if(target->getID() != action->infor2 && target->getID() != action->infor3)
+            continue;
+        counter++;
+
+        if(target->getHandCards().count() == 0)
+            continue;
+        coder.askForDiscard(target->getID(),1,"n");
+
+        QList<CardEntity*> cardChosen;
+        cardChosen = messageBuffer::readCardID(1);
+        target->removeHandCards(cardChosen,false);
+        coder.discardNotice(target->getID(),1,"n",cardChosen);
+
+    }
+}
+
+void LingFu::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(leiMing(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(fengXing(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(baiGuiYeXing(QList<void*>)));
+}
+
+void LingFu::lingLiBengJie(Harm &hurt)
+{
+    if(this->getEnergy() <= 0)
+        return;
+    coder.askForSkill(this->getID(),"灵力崩解");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+
+    coder.notice("灵符师发动【灵力崩解】");
+    if(ans.infor1 == 0)
+        this->setCrystal(this->getCrystal()-1);
+    else
+        this->setGem(this->getGem()-1);
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+
+    hurt.harmPoint++;
+}
+
+void LingFu::baiGuiYeXing(QList<void *> args)
+{
+    PlayerEntity *src = (PlayerEntity*)args[0];
+    bool isActive = *(bool*)args[4];
+    if(src->getID() != this->getID())
+        return;
+    if(!isActive)
+        return;
+    if(this->getCoverCards().count() == 0)
+        return;
+
+    coder.askForSkill(this->getID(),"百鬼夜行");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+
+    coder.notice("灵符师发动【百鬼夜行】");
+
+    CardEntity *yaoLi = getCardByID(ans.CardID);
+    QList<CardEntity*> yaoLis;
+    yaoLis << yaoLi;
+    PlayerEntity *dst1,*dst2;
+    BatInfor ans2;
+
+
+
+
+    if(yaoLi->getElement() == "fire")
+    {
+        coder.askForSkillNumber(this->getID(),180501);
+        ans2 = messageBuffer::readBatInfor();
+        dst1 = engine->getPlayerByID(ans2.infor1);
+        if(ans2.reply != 0)
+        {
+            engine->moveCardFromCoverToDiscard(yaoLi,true);
+            this->setToken(2,this->getCoverCards().count());
+            coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+            coder.coverCardNotice(this->getID(),1,yaoLis,true,true);
+            dst2 = engine->getPlayerByID(ans2.infor2);
+            PlayerEntity *target = this;
+
+            Harm hurt;
+            hurt.type = MAGIC;
+            hurt.harmPoint = 1;
+            this->lingLiBengJie(hurt);
+
+            for(int counter = 0;counter < engine->getPlayerNum();counter++,target = target->getNext())
+            {
+                if(target->getID() == dst1->getID() || target->getID() == dst2->getID())
+                    continue;
+                engine->timeLine3(hurt,this,target,"百鬼夜行");
+            }
+            return;
+        }
+    }
+    else
+    {
+        coder.askForSkillNumber(this->getID(),180503);
+        int dstID = messageBuffer::readInfor();
+        dst1 = engine->getPlayerByID(dstID);
+    }
+
+    engine->moveCardFromCoverToDiscard(yaoLi,false);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),1,yaoLis,true,false);
+
+    Harm hurt;
+    hurt.type = MAGIC;
+    hurt.harmPoint = 1;
+    this->lingLiBengJie(hurt);
+    engine->timeLine3(hurt,this,dst1,"百鬼夜行");
+
+}
+//魔枪
+MoQiang::MoQiang(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=29;
+    this->star=4;
+    JieFangUsed=false;
+    JieFangFirst=false;
+    HuanYingUsed=false;
+    StartUsed=false;
+    ChongYingUsed=false;
+    AddAttackPoint=0;
+    makeConnection(engine);
+}
+
+void MoQiang::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(AnZhiJieFang1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(AnZhiJieFang2(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(AnZhiJieFang3(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(HuanYingXingChen(QList<void*>)));
+    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(HuanYingXingChen2(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(timeLine3SIG(QList<void*>)),this,SLOT(AnZhiBiZhang(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ChongYing1(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(ChongYing2(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(ChongYing3(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(ChongYing4(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(QiHeiZhiQiang(QList<void*>)));
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
+
+void MoQiang::AnZhiJieFang1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(JieFangUsed || StartUsed)
+        return;
+    coder.askForSkill(id,"暗之解放");
+    if(messageBuffer::readInfor() == 0)
+        return;
+    coder.notice(tr("魔枪发动【暗之解放】"));
+    setTap(1);
+    coder.tapNotice(id,1,"【幻影形态】");
+    setHandCardsMaxFixed(true,5);
+    coder.handcardMaxNotice(id,handCardsMax);
+    JieFangUsed=true;
+    JieFangFirst=true;
+    StartUsed=true;
+}
+
+void MoQiang::AnZhiJieFang2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!JieFangUsed || !JieFangFirst)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    coder.notice(tr("魔枪发动【暗之解放】"));
+    Harm* harm=(Harm*)args[2];
+    harm->harmPoint+=2;
+    JieFangFirst=false;
+}
+
+void MoQiang::AnZhiJieFang3(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!JieFangUsed || !JieFangFirst)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    JieFangFirst=false;
+}
+
+void MoQiang::HuanYingXingChen(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(StartUsed || !JieFangUsed)
+        return;
+    BatInfor huanying;
+    if(!HuanYingUsed){
+    coder.askForSkill(id,"幻影星辰");
+    huanying=messageBuffer::readBatInfor();
+    }
+    BatInfor huanying2;
+    if(huanying.reply==0)
+        return;
+    if(huanying.infor1==0)
+    {
+        Harm harm;
+        harm.harmPoint=2;
+        harm.type=MAGICHARM;
+        HuanYingUsed=true;
+        engine->timeLine3(harm,this,this,"幻影星辰");
+        coder.notice(tr("魔枪发动【幻影星辰】"));
+        setTap(0);
+        coder.tapNotice(id,0,"【正常形态】");
+        setHandCardsMaxFixed(true);
+        coder.handcardMaxNotice(id,handCardsMax);
+    }
+    if(HuanYingUsed){
+        coder.askForSkill(id,"幻影星辰",QString::number(1));
+        huanying2=messageBuffer::readBatInfor();
+    }
+    if(huanying2.infor1==1 && HuanYingUsed)
+    {
+        PlayerEntity* dst=engine->getPlayerByID(huanying2.dstID);
+        Harm harm;
+        harm.harmPoint=2;
+        harm.type=MAGICHARM;
+        coder.notice(tr("魔枪对玩家")+QString::number(huanying2.dstID)+tr("发动【幻影星辰】"));
+        engine->timeLine3(harm,this,dst,"幻影星辰");
+    }
+    StartUsed=true;
+    JieFangUsed=false;
+    JieFangFirst=false;
+
+}
+
+void MoQiang::HuanYingXingChen2(int harmed, int *howMany, PlayerEntity *dst)
+{
+    if(dst->getID()!=this->getID())
+        return;
+    if(*howMany==0)
+        return;
+    if(HuanYingUsed)
+        HuanYingUsed=false;
+}
+
+void MoQiang::AnZhiBiZhang(QList<void *> args)
+{
+    int howMany;
+    if(this != ((PlayerEntity*)args[1])||handCards.size()==0)
+        return;
+    coder.askForSkill(this->getID(),"暗之壁障");
+    QString msg=messageBuffer::readMsg();
+    QStringList arg=msg.split(";");
+    if(arg[1].toInt()==0)
+        return;
+    howMany=arg[2].toInt();
+    if(howMany == 0)
+        return;
+    else
+    {
+        QList<CardEntity*>cards;
+        arg=arg[3].split(":");
+        int i;
+        for(i=0;i<howMany;i++)
+        {
+            cards<<getCardByID(arg[i].toInt());
+        }
+        this->removeHandCards(cards,true);
+        coder.notice("魔枪发动【暗之壁障】");
+        coder.discardNotice(this->getID(),howMany,"y",cards);
+    }
+}
+
+void MoQiang::QiHeiZhiQiang(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    PlayerEntity*myself=(PlayerEntity*)args[0];
+    if(myself->getEnergy()==0)
+        return;
+    PlayerEntity*dst=(PlayerEntity*)args[1];
+    if(dst->getHandCards().size()<1 || dst->getHandCards().size()>2)
+        return;
+    if(!JieFangUsed)
+        return;
+    coder.askForSkill(id,"漆黑之枪");
+    BatInfor bat=messageBuffer::readBatInfor();
+    if(bat.reply==0)
+        return;
+    int n=bat.infor1;
+    if(myself->getCrystal()>=n)
+        setCrystal(crystal-n);
+    else
+    {
+        n-=myself->getCrystal();
+        setCrystal(0);
+        setGem(gem-n);
+    }
+    coder.energyNotice(id,gem,crystal);
+    coder.notice(tr("魔枪发动【漆黑之枪】"));
+    Harm* harm=(Harm*)args[2];
+    harm->harmPoint+=bat.infor1;
+    harm->harmPoint+=2;
+}
+
+void MoQiang::ChongYing1(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2905 || JieFangFirst)
+        return;
+    QList<CardEntity*>cards;
+    cards<<getCardByID(magic->CardID);
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->getID(),1,"y",cards);
+    coder.notice(tr("魔枪发动【充盈】"));
+    coder.askForChongYing(id,color);
+    BatInfor ans=messageBuffer::readBatInfor();
+    cards.clear();
+    cards<<getCardByID(ans.CardID);
+    this->removeHandCards(cards,true);
+    coder.discardNotice(this->getID(),1,"y",cards);
+    PlayerEntity* ptr = engine->getNext(this);
+    for(;ptr!=this;ptr=engine->getNext(ptr))
+    {
+        coder.askForChongYing(ptr->getID(),color);
+        BatInfor ans=messageBuffer::readBatInfor();
+        if(ans.reply==1){
+        cards.clear();
+        cards<<getCardByID(ans.CardID);
+        ptr->removeHandCards(cards,true);
+        coder.discardNotice(ptr->getID(),1,"y",cards);
+        if(ans.infor1==1)
+            AddAttackPoint++;
+        }
+    }
+    coder.notice(tr("魔枪本回合下一次主动攻击将额外+")+QString::number(AddAttackPoint)+tr("点伤害"));
+    ChongYingUsed=true;
+    engine->addActionNum(ATTACK);
+}
+
+void MoQiang::ChongYing2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(id != skill->srcID||skill->infor1!=2906)
+        return;
+    coder.notice("魔枪发动【充盈】的额外攻击效果");
+}
+
+void MoQiang::ChongYing3(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(!ChongYingUsed)
+        return;
+    Harm* harm=(Harm*)args[2];
+    harm->harmPoint+=AddAttackPoint;
+    ChongYingUsed=false;
+}
+
+void MoQiang::ChongYing4(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(!ChongYingUsed)
+        return;
+    ChongYingUsed=false;
+}
+
+void MoQiang::skillReset(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    StartUsed=false;
+    ChongYingUsed=false;
+    JieFangFirst=false;
+    HuanYingUsed=false;
+    AddAttackPoint=0;
 }

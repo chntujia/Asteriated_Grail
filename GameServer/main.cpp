@@ -96,6 +96,19 @@ void Coder::askForRolePick(int ID,int howMany,QList<int>*roles)
     emit sendMessage(ID,message);
 }
 
+void Coder::coverCardNotice(int playerID, int howMany, QList<CardEntity *> cards, bool remove, bool show)
+{
+    QString message = "48;" + TOQSTR(playerID) + ";" + TOQSTR(howMany) + ";";
+    for(int i = 0;i < howMany;i++)
+    {
+        message += TOQSTR(cards[i]->getID());
+        if(i != howMany - 1)
+            message += ",";
+    }
+    message += ";" + TOQSTR((int)remove) + ";" + TOQSTR((int)show) + ";";
+    emit sendMessage(-1,message);
+}
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

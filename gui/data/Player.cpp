@@ -6,7 +6,9 @@ Player::Player(int ID, int isRed):id(ID),handCardsMax(6),crossNum(0),crossMax(2)
     gem=0;
     crystal=0;
     handCardsNum=0;
-    tokenMax[1]=tokenMax[0]=token[1]=token[0]=0;
+    coverCardsMax = 0;
+    coverCardsNum = 0;
+    tokenMax[2]=tokenMax[1]=tokenMax[0]=token[2]=token[1]=token[0]=0;
     for(int i=0;i<5;i++ )
         specials[i]=false;
 }
@@ -83,12 +85,19 @@ void Player::setRole(int roleID)
         name=tr("[ÏÍÕß]");
         energyMax=4;
         break;
+    case 18:
+        name = tr("[Áé·ûÊ¦]");
+        tokenName[2] = tr("ÑýÁ¦");
+        tokenMax[2] = 2;
+        break;
+
     case 20:
         name=tr("[¸ñ¶·¼Ò]");
         tapSource="resource/baishi.png";
         tokenName[0]=tr("¶·Æø");
         tokenMax[0]=6;
         break;
+
     case 21:
         name=tr("[ÓÂÕß]");
         tapSource="resource/jingpilijie.png";
@@ -115,6 +124,10 @@ void Player::setRole(int roleID)
         tokenName[0]=tr("ÑªÓ¡");
         tokenMax[0]=2;
         crossMax=4;
+        break;
+    case 29:
+        name=tr("[Ä§Ç¹]");
+        tapSource="resource/huanying.png";
         break;
     }
 }
@@ -157,6 +170,7 @@ void Player::setHandCardsMax(int howMany)
 {
     handCardsMax=howMany;
 }
+
 void Player::setCrossNum(int howMany)
 {
     crossNum=howMany;

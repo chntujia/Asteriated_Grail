@@ -33,7 +33,7 @@ public:
     //设置手牌变化
     void addHandCardsRange(int howMany);
     //设置治疗
-    void addCrossNum(int howMany, int atMost=crossMax);
+    void addCrossNum(int howMany, int atMost=-1);
     void subCrossNum(int howMany);
 
     void setGem(int howMany);
@@ -62,6 +62,7 @@ public:
     int getCrystal();
     int getEnergy();
     int getColor();
+    QList<CardEntity*> getCoverCards(){return this->coverCards;}
     int getToken(int id){return token[id];}
     //获取该玩家面前的基础效果牌
     QList<CardEntity*> getBasicEffect(){return this->basicEffect;}
@@ -76,7 +77,10 @@ public:
     //void setInfo(int roleID);
     //QString getInfo();
     //static void loseMorale(int num,int isRed);
-
+    bool removeOneHandCard(CardEntity* card){return this->handCards.removeOne(card);}
+    bool removeOneCoverCard(CardEntity* card){return this->coverCards.removeOne(card);}
+    bool removeOneEffectCard(CardEntity* card){return this->basicEffect.removeOne(card);}
+    void addCardsToCover(QList<CardEntity*> cards);
 signals:
     //暴牌信号
     void overLoadCardsSIG();
@@ -129,6 +133,7 @@ protected:
     QList<CardEntity*> handCards;//手牌
     QList<CardEntity*> basicEffect;//基础效果牌
     QList<CardEntity*> exclusiveEffect;//专属效果
+    QList<CardEntity*> coverCards;//盖牌区
     //游戏引擎，方便调用engine的各项功能
     BackgroundEngine* engine;
 

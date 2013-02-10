@@ -38,7 +38,8 @@ public:
     void reset();
     void addButton(Button* button);
     QList<Button*> getButtons();
-
+    void setEnabled(bool enable);
+    void addOutsideTurnButton(Button* button);
 signals:
     void buttonUnselected();
 public slots:

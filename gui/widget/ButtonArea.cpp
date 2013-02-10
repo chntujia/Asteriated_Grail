@@ -147,11 +147,15 @@ ButtonArea::ButtonArea()
     button->setParentItem(this);
     button->setPos(160,0);
     buttons<<button;
+
+
+
     for(int i=0;i<buttons.count();i++)
     {
         connect(buttons[i],SIGNAL(buttonSelected(int)),this,SLOT(onButtonSelected(int)));
         connect(buttons[i],SIGNAL(buttonUnselected(int)),this,SLOT(onButtonUnselected(int)));
     }
+
 }
 QRectF ButtonArea::boundingRect() const
 {
@@ -181,6 +185,13 @@ void ButtonArea::addButton(Button* button)
     connect(button,SIGNAL(buttonUnselected(int)),this,SLOT(onButtonUnselected(int)));
 }
 
+void ButtonArea::addOutsideTurnButton(Button* button)
+{
+    button->setParentItem(this);
+    button->setPos(80*(button->id - 10),-200);
+    button->setOpacity(1);
+}
+
 void ButtonArea::onButtonUnselected(int id)
 {
     emit buttonUnselected();
@@ -191,6 +202,12 @@ void ButtonArea::reset()
     int i;
     for(i=0;i<buttons.count();i++)
         disable(i);
+}
+
+void ButtonArea::setEnabled(bool enable)
+{
+    for(int i = 0;i < this->buttons.count();i++)
+        buttons.at(i)->setEnabled(enable);
 }
 
 void ButtonArea::enable(int i)

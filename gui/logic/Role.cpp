@@ -38,6 +38,7 @@ Role::Role(QObject *parent) :
     decisionArea=gui->getDecisionArea();
     tipArea=gui->getTipArea();
     teamArea=gui->getTeamArea();
+    coverArea = gui->getCoverArea();
 
 }
 void Role::makeConnection()
@@ -53,7 +54,13 @@ void Role::makeConnection()
     connect(buttonArea->getButtons().at(2),SIGNAL(buttonSelected(int)),this,SLOT(extract()));
     connect(buttonArea,SIGNAL(buttonUnselected()),this,SLOT(onCancelClicked()));
     connect(handArea,SIGNAL(cardReady()),this,SLOT(cardAnalyse()));
+    connect(coverArea,SIGNAL(cardReady()),this,SLOT(coverCardAnalyse()));
     connect(playerArea,SIGNAL(playerReady()),this,SLOT(playerAnalyse()));
+}
+
+void Role::coverCardAnalyse()
+{
+
 }
 
 void Role::cardAnalyse()
@@ -136,8 +143,9 @@ void Role::cardAnalyse()
     case 3:
 //ÌìÊ¹×£¸£¸øÅÆ
     case 751:
-//Ä§±¬³å»÷ÆúÅÆ
+//Ä§±¬³å»÷ÆúÅÆ,³äÓ¯
     case 851:
+    case 2951:
         decisionArea->enable(0);
     break;
 //Ä§µ¯reply
@@ -497,6 +505,31 @@ void Role::WeiLi()
     decisionArea->enable(1);
 }
 
+void Role::ChongYing(int color)
+{
+    gui->reset();
+    state=2951;
+    Player* myself=dataInterface->getMyself();
+    if(myself->getName()!=tr("[Ä§Ç¹]"))
+        tipArea->setMsg(tr("ÆúÒ»ÕÅÅÆ£¬·¨Êõ»òÀ×½«»áÎªÄ§Ç¹¼Ó1ÉËº¦"));
+    else
+        tipArea->setMsg(tr("ÆúÒ»ÕÅÅÆ"));
+    if(handArea->getHandCardItems().size()==0)
+        decisionArea->enable(3);
+    else if(color==myself->getColor())
+    {
+        decisionArea->enable(1);
+        handArea->enableAll();
+        handArea->setQuota(1);
+    }
+    else
+    {
+        handArea->enableAll();
+        handArea->setQuota(1);
+    }
+    decisionArea->disable(0);
+}
+
 void Role::onCancelClicked()
 {
     QString command;
@@ -543,6 +576,12 @@ void Role::onCancelClicked()
 //Ä§±¬³å»÷ÆúÅÆ
     case 851:
         command="851;0;";
+        emit sendCommand(command);
+        gui->reset();
+        break;
+//³äÓ¯ÆúÅÆ
+    case 2951:
+        command="2951;0;";
         emit sendCommand(command);
         gui->reset();
         break;
@@ -770,6 +809,18 @@ void Role::onOkClicked()
         gui->reset();
         emit sendCommand(command);
         break;
+//³äÓ¯
+    case 2951:
+        cardID=QString::number(selectedCards[0]->getID());
+        command="2951;1;"+cardID+";";
+        if(selectedCards[0]->getElement()=="thunder" || selectedCards[0]->getType()=="magic")
+            command+="1;";
+        else
+            command+="0;";
+        dataInterface->removeHandCard(selectedCards[0]);
+        gui->reset();
+        emit sendCommand(command);
+        break;
     }
 }
 
@@ -784,6 +835,7 @@ void Role::decipher(QString command)
     int hitRate;
     int i,howMany;
     int team,gem,crystal;
+    int dir,show;
 
     Card*card;
     Player*player;
@@ -1016,6 +1068,11 @@ void Role::decipher(QString command)
                 card=dataInterface->getCard(cardID);
                 playerList[sourceID]->removeStatus(card);
                 break;
+            case 6:
+                player = playerList.at(sourceID);
+                player->changeCoverCardNum(-howMany);
+
+                break;
             }
         }
         if(targetID!=-1)
@@ -1044,10 +1101,24 @@ void Role::decipher(QString command)
                     playerList[targetID]->addStatus(5,card);
                 QSound::play("sound/Equip.wav");
                 break;
+            case 6:
+                player=playerList.at(targetID);
+                player->changeCoverCardNum(howMany);
+                break;
             }
         }
-        if(sourceID==-1 && sourceArea==1){
-            teamArea->changeLeftCardNum(-howMany);
+        if(sourceID==-1){
+            switch(sourceArea)
+            {
+            case 1:
+                teamArea->changeLeftCardNum(-howMany);
+                break;
+            case 2:
+
+            case 3:
+                teamArea->changeDroppedCardNum(-howMany);
+                break;
+            }
             teamArea->update();
         }
         if(targetID==-1)
@@ -1269,6 +1340,52 @@ void Role::decipher(QString command)
         playerList.at(targetID)->setSpecial(msg.toInt(),arg[3].toInt());
         playerArea->update();
         break;
+
+        //¸ÇÅÆÍ¨¸æ
+            case 48:
+                targetID=arg[1].toInt();
+                howMany=arg[2].toInt();
+                dir = arg[4].toInt();
+                show = arg[5].toInt();
+                cardIDList=arg[3].split(',');
+
+        //        if(targetID==myID)
+        //        {
+
+        //            for(i=0;i<howMany;i++)
+        //            {
+        //                cardID=cardIDList[i].toInt();
+        //                card=dataInterface->getCard(cardID);
+        //                if(dir == 0)
+        //                    dataInterface->addCoverCard(card);
+        //                else
+        //                    dataInterface->removeCoverCard(card);
+        //            }
+        //        }
+
+                if(dir == 0)
+                    gui->logAppend(arg[2]+tr("ÕÅÅÆ¼ÓÈëÍæ¼Ò") + playerList[targetID]->getName()+tr("¸ÇÅÆÇø"));
+                else
+                {
+                    if(show == 0)
+                        gui->logAppend(tr("Íæ¼Ò") + playerList[targetID]->getName() + tr("ÒÆ³ý") + arg[2] + tr("ÕÅ¸ÇÅÆ"));
+                    else
+                    {
+                        QList<Card*> cards;
+
+                        QString log = tr("Íæ¼Ò") + playerList[targetID]->getName() + tr("ÒÆ³ý") + arg[2] + tr("ÕÅ¸ÇÅÆ:");
+                        for(int i = 0;i < howMany;i++)
+                        {
+                            cards << dataInterface->getCard(cardIDList[i].toInt());
+                            log += tr("[") + cards.at(i)->getName() + tr("]");
+                        }
+                        gui->logAppend(log);
+                        showArea->showCards(cards);
+                    }
+                }
+
+                break;
+
 //±ê¼Ç±ä¸ü
     case 45:
         targetID=arg[1].toInt();
@@ -1310,7 +1427,23 @@ void Role::decipher(QString command)
             MoBaoChongJi();
         }
         break;
-
+//³äÓ¯£¨ÆúÅÆ£©
+    case 2950:
+        targetID=arg[1].toInt();
+        int color=arg[2].toInt();
+        msg=tr("µÈ´ý")+playerList[targetID]->getName()+tr("³äÓ¯£¨ÆúÅÆ£©ÏìÓ¦");
+        gui->logAppend(msg);
+        if(targetID!=myID)
+        {
+            isMyTurn=0;
+            gui->setEnable(0);
+        }
+        else
+        {
+            gui->setEnable(1);
+            ChongYing(color);
+        }
+        break;    
     }
 }
 

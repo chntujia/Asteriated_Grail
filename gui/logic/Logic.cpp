@@ -19,10 +19,13 @@
 #include "ShenGuan.h"
 #include "SiLing.h"
 #include "XianZhe.h"
+
 #include "GeDouJia.h"
 #include "WuNv.h"
 #include "LingHun.h"
 #include "HongLian.h"
+#include "MoQiang.h"
+#include "LingFu.h"
 
 #define LOGINPERMIT 1
 #define GAMESTART 2
@@ -94,6 +97,9 @@ void Logic::setMyRole(int roleID)
     case 17:
         new XianZhe;
         break;
+    case 18:
+        new LingFu;
+        break;
     case 20:
         new GeDouJia;
         break;
@@ -108,6 +114,9 @@ void Logic::setMyRole(int roleID)
         break;
     case 28:
         new HongLian;
+        break;
+    case 29:
+        new MoQiang;
         break;
     }
 }

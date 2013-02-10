@@ -28,6 +28,6 @@ private:
     LogArea* logArea;
     QGraphicsProxyWidget* logAreaProxy;
 
-
+    HandArea *coverArea;
 };
 #endif // ROOMSCENE_H

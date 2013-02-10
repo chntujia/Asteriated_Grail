@@ -21,6 +21,7 @@ class Player:public QObject
 public:
     Player(int id,int color);
     void setHandCardsMax(int howMany);
+    void setCoverCardsMax(int howMany){this->coverCardsMax = howMany;}
     void setCrossNum(int howMany);
     void setGem(int howMany);
     void setCrystal(int howMany);
@@ -30,6 +31,7 @@ public:
     void setSpecial(int type,bool flag);
     void setToken(int id,int howMany){token[id]=howMany;}
     void changeHandCardNum(int increase){handCardsNum+=increase;}
+    void changeCoverCardNum(int increase){coverCardsNum += increase;}
     void addStatus(int type,Card* card);
     void removeStatus(Card* card);
     bool checkStatus(int type);
@@ -41,6 +43,8 @@ public:
     QString getTokenName(int id){return tokenName[id];}
     int getHandCardMax();
     int getHandCardNum();
+    int getCoverCardMax(){return this->coverCardsMax;}
+    int getCoverCardNum(){return this->coverCardsNum;}
     int getCrossNum();
     int getCrossMax();
     int getGem();
@@ -64,6 +68,8 @@ protected:
     QString name;
     int handCardsMax;
     int handCardsNum;
+    int coverCardsMax;
+    int coverCardsNum;
     int crossNum;
     int crossMax;
     int gem;

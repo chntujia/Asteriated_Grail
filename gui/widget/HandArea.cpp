@@ -63,6 +63,7 @@ void HandArea::onCardUnselected(int id)
     else
         emit cardReady();
 }
+
 void HandArea::reset()
 {
     disableAll();

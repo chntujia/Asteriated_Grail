@@ -121,7 +121,7 @@ void PlayerEntity::addCrossNum(int howMany, int atMost)
     {
         if(crossNum>crossMax)
             return;
-        crossNum=(crossNum+howMany)<=atMost?(crossNum+howMany):atMost;
+        crossNum=(crossNum+howMany)<=crossMax?(crossNum+howMany):crossMax;
     }
 }
 
@@ -310,5 +310,11 @@ void PlayerEntity::giveHandCards(QList<CardEntity*> cards,PlayerEntity* to)
         to->cardsOverLoad(0);
 }
 
-
+void PlayerEntity::addCardsToCover(QList<CardEntity*> cards)
+{
+    for(int i = 0;i < cards.count();i++)
+    {
+        this->coverCards << cards.at(i);
+    }
+}
 

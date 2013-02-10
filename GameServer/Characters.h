@@ -2,6 +2,9 @@
 #define CHARACTERS_H
 #include "BackgroundEngine.h"
 #include "PlayerEntity.h"
+
+
+struct Harm;
 class BackgroundEntity;
 //¿ñÕ½Ê¿
 class Berserker :public PlayerEntity
@@ -61,7 +64,7 @@ public slots:
     void HuiMeiFengBao(QList<void*> args);
 signals:
 private:
-    \
+    
 };
 
 class AnSha : public PlayerEntity
@@ -77,7 +80,7 @@ public slots:
     void AttackCheck(QList<void*> args);
 signals:
 private:
-    \
+    
 };
 
 class TianShi : public PlayerEntity
@@ -95,7 +98,7 @@ public slots:
     void TianShiJiBan(int userID);
 signals:
 private:
-    \
+    
 };
 class Saintness : public PlayerEntity
 {
@@ -217,7 +220,7 @@ public slots:
     void MaoXianZheTianTang(QList<void*> args);
 signals:
 private:
-    \
+    
 };
 
 
@@ -243,7 +246,7 @@ public slots:
 signals:
 private:
     bool ignite;
-    \
+    
 };
 //ÖÙ²Ã
 class ZhongCai : public PlayerEntity
@@ -404,6 +407,8 @@ public slots:
     void ShengJieFaDian(QList<void*> args);
 private:
 };
+
+
 //¸ñ¶·
 class GeDouJia : public PlayerEntity
 {
@@ -508,4 +513,48 @@ private:
     bool HeCheng;
 };
 
+class LingFu:public PlayerEntity
+{
+    Q_OBJECT
+public:
+    LingFu(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void leiMing(QList<void*> args);
+    void fengXing(QList<void*> args);
+    void nianZhou(QList<void*> args);
+    void lingLiBengJie(Harm &hurt);
+    void baiGuiYeXing(QList<void*> args);
+private:
+
+};
+
+//Ä§Ç¹
+class MoQiang : public PlayerEntity
+{
+    Q_OBJECT
+public:
+    MoQiang(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void AnZhiJieFang1(QList<void*> args);
+    void AnZhiJieFang2(QList<void *> args);
+    void AnZhiJieFang3(QList<void *> args);
+    void HuanYingXingChen(QList<void*> args);
+    void HuanYingXingChen2(int harmed,int*howMany,PlayerEntity*dst);
+    void AnZhiBiZhang(QList<void*> args);
+    void ChongYing1(QList<void*> args);
+    void ChongYing2(QList<void *> args);
+    void ChongYing3(QList<void *> args);
+    void ChongYing4(QList<void *> args);
+    void QiHeiZhiQiang(QList<void*> args);
+    void skillReset(QList<void*> args);
+private:
+    bool JieFangUsed;
+    bool JieFangFirst;
+    bool HuanYingUsed;
+    bool ChongYingUsed;
+    bool StartUsed;
+    int AddAttackPoint;
+};
 #endif // CHARACTERS_H
