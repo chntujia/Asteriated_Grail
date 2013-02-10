@@ -35,7 +35,7 @@ void MoQiang::AnZhiJieFang()
     {
         flag=false;
         for(i=0;i<n;i++)
-            if(handcards[i]->getElement()!="light")
+            if(handcards[i]->getType()!="magic")
             {
                 flag=true;
                 break;
