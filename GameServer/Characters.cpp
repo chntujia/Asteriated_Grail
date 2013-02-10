@@ -4142,10 +4142,12 @@ void MoQiang::ChongYing1(QList<void *> args)
     coder.notice(tr("Ä§Ç¹·¢¶¯¡¾³äÓ¯¡¿"));
     coder.askForChongYing(id,color);
     BatInfor ans=messageBuffer::readBatInfor();
+    if(ans.reply==1){
     cards.clear();
     cards<<getCardByID(ans.CardID);
     this->removeHandCards(cards,true);
     coder.discardNotice(this->getID(),1,"y",cards);
+    }
     PlayerEntity* ptr = engine->getNext(this);
     for(;ptr!=this;ptr=engine->getNext(ptr))
     {
