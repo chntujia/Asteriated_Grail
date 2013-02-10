@@ -3486,7 +3486,7 @@ void LingHun::LingHunLianJie2(QList<void *> args)
             Harm zhuanyi2;
             zhuanyi2.type=harm->type;
             zhuanyi2.harmPoint=harm->harmPoint;
-            if(dst->getID()==this->getID())
+            if(dst->getID()==LianJieID)
                 engine->timeLine6(zhuanyi2,src,engine->getPlayerByID(LianJieID));
             else
                 engine->timeLine6(zhuanyi1,src,engine->getPlayerByID(LianJieID));
