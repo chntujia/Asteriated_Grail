@@ -98,7 +98,7 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->drawPixmap((Pgem.width()+4)*i+offset,4,Pgem);
 
     offset=420;
-    painter->drawPixmap(offset,4,Num[round/10]);
+    painter->drawPixmap(offset,2,Num[round/10]);
     painter->drawPixmap(offset+Num[0].width(),2,Num[round%10]);
 
     offset=459;

@@ -357,6 +357,7 @@ public slots:
     void Pray2(QList<void*> args);
     void skillReset(QList<void*> args);
 private:
+    bool XunJieCounted;
     bool FaLiChaoXiUsed;
 };
 
