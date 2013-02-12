@@ -107,6 +107,7 @@ public:
     void turnBegineNotice(int ID){emit this->sendMessage(-1,"3;" + TOQSTR(ID) + ";");}
     void askForReBat(int type,int cardID,int dstID,int srcID){emit this->sendMessage(-1,combMessage("5",TOQSTR(type),TOQSTR(cardID),TOQSTR(dstID),TOQSTR(srcID)));}
     void askForDiscard(int ID,int sum,QString show){emit this->sendMessage(-1,combMessage("7",TOQSTR(ID),TOQSTR(sum),show));}
+    void askForDiscover(int ID, int sum,QString show){emit this->sendMessage(-1,combMessage("49",TOQSTR(ID),TOQSTR(sum),show));}
     void drawNotice(int ID,int sum,QList<CardEntity*> cards);
     void reshuffleNotice(int howManyNew){emit this->sendMessage(-1,combMessage("10",TOQSTR(howManyNew)));}
     void moraleNotice(int color,int value){emit this->sendMessage(-1,combMessage("11",TOQSTR(color),TOQSTR(value)));}

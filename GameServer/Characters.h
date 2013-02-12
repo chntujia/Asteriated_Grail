@@ -371,7 +371,7 @@ public slots:
     void ShenShengQiShi(QList<void*> args);
     void ShenShengQiFu(QList<void*> args);
     void ShuiZhiShenLi(QList<void*> args);
-    void ShengShiShouHu(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable);
+    void ShengShiShouHu(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
     void ShenShengQiYue(QList<void*> args);
     void ShenShengLingYu(QList<void*> args);
 };
@@ -385,7 +385,7 @@ public:
     void makeConnection(BackgroundEngine *engine);
 public slots:
     void BuXiu(QList<void*> args);
-    void ShengDu(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable);
+    void ShengDu(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
     void WenYi(QList<void*> args);
     void SiWangZhiChu(QList<void*> args);
     void MuBeiYunLuo(QList<void*> args);
@@ -470,7 +470,7 @@ public:
     void makeConnection(BackgroundEngine *engine);
 public slots:
     void XingHongShengYue(QList<void*> args);
-    void XingHongXinYang(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable);
+    void XingHongXinYang(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
     void XueXingDaoYan(QList<void*> args);
     void ShaLuShengYan(QList<void*> args);
     void ToReXueFeiTeng(int harmed, int* howMany, PlayerEntity* dst);
@@ -557,4 +557,26 @@ private:
     bool StartUsed;
     int AddAttackPoint;
 };
+
+class DieWu: public PlayerEntity
+{
+    Q_OBJECT
+public:
+    DieWu(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+    void DiaoLing(int cardID, bool removed);
+public slots:
+    void WuDong(QList<void*> args);
+    void DuFen(QList<void*> args);
+    void ChaoSheng(QList<void*> args);
+    void JingHuaShuiYue(QList<void*> args);
+    void DiaoLingFix(int harmed, int* howMany, PlayerEntity* dst);
+    void DiaoLingFixHeCheng(int harmed, int* howMany, PlayerEntity* dst);
+    void YongHua(QList<void*> args);
+    void DaoNiZhiDie(QList<void*> args);
+    void DaoNiZhiDieJudge(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
+private:
+
+};
+
 #endif // CHARACTERS_H

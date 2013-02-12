@@ -22,6 +22,7 @@
 
 #include "GeDouJia.h"
 #include "WuNv.h"
+#include "DieWu.h"
 #include "LingHun.h"
 #include "HongLian.h"
 #include "MoQiang.h"
@@ -111,6 +112,9 @@ void Logic::setMyRole(int roleID)
         break;
     case 23:
         new WuNv;
+        break;
+    case 24:
+        new DieWu;
         break;
     case 28:
         new HongLian;

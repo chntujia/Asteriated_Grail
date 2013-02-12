@@ -64,7 +64,6 @@ void LingFu::onOkClicked()
         command = "1801;1;";
         command += QString::number(selectedCards[0]->getID()) + ";";
         handArea->removeCardItem(selectedCards[0]);
-        coverArea->addCardItem(selectedCards[0]);
         emit sendCommand(command);
         gui->reset();
         break;

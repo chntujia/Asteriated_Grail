@@ -2374,7 +2374,7 @@ void ShenGuan::ShenShengQiFu(QList<void *> args)
     this->addCrossNum(2);
     coder.crossChangeNotice(this->getID(), getCrossNum());
 }
-void ShenGuan::ShengShiShouHu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable)
+void ShenGuan::ShengShiShouHu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable,QString magicReason)
 {
     if(dst!=this)
         return;
@@ -2460,7 +2460,7 @@ void ShenGuan::ShenShengLingYu(QList<void *> args)
     }
     if(n>0)
     {
-        this->removeHandCards(cards,true);
+        this->removeHandCards(cards,false);
         coder.discardNotice(this->getID(), n, "n", cards);
     }
     if(magic->infor2 == 1)
@@ -2486,7 +2486,7 @@ void ShenGuan::ShenShengLingYu(QList<void *> args)
 void ShenGuan::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(specialFinishSIG(QList<void*>)),this,SLOT(ShenShengQiShi(QList<void*>)));
-    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*)),this,SLOT(ShengShiShouHu(Harm,PlayerEntity*,PlayerEntity*,int*)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(ShengShiShouHu(Harm,PlayerEntity*,PlayerEntity*,int*)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShenShengQiFu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShuiZhiShenLi(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(ShenShengQiYue(QList<void*>)));
@@ -2521,7 +2521,7 @@ void SiLing::BuXiu(QList<void *> args)
     coder.notice("死灵发动【不朽】，增加1治疗");
 }
 
-void SiLing::ShengDu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable)
+void SiLing::ShengDu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable, QString magicReason)
 {
     if(dst!=this)
         return;
@@ -2614,7 +2614,7 @@ void SiLing::skillReset(QList<void *> args)
 void SiLing::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(magicFinishSIG(QList<void*>)),this,SLOT(BuXiu(QList<void*>)));
-    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*)),this,SLOT(ShengDu(Harm,PlayerEntity*,PlayerEntity*,int*)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(ShengDu(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(WenYi(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(SiWangZhiChu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(MuBeiYunLuo(QList<void*>)));
@@ -3277,7 +3277,7 @@ void LingHun::LingHunTunShi2(QList<void *> args)
 
 void LingHun::LingHunTunShi3(int harmed, int *howMany, PlayerEntity *dst)
 {
-    if(!HeCheng)
+    if(!HeCheng||*howMany==0)
         return;
     HeCheng=false;
     if(dst->getColor()==color)
@@ -3554,7 +3554,7 @@ HongLian::HongLian(BackgroundEngine *engine, int id, int color):PlayerEntity(eng
 void HongLian::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(XingHongShengYue(QList<void*>)));
-    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*)),this,SLOT(XingHongXinYang(Harm,PlayerEntity*,PlayerEntity*,int*)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(XingHongXinYang(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(XueXingDaoYan(QList<void*>)));
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(ShaLuShengYan(QList<void*>)));
     connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(ToReXueFeiTeng(int,int*,PlayerEntity*)));
@@ -3585,7 +3585,7 @@ void HongLian::XingHongShengYue(QList<void *> args)
     coder.notice("红莲骑士发动【猩红圣约】，增加1治疗");
 }
 
-void HongLian::XingHongXinYang(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable)
+void HongLian::XingHongXinYang(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable,QString magicReason)
 {
     if(dst!=this)
         return;
@@ -3743,7 +3743,7 @@ LingFu::LingFu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,
     this->characterID = 18;
     this->star = 4;
     this->makeConnection(engine);
-
+    tokenMax[2]=2;
 }
 
 void LingFu::nianZhou(QList<void *> args)
@@ -4208,4 +4208,247 @@ void MoQiang::skillReset(QList<void *> args)
     JieFangFirst=false;
     HuanYingUsed=false;
     AddAttackPoint=0;
+}
+
+//蝶舞 24
+DieWu::DieWu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=25;
+    this->star=5;
+    handCardsMin = 3;
+    tokenMax[2]=8;
+    tokenMax[0]=20;
+    makeConnection(engine);
+}
+
+void DieWu::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(WuDong(QList<void*>)));
+    connect(engine,SIGNAL(timeLine5SIG(QList<void*>)),this,SLOT(DuFen(QList<void*>)));
+    connect(engine,SIGNAL(timeLine6SIG(QList<void*>)),this,SLOT(ChaoSheng(QList<void*>)));
+    connect(engine,SIGNAL(timeLine5SIG(QList<void*>)),this,SLOT(JingHuaShuiYue(QList<void*>)));
+    connect(engine,SIGNAL(beforeLoseMoralSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFix(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(YongHua(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(DaoNiZhiDie(QList<void*>)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(DaoNiZhiDieJudge(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
+    connect(engine,SIGNAL(fixMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFix(QList<void*>)));
+    connect(engine,SIGNAL(loseMoraleHeChengSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFixHeCheng(int,int*,PlayerEntity*)));
+}
+
+void DieWu::WuDong(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2401)
+        return;
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    if(magic->CardID!=-1)
+    {
+        coder.notice("蝶舞发动【舞动】，弃一张手牌");
+        this->removeHandCards(cards,false);
+    }
+    else
+    {
+        coder.notice("蝶舞发动【舞动】，摸一张手牌");
+        engine->drawCards(1,0,this);
+    }
+    QList<CardEntity*> jian = engine->drwaCardsForCover(1);
+
+    engine->moveCardToCover(jian[0],this->getID());
+    coder.moveCardNotice(1,jian,this->getID(),PILE,this->id,COVERED);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->id,1,jian,false,false);
+}
+
+void DieWu::DuFen(QList<void *> args)
+{
+    Harm* harm = (Harm*)args[2];
+    if(harm->type!=MAGIC||harm->harmPoint!=1||coverCards.size()==0)
+        return;
+    coder.askForSkill(this->getID(),"毒粉");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply==0)
+        return;
+
+    coder.notice("蝶舞者发动毒粉，该次伤害加1");
+
+    this->DiaoLing(ans.CardID, false);
+    harm->harmPoint = 0;
+
+    Harm newHarm;
+    newHarm.harmPoint = 2;
+    newHarm.type = MAGIC;
+    engine->timeLine5(newHarm, (PlayerEntity*)args[0],(PlayerEntity*)args[1],0);
+}
+
+void DieWu::ChaoSheng(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[1]||coverCards.size()==0)
+        return;
+    Harm* harm = (Harm*)args[2];
+    coder.askForSkill(this->getID(),"朝圣");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply==0)
+        return;
+
+    coder.notice("蝶舞者发动朝圣，该次伤害减1");
+    this->DiaoLing(ans.CardID, false);
+    harm->harmPoint-=1;
+}
+
+void DieWu::JingHuaShuiYue(QList<void *> args)
+{
+    Harm* harm = (Harm*)args[2];
+    if(harm->type!=MAGIC||harm->harmPoint!=2||coverCards.size()<2)
+        return;
+    coder.askForSkill(this->getID(),"镜花水月");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply==0)
+        return;
+
+    QList<CardEntity*> jian;
+    jian << getCardByID(ans.CardID);
+    jian << getCardByID(ans.infor2);
+    for(int i = 0; i<2;i++)
+        engine->moveCardFromCoverToDiscard(jian[i],true);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),2,jian,true,ans.reply);
+
+    this->DiaoLing(ans.CardID, true);
+    this->DiaoLing(ans.infor2, true);
+    harm->harmPoint = 0;
+
+    Harm newHarm;
+    newHarm.harmPoint = 1;
+    newHarm.type = MAGIC;
+    engine->timeLine5(newHarm, this,(PlayerEntity*)args[1],0);
+    engine->timeLine5(newHarm, this,(PlayerEntity*)args[1],0);
+}
+
+void DieWu::DiaoLing(int cardID, bool removed)
+{
+    BatInfor ans;
+    if(getCardByID(cardID)->getType()==tr("magic"))
+    {
+        coder.askForSkill(this->getID(),"凋零");
+        ans = messageBuffer::readBatInfor();
+    }
+    if(getCardByID(cardID)->getType()!=tr("magic"))
+        ans.reply = 0;
+    if(!removed)
+    {
+        QList<CardEntity*> jian;
+        jian << getCardByID(cardID);
+        engine->moveCardFromCoverToDiscard(jian[0],ans.reply);
+        this->setToken(2,this->getCoverCards().count());
+        coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+        coder.coverCardNotice(this->getID(),1,jian,true,ans.reply);
+    }
+    if(ans.reply == 0)
+        return;
+    coder.notice("蝶舞者对玩家"+QString::number(ans.dstID)+"发动凋零");
+    Harm harm;
+    harm.harmPoint = 1;
+    harm.type = MAGIC;
+    engine->timeLine3(harm, this, engine->getPlayerByID(ans.dstID), "凋零");
+    harm.harmPoint = 2;
+    engine->timeLine3(harm, this, this, "凋零");
+}
+
+void DieWu::YongHua(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2406||getGem()<=0)
+        return;
+    gem--;
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+    coder.notice("蝶舞者发动【蛹化】");
+
+    QList<CardEntity*> jian = engine->drwaCardsForCover(4);
+    for(int i= 0;i <4; i ++)
+        engine->moveCardToCover(jian[i],this->getID());
+    coder.moveCardNotice(4,jian,this->getID(),PILE,this->id,COVERED);
+    coder.coverCardNotice(this->id,1,jian,false,false);
+
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+
+    this->setToken(0,token[0]+1);
+    coder.tokenNotice(this->getID(),0,token[0]);
+
+    this->addHandCardsRange(-1);
+    coder.handcardMaxNotice(this->getID(), this->getHandCardMax());
+}
+
+void DieWu::DaoNiZhiDie(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2407||getEnergy()<=0)
+        return;
+    if(crystal>0)
+        crystal--;
+    else
+        gem--;
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+    QList<CardEntity*> cards;
+    cards << getCardByID(magic->CardID);
+    cards << getCardByID(magic->infor2);
+    coder.discardNotice(id,cards.size(),"n",cards);
+    this->removeHandCards(cards,false);
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    if(magic->infor2 == 1)
+    {
+        coder.notice("蝶舞者对玩家"+QString::number(magic->dstID)+"发动【倒逆之蝶】");
+        Harm harm;
+        harm.harmPoint = 1;
+        harm.type = MAGIC;
+        engine->timeLine3(harm,this,dst,"倒逆之蝶");
+    }
+    else
+    {
+        if(magic->infor2==2)
+        {
+            coder.notice("蝶舞者发动【倒逆之蝶】，移除2个【茧】，移除1个【蛹】");
+            DiaoLing(magic->infor4, false);
+            DiaoLing(magic->infor5, false);
+        }
+        else
+        {
+            coder.notice("蝶舞者发动【倒逆之蝶】，对自己造成4点法术伤害，移除1个【蛹】");
+            Harm harm;
+            harm.harmPoint = 4;
+            harm.type = MAGIC;
+            engine->timeLine3(harm,this,this,"倒逆之蝶自伤");
+        }
+        this->setToken(0,token[0]-1);
+        coder.tokenNotice(this->getID(),0,token[0]);
+
+        this->addHandCardsRange(1);
+        coder.handcardMaxNotice(this->getID(), this->getHandCardMax());
+    }
+}
+
+void DieWu::DaoNiZhiDieJudge(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable, QString magicReason)
+{
+    if(src!=this||magicReason!=tr("倒逆之蝶"))
+        return;
+    *crossAvailable=0;
+}
+
+void DieWu::DiaoLingFix(int harmed, int *howMany, PlayerEntity *dst)
+{
+    if(!tap||dst->getColor()!=this->getColor())
+        return;
+    if(teamArea.getMorale(dst->getColor())<*howMany)
+        *howMany = teamArea.getMorale(dst->getColor())-1;
+}
+
+void DieWu::DiaoLingFixHeCheng(int harmed, int *howMany, PlayerEntity *dst)
+{
+    if(!tap||dst->getColor()==this->getColor())
+        return;
+    if(teamArea.getMorale(dst->getColor())<*howMany)
+        *howMany = teamArea.getMorale(dst->getColor())-1;
 }

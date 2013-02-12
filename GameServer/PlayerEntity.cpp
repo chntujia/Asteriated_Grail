@@ -265,6 +265,7 @@ void PlayerEntity::cardsOverLoad(int harmed)
     coder.discardNotice(id,overNum,"n",cardChosen);
     emit beforeLoseMoralSIG(harmed,&overNum,this);
     emit loseMoraleSIG(harmed,&overNum,this);//应该要根据harmed参数分辨是否是伤害/哪种伤害造成的士气下降
+    emit fixMoraleSIG(harmed,&overNum,this);
     teamArea.setMorale(this->color,teamArea.getMorale(this->color) - overNum);
 
     coder.moraleNotice(this->color,teamArea.getMorale(this->color));
@@ -272,6 +273,20 @@ void PlayerEntity::cardsOverLoad(int harmed)
     emit checkEndSIG();
     emit trueLoseMoraleSIG(harmed,&overNum,this);
 }
+void PlayerEntity::coverOverLoad()
+{
+    int overNum = this->coverCards.size() - tokenMax[2];
+    coder.askForDiscover(this->getID(),overNum,"n");
+
+    QList<CardEntity*> cardChosen;
+    cardChosen = messageBuffer::readCardID(overNum);
+    for(int i=0;i <cardChosen.size();i++)
+        engine->moveCardFromCoverToDiscard(cardChosen[i],false);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),overNum,cardChosen,true,false);
+}
+
 //增加手牌，可能发生暴牌
 void PlayerEntity::addHandCards(QList<CardEntity*> newCard,int harmed, bool fromPile)
 {
@@ -316,5 +331,6 @@ void PlayerEntity::addCardsToCover(QList<CardEntity*> cards)
     {
         this->coverCards << cards.at(i);
     }
+    if(coverCards.size()>tokenMax[2])
+        coverOverLoad();
 }
-

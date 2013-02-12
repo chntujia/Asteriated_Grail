@@ -125,6 +125,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 23:
         return new WuNv(engine,id,color);
         break;
+    case 24:
+        return new DieWu(engine,id,color);
+        break;
     case 28:
         return new HongLian(engine,id,color);
         break;
@@ -192,6 +195,7 @@ void BackgroundEngine::seatArrange()
     roles<<20;
     roles<<22;
     roles<<23;
+    roles<<24;
     roles<<28;
     roles<<29;
     randomize(&roles);
@@ -454,6 +458,20 @@ void BackgroundEngine::drawCards(int num,int harmed,PlayerEntity* player)
     //?и╣ив???ик??и░???иои║???
     player->addHandCards(newCards,harmed);
 }
+QList<CardEntity *> BackgroundEngine::drwaCardsForCover(int num)
+{
+    QList<CardEntity*> newCards;
+    for(int i = 0;i < num;i++)
+    {
+        if(this->pile.isEmpty())
+        {
+            shuffle(true);
+        }
+        newCards << this->pile.takeLast();
+    }
+    return newCards;
+}
+
 //??????идик
 void BackgroundEngine::posionProcess(PlayerEntity* player,CardEntity* card)
 {
@@ -728,12 +746,15 @@ void BackgroundEngine::actionPhase()
                 teamArea.setGem(color,teamArea.getGem(color) - bat.infor1);
                 teamArea.setCrystal(color,teamArea.getCrystal(color) - bat.infor2);
                 teamArea.setCup(color,teamArea.getCup(color) + 1);
-                teamArea.setMorale(!color,teamArea.getMorale(!color) - 1);                
+                int n=1;
+                emit fixMoralHeChengSIG(0,&n,currentPlayer);
+                teamArea.setMorale(!color,teamArea.getMorale(!color) - n);
+
                 coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
                 coder.cupNotice(color,teamArea.getCup(color));
                 coder.moraleNotice(!color,teamArea.getMorale(!color));
                 emit specialFinishSIG(args);
-                int n=1;
+
                 emit loseMoraleHeChengSIG(0,&n,currentPlayer);
                 this->checkEnd();
             }
@@ -1009,14 +1030,14 @@ void BackgroundEngine::timeLine3(Harm harm, PlayerEntity *src, PlayerEntity *dst
         coder.attackHurtNotice(dst->getID(),harm.harmPoint,src->getID());
     else if(harm.type == MAGIC)
         coder.magicHurtNotice(dst->getID(),harm.harmPoint,src->getID(),magicReason);
-    timeLine4(harm,src,dst);
+    timeLine4(harm,src,dst, magicReason);
 }
 
-void BackgroundEngine::timeLine4(Harm harm,PlayerEntity *src,PlayerEntity *dst)
+void BackgroundEngine::timeLine4(Harm harm,PlayerEntity *src,PlayerEntity *dst,QString magicReason)
 {
     int crossUsed = 0;
     int crossAvailable = dst->getCrossNum();
-    emit askForHeal(harm,src,dst,&crossAvailable);
+    emit askForHeal(harm,src,dst,&crossAvailable, magicReason);
     if(crossAvailable != 0)
     {
         coder.askForCross(dst->getID(),harm.harmPoint,harm.type, crossAvailable);
@@ -1036,9 +1057,13 @@ void BackgroundEngine::timeLine5(Harm harm,PlayerEntity *src,PlayerEntity *dst,i
     }
     if(harm.harmPoint == 0)
         return;
-    //emit timeLine5SIG();
-
-    timeLine6(harm,src,dst);
+    QList<void*> arg;
+    arg << src;
+    arg << dst;
+    arg << &harm;
+    emit timeLine5SIG(arg);
+    if(harm.harmPoint>0)
+        timeLine6(harm,src,dst);
 }
 
 void BackgroundEngine::timeLine6(Harm harm,PlayerEntity *src,PlayerEntity *dst)

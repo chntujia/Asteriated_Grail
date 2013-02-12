@@ -23,6 +23,7 @@ public:
     void addHandCards(QList<CardEntity*> newCard,int harmed,bool fromPile=true);
     //暴牌处理
     void cardsOverLoad(int harmed);
+    void coverOverLoad();
     //移除手牌操作
     void removeHandCards(QList<CardEntity*> oldCard,bool show,bool toDiscardPile = true);
     //给牌操作
@@ -81,6 +82,7 @@ public:
     bool removeOneCoverCard(CardEntity* card){return this->coverCards.removeOne(card);}
     bool removeOneEffectCard(CardEntity* card){return this->basicEffect.removeOne(card);}
     void addCardsToCover(QList<CardEntity*> cards);
+    void drawCardsToCover(int howMany);
 signals:
     //暴牌信号
     void overLoadCardsSIG();
@@ -94,6 +96,8 @@ signals:
     void beforeLoseMoralSIG(int harmed, int *howMany, PlayerEntity *dst);
     //士气下降信号
     void loseMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
+    //蝶舞锁士气信号
+    void fixMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
     //真实士气下降信号（巫女红莲进入状态使用）
     void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst);
     //检查结束信号

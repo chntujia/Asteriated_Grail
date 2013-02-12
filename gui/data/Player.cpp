@@ -118,6 +118,14 @@ void Player::setRole(int roleID)
         name=tr("[Î×Å®]");
         tapSource="resource/liuxue.png";
         break;
+    case 24:
+        name=("[µûÎèÕß]");
+        tapSource="resource/diaoling.png";
+        tokenName[0]=tr("Ó¼");
+        tokenMax[0]=20;
+        tokenName[2]=tr("¼ë");
+        tokenMax[2]=8;
+        break;
     case 28:
         name=tr("[ºìÁ«ÆïÊ¿]");
         tapSource="resource/rexuefeiteng.png";
