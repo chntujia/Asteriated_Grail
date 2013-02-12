@@ -2221,10 +2221,13 @@ void QiDao::XunJieCiFu1(QList<void*> args)
 }
 void QiDao::XunJieCiFu2(QList<void*> args)
 {
+    if(XunJieCounted)
+        return;
     PlayerEntity*user=(PlayerEntity*)args[0];
     foreach(CardEntity*xunjie, user->getBasicEffect())
         if(xunjie->getSpecialityList().contains(tr("Ñ¸½Ý´Í¸£"))){
             engine->addActionNum(ATTACK);
+            XunJieCounted=true;
             break;
         }
 }
@@ -2309,6 +2312,7 @@ void QiDao::Pray2(QList<void*> args)
 }
 void QiDao::skillReset(QList<void *> args)
 {
+    XunJieCounted=false;
     if(this != ((PlayerEntity*)args[0]))
         return;
     FaLiChaoXiUsed = false;
@@ -4108,7 +4112,7 @@ void MoQiang::QiHeiZhiQiang(QList<void *> args)
     PlayerEntity*dst=(PlayerEntity*)args[1];
     if(dst->getHandCards().size()<1 || dst->getHandCards().size()>2)
         return;
-    if(!JieFangUsed)
+    if(!JieFangUsed || JieFangFirst)
         return;
     coder.askForSkill(id,"ÆáºÚÖ®Ç¹");
     BatInfor bat=messageBuffer::readBatInfor();

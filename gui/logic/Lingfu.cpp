@@ -63,7 +63,9 @@ void LingFu::onOkClicked()
     case 1801:
         command = "1801;1;";
         command += QString::number(selectedCards[0]->getID()) + ";";
-        handArea->removeCardItem(selectedCards[0]);
+
+        dataInterface->removeHandCard(selectedCards[0]);
+        dataInterface->addCoverCard(selectedCards[0]);
         emit sendCommand(command);
         gui->reset();
         break;
@@ -109,7 +111,8 @@ void LingFu::onOkClicked()
         cardID = QString::number(selectedCoverCards[0]->getID());
         command += cardID + ";";
         emit sendCommand(command);
-        coverArea->removeCardItem(selectedCoverCards[0]);
+
+        dataInterface->removeCoverCard(selectedCoverCards[0]);
         coverArea->reset();
         gui->showCoverArea(false);
         gui->reset();
