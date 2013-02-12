@@ -4108,7 +4108,7 @@ void MoQiang::QiHeiZhiQiang(QList<void *> args)
     PlayerEntity*dst=(PlayerEntity*)args[1];
     if(dst->getHandCards().size()<1 || dst->getHandCards().size()>2)
         return;
-    if(!JieFangUsed)
+    if(!JieFangUsed || JieFangFirst)
         return;
     coder.askForSkill(id,"ÆáºÚÖ®Ç¹");
     BatInfor bat=messageBuffer::readBatInfor();
