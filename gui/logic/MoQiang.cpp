@@ -109,10 +109,35 @@ void MoQiang::ChongYing()
 
 void MoQiang::cardAnalyse()
 {
+    QList<Card*>selectedCards;
     Role::cardAnalyse();
+    selectedCards=handArea->getSelectedCards();
     switch(state)
     {
     case 2903:
+        cardReady=false;
+        if(selectedCards.size()==0)
+            decisionArea->disable(0);
+        else
+        {
+            foreach(Card*ptr,selectedCards)
+                for(int i=0;i<selectedCards.size();i++)
+                {
+                    if(ptr->getElement()!=selectedCards[i]->getElement())
+                    {
+                        if(ptr->getType()!="magic")
+                        {
+                            playerArea->reset();
+                            decisionArea->disable(0);
+                            cardReady=true;
+                            break;
+                        }
+                    }
+                }
+            if(!cardReady)
+                decisionArea->enable(0);
+        }
+        break;
     case 2905:
         decisionArea->enable(0);
         break;
