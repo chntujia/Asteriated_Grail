@@ -31,6 +31,7 @@ void PlayerEntity::makeConnection(BackgroundEngine *engine)
     connect(this,SIGNAL(showHandCards(QList<CardEntity*>,PlayerEntity*)),engine,SIGNAL(showHandCards(QList<CardEntity*>,PlayerEntity*)));
     connect(this,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)));
     connect(this,SIGNAL(handCardsChange(PlayerEntity*)),engine,SIGNAL(handCardsChange(PlayerEntity*)));
+    connect(this,SIGNAL(fixMoraleSIG(int,int*,PlayerEntity*)),engine,SIGNAL(fixMoraleSIG(int,int*,PlayerEntity*)));
 }
 
 PlayerEntity::PlayerEntity(BackgroundEngine *engine,int ID, int isRed)

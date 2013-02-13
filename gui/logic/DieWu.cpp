@@ -116,7 +116,6 @@ void DieWu::DiaoLing()
         tipArea->setMsg("ÊÇ·ñ·¢¶¯µòÁã£¿");
         playerArea->enableAll();
         playerArea->setQuota(1);
-        decisionArea->enable(0);
     }
     else
     {
@@ -197,7 +196,7 @@ void DieWu::onOkClicked()
     switch(state)
     {
     case 2411:
-        command="2401;";
+        command="2401;0;";
         if(tipArea->getBoxCurrentText()[0].digitValue()==1)
         {
             wudongmopai = true;
@@ -212,10 +211,15 @@ void DieWu::onOkClicked()
         }
         break;
     case 2412:
-        command="2401;";
-        cardID = QString::number(selectedCards[0]->getID());
+        command="2401;1;";
+        if(dataInterface->getHandCards().size()!=0)
+        {
+            cardID = QString::number(selectedCards[0]->getID());
+            dataInterface->removeHandCard(selectedCards[0]);
+        }
+        else
+            cardID = -1;
         command+=sourceID+";"+cardID+";";
-        dataInterface->removeHandCard(selectedCards[0]);
         emit sendCommand(command);
         gui->reset();
         break;

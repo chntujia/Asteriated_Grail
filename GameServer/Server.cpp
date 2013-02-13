@@ -1235,8 +1235,9 @@ void Server::decoder(int id, QString message)
     case 2401:
         action.reply = MAGIC;
         action.infor1 = 2401;
-        action.srcID = infor[1].toInt();
-        action.CardID = infor[2].toInt();
+        action.infor2 = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.CardID = infor[3].toInt();
         messageBuffer::writeBatInfor(action);
         break;
 //¶¾·Û

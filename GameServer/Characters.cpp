@@ -4227,6 +4227,7 @@ DieWu::DieWu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id
 
 void DieWu::makeConnection(BackgroundEngine *engine)
 {
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(WuDong(QList<void*>)));
     connect(engine,SIGNAL(timeLine5SIG(QList<void*>)),this,SLOT(DuFen(QList<void*>)));
     connect(engine,SIGNAL(timeLine6SIG(QList<void*>)),this,SLOT(ChaoSheng(QList<void*>)));
@@ -4235,7 +4236,7 @@ void DieWu::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(YongHua(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(DaoNiZhiDie(QList<void*>)));
     connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(DaoNiZhiDieJudge(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
-    connect(engine,SIGNAL(fixMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFix(QList<void*>)));
+    connect(engine,SIGNAL(fixMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFix(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(loseMoraleHeChengSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFixHeCheng(int,int*,PlayerEntity*)));
 }
 
@@ -4245,11 +4246,15 @@ void DieWu::WuDong(QList<void *> args)
     if(magic->srcID != id || magic->infor1 != 2401)
         return;
     QList<CardEntity*> cards;
-    cards << getCardByID(magic->CardID);
-    if(magic->CardID!=-1)
+
+    if(magic->infor2==1)
     {
         coder.notice("蝶舞发动【舞动】，弃一张手牌");
-        this->removeHandCards(cards,false);
+        if(magic->CardID!=-1)
+        {
+            cards << getCardByID(magic->CardID);
+            this->removeHandCards(cards,false);
+        }
     }
     else
     {
@@ -4448,9 +4453,9 @@ void DieWu::DiaoLingFix(int harmed, int *howMany, PlayerEntity *dst)
 {
     if(!tap||dst->getColor()==this->getColor())
         return;
-    if(teamArea.getMorale(dst->getColor())<*howMany)
+    if(teamArea.getMorale(!this->getColor())<=*howMany)
     {
-        *howMany = teamArea.getMorale(dst->getColor())-1;
+        *howMany = teamArea.getMorale(!this->getColor())-1;
         coder.notice("蝶舞本回合发动过凋零，对方士气锁1");
     }
 }
@@ -4459,9 +4464,9 @@ void DieWu::DiaoLingFixHeCheng(int harmed, int *howMany, PlayerEntity *dst)
 {
     if(!tap||dst->getColor()!=this->getColor())
         return;
-    if(teamArea.getMorale(dst->getColor())<*howMany)
+    if(teamArea.getMorale(!this->getColor())<=*howMany)
     {
-        *howMany = teamArea.getMorale(dst->getColor())-1;
+        *howMany = teamArea.getMorale(!this->getColor())-1;
         coder.notice("蝶舞本回合发动过凋零，对方士气锁1");
     }
 }
