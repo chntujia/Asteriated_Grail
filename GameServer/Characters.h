@@ -576,6 +576,7 @@ public slots:
     void YongHua(QList<void*> args);
     void DaoNiZhiDie(QList<void*> args);
     void DaoNiZhiDieJudge(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
+    void skillReset(QList<void*> args);
 private:
 
 };

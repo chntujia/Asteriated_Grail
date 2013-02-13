@@ -20,6 +20,7 @@ public slots:
     void onCancelClicked();
     void cardAnalyse();
     void coverCardAnalyse();
+    void decipher(QString command);
     void WuDong1();
     void YongHua();
     void DaoNiZhiDie1();

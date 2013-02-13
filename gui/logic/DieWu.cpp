@@ -60,8 +60,10 @@ void DieWu::WuDong2()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
-
-    handArea->setQuota(1);
+    if(dataInterface->getHandCards().size()==0)
+        decisionArea->enable(0);
+    else
+        handArea->setQuota(1);
     handArea->enableAll();
 
     decisionArea->enable(1);
@@ -109,12 +111,16 @@ void DieWu::JingHuaShuiYue()
 void DieWu::DiaoLing()
 {
     state = 2405;
-    tipArea->setMsg("是否发动凋零？");
     if(diaoLingFlag)
     {
+        tipArea->setMsg("是否发动凋零？");
         playerArea->enableAll();
         playerArea->setQuota(1);
         decisionArea->enable(0);
+    }
+    else
+    {
+        tipArea->setMsg("非法术茧，无法发动凋零，请选择取消");
     }
     decisionArea->enable(1);
 }
@@ -137,14 +143,18 @@ void DieWu::DaoNiZhiDie1()
     tipArea->reset();
     tipArea->setMsg("你弃2张牌，再选择一项：");
     tipArea->addBoxItem("1.对目标角色造成1点法术伤害，该伤害不能用治疗抵御");
-    tipArea->addBoxItem("2.（移除2个【茧】）移除1个【蛹】");
-    tipArea->addBoxItem("3.（自己造成4点法术伤害③）移除1个【蛹】");
+    if(dataInterface->getMyself()->getToken(2)>0)
+    {
+        tipArea->addBoxItem("2.（移除2个【茧】）移除1个【蛹】");
+        tipArea->addBoxItem("3.（自己造成4点法术伤害③）移除1个【蛹】");
+    }
     tipArea->showBox();
     QList<Card*> handcards=dataInterface->getHandCards();
     if(handcards.size()>1)
         handArea->setQuota(2);
     else if(handcards.size()==1)
         handArea->setQuota(1);
+    handArea->enableAll();
     decisionArea->enable(1);
     if(handcards.size()==0)
         decisionArea->enable(0);
@@ -177,7 +187,7 @@ void DieWu::DaoNiZhiDie2()
 void DieWu::onOkClicked()
 {
     Role::onOkClicked();
-    QString command;
+    static QString command;
     QString sourceID = QString::number(myID);
     QString targetID;
     QString text,cardID;
@@ -243,7 +253,7 @@ void DieWu::onOkClicked()
         gui->reset();
         break;
     case 2405:
-        command="2405;";
+        command="2405;1;";
         targetID = QString::number(selectedPlayers[0]->getID());
         command+=sourceID+";"+targetID+";";
         emit sendCommand(command);
@@ -315,7 +325,7 @@ void DieWu::onCancelClicked()
         gui->reset();
         break;
     case 2403:
-        command="2403;0;-1;-1;";
+        command="2403;0;"+QString::number(myID)+";-1;";
         coverArea->reset();
         gui->showCoverArea(false);
         emit sendCommand(command);
@@ -329,7 +339,7 @@ void DieWu::onCancelClicked()
         gui->reset();
         break;
     case 2405:
-        command="2405;0;-1;-1;";
+        command="2405;0;"+QString::number(myID)+";-1;";
         emit sendCommand(command);
         gui->reset();
         break;
@@ -387,6 +397,27 @@ void DieWu::askForSkill(QString skill)
         ChaoSheng();
     else if(skill==tr("镜花水月"))
         JingHuaShuiYue();
-    else if(skill==tr("凋零"))
-    {diaoLingFlag = true;DiaoLing();}
+}
+
+void DieWu::decipher(QString command)
+{
+    Role::decipher(command);
+    this->command=command;
+    QStringList arg=command.split(';');
+    QStringList cardIDList;
+
+    switch(arg[0].toInt())
+    {
+    //法术牌凋零询问
+    case 2451:
+        diaoLingFlag = true;
+        DiaoLing();
+        break;
+    //非法术牌凋零询问
+    case 2452:
+        diaoLingFlag = false;
+        DiaoLing();
+        break;
+    }
+
 }

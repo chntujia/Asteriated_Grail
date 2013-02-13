@@ -4257,10 +4257,12 @@ void DieWu::WuDong(QList<void *> args)
         engine->drawCards(1,0,this);
     }
     QList<CardEntity*> jian = engine->drwaCardsForCover(1);
-
+    engine->moveCardFrom(jian[0]);
     engine->moveCardToCover(jian[0],this->getID());
-    coder.moveCardNotice(1,jian,this->getID(),PILE,this->id,COVERED);
+    coder.moveCardNotice(1,jian,-1,PILE,this->id,COVERED);
     this->setToken(2,this->getCoverCards().count());
+    if(getCoverCards().count()>tokenMax[2])
+        this->coverOverLoad();
     coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
     coder.coverCardNotice(this->id,1,jian,false,false);
 }
@@ -4333,14 +4335,11 @@ void DieWu::JingHuaShuiYue(QList<void *> args)
 
 void DieWu::DiaoLing(int cardID, bool removed)
 {
-    BatInfor ans;
     if(getCardByID(cardID)->getType()==tr("magic"))
-    {
-        coder.askForSkill(this->getID(),"凋零");
-        ans = messageBuffer::readBatInfor();
-    }
-    if(getCardByID(cardID)->getType()!=tr("magic"))
-        ans.reply = 0;
+        coder.askForSkillNumber(this->getID(),2451);
+    else
+        coder.askForSkillNumber(this->getID(),2452);
+    BatInfor ans = messageBuffer::readBatInfor();
     if(!removed)
     {
         QList<CardEntity*> jian;
@@ -4352,6 +4351,8 @@ void DieWu::DiaoLing(int cardID, bool removed)
     }
     if(ans.reply == 0)
         return;
+    tap = true;
+    coder.tapNotice(this->getID(),1,"凋零");
     coder.notice("蝶舞者对玩家"+QString::number(ans.dstID)+"发动凋零");
     Harm harm;
     harm.harmPoint = 1;
@@ -4373,10 +4374,12 @@ void DieWu::YongHua(QList<void *> args)
     QList<CardEntity*> jian = engine->drwaCardsForCover(4);
     for(int i= 0;i <4; i ++)
         engine->moveCardToCover(jian[i],this->getID());
-    coder.moveCardNotice(4,jian,this->getID(),PILE,this->id,COVERED);
-    coder.coverCardNotice(this->id,1,jian,false,false);
+    coder.moveCardNotice(4,jian,-1,PILE,this->id,COVERED);
+    coder.coverCardNotice(this->id,4,jian,false,false);
 
     this->setToken(2,this->getCoverCards().count());
+    if(getCoverCards().count()>tokenMax[2])
+        this->coverOverLoad();
     coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
 
     this->setToken(0,token[0]+1);
@@ -4398,7 +4401,7 @@ void DieWu::DaoNiZhiDie(QList<void *> args)
     coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
     QList<CardEntity*> cards;
     cards << getCardByID(magic->CardID);
-    cards << getCardByID(magic->infor2);
+    cards << getCardByID(magic->infor3);
     coder.discardNotice(id,cards.size(),"n",cards);
     this->removeHandCards(cards,false);
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
@@ -4443,16 +4446,33 @@ void DieWu::DaoNiZhiDieJudge(Harm harm, PlayerEntity *src, PlayerEntity *dst, in
 
 void DieWu::DiaoLingFix(int harmed, int *howMany, PlayerEntity *dst)
 {
-    if(!tap||dst->getColor()!=this->getColor())
+    if(!tap||dst->getColor()==this->getColor())
         return;
     if(teamArea.getMorale(dst->getColor())<*howMany)
+    {
         *howMany = teamArea.getMorale(dst->getColor())-1;
+        coder.notice("蝶舞本回合发动过凋零，对方士气锁1");
+    }
 }
 
 void DieWu::DiaoLingFixHeCheng(int harmed, int *howMany, PlayerEntity *dst)
 {
-    if(!tap||dst->getColor()==this->getColor())
+    if(!tap||dst->getColor()!=this->getColor())
         return;
     if(teamArea.getMorale(dst->getColor())<*howMany)
+    {
         *howMany = teamArea.getMorale(dst->getColor())-1;
+        coder.notice("蝶舞本回合发动过凋零，对方士气锁1");
+    }
+}
+
+void DieWu::skillReset(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(tap)
+    {
+        tap = false;
+        coder.tapNotice(this->getID(),0,"解除凋零");
+    }
 }

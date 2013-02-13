@@ -60,7 +60,12 @@ void Role::makeConnection()
 
 void Role::coverCardAnalyse()
 {
-
+    switch(state)
+    {
+    case 50:
+        decisionArea->enable(0);
+        break;
+    }
 }
 
 void Role::cardAnalyse()
@@ -313,6 +318,9 @@ void Role::drop(int howMany)
 void Role::dropCover(int howMany)
 {
     state = 50;
+    gui->showCoverArea(true);
+    HandArea *coverArea = gui->getCoverArea();
+    coverArea->reset();
     coverArea->setQuota(howMany);
     coverArea->enableAll();
     QApplication::alert((QWidget*)playerArea->window());
@@ -810,6 +818,8 @@ void Role::onOkClicked()
         {
             dataInterface->removeHandCard(selectedCards[i]);
         }
+        coverArea->reset();
+        gui->showCoverArea(false);
         gui->reset();
         emit sendCommand(command);
         break;

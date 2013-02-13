@@ -331,6 +331,4 @@ void PlayerEntity::addCardsToCover(QList<CardEntity*> cards)
     {
         this->coverCards << cards.at(i);
     }
-    if(coverCards.size()>tokenMax[2])
-        coverOverLoad();
 }
