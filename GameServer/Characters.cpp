@@ -4237,7 +4237,7 @@ void DieWu::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(DaoNiZhiDie(QList<void*>)));
     connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(DaoNiZhiDieJudge(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
     connect(engine,SIGNAL(fixMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFix(int,int*,PlayerEntity*)));
-    connect(engine,SIGNAL(loseMoraleHeChengSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFixHeCheng(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(fixMoralHeChengSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFixHeCheng(int,int*,PlayerEntity*)));
 }
 
 void DieWu::WuDong(QList<void *> args)

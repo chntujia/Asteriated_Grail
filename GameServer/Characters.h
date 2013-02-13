@@ -580,5 +580,20 @@ public slots:
 private:
 
 };
+/*
+class MoGong: public PlayerEntity
+{
+    Q_OBJECT
+public:
+    MoGong(BackgroundEngine* engine, int id, int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void MoGuanChongJi(QList<void*> args);
+    void MoGuanChongJiHit(QList<void*> args);
+    void MoGuanChongJiMiss(QList<void *> args);
+    void LeiGuangSanShe(QList<void*> args);
+    void DuoChongSheJi(QList<void*> args);
 
+};
+*/
 #endif // CHARACTERS_H

@@ -114,7 +114,7 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
         return new GeDouJia(engine,id,color);
         break;
     case 18:
-        return new LingFu(engine,id,color);  //debugó?
+        return new LingFu(engine,id,color);
         break;
     case 21:
         return new YongZhe(engine,id,color);
@@ -472,7 +472,7 @@ QList<CardEntity *> BackgroundEngine::drwaCardsForCover(int num)
     return newCards;
 }
 
-//??????àí
+
 //中毒处理
 void BackgroundEngine::posionProcess(PlayerEntity* player,CardEntity* card)
 {
@@ -493,7 +493,7 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
 
     if(reply == 0)
     {
-        //ì???
+
         this->attackLeft = 0;
         this->magicLeft = 0;
         this->specialLeft = 0;
@@ -504,13 +504,13 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
     }
     else if(reply == 1)
     {
-        //????
+
         coder.weakNotice(player->getID(),1,howMany);
         this->drawCards(howMany,0,player);
     }
 }
 
-//??????ê?ê±?ì?a”±?°í??ò???°”??ù???§???í??ê??§??
+
 void BackgroundEngine::checkEffect(PlayerEntity* player)
 {
     for(int i = 0;i < player->getBasicEffect().size();i++)
@@ -965,7 +965,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         for(int i = 0;i < dst->getBasicEffect().size()&& checkShield;i++)
         {
             //检查是否有圣盾
-            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("ììê?????")))
+            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
             {
                 coder.shieldNotic(dst->getID());
                 dst->removeBasicEffect(dst->getBasicEffect()[i]);
@@ -1192,7 +1192,7 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
             //检查圣盾
             for(int i = 0;i < dstPlayer->getBasicEffect().size();i++)
             {
-                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(tr("ììê?????")))
+                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
                 {
                     coder.shieldNotic(dst);
                     dstPlayer->removeBasicEffect(dstPlayer->getBasicEffect()[i]);
