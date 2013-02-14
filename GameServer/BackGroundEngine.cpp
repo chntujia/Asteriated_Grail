@@ -116,7 +116,7 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
         return new GeDouJia(engine,id,color);
         break;
     case 18:
-        return new LingFu(engine,id,color);  //debugó?
+        return new LingFu(engine,id,color);
         break;
     case 21:
         return new YongZhe(engine,id,color);
@@ -126,6 +126,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
         break;
     case 23:
         return new WuNv(engine,id,color);
+        break;
+    case 24:
+        return new DieWu(engine,id,color);
         break;
     case 28:
         return new HongLian(engine,id,color);
@@ -188,8 +191,9 @@ void BackgroundEngine::seatArrange()
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
 
-    for(int i=1; i<= 23 ;i++)
+    for(int i=1; i<= 24 ;i++)
         roles<<i;
+
     roles<<28;
     roles<<29;
     randomize(&roles);
@@ -452,6 +456,21 @@ void BackgroundEngine::drawCards(int num,int harmed,PlayerEntity* player)
     //命令该玩家增加手牌
     player->addHandCards(newCards,harmed);
 }
+QList<CardEntity *> BackgroundEngine::drwaCardsForCover(int num)
+{
+    QList<CardEntity*> newCards;
+    for(int i = 0;i < num;i++)
+    {
+        if(this->pile.isEmpty())
+        {
+            shuffle(true);
+        }
+        newCards << this->pile.takeLast();
+    }
+    return newCards;
+}
+
+
 //中毒处理
 void BackgroundEngine::posionProcess(PlayerEntity* player,CardEntity* card)
 {
@@ -472,7 +491,11 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
 
     if(reply == 0)
     {
+
         //跳过
+
+
+
         this->attackLeft = 0;
         this->magicLeft = 0;
         this->specialLeft = 0;
@@ -483,13 +506,21 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
     }
     else if(reply == 1)
     {
+
         //强摸
+
+
+
         coder.weakNotice(player->getID(),1,howMany);
         this->drawCards(howMany,0,player);
     }
 }
 
+
 //回合开始时检测当前玩家面前的基础效果和专属效果
+
+
+
 void BackgroundEngine::checkEffect(PlayerEntity* player)
 {
     for(int i = 0;i < player->getBasicEffect().size();i++)
@@ -726,12 +757,15 @@ void BackgroundEngine::actionPhase()
                 teamArea.setGem(color,teamArea.getGem(color) - bat.infor1);
                 teamArea.setCrystal(color,teamArea.getCrystal(color) - bat.infor2);
                 teamArea.setCup(color,teamArea.getCup(color) + 1);
-                teamArea.setMorale(!color,teamArea.getMorale(!color) - 1);                
+                int n=1;
+                emit fixMoralHeChengSIG(0,&n,currentPlayer);
+                teamArea.setMorale(!color,teamArea.getMorale(!color) - n);
+
                 coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
                 coder.cupNotice(color,teamArea.getCup(color));
                 coder.moraleNotice(!color,teamArea.getMorale(!color));
                 emit specialFinishSIG(args);
-                int n=1;
+
                 emit loseMoraleHeChengSIG(0,&n,currentPlayer);
                 this->checkEnd();
             }
@@ -1007,14 +1041,14 @@ void BackgroundEngine::timeLine3(Harm harm, PlayerEntity *src, PlayerEntity *dst
         coder.attackHurtNotice(dst->getID(),harm.harmPoint,src->getID());
     else if(harm.type == MAGIC)
         coder.magicHurtNotice(dst->getID(),harm.harmPoint,src->getID(),magicReason);
-    timeLine4(harm,src,dst);
+    timeLine4(harm,src,dst, magicReason);
 }
 
-void BackgroundEngine::timeLine4(Harm harm,PlayerEntity *src,PlayerEntity *dst)
+void BackgroundEngine::timeLine4(Harm harm,PlayerEntity *src,PlayerEntity *dst,QString magicReason)
 {
     int crossUsed = 0;
     int crossAvailable = dst->getCrossNum();
-    emit askForHeal(harm,src,dst,&crossAvailable);
+    emit askForHeal(harm,src,dst,&crossAvailable, magicReason);
     if(crossAvailable != 0)
     {
         coder.askForCross(dst->getID(),harm.harmPoint,harm.type, crossAvailable);
@@ -1034,9 +1068,13 @@ void BackgroundEngine::timeLine5(Harm harm,PlayerEntity *src,PlayerEntity *dst,i
     }
     if(harm.harmPoint == 0)
         return;
-    //emit timeLine5SIG();
-
-    timeLine6(harm,src,dst);
+    QList<void*> arg;
+    arg << src;
+    arg << dst;
+    arg << &harm;
+    emit timeLine5SIG(arg);
+    if(harm.harmPoint>0)
+        timeLine6(harm,src,dst);
 }
 
 void BackgroundEngine::timeLine6(Harm harm,PlayerEntity *src,PlayerEntity *dst)
@@ -1164,7 +1202,7 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
             //检查圣盾
             for(int i = 0;i < dstPlayer->getBasicEffect().size();i++)
             {
-                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(tr("ììê?????")))
+                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
                 {
                     coder.shieldNotic(dst);
                     dstPlayer->removeBasicEffect(dstPlayer->getBasicEffect()[i]);

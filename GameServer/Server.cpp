@@ -315,7 +315,13 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeCardInfor(cards);
 
     break;
-
+//盖牌超出上限弃牌通告
+    case 50:
+        chosenCards = infor.at(1).split(",");
+        for(int i = 0;i < chosenCards.size();i++)
+            cards << chosenCards.at(i).toInt();
+        messageBuffer::writeCardInfor(cards);
+    break;
     case READYBEGIN:
         ready[id] = true;
         for(int i = 0;i < ready.size();i++)
@@ -334,7 +340,6 @@ void Server::decoder(int id, QString message)
         emit roleNoticeSIG();
         emit gameStartSIG();
         break;
-
     case WEAKCOMMAND:
         messageBuffer::writeInfor(infor[1].toInt());
     break;
@@ -1225,6 +1230,7 @@ void Server::decoder(int id, QString message)
         case 180504:
             messageBuffer::writeInfor(infor[1].toInt());
             break;
+
 //剑魂守护
     case 1901:
         messageBuffer::writeInfor(infor[1].toInt());
@@ -1264,6 +1270,71 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeBatInfor(ans);
         break;
 
+
+
+//蝶舞 24
+//舞动
+    case 2401:
+        action.reply = MAGIC;
+        action.infor1 = 2401;
+        action.infor2 = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.CardID = infor[3].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//毒粉
+    case 2402:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2402;
+        ans.srcID = infor[2].toInt();
+        ans.CardID = infor[3].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//朝圣
+    case 2403:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2403;
+        ans.srcID = infor[2].toInt();
+        ans.CardID = infor[3].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//镜花水月
+    case 2404:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2404;
+        ans.srcID = infor[2].toInt();
+        ans.CardID = infor[3].toInt();
+        ans.infor2 = infor[4].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//凋零
+    case 2405:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2405;
+        ans.srcID = infor[2].toInt();
+        ans.dstID = infor[3].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//蛹化
+    case 2406:
+        action.reply = MAGIC;
+        action.infor1 = 2406;
+        action.srcID = infor[1].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//倒逆之蝶
+    case 2407:
+        action.reply =MAGIC;
+        action.infor1 = 2407;
+        action.CardID = infor[1].toInt();
+        action.infor3 = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        action.srcID = infor[4].toInt();
+        action.dstID = infor[5].toInt();
+        action.infor4 = infor[6].toInt();
+        action.infor5 = infor[7].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
 
     }
 

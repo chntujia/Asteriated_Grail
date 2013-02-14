@@ -60,7 +60,12 @@ void Role::makeConnection()
 
 void Role::coverCardAnalyse()
 {
-
+    switch(state)
+    {
+    case 50:
+        decisionArea->enable(0);
+        break;
+    }
 }
 
 void Role::cardAnalyse()
@@ -306,6 +311,18 @@ void Role::drop(int howMany)
     state=3;
     handArea->setQuota(howMany);
     handArea->enableAll();
+    QApplication::alert((QWidget*)playerArea->window());
+
+}
+
+void Role::dropCover(int howMany)
+{
+    state = 50;
+    gui->showCoverArea(true);
+    HandArea *coverArea = gui->getCoverArea();
+    coverArea->reset();
+    coverArea->setQuota(howMany);
+    coverArea->enableAll();
     QApplication::alert((QWidget*)playerArea->window());
 
 }
@@ -785,6 +802,26 @@ void Role::onOkClicked()
             emit sendCommand("1607;"+QString::number(myID)+";");
             myRole->attackAction();
         }
+        break;
+//弃盖牌
+    case 50:
+        selectedCards = coverArea->getSelectedCards();
+        cardID=QString::number(selectedCards[0]->getID());
+        command="50;"+cardID;
+        for(i=1;i<selectedCards.count();i++)
+        {
+            cardID=QString::number(selectedCards[i]->getID());
+            command+=","+cardID;
+        }
+        command+=";";
+        for(i=0;i<selectedCards.count();i++)
+        {
+            dataInterface->removeHandCard(selectedCards[i]);
+        }
+        coverArea->reset();
+        gui->showCoverArea(false);
+        gui->reset();
+        emit sendCommand(command);
         break;
 //天使祝福
     case 751:
@@ -1349,19 +1386,19 @@ void Role::decipher(QString command)
                 show = arg[5].toInt();
                 cardIDList=arg[3].split(',');
 
-        //        if(targetID==myID)
-        //        {
+                if(targetID==myID)
+                {
 
-        //            for(i=0;i<howMany;i++)
-        //            {
-        //                cardID=cardIDList[i].toInt();
-        //                card=dataInterface->getCard(cardID);
-        //                if(dir == 0)
-        //                    dataInterface->addCoverCard(card);
-        //                else
-        //                    dataInterface->removeCoverCard(card);
-        //            }
-        //        }
+                    for(i=0;i<howMany;i++)
+                    {
+                        cardID=cardIDList[i].toInt();
+                        card=dataInterface->getCard(cardID);
+                        if(dir == 0)
+                            dataInterface->addCoverCard(card);
+                        else
+                            dataInterface->removeCoverCard(card);
+                    }
+                }
 
                 if(dir == 0)
                     gui->logAppend(arg[2]+tr("张牌加入玩家") + playerList[targetID]->getName()+tr("盖牌区"));
@@ -1393,6 +1430,28 @@ void Role::decipher(QString command)
         howMany=arg[3].toInt();
         playerList.at(targetID)->setToken(flag.toInt(),howMany);
         playerArea->update();
+        break;
+//盖牌弃牌
+    case 49:
+        targetID=arg[1].toInt();
+        howMany=arg[2].toInt();
+        flag=arg[3];
+        msg=playerList[targetID]->getName()+tr("需要弃")+arg[2]+tr("张盖牌");
+        if(flag=="y")
+            gui->logAppend(msg+tr("(明弃)"));
+        else
+            gui->logAppend(msg+tr("(暗弃)"));
+        if(targetID!=myID)
+        {
+            gui->setEnable(0);
+        }
+        else
+        {
+            gui->setEnable(1);
+            gui->reset();
+            dropCover(howMany);
+            tipArea->setMsg(tr("你需要弃")+arg[2]+tr("张盖牌"));
+        }
         break;
 //天使祝福
     case 750:
