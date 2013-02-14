@@ -19,7 +19,7 @@
 #include "ShenGuan.h"
 #include "SiLing.h"
 #include "XianZhe.h"
-
+#include "JianDi.h"
 #include "GeDouJia.h"
 #include "WuNv.h"
 #include "LingHun.h"
@@ -99,6 +99,9 @@ void Logic::setMyRole(int roleID)
         break;
     case 18:
         new LingFu;
+        break;
+    case 19:
+        new JianDi;
         break;
     case 20:
         new GeDouJia;

@@ -109,7 +109,9 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 17:
         return new XianZhe(engine,id,color);
         break;
-
+    case 19:
+        return new JianDi(engine,id,color);
+        break;
     case 20:
         return new GeDouJia(engine,id,color);
         break;
@@ -186,12 +188,8 @@ void BackgroundEngine::seatArrange()
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
 
-    for(int i=1; i<= 18 ;i++)
+    for(int i=1; i<= 23 ;i++)
         roles<<i;
-    roles<<21;
-    roles<<20;
-    roles<<22;
-    roles<<23;
     roles<<28;
     roles<<29;
     randomize(&roles);
@@ -474,7 +472,7 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
 
     if(reply == 0)
     {
-        //ì???
+        //跳过
         this->attackLeft = 0;
         this->magicLeft = 0;
         this->specialLeft = 0;
@@ -485,13 +483,13 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
     }
     else if(reply == 1)
     {
-        //????
+        //强摸
         coder.weakNotice(player->getID(),1,howMany);
         this->drawCards(howMany,0,player);
     }
 }
 
-//??????ê?ê±?ì?a”±?°í??ò???°”??ù???§???í??ê??§??
+//回合开始时检测当前玩家面前的基础效果和专属效果
 void BackgroundEngine::checkEffect(PlayerEntity* player)
 {
     for(int i = 0;i < player->getBasicEffect().size();i++)
@@ -515,7 +513,7 @@ void BackgroundEngine::checkEffect(PlayerEntity* player)
         }    
 }
 
-//回合开始时检测当前玩家面前的基础效果和专属效果
+
 void BackgroundEngine::acted(int kind)
 {
     if(kind == ATTACK)
@@ -943,7 +941,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         for(int i = 0;i < dst->getBasicEffect().size()&& checkShield;i++)
         {
             //检查是否有圣盾
-            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("ììê?????")))
+            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
             {
                 coder.shieldNotic(dst->getID());
                 dst->removeBasicEffect(dst->getBasicEffect()[i]);
