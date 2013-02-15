@@ -126,6 +126,12 @@ void Player::setRole(int roleID)
         tokenName[2]=tr("¼ë");
         tokenMax[2]=8;
         break;
+    case 26:
+        name=("[Ä§¹­]");
+        tokenName[2]=tr("³äÄÜ");
+        tokenMax[2]=8;
+        gem = 3;
+        break;
     case 28:
         name=tr("[ºìÁ«ÆïÊ¿]");
         tapSource="resource/rexuefeiteng.png";

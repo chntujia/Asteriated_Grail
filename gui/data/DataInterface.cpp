@@ -183,6 +183,11 @@ QList<Card*> DataInterface::getHandCards()
     return handcards;
 }
 
+QList<Card*> DataInterface::getCoverCards()
+{
+    return coverCards;
+}
+
 Player* DataInterface::getMyself()
 {
     return myself;

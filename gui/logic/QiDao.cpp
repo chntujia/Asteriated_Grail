@@ -238,6 +238,8 @@ void QiDao::onOkClicked()
             command+=QString::number(ptr->getID())+";";
             dataInterface->removeHandCard(ptr);
         }
+        for(int i=0;i<(2-selectedCards.size());i++)
+            command+="-1;";
         usedMagic=true;
         emit sendCommand(command);
         gui->reset();

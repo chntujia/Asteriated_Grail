@@ -2451,22 +2451,12 @@ void ShenGuan::ShenShengLingYu(QList<void *> args)
     coder.notice("神官对玩家"+QString::number(magic->dstID)+"发动神圣领域");
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
     QList<CardEntity*> cards;
-    int n = 0;
     if(magic->CardID!=-1)
-    {
         cards << getCardByID(magic->CardID);
-        n++;
-    }
     if(magic->infor3!=-1)
-    {
         cards << getCardByID(magic->infor3);
-        n++;
-    }
-    if(n>0)
-    {
-        this->removeHandCards(cards,false);
-        coder.discardNotice(this->getID(), n, "n", cards);
-    }
+    this->removeHandCards(cards,false);
+    coder.discardNotice(this->getID(), cards.size(), "n", cards);
     if(magic->infor2 == 1)
     {
         this->subCrossNum(1);
@@ -4325,7 +4315,7 @@ void DieWu::JingHuaShuiYue(QList<void *> args)
         engine->moveCardFromCoverToDiscard(jian[i],true);
     this->setToken(2,this->getCoverCards().count());
     coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
-    coder.coverCardNotice(this->getID(),2,jian,true,ans.reply);
+    coder.coverCardNotice(this->getID(),2,jian,true,true);
 
     this->DiaoLing(ans.CardID, true);
     this->DiaoLing(ans.infor2, true);
@@ -4405,8 +4395,10 @@ void DieWu::DaoNiZhiDie(QList<void *> args)
         gem--;
     coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
     QList<CardEntity*> cards;
-    cards << getCardByID(magic->CardID);
-    cards << getCardByID(magic->infor3);
+    if(magic->CardID!=-1)
+        cards << getCardByID(magic->CardID);
+    if(magic->infor3!=-1)
+        cards << getCardByID(magic->infor3);
     coder.discardNotice(id,cards.size(),"n",cards);
     this->removeHandCards(cards,false);
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
@@ -4480,4 +4472,233 @@ void DieWu::skillReset(QList<void *> args)
         tap = false;
         coder.tapNotice(this->getID(),0,"解除凋零");
     }
+}
+
+MoGong::MoGong(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=26;
+    this->star=4;
+    tokenMax[2]=8;
+    gem = 3;
+    makeConnection(engine);
+}
+
+void MoGong::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(MoGuanChongJi(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(MoGuanChongJiHit(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(MoGuanChongJiMiss(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(LeiGuangSanShe(QList<void*>)));
+    connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(DuoChongSheJi1(QList<void*>)));
+    connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(DuoChongSheJi2(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(ChongNengMoYan(QList<void*>)));
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
+
+void MoGong::MoGuanChongJi(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID != id || skill->infor1 != 2601)
+        return;
+    MoGuanChongJiUsed = true;
+    MoGuanCHongJiUsing = true;
+    coder.notice("魔弓发动【魔贯冲击】");
+
+    QList<CardEntity*> chongNeng;
+    chongNeng << getCardByID(skill->infor2);
+    engine->moveCardFromCoverToDiscard(chongNeng[0],true);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),1,chongNeng,true,true);
+}
+
+void MoGong::MoGuanChongJiHit(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0])||!MoGuanCHongJiUsing)
+        return;
+    BatInfor ans;
+    ans.reply = 0;
+    if(coverCards.size()>0)
+    {
+        coder.askForSkill(this->getID(),"魔贯冲击命中");
+        ans = messageBuffer::readBatInfor();
+    }
+    Harm *harm = (Harm*)args[2];
+    if(ans.reply==1)
+    {
+        coder.notice("魔弓发动【魔贯冲击】，额外移除一张火系充能，本次攻击伤害加2");
+        QList<CardEntity*> chongNeng;
+        chongNeng << getCardByID(ans.CardID);
+        engine->moveCardFromCoverToDiscard(chongNeng[0],true);
+        this->setToken(2,this->getCoverCards().count());
+        coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+        coder.coverCardNotice(this->getID(),1,chongNeng,true,true);
+        harm->harmPoint+=2;
+    }
+    else
+    {
+        coder.notice("魔弓发动【魔贯冲击】，本次攻击加1");
+        harm->harmPoint++;
+    }
+    MoGuanCHongJiUsing = false;
+}
+
+void MoGong::MoGuanChongJiMiss(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0])||!MoGuanCHongJiUsing)
+        return;
+    coder.notice("魔弓发动【魔贯冲击】");
+    Harm harm;
+    harm.harmPoint = 3;
+    harm.type = MAGIC;
+    engine->timeLine3(harm,this,(PlayerEntity*)args[1],"魔贯冲击");
+    MoGuanCHongJiUsing = false;
+}
+
+void MoGong::LeiGuangSanShe(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID()||magic->infor1!=2603)
+        return;
+
+    QStringList cardNum = magic->inforstr.split(":");
+    QList<CardEntity*> chongneng;
+    for(int i=0;i<magic->infor2;i++)
+        chongneng << getCardByID(cardNum[i].toInt());
+    coder.notice("魔弓发动【雷光散射】，额外弃"+QString::number(magic->infor2-1)+"张雷系充能，指定目标为玩家"+QString::number(magic->dstID));
+    for(int i = 0; i<magic->infor2;i++)
+        engine->moveCardFromCoverToDiscard(chongneng[i],true);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),chongneng.size(),chongneng,true,true);
+
+    Harm harm;
+    harm.type = MAGIC;
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    PlayerEntity* player = this->getNext();
+    while(player!=this)
+    {
+        if(player->getColor()!=this->getColor())
+        {
+            if(player!=dst)
+                harm.harmPoint=1;
+            else
+                harm.harmPoint=magic->infor2;
+            this->engine->timeLine3(harm,this,dst,"雷光散射");
+        }
+        player = player->getNext();
+    }
+}
+
+void MoGong::DuoChongSheJi1(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0])||coverCards.size()==0||MoGuanChongJiUsed)
+        return;
+    engine->addActionNum(ATTACK);
+
+}
+
+void MoGong::DuoChongSheJi2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(id != skill->srcID||skill->infor1!=2605)
+        return;
+    coder.notice("魔弓发动【多重射击】");
+    DuoChongSheJiUsed=true;
+    QList<CardEntity*> chongNeng;
+    chongNeng << getCardByID(skill->infor2);
+    engine->moveCardFromCoverToDiscard(chongNeng[0],true);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),1,chongNeng,true,true);
+}
+
+void MoGong::ChongNengMoYan(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0]||this->getEnergy()<=0)
+        return;
+    coder.askForSkill(this->getID(),"充能/魔眼");
+    BatInfor start = messageBuffer::readBatInfor();
+    if(start.reply == 0)
+        return;
+    if(start.reply == 1)
+    {
+        if(crystal>0)
+            crystal--;
+        else
+            gem--;
+        coder.energyNotice(this->getID(),gem,crystal);
+        ChongNengUsed = true;
+        if(start.infor2>0)
+        {
+            QStringList cardNum = start.inforstr.split(":");
+            QList<CardEntity*> cards;
+            for(int i=0;i<start.infor2;i++)
+                cards << getCardByID(cardNum[i].toInt());
+            coder.discardNotice(id,cards.size(),"n",cards);
+            this->removeHandCards(cards,false);
+        }
+        engine->drawCards(start.infor3,0,this);
+        coder.askForSkill(this->getID(),"充能盖牌");
+        QString msg=messageBuffer::readMsg();
+        QStringList arg=msg.split(";");
+        QList<CardEntity*> chongneng;
+        for(int i=0;i<arg[1].toInt();i++)
+        {
+            chongneng << getCardByID(arg[i+2].toInt());
+            engine->moveCardFrom(chongneng[i]);
+            engine->moveCardToCover(chongneng[i],this->getID());
+        }
+        coder.moveCardNotice(arg[1].toInt(),chongneng,this->getID(),HAND,this->id,COVERED);
+        coder.coverCardNotice(this->id,arg[1].toInt(),chongneng,false,false);
+
+        this->setToken(2,this->getCoverCards().count());
+        if(getCoverCards().count()>tokenMax[2])
+            this->coverOverLoad();
+        coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    }
+    else
+    {
+        gem--;
+        coder.energyNotice(this->getID(),gem,crystal);
+        MoYanUsed = true;
+        PlayerEntity* dst;
+        if(start.dstID==-1)
+            engine->drawCards(3,0,this);
+        else
+        {
+            dst = engine->getPlayerByID(start.dstID);
+            if(dst->getHandCardNum()>0)
+                coder.askForDiscard(start.dstID,1,false);
+            QList<CardEntity*> cardChosen;
+            cardChosen = messageBuffer::readCardID(1);
+            dst->removeHandCards(cardChosen,false);
+            coder.discardNotice(start.dstID,1,"n",cardChosen);
+
+            coder.askForSkill(this->getID(),"魔眼盖牌");
+            QList<CardEntity*> chongneng;
+            chongneng = messageBuffer::readCardID(1);
+            engine->moveCardFrom(chongneng[0]);
+            engine->moveCardToCover(chongneng[0],this->getID());
+            coder.moveCardNotice(1,chongneng,this->getID(),HAND,this->id,COVERED);
+            coder.coverCardNotice(this->id,1,chongneng,false,false);
+            this->setToken(2,this->getCoverCards().count());
+            if(getCoverCards().count()>tokenMax[2])
+                this->coverOverLoad();
+            coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+        }
+        crystal++;
+        coder.energyNotice(this->getID(),gem,crystal);
+    }
+}
+
+void MoGong::skillReset(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    MoGuanChongJiUsed = false;
+    MoGuanCHongJiUsing = false;
+    DuoChongSheJiUsed = false;
+    MoYanUsed = false;
+    ChongNengUsed = false;
 }

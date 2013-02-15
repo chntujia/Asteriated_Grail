@@ -27,6 +27,7 @@
 #include "HongLian.h"
 #include "MoQiang.h"
 #include "LingFu.h"
+#include "MoGong.h"
 
 #define LOGINPERMIT 1
 #define GAMESTART 2
@@ -115,6 +116,9 @@ void Logic::setMyRole(int roleID)
         break;
     case 24:
         new DieWu;
+        break;
+    case 26:
+        new MoGong;
         break;
     case 28:
         new HongLian;

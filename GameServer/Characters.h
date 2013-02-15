@@ -580,7 +580,7 @@ public slots:
 private:
 
 };
-/*
+
 class MoGong: public PlayerEntity
 {
     Q_OBJECT
@@ -592,8 +592,16 @@ public slots:
     void MoGuanChongJiHit(QList<void*> args);
     void MoGuanChongJiMiss(QList<void *> args);
     void LeiGuangSanShe(QList<void*> args);
-    void DuoChongSheJi(QList<void*> args);
-
+    void DuoChongSheJi1(QList<void*> args);
+    void DuoChongSheJi2(QList<void*> args);
+    void ChongNengMoYan(QList<void*> args);
+    void skillReset(QList<void*> args);
+private:
+    bool ChongNengUsed;
+    bool MoYanUsed;
+    bool MoGuanChongJiUsed;
+    bool MoGuanCHongJiUsing;
+    bool DuoChongSheJiUsed;
 };
-*/
+
 #endif // CHARACTERS_H

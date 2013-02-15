@@ -174,7 +174,6 @@ void DieWu::DaoNiZhiDie2()
         break;
     case 2:
         gui->showCoverArea(true);
-        HandArea *coverArea = gui->getCoverArea();
         coverArea->reset();
         coverArea->enableAll();
         coverArea->setQuota(2);
@@ -296,12 +295,12 @@ void DieWu::onOkClicked()
         else
         {
             command+="-1;";
-            cardID = QString::number(selectedCoverCards[0]->getID());
-            command+=cardID+";";
-            cardID = QString::number(selectedCoverCards[1]->getID());
-            command+=cardID+";";
-            dataInterface->removeCoverCard(selectedCoverCards[0]);
-            dataInterface->removeCoverCard(selectedCoverCards[1]);
+            foreach(Card*ptr,selectedCards){
+                command+=QString::number(ptr->getID())+";";
+                dataInterface->removeHandCard(ptr);
+            }
+            for(int i=0;i<(2-selectedCards.size());i++)
+                command+="-1;";
             coverArea->reset();
             gui->showCoverArea(false);
         }

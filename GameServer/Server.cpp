@@ -1293,6 +1293,71 @@ void Server::decoder(int id, QString message)
         action.infor5 = infor[7].toInt();
         messageBuffer::writeBatInfor(action);
         break;
+//Ä§¹­
+//Ä§¹á³å»÷
+    case 2601:
+        action.reply=ATTACKSKILL;
+        action.CardID = infor[1].toInt();
+        action.dstID = infor[2].toInt();
+        action.srcID = infor[3].toInt();
+        action.infor1=1201;
+        action.infor2=infor[4].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//Ä§¹á³å»÷ÃüÖÐÑ¯ÎÊ
+    case 2602:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2602;
+        ans.CardID = infor[2].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//À×¹âÉ¢Éä
+    case 2603:
+        action.reply = MAGIC;
+        action.infor1 = 2603;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        action.inforstr = infor[4].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//¶àÖØÉä»÷
+    case 2605:
+        action.reply=ATTACKSKILL;
+        action.CardID = infor[1].toInt();
+        action.dstID = infor[2].toInt();
+        action.srcID = infor[3].toInt();
+        action.infor1=1201;
+        action.infor2=infor[4].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//³äÄÜÄ§ÑÛÑ¯ÎÊ
+    case 2606:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2606;
+        if(ans.reply == 1)
+        {
+            ans.infor2 = infor[2].toInt();
+            ans.inforstr = infor[3].toInt();
+            ans.infor3 = infor[4].toInt();
+            ans.srcID = infor[5].toInt();
+        }
+        if(ans.reply == 2)
+        {
+            ans.dstID = infor[2].toInt();
+            ans.srcID = infor[3].toInt();
+        }
+        messageBuffer::writeBatInfor(ans);
+        break;
+//³äÄÜÆúÅÆ
+    case 2607:
+        messageBuffer::writeMsg(message);
+        break;
+//Ä§ÑÛÆúÅÆ
+    case 2608:
+        cards<<infor[1].toInt();
+        messageBuffer::writeCardInfor(cards);
+        break;
     }
 
 }

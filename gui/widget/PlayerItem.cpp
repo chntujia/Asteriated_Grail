@@ -108,7 +108,10 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     {
         painter->drawPixmap(0,0,QPixmap("resource/token3.png"));
         entry=player->getTokenName(2)+"£º";
-        entry+=QString::number(player->getToken(2))+'/'+QString::number(player->getTokenMax(2));
+        if(player->getTokenMax(2)==20)
+            entry+=QString::number(player->getToken(2))+"/¡Ş";
+        else
+            entry+=QString::number(player->getToken(2))+'/'+QString::number(player->getTokenMax(2));
         painter->drawText(width*0.55,height*0.92,entry);
     }
     if(player->getTap())
