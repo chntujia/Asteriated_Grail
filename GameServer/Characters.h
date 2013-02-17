@@ -559,6 +559,33 @@ private:
     int AddAttackPoint;
 };
 
+
+//剑帝
+class JianDi : public PlayerEntity
+{
+    Q_OBJECT
+public:
+    JianDi(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void JianHunShouHu(QList<void*> args);
+    void YangGong(QList<void*> args);
+    void JianQiZhan(QList<void*> args);
+    void TianYuEMo(QList<void*> args);
+    void TianShiZhiHun(QList<void*> args);
+    void TianShiZhiHun1(QList<void *> args);
+    void TianShiZhiHun2(QList<void *> args);
+    void EMoZhiHun(QList<void*> args);
+    void EMoZhiHun1(QList<void *> args);
+    void EMoZhiHun2(QList<void *> args);
+    void BuQuYiZhi(QList<void*> args);
+    void BuQuYiZhi2(QList<void *> args);
+private:
+    int TianshiOrEmo;//0-皆不是，1-天使，2-恶魔
+    bool HunUsed;
+};
+
+
 class DieWu: public PlayerEntity
 {
     Q_OBJECT
@@ -605,5 +632,6 @@ private:
     bool DuoChongSheJiUsed;
     bool DuoChongSheJiUsing;
 };
+
 
 #endif // CHARACTERS_H

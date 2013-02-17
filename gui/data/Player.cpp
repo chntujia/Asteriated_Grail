@@ -90,7 +90,13 @@ void Player::setRole(int roleID)
         tokenName[2] = tr("ÑýÁ¦");
         tokenMax[2] = 2;
         break;
-
+    case 19:
+        name=tr("[½£µÛ]");
+        tokenName[0]=tr("½£Æø");
+        tokenMax[0]=5;
+        tokenName[2]=tr("½£»ê");
+        tokenMax[2]=3;
+        break;
     case 20:
         name=tr("[¸ñ¶·¼Ò]");
         tapSource="resource/baishi.png";
@@ -130,7 +136,6 @@ void Player::setRole(int roleID)
         name=("[Ä§¹­]");
         tokenName[2]=tr("³äÄÜ");
         tokenMax[2]=8;
-        gem = 3;
         break;
     case 28:
         name=tr("[ºìÁ«ÆïÊ¿]");

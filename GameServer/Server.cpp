@@ -1230,6 +1230,48 @@ void Server::decoder(int id, QString message)
         case 180504:
             messageBuffer::writeInfor(infor[1].toInt());
             break;
+
+//剑魂守护
+    case 1901:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
+//剑气斩
+    case 1902:
+        ans.reply = infor[1].toInt();
+        if(ans.reply!=0)
+        {
+            ans.dstID = infor[2].toInt();
+            ans.infor1 = infor[3].toInt();
+        }
+        messageBuffer::writeBatInfor(ans);
+        break;
+//天使之魂
+    case 1903:
+        ans.reply = infor[1].toInt();
+        if(ans.reply!=0)
+            ans.CardID = infor[2].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//恶魔之魂
+    case 1904:
+        ans.reply = infor[1].toInt();
+        if(ans.reply!=0)
+            ans.CardID = infor[2].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//不屈意志
+    case 1905:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
+    case 1906:
+        ans.reply = ATTACK;
+        ans.infor1 = 1906;
+        ans.srcID = infor[1].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+
+
+
 //蝶舞 24
 //舞动
     case 2401:

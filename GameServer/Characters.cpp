@@ -1324,9 +1324,9 @@ void MaoXian::TouTianHuanRi(QList<void *> args)
 void MaoXian::TouTianHuanRi2(QList<void *> args)
 {
     BatInfor *skill = (BatInfor*)args[0];
-    if(skill->srcID!=id || skill->infor1!=1203)
+    if(skill->srcID!=id || skill->infor1!=1206)
         return;
-    coder.notice("冒险家使用【偷天换日】的额外攻击行动");
+    coder.notice("冒险家使用【偷天换日】的额外攻击或法术行动");
 }
 
 //特殊加工
@@ -1352,9 +1352,9 @@ void MaoXian::TeShuJiaGong(QList<void *> args)
 void MaoXian::TeShuJiaGong2(QList<void *> args)
 {
     BatInfor *skill = (BatInfor*)args[0];
-    if(skill->srcID!=id || skill->infor1!=1203)
+    if(skill->srcID!=id || skill->infor1!=1205)
         return;
-    coder.notice("冒险家使用【偷天换日】的额外攻击行动");
+    coder.notice("冒险家使用【特殊加工】的额外攻击或法术行动");
 }
 //冒险者天堂
 void MaoXian::MaoXianZheTianTang(QList<void *> args)
@@ -4204,6 +4204,248 @@ void MoQiang::skillReset(QList<void *> args)
     AddAttackPoint=0;
 }
 
+
+//剑帝
+JianDi::JianDi(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=19;
+    this->star=4.5;
+    tokenMax[0]=5;
+    HunUsed=false;
+    TianshiOrEmo=0;
+    this->makeConnection(engine);
+}
+
+void JianDi::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(JianHunShouHu(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(YangGong(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(JianQiZhan(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1ProSIG(QList<void*>)),this,SLOT(TianYuEMo(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(TianShiZhiHun(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(TianShiZhiHun1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(TianShiZhiHun2(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(EMoZhiHun(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(EMoZhiHun1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(EMoZhiHun2(QList<void*>)));
+    connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(BuQuYiZhi(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(BuQuYiZhi2(QList<void*>)));
+}
+
+void JianDi::JianHunShouHu(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->coverCards.count()>=3)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(HunUsed)
+        return;
+    CardEntity* jianHun=(CardEntity*)args[3];
+    coder.askForSkill(id,"剑魂守护",QString::number(jianHun->getID()));
+    if(messageBuffer::readInfor()==0)
+        return;
+    coder.notice("剑帝发动【剑魂守护】");
+
+
+    QList<CardEntity*> jianHuns;
+    jianHuns << jianHun;
+
+    engine->moveCardFrom(jianHun);
+    engine->moveCardToCover(jianHun,this->getID());
+    coder.moveCardNotice(1,jianHuns,-1,DISCARDPILE,this->id,COVERED);
+    coder.coverCardNotice(this->id,1,jianHuns,false,false);
+
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+}
+
+void JianDi::YangGong(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(this->getToken(0)==5)
+        return;
+    coder.notice(tr("剑帝发动【佯攻】"));
+    setToken(0,token[0]+1);
+    coder.tokenNotice(id,0,token[0]);
+}
+
+void JianDi::JianQiZhan(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->getToken(0)==0)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    PlayerEntity* dst=(PlayerEntity*)args[1];
+    coder.askForSkill(id,"剑气斩",QString::number(dst->getID()));
+    BatInfor skill=messageBuffer::readBatInfor();
+    if(skill.reply==0)
+        return;
+    coder.notice(tr("剑帝对玩家")+QString::number(skill.dstID)+tr("发动【剑气斩】"));
+    setToken(0,token[0]-skill.infor1);
+    coder.tokenNotice(id,0,token[0]);
+    Harm harm;
+    harm.harmPoint=skill.infor1;
+    harm.type=MAGICHARM;
+    engine->timeLine3(harm,this,engine->getPlayerByID(skill.dstID),"剑气斩");
+}
+
+void JianDi::TianYuEMo(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->getEnergy()==0)
+        TianshiOrEmo=0;
+    else if(this->getEnergy()==2)
+        TianshiOrEmo=2;
+    else
+        TianshiOrEmo=1;
+}
+
+void JianDi::TianShiZhiHun(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->coverCards.size()==0)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=1)
+        return;
+    coder.askForSkill(id,"天使之魂");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+    CardEntity *jianhun = getCardByID(ans.CardID);
+    QList<CardEntity*> jianhuns;
+    jianhuns << jianhun;
+    engine->moveCardFromCoverToDiscard(jianhun,false);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),1,jianhuns,true,false);
+    coder.notice("剑帝发动【天使之魂】");
+    HunUsed=true;
+}
+
+void JianDi::TianShiZhiHun1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=1 || !HunUsed)
+        return;
+    this->addCrossNum(2);
+    coder.crossChangeNotice(this->getID(), crossNum);
+    coder.notice(tr("剑帝为自己+2治疗"));
+    HunUsed=false;
+}
+
+void JianDi::TianShiZhiHun2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=1 || !HunUsed)
+        return;
+    if(teamArea.getMorale(this->getColor())<15)
+    {
+        int morale=teamArea.getMorale(this->getColor())+1;
+        teamArea.setMorale(this->getColor(),morale);
+        coder.moraleNotice(this->getColor(),morale);
+        coder.notice(tr("己方+1士气"));
+    }
+    HunUsed=false;
+}
+
+void JianDi::EMoZhiHun(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->coverCards.size()==0)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=2)
+        return;
+    coder.askForSkill(id,"恶魔之魂");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+    CardEntity *jianhun = getCardByID(ans.CardID);
+    QList<CardEntity*> jianhuns;
+    jianhuns << jianhun;
+    engine->moveCardFromCoverToDiscard(jianhun,false);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),1,jianhuns,true,false);
+    coder.notice("剑帝发动【恶魔之魂】");
+    HunUsed=true;
+}
+
+void JianDi::EMoZhiHun1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=2 || !HunUsed)
+        return;
+    Harm* harm=(Harm*)args[2];
+    harm->harmPoint++;
+    HunUsed=false;
+}
+
+void JianDi::EMoZhiHun2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=2 || !HunUsed)
+        return;
+    setToken(0,token[0]+2);
+    coder.tokenNotice(id,0,token[0]);
+    HunUsed=false;
+}
+
+void JianDi::BuQuYiZhi(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->getEnergy()==0)
+        return;
+    coder.askForSkill(id,"不屈意志");
+    if(messageBuffer::readInfor()==0)
+        return;
+    if(this->getCrystal()>0)
+        crystal--;
+    else
+        gem--;
+    setGem(gem);
+    setCrystal(crystal);
+    coder.energyNotice(id,gem,crystal);
+    coder.notice(tr("剑帝发动【不屈意志】"));
+    engine->drawCards(1,0,this);
+    setToken(0,token[0]+1);
+    coder.tokenNotice(id,0,token[0]);
+    engine->addActionNum(ATTACK);
+}
+
+void JianDi::BuQuYiZhi2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(id != skill->srcID||skill->infor1!=1906)
+        return;
+    coder.notice("剑帝使用【不屈意志】的攻击行动");
+}
 //蝶舞 24
 DieWu::DieWu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
 {
@@ -4472,6 +4714,7 @@ void DieWu::skillReset(QList<void *> args)
         tap = false;
         coder.tapNotice(this->getID(),0,"解除凋零");
     }
+
 }
 
 MoGong::MoGong(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
@@ -4479,7 +4722,6 @@ MoGong::MoGong(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,
     this->characterID=26;
     this->star=4;
     tokenMax[2]=8;
-    gem = 3;
     makeConnection(engine);
 }
 
