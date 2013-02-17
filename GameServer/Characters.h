@@ -594,6 +594,7 @@ public slots:
     void LeiGuangSanShe(QList<void*> args);
     void DuoChongSheJi1(QList<void*> args);
     void DuoChongSheJi2(QList<void*> args);
+    void DuoChongSheJiHarm(QList<void*> args);
     void ChongNengMoYan(QList<void*> args);
     void skillReset(QList<void*> args);
 private:
@@ -602,6 +603,7 @@ private:
     bool MoGuanChongJiUsed;
     bool MoGuanCHongJiUsing;
     bool DuoChongSheJiUsed;
+    bool DuoChongSheJiUsing;
 };
 
 #endif // CHARACTERS_H

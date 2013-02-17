@@ -4222,7 +4222,7 @@ void DieWu::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(timeLine5SIG(QList<void*>)),this,SLOT(DuFen(QList<void*>)));
     connect(engine,SIGNAL(timeLine6SIG(QList<void*>)),this,SLOT(ChaoSheng(QList<void*>)));
     connect(engine,SIGNAL(timeLine5SIG(QList<void*>)),this,SLOT(JingHuaShuiYue(QList<void*>)));
-    connect(engine,SIGNAL(beforeLoseMoralSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFix(QList<void*>)));
+    connect(engine,SIGNAL(beforeLoseMoralSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFix(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(YongHua(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(DaoNiZhiDie(QList<void*>)));
     connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(DaoNiZhiDieJudge(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
@@ -4493,6 +4493,7 @@ void MoGong::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(DuoChongSheJi2(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(ChongNengMoYan(QList<void*>)));
     connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(DuoChongSheJiHarm(QList<void*>)));
 }
 
 void MoGong::MoGuanChongJi(QList<void *> args)
@@ -4565,7 +4566,10 @@ void MoGong::LeiGuangSanShe(QList<void *> args)
     QList<CardEntity*> chongneng;
     for(int i=0;i<magic->infor2;i++)
         chongneng << getCardByID(cardNum[i].toInt());
-    coder.notice("魔弓发动【雷光散射】，额外弃"+QString::number(magic->infor2-1)+"张雷系充能，指定目标为玩家"+QString::number(magic->dstID));
+    if(magic->dstID!=-1)
+        coder.notice("魔弓发动【雷光散射】，额外弃"+QString::number(magic->infor2-1)+"张雷系充能，指定目标为玩家"+QString::number(magic->dstID));
+    else
+        coder.notice("魔弓发动【雷光散射】");
     for(int i = 0; i<magic->infor2;i++)
         engine->moveCardFromCoverToDiscard(chongneng[i],true);
     this->setToken(2,this->getCoverCards().count());
@@ -4574,17 +4578,16 @@ void MoGong::LeiGuangSanShe(QList<void *> args)
 
     Harm harm;
     harm.type = MAGIC;
-    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
     PlayerEntity* player = this->getNext();
     while(player!=this)
     {
         if(player->getColor()!=this->getColor())
         {
-            if(player!=dst)
+            if(player->getID()!=magic->dstID)
                 harm.harmPoint=1;
             else
                 harm.harmPoint=magic->infor2;
-            this->engine->timeLine3(harm,this,dst,"雷光散射");
+            this->engine->timeLine3(harm,this,player,"雷光散射");
         }
         player = player->getNext();
     }
@@ -4604,13 +4607,25 @@ void MoGong::DuoChongSheJi2(QList<void *> args)
     if(id != skill->srcID||skill->infor1!=2605)
         return;
     coder.notice("魔弓发动【多重射击】");
+    *(int*)args[1]=0;
     DuoChongSheJiUsed=true;
+    DuoChongSheJiUsing=true;
     QList<CardEntity*> chongNeng;
     chongNeng << getCardByID(skill->infor2);
     engine->moveCardFromCoverToDiscard(chongNeng[0],true);
     this->setToken(2,this->getCoverCards().count());
     coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
     coder.coverCardNotice(this->getID(),1,chongNeng,true,true);
+}
+
+void MoGong::DuoChongSheJiHarm(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0])||!DuoChongSheJiUsing)
+        return;
+    coder.notice("本次攻击为【多重射击】，伤害减1");
+    Harm *harm = (Harm*)args[2];
+    harm->harmPoint--;
+    DuoChongSheJiUsing = false;
 }
 
 void MoGong::ChongNengMoYan(QList<void *> args)
@@ -4674,7 +4689,7 @@ void MoGong::ChongNengMoYan(QList<void *> args)
             cardChosen = messageBuffer::readCardID(1);
             dst->removeHandCards(cardChosen,false);
             coder.discardNotice(start.dstID,1,"n",cardChosen);
-
+        }
             coder.askForSkill(this->getID(),"魔眼盖牌");
             QList<CardEntity*> chongneng;
             chongneng = messageBuffer::readCardID(1);
@@ -4686,7 +4701,6 @@ void MoGong::ChongNengMoYan(QList<void *> args)
             if(getCoverCards().count()>tokenMax[2])
                 this->coverOverLoad();
             coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
-        }
         crystal++;
         coder.energyNotice(this->getID(),gem,crystal);
     }

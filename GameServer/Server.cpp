@@ -1300,7 +1300,7 @@ void Server::decoder(int id, QString message)
         action.CardID = infor[1].toInt();
         action.dstID = infor[2].toInt();
         action.srcID = infor[3].toInt();
-        action.infor1=1201;
+        action.infor1=2601;
         action.infor2=infor[4].toInt();
         messageBuffer::writeBatInfor(action);
         break;
@@ -1318,17 +1318,23 @@ void Server::decoder(int id, QString message)
         action.dstID = infor[1].toInt();
         action.srcID = infor[2].toInt();
         action.infor2 = infor[3].toInt();
-        action.inforstr = infor[4].toInt();
+        action.inforstr = infor[4];
         messageBuffer::writeBatInfor(action);
+        break;
+    case 2604:
+        ans.reply = ATTACKSKILL;
+        ans.infor1=2604;
+        ans.srcID=infor[1].toInt();
+        messageBuffer::writeBatInfor(ans);
         break;
 //多重射击
     case 2605:
         action.reply=ATTACKSKILL;
+        action.infor1 = 2605;
         action.CardID = infor[1].toInt();
         action.dstID = infor[2].toInt();
         action.srcID = infor[3].toInt();
-        action.infor1=1201;
-        action.infor2=infor[4].toInt();
+        action.infor2 = infor[4].toInt();
         messageBuffer::writeBatInfor(action);
         break;
 //充能魔眼询问
@@ -1338,7 +1344,7 @@ void Server::decoder(int id, QString message)
         if(ans.reply == 1)
         {
             ans.infor2 = infor[2].toInt();
-            ans.inforstr = infor[3].toInt();
+            ans.inforstr = infor[3];
             ans.infor3 = infor[4].toInt();
             ans.srcID = infor[5].toInt();
         }

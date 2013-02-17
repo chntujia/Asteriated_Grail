@@ -23,6 +23,7 @@ public slots:
     void onCancelClicked();
     void cardAnalyse();
     void coverCardAnalyse();
+    void resign();
     void MoGuanChongJi();
     void LeiGuangSanShe();
 private:

@@ -52,21 +52,24 @@ void MoGong::MoGuanChongJi()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
+    tipArea->setMsg("ÇëÑ¡Ôñ»ðÏµ³äÄÜ");
     gui->showCoverArea(true);
     coverArea->reset();
     coverArea->enableElement("fire");
     coverArea->setQuota(1);
-    buttonArea->enable(1);
+    decisionArea->enable(1);
 }
 
 void MoGong::MoGuanChongJiHit()
 {
     state = 2602;
+    tipArea->setMsg("¹¥»÷ÃüÖÐ£¬¶îÍâÒÆ³ý1»ðÏµ³äÄÜÉËº¦¼Ó1");
     gui->showCoverArea(true);
     coverArea->reset();
     coverArea->enableElement("fire");
     coverArea->setQuota(1);
     buttonArea->enable(1);
+    decisionArea->enable(1);
 }
 
 void MoGong::LeiGuangSanShe()
@@ -75,6 +78,7 @@ void MoGong::LeiGuangSanShe()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
+    tipArea->setMsg("ÇëÑ¡ÔñÀ×Ïµ³äÄÜ");
     gui->showCoverArea(true);
     coverArea->reset();
     coverArea->enableElement("thunder");
@@ -91,10 +95,12 @@ void MoGong::DuoChongSheJi()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
+    tipArea->setMsg("ÇëÑ¡Ôñ·çÏµ³äÄÜ");
     gui->showCoverArea(true);
     coverArea->reset();
     coverArea->enableElement("wind");
     coverArea->setQuota(1);
+    decisionArea->disable(0);
 }
 
 void MoGong::ChongNengMoYan1()
@@ -128,10 +134,11 @@ void MoGong::ChongNengMoYan2()
         for(int i = 1; i < 5; i ++)
             tipArea->addBoxItem(QString::number(i));
         tipArea->showBox();
-        if(dataInterface->getHandCards().size()<=4)
+        if(myself->getHandCardNum()<=4)
             decisionArea->enable(0);
         else
         {
+            decisionArea->disable(0);
             handArea->enableAll();
             handArea->setQuota(myself->getHandCardNum()-4);
         }
@@ -156,6 +163,7 @@ void MoGong::ChongNengGaiPai()
     tipArea->setMsg("ÇëÑ¡Ôñ×î¶à"+QString::number(chongnengNum)+"ÕÅÊÖÅÆ¸Ç×ö³äÄÜ");
     handArea->enableAll();
     handArea->setQuota(0,chongnengNum);
+    decisionArea->enable(0);
 }
 
 void MoGong::MoYanGaiPai()
@@ -203,7 +211,6 @@ void MoGong::coverCardAnalyse()
     switch(state)
     {
     case 2601:
-        coverArea->reset();
         gui->showCoverArea(false);
         handArea->enableAttack();
         handArea->setQuota(1);
@@ -213,9 +220,14 @@ void MoGong::coverCardAnalyse()
         break;
     case 2603:
         if(selectedCoverCards.size()==1)
+        {
             decisionArea->enable(0);
+            playerArea->disableAll();
+            playerArea->setQuota(0);
+        }
         else
         {
+            decisionArea->disable(0);
             playerArea->enableEnemy();
             playerArea->setQuota(1);
         }
@@ -229,7 +241,6 @@ void MoGong::coverCardAnalyse()
 
 void MoGong::onOkClicked()
 {
-    Role::onOkClicked();
     static QString command;
     QString sourceID = QString::number(myID);
     QString targetID;
@@ -253,6 +264,7 @@ void MoGong::onOkClicked()
     case 42:
         text=tipArea->getBoxCurrentText();
         switch (text[0].digitValue()){
+        case 1:
             emit sendCommand("2604;"+QString::number(myID)+";");
             DuoChongSheJi();
             break;
@@ -261,11 +273,8 @@ void MoGong::onOkClicked()
     case 2601:
         MoGuanChongJiUsed = true;
         cardID=QString::number(selectedCards[0]->getID());
-        emit sendCommand("1");
         targetID=QString::number(selectedPlayers[0]->getID());
-        emit sendCommand("2");
         sourceID=QString::number(myID);
-        emit sendCommand("3");
         command="2601;"+cardID+";"+targetID+";"+sourceID+";"+QString::number(selectedCoverCards[0]->getID())+";";
         lastTarget = selectedPlayers[0]->getID();
         usedAttack=true;
@@ -283,12 +292,12 @@ void MoGong::onOkClicked()
         emit sendCommand(command);
         break;
     case 2603:
-        if(selectedCards.size()!=0)
+        if(selectedPlayers.size()!=0)
             targetID=QString::number(selectedPlayers[0]->getID());
         else
             targetID=QString::number(-1);
         sourceID=QString::number(myID);
-        command="2603;"+targetID+";"+sourceID+";"+QString::number(selectedCoverCards.size());
+        command="2603;"+targetID+";"+sourceID+";"+QString::number(selectedCoverCards.size())+";";
         foreach(Card*ptr,selectedCoverCards)
             command+=QString::number(ptr->getID())+":";
         command+=";";
@@ -302,7 +311,7 @@ void MoGong::onOkClicked()
         cardID=QString::number(39);
         targetID=QString::number(selectedPlayers[0]->getID());
         sourceID=QString::number(myID);
-        command="2605;"+cardID+";"+targetID+";"+sourceID+";";
+        command="2605;"+cardID+";"+targetID+";"+sourceID+";"+QString::number(selectedCoverCards[0]->getID())+";";
         coverArea->reset();
         gui->showCoverArea(false);
         gui->reset();
@@ -318,10 +327,10 @@ void MoGong::onOkClicked()
         if(startChoice==1)
         {
             command+="1;";
-            if(myself->getCoverCardNum()<=4)
+            if(myself->getHandCardNum()<=4)
                 command+="0;";
             else
-                command+=QString::number(myself->getCoverCardNum()-4);
+                command+=QString::number(myself->getHandCardNum()-4)+";";
             foreach(Card* ptr, selectedCards)
             {
                 command+=QString::number(ptr->getID())+":";
@@ -365,6 +374,7 @@ void MoGong::onOkClicked()
         gui->reset();
         break;
     }
+    Role::onOkClicked();
 }
 
 void MoGong::onCancelClicked()
@@ -435,8 +445,17 @@ void MoGong::askForSkill(QString skill)
     Role::askForSkill(skill);
     if(skill==tr("³äÄÜ/Ä§ÑÛ"))
         ChongNengMoYan1();
+    else if(skill==tr("Ä§¹á³å»÷ÃüÖÐ"))
+        MoGuanChongJiHit();
     else if(skill==tr("³äÄÜ¸ÇÅÆ"))
         ChongNengGaiPai();
     else if(skill==tr("Ä§ÑÛ¸ÇÅÆ"))
         MoYanGaiPai();
+}
+
+void MoGong::resign()
+{
+    Role::resign();
+    coverArea->reset();
+    gui->showCoverArea(false);
 }
