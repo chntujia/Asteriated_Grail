@@ -4843,7 +4843,7 @@ void MoGong::LeiGuangSanShe(QList<void *> args)
                 harm.harmPoint=magic->infor2;
             this->engine->timeLine3(harm,this,player,"À×¹âÉ¢Éä");
             if(engine->checkEnd())
-                break;
+                return;
         }
         player = player->getNext();
     }

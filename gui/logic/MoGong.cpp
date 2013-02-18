@@ -207,6 +207,7 @@ void MoGong::cardAnalyse()
 void MoGong::coverCardAnalyse()
 {
     Role::coverCardAnalyse();
+    Player*myself=dataInterface->getMyself();
     QList<Card*> selectedCoverCards = this->coverArea->getSelectedCards();
     switch(state)
     {
@@ -235,6 +236,22 @@ void MoGong::coverCardAnalyse()
     case 2605:
         playerArea->enableEnemy();
         playerArea->disablePlayerItem(lastTarget);
+        int i;
+        QList<Player*> players=dataInterface->getPlayerList();
+        for(i=0;i<players.size();i++)
+            if(players[i]->getRoleID()==5 && players[i]->getTap()==1){
+                playerArea->disablePlayerItem(i);
+                break;
+            }
+        if(myself->getSpecial(1) == 1)
+        {
+            playerArea->disableAll();
+            for(i=0;i<players.size();i++)
+                if(players[i]->getRoleID()==21){
+                    playerArea->enablePlayerItem(i);
+                    break;
+                }
+        }
         break;
     }
 }
