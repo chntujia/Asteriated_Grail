@@ -250,8 +250,6 @@ void BowLady::snipe(QList<void *> args)
 
 void BowLady::snipe2(QList<void*>args)
 {
-    if(engine->checkEnd())
-        break;
     BatInfor *skill = (BatInfor*)args[0];
     if(skill->srcID!=id || skill->infor1!=304)
         return;
@@ -1013,8 +1011,6 @@ void FengYin::FaShuJiDang1(QList<void *> args)
 }
 void FengYin::FaShuJiDang2(QList<void *> args)
 {
-    if(engine->checkEnd())
-        break;
     BatInfor *skill = (BatInfor*)args[0];
     if(id != skill->srcID||skill->infor1!=404)
         return;
@@ -1477,8 +1473,6 @@ void YuanSu::YuanSuFaShu(QList<void*> args)
 }
 void YuanSu::YuanSuFaShu2(QList<void*> args)
 {
-    if(engine->checkEnd())
-        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(skill->srcID!=id)
         return;
@@ -1507,8 +1501,6 @@ void YuanSu::YuanSuDianRan(QList<void*> args)
 }
 void YuanSu::YuanSuDianRan2(QList<void*> args)
 {
-    if(engine->checkEnd())
-        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(skill->srcID!=id || skill->infor1!=1106)
         return;
@@ -1958,8 +1950,6 @@ void YongZhe::JingPiLiJie2(QList<void *> args)
 }
 void YongZhe::JingPiLiJie3(QList<void *> args)
 {
-    if(engine->checkEnd())
-        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(skill->srcID!=id || skill->infor1!=2103)
         return;
@@ -2176,8 +2166,6 @@ void QiDao::FaLiChaoXi1(QList<void *> args)
 }
 void QiDao::FaLiChaoXi2(QList<void *> args)
 {
-    if(engine->checkEnd())
-        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(id != skill->srcID||skill->infor1!=1606)
         return;
@@ -3991,8 +3979,6 @@ void MoQiang::AnZhiJieFang1(QList<void *> args)
     JieFangUsed=true;
     JieFangFirst=true;
     StartUsed=true;
-    if(engine->checkEnd())
-        return;
 }
 
 void MoQiang::AnZhiJieFang2(QList<void *> args)
@@ -4455,8 +4441,6 @@ void JianDi::BuQuYiZhi(QList<void *> args)
 
 void JianDi::BuQuYiZhi2(QList<void *> args)
 {
-    if(engine->checkEnd())
-        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(id != skill->srcID||skill->infor1!=1906)
         return;
@@ -4846,8 +4830,6 @@ void MoGong::LeiGuangSanShe(QList<void *> args)
             else
                 harm.harmPoint=magic->infor2;
             this->engine->timeLine3(harm,this,player,"À×¹âÉ¢Éä");
-            if(engine->checkEnd())
-                return;
         }
         player = player->getNext();
     }
