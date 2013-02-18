@@ -250,6 +250,8 @@ void BowLady::snipe(QList<void *> args)
 
 void BowLady::snipe2(QList<void*>args)
 {
+    if(engine->checkEnd())
+        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(skill->srcID!=id || skill->infor1!=304)
         return;
@@ -1011,6 +1013,8 @@ void FengYin::FaShuJiDang1(QList<void *> args)
 }
 void FengYin::FaShuJiDang2(QList<void *> args)
 {
+    if(engine->checkEnd())
+        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(id != skill->srcID||skill->infor1!=404)
         return;
@@ -1473,6 +1477,8 @@ void YuanSu::YuanSuFaShu(QList<void*> args)
 }
 void YuanSu::YuanSuFaShu2(QList<void*> args)
 {
+    if(engine->checkEnd())
+        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(skill->srcID!=id)
         return;
@@ -1947,6 +1953,8 @@ void YongZhe::JingPiLiJie2(QList<void *> args)
     jingpilijie.harmPoint=3;
     jingpilijie.type=MAGICHARM;
     engine->timeLine3(jingpilijie,this,this,"精疲力竭");
+    if(engine->checkEnd())
+        return;
 }
 void YongZhe::JingPiLiJie3(QList<void *> args)
 {
@@ -4027,6 +4035,8 @@ void MoQiang::HuanYingXingChen(QList<void *> args)
         harm.type=MAGICHARM;
         HuanYingUsed=true;
         engine->timeLine3(harm,this,this,"幻影星辰");
+        if(engine->checkEnd())
+            return;
         coder.notice(tr("魔枪发动【幻影星辰】"));
         setTap(0);
         coder.tapNotice(id,0,"【正常形态】");
@@ -4441,6 +4451,8 @@ void JianDi::BuQuYiZhi(QList<void *> args)
 
 void JianDi::BuQuYiZhi2(QList<void *> args)
 {
+    if(engine->checkEnd())
+        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(id != skill->srcID||skill->infor1!=1906)
         return;
@@ -4830,6 +4842,8 @@ void MoGong::LeiGuangSanShe(QList<void *> args)
             else
                 harm.harmPoint=magic->infor2;
             this->engine->timeLine3(harm,this,player,"雷光散射");
+            if(engine->checkEnd())
+                break;
         }
         player = player->getNext();
     }
