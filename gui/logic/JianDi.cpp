@@ -161,7 +161,6 @@ void JianDi::onOkClicked()
         break;
     case 1901:
         command="1901;1;";
-        dataInterface->addCoverCard(dataInterface->getCard(shouhuID));
         emit sendCommand(command);
         gui->reset();
         break;
@@ -184,7 +183,6 @@ void JianDi::onOkClicked()
         command += cardID + ";";
         emit sendCommand(command);
 
-        dataInterface->removeCoverCard(selectedCoverCards[0]);
         coverArea->reset();
         gui->showCoverArea(false);
         gui->reset();
@@ -195,7 +193,6 @@ void JianDi::onOkClicked()
         command += cardID + ";";
         emit sendCommand(command);
 
-        dataInterface->removeCoverCard(selectedCoverCards[0]);
         coverArea->reset();
         gui->showCoverArea(false);
         gui->reset();
@@ -207,6 +204,7 @@ void JianDi::onOkClicked()
         gui->reset();
         break;
     }
+    gui->showCoverArea(false);
 }
 
 void JianDi::onCancelClicked()
@@ -244,4 +242,5 @@ void JianDi::onCancelClicked()
         gui->reset();
         break;
     }
+    gui->showCoverArea(false);
 }

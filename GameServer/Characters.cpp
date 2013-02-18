@@ -4830,6 +4830,8 @@ void MoGong::LeiGuangSanShe(QList<void *> args)
             else
                 harm.harmPoint=magic->infor2;
             this->engine->timeLine3(harm,this,player,"À×¹âÉ¢Éä");
+            if(engine->checkEnd())
+                return;
         }
         player = player->getNext();
     }
@@ -4932,6 +4934,8 @@ void MoGong::ChongNengMoYan(QList<void *> args)
             dst->removeHandCards(cardChosen,false);
             coder.discardNotice(start.dstID,1,"n",cardChosen);
         }
+        if(this->getHandCardNum()>0)
+        {
             coder.askForSkill(this->getID(),"Ä§ÑÛ¸ÇÅÆ");
             QList<CardEntity*> chongneng;
             chongneng = messageBuffer::readCardID(1);
@@ -4943,6 +4947,7 @@ void MoGong::ChongNengMoYan(QList<void *> args)
             if(getCoverCards().count()>tokenMax[2])
                 this->coverOverLoad();
             coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+        }
         crystal++;
         coder.energyNotice(this->getID(),gem,crystal);
     }
@@ -4957,4 +4962,5 @@ void MoGong::skillReset(QList<void *> args)
     DuoChongSheJiUsed = false;
     MoYanUsed = false;
     ChongNengUsed = false;
+    DuoChongSheJiUsing = false;
 }

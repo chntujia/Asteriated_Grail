@@ -308,6 +308,7 @@ void MoGong::onOkClicked()
         break;
     case 2605:
         DuoChongSheJiUsed = true;
+        lastTarget = selectedPlayers[0]->getID();
         cardID=QString::number(39);
         targetID=QString::number(selectedPlayers[0]->getID());
         sourceID=QString::number(myID);
