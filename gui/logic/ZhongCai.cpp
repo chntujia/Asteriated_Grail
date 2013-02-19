@@ -57,7 +57,7 @@ void ZhongCai::YiShiZhongDuan()
                 flag=true;
                 break;
             }
-        if(myself->getToken(0)>0)
+        if(myself->getToken(0)>0 || myself->getEnergy()>0)
             flag=true;
     }
     if(flag)
@@ -83,7 +83,7 @@ void ZhongCai::ZhongCaiYiShi()
                 flag=true;
                 break;
             }
-        if(myself->getToken(0)>0)
+        if(myself->getToken(0)>0 || myself->getEnergy()>0)
             flag=true;
     }
     if(flag)
