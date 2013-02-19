@@ -3319,8 +3319,8 @@ void LingHun::LingHunJingXiang(QList<void *> args)
     {
         for(int i=0;i<magic->infor2;i++)
             cards.append(getCardByID(cardNum[i].toInt()));
-        coder.discardNotice(id,magic->infor2,"y",cards);
-        this->removeHandCards(cards,true);
+        coder.discardNotice(id,magic->infor2,"n",cards);
+        this->removeHandCards(cards,false);
     }
     else
     {
