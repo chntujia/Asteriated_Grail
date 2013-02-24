@@ -1,4 +1,5 @@
 #include <QtGui>
+#include "widget/Animation.h"
 #include "widget/RoomView.h"
 #include "data/DataInterface.h"
 #include "widget/GUI.h"
@@ -21,8 +22,11 @@ int main(int argc, char *argv[])
     if(c.exec()==QDialog::Accepted)
     {
 
+        animation = new Animation;
         gui=new GUI;
         RoomView view;
+
+        animation->setRoomScene(view.getScene());
 
         view.show();
 //GUI初始化完成

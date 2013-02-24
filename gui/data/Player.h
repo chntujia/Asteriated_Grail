@@ -60,11 +60,14 @@ public:
     QString getFaceSource(){return faceSource;}
     QString getTapSource(){return tapSource;}
     QList<Status*> getStatus(){return statusList;}
+    void setPos(int pos){this->pos = pos;}
+    int getPos(){return pos;}
 signals:
     void addStatusSIG(Status *status);
     void removeStatusSIG(Status *status);
 protected:
     int id;
+    int pos;
     QString name;
     int handCardsMax;
     int handCardsNum;

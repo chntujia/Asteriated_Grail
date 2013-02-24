@@ -1,5 +1,7 @@
 #include "ShowArea.h"
+#include "Animation.h"
 #include <QPainter>
+#include <windows.h>
 
 static QRectF ShowAreaRect(0, 0, 550, 150);
 ShowArea::ShowArea()
@@ -38,6 +40,7 @@ void ShowArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->drawText(offset+width*0.8+i*card_skip,height*0.68,card->getProperty());
         for(j=0;j<card->getHasSpeciality();j++)
             painter->drawText(offset+width*0.15+i*card_skip,height*(0.76+j*0.13),card->getSpecialityList().at(j));
+
     }
 
 }
@@ -48,6 +51,27 @@ void ShowArea::showCards(QList<Card *> cards)
     foreach(Card* ptr,cards)
         this->cards<<ptr;
     update();
+
+    int howMany = cards.length();
+    int card_skip;
+    int offset = 0;
+    if(howMany > 5)
+        card_skip = 450/(howMany-1);
+    else
+    {
+        card_skip = 100;
+        offset=275-howMany*0.5*100;
+    }
+    QList<QGraphicsObject*> *list = animation->getTempItems();
+    for(int i = 0;i <howMany;i++)
+    {
+        CardItem* cardItem;
+        cardItem = new CardItem(cards[i]);
+
+        (*list) << cardItem;
+        animation->itemFlash(list->at(i),165 + offset+card_skip*i + cardItem->boundingRect().width()/2,260+cardItem->boundingRect().height()/2)->start(QAbstractAnimation::DeleteWhenStopped);
+    }
+
 }
 
 

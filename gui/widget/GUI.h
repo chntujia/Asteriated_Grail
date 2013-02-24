@@ -9,6 +9,7 @@
 #include "TipArea.h"
 #include "ButtonArea.h"
 #include "LogArea.h"
+#include "Animation.h"
 
 class GUI : public QObject
 {

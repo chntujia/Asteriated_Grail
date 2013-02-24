@@ -11,6 +11,7 @@ class RoomView : public QGraphicsView
 
 public:
     RoomView();
+    RoomScene* getScene(){return scene;}
 private:
     RoomScene *scene;
 };
