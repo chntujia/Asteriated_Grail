@@ -5,7 +5,7 @@ HongLian::HongLian()
     makeConnection();
     setMyRole(this);
     Button *xingHongShiZi;
-    xingHongShiZi = new Button(3,tr("ÐÉºìÊ®×Ö"));
+    xingHongShiZi = new Button(3,tr("ÐÈºìÊ®×Ö"));
     buttonArea->addButton(xingHongShiZi);
     connect(xingHongShiZi,SIGNAL(buttonSelected(int)),this,SLOT(XingHongShiZi()));
 }
@@ -29,7 +29,7 @@ void HongLian::normal()
 void HongLian::XingHongShengYue()
 {
     state = 36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÐÉºìÊ¥Ô¼£¿"));
+    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÐÈºìÊ¥Ô¼£¿"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -225,7 +225,7 @@ void HongLian::attackOrMagic()
 void HongLian::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ÐÉºìÊ¥Ô¼"))
+    if(skill==tr("ÐÈºìÊ¥Ô¼"))
         XingHongShengYue();
     else if(skill==tr("É±Â¾Ê¢Ñç"))
         ShaLuShengYan();
