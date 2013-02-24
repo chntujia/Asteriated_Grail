@@ -10,6 +10,7 @@
 #include "ButtonArea.h"
 #include "LogArea.h"
 #include "BPArea.h"
+#include "Animation.h"
 
 class GUI : public QObject
 {

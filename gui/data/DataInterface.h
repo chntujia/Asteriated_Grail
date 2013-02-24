@@ -24,7 +24,7 @@ public:
     void setMyself(Player* player);
     void setID(int id);
     void setPlayerMax(int playerMax);
-
+    Player* getPlayerById(int id);
     Card* getCard(int id);
     int getID();
     int getFirstPlayerID(){return firstPlayerID;}

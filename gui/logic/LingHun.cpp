@@ -174,20 +174,8 @@ void LingHun::LingHunZengFu()
     int i;
     int n=handcards.size();
     decisionArea->enable(1);
-    if(n<4)
-    {
-        flag=false;
-        for(i=0;i<n;i++)
-            if(handcards[i]->getElement()!="light")
-            {
-                flag=true;
-                break;
-            }
-        if(myself->getToken(0)>1)
-            flag=true;
-    }
-    if(flag)
-        decisionArea->enable(0);
+
+    decisionArea->enable(0);
 }
 
 void LingHun::cardAnalyse()

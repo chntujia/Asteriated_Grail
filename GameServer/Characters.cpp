@@ -3321,8 +3321,8 @@ void LingHun::LingHunJingXiang(QList<void *> args)
     {
         for(int i=0;i<magic->infor2;i++)
             cards.append(getCardByID(cardNum[i].toInt()));
-        coder.discardNotice(id,magic->infor2,"y",cards);
-        this->removeHandCards(cards,true);
+        coder.discardNotice(id,magic->infor2,"n",cards);
+        this->removeHandCards(cards,false);
     }
     else
     {
@@ -3716,7 +3716,7 @@ void HongLian::XingHongShiZi(QList<void *> args)
     else
         gem--;
     coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
-    coder.notice("红莲骑士对玩家"+QString::number(magic->dstID)+"发动【猩红十字】");
+    coder.notice("红莲骑士对玩家"+QString::number(magic->dstID)+"发动【腥红十字】");
     setToken(0,token[0]-1);
     coder.tokenNotice(this->getID(),0,token[0]);
     QList<CardEntity*> cards;
@@ -3728,12 +3728,12 @@ void HongLian::XingHongShiZi(QList<void *> args)
     Harm selfHarm;
     selfHarm.harmPoint = 4;
     selfHarm.type = MAGIC;
-    engine->timeLine3(selfHarm,this,this,"猩红十字");
+    engine->timeLine3(selfHarm,this,this,"腥红十字");
 
     Harm harm;
     harm.harmPoint = 3;
     harm.type = MAGIC;
-    engine->timeLine3(harm,this,engine->getPlayerByID(magic->dstID),"猩红十字");
+    engine->timeLine3(harm,this,engine->getPlayerByID(magic->dstID),"腥红十字");
 }
 
 void HongLian::skillReset(QList<void *> args)
@@ -4042,7 +4042,7 @@ void MoQiang::HuanYingXingChen(QList<void *> args)
         coder.notice(tr("魔枪发动【幻影星辰】"));
         setTap(0);
         coder.tapNotice(id,0,"【正常形态】");
-        setHandCardsMaxFixed(true);
+        setHandCardsMaxFixed(false);
         coder.handcardMaxNotice(id,handCardsMax);
     }
     if(HuanYingUsed){

@@ -5,7 +5,7 @@ HongLian::HongLian()
     makeConnection();
     setMyRole(this);
     Button *xingHongShiZi;
-    xingHongShiZi = new Button(3,tr("猩红十字"));
+    xingHongShiZi = new Button(3,tr("腥红十字"));
     buttonArea->addButton(xingHongShiZi);
     connect(xingHongShiZi,SIGNAL(buttonSelected(int)),this,SLOT(XingHongShiZi()));
 }
@@ -29,7 +29,7 @@ void HongLian::normal()
 void HongLian::XingHongShengYue()
 {
     state = 36;
-    tipArea->setMsg(tr("是否发动猩红圣约？"));
+    tipArea->setMsg(tr("是否发动腥红圣约？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -40,6 +40,7 @@ void HongLian::XueXingDaoYan1()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
+    buttonArea->reset();
     Player* myself=dataInterface->getMyself();
 
     tipArea->setMsg(tr("【血腥祷言】请选择分给第一人的治疗"));

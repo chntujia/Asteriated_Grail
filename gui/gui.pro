@@ -57,6 +57,7 @@ HEADERS += client/Client.h \
     logic/MoGong.h \
     logic/JianDi.h \
     widget/BPArea.h \
+    widget/Animation.h \
     widget/RoleItem.h
 FORMS += client/ClientUI.ui
 SOURCES += main.cpp \
@@ -109,4 +110,5 @@ SOURCES += main.cpp \
     logic/MoGong.cpp \
     logic/JianDi.cpp \
     widget/BPArea.cpp \
+    widget/Animation.cpp \
     widget/RoleItem.cpp

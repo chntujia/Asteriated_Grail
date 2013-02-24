@@ -1,6 +1,8 @@
+#include <QApplication>
 #include "logic/Logic.h"
 #include "data/DataInterface.h"
 #include "Role.h"
+#include "widget/PlayerArea.h"
 #include "JianSheng.h"
 #include "KuangZhan.h"
 #include "GongNv.h"
@@ -139,6 +141,7 @@ void Logic::getCommand(QString command)
     DecisionArea* decisionArea;
     BPArea* bpArea;
     QList<int> roleIDs;
+    PlayerArea* playerArea;
     int playerMax,targetID,roleID,howMany,num;
 
     switch (arg[0].toInt())
@@ -223,6 +226,8 @@ void Logic::getCommand(QString command)
         bpArea->setMsg("请ban一角色");
         bpArea->setQuota(1);
         bpArea->enableAll();
+        playerArea = gui->getPlayerArea();
+        QApplication::alert((QWidget*)playerArea->window());
         break;
     case 55:
         state = 55;
@@ -230,6 +235,8 @@ void Logic::getCommand(QString command)
         bpArea->setMsg("请选择一角色");
         bpArea->setQuota(1);
         bpArea->enableAll();
+        playerArea = gui->getPlayerArea();
+        QApplication::alert((QWidget*)playerArea->window());
         break;
     case 54:
         bpArea = gui->getBPArea();
@@ -240,8 +247,13 @@ void Logic::getCommand(QString command)
         bpArea = gui->getBPArea();
         bpArea->choose(arg[2].toInt());
         bpArea->remove(arg[2].toInt());
+        decisionArea = gui->getDecisionArea();
         if(bpArea->checkOver())
+        {
             bpArea->setVisible(0);
+            disconnect(decisionArea,SIGNAL(okClicked()),this,SLOT(onOkClicked()));
+            disconnect(bpArea,SIGNAL(roleReady()),this,SLOT(roleAnalyse()));
+        }
         break;
     }
 }

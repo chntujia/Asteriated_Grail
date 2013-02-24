@@ -5,6 +5,10 @@
 #include "data/DataInterface.h"
 #include "widget/GUI.h"
 #include "logic/Logic.h"
+#include "widget/Animation.h"
+#include <windows.h>
+
+QPointF PlayerPos[]={QPointF(10,500),QPointF(740,260),QPointF(545,60),QPointF(380,60),QPointF(210,60),QPointF(10,260)};
 
 Role::Role(QObject *parent) :
     QObject(parent)
@@ -545,6 +549,7 @@ void Role::ChongYing(int color)
         handArea->setQuota(1);
     }
     decisionArea->disable(0);
+    QApplication::alert((QWidget*)playerArea->window());
 }
 
 void Role::onCancelClicked()
@@ -873,6 +878,8 @@ void Role::decipher(QString command)
     int i,howMany;
     int team,gem,crystal;
     int dir,show;
+    int card_skip;
+    int offset=0;
 
     Card*card;
     Player*player;
@@ -883,6 +890,9 @@ void Role::decipher(QString command)
     QString flag;
     QString cardName;
     QList<Player*>playerList=dataInterface->getPlayerList();
+    QList<QGraphicsObject*>* tempList;
+    PictureContainer* picture;
+    int pos;
     ShowArea* showArea=gui->getShowArea();
 
     switch (arg[0].toInt())
@@ -893,6 +903,12 @@ void Role::decipher(QString command)
         gui->logAppend("-----------------------------------");
         gui->logAppend(playerList[targetID]->getName()+tr("回合开始"));
         playerArea->setCurrentPlayerID(targetID);
+
+        tempList = animation->getTempItems();
+        picture = new PictureContainer();
+        picture->setPixmap(playerList[targetID]->getFaceSource());
+        animation->itemFlash(picture,PlayerPos[playerList[targetID]->getPos()].x()+picture->boundingRect().width()/2,PlayerPos[playerList[targetID]->getPos()].y()+picture->boundingRect().height()/2)->start(QAbstractAnimation::DeleteWhenStopped);
+
         if(targetID==dataInterface->getFirstPlayerID())
             teamArea->addRoundBy1();
         if(targetID!=myID)
@@ -1025,6 +1041,7 @@ void Role::decipher(QString command)
                 cards<<card;
             }
             showArea->showCards(cards);
+
         }
         gui->logAppend(msg);
         break;
@@ -1239,6 +1256,7 @@ void Role::decipher(QString command)
             cards.clear();
             cards<<card;
             showArea->showCards(cards);
+
         }
         if(card->getElement()!="light")
             gui->logAppend(playerList[sourceID]->getName()+tr("对")+playerList[targetID]->getName()+tr("使用了")+cardName);
@@ -1418,6 +1436,8 @@ void Role::decipher(QString command)
                         }
                         gui->logAppend(log);
                         showArea->showCards(cards);
+
+
                     }
                 }
 
