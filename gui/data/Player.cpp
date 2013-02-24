@@ -15,7 +15,7 @@ Player::Player(int ID, int isRed):id(ID),handCardsMax(6),crossNum(0),crossMax(2)
 void Player::setRole(int roleID)
 {
     this->roleID=roleID;
-    faceSource="role/"+QString::number(roleID)+".png";
+    faceSource="role/"+QString::number(roleID)+".jpg";
     switch(roleID)
     {
     case 1:

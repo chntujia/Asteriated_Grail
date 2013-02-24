@@ -212,6 +212,7 @@ void BackgroundEngine::roleRandom()
     for(int i=0;i<playerSum;i++){
         playerList[i]=setRole(roles[i],this,queue[i].digitValue(),queue[i+playerSum].digitValue());
         coder.roleNotice(queue[i].digitValue(),roles[i]);
+        coder.energyNotice(queue[i].digitValue(),1,1);
     }
     seatPostarrange();
     gameStart();

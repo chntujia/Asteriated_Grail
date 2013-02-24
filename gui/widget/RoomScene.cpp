@@ -2,13 +2,13 @@
 #include <QPointF>
 #include "widget/GUI.h"
 #include <QPainter>
-static const QPointF HandPos(165,505);
+static const QPointF HandPos(190,505);
 static const QPointF PlayerAreaPos(0,0);
-static const QPointF ShowAreaPos(165,260);
-static const QPointF TipAreaPos(210,230);
-static const QPointF TeamAreaPos(2,2);
+static const QPointF ShowAreaPos(190,260);
+static const QPointF TipAreaPos(203,230);
+static const QPointF TeamAreaPos(2,3);
 static const QPointF DecisionAreaPos(725,450);
-static const QPointF ButtonAreaPos(165,650);
+static const QPointF ButtonAreaPos(190,650);
 static const QPointF LogAreaPos(901,30);
 
 RoomScene::RoomScene()

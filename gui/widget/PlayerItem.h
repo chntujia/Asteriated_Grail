@@ -41,6 +41,10 @@ private:
     QPixmap face;
     QPixmap gem;
     QPixmap crystal;
+    QPixmap card;
+    QPixmap overflow;
+    QPixmap heal;
+    QPixmap remain;
     int width;
     int height;
     bool selected;

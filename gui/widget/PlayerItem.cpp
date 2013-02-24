@@ -57,9 +57,10 @@ PlayerItem::PlayerItem(Player* player):selected(0)
     this->height=frame.height();
     gem=QPixmap("resource/Egem.png");
     crystal=QPixmap("resource/Ecrystal.png");
-
-
-
+    card=QPixmap("resource/card.png");
+    overflow=QPixmap("resource/overflow.png");
+    heal=QPixmap("resource/heal.png");
+    remain=QPixmap("resource/remain.png");
 }
 QRectF PlayerItem::boundingRect() const
 {
@@ -67,29 +68,50 @@ QRectF PlayerItem::boundingRect() const
 }
 void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    if(selected)
+        painter->drawPixmap(-5,-3,QPixmap("resource/playerSelected.png"));
     painter->drawPixmap(0, 0, frame);
-    painter->drawPixmap(16,20,player->getFaceSource());
+    painter->drawPixmap(2,6,player->getFaceSource());
 
     QFont font;
     font.setBold(1);
     painter->setFont(font);
 
-    painter->drawText(0.15*width,0.1*height,QString::number(player->getID()));
+    painter->drawText(0.3*width,0.11*height,QString::number(player->getID()));
 
-    QString entry=tr("手牌：");
-    entry+=QString::number(player->getHandCardNum())+'/'+QString::number(player->getHandCardMax());
-    painter->drawText(width*0.12,height*0.73,entry);
-
-    entry=tr("治疗：");
-    entry+=QString::number(player->getCrossNum())+'/'+QString::number(player->getCrossMax());
-    painter->drawText(width*0.12,height*0.82,entry);
+    int num=player->getHandCardNum();
+    int max=player->getHandCardMax();
+    QString entry=QString::number(num)+'/'+QString::number(max);
+    painter->drawText(width*0.42,height*0.24,entry);
     int i,offset;
-    painter->drawText(width*0.12,height*0.92,tr("能量："));
+    for(i=0;num<=max && i<max;i++)
+        if(i<num)
+            painter->drawPixmap(width*0.62+card.width()*i,height*0.16, card);
+        else
+            painter->drawPixmap(width*0.62+card.width()*i,height*0.16, remain);
+    for(i=0;num>max && i<max;i++)
+        painter->drawPixmap(width*0.42+card.width()*i,height*0.24, overflow);
+
+    num=player->getCrossNum();
+    max=player->getCrossMax();
+    entry=QString::number(num)+'/'+QString::number(max);
+    painter->drawText(width*0.42,height*0.37,entry);
+    for(i=0;i<max;i++)
+        if(i<num)
+            painter->drawPixmap(width*0.62+card.width()*i,height*0.26, heal);
+        else
+            painter->drawPixmap(width*0.62+card.width()*i,height*0.26, remain);
+    for(i=0;i<num-max;i++)
+        painter->drawPixmap(width*0.62+card.width()*i,height*0.3, heal);
+
+
     for(i=0;i<player->getGem();i++)
-        painter->drawPixmap(width*0.35+i*9,height*0.86,gem.scaled(9,13));
-    offset=width*0.35+i*9;
+        painter->drawPixmap(width*0.74+i*gem.width(),height*0.37,gem);
+
+    offset=width*0.74+i*gem.width();
     for(i=0;i<player->getCrystal();i++)
-        painter->drawPixmap(i*9+offset,height*0.86,crystal.scaled(9,13));
+        painter->drawPixmap(i*crystal.width()+offset,height*0.37,crystal);
+
     if(player->getTokenMax(0)>0)
     {
         painter->drawPixmap(0,0,QPixmap("resource/token1.png"));
@@ -121,8 +143,7 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         painter->drawPixmap(115,50,QPixmap("resource/lianjie.png"));
     if(player->getSpecial(3))
         painter->drawPixmap(115,65,QPixmap("resource/tongsheng.png"));
-    if(selected)
-        painter->drawPixmap(-5,-5,QPixmap("resource/playerSelected.png"));
+
 
 }
 void PlayerItem::addStatusItem(Status *status)

@@ -4,7 +4,7 @@
 #include "data/Player.h"
 #include <QPainter>
 static QRectF PlayerAreaRect(0, 0, 1000, 700);
-static const QPointF PlayerPos[]={QPointF(10,500),QPointF(740,260),QPointF(545,60),QPointF(380,60),QPointF(210,60),QPointF(10,260)};
+static const QPointF PlayerPos[]={QPointF(5,510),QPointF(698,280),QPointF(550,60),QPointF(347,60),QPointF(145,60),QPointF(5,280)};
 PlayerArea::PlayerArea():least(1),most(1)
 {
     int i;
@@ -49,7 +49,7 @@ void PlayerArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 {
     PlayerItem* currentPlayerItem;
     currentPlayerItem=playerItems[currentPlayerID];
-    painter->drawPixmap(currentPlayerItem->x()-5,currentPlayerItem->y()-5,QPixmap("resource/yourTurn.png"));
+    painter->drawPixmap(currentPlayerItem->x()-5,currentPlayerItem->y()-3,QPixmap("resource/yourTurn.png"));
 }
 
 void PlayerArea::sortPlayerItems()

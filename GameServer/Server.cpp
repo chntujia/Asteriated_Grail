@@ -158,7 +158,8 @@ void Server::incomingConnection ( int socketDescriptor )
     temp += ";";
     this->sendMessage(this->clientSocketList.size()-1,temp);
 
-    if(howMany == playerSum)
+//    if(howMany == playerSum)
+    if(howMany == 1)
         emit this->seatArrangeSIG();
     else
         sendMessage(-1,tr("现有")+QString::number(howMany)+tr("名玩家进入房间，请耐心等候"));
