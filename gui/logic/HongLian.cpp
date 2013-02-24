@@ -225,7 +225,7 @@ void HongLian::attackOrMagic()
 void HongLian::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ÐÉºìÊ¥Ô¼"))
+    if(skill==tr("ÐÈºìÊ¥Ô¼"))
         XingHongShengYue();
     else if(skill==tr("É±Â¾Ê¢Ñç"))
         ShaLuShengYan();

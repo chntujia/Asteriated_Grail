@@ -2263,8 +2263,10 @@ void QiDao::GuangHuiXinYang(QList<void*> args)
     token[0]--;
     coder.tokenNotice(id,0,token[0]);
     QList<CardEntity*> cards;
-    cards << getCardByID(magic->CardID);
-    cards << getCardByID(magic->infor2);
+    if(magic->CardID!=-1)
+        cards << getCardByID(magic->CardID);
+    if(magic->infor2!=-1)
+        cards << getCardByID(magic->infor2);
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
     coder.discardNotice(id,cards.size(),"n",cards);
     this->removeHandCards(cards,false);
@@ -3577,14 +3579,14 @@ void HongLian::XingHongShengYue(QList<void *> args)
         return;
     if(XingHongShengYueUsed)
         return;
-    coder.askForSkill(this->getID(), "猩红圣约");
+    coder.askForSkill(this->getID(), "腥红圣约");
     if(messageBuffer::readInfor() == 0)
         return;
 
     XingHongShengYueUsed = true;
     this->addCrossNum(1);
     coder.crossChangeNotice(this->getID(), crossNum);
-    coder.notice("红莲骑士发动【猩红圣约】，增加1治疗");
+    coder.notice("红莲骑士发动【腥红圣约】，增加1治疗");
 }
 
 void HongLian::XingHongXinYang(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable,QString magicReason)
@@ -4876,7 +4878,7 @@ void MoGong::DuoChongSheJi2(QList<void *> args)
 
 void MoGong::DuoChongSheJiHarm(QList<void *> args)
 {
-    if(this != ((PlayerEntity*)args[0])||!DuoChongSheJiUsing)
+    if(this != ((PlayerEntity*)args[0])||!DuoChongSheJiUsed||!DuoChongSheJiUsing)
         return;
     coder.notice("本次攻击为【多重射击】，伤害减1");
     Harm *harm = (Harm*)args[2];

@@ -340,6 +340,12 @@ void Server::decoder(int id, QString message)
         emit roleNoticeSIG();
         emit gameStartSIG();
         break;
+    case 53:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
+    case 56:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
     case WEAKCOMMAND:
         messageBuffer::writeInfor(infor[1].toInt());
     break;
@@ -911,10 +917,8 @@ void Server::decoder(int id, QString message)
         ans.dstID = infor[1].toInt();
         ans.srcID = infor[2].toInt();
         howMany=infor[3].toInt();
-        if(howMany>0)
-            ans.CardID = infor[4].toInt();
-        if(howMany>1)
-            ans.infor2 = infor[5].toInt();
+        ans.CardID = infor[4].toInt();
+        ans.infor2 = infor[5].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
 //ÆáºÚÐÅÑö

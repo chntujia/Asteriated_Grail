@@ -144,6 +144,11 @@ public:
     void askForRolePick(int ID,int howMany,QList<int> *roles);
     void coverCardNotice(int playerID,int howMany,QList<CardEntity*> cards,bool remove,bool show);
     void askForSkillNumber(int playerID,int skillNum){emit this->sendMessage(playerID,combMessage(TOQSTR(skillNum)));}
+    void optionalRoleNotice(int num, QList<int> *roles);
+    void askForBan(int ID);
+    void banNotice(int ID, int role);
+    void askForPick(int ID);
+    void pickNotice(int ID, int role);
 signals:
     void sendMessage(int,QString);
 

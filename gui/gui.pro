@@ -55,7 +55,9 @@ HEADERS += client/Client.h \
     logic/GeDouJia.h \
     logic/DieWu.h \
     logic/MoGong.h \
-    logic/JianDi.h
+    logic/JianDi.h \
+    widget/BPArea.h \
+    widget/RoleItem.h
 FORMS += client/ClientUI.ui
 SOURCES += main.cpp \
            client/Client.cpp \
@@ -105,4 +107,6 @@ SOURCES += main.cpp \
     logic/GeDouJia.cpp \
     logic/DieWu.cpp \
     logic/MoGong.cpp \
-    logic/JianDi.cpp
+    logic/JianDi.cpp \
+    widget/BPArea.cpp \
+    widget/RoleItem.cpp

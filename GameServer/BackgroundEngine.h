@@ -114,6 +114,8 @@ public slots:
     void seatArrange();
     void role3Pick1();
     void role3Pick1Reply(int id,int roleID);
+    //提供候选角色
+    void BP();
     void roleRandom();
     void seatPostarrange();
     //游戏结束检查槽

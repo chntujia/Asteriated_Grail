@@ -137,7 +137,9 @@ void Logic::getCommand(QString command)
     QStringList arg=command.split(';');
     TipArea *tipArea;
     DecisionArea* decisionArea;
-    int playerMax,targetID,roleID,howMany;
+    BPArea* bpArea;
+    QList<int> roleIDs;
+    int playerMax,targetID,roleID,howMany,num;
 
     switch (arg[0].toInt())
     {
@@ -198,20 +200,92 @@ void Logic::getCommand(QString command)
         tipArea->showBox();
         decisionArea->enable(0);
         break;
+    case 51:
+        state = 51;
+        tipArea=gui->getTipArea();
+        decisionArea=gui->getDecisionArea();
+        bpArea = gui->getBPArea();
+        tipArea->reset();
+        connect(decisionArea,SIGNAL(okClicked()),this,SLOT(onOkClicked()));
+        connect(bpArea,SIGNAL(roleReady()),this,SLOT(roleAnalyse()));
+        num = arg[1].toInt();
+
+        for(int i=0;i<num;i++)
+        {
+            roleIDs<<arg[i+2].toInt();
+        }
+
+        bpArea->BPStart(num, roleIDs);
+        break;
+    case 52:
+        state = 52;
+        bpArea = gui->getBPArea();
+        bpArea->setMsg("请ban一角色");
+        bpArea->setQuota(1);
+        bpArea->enableAll();
+        break;
+    case 55:
+        state = 55;
+        bpArea = gui->getBPArea();
+        bpArea->setMsg("请选择一角色");
+        bpArea->setQuota(1);
+        bpArea->enableAll();
+        break;
+    case 54:
+        bpArea = gui->getBPArea();
+        bpArea->disableRoleItem(arg[2].toInt());
+        bpArea->remove(arg[2].toInt());
+        break;
+    case 57:
+        bpArea = gui->getBPArea();
+        bpArea->choose(arg[2].toInt());
+        bpArea->remove(arg[2].toInt());
+        if(bpArea->checkOver())
+            bpArea->setVisible(0);
+        break;
     }
 }
 void Logic::onOkClicked()
 {
+    QStringList chosen;
+    TipArea *tipArea;
+    QList<int> roles;
+    BPArea* bpArea;
     switch(state)
     {
     case 46:
-        TipArea *tipArea=gui->getTipArea();
-        QStringList chosen=tipArea->getBoxCurrentText().split(".");
+        tipArea=gui->getTipArea();
+        chosen=tipArea->getBoxCurrentText().split(".");
         emit sendCommand("47;"+chosen[0]+";");
         disconnect(gui->getDecisionArea(),SIGNAL(okClicked()),this,SLOT(onOkClicked()));;
+        gui->reset();
+        break;
+    case 52:
+        bpArea=gui->getBPArea();
+        roles = bpArea->getSelectedRoles();
+        emit sendCommand("53;"+QString::number(roles[0])+";");
+        bpArea->reset();
+        gui->reset();
+        break;
+    case 55:
+        bpArea=gui->getBPArea();
+        roles = bpArea->getSelectedRoles();
+        emit sendCommand("56;"+QString::number(roles[0])+";");
+        bpArea->reset();
         gui->reset();
         break;
     }
 
 
+}
+
+void Logic::roleAnalyse()
+{
+    DecisionArea* decisionArea = gui->getDecisionArea();
+    switch(state)
+    {
+    case 52:
+    case 55:
+        decisionArea->enable(0);
+    }
 }

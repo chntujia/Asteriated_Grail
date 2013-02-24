@@ -109,6 +109,38 @@ void Coder::coverCardNotice(int playerID, int howMany, QList<CardEntity *> cards
     emit sendMessage(-1,message);
 }
 
+void Coder::optionalRoleNotice(int num, QList<int> *roles)
+{
+    QString message="51;"+QString::number(num)+";";
+    for(int i=0;i<num;i++)
+        message+=QString::number(roles->takeFirst())+";";
+    emit sendMessage(-1,message);
+}
+
+void Coder::askForBan(int ID)
+{
+    QString message="52;"+QString::number(ID)+";";
+    emit sendMessage(ID, message);
+}
+
+void Coder::banNotice(int ID, int role)
+{
+    QString message = "54;"+QString::number(ID)+";"+QString::number(role)+";";
+    emit sendMessage(-1, message);
+}
+
+void Coder::askForPick(int ID)
+{
+    QString message="55;"+QString::number(ID)+";";
+    emit sendMessage(ID, message);
+}
+
+void Coder::pickNotice(int ID, int role)
+{
+    QString message = "57;"+QString::number(ID)+";"+QString::number(role)+";";
+    emit sendMessage(-1, message);
+}
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -180,6 +212,8 @@ MyRoom::MyRoom(Server *server):QObject()
         connect(serverModule,SIGNAL(gameStartSIG()),this->backEngine,SLOT(gameStart()));
         connect(this->serverModule,SIGNAL(roleNoticeSIG()),backEngine,SLOT(seatPostarrange()));
         break;
+    case 2:
+        connect(this->serverModule,SIGNAL(roleStrategySIG()),backEngine, SLOT(BP()));
     }
 
 //    emit this->serverModule->toDisplayPublic("server IP:" + this->serverModule->serverAddress().toString());

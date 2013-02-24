@@ -239,6 +239,45 @@ void BackgroundEngine::role3Pick1Reply(int id,int roleID)
         }
 }
 
+void BackgroundEngine::BP()
+{
+    coder.optionalRoleNotice(16, &roles);
+    int red = 0, blue = 0,choice,player;
+    for(int i = 0;i <playerSum/2;i++)
+    {
+        while(queue[red+playerSum].digitValue()!=1)
+            red ++;
+        player = queue[red].digitValue();
+        coder.askForBan(player);
+        choice = messageBuffer::readInfor();
+        coder.banNotice(player, choice);
+
+        while(queue[blue+playerSum].digitValue()!=0)
+            blue ++;
+        player = queue[blue].digitValue();
+        coder.askForBan(player);
+        choice = messageBuffer::readInfor();
+        coder.banNotice(player, choice);
+
+        player = queue[red].digitValue();
+        coder.askForPick(player);
+        choice = messageBuffer::readInfor();
+        coder.pickNotice(player, choice);
+        playerList[red]=setRole(choice,this,player,1);
+        coder.roleNotice(player,choice);
+        red++;
+
+        player = queue[blue].digitValue();
+        coder.askForPick(player);
+        choice = messageBuffer::readInfor();
+        coder.pickNotice(player, choice);
+        playerList[blue]=setRole(choice,this,player,0);
+        coder.roleNotice(player,choice);
+        blue++;
+    }
+    seatPostarrange();
+    gameStart();
+}
 
 
 //游戏开始,游戏流程控制
