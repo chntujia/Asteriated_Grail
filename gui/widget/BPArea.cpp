@@ -4,34 +4,43 @@
 #include "data/DataInterface.h"
 #include "widget/GUI.h"
 
-static QRectF BPAreaRect(-100, 0, 1000, 1000);
+static QRectF BPAreaRect(0, 0, 1000, 1000);
 static const QPointF RolePos[]=
-{QPointF(200,200),QPointF(240,200),QPointF(280,200),QPointF(320,200),
- QPointF(360,200),QPointF(400,200),QPointF(440,200),QPointF(480,200),
- QPointF(520,200),QPointF(560,200),QPointF(600,200),QPointF(640,200),
- QPointF(680,200),QPointF(720,200),QPointF(760,200),QPointF(800,200)
+{
+    QPointF(160,230),QPointF(234,230),QPointF(320,230),QPointF(400,230),
+    QPointF(480,230),QPointF(560,230),QPointF(640,230),QPointF(720,230),
+    QPointF(160,500),QPointF(240,500),QPointF(320,500),QPointF(400,500),
+    QPointF(480,500),QPointF(560,500),QPointF(640,500),QPointF(720,500),
 };
 BPArea::BPArea():least(1),most(1)
 {
     height=1000;
     width=1000;
     setVisible(false);
-    currentRed = 0;
-    currentBlue = 0;
-    currentColor = 1;
+    currentSum = 0;
 }
 
 void BPArea::BPStart(int num, QList<int> roles)
 {
     gui->reset();
     left = roles;
+    currentSum = 0;
     for(int i=0;i<num;i++)
     {
         roleItems << new RoleItem(roles[i]);
         connect(roleItems[i],SIGNAL(roleSelected(int)),this,SLOT(onRoleSelected(int)));
         connect(roleItems[i],SIGNAL(roleUnselected(int)),this,SLOT(onRoleUnselected(int)));
+        if(i<8)
+        {
+            roleItems[i]->setX(160+73*i);
+            roleItems[i]->setY(230);
+        }
+        else
+        {
+            roleItems[i]->setX(160+73*(i-8));
+            roleItems[i]->setY(480);
+        }
         roleItems[i]->setParentItem(this);
-        roleItems[i]->setPos(RolePos[i]);
         roleItems[i]->setZValue(0.1*i);
     }
     setVisible(true);
@@ -44,7 +53,7 @@ void BPArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     font.setPixelSize(20);
     painter->setFont(font);
     painter->setPen(QColor(Qt::white));
-    painter->drawText(QRectF(0, 0, width, height*0.8),Qt::AlignCenter,msg);
+    painter->drawText(QRectF(0, 0, width, height*0.85),Qt::AlignCenter,msg);
 }
 
 QRectF BPArea::boundingRect() const
@@ -63,8 +72,8 @@ void BPArea::disableRoleItem(int roleID)
 {
     RoleItem* role = getRoleByID(roleID);
     role->setEnabled(0);
-    role->setOpacity(0.6);
-    role->setY(220);
+    role->setOpacity(0.5);
+    role->setY(role->y()+20);
 }
 
 void BPArea::onRoleSelected(int id)
@@ -116,30 +125,10 @@ RoleItem *BPArea::getRoleByID(int ID)
 void BPArea::choose(int roleID)
 {
     RoleItem* choice = getRoleByID(roleID);
-    QString queue = dataInterface->getQueue();
-    int max = dataInterface->getPlayerMax();
-    if(currentColor==1)
-    {
-        while(queue[currentRed+max].digitValue()!=1)
-            currentRed++;
-        choice->setX((currentRed+5)*60);
-        choice->setY(450);
-        choice->setEnabled(0);
-        choice->setOpacity(1);
-        currentRed ++;
-        currentColor = 0;
-    }
-    else
-    {
-        while(queue[currentBlue+max].digitValue()!=0)
-            currentBlue++;
-        choice->setX((currentBlue+5)*60);
-        choice->setY(500);
-        choice->setEnabled(0);
-        choice->setOpacity(1);
-        currentBlue ++;
-        currentColor = 1;
-    }
+    choice->setEnabled(0);
+    choice->setOpacity(0.8);
+    choice->setY(choice->y()-20);
+    currentSum++;
 }
 
 void BPArea::reset()
@@ -153,9 +142,7 @@ void BPArea::reset()
 bool BPArea::checkOver()
 {
     int max = dataInterface->getPlayerMax();
-    if(currentRed==max&&currentBlue==max-1)
-        return true;
-    if(currentRed==max-1||currentBlue==max)
+    if(currentSum==max)
         return true;
     return false;
 }

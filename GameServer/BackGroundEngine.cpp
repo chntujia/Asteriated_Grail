@@ -264,7 +264,7 @@ void BackgroundEngine::BP()
         choice = messageBuffer::readInfor();
         coder.pickNotice(player, choice);
         playerList[red]=setRole(choice,this,player,1);
-        coder.roleNotice(player,choice);
+        coder.roleNotice(player,choice,1);
         red++;
 
         player = queue[blue].digitValue();
@@ -272,7 +272,7 @@ void BackgroundEngine::BP()
         choice = messageBuffer::readInfor();
         coder.pickNotice(player, choice);
         playerList[blue]=setRole(choice,this,player,0);
-        coder.roleNotice(player,choice);
+        coder.roleNotice(player,choice,1);
         blue++;
     }
     seatPostarrange();

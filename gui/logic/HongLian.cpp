@@ -37,10 +37,7 @@ void HongLian::XingHongShengYue()
 void HongLian::XueXingDaoYan1()
 {
     state = 2811;
-    handArea->reset();
-    playerArea->reset();
-    tipArea->reset();
-    buttonArea->reset();
+    gui->reset();
     Player* myself=dataInterface->getMyself();
 
     tipArea->setMsg(tr("【血腥祷言】请选择分给第一人的治疗"));

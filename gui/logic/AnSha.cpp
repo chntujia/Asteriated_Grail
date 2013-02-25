@@ -21,6 +21,7 @@ void AnSha::ShuiYing()
 void AnSha::QianXing()
 {
     state=503;
+    gui->reset();
     tipArea->setMsg(tr("是否发动潜行？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;

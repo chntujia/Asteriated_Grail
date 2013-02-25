@@ -458,6 +458,7 @@ public slots:
     void NiLiu(QList<void*> args);
     void XueZhiBeiMing(QList<void*> args);
     void XueZhiZuZhou(QList<void*> args);
+    void StartJudge(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
 private:
     int TongShengID;
 };

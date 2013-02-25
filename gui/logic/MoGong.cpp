@@ -106,9 +106,7 @@ void MoGong::DuoChongSheJi()
 void MoGong::ChongNengMoYan1()
 {
     state = 2661;
-    handArea->reset();
-    playerArea->reset();
-    tipArea->reset();
+    gui->reset();
     tipArea->setMsg("是否发动充能/魔眼？");
     Player* myself = dataInterface->getMyself();
     if(myself->getEnergy()>0)

@@ -1372,8 +1372,8 @@ void MaoXian::MaoXianZheTianTang(QList<void *> args)
     PlayerEntity*dst=engine->getPlayerByID(magic->dstID);
     dst->setGem(dst->getGem()+magic->infor2);
     dst->setCrystal(dst->getCrystal()+magic->infor3);
-    teamArea.setGem(color,teamArea.getGem(color)-magic->infor2);
-    teamArea.setCrystal(color,teamArea.getCrystal(color)-magic->infor3);
+    teamArea.setGem(color,(teamArea.getGem(color)-magic->infor2));
+    teamArea.setCrystal(color,(teamArea.getCrystal(color)-magic->infor3));
     coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
     coder.energyNotice(magic->dstID,dst->getGem(),dst->getCrystal());
 }
@@ -3024,6 +3024,7 @@ void WuNv::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(NiLiu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XueZhiBeiMing(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XueZhiZuZhou(QList<void*>)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(StartJudge(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
 }
 
 void WuNv::TongShengGongSi(QList<void *> args)
@@ -3228,6 +3229,14 @@ void WuNv::XueZhiZuZhou(QList<void *> args)
         this->removeHandCards(cards,false);
         coder.discardNotice(this->getID(), magic->infor2, "n", cards);
     }
+}
+
+void WuNv::StartJudge(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable, QString magicReason)
+{
+    if(dst != this&&src!=this)
+        return;
+    if(magicReason==tr("ÑªÖ®°§ÉË")&&getHandCardNum()==0&&harm.harmPoint<=*crossAvailable)
+        *crossAvailable = harm.harmPoint-1;
 }
 
 //Áé»ê ps.ÖÙ²Ã¡¾ÉóÅÐÀË³±¡¿¼Ó·¢¶¯¹ã²¥ ¸ñ¶·¡¾Äîµ¯¡¿,¡¾²ÔÑ×ÐîÁ¦¡¿Ð¡ÐÞ
@@ -3595,6 +3604,9 @@ void HongLian::XingHongXinYang(Harm harm, PlayerEntity *src, PlayerEntity *dst, 
         return;
     if(src!=this)
         *crossAvailable = 0;
+    else
+        if(magicReason==tr("ÑªÐÈµ»ÑÔ")&&getHandCardNum()==0&&harm.harmPoint<=*crossAvailable)
+            *crossAvailable = harm.harmPoint-1;
 }
 
 void HongLian::XueXingDaoYan(QList<void *> args)

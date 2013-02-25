@@ -34,9 +34,7 @@ private:
     int height;
     int least;
     int most;
-    int currentRed;
-    int currentBlue;
-    int currentColor;
+    int currentSum;
     QPixmap background;
     QString msg;
     QList<int> selectedRoles;

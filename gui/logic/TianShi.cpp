@@ -84,6 +84,7 @@ void TianShi::TianShiZhiQiang()
 
 void TianShi::TianShiZhiGe1()
 {
+    gui->reset();
     int gem,crystal;
     Player*myself=dataInterface->getMyself();
 

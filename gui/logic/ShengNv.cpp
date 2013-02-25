@@ -82,6 +82,7 @@ void ShengNv::ZhiYuZhiGuang()
 void ShengNv::LianMin()
 {
     state=604;
+    gui->reset();
     tipArea->setMsg(tr(" «∑Ò∑¢∂Ø¡Ø√ı£ø"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;

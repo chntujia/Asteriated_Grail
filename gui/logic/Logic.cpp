@@ -169,6 +169,8 @@ void Logic::getCommand(QString command)
         if(arg[3]=="1"){
             dataInterface->getPlayerList().at(targetID)->setRole(roleID);
             gui->getPlayerArea()->update();
+            if(targetID==myID)
+                setMyRole(roleID);
             hasShownRole=true;
         }
         else if(targetID==myID){
@@ -263,6 +265,7 @@ void Logic::onOkClicked()
     TipArea *tipArea;
     QList<int> roles;
     BPArea* bpArea;
+    RoleItem* role;
     switch(state)
     {
     case 46:
@@ -276,6 +279,8 @@ void Logic::onOkClicked()
         bpArea=gui->getBPArea();
         roles = bpArea->getSelectedRoles();
         emit sendCommand("53;"+QString::number(roles[0])+";");
+        role= bpArea->getRoleByID(roles[0]);
+        role->setY(role->y()+20);
         bpArea->reset();
         gui->reset();
         break;
@@ -283,6 +288,8 @@ void Logic::onOkClicked()
         bpArea=gui->getBPArea();
         roles = bpArea->getSelectedRoles();
         emit sendCommand("56;"+QString::number(roles[0])+";");
+        role= bpArea->getRoleByID(roles[0]);
+        role->setY(role->y()+20);
         bpArea->reset();
         gui->reset();
         break;

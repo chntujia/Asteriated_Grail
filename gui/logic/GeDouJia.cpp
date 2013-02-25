@@ -50,6 +50,7 @@ void GeDouJia::NianDan2()
 void GeDouJia::BaiShiHuanLongQuan()
 {
     state=2003;
+    gui->reset();
     tipArea->setMsg(tr("是否发动百式幻龙拳？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();
@@ -74,6 +75,7 @@ void GeDouJia::BaiShiHuanLongQuan()
 void GeDouJia::DouShenTianQu()
 {
     state=2004;
+    gui->reset();
     tipArea->setMsg(tr("是否发动斗神天驱？如是，请选择要弃的牌"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();

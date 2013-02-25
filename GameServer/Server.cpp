@@ -774,6 +774,7 @@ void Server::decoder(int id, QString message)
 //冒险者天堂
     case 1204:
         action.reply = SPECIAL;
+        action.CardID = 4;//表示为非正常的特殊行动
         action.infor1 = 1204;
         action.dstID = infor[1].toInt();
         action.srcID = infor[2].toInt();

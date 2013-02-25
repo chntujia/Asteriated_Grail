@@ -126,6 +126,7 @@ void LingHun::LingHunZhuanHuan()
 void LingHun::LingHunLianJie(int harmPoint)
 {
     state=2206;
+    gui->reset();
     Player *myself=dataInterface->getMyself();
     decisionArea->enable(1);
     if(!lianJieUsed){
@@ -167,6 +168,7 @@ void LingHun::LingHunLianJie(int harmPoint)
 void LingHun::LingHunZengFu()
 {
     state=2207;
+    gui->reset();
     tipArea->setMsg(tr("是否发动灵魂增幅？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();

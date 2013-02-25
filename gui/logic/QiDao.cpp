@@ -59,6 +59,7 @@ void QiDao::magicAction()
 void QiDao::QiDong()
 {
     state=1601;
+    gui->reset();
     tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯Æíµ»£¿"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;

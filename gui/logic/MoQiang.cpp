@@ -25,6 +25,7 @@ void MoQiang::normal()
 void MoQiang::AnZhiJieFang()
 {
     state=2901;
+    gui->reset();
     tipArea->setMsg(tr("是否发动暗之解放？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
@@ -48,6 +49,7 @@ void MoQiang::AnZhiJieFang()
 void MoQiang::HuanYingXingChen(int flag)
 {
     state=2902;
+    gui->reset();
     huanYingFlag=flag;
     if(flag==0){
     tipArea->setMsg(tr("是否发动幻影星辰？"));
@@ -236,7 +238,7 @@ void MoQiang::onOkClicked()
             sourceID=QString::number(myID);
             command+=targetID+";"+sourceID+";";
         }
-        emit sendCommand(command);
+        emit sendCommand(command);buttonArea->setEnabled(0);
         gui->reset();
         break;
     case 2903:
