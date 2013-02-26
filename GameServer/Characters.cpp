@@ -3813,6 +3813,8 @@ void LingFu::leiMing(QList<void *> args)
         if(target->getID() != action->infor2 && target->getID() != action->infor3)
             continue;
         engine->timeLine3(harm,this,target,"灵符-雷鸣");
+        if(engine->checkEnd())
+            break;
         counter++;
     }
 
@@ -3931,6 +3933,8 @@ void LingFu::baiGuiYeXing(QList<void *> args)
                 if(target->getID() == dst1->getID() || target->getID() == dst2->getID())
                     continue;
                 engine->timeLine3(hurt,this,target,"百鬼夜行");
+                if(engine->checkEnd())
+                    break;
             }
             return;
         }
@@ -4592,8 +4596,10 @@ void DieWu::JingHuaShuiYue(QList<void *> args)
     Harm newHarm;
     newHarm.harmPoint = 1;
     newHarm.type = MAGIC;
-    engine->timeLine5(newHarm, this,(PlayerEntity*)args[1],0);
-    engine->timeLine5(newHarm, this,(PlayerEntity*)args[1],0);
+    engine->timeLine3(newHarm,this, (PlayerEntity*)args[1],"镜花水月");
+    if(engine->checkEnd())
+        return;
+    engine->timeLine3(newHarm, this, (PlayerEntity*)args[1],"镜花水月");
 }
 
 void DieWu::DiaoLing(int cardID, bool removed)
