@@ -4079,6 +4079,8 @@ void MoQiang::HuanYingXingChen(QList<void *> args)
         harm.type=MAGICHARM;
         coder.notice(tr("魔枪对玩家")+QString::number(huanying2.dstID)+tr("发动【幻影星辰】"));
         engine->timeLine3(harm,this,dst,"幻影星辰");
+        if(engine->checkEnd())
+            return;
     }
     StartUsed=true;
     JieFangUsed=false;
