@@ -3969,6 +3969,7 @@ MoQiang::MoQiang(BackgroundEngine *engine, int id, int color):PlayerEntity(engin
     StartUsed=false;
     ChongYingUsed=false;
     AddAttackPoint=0;
+    FirstTrun=false;
     makeConnection(engine);
 }
 
@@ -4005,6 +4006,7 @@ void MoQiang::AnZhiJieFang1(QList<void *> args)
     JieFangUsed=true;
     JieFangFirst=true;
     StartUsed=true;
+    FirstTrun=true;
 }
 
 void MoQiang::AnZhiJieFang2(QList<void *> args)
@@ -4077,7 +4079,7 @@ void MoQiang::HuanYingXingChen(QList<void *> args)
     StartUsed=true;
     JieFangUsed=false;
     JieFangFirst=false;
-
+    FirstTrun=false;
 }
 
 void MoQiang::HuanYingXingChen2(int harmed, int *howMany, PlayerEntity *dst)
@@ -4130,7 +4132,7 @@ void MoQiang::QiHeiZhiQiang(QList<void *> args)
     PlayerEntity*dst=(PlayerEntity*)args[1];
     if(dst->getHandCards().size()<1 || dst->getHandCards().size()>2)
         return;
-    if(!JieFangUsed || JieFangFirst)
+    if(!JieFangUsed || FirstTrun)
         return;
     coder.askForSkill(id,"ÆáºÚÖ®Ç¹");
     BatInfor bat=messageBuffer::readBatInfor();
@@ -4229,6 +4231,7 @@ void MoQiang::skillReset(QList<void *> args)
     ChongYingUsed=false;
     JieFangFirst=false;
     HuanYingUsed=false;
+    FirstTrun=false;
     AddAttackPoint=0;
 }
 
