@@ -1,150 +1,150 @@
-0	magic	earth	»Ã	Ê¥¶Ü	card/shengDunDi.png	0		
-1	magic	earth	Ê¥	Ê¥¶Ü	card/shengDunDi.png	0		
-2	magic	earth	Ó½	Ê¥¶Ü	card/shengDunDi.png	0		
-3	magic	earth	¼¼	ĞéÈõ	card/xuRuoDi.png	0		
-4	magic	earth	Ó½	ÖĞ¶¾	card/zhongDuDi.png	0		
-5	magic	wind	»Ã	Ä§µ¯	card/moDanFeng.png	0		
-6	magic	wind	Ê¥	Ê¥¶Ü	card/shengDunFeng.png	0		
-7	magic	wind	Ñª	Ê¥¶Ü	card/shengDunFeng.png	0		
-8	magic	wind	Ó½	Ê¥¶Ü	card/shengDunFeng.png	0		
-9	magic	wind	»Ã	ĞéÈõ	card/xuRuoFeng.png	0		
-10	magic	wind	Ê¥	ÖĞ¶¾	card/zhongDuFeng.png	0		
-11	magic	light	Ê¥	Ê¥¹â	card/shengGuang.png	1	ÖÎÁÆÊõ	
-12	magic	light	Ê¥	Ê¥¹â	card/shengGuang.png	1	ÖÎÁÆÊõ	
-13	magic	light	Ê¥	Ê¥¹â	card/shengGuang.png	1	ÖÎÓúÖ®¹â	
-14	magic	light	»Ã	Ê¥¹â	card/shengGuang.png	0		
-15	magic	light	»Ã	Ê¥¹â	card/shengGuang.png	0		
-16	magic	light	¼¼	Ê¥¹â	card/shengGuang.png	0		
-17	magic	light	¼¼	Ê¥¹â	card/shengGuang.png	0		
-18	magic	light	¼¼	Ê¥¹â	card/shengGuang.png	0		
-19	magic	light	Ñª	Ê¥¹â	card/shengGuang.png	0		
-20	magic	light	Ñª	Ê¥¹â	card/shengGuang.png	0		
-21	magic	light	Ñª	Ê¥¹â	card/shengGuang.png	0		
-22	magic	fire	Ó½	Ä§µ¯	card/moDanHuo.png	0		
-23	magic	fire	¼¼	Ê¥¶Ü	card/shengDunHuo.png	0		
-24	magic	fire	Ñª	Ê¥¶Ü	card/shengDunHuo.png	0		
-25	magic	fire	Ê¥	ĞéÈõ	card/xuRuoHuo.png	0		
-26	magic	fire	Ñª	ĞéÈõ	card/xuRuoHuo.png	0		
-27	magic	thunder	¼¼	Ä§µ¯	card/moDanLei.png	0		
-28	magic	thunder	Ê¥	Ä§µ¯	card/moDanLei.png	0		
-29	magic	thunder	»Ã	Ê¥¶Ü	card/shengDunLei.png	0		
-30	magic	thunder	Ñª	Ê¥¶Ü	card/shengDunLei.png	0		
-31	magic	thunder	¼¼	ÖĞ¶¾	card/zhongDuLei.png	0		
-32	magic	water	»Ã	Ä§µ¯	card/moDanShui.png	0		
-33	magic	water	Ñª	Ä§µ¯	card/moDanShui.png	0		
-34	magic	water	Ñª	ĞéÈõ	card/xuRuoShui.png	0		
-35	magic	water	Ó½	ĞéÈõ	card/xuRuoShui.png	0		
-36	magic	water	»Ã	ÖĞ¶¾	card/zhongDuShui.png	0		
-37	magic	water	¼¼	ÖĞ¶¾	card/zhongDuShui.png	0		
-38	magic	water	Ê¥	ÖĞ¶¾	card/zhongDuShui.png	0		
-39	attack	darkness	Ê¥	°µÃğ	card/anMie.png	0		
-40	attack	darkness	Ê¥	°µÃğ	card/anMie.png	0		
-41	attack	darkness	Ê¥	°µÃğ	card/anMie.png	0		
-42	attack	darkness	Ê¥	°µÃğ	card/anMie.png	0		
-43	attack	darkness	Ó½	°µÃğ	card/anMie.png	0		
-44	attack	darkness	Ó½	°µÃğ	card/anMie.png	0		
-45	attack	earth	»Ã	µØÁÑÕ¶	card/diLieZhan.png	2	µØÖ®·âÓ¡	Áé»ê´ÍÓè
-46	attack	earth	»Ã	µØÁÑÕ¶	card/diLieZhan.png	2	µØÖ®·âÓ¡	Áé»ê´ÍÓè
-47	attack	earth	»Ã	µØÁÑÕ¶	card/diLieZhan.png	2	µØÖ®·âÓ¡	Áé»êÕğ±¬
-48	attack	earth	»Ã	µØÁÑÕ¶	card/diLieZhan.png	2	µØÖ®·âÓ¡	Áé»êÕğ±¬
-49	attack	earth	¼¼	µØÁÑÕ¶	card/diLieZhan.png	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-50	attack	earth	¼¼	µØÁÑÕ¶	card/diLieZhan.png	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-51	attack	earth	¼¼	µØÁÑÕ¶	card/diLieZhan.png	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-52	attack	earth	¼¼	µØÁÑÕ¶	card/diLieZhan.png	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-53	attack	earth	¼¼	µØÁÑÕ¶	card/diLieZhan.png	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-54	attack	earth	Ê¥	µØÁÑÕ¶	card/diLieZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-55	attack	earth	Ó½	µØÁÑÕ¶	card/diLieZhan.png	2	ÍşÁ¦´Í¸£	ÔÉÊ¯
-56	attack	earth	Ó½	µØÁÑÕ¶	card/diLieZhan.png	2	ÍşÁ¦´Í¸£	ÔÉÊ¯
-57	attack	earth	Ñª	µØÁÑÕ¶	card/diLieZhan.png	2	ÑªĞÈÅØÏø	ÑªÖ®±¯Ãù
-58	attack	earth	Ñª	µØÁÑÕ¶	card/diLieZhan.png	2	ÑªĞÈÅØÏø	ÑªÖ®±¯Ãù
-59	attack	earth	Ñª	µØÁÑÕ¶	card/diLieZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-60	attack	earth	Ñª	µØÁÑÕ¶	card/diLieZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-61	attack	earth	Ñª	µØÁÑÕ¶	card/diLieZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-62	attack	earth	Ó½	µØÁÑÕ¶	card/diLieZhan.png	2	Ñ¸½İ´Í¸£	ÔÉÊ¯
-63	attack	earth	Ó½	µØÁÑÕ¶	card/diLieZhan.png	2	Ñ¸½İ´Í¸£	ÔÉÊ¯
-64	attack	earth	Ê¥	µØÁÑÕ¶	card/diLieZhan.png	1	ÖÎÓúÖ®¹â	
-65	attack	earth	Ê¥	µØÁÑÕ¶	card/diLieZhan.png	1	ÖÎÓúÖ®¹â	
-66	attack	wind	»Ã	·çÉñÕ¶	card/fengShenZhan.png	2	·çÖ®·âÓ¡	Áé»ê´ÍÓè
-67	attack	wind	»Ã	·çÉñÕ¶	card/fengShenZhan.png	2	·çÖ®·âÓ¡	Áé»ê´ÍÓè
-68	attack	wind	»Ã	·çÉñÕ¶	card/fengShenZhan.png	2	·çÖ®·âÓ¡	Áé»ê´ÍÓè
-69	attack	wind	»Ã	·çÉñÕ¶	card/fengShenZhan.png	2	·çÖ®·âÓ¡	Áé»ê´ÍÓè
-70	attack	wind	¼¼	·çÉñÕ¶	card/fengShenZhan.png	2	¼²·ç¼¼	¾«×¼Éä»÷
-71	attack	wind	¼¼	·çÉñÕ¶	card/fengShenZhan.png	2	¼²·ç¼¼	¾«×¼Éä»÷
-72	attack	wind	¼¼	·çÉñÕ¶	card/fengShenZhan.png	2	¼²·ç¼¼	¾«×¼Éä»÷
-73	attack	wind	¼¼	·çÉñÕ¶	card/fengShenZhan.png	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-74	attack	wind	¼¼	·çÉñÕ¶	card/fengShenZhan.png	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-75	attack	wind	Ê¥	·çÉñÕ¶	card/fengShenZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-76	attack	wind	Ê¥	·çÉñÕ¶	card/fengShenZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-77	attack	wind	Ê¥	·çÉñÕ¶	card/fengShenZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-78	attack	wind	Ñª	·çÉñÕ¶	card/fengShenZhan.png	2	ÑªĞÈÅØÏø	ÑªÖ®±¯Ãù
-79	attack	wind	Ñª	·çÉñÕ¶	card/fengShenZhan.png	2	ÑªĞÈÅØÏø	ÑªÖ®±¯Ãù
-80	attack	wind	Ñª	·çÉñÕ¶	card/fengShenZhan.png	2	ÑªĞÈÅØÏø	ÑªÖ®±¯Ãù
-81	attack	wind	Ñª	·çÉñÕ¶	card/fengShenZhan.png	2	ÑªĞÈÅØÏø	ÑªÖ®±¯Ãù
-82	attack	wind	Ó½	·çÉñÕ¶	card/fengShenZhan.png	2	Ñ¸½İ´Í¸£	·çÈĞ
-83	attack	wind	Ó½	·çÉñÕ¶	card/fengShenZhan.png	2	Ñ¸½İ´Í¸£	·çÈĞ
-84	attack	wind	Ó½	·çÉñÕ¶	card/fengShenZhan.png	2	Ñ¸½İ´Í¸£	·çÈĞ
-85	attack	wind	Ó½	·çÉñÕ¶	card/fengShenZhan.png	2	Ñ¸½İ´Í¸£	·çÈĞ
-86	attack	wind	Ó½	·çÉñÕ¶	card/fengShenZhan.png	2	Ñ¸½İ´Í¸£	·çÈĞ
-87	attack	fire	»Ã	»ğÑæÕ¶	card/huoYanZhan.png	2	»ğÖ®·âÓ¡	Áé»êÕğ±¬
-88	attack	fire	»Ã	»ğÑæÕ¶	card/huoYanZhan.png	2	»ğÖ®·âÓ¡	Áé»êÕğ±¬
-89	attack	fire	»Ã	»ğÑæÕ¶	card/huoYanZhan.png	2	»ğÖ®·âÓ¡	Áé»êÕğ±¬
-90	attack	fire	»Ã	»ğÑæÕ¶	card/huoYanZhan.png	2	»ğÖ®·âÓ¡	Áé»êÕğ±¬
-91	attack	fire	»Ã	»ğÑæÕ¶	card/huoYanZhan.png	2	»ğÖ®·âÓ¡	Áé»êÕğ±¬
-92	attack	fire	¼¼	»ğÑæÕ¶	card/huoYanZhan.png	2	¼²·ç¼¼	ÉÁ¹âÏİÚå
-93	attack	fire	¼¼	»ğÑæÕ¶	card/huoYanZhan.png	2	¼²·ç¼¼	ÉÁ¹âÏİÚå
-94	attack	fire	¼¼	»ğÑæÕ¶	card/huoYanZhan.png	2	¼²·ç¼¼	ÉÁ¹âÏİÚå
-95	attack	fire	¼¼	»ğÑæÕ¶	card/huoYanZhan.png	2	¼²·ç¼¼	ÉÁ¹âÏİÚå
-96	attack	fire	Ê¥	»ğÑæÕ¶	card/huoYanZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÊõ
-97	attack	fire	Ê¥	»ğÑæÕ¶	card/huoYanZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÊõ
-98	attack	fire	Ê¥	»ğÑæÕ¶	card/huoYanZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÊõ
-99	attack	fire	Ê¥	»ğÑæÕ¶	card/huoYanZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÊõ
-100	attack	fire	Ó½	»ğÑæÕ¶	card/huoYanZhan.png	2	ÍşÁ¦´Í¸£	»ğÇò
-101	attack	fire	Ó½	»ğÑæÕ¶	card/huoYanZhan.png	2	ÍşÁ¦´Í¸£	»ğÇò
-102	attack	fire	Ó½	»ğÑæÕ¶	card/huoYanZhan.png	2	ÍşÁ¦´Í¸£	»ğÇò
-103	attack	fire	Ó½	»ğÑæÕ¶	card/huoYanZhan.png	2	ÍşÁ¦´Í¸£	»ğÇò
-104	attack	fire	Ñª	»ğÑæÕ¶	card/huoYanZhan.png	2	ÑªĞÈÅØÏø	ÑªÖ®±¯Ãù
-105	attack	fire	Ñª	»ğÑæÕ¶	card/huoYanZhan.png	2	ÑªĞÈÅØÏø	ÑªÖ®±¯Ãù
-106	attack	fire	Ñª	»ğÑæÕ¶	card/huoYanZhan.png	2	ÑªĞÈÅØÏø	ÑªÖ®±¯Ãù
-107	attack	fire	Ñª	»ğÑæÕ¶	card/huoYanZhan.png	2	ÑªĞÈÅØÏø	ÑªÖ®±¯Ãù
-108	attack	thunder	¼¼	À×¹âÕ¶	card/leiGuangZhan.png	2	¼²·ç¼¼	¾«×¼Éä»÷
-109	attack	thunder	¼¼	À×¹âÕ¶	card/leiGuangZhan.png	2	¼²·ç¼¼	¾«×¼Éä»÷
-110	attack	thunder	»Ã	À×¹âÕ¶	card/leiGuangZhan.png	2	À×Ö®·âÓ¡	Áé»êÕğ±¬
-111	attack	thunder	»Ã	À×¹âÕ¶	card/leiGuangZhan.png	2	À×Ö®·âÓ¡	Áé»êÕğ±¬
-112	attack	thunder	»Ã	À×¹âÕ¶	card/leiGuangZhan.png	2	À×Ö®·âÓ¡	Áé»êÕğ±¬
-113	attack	thunder	»Ã	À×¹âÕ¶	card/leiGuangZhan.png	2	À×Ö®·âÓ¡	Áé»êÕğ±¬
-114	attack	thunder	»Ã	À×¹âÕ¶	card/leiGuangZhan.png	2	À×Ö®·âÓ¡	Áé»êÕğ±¬
-115	attack	thunder	¼¼	À×¹âÕ¶	card/leiGuangZhan.png	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-116	attack	thunder	¼¼	À×¹âÕ¶	card/leiGuangZhan.png	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-117	attack	thunder	Ê¥	À×¹âÕ¶	card/leiGuangZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÊõ
-118	attack	thunder	Ê¥	À×¹âÕ¶	card/leiGuangZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÊõ
-119	attack	thunder	Ê¥	À×¹âÕ¶	card/leiGuangZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÊõ
-120	attack	thunder	Ê¥	À×¹âÕ¶	card/leiGuangZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÊõ
-121	attack	thunder	Ñª	À×¹âÕ¶	card/leiGuangZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-122	attack	thunder	Ñª	À×¹âÕ¶	card/leiGuangZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-123	attack	thunder	Ñª	À×¹âÕ¶	card/leiGuangZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-124	attack	thunder	Ñª	À×¹âÕ¶	card/leiGuangZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-125	attack	thunder	Ó½	À×¹âÕ¶	card/leiGuangZhan.png	2	Ñ¸½İ´Í¸£	À×»÷
-126	attack	thunder	Ó½	À×¹âÕ¶	card/leiGuangZhan.png	2	Ñ¸½İ´Í¸£	À×»÷
-127	attack	thunder	Ó½	À×¹âÕ¶	card/leiGuangZhan.png	2	Ñ¸½İ´Í¸£	À×»÷
-128	attack	thunder	Ó½	À×¹âÕ¶	card/leiGuangZhan.png	2	Ñ¸½İ´Í¸£	À×»÷
-129	attack	water	¼¼	Ë®Á°Õ¶	card/shuiLianZhan.png	2	¼²·ç¼¼	ÉÁ¹âÏİÚå
-130	attack	water	¼¼	Ë®Á°Õ¶	card/shuiLianZhan.png	2	¼²·ç¼¼	ÉÁ¹âÏİÚå
-131	attack	water	¼¼	Ë®Á°Õ¶	card/shuiLianZhan.png	2	¼²·ç¼¼	ÉÁ¹âÏİÚå
-132	attack	water	¼¼	Ë®Á°Õ¶	card/shuiLianZhan.png	2	¼²·ç¼¼	ÉÁ¹âÏİÚå
-133	attack	water	»Ã	Ë®Á°Õ¶	card/shuiLianZhan.png	2	Ë®Ö®·âÓ¡	Áé»ê´ÍÓè
-134	attack	water	»Ã	Ë®Á°Õ¶	card/shuiLianZhan.png	2	Ë®Ö®·âÓ¡	Áé»ê´ÍÓè
-135	attack	water	»Ã	Ë®Á°Õ¶	card/shuiLianZhan.png	2	Ë®Ö®·âÓ¡	Áé»êÕğ±¬
-136	attack	water	»Ã	Ë®Á°Õ¶	card/shuiLianZhan.png	2	Ë®Ö®·âÓ¡	Áé»êÕğ±¬
-137	attack	water	Ê¥	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-138	attack	water	Ê¥	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-139	attack	water	Ê¥	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-140	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÍşÁ¦´Í¸£	±ù¶³
-141	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÍşÁ¦´Í¸£	±ù¶³
-142	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÍşÁ¦´Í¸£	±ù¶³
-143	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÍşÁ¦´Í¸£	±ù¶³
-144	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÍşÁ¦´Í¸£	±ù¶³
-145	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÍşÁ¦´Í¸£	±ù¶³
-146	attack	water	Ñª	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-147	attack	water	Ñª	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-148	attack	water	Ñª	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-149	attack	water	Ñª	Ë®Á°Õ¶	card/shuiLianZhan.png	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
+0	magic	earth	å¹»	åœ£ç›¾	card/shengDunDi.png	0		
+1	magic	earth	åœ£	åœ£ç›¾	card/shengDunDi.png	0		
+2	magic	earth	å’	åœ£ç›¾	card/shengDunDi.png	0		
+3	magic	earth	æŠ€	è™šå¼±	card/xuRuoDi.png	0		
+4	magic	earth	å’	ä¸­æ¯’	card/zhongDuDi.png	0		
+5	magic	wind	å¹»	é­”å¼¹	card/moDanFeng.png	0		
+6	magic	wind	åœ£	åœ£ç›¾	card/shengDunFeng.png	0		
+7	magic	wind	è¡€	åœ£ç›¾	card/shengDunFeng.png	0		
+8	magic	wind	å’	åœ£ç›¾	card/shengDunFeng.png	0		
+9	magic	wind	å¹»	è™šå¼±	card/xuRuoFeng.png	0		
+10	magic	wind	åœ£	ä¸­æ¯’	card/zhongDuFeng.png	0		
+11	magic	light	åœ£	åœ£å…‰	card/shengGuang.png	1	æ²»ç–—æœ¯	
+12	magic	light	åœ£	åœ£å…‰	card/shengGuang.png	1	æ²»ç–—æœ¯	
+13	magic	light	åœ£	åœ£å…‰	card/shengGuang.png	1	æ²»æ„ˆä¹‹å…‰	
+14	magic	light	å¹»	åœ£å…‰	card/shengGuang.png	0		
+15	magic	light	å¹»	åœ£å…‰	card/shengGuang.png	0		
+16	magic	light	æŠ€	åœ£å…‰	card/shengGuang.png	0		
+17	magic	light	æŠ€	åœ£å…‰	card/shengGuang.png	0		
+18	magic	light	æŠ€	åœ£å…‰	card/shengGuang.png	0		
+19	magic	light	è¡€	åœ£å…‰	card/shengGuang.png	0		
+20	magic	light	è¡€	åœ£å…‰	card/shengGuang.png	0		
+21	magic	light	è¡€	åœ£å…‰	card/shengGuang.png	0		
+22	magic	fire	å’	é­”å¼¹	card/moDanHuo.png	0		
+23	magic	fire	æŠ€	åœ£ç›¾	card/shengDunHuo.png	0		
+24	magic	fire	è¡€	åœ£ç›¾	card/shengDunHuo.png	0		
+25	magic	fire	åœ£	è™šå¼±	card/xuRuoHuo.png	0		
+26	magic	fire	è¡€	è™šå¼±	card/xuRuoHuo.png	0		
+27	magic	thunder	æŠ€	é­”å¼¹	card/moDanLei.png	0		
+28	magic	thunder	åœ£	é­”å¼¹	card/moDanLei.png	0		
+29	magic	thunder	å¹»	åœ£ç›¾	card/shengDunLei.png	0		
+30	magic	thunder	è¡€	åœ£ç›¾	card/shengDunLei.png	0		
+31	magic	thunder	æŠ€	ä¸­æ¯’	card/zhongDuLei.png	0		
+32	magic	water	å¹»	é­”å¼¹	card/moDanShui.png	0		
+33	magic	water	è¡€	é­”å¼¹	card/moDanShui.png	0		
+34	magic	water	è¡€	è™šå¼±	card/xuRuoShui.png	0		
+35	magic	water	å’	è™šå¼±	card/xuRuoShui.png	0		
+36	magic	water	å¹»	ä¸­æ¯’	card/zhongDuShui.png	0		
+37	magic	water	æŠ€	ä¸­æ¯’	card/zhongDuShui.png	0		
+38	magic	water	åœ£	ä¸­æ¯’	card/zhongDuShui.png	0		
+39	attack	darkness	åœ£	æš—ç­	card/anMie.png	0		
+40	attack	darkness	åœ£	æš—ç­	card/anMie.png	0		
+41	attack	darkness	åœ£	æš—ç­	card/anMie.png	0		
+42	attack	darkness	åœ£	æš—ç­	card/anMie.png	0		
+43	attack	darkness	å’	æš—ç­	card/anMie.png	0		
+44	attack	darkness	å’	æš—ç­	card/anMie.png	0		
+45	attack	earth	å¹»	åœ°è£‚æ–©	card/diLieZhan.png	2	åœ°ä¹‹å°å°	çµé­‚èµäºˆ
+46	attack	earth	å¹»	åœ°è£‚æ–©	card/diLieZhan.png	2	åœ°ä¹‹å°å°	çµé­‚èµäºˆ
+47	attack	earth	å¹»	åœ°è£‚æ–©	card/diLieZhan.png	2	åœ°ä¹‹å°å°	çµé­‚éœ‡çˆ†
+48	attack	earth	å¹»	åœ°è£‚æ–©	card/diLieZhan.png	2	åœ°ä¹‹å°å°	çµé­‚éœ‡çˆ†
+49	attack	earth	æŠ€	åœ°è£‚æ–©	card/diLieZhan.png	2	çƒˆé£æŠ€	ç²¾å‡†å°„å‡»
+50	attack	earth	æŠ€	åœ°è£‚æ–©	card/diLieZhan.png	2	çƒˆé£æŠ€	ç²¾å‡†å°„å‡»
+51	attack	earth	æŠ€	åœ°è£‚æ–©	card/diLieZhan.png	2	çƒˆé£æŠ€	ç²¾å‡†å°„å‡»
+52	attack	earth	æŠ€	åœ°è£‚æ–©	card/diLieZhan.png	2	çƒˆé£æŠ€	ç²¾å‡†å°„å‡»
+53	attack	earth	æŠ€	åœ°è£‚æ–©	card/diLieZhan.png	2	çƒˆé£æŠ€	ç²¾å‡†å°„å‡»
+54	attack	earth	åœ£	åœ°è£‚æ–©	card/diLieZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+55	attack	earth	å’	åœ°è£‚æ–©	card/diLieZhan.png	2	å¨åŠ›èµç¦	é™¨çŸ³
+56	attack	earth	å’	åœ°è£‚æ–©	card/diLieZhan.png	2	å¨åŠ›èµç¦	é™¨çŸ³
+57	attack	earth	è¡€	åœ°è£‚æ–©	card/diLieZhan.png	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+58	attack	earth	è¡€	åœ°è£‚æ–©	card/diLieZhan.png	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+59	attack	earth	è¡€	åœ°è£‚æ–©	card/diLieZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+60	attack	earth	è¡€	åœ°è£‚æ–©	card/diLieZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+61	attack	earth	è¡€	åœ°è£‚æ–©	card/diLieZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+62	attack	earth	å’	åœ°è£‚æ–©	card/diLieZhan.png	2	è¿…æ·èµç¦	é™¨çŸ³
+63	attack	earth	å’	åœ°è£‚æ–©	card/diLieZhan.png	2	è¿…æ·èµç¦	é™¨çŸ³
+64	attack	earth	åœ£	åœ°è£‚æ–©	card/diLieZhan.png	1	æ²»æ„ˆä¹‹å…‰	
+65	attack	earth	åœ£	åœ°è£‚æ–©	card/diLieZhan.png	1	æ²»æ„ˆä¹‹å…‰	
+66	attack	wind	å¹»	é£ç¥æ–©	card/fengShenZhan.png	2	é£ä¹‹å°å°	çµé­‚èµäºˆ
+67	attack	wind	å¹»	é£ç¥æ–©	card/fengShenZhan.png	2	é£ä¹‹å°å°	çµé­‚èµäºˆ
+68	attack	wind	å¹»	é£ç¥æ–©	card/fengShenZhan.png	2	é£ä¹‹å°å°	çµé­‚èµäºˆ
+69	attack	wind	å¹»	é£ç¥æ–©	card/fengShenZhan.png	2	é£ä¹‹å°å°	çµé­‚èµäºˆ
+70	attack	wind	æŠ€	é£ç¥æ–©	card/fengShenZhan.png	2	ç–¾é£æŠ€	ç²¾å‡†å°„å‡»
+71	attack	wind	æŠ€	é£ç¥æ–©	card/fengShenZhan.png	2	ç–¾é£æŠ€	ç²¾å‡†å°„å‡»
+72	attack	wind	æŠ€	é£ç¥æ–©	card/fengShenZhan.png	2	ç–¾é£æŠ€	ç²¾å‡†å°„å‡»
+73	attack	wind	æŠ€	é£ç¥æ–©	card/fengShenZhan.png	2	çƒˆé£æŠ€	ç²¾å‡†å°„å‡»
+74	attack	wind	æŠ€	é£ç¥æ–©	card/fengShenZhan.png	2	çƒˆé£æŠ€	ç²¾å‡†å°„å‡»
+75	attack	wind	åœ£	é£ç¥æ–©	card/fengShenZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+76	attack	wind	åœ£	é£ç¥æ–©	card/fengShenZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+77	attack	wind	åœ£	é£ç¥æ–©	card/fengShenZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+78	attack	wind	è¡€	é£ç¥æ–©	card/fengShenZhan.png	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+79	attack	wind	è¡€	é£ç¥æ–©	card/fengShenZhan.png	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+80	attack	wind	è¡€	é£ç¥æ–©	card/fengShenZhan.png	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+81	attack	wind	è¡€	é£ç¥æ–©	card/fengShenZhan.png	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+82	attack	wind	å’	é£ç¥æ–©	card/fengShenZhan.png	2	è¿…æ·èµç¦	é£åˆƒ
+83	attack	wind	å’	é£ç¥æ–©	card/fengShenZhan.png	2	è¿…æ·èµç¦	é£åˆƒ
+84	attack	wind	å’	é£ç¥æ–©	card/fengShenZhan.png	2	è¿…æ·èµç¦	é£åˆƒ
+85	attack	wind	å’	é£ç¥æ–©	card/fengShenZhan.png	2	è¿…æ·èµç¦	é£åˆƒ
+86	attack	wind	å’	é£ç¥æ–©	card/fengShenZhan.png	2	è¿…æ·èµç¦	é£åˆƒ
+87	attack	fire	å¹»	ç«ç„°æ–©	card/huoYanZhan.png	2	ç«ä¹‹å°å°	çµé­‚éœ‡çˆ†
+88	attack	fire	å¹»	ç«ç„°æ–©	card/huoYanZhan.png	2	ç«ä¹‹å°å°	çµé­‚éœ‡çˆ†
+89	attack	fire	å¹»	ç«ç„°æ–©	card/huoYanZhan.png	2	ç«ä¹‹å°å°	çµé­‚éœ‡çˆ†
+90	attack	fire	å¹»	ç«ç„°æ–©	card/huoYanZhan.png	2	ç«ä¹‹å°å°	çµé­‚éœ‡çˆ†
+91	attack	fire	å¹»	ç«ç„°æ–©	card/huoYanZhan.png	2	ç«ä¹‹å°å°	çµé­‚éœ‡çˆ†
+92	attack	fire	æŠ€	ç«ç„°æ–©	card/huoYanZhan.png	2	ç–¾é£æŠ€	é—ªå…‰é™·é˜±
+93	attack	fire	æŠ€	ç«ç„°æ–©	card/huoYanZhan.png	2	ç–¾é£æŠ€	é—ªå…‰é™·é˜±
+94	attack	fire	æŠ€	ç«ç„°æ–©	card/huoYanZhan.png	2	ç–¾é£æŠ€	é—ªå…‰é™·é˜±
+95	attack	fire	æŠ€	ç«ç„°æ–©	card/huoYanZhan.png	2	ç–¾é£æŠ€	é—ªå…‰é™·é˜±
+96	attack	fire	åœ£	ç«ç„°æ–©	card/huoYanZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆæœ¯
+97	attack	fire	åœ£	ç«ç„°æ–©	card/huoYanZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆæœ¯
+98	attack	fire	åœ£	ç«ç„°æ–©	card/huoYanZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆæœ¯
+99	attack	fire	åœ£	ç«ç„°æ–©	card/huoYanZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆæœ¯
+100	attack	fire	å’	ç«ç„°æ–©	card/huoYanZhan.png	2	å¨åŠ›èµç¦	ç«çƒ
+101	attack	fire	å’	ç«ç„°æ–©	card/huoYanZhan.png	2	å¨åŠ›èµç¦	ç«çƒ
+102	attack	fire	å’	ç«ç„°æ–©	card/huoYanZhan.png	2	å¨åŠ›èµç¦	ç«çƒ
+103	attack	fire	å’	ç«ç„°æ–©	card/huoYanZhan.png	2	å¨åŠ›èµç¦	ç«çƒ
+104	attack	fire	è¡€	ç«ç„°æ–©	card/huoYanZhan.png	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+105	attack	fire	è¡€	ç«ç„°æ–©	card/huoYanZhan.png	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+106	attack	fire	è¡€	ç«ç„°æ–©	card/huoYanZhan.png	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+107	attack	fire	è¡€	ç«ç„°æ–©	card/huoYanZhan.png	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+108	attack	thunder	æŠ€	é›·å…‰æ–©	card/leiGuangZhan.png	2	ç–¾é£æŠ€	ç²¾å‡†å°„å‡»
+109	attack	thunder	æŠ€	é›·å…‰æ–©	card/leiGuangZhan.png	2	ç–¾é£æŠ€	ç²¾å‡†å°„å‡»
+110	attack	thunder	å¹»	é›·å…‰æ–©	card/leiGuangZhan.png	2	é›·ä¹‹å°å°	çµé­‚éœ‡çˆ†
+111	attack	thunder	å¹»	é›·å…‰æ–©	card/leiGuangZhan.png	2	é›·ä¹‹å°å°	çµé­‚éœ‡çˆ†
+112	attack	thunder	å¹»	é›·å…‰æ–©	card/leiGuangZhan.png	2	é›·ä¹‹å°å°	çµé­‚éœ‡çˆ†
+113	attack	thunder	å¹»	é›·å…‰æ–©	card/leiGuangZhan.png	2	é›·ä¹‹å°å°	çµé­‚éœ‡çˆ†
+114	attack	thunder	å¹»	é›·å…‰æ–©	card/leiGuangZhan.png	2	é›·ä¹‹å°å°	çµé­‚éœ‡çˆ†
+115	attack	thunder	æŠ€	é›·å…‰æ–©	card/leiGuangZhan.png	2	çƒˆé£æŠ€	ç²¾å‡†å°„å‡»
+116	attack	thunder	æŠ€	é›·å…‰æ–©	card/leiGuangZhan.png	2	çƒˆé£æŠ€	ç²¾å‡†å°„å‡»
+117	attack	thunder	åœ£	é›·å…‰æ–©	card/leiGuangZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆæœ¯
+118	attack	thunder	åœ£	é›·å…‰æ–©	card/leiGuangZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆæœ¯
+119	attack	thunder	åœ£	é›·å…‰æ–©	card/leiGuangZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆæœ¯
+120	attack	thunder	åœ£	é›·å…‰æ–©	card/leiGuangZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆæœ¯
+121	attack	thunder	è¡€	é›·å…‰æ–©	card/leiGuangZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+122	attack	thunder	è¡€	é›·å…‰æ–©	card/leiGuangZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+123	attack	thunder	è¡€	é›·å…‰æ–©	card/leiGuangZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+124	attack	thunder	è¡€	é›·å…‰æ–©	card/leiGuangZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+125	attack	thunder	å’	é›·å…‰æ–©	card/leiGuangZhan.png	2	è¿…æ·èµç¦	é›·å‡»
+126	attack	thunder	å’	é›·å…‰æ–©	card/leiGuangZhan.png	2	è¿…æ·èµç¦	é›·å‡»
+127	attack	thunder	å’	é›·å…‰æ–©	card/leiGuangZhan.png	2	è¿…æ·èµç¦	é›·å‡»
+128	attack	thunder	å’	é›·å…‰æ–©	card/leiGuangZhan.png	2	è¿…æ·èµç¦	é›·å‡»
+129	attack	water	æŠ€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	ç–¾é£æŠ€	é—ªå…‰é™·é˜±
+130	attack	water	æŠ€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	ç–¾é£æŠ€	é—ªå…‰é™·é˜±
+131	attack	water	æŠ€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	ç–¾é£æŠ€	é—ªå…‰é™·é˜±
+132	attack	water	æŠ€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	ç–¾é£æŠ€	é—ªå…‰é™·é˜±
+133	attack	water	å¹»	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	æ°´ä¹‹å°å°	çµé­‚èµäºˆ
+134	attack	water	å¹»	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	æ°´ä¹‹å°å°	çµé­‚èµäºˆ
+135	attack	water	å¹»	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	æ°´ä¹‹å°å°	çµé­‚éœ‡çˆ†
+136	attack	water	å¹»	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	æ°´ä¹‹å°å°	çµé­‚éœ‡çˆ†
+137	attack	water	åœ£	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+138	attack	water	åœ£	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+139	attack	water	åœ£	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+140	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	å¨åŠ›èµç¦	å†°å†»
+141	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	å¨åŠ›èµç¦	å†°å†»
+142	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	å¨åŠ›èµç¦	å†°å†»
+143	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	å¨åŠ›èµç¦	å†°å†»
+144	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	å¨åŠ›èµç¦	å†°å†»
+145	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	å¨åŠ›èµç¦	å†°å†»
+146	attack	water	è¡€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+147	attack	water	è¡€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+148	attack	water	è¡€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+149	attack	water	è¡€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£

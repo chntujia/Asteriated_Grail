@@ -21,13 +21,13 @@ CardEntity::CardEntity(QStringList* cardEntry):QObject(NULL)
 
 int CardEntity::checkBasicMagic(QString cardName)
 {
-    if(cardName == tr("Ê¥¶Ü"))
+    if(cardName == tr("åœ£ç›¾"))
         return SHIELDCARD;
-    else if(cardName == tr("ÖÐ¶¾"))
+    else if(cardName == tr("ä¸­æ¯’"))
         return POISONCARD;
-    else if(cardName == tr("Ä§µ¯"))
+    else if(cardName == tr("é­”å¼¹"))
         return MISSILECARD;
-    else if(cardName == tr("ÐéÈõ"))
+    else if(cardName == tr("è™šå¼±"))
         return WEAKCARD;
     /*
     for(int i = 0;i < shieldCardID.size();i++)

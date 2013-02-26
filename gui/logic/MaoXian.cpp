@@ -6,15 +6,15 @@ MaoXian::MaoXian()
     connect(playerArea,SIGNAL(playerUnready()),this,SLOT(onUnready()));
 
     Button *qiZha,*touTianHuanRi,*teShuJiaGong;
-    qiZha=new Button(3,tr("ÆÛ Õ©"));
+    qiZha=new Button(3,tr("æ¬º è¯ˆ"));
     buttonArea->addButton(qiZha);
     connect(qiZha,SIGNAL(buttonSelected(int)),this,SLOT(QiZha()));
 
-    touTianHuanRi=new Button(4,tr("ÍµÌì»»ÈÕ"));
+    touTianHuanRi=new Button(4,tr("å·å¤©æ¢æ—¥"));
     buttonArea->addButton(touTianHuanRi);
     connect(touTianHuanRi,SIGNAL(buttonSelected(int)),this,SLOT(TouTianHuanRi()));
 
-    teShuJiaGong=new Button(5,tr("ÌØÊâ¼Ó¹¤"));
+    teShuJiaGong=new Button(5,tr("ç‰¹æ®ŠåŠ å·¥"));
     buttonArea->addButton(teShuJiaGong);
     connect(teShuJiaGong,SIGNAL(buttonSelected(int)),this,SLOT(TeShuJiaGong()));
 }
@@ -33,11 +33,11 @@ void MaoXian::buy()
     tipArea->reset();
 
     if(energy<4)
-        tipArea->setMsg(tr("ÄãÃş3ÕÅÅÆ£¬Äã·½Õ½¼¨Çø¼ÓÁ½±¦Ê¯"));
+        tipArea->setMsg(tr("ä½ æ‘¸3å¼ ç‰Œï¼Œä½ æ–¹æˆ˜ç»©åŒºåŠ ä¸¤å®çŸ³"));
     if(energy==4)
-        tipArea->setMsg(tr("Õ½¼¨ÇøĞÇÊ¯ÒÑÓĞ4¸ö£¬¹ºÂòÖ»Ôö¼ÓÒ»±¦Ê¯"));
+        tipArea->setMsg(tr("æˆ˜ç»©åŒºæ˜ŸçŸ³å·²æœ‰4ä¸ªï¼Œè´­ä¹°åªå¢åŠ ä¸€å®çŸ³"));
     if(energy==5)
-        tipArea->setMsg(tr("Õ½¼¨ÇøĞÇÊ¯ÊıÄ¿ÒÑ´ïÉÏÏŞ£¬¹ºÂò½«²»ÔÙÔö¼ÓĞÇÊ¯"));
+        tipArea->setMsg(tr("æˆ˜ç»©åŒºæ˜ŸçŸ³æ•°ç›®å·²è¾¾ä¸Šé™ï¼Œè´­ä¹°å°†ä¸å†å¢åŠ æ˜ŸçŸ³"));
 }
 
 void MaoXian::extract()
@@ -50,7 +50,7 @@ void MaoXian::extract()
     decisionArea->enable(1);
     playerArea->enableMate(true);
     playerArea->setQuota(1);
-    tipArea->setMsg(tr("ÇëÏÈÑ¡ÔñÒª¸øÓèµÄ¶ÔÏó"));
+    tipArea->setMsg(tr("è¯·å…ˆé€‰æ‹©è¦ç»™äºˆçš„å¯¹è±¡"));
 }
 
 void MaoXian::normal()
@@ -60,7 +60,7 @@ void MaoXian::normal()
 
     if(dataInterface->getMyTeam()->getEnergy()>0)
         buttonArea->enable(2);
-//ÆÛÕ©
+//æ¬ºè¯ˆ
     QList<Card*>handcards=dataInterface->getHandCards();
     for(int i=0;i<handcards.size()-1;i++)
         for(int j=i+1;j<handcards.size();j++)
@@ -69,7 +69,7 @@ void MaoXian::normal()
                 break;
             }
 
-//ÍµÌì»»ÈÕ ÌØÊâ¼Ó¹¤
+//å·å¤©æ¢æ—¥ ç‰¹æ®ŠåŠ å·¥
     if(myself->getEnergy()>0){
         if(dataInterface->getOtherTeam()->getGem()>0 && !onceUsed2)
             buttonArea->enable(4);
@@ -125,12 +125,12 @@ void MaoXian::QiZha()
     decisionArea->disable(0);
 
     handArea->enableAll();
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÆÛÕ©µÄÊôĞÔ£¨3ÕÅÍ¬Ïµ×Ô¶¯ÊÓÎª°µÃğ£©£º"));
-    tipArea->addBoxItem(tr("1.·ç"));
-    tipArea->addBoxItem(tr("2.Ë®"));
-    tipArea->addBoxItem(tr("3.»ğ"));
-    tipArea->addBoxItem(tr("4.µØ"));
-    tipArea->addBoxItem(tr("5.À×"));
+    tipArea->setMsg(tr("è¯·é€‰æ‹©æ¬ºè¯ˆçš„å±æ€§ï¼ˆ3å¼ åŒç³»è‡ªåŠ¨è§†ä¸ºæš—ç­ï¼‰ï¼š"));
+    tipArea->addBoxItem(tr("1.é£"));
+    tipArea->addBoxItem(tr("2.æ°´"));
+    tipArea->addBoxItem(tr("3.ç«"));
+    tipArea->addBoxItem(tr("4.åœ°"));
+    tipArea->addBoxItem(tr("5.é›·"));
     tipArea->showBox();
 }
 
@@ -146,11 +146,11 @@ void MaoXian::TeShuJiaGong()
     decisionArea->enable(1);
     decisionArea->enable(0);
 
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÊ¹ÓÃµÄÄÜÁ¿£º"));
+    tipArea->setMsg(tr("è¯·é€‰æ‹©ä½¿ç”¨çš„èƒ½é‡ï¼š"));
     if(myself->getCrystal()>=1)
-        tipArea->addBoxItem(tr("1.Ë®¾§"));
+        tipArea->addBoxItem(tr("1.æ°´æ™¶"));
     if(myself->getGem()>=1)
-        tipArea->addBoxItem(tr("2.±¦Ê¯"));
+        tipArea->addBoxItem(tr("2.å®çŸ³"));
 
     tipArea->showBox();
 }
@@ -167,11 +167,11 @@ void MaoXian::TouTianHuanRi()
     decisionArea->enable(1);
     decisionArea->enable(0);
 
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÊ¹ÓÃµÄÄÜÁ¿£º"));
+    tipArea->setMsg(tr("è¯·é€‰æ‹©ä½¿ç”¨çš„èƒ½é‡ï¼š"));
     if(myself->getCrystal()>=1)
-        tipArea->addBoxItem(tr("1.Ë®¾§"));
+        tipArea->addBoxItem(tr("1.æ°´æ™¶"));
     if(myself->getGem()>=1)
-        tipArea->addBoxItem(tr("2.±¦Ê¯"));
+        tipArea->addBoxItem(tr("2.å®çŸ³"));
 
     tipArea->showBox();
 }
@@ -206,23 +206,23 @@ void MaoXian::playerAnalyse()
         crystal=dataInterface->getMyTeam()->getCrystal();
         decisionArea->enable(0);
         tipArea->reset();
-        tipArea->setMsg(tr("ÇëÑ¡ÔñÒªÌáÈ¡µÄĞÇÊ¯Êı£º"));
+        tipArea->setMsg(tr("è¯·é€‰æ‹©è¦æå–çš„æ˜ŸçŸ³æ•°ï¼š"));
         switch(dst->getEnergyMax()-dst->getEnergy())
         {
         case 4:
         case 3:
         case 2:
             if(gem>=2)
-                tipArea->addBoxItem(tr("1.Á½¸ö±¦Ê¯"));
+                tipArea->addBoxItem(tr("1.ä¸¤ä¸ªå®çŸ³"));
             if(crystal>=2)
-                tipArea->addBoxItem(tr("2.Á½¸öË®¾§"));
+                tipArea->addBoxItem(tr("2.ä¸¤ä¸ªæ°´æ™¶"));
             if(gem>=1&&crystal>=1)
-                tipArea->addBoxItem(tr("3.Ò»¸ö±¦Ê¯ºÍÒ»¸öË®¾§"));
+                tipArea->addBoxItem(tr("3.ä¸€ä¸ªå®çŸ³å’Œä¸€ä¸ªæ°´æ™¶"));
         case 1:
             if(gem>=1)
-                tipArea->addBoxItem(tr("4.Ò»¸ö±¦Ê¯"));
+                tipArea->addBoxItem(tr("4.ä¸€ä¸ªå®çŸ³"));
             if(crystal>=1)
-                tipArea->addBoxItem(tr("5.Ò»¸öË®¾§"));
+                tipArea->addBoxItem(tr("5.ä¸€ä¸ªæ°´æ™¶"));
         }
         tipArea->showBox();
         break;
@@ -254,7 +254,7 @@ void MaoXian::onOkClicked()
 
     switch(state)
     {
-//¶îÍâĞĞ¶¯Ñ¯ÎÊ
+//é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
@@ -268,7 +268,7 @@ void MaoXian::onOkClicked()
             attackOrMagic();
         }
         break;
-//ÆÛÕ©
+//æ¬ºè¯ˆ
     case 1201:
         command="1201;";
         if(selectedCards.size()==3)
@@ -307,7 +307,7 @@ void MaoXian::onOkClicked()
         qizha=false;
         gui->reset();
         break;
-//ÌØÊâ¼Ó¹¤
+//ç‰¹æ®ŠåŠ å·¥
     case 1202:
         command="1202;";
         text=tipArea->getBoxCurrentText();
@@ -321,7 +321,7 @@ void MaoXian::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÍµÌì»»ÈÕ
+//å·å¤©æ¢æ—¥
     case 1203:
         command="1203;";
         text=tipArea->getBoxCurrentText();
@@ -335,7 +335,7 @@ void MaoXian::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//Ã°ÏÕ¼ÒÌìÌÃ
+//å†’é™©å®¶å¤©å ‚
     case 1204:
         command+="1204;";
         targetID=QString::number(selectedPlayers[0]->getID());
@@ -363,7 +363,7 @@ void MaoXian::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//¹ºÂò
+//è´­ä¹°
     case 1205:
         command="4;3;0;";
         int stone=dataInterface->getMyTeam()->getEnergy();
@@ -397,14 +397,14 @@ void MaoXian::onCancelClicked()
     Role::onCancelClicked();
     switch(state)
     {
-//ÆÛÕ©
+//æ¬ºè¯ˆ
     case 10:
     case 1201:
-//ÌØÊâ¼Ó¹¤
+//ç‰¹æ®ŠåŠ å·¥
     case 1202:
-//ÍµÌì»»ÈÕ
+//å·å¤©æ¢æ—¥
     case 1203:
-//Ã°ÏÕÕßÌìÌÃ
+//å†’é™©è€…å¤©å ‚
     case 1204:
         if(actionFlag==4)
             attackOrMagic();
@@ -419,9 +419,9 @@ void MaoXian::additionalAction()
 {
     Role::additionalAction();
     if(TeShuJiaGongAddition)
-        tipArea->addBoxItem(tr("1.¹¥»÷»ò·¨ÊõĞĞ¶¯£¨ÌØÊâ¼Ó¹¤£©"));
+        tipArea->addBoxItem(tr("1.æ”»å‡»æˆ–æ³•æœ¯è¡ŒåŠ¨ï¼ˆç‰¹æ®ŠåŠ å·¥ï¼‰"));
     if(TouTianHuanRiAddition)
-        tipArea->addBoxItem(tr("2.¹¥»÷»ò·¨ÊõĞĞ¶¯£¨ÍµÌì»»ÈÕ£©"));
+        tipArea->addBoxItem(tr("2.æ”»å‡»æˆ–æ³•æœ¯è¡ŒåŠ¨ï¼ˆå·å¤©æ¢æ—¥ï¼‰"));
 }
 
 void MaoXian::turnBegin()

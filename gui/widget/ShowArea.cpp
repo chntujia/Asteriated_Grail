@@ -1,7 +1,7 @@
 #include "ShowArea.h"
 #include "Animation.h"
 #include <QPainter>
-#include <windows.h>
+//#include <windows.h>
 
 static QRectF ShowAreaRect(0, 0, 550, 150);
 ShowArea::ShowArea()

@@ -6,7 +6,7 @@ YongZhe::YongZhe()
 setMyRole(this);
 
     Button *tiaoXin;
-    tiaoXin=new Button(3,tr("����"));
+    tiaoXin=new Button(3,tr("挑衅"));
     buttonArea->addButton(tiaoXin);
     connect(tiaoXin,SIGNAL(buttonSelected(int)),this,SLOT(TiaoXin()));
 }
@@ -15,7 +15,7 @@ void YongZhe::normal()
 {
     Role::normal();
     Player* myself=dataInterface->getMyself();
-    //����
+    //挑衅
     if(myself->getToken(0)>0)
         buttonArea->enable(3);
         foreach(Player* ptr,dataInterface->getPlayerList())
@@ -29,7 +29,7 @@ void YongZhe::normal()
 void YongZhe::NuHou()
 {
     state=36;
-    tipArea->setMsg(tr("�Ƿ񷢶�ŭ��"));
+    tipArea->setMsg(tr("是否发动怒吼？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -37,7 +37,7 @@ void YongZhe::NuHou()
 void YongZhe::MingJingZhiShui()
 {
     state=36;
-    tipArea->setMsg(tr("�Ƿ񷢶�����ֹˮ��"));
+    tipArea->setMsg(tr("是否发动明镜止水？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -45,7 +45,7 @@ void YongZhe::MingJingZhiShui()
 void YongZhe::JinDuanZhiLi()
 {
     state=2102;
-    tipArea->setMsg(tr("�Ƿ񷢶�����֮����"));
+    tipArea->setMsg(tr("是否发动禁断之力？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -53,7 +53,7 @@ void YongZhe::JinDuanZhiLi()
 void YongZhe::SiDou()
 {
     state=36;
-    tipArea->setMsg(tr("�Ƿ񷢶�������"));
+    tipArea->setMsg(tr("是否发动死斗？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -87,7 +87,7 @@ void YongZhe::onOkClicked()
 
     switch(state)
     {
-    //�����ж�ѯ��
+    //额外行动询问
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0].digitValue()==1)
@@ -97,7 +97,7 @@ void YongZhe::onOkClicked()
             attackAction();
         }
         break;
-    //����
+    //挑衅
     case 2101:
         command="2101;";
         sourceID=QString::number(myID);
@@ -106,7 +106,7 @@ void YongZhe::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-    //����֮��
+    //禁断之力
     case 2102:
         jinDuanZhiLi++;
         command="2102;1;";
@@ -127,7 +127,7 @@ void YongZhe::onCancelClicked()
     case 2101:
         normal();
         break;
-    //����֮��
+    //禁断之力
     case 2102:
         if(jinDuanZhiLi>0)
             jinDuanZhiLi=0;
@@ -146,13 +146,13 @@ void YongZhe::turnBegin()
 void YongZhe::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ŭ��"))
+    if(skill==tr("怒吼"))
         NuHou();
-    else if(skill==tr("����ֹˮ"))
+    else if(skill==tr("明镜止水"))
         MingJingZhiShui();
-    else if(skill==tr("����֮��"))
+    else if(skill==tr("禁断之力"))
         JinDuanZhiLi();
-    else if(skill==tr("����"))
+    else if(skill==tr("死斗"))
         SiDou();
 }
 
@@ -160,6 +160,6 @@ void YongZhe::additionalAction()
 {
     Role::additionalAction();
     if(jinDuanZhiLi>0)
-        tipArea->addBoxItem(tr("1.�����ж�����ƣ���ߣ�"));
+        tipArea->addBoxItem(tr("1.攻击行动（精疲力竭）"));
 }
 

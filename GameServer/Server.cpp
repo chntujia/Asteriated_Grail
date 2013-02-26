@@ -105,7 +105,7 @@ void ClientSocket::readMessage()
     quint16 nextBlockSize;
     QString message;
 
-        in.setVersion(QDataStream::Qt_4_7);
+        in.setVersion(QDataStream::Qt_5_0);
         while(1)
         {
         if(bytesAvailable() < (int)sizeof(quint16)) return;
@@ -113,13 +113,13 @@ void ClientSocket::readMessage()
 
         if(bytesAvailable() < nextBlockSize) return;
 
-        //Èç¹ûÃ»ÓĞµÃµ½È«²¿µÄÊı¾İ£¬Ôò·µ»Ø£¬¼ÌĞø½ÓÊÕÊı¾İ
+        //å¦‚æœæ²¡æœ‰å¾—åˆ°å…¨éƒ¨çš„æ•°æ®ï¼Œåˆ™è¿”å›ï¼Œç»§ç»­æ¥æ”¶æ•°æ®
 
         in >> message;
 
         emit getMessage(id,message);
         }
-        //½«½ÓÊÕµ½µÄÊı¾İ´æ·Åµ½±äÁ¿ÖĞ
+        //å°†æ¥æ”¶åˆ°çš„æ•°æ®å­˜æ”¾åˆ°å˜é‡ä¸­
  }
 
 Server::Server(QObject *parent,bool isIPv6,int port, int roleStrategy) :
@@ -135,7 +135,7 @@ Server::Server(QObject *parent,bool isIPv6,int port, int roleStrategy) :
 
 }
 
-void Server::incomingConnection ( int socketDescriptor )
+void Server::incomingConnection ( qintptr socketDescriptor )
 {
     if(this->clientSocketList.size() >= playerSum)
         return;
@@ -161,21 +161,21 @@ void Server::incomingConnection ( int socketDescriptor )
     if(howMany == playerSum)
         emit this->seatArrangeSIG();
     else
-        sendMessage(-1,tr("ÏÖÓĞ")+QString::number(howMany)+tr("ÃûÍæ¼Ò½øÈë·¿¼ä£¬ÇëÄÍĞÄµÈºò"));
+        sendMessage(-1,tr("ç°æœ‰")+QString::number(howMany)+tr("åç©å®¶è¿›å…¥æˆ¿é—´ï¼Œè¯·è€å¿ƒç­‰å€™"));
 }
 
-//num=-1±íÊ¾¹ã²¥
+//num=-1è¡¨ç¤ºå¹¿æ’­
 void Server::sendMessage(int num, QString message)
 {
-    QByteArray block; //ÓÃÓÚÔİ´æÎÒÃÇÒª·¢ËÍµÄÊı¾İ
+    QByteArray block; //ç”¨äºæš‚å­˜æˆ‘ä»¬è¦å‘é€çš„æ•°æ®
 
     QDataStream out(&block,QIODevice::WriteOnly);
 
-    //Ê¹ÓÃÊı¾İÁ÷Ğ´ÈëÊı¾İ
+    //ä½¿ç”¨æ•°æ®æµå†™å…¥æ•°æ®
 
-    out.setVersion(QDataStream::Qt_4_7);
+    out.setVersion(QDataStream::Qt_5_0);
 
-    //ÉèÖÃÊı¾İÁ÷µÄ°æ±¾£¬¿Í»§¶ËºÍ·şÎñÆ÷¶ËÊ¹ÓÃµÄ°æ±¾ÒªÏàÍ¬
+    //è®¾ç½®æ•°æ®æµçš„ç‰ˆæœ¬ï¼Œå®¢æˆ·ç«¯å’ŒæœåŠ¡å™¨ç«¯ä½¿ç”¨çš„ç‰ˆæœ¬è¦ç›¸åŒ
 
     out<<(quint16) 0;
 
@@ -210,7 +210,7 @@ void Server::sendMessage(int num, QString message)
 void Server::onDisconnectedSIG(ClientSocket* brokenSocket)
 {
     clientSocketList.removeOne(brokenSocket);
-    coder.notice("<font color=\'red\'>Íæ¼Ò"+QString::number(brokenSocket->getID())+"¶ÏÏß</font>");
+    coder.notice("<font color=\'red\'>ç©å®¶"+QString::number(brokenSocket->getID())+"æ–­çº¿</font>");
 }
 
 void Server::decoder(int id, QString message)
@@ -315,7 +315,7 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeCardInfor(cards);
 
     break;
-//¸ÇÅÆ³¬³öÉÏÏŞÆúÅÆÍ¨¸æ
+//ç›–ç‰Œè¶…å‡ºä¸Šé™å¼ƒç‰Œé€šå‘Š
     case 50:
         chosenCards = infor.at(1).split(",");
         for(int i = 0;i < chosenCards.size();i++)
@@ -368,21 +368,21 @@ void Server::decoder(int id, QString message)
     case ANSFORSKILL:
     messageBuffer::writeInfor(infor[1].toInt());
     break;
-//Á¬Ğø¼¼
+//è¿ç»­æŠ€
     case 101:
         ans.reply = ATTACK;
         ans.infor1=101;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//½£Ó°
+//å‰‘å½±
     case 102:
         ans.reply = ATTACK;
         ans.infor1=102;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//¼²·ç¼¼¶îÍâĞĞ¶¯
+//ç–¾é£æŠ€é¢å¤–è¡ŒåŠ¨
     case 103:
         ans.reply = ATTACK;
         ans.infor1=103;
@@ -422,7 +422,7 @@ void Server::decoder(int id, QString message)
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//·âÓ¡·¨Êõ
+//å°å°æ³•æœ¯
     case 401:
         ans.reply = MAGIC;
         ans.infor1 = 401;
@@ -431,7 +431,7 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[3].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ÎåÏµÊø¸¿
+//äº”ç³»æŸç¼š
     case 402:
         ans.reply = MAGIC;
         ans.infor1 = 402;
@@ -440,7 +440,7 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[3].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//·âÓ¡ÆÆËé
+//å°å°ç ´ç¢
     case 403:
         ans.reply = MAGIC;
         ans.infor1 = 403;
@@ -450,27 +450,27 @@ void Server::decoder(int id, QString message)
         ans.CardID = infor[4].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//·¨Êõ¼¤µ´
+//æ³•æœ¯æ¿€è¡
     case 404:
         ans.reply = MAGIC;
         ans.srcID = infor.at(1).toInt();
         ans.infor1=404;
         messageBuffer::writeBatInfor(ans);
         break;
-//Ë®Ó°
+//æ°´å½±
     case 502:
         messageBuffer::writeMsg(message.remove(0,4));
         break;
-//Ç±ĞĞ
+//æ½œè¡Œ
     case 503:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
-//±ùËªµ»ÑÔ
+//å†°éœœç¥·è¨€
     case 601:
         ans.dstID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ÖÎÁÆÊõ
+//æ²»ç–—æœ¯
     case 602:
         ans.reply=MAGIC;
         ans.CardID=infor[1].toInt();
@@ -479,7 +479,7 @@ void Server::decoder(int id, QString message)
         ans.infor1=602;
         messageBuffer::writeBatInfor(ans);
         break;
-//ÖÎÓúÖ®¹â
+//æ²»æ„ˆä¹‹å…‰
     case 603:
         ans.reply=MAGIC;
         ans.CardID=infor[1].toInt();
@@ -495,11 +495,11 @@ void Server::decoder(int id, QString message)
             ans.infor4=infor[6].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//Á¯Ãõ
+//æ€œæ‚¯
     case 604:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
-//Ê¥ÁÆ
+//åœ£ç–—
     case 605:
         ans.reply=MAGIC;
         ans.infor4=infor[1].toInt();
@@ -510,14 +510,14 @@ void Server::decoder(int id, QString message)
         ans.srcID=infor[5].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//Ê¥ÁÆ¶îÍâĞĞ¶¯
+//åœ£ç–—é¢å¤–è¡ŒåŠ¨
     case 606:
         ans.reply = ATTACKORMAGIC;
         ans.srcID = infor.at(1).toInt();
         ans.infor1=606;
         messageBuffer::writeBatInfor(ans);
         break;
-//·çÖ®½à¾»
+//é£ä¹‹æ´å‡€
     case 701:
         ans.reply=MAGIC;
         ans.infor1=701;
@@ -527,7 +527,7 @@ void Server::decoder(int id, QString message)
         ans.infor2=infor[4].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ÌìÊ¹×£¸£
+//å¤©ä½¿ç¥ç¦
     case 702:
         ans.reply = MAGIC;
         ans.infor1 = 702;
@@ -539,7 +539,7 @@ void Server::decoder(int id, QString message)
             ans.infor3=infor[5].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ÌìÊ¹Ö®Ç½
+//å¤©ä½¿ä¹‹å¢™
     case 703:
         ans.reply = MAGIC;
         ans.infor1 = 703;
@@ -548,7 +548,7 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[3].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ÌìÊ¹Ö®¸è
+//å¤©ä½¿ä¹‹æ­Œ
     case 704:
         ans.reply=infor[1].toInt();
         if(ans.reply==1)
@@ -559,7 +559,7 @@ void Server::decoder(int id, QString message)
         }
         messageBuffer::writeBatInfor(ans);
         break;
-//ÉñÖ®±Ó»¤
+//ç¥ä¹‹åº‡æŠ¤
     case 705:
         ans.reply=infor[1].toInt();
         if(ans.reply==1)
@@ -569,12 +569,12 @@ void Server::decoder(int id, QString message)
         }
         messageBuffer::writeBatInfor(ans);
         break;
-//ÌìÊ¹î¿°í
+//å¤©ä½¿ç¾ç»Š
     case 707:
         ans.dstID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ÌìÊ¹×£¸££¨¸øÅÆ£©
+//å¤©ä½¿ç¥ç¦ï¼ˆç»™ç‰Œï¼‰
     case 751:
         howMany=infor[1].toInt();
         for(i=0;i<howMany;i++)
@@ -582,7 +582,7 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeCardInfor(cards);
         break;
 
-//Ä§µ¯ÈÚºÏ(»ØºÏÄÚ£©
+//é­”å¼¹èåˆ(å›åˆå†…ï¼‰
     case 801:
         ans.reply = MAGIC;
         ans.CardID = infor[1].toInt();
@@ -591,14 +591,14 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[3].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//Ä§µ¯ÈÚºÏ£¨»ØºÏÍâ£©
+//é­”å¼¹èåˆï¼ˆå›åˆå¤–ï¼‰
     case 802:
         missileInfor.reply = 802;
         missileInfor.CardID = infor.at(1).toInt();
         missileInfor.dstID = infor.at(2).toInt();
         messageBuffer::writeBatInfor(missileInfor);
         break;
-//Ä§±¬³å»÷
+//é­”çˆ†å†²å‡»
     case 803:
         ans.reply = MAGIC;
         ans.infor1 = 803;
@@ -608,7 +608,7 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[4].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//»ÙÃğ·ç±©
+//æ¯ç­é£æš´
     case 804:
         ans.reply = MAGIC;
         ans.infor1 = 804;
@@ -617,21 +617,21 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[3].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//Ä§±¬³å»÷£¨ÆúÅÆ£©
+//é­”çˆ†å†²å‡»ï¼ˆå¼ƒç‰Œï¼‰
     case 851:
         ans.reply=infor[1].toInt();
         if(ans.reply)
         ans.CardID=infor[2].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ĞŞÂŞÁ¬Õ¶
+//ä¿®ç½—è¿æ–©
     case 901:
         ans.reply = ATTACK;
         ans.srcID = infor.at(1).toInt();
         ans.infor1=901;
         messageBuffer::writeBatInfor(ans);
         break;
-//°µÓ°Á÷ĞÇ
+//æš—å½±æµæ˜Ÿ
     case 902:
         ans.reply = MAGIC;
         ans.infor1 = 902;
@@ -641,11 +641,11 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[4].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//°µÓ°Äı¾Û
+//æš—å½±å‡èš
     case 903:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
-//»ÔÒ«
+//è¾‰è€€
     case 1001:
         ans.reply = MAGIC;
         ans.infor1 = 1001;
@@ -653,7 +653,7 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[2].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//³Í½ä
+//æƒ©æˆ’
     case 1002:
         ans.reply = MAGIC;
         ans.infor1 = 1002;
@@ -674,11 +674,11 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//µØÇ¹
+//åœ°æª
     case 1005:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
-//Ê¥¹âÆíÓú
+//åœ£å…‰ç¥ˆæ„ˆ
     case 1006:
         ans.reply = MAGIC;
         ans.infor1 = 1006;
@@ -692,7 +692,7 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeBatInfor(ans);
         break;
 
-//ÔªËØ·¨Êõ
+//å…ƒç´ æ³•æœ¯
     case 1101:
         action.reply=MAGIC;
         action.infor1=1101;
@@ -707,7 +707,7 @@ void Server::decoder(int id, QString message)
             action.infor5=infor.at(5+action.infor3).toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ÔªËØµãÈ¼
+//å…ƒç´ ç‚¹ç‡ƒ
     case 1102:
         action.reply=MAGIC;
         action.infor1=1102;
@@ -715,7 +715,7 @@ void Server::decoder(int id, QString message)
         action.srcID = infor.at(2).toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ÔÂ¹â
+//æœˆå…‰
     case 1103:
         action.reply=MAGIC;
         action.infor1=1103;
@@ -741,7 +741,7 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ÆÛÕ©
+//æ¬ºè¯ˆ
     case 1201:
         action.reply=ATTACKSKILL;
         action.CardID = infor.at(1).toInt();
@@ -755,7 +755,7 @@ void Server::decoder(int id, QString message)
             action.infor5=infor.at(7).toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ÍµÌì»»ÈÕ
+//å·å¤©æ¢æ—¥
     case 1202:
         action.reply = MAGIC;
         action.infor1 = 1202;
@@ -763,7 +763,7 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[2].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ÌØÊâ¼Ó¹¤
+//ç‰¹æ®ŠåŠ å·¥
     case 1203:
         action.reply = MAGIC;
         action.infor1 = 1203;
@@ -771,10 +771,10 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[2].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//Ã°ÏÕÕßÌìÌÃ
+//å†’é™©è€…å¤©å ‚
     case 1204:
         action.reply = SPECIAL;
-        action.CardID = 4;//±íÊ¾Îª·ÇÕı³£µÄÌØÊâĞĞ¶¯
+        action.CardID = 4;//è¡¨ç¤ºä¸ºéæ­£å¸¸çš„ç‰¹æ®Šè¡ŒåŠ¨
         action.infor1 = 1204;
         action.dstID = infor[1].toInt();
         action.srcID = infor[2].toInt();
@@ -794,8 +794,8 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ËÀÁé·¨Ê¦
-//ÎÁÒß
+//æ­»çµæ³•å¸ˆ
+//ç˜Ÿç–«
     case 1302:
         action.reply = MAGIC;
         action.infor1 = 1302;
@@ -803,7 +803,7 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[2].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ËÀÍöÖ®´¥
+//æ­»äº¡ä¹‹è§¦
     case 1303:
         action.reply = MAGIC;
         action.infor1 = 1303;
@@ -814,22 +814,22 @@ void Server::decoder(int id, QString message)
         action.inforstr = infor[5];
         messageBuffer::writeBatInfor(action);
         break;
-//Ä¹±®ÔÉÂä
+//å¢“ç¢‘é™¨è½
     case 1304:
         action.reply = MAGIC;
         action.infor1 = 1304;
         action.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ÒÇÊ½ÖĞ¶Ï
+//ä»ªå¼ä¸­æ–­
     case 1401:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
-//ÖÙ²ÃÒÇÊ½
+//ä»²è£ä»ªå¼
     case 1402:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
-//Ä©ÈÕÉóÅĞ
+//æœ«æ—¥å®¡åˆ¤
     case 1403:
         action.reply=MAGIC;
         action.infor1=1403;
@@ -837,7 +837,7 @@ void Server::decoder(int id, QString message)
         action.srcID = infor.at(2).toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ÅĞ¾öÌìÆ½
+//åˆ¤å†³å¤©å¹³
     case 1404:
         action.reply = MAGIC;
         action.infor1 = 1404;
@@ -845,8 +845,8 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[2].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//Éñ¹Ù
-//ÉñÊ¥Æí¸£
+//ç¥å®˜
+//ç¥åœ£ç¥ˆç¦
     case 1502:
         action.reply = MAGIC;
         action.infor1 = 1502;
@@ -855,7 +855,7 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[3].toInt();
         messageBuffer::writeBatInfor(action);
         break;
- //Ë®Ö®ÉñÁ¦
+ //æ°´ä¹‹ç¥åŠ›
     case 1531:
         action.reply = MAGIC;
         action.infor1 = 1503;
@@ -864,12 +864,12 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[3].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//Ë®Ö®ÉñÁ¦¸øÅÆ
+//æ°´ä¹‹ç¥åŠ›ç»™ç‰Œ
     case 1532:
         cards<<infor[1].toInt();
         messageBuffer::writeCardInfor(cards);
         break;
-//ÉñÊ¥ÆõÔ¼
+//ç¥åœ£å¥‘çº¦
     case 1504:
         action.infor1 = 1504;
         action.infor2 = infor[1].toInt();
@@ -878,7 +878,7 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[4].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ÉñÊ¥ÁìÓò
+//ç¥åœ£é¢†åŸŸ
     case 1505:
         action.reply = MAGIC;
         action.infor1 = 1505;
@@ -889,11 +889,11 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[5].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//Æíµ»
+//ç¥ˆç¥·
     case 1601:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
-//ÍşÁ¦´Í¸£
+//å¨åŠ›èµç¦
     case 1602:
         action.reply=MAGIC;
         action.infor1=1602;
@@ -902,7 +902,7 @@ void Server::decoder(int id, QString message)
         action.srcID = infor.at(3).toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//Ñ¸½İ´Í¸£
+//è¿…æ·èµç¦
     case 1603:
         action.reply=MAGIC;
         action.infor1=1603;
@@ -911,7 +911,7 @@ void Server::decoder(int id, QString message)
         action.srcID = infor.at(3).toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//¹â»ÔĞÅÑö
+//å…‰è¾‰ä¿¡ä»°
     case 1604:
         ans.reply = MAGIC;
         ans.infor1 = 1604;
@@ -922,7 +922,7 @@ void Server::decoder(int id, QString message)
         ans.infor2 = infor[5].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ÆáºÚĞÅÑö
+//æ¼†é»‘ä¿¡ä»°
     case 1605:
         action.reply=MAGIC;
         action.infor1=1605;
@@ -930,20 +930,20 @@ void Server::decoder(int id, QString message)
         action.srcID = infor.at(2).toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//·¨Á¦³±Ï«
+//æ³•åŠ›æ½®æ±
     case 1606:
         ans.infor1=1606;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//Ñ¸½İ¶îÍâ
+//è¿…æ·é¢å¤–
     case 1607:
         ans.reply = ATTACK;
         ans.infor1=1607;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ÌôĞÆ
+//æŒ‘è¡…
     case 2101:
         ans.reply = MAGIC;
         ans.infor1 = 2101;
@@ -951,7 +951,7 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[2].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//½û¶ÏÖ®Á¦
+//ç¦æ–­ä¹‹åŠ›
     case 2102:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
@@ -961,11 +961,11 @@ void Server::decoder(int id, QString message)
         ans.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-        //·¨Êõ·´µ¯
+        //æ³•æœ¯åå¼¹
             case 1701:
                 messageBuffer::writeMsg(message);
                 break;
-        //Ä§µÀ·¨µä
+        //é­”é“æ³•å…¸
             case 1702:
                 action.reply = MAGIC;
                 action.infor1 = 1702;
@@ -975,7 +975,7 @@ void Server::decoder(int id, QString message)
                 action.inforstr = infor[4];
                 messageBuffer::writeBatInfor(action);
                 break;
-        //Ê¥½à·¨µä
+        //åœ£æ´æ³•å…¸
             case 1703:
                 action.reply = MAGIC;
                 action.infor1 = 1703;
@@ -986,24 +986,24 @@ void Server::decoder(int id, QString message)
                 action.inforstrp = infor[5];
                 messageBuffer::writeBatInfor(action);
                 break;
-//²ÔÑ×ĞîÁ¦
+//è‹ç‚è“„åŠ›
     case 2001:
         messageBuffer::writeMsg(message);
         break;
-//Äîµ¯
+//å¿µå¼¹
     case 2002:
         messageBuffer::writeMsg(message);
         break;
-//°ÙÊ½»ÃÁúÈ­
+//ç™¾å¼å¹»é¾™æ‹³
     case 2003:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
-//¶·ÉñÌìÇı
+//æ–—ç¥å¤©é©±
     case 2004:
         messageBuffer::writeMsg(message);
         break;
-//Î×Å® 23
-//Í¬Éú¹²ËÀ
+//å·«å¥³ 23
+//åŒç”Ÿå…±æ­»
     case 2301:
         action.reply = MAGIC;
         action.infor1 = 2301;
@@ -1011,14 +1011,14 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[2].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ÑªÖ®°§ÉË
+//è¡€ä¹‹å“€ä¼¤
     case 2302:
         action.infor1 = 2302;
         action.infor2 = infor[1].toInt();
         action.dstID = infor[2].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ÄæÁ÷
+//é€†æµ
     case 2303:
         action.reply = MAGIC;
         action.infor1 = 2303;
@@ -1027,7 +1027,7 @@ void Server::decoder(int id, QString message)
         action.infor2 = infor[3].toInt();
         messageBuffer::writeBatInfor(action);
         break;
- //ÑªÖ®±¯Ãù
+ //è¡€ä¹‹æ‚²é¸£
     case 2304:
         action.reply = MAGIC;
         action.infor1 = 2304;
@@ -1037,7 +1037,7 @@ void Server::decoder(int id, QString message)
         action.srcID = infor[4].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//ÑªÖ®×çÖä
+//è¡€ä¹‹è¯…å’’
     case 2305:
         action.reply = MAGIC;
         action.infor1 = 2305;
@@ -1047,7 +1047,7 @@ void Server::decoder(int id, QString message)
         action.inforstr = infor[4];
         messageBuffer::writeBatInfor(action);
         break;
-//Áé»êÕÙ»¹
+//çµé­‚å¬è¿˜
    case 2201:
         action.reply = MAGIC;
         action.infor1 = 2201;
@@ -1056,7 +1056,7 @@ void Server::decoder(int id, QString message)
         action.inforstr=infor[3];
         messageBuffer::writeBatInfor(action);
         break;
-//Áé»ê¾µÏñ
+//çµé­‚é•œåƒ
    case 2202:
         action.reply = MAGIC;
         action.infor1 = 2202;
@@ -1067,7 +1067,7 @@ void Server::decoder(int id, QString message)
             action.inforstr = infor[4];
         messageBuffer::writeBatInfor(action);
         break;
-//Áé»êÕğ±¬
+//çµé­‚éœ‡çˆ†
    case 2203:
         action.reply = MAGIC;
         action.infor1 = 2203;
@@ -1076,7 +1076,7 @@ void Server::decoder(int id, QString message)
         action.CardID = infor[3].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//Áé»ê´ÍÓè
+//çµé­‚èµäºˆ
     case 2204:
         action.reply = MAGIC;
         action.infor1 = 2204;
@@ -1085,20 +1085,20 @@ void Server::decoder(int id, QString message)
         action.CardID = infor[3].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//Áé»ê×ª»»
+//çµé­‚è½¬æ¢
     case 2205:
         messageBuffer::writeMsg(message);
         break;
-//Áé»êÁ´½Ó
+//çµé­‚é“¾æ¥
     case 2206:
         messageBuffer::writeMsg(message);
         break;
-//Áé»êÔö·ù
+//çµé­‚å¢å¹…
     case 2207:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
-//ºìÁ«ÆïÊ¿ 28
-//ÑªĞÈµ»ÑÔ
+//çº¢è²éª‘å£« 28
+//è¡€è…¥ç¥·è¨€
     case 2801:
         action.infor1 = 2801;
         action.infor2 = infor[1].toInt();
@@ -1108,14 +1108,14 @@ void Server::decoder(int id, QString message)
         action.infor5 = infor[5].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//½ä½¾½äÔê
+//æˆ’éª„æˆ’èº
     case 2802:
         ans.reply=ATTACKORMAGIC;
         ans.infor1=2802;
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//ĞÉºìÊ®×Ö
+//çŒ©çº¢åå­—
     case 2803:
         action.reply = MAGIC;
         action.infor1 = 2803;
@@ -1125,7 +1125,7 @@ void Server::decoder(int id, QString message)
         action.infor2 = infor[4].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-        //³äÓ¯£¨ÆúÅÆ£©
+        //å……ç›ˆï¼ˆå¼ƒç‰Œï¼‰
             case 2951:
                 ans.reply = infor[1].toInt();
                 if(ans.reply==1){
@@ -1134,11 +1134,11 @@ void Server::decoder(int id, QString message)
                 }
                 messageBuffer::writeBatInfor(ans);
                 break;
-        //°µÖ®½â·Å
+        //æš—ä¹‹è§£æ”¾
             case 2901:
                 messageBuffer::writeInfor(infor[1].toInt());
                 break;
-        //»ÃÓ°ĞÇ³½
+        //å¹»å½±æ˜Ÿè¾°
             case 2902:
                 ans.reply = infor[1].toInt();
                 if(ans.reply==1)
@@ -1152,18 +1152,18 @@ void Server::decoder(int id, QString message)
                 }
                 messageBuffer::writeBatInfor(ans);
                 break;
-        //°µÖ®±ÚÕÏ
+        //æš—ä¹‹å£éšœ
             case 2903:
                 messageBuffer::writeMsg(message);
                 break;
-        //ÆáºÚÖ®Ç¹
+        //æ¼†é»‘ä¹‹æª
             case 2904:
                 ans.reply = infor[1].toInt();
                 if(ans.reply!=0)
                     ans.infor1 = infor[2].toInt();
                 messageBuffer::writeBatInfor(ans);
                 break;
-        //³äÓ¯
+        //å……ç›ˆ
             case 2905:
                 action.reply = MAGIC;
                 action.infor1 = 2905;
@@ -1171,7 +1171,7 @@ void Server::decoder(int id, QString message)
                 action.CardID = infor[2].toInt();
                 messageBuffer::writeBatInfor(action);
                 break;
-        //³äÓ¯×·¼Ó
+        //å……ç›ˆè¿½åŠ 
             case 2906:
                 ans.reply = ATTACK;
                 ans.srcID = infor.at(1).toInt();
@@ -1179,14 +1179,14 @@ void Server::decoder(int id, QString message)
                 messageBuffer::writeBatInfor(ans);
                 break;
 
-        //ÄîÖä
+        //å¿µå’’
         case 1801:
             ans.reply = infor[1].toInt();
             if(ans.reply != 0)
                 ans.CardID = infor[2].toInt();
             messageBuffer::writeBatInfor(ans);
             break;
-        //·çÀ×Ë«·û
+        //é£é›·åŒç¬¦
         case 1802:
                 action.reply = MAGIC;
                 action.infor1 = 1802;
@@ -1205,14 +1205,14 @@ void Server::decoder(int id, QString message)
             action.srcID = infor[4].toInt();
             messageBuffer::writeBatInfor(action);
             break;
-        //ÁéÁ¦±À½â
+        //çµåŠ›å´©è§£
         case 1804:
             ans.reply = infor[1].toInt();
             if(ans.reply != 0)
                 ans.infor1 = infor[2].toInt();
             messageBuffer::writeBatInfor(ans);
             break;
-        //°Ù¹íÒ¹ĞĞ
+        //ç™¾é¬¼å¤œè¡Œ
         case 1805:
             ans.reply = infor[1].toInt();
             if(ans.reply != 0)
@@ -1221,7 +1221,7 @@ void Server::decoder(int id, QString message)
             }
             messageBuffer::writeBatInfor(ans);
             break;
-        //°Ù¹íÒ¹ĞĞ£¨»ğ£©
+        //ç™¾é¬¼å¤œè¡Œï¼ˆç«ï¼‰
         case 180502:
             ans.reply = infor[1].toInt();
             ans.infor1 = infor[2].toInt();
@@ -1231,16 +1231,16 @@ void Server::decoder(int id, QString message)
             }
             messageBuffer::writeBatInfor(ans);
             break;
-        //°Ù¹íÒ¹ĞĞ£¨ÆÕ£©
+        //ç™¾é¬¼å¤œè¡Œï¼ˆæ™®ï¼‰
         case 180504:
             messageBuffer::writeInfor(infor[1].toInt());
             break;
 
-//½£»êÊØ»¤
+//å‰‘é­‚å®ˆæŠ¤
     case 1901:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
-//½£ÆøÕ¶
+//å‰‘æ°”æ–©
     case 1902:
         ans.reply = infor[1].toInt();
         if(ans.reply!=0)
@@ -1250,21 +1250,21 @@ void Server::decoder(int id, QString message)
         }
         messageBuffer::writeBatInfor(ans);
         break;
-//ÌìÊ¹Ö®»ê
+//å¤©ä½¿ä¹‹é­‚
     case 1903:
         ans.reply = infor[1].toInt();
         if(ans.reply!=0)
             ans.CardID = infor[2].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//¶ñÄ§Ö®»ê
+//æ¶é­”ä¹‹é­‚
     case 1904:
         ans.reply = infor[1].toInt();
         if(ans.reply!=0)
             ans.CardID = infor[2].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//²»ÇüÒâÖ¾
+//ä¸å±ˆæ„å¿—
     case 1905:
         messageBuffer::writeInfor(infor[1].toInt());
         break;
@@ -1277,8 +1277,8 @@ void Server::decoder(int id, QString message)
 
 
 
-//µûÎè 24
-//Îè¶¯
+//è¶èˆ 24
+//èˆåŠ¨
     case 2401:
         action.reply = MAGIC;
         action.infor1 = 2401;
@@ -1287,7 +1287,7 @@ void Server::decoder(int id, QString message)
         action.CardID = infor[3].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//¶¾·Û
+//æ¯’ç²‰
     case 2402:
         ans.reply = infor[1].toInt();
         ans.infor1 = 2402;
@@ -1295,7 +1295,7 @@ void Server::decoder(int id, QString message)
         ans.CardID = infor[3].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//³¯Ê¥
+//æœåœ£
     case 2403:
         ans.reply = infor[1].toInt();
         ans.infor1 = 2403;
@@ -1303,7 +1303,7 @@ void Server::decoder(int id, QString message)
         ans.CardID = infor[3].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//¾µ»¨Ë®ÔÂ
+//é•œèŠ±æ°´æœˆ
     case 2404:
         ans.reply = infor[1].toInt();
         ans.infor1 = 2404;
@@ -1312,7 +1312,7 @@ void Server::decoder(int id, QString message)
         ans.infor2 = infor[4].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//µòÁã
+//å‡‹é›¶
     case 2405:
         ans.reply = infor[1].toInt();
         ans.infor1 = 2405;
@@ -1320,14 +1320,14 @@ void Server::decoder(int id, QString message)
         ans.dstID = infor[3].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//Ó¼»¯
+//è›¹åŒ–
     case 2406:
         action.reply = MAGIC;
         action.infor1 = 2406;
         action.srcID = infor[1].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//µ¹ÄæÖ®µû
+//å€’é€†ä¹‹è¶
     case 2407:
         action.reply =MAGIC;
         action.infor1 = 2407;
@@ -1340,8 +1340,8 @@ void Server::decoder(int id, QString message)
         action.infor5 = infor[7].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//Ä§¹­
-//Ä§¹á³å»÷
+//é­”å¼“
+//é­”è´¯å†²å‡»
     case 2601:
         action.reply=ATTACKSKILL;
         action.CardID = infor[1].toInt();
@@ -1351,14 +1351,14 @@ void Server::decoder(int id, QString message)
         action.infor2=infor[4].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//Ä§¹á³å»÷ÃüÖĞÑ¯ÎÊ
+//é­”è´¯å†²å‡»å‘½ä¸­è¯¢é—®
     case 2602:
         ans.reply = infor[1].toInt();
         ans.infor1 = 2602;
         ans.CardID = infor[2].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//À×¹âÉ¢Éä
+//é›·å…‰æ•£å°„
     case 2603:
         action.reply = MAGIC;
         action.infor1 = 2603;
@@ -1374,7 +1374,7 @@ void Server::decoder(int id, QString message)
         ans.srcID=infor[1].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
-//¶àÖØÉä»÷
+//å¤šé‡å°„å‡»
     case 2605:
         action.reply=ATTACKSKILL;
         action.infor1 = 2605;
@@ -1384,7 +1384,7 @@ void Server::decoder(int id, QString message)
         action.infor2 = infor[4].toInt();
         messageBuffer::writeBatInfor(action);
         break;
-//³äÄÜÄ§ÑÛÑ¯ÎÊ
+//å……èƒ½é­”çœ¼è¯¢é—®
     case 2606:
         ans.reply = infor[1].toInt();
         ans.infor1 = 2606;
@@ -1402,11 +1402,11 @@ void Server::decoder(int id, QString message)
         }
         messageBuffer::writeBatInfor(ans);
         break;
-//³äÄÜÆúÅÆ
+//å……èƒ½å¼ƒç‰Œ
     case 2607:
         messageBuffer::writeMsg(message);
         break;
-//Ä§ÑÛÆúÅÆ
+//é­”çœ¼å¼ƒç‰Œ
     case 2608:
         cards<<infor[1].toInt();
         messageBuffer::writeCardInfor(cards);

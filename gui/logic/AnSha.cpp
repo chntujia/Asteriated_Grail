@@ -9,7 +9,7 @@ setMyRole(this);
 void AnSha::ShuiYing()
 {
     state=502;
-    tipArea->setMsg(tr("�Ƿ񷢶�ˮӰ��"));
+    tipArea->setMsg(tr("是否发动水影？"));
     handArea->setQuota(1,7);
 
     decisionArea->enable(1);
@@ -22,7 +22,7 @@ void AnSha::QianXing()
 {
     state=503;
     gui->reset();
-    tipArea->setMsg(tr("�Ƿ񷢶�Ǳ�У�"));
+    tipArea->setMsg(tr("是否发动潜行？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
     int i;
@@ -45,9 +45,9 @@ void AnSha::QianXing()
 void AnSha::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ˮӰ"))
+    if(skill==tr("水影"))
         ShuiYing();
-    else if(skill==tr("Ǳ��"))
+    else if(skill==tr("潜行"))
         QianXing();
 }
 
@@ -57,7 +57,7 @@ void AnSha::cardAnalyse()
 
     switch (state)
     {
-    //ˮӰѯ��
+    //水影询问
     case 502:
         decisionArea->enable(0);
         break;
@@ -74,7 +74,7 @@ void AnSha::onOkClicked()
     selectedCards=handArea->getSelectedCards();
     switch(state)
     {
-    //ˮӰѯ��
+    //水影询问
     case 502:
         command="502;";
         howMany=selectedCards.size();
@@ -89,7 +89,7 @@ void AnSha::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-    //Ǳ��ѯ��
+    //潜行询问
     case 503:
         command="503;1;";
         start=true;
@@ -108,13 +108,13 @@ void AnSha::onCancelClicked()
     selectedCards=handArea->getSelectedCards();
     switch(state)
     {
-    //ˮӰѯ��
+    //水影询问
     case 502:
         command="502;0;";
         emit sendCommand(command);
         gui->reset();
         break;
-    //Ǳ��ѯ��
+    //潜行询问
     case 503:
         command="503;0;";
         emit sendCommand(command);

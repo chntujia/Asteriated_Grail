@@ -36,7 +36,7 @@ private:
 
 };
 
-//¿Í»§¶ËÌ×½Ó×Ö
+//å®¢æˆ·ç«¯å¥—æ¥å­—
 class ClientSocket : public QTcpSocket
 {
     Q_OBJECT
@@ -71,14 +71,14 @@ signals:
     void roleNoticeSIG();
     void toDisplay(QString);
 public slots:
-    //½âÂëÆ÷
+    //è§£ç å™¨
     void decoder(int id,QString message);
-    //·¢ËÍ¸÷Ä£¿éµÄÍ¨Ñ¶ĞÅÏ¢
+    //å‘é€å„æ¨¡å—çš„é€šè®¯ä¿¡æ¯
     void sendMessage(int num,QString message);
     void onDisconnectedSIG(ClientSocket*);
 protected:
-    //¶ÁÈ¡Êı¾İ
-    void incomingConnection ( int socketDescriptor );
+    //è¯»å–æ•°æ®
+    void incomingConnection ( qintptr socketDescriptor );
 private:
     QList<ClientSocket*> clientSocketList;
     QList<bool> ready;

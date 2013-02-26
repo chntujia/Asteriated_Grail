@@ -6,7 +6,7 @@ MoQiang::MoQiang()
     setMyRole(this);
 
     Button *chongying;
-    chongying=new Button(3,"³äÓ¯");
+    chongying=new Button(3,"å……ç›ˆ");
     buttonArea->addButton(chongying);
     connect(chongying,SIGNAL(buttonSelected(int)),this,SLOT(ChongYing()));
 }
@@ -26,7 +26,7 @@ void MoQiang::AnZhiJieFang()
 {
     state=2901;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯°µÖ®½â·Å£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨æš—ä¹‹è§£æ”¾ï¼Ÿ"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
     int i;
@@ -52,7 +52,7 @@ void MoQiang::HuanYingXingChen(int flag)
     gui->reset();
     huanYingFlag=flag;
     if(flag==0){
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯»ÃÓ°ĞÇ³½£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨å¹»å½±æ˜Ÿè¾°ï¼Ÿ"));
     decisionArea->enable(1);
     decisionArea->enable(0);
     }
@@ -69,7 +69,7 @@ void MoQiang::HuanYingXingChen(int flag)
 void MoQiang::AnZhiBiZhang()
 {
     state=2903;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯°µÖ®±ÚÕÏ£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨æš—ä¹‹å£éšœï¼Ÿ"));
     handArea->setQuota(1,7);
 
     decisionArea->enable(1);
@@ -83,7 +83,7 @@ void MoQiang::QiHeiZhiQiang()
 {
     state=2904;
     tipArea->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÆáºÚÖ®Ç¹£¿ÈçÊÇÇëÑ¡Ôñ·¢¶¯ÄÜÁ¿Êı£º"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨æ¼†é»‘ä¹‹æªï¼Ÿå¦‚æ˜¯è¯·é€‰æ‹©å‘åŠ¨èƒ½é‡æ•°ï¼š"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 
@@ -168,7 +168,7 @@ void MoQiang::additionalAction()
 {
     Role::additionalAction();
     if(chongYingUsed)
-        tipArea->addBoxItem("1.¶îÍâ¹¥»÷ĞĞ¶¯£¨³äÓ¯£©");
+        tipArea->addBoxItem("1.é¢å¤–æ”»å‡»è¡ŒåŠ¨ï¼ˆå……ç›ˆï¼‰");
 }
 
 void MoQiang::moDaned(int nextID, int sourceID, int howMany)
@@ -186,13 +186,13 @@ void MoQiang::attacked(QString element, int hitRate)
 void MoQiang::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("°µÖ®½â·Å"))
+    if(skill==tr("æš—ä¹‹è§£æ”¾"))
         AnZhiJieFang();
-    else if(skill==tr("»ÃÓ°ĞÇ³½"))
+    else if(skill==tr("å¹»å½±æ˜Ÿè¾°"))
         HuanYingXingChen(command.split(';').at(3).toInt());
-    else if(skill==tr("°µÖ®±ÚÕÏ"))
+    else if(skill==tr("æš—ä¹‹å£éšœ"))
         AnZhiBiZhang();
-    else if(skill==tr("ÆáºÚÖ®Ç¹"))
+    else if(skill==tr("æ¼†é»‘ä¹‹æª"))
         QiHeiZhiQiang();
 }
 

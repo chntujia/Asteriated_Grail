@@ -15,7 +15,7 @@ QList<CardEntity*> cardList;
 TeamArea teamArea;
 Coder coder;
 int playerSum = 6;
-//以下为编码器函数,具体可参见通讯协议
+//浠ヤ笅涓虹紪鐮佸櫒鍑芥暟,鍏蜂綋鍙弬瑙侀�氳鍗忚
 void Coder::askForAction(int playerID, int actionTypeAllowed,bool acted)
 {
     emit this->sendMessage(-1,combMessage(TOQSTR(ASKFORACTION),TOQSTR(playerID),TOQSTR(actionTypeAllowed),acted?"1":"0"));
@@ -146,10 +146,10 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     messageBuffer::init();
-    QTextCodec *codec = QTextCodec::codecForName("system");
+    QTextCodec *codec = QTextCodec::codecForName("utf-8");
     QTextCodec::setCodecForLocale(codec);
-    QTextCodec::setCodecForCStrings(codec);
-    QTextCodec::setCodecForTr(codec);
+//    QTextCodec::setCodecForCStrings(codec);
+//    QTextCodec::setCodecForTr(codec);
     /*
     int initialArray[28] = {0,1,2,6,7,8,23,24,29,30,3,9,25,26,34,35,4,10,31,36,37,38,5,22,27,28,32,33};
     for(int i = 0;i < 28;i++)

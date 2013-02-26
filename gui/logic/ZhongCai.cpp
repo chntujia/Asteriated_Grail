@@ -6,12 +6,12 @@ ZhongCai::ZhongCai()
 setMyRole(this);
 
     Button *moRiShenPan;
-    moRiShenPan=new Button(3,tr("Ä©ÈÕÉóÅĞ"));
+    moRiShenPan=new Button(3,tr("æœ«æ—¥å®¡åˆ¤"));
     buttonArea->addButton(moRiShenPan);
     connect(moRiShenPan,SIGNAL(buttonSelected(int)),this,SLOT(MoRiShenPan()));
 
     Button *panJueTianPing;
-    panJueTianPing=new Button(4,tr("ÅĞ¾öÌìÆ½"));
+    panJueTianPing=new Button(4,tr("åˆ¤å†³å¤©å¹³"));
     buttonArea->addButton(panJueTianPing);
     connect(panJueTianPing,SIGNAL(buttonSelected(int)),this,SLOT(PanJueTianPing()));
 }
@@ -20,13 +20,13 @@ void ZhongCai::normal()
 {
     Role::normal();
     Player *myself=dataInterface->getMyself();
-    //Ä©ÈÕÉóÅĞ
+    //æœ«æ—¥å®¡åˆ¤
     if(myself->getToken(0)>0)
         buttonArea->enable(3);
-    //ÅĞ¾öÌìÆ½
+    //åˆ¤å†³å¤©å¹³
     if(myself->getEnergy()>0)
         buttonArea->enable(4);
-    //Ç¿ÖÆÄ©ÈÕ
+    //å¼ºåˆ¶æœ«æ—¥
     if(myself->getToken(0)==4)
     {
         handArea->disableAll();
@@ -42,7 +42,7 @@ void ZhongCai::YiShiZhongDuan()
 {
     state=1401;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÒÇÊ½ÖĞ¶Ï£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨ä»ªå¼ä¸­æ–­ï¼Ÿ"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();
     bool flag=true;
@@ -69,7 +69,7 @@ void ZhongCai::ZhongCaiYiShi()
 {
     state=1402;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÖÙ²ÃÒÇÊ½£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨ä»²è£ä»ªå¼ï¼Ÿ"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();
     bool flag=true;
@@ -116,9 +116,9 @@ void ZhongCai::PanJueTianPing()
     decisionArea->enable(0);
     decisionArea->enable(1);
 
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÒ»Ïî£º"));
-    tipArea->addBoxItem(tr("1.ÆúµôÄãµÄËùÓĞÊÖÅÆ"));
-    tipArea->addBoxItem(tr("2.½«ÊÖÅÆ²¹µ½ÉÏÏŞ£¬¡¾Õ½¼¨Çø¡¿+1¡¾±¦Ê¯¡¿"));
+    tipArea->setMsg(tr("è¯·é€‰æ‹©ä¸€é¡¹ï¼š"));
+    tipArea->addBoxItem(tr("1.å¼ƒæ‰ä½ çš„æ‰€æœ‰æ‰‹ç‰Œ"));
+    tipArea->addBoxItem(tr("2.å°†æ‰‹ç‰Œè¡¥åˆ°ä¸Šé™ï¼Œã€æˆ˜ç»©åŒºã€‘+1ã€å®çŸ³ã€‘"));
     tipArea->showBox();
 }
 
@@ -179,19 +179,19 @@ void ZhongCai::onCancelClicked()
     QString command;
     switch(state)
     {
-    //Ä©ÈÕÉóÅĞ
+    //æœ«æ—¥å®¡åˆ¤
     case 1403:
-    //ÅĞ¾öÌìÆ½
+    //åˆ¤å†³å¤©å¹³
     case 1404:
         normal();
         break;
-    //ÒÇÊ½ÖĞ¶Ï
+    //ä»ªå¼ä¸­æ–­
     case 1401:
         command="1401;0;";
         emit sendCommand(command);
         gui->reset();
         break;
-    //ÖÙ²ÃÒÇÊ½
+    //ä»²è£ä»ªå¼
     case 1402:
         command="1402;0;";
         emit sendCommand(command);
@@ -202,8 +202,8 @@ void ZhongCai::onCancelClicked()
 void ZhongCai::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ÒÇÊ½ÖĞ¶Ï"))
+    if(skill==tr("ä»ªå¼ä¸­æ–­"))
         YiShiZhongDuan();
-    else if(skill==tr("ÖÙ²ÃÒÇÊ½"))
+    else if(skill==tr("ä»²è£ä»ªå¼"))
         ZhongCaiYiShi();
 }

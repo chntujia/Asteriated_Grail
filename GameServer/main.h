@@ -17,17 +17,17 @@
 #define RED  1
 #define BLUE 0
 
-//Ӧս�ж���ע��BLOCKEDָʥ���Ӧս��HITָ���л�ʥ�ܣ���server�ж���
+//应战行动，注意BLOCKED指圣光和应战，HIT指命中或圣盾（由server判定）
 #define REPLYBATTLE  0
 #define BLOCKED      1
 #define HIT          2
 
-//�˺�����
+//伤害类型
 #define NOTHARMED  0
 #define ATTACKHARM 1
 #define MAGICHARM  2
 
-//�ж����
+//行动类别
 #define ATTACK  1
 #define ATTACKSKILL 10
 #define MAGIC   2
@@ -35,17 +35,17 @@
 #define ATTACKORMAGIC 4
 #define ALLACTION 5
 #define FINISH -1
-//���������ͨ���޷�Ӧս���ض�����
+//攻击类别，普通、无法应战、必定命中
 #define NORMAL  0
 #define NOREPLY 1
 #define NOMISS  2
 
-//�����ж�
+//特殊行动
 #define BUY     0
 #define SYNTHESIZE 1
 #define EXTRACT    2
 
-//ͨѶЭ���
+//通讯协议号
 #define COMMONMAGIC 0
 #define BEGINNOTICE 2
 #define TURNBEGINNOTICE 3
@@ -85,8 +85,8 @@
 #define UNACTIONALNOTICE 31
 #define NOTICE 38
 
-//���������＼�����
-//��֮Ů��
+//以下是人物技能类宏
+//弓之女神
 #define BOWLADY_ANSFORTRANSFIXTION 301
 #define BOWLADY_TRAP 302
 #define BOWLADY_SNIPE 303
@@ -94,10 +94,10 @@
 #define TOQSTR(x)  QString::number(x)
 #define CARDSUM 150
 
-//��ͨѶЭ��ĸ�ʽ���Ӹ�QString
+//按通讯协议的格式连接各QString
 QString combMessage(QString item1,QString item2 = (QChar)0,QString item3 = (QChar)0,QString item4 = (QChar)0,QString item5 = (QChar)0,QString item6 = (QChar)0,QString item7 = (QChar)0);
 
-//������,�༭����ͨѶ��Ϣ
+//编码器,编辑各类通讯信息
 class Coder:public QObject
 {
     Q_OBJECT
@@ -153,7 +153,7 @@ signals:
     void sendMessage(int,QString);
 
 };
-//ս����
+//战绩区
 class TeamArea
 {
 public:
@@ -176,21 +176,21 @@ private:
     int cupRED,cupBLUE;
 };
 
-//ս���ṹ��
+//战斗结构体
 struct BatInfor
 {
-    //�ж����ʣ���Ӧս�У�REPLYBATTLE��ʾӦս��BLOCKED��ʾʥ���赲��HIT��ʾ�޻�Ӧ
-    //�������ж��У�ATTACK��ʾ����Ϊ�����ƣ�MAGIC��ʾΪ�������������������＼�ܣ���FINISH��ʾ�����ж�
+    //行动性质，在应战中，REPLYBATTLE表示应战，BLOCKED表示圣光阻挡，HIT表示无回应
+    //在主动行动中，ATTACK表示卡牌为攻击牌，MAGIC表示为法术（基本法术或人物技能），FINISH表示放弃行动
     int reply;
 
-    //����ʹ�õĿ��ƣ��������ƻ�ʥ��
+    //保存使用的卡牌，即攻击牌或圣光
     int CardID;
 
-    //��Դ��Ŀ�����ID��ע���������Դ��Ŀ����ָ���Ƶ���Դ��Ŀ��
+    //来源和目标玩家ID，注意这里的来源和目标是指卡牌的来源和目标
     int srcID;
     int dstID;
-    //������Ϣ
-    //��Ҫ���ڷ����ͼ��ܡ�һ��infor1��ż��ܴ��ţ���BOWLADY_TRAP�����������ڴ�ż�����Ϣ���������ġ�������ĵȣ�
+    //其他信息
+    //主要用于法术型技能。一般infor1存放技能代号（如BOWLADY_TRAP），其他用于存放技能信息（能量消耗、灵魂消耗等）
     int infor1;
     int infor2;
     int infor3;
@@ -204,7 +204,7 @@ class BackgroundEngine;
 class Server;
 class TestUIex;
 
-//������
+//房间类
 class MyRoom:public QObject
 {
     Q_OBJECT

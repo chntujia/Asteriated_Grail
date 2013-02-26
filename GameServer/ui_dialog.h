@@ -11,17 +11,17 @@
 #define UI_DIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -101,10 +101,10 @@ public:
 
     void retranslateUi(QDialog *Dialog)
     {
-        Dialog->setWindowTitle(QApplication::translate("Dialog", "Setting", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("Dialog", "\351\200\211\345\260\206\346\250\241\345\274\217", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("Dialog", "\347\233\221\345\220\254\347\232\204\345\215\217\350\256\256", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("Dialog", "\347\233\221\345\220\254\347\232\204\347\253\257\345\217\243", 0, QApplication::UnicodeUTF8));
+        Dialog->setWindowTitle(QApplication::translate("Dialog", "Setting"));
+        label_3->setText(QApplication::translate("Dialog", "\351\200\211\345\260\206\346\250\241\345\274\217"));
+        label->setText(QApplication::translate("Dialog", "\347\233\221\345\220\254\347\232\204\345\215\217\350\256\256"));
+        label_2->setText(QApplication::translate("Dialog", "\347\233\221\345\220\254\347\232\204\347\253\257\345\217\243"));
     } // retranslateUi
 
 };

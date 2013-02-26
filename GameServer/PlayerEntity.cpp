@@ -4,7 +4,7 @@
 #include "BackgroundEngine.h"
 #include "Server.h"
 
-//ÒÆ³ı»ù´¡Ğ§¹û¿¨
+//ç§»é™¤åŸºç¡€æ•ˆæœå¡
 bool PlayerEntity::removeBasicEffect(CardEntity* effect,int toWho,int toWhere)
 {
     if(!basicEffect.removeOne(effect))
@@ -55,7 +55,7 @@ PlayerEntity::PlayerEntity(BackgroundEngine *engine,int ID, int isRed)
     this->makeConnection(engine);
     this->engine = engine;
 
-    //ÒÔÏÂÊôĞÔÔÚ×ÓÀàÖĞĞŞ¸Ä
+    //ä»¥ä¸‹å±æ€§åœ¨å­ç±»ä¸­ä¿®æ”¹
     this->crossMax = 2;
     this->energyMax = 3;
     this->star = 3;
@@ -218,14 +218,14 @@ static void PlayerEntity::loseMorale(int num,int isRed)
     }
 }*/
 
-//ÒÆ³ıÊÖÅÆ
-//¶ÔÓÚÆúÅÆ,´Ëº¯Êı»áĞŞ¸Ä¿¨ÅÆµÄÎ»ÖÃµÈ²ÎÊı²¢´ÓÍæ¼ÒÊÖÖĞÒÆ³ı£¬·ñÔòÖ»Íê³É´ÓÍæ¼ÒÊÖÖĞÒÆ³ıµÄ¶¯×÷£¬²»ÉèÖÃ¿¨ÅÆÎ»ÖÃ
-//´Ëº¯ÊıÖ»»á·¢ËÍÒÆÅÆÖ¸Áî£¬²»»á·¢ËÍÆúÅÆÍ¨¸æµÈÆäËûÍ¨¸æ£¬ÇëÌØ±ğ×¢Òâ
+//ç§»é™¤æ‰‹ç‰Œ
+//å¯¹äºå¼ƒç‰Œ,æ­¤å‡½æ•°ä¼šä¿®æ”¹å¡ç‰Œçš„ä½ç½®ç­‰å‚æ•°å¹¶ä»ç©å®¶æ‰‹ä¸­ç§»é™¤ï¼Œå¦åˆ™åªå®Œæˆä»ç©å®¶æ‰‹ä¸­ç§»é™¤çš„åŠ¨ä½œï¼Œä¸è®¾ç½®å¡ç‰Œä½ç½®
+//æ­¤å‡½æ•°åªä¼šå‘é€ç§»ç‰ŒæŒ‡ä»¤ï¼Œä¸ä¼šå‘é€å¼ƒç‰Œé€šå‘Šç­‰å…¶ä»–é€šå‘Šï¼Œè¯·ç‰¹åˆ«æ³¨æ„
 void PlayerEntity::removeHandCards(QList<CardEntity*> oldCard, bool show,bool toDiscardPile)
 {
     if(toDiscardPile)
     {
-        //ÆúÅÆ
+        //å¼ƒç‰Œ
         coder.moveCardNotice(oldCard.size(),oldCard,this->getID(),HAND,-1,show?DISCARDPILE:DISCARDPILECOVERED);
         for(int i = 0;i < oldCard.size();i++)
         {
@@ -243,7 +243,7 @@ void PlayerEntity::removeHandCards(QList<CardEntity*> oldCard, bool show,bool to
     }
     else
     {
-        //·ÇÆúÅÆ(»ù´¡Ğ§¹ûÅÆ)
+        //éå¼ƒç‰Œ(åŸºç¡€æ•ˆæœç‰Œ)
         for(int i = 0;i < oldCard.size();i++)
         {
             this->handCards.removeOne(oldCard.at(i));
@@ -254,7 +254,7 @@ void PlayerEntity::removeHandCards(QList<CardEntity*> oldCard, bool show,bool to
         emit showHandCards(oldCard,this);
 }
 
-//±©ÅÆ
+//æš´ç‰Œ
 void PlayerEntity::cardsOverLoad(int harmed)
 {
     int overNum = this->handCards.size() - this->handCardsMax;
@@ -265,7 +265,7 @@ void PlayerEntity::cardsOverLoad(int harmed)
     this->removeHandCards(cardChosen,false);
     coder.discardNotice(id,overNum,"n",cardChosen);
     emit beforeLoseMoralSIG(harmed,&overNum,this);
-    emit loseMoraleSIG(harmed,&overNum,this);//Ó¦¸ÃÒª¸ù¾İharmed²ÎÊı·Ö±æÊÇ·ñÊÇÉËº¦/ÄÄÖÖÉËº¦Ôì³ÉµÄÊ¿ÆøÏÂ½µ
+    emit loseMoraleSIG(harmed,&overNum,this);//åº”è¯¥è¦æ ¹æ®harmedå‚æ•°åˆ†è¾¨æ˜¯å¦æ˜¯ä¼¤å®³/å“ªç§ä¼¤å®³é€ æˆçš„å£«æ°”ä¸‹é™
     emit fixMoraleSIG(harmed,&overNum,this);
     teamArea.setMorale(this->color,teamArea.getMorale(this->color) - overNum);
 
@@ -288,7 +288,7 @@ void PlayerEntity::coverOverLoad()
     coder.coverCardNotice(this->getID(),overNum,cardChosen,true,false);
 }
 
-//Ôö¼ÓÊÖÅÆ£¬¿ÉÄÜ·¢Éú±©ÅÆ
+//å¢åŠ æ‰‹ç‰Œï¼Œå¯èƒ½å‘ç”Ÿæš´ç‰Œ
 void PlayerEntity::addHandCards(QList<CardEntity*> newCard,int harmed, bool fromPile)
 {
     if(fromPile)

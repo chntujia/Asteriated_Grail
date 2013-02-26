@@ -20,10 +20,10 @@ ClientUI::ClientUI(QWidget *parent) :
     ui->addr->setText("127.0.0.1");
     //ui->addr->setText("2001:5C0:1000:B::7C63");
     ui->port->setText("50000");
-    ui->board->setText(tr("ÇëÁ¬½Ó·þÎñÆ÷¡£ÈôÒªÇÀ¶Ó£¬ÇëÏÈÑ¡Ôñ¶ÓÎéÔÙÁ¬½Ó"));
-    ui->comboBox->addItem(tr("Ëæ»ú"));
-    ui->comboBox->addItem(tr("ºì¶Ó"));
-    ui->comboBox->addItem(tr("À¶¶Ó"));
+    ui->board->setText(tr("è¯·è¿žæŽ¥æœåŠ¡å™¨ã€‚è‹¥è¦æŠ¢é˜Ÿï¼Œè¯·å…ˆé€‰æ‹©é˜Ÿä¼å†è¿žæŽ¥"));
+    ui->comboBox->addItem(tr("éšæœº"));
+    ui->comboBox->addItem(tr("çº¢é˜Ÿ"));
+    ui->comboBox->addItem(tr("è“é˜Ÿ"));
 }
 
 ClientUI::~ClientUI()
@@ -36,7 +36,7 @@ void ClientUI::showMessage(QString msg)
     switch (arg[0].toInt())
     {
     case 1:
-        ui->board->append(tr("ÄãµÄIDÊÇ£º")+arg[1]);
+        ui->board->append(tr("ä½ çš„IDæ˜¯ï¼š")+arg[1]);
         myID=arg[1].toInt();
         break;
     case 2:
@@ -48,7 +48,7 @@ void ClientUI::showMessage(QString msg)
 
 void ClientUI::startGame()
 {
-    ui->board->append(tr("Çë¿ªÊ¼ÓÎÏ·"));
+    ui->board->append(tr("è¯·å¼€å§‹æ¸¸æˆ"));
     ui->startButton->setEnabled(1);
     disconnect(this);
 }
@@ -65,5 +65,5 @@ void ClientUI::link()
 
 void ClientUI::displayError(QAbstractSocket::SocketError)
 {
-     showMessage(tcpSocket->errorString()); //Êä³ö´íÎóÐÅÏ¢
+     showMessage(tcpSocket->errorString()); //è¾“å‡ºé”™è¯¯ä¿¡æ¯
 }

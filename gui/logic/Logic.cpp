@@ -158,10 +158,10 @@ void Logic::getCommand(QString command)
             dataInterface->initTeam(18);
         else
             dataInterface->initTeam(15);
-//dataInterface³õÊ¼»¯Íê³É
+//dataInterfaceåˆå§‹åŒ–å®Œæˆ
         emit gameStart();
         break;
-//½ÇÉ«Ðû¸æ
+//è§’è‰²å®£å‘Š
     case 37:
         targetID=arg[1].toInt();
         roleID=arg[2].toInt();
@@ -189,7 +189,7 @@ void Logic::getCommand(QString command)
             }
         }
         break;
-//31Ñ¡Ôñ½ÇÉ«
+//31é€‰æ‹©è§’è‰²
     case 46:
         state=46;
         tipArea=gui->getTipArea();
@@ -201,7 +201,7 @@ void Logic::getCommand(QString command)
             roleID=arg[2+i].toInt();
             tipArea->addBoxItem(QString::number(roleID)+"."+dataInterface->getRoleList().at(roleID));
         }
-        tipArea->setMsg(tr("ÇëÑ¡Ôñ½ÇÉ«£º"));
+        tipArea->setMsg(tr("è¯·é€‰æ‹©è§’è‰²ï¼š"));
         tipArea->showBox();
         decisionArea->enable(0);
         break;
@@ -225,7 +225,7 @@ void Logic::getCommand(QString command)
     case 52:
         state = 52;
         bpArea = gui->getBPArea();
-        bpArea->setMsg("ÇëbanÒ»½ÇÉ«");
+        bpArea->setMsg("è¯·banä¸€è§’è‰²");
         bpArea->setQuota(1);
         bpArea->enableAll();
         playerArea = gui->getPlayerArea();
@@ -234,7 +234,7 @@ void Logic::getCommand(QString command)
     case 55:
         state = 55;
         bpArea = gui->getBPArea();
-        bpArea->setMsg("ÇëÑ¡ÔñÒ»½ÇÉ«");
+        bpArea->setMsg("è¯·é€‰æ‹©ä¸€è§’è‰²");
         bpArea->setQuota(1);
         bpArea->enableAll();
         playerArea = gui->getPlayerArea();

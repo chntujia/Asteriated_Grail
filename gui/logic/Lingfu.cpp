@@ -10,8 +10,8 @@ LingFu::LingFu()
     setMyRole(this);
 
     Button *leiMing,*fengXing,*checkCover;
-    leiMing=new Button(3,tr("Áé·û-À×Ãù"));
-    fengXing = new Button(4,tr("Áé·û-·çĞĞ"));
+    leiMing=new Button(3,tr("çµç¬¦-é›·é¸£"));
+    fengXing = new Button(4,tr("çµç¬¦-é£è¡Œ"));
 
     buttonArea->addButton(leiMing);
     buttonArea->addButton(fengXing);
@@ -19,7 +19,7 @@ LingFu::LingFu()
     connect(leiMing,SIGNAL(buttonSelected(int)),this,SLOT(leiMing()));
     connect(fengXing,SIGNAL(buttonSelected(int)),this,SLOT(fengXing()));
 
-    checkCover = new Button(10,tr("²é¿´ÑıÁ¦"));
+    checkCover = new Button(10,tr("æŸ¥çœ‹å¦–åŠ›"));
     buttonArea->addOutsideTurnButton(checkCover);
 
     checkCover->setVisible(true);
@@ -34,7 +34,7 @@ void LingFu::normal()
 {
     Role::normal();
     Player* myself=dataInterface->getMyself();
-    //Áé·û
+    //çµç¬¦
     if (handArea->checkElement("thunder"))
         buttonArea->enable(3);
     if (handArea->checkElement("wind"))
@@ -59,7 +59,7 @@ void LingFu::onOkClicked()
 
     switch(state)
     {
-    //ÄîÖä
+    //å¿µå’’
     case 1801:
         command = "1801;1;";
         command += QString::number(selectedCards[0]->getID()) + ";";
@@ -68,7 +68,7 @@ void LingFu::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-    //Áé·û
+    //çµç¬¦
     case 1802:
         command="1802;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -93,7 +93,7 @@ void LingFu::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-    //ÁéÁ¦±À½â
+    //çµåŠ›å´©è§£
     case 1804:
         command = "1804;1;";
         text=tipArea->getBoxCurrentText();
@@ -104,7 +104,7 @@ void LingFu::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-    //°Ù¹íÒ¹ĞĞ
+    //ç™¾é¬¼å¤œè¡Œ
     case 1805:
         command = "1805;1;";
         cardID = QString::number(selectedCoverCards[0]->getID());
@@ -116,11 +116,11 @@ void LingFu::onOkClicked()
         gui->showCoverArea(false);
         gui->reset();
         break;
-    //°Ù¹íÒ¹ĞĞ-Ñ¯ÎÊÊÇ·ñÕ¹Ê¾»ğÑıÁ¦
+    //ç™¾é¬¼å¤œè¡Œ-è¯¢é—®æ˜¯å¦å±•ç¤ºç«å¦–åŠ›
     case 18050201:
         baiGuiYeXing3(true);
         break;
-    //°Ù¹íÒ¹ĞĞ-(»ğ)Ñ¡ÔñÄ¿±ê
+    //ç™¾é¬¼å¤œè¡Œ-(ç«)é€‰æ‹©ç›®æ ‡
     case 180502:
         command = "180502;";
         command += QString::number(selectedPlayers.count()-1) + ";" + QString::number(selectedPlayers[0]->getID()) + ";";
@@ -132,7 +132,7 @@ void LingFu::onOkClicked()
         gui->showCoverArea(false);
         gui->reset();
         break;
-    //°Ù¹íÒ¹ĞĞ-£¨ÆÕ£©Ñ¡ÔñÄ¿±ê
+    //ç™¾é¬¼å¤œè¡Œ-ï¼ˆæ™®ï¼‰é€‰æ‹©ç›®æ ‡
     case 180504:
         command = "180504;" + QString::number(selectedPlayers[0]->getID()) + ";";
 //        coverArea->removeCardItem(selectedCoverCards[0]);
@@ -156,25 +156,25 @@ void LingFu::onCancelClicked()
 
     {    
 
-    //ÄîÖä
+    //å¿µå’’
     case 1801:
         command = "1801;0;;";
         emit sendCommand(command);
         gui->reset();
         break;
     case 1:
-    //Áé·û
+    //çµç¬¦
     case 1802:
     case 1803:
         normal();
         break;
-    //ÁéÁ¦±À½â
+    //çµåŠ›å´©è§£
     case 1804:
         command = "1804;0;;";
         emit sendCommand(command);
         gui->reset();
         break;
-    //°Ù¹íÒ¹ĞĞ
+    //ç™¾é¬¼å¤œè¡Œ
     case 1805:
         command = "1805;0;";
         emit sendCommand(command);
@@ -182,7 +182,7 @@ void LingFu::onCancelClicked()
         gui->showCoverArea(false);
         gui->reset();
         break;
-    //°Ù¹íÒ¹ĞĞ-Ñ¯ÎÊÊÇ·ñÕ¹Ê¾»ğÑıÁ¦
+    //ç™¾é¬¼å¤œè¡Œ-è¯¢é—®æ˜¯å¦å±•ç¤ºç«å¦–åŠ›
     case 18050201:
         baiGuiYeXing3(false);
         break;
@@ -225,7 +225,7 @@ void LingFu::fengXing()
 void LingFu::nianZhou()
 {
     state=1801;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÄîÖä£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨å¿µå’’ï¼Ÿ"));
     handArea->setQuota(1);
     handArea->enableAll();
     decisionArea->enable(1);
@@ -234,19 +234,19 @@ void LingFu::nianZhou()
 void LingFu::lingLiBengJie()
 {
     state=1804;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÁéÁ¦±À½â£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨çµåŠ›å´©è§£ï¼Ÿ"));
 
 
     decisionArea->enable(0);
 
     if(dataInterface->getMyself()->getCrystal()>=1)
     {
-        tipArea->addBoxItem(tr("1.Ë®¾§"));
+        tipArea->addBoxItem(tr("1.æ°´æ™¶"));
         decisionArea->enable(1);
     }
     if(dataInterface->getMyself()->getGem()>=1)
     {
-        tipArea->addBoxItem(tr("2.±¦Ê¯"));
+        tipArea->addBoxItem(tr("2.å®çŸ³"));
         decisionArea->enable(1);
     }
     tipArea->showBox();
@@ -255,7 +255,7 @@ void LingFu::lingLiBengJie()
 void LingFu::baiGuiYeXing()
 {
     state = 1805;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯°Ù¹íÒ¹ĞĞ£¿Òª·¢¶¯ÇëÑ¡ÔñÑıÁ¦"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨ç™¾é¬¼å¤œè¡Œï¼Ÿè¦å‘åŠ¨è¯·é€‰æ‹©å¦–åŠ›"));
 
     gui->showCoverArea(true);
     HandArea *coverArea = gui->getCoverArea();
@@ -268,7 +268,7 @@ void LingFu::baiGuiYeXing()
 void LingFu::baiGuiYeXing2()
 {
     state = 18050201;
-    tipArea->setMsg(tr("ÊÇ·ñÕ¹Ê¾»ğÊôĞÔÑıÁ¦£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å±•ç¤ºç«å±æ€§å¦–åŠ›ï¼Ÿ"));
 
     decisionArea->enable(0);
     decisionArea->enable(1);
@@ -279,12 +279,12 @@ void LingFu::baiGuiYeXing3(bool show)
     state = 180502;
     if(show)
     {
-        tipArea->setMsg("ÇëÑ¡ÔñÁ½Ãû½ÇÉ«²»ÊÜÉËº¦£¬ÆäËû½ÇÉ«¸÷ÊÜ1µã·¨ÊõÉËº¦");
+        tipArea->setMsg("è¯·é€‰æ‹©ä¸¤åè§’è‰²ä¸å—ä¼¤å®³ï¼Œå…¶ä»–è§’è‰²å„å—1ç‚¹æ³•æœ¯ä¼¤å®³");
         playerArea->setQuota(2);
     }
     else
     {
-        tipArea->setMsg("ÇëÑ¡Ôñ1Ãû½ÇÉ«£¬¶ÔÆäÔì³É1µã·¨ÊõÉËº¦");
+        tipArea->setMsg("è¯·é€‰æ‹©1åè§’è‰²ï¼Œå¯¹å…¶é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³");
         playerArea->setQuota(1);
     }
 
@@ -296,7 +296,7 @@ void LingFu::baiGuiYeXing3(bool show)
 void LingFu::baiGuiYeXing4()
 {
     state = 180504;
-    tipArea->setMsg("ÇëÑ¡Ôñ1Ãû½ÇÉ«£¬¶ÔÆäÔì³É1µã·¨ÊõÉËº¦");
+    tipArea->setMsg("è¯·é€‰æ‹©1åè§’è‰²ï¼Œå¯¹å…¶é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³");
     playerArea->setQuota(1);
     playerArea->enableAll();
     decisionArea->reset();
@@ -305,11 +305,11 @@ void LingFu::baiGuiYeXing4()
 void LingFu::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ÄîÖä"))
+    if(skill==tr("å¿µå’’"))
         nianZhou();
-    else if(skill==tr("ÁéÁ¦±À½â"))
+    else if(skill==tr("çµåŠ›å´©è§£"))
         lingLiBengJie();
-    else if(skill == tr("°Ù¹íÒ¹ĞĞ"))
+    else if(skill == tr("ç™¾é¬¼å¤œè¡Œ"))
         baiGuiYeXing();
 }
 
@@ -318,7 +318,7 @@ void LingFu::coverCardAnalyse()
     QList<Card*> selectedCoverCards = this->coverArea->getSelectedCards();
     switch(state)
     {
-    //°Ù¹íÒ¹ĞĞ
+    //ç™¾é¬¼å¤œè¡Œ
     case 1805:
         decisionArea->enable(0);
     }
@@ -331,11 +331,11 @@ void LingFu::cardAnalyse()
     switch (state)
     {
 
-//ÄîÖä
+//å¿µå’’
     case 1801:
         decisionArea->enable(0);
         break;
-//·çÀ×Ë«·û
+//é£é›·åŒç¬¦
     case 1802:
     case 1803:
         playerArea->enableAll();
@@ -353,11 +353,11 @@ void LingFu::decipher(QString command)
 
     switch(arg[0].toInt())
     {
-    //°Ù¹íÒ¹ĞĞ-»ğÑıÁ¦-Õ¹Ê¾¼°Ä¿±êÑ¯ÎÊ
+    //ç™¾é¬¼å¤œè¡Œ-ç«å¦–åŠ›-å±•ç¤ºåŠç›®æ ‡è¯¢é—®
     case 180501:
         this->baiGuiYeXing2();
         break;
-    //°Ù¹íÒ¹ĞĞ-ÆÕÍ¨ÑıÁ¦-Ä¿±êÑ¯ÎÊ
+    //ç™¾é¬¼å¤œè¡Œ-æ™®é€šå¦–åŠ›-ç›®æ ‡è¯¢é—®
     case 180503:
         this->baiGuiYeXing4();
         break;

@@ -8,7 +8,7 @@ static const QPointF PlayerPos[]={QPointF(10,500),QPointF(740,260),QPointF(545,6
 PlayerArea::PlayerArea():least(1),most(1)
 {
     int i;
-    //根据座次建立
+    //鏍规嵁搴ф寤虹珛
     QList<Player*> playerList=dataInterface->getPlayerList();
     for(i=0;i<playerList.count();i++)
     {
@@ -19,10 +19,10 @@ PlayerArea::PlayerArea():least(1),most(1)
         playerItems[i]->setPos(PlayerPos[i]);
         playerList[i]->setPos(i);
     }
-    //根据ID排序
+    //鏍规嵁ID鎺掑簭
     sortPlayerItems();
     dataInterface->sortPlayers();
-    //设置队友
+    //璁剧疆闃熷弸
     int myID=dataInterface->getID();
     playerList=dataInterface->getPlayerList();
     Player* player=playerList[myID];

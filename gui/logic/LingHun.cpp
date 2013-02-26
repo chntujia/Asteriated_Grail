@@ -7,22 +7,22 @@ LingHun::LingHun()
     setMyRole(this);
     lianJieUsed=false;
     Button *linghunzhaohuan;
-    linghunzhaohuan=new Button(3,"Áé»êÕÙ»¹");
+    linghunzhaohuan=new Button(3,"çµé­‚å¬è¿˜");
     buttonArea->addButton(linghunzhaohuan);
     connect(linghunzhaohuan,SIGNAL(buttonSelected(int)),this,SLOT(LingHunZhaoHuan()));
 
     Button *linghunjingxiang;
-    linghunjingxiang=new Button(4,"Áé»ê¾µÏñ");
+    linghunjingxiang=new Button(4,"çµé­‚é•œåƒ");
     buttonArea->addButton(linghunjingxiang);
     connect(linghunjingxiang,SIGNAL(buttonSelected(int)),this,SLOT(LingHunJingXiang()));
 
     Button *linghunzhenbao;
-    linghunzhenbao=new Button(5,"Áé»êÕğ±¬");
+    linghunzhenbao=new Button(5,"çµé­‚éœ‡çˆ†");
     buttonArea->addButton(linghunzhenbao);
     connect(linghunzhenbao,SIGNAL(buttonSelected(int)),this,SLOT(LingHunZhenBao()));
 
     Button *linghunciyu;
-    linghunciyu=new Button(6,"Áé»ê´ÍÓè");
+    linghunciyu=new Button(6,"çµé­‚èµäºˆ");
     buttonArea->addButton(linghunciyu);
     connect(linghunciyu,SIGNAL(buttonSelected(int)),this,SLOT(LingHunCiYu()));
 }
@@ -35,9 +35,9 @@ void LingHun::normal()
         buttonArea->enable(3);
     if(myself->getToken(0)>=2)
         buttonArea->enable(4);
-    if (handArea->checkSpecility(tr("Áé»êÕğ±¬")) && myself->getToken(0)>=3)
+    if (handArea->checkSpecility(tr("çµé­‚éœ‡çˆ†")) && myself->getToken(0)>=3)
         buttonArea->enable(5);
-    if (handArea->checkSpecility(tr("Áé»ê´ÍÓè")) && myself->getToken(1)>=3)
+    if (handArea->checkSpecility(tr("çµé­‚èµäºˆ")) && myself->getToken(1)>=3)
         buttonArea->enable(6);
     unactionalCheck();
 }
@@ -85,7 +85,7 @@ void LingHun::LingHunZhenBao()
 
     playerArea->setQuota(1);
 
-    handArea->enableSpecility(tr("Áé»êÕğ±¬"));
+    handArea->enableSpecility(tr("çµé­‚éœ‡çˆ†"));
     handArea->setQuota(1);
 
     decisionArea->enable(1);
@@ -101,7 +101,7 @@ void LingHun::LingHunCiYu()
 
     playerArea->setQuota(1);
 
-    handArea->enableSpecility(tr("Áé»ê´ÍÓè"));
+    handArea->enableSpecility(tr("çµé­‚èµäºˆ"));
     handArea->setQuota(1);
 
     decisionArea->enable(1);
@@ -112,14 +112,14 @@ void LingHun::LingHunZhuanHuan()
 {
     state=2205;
     Player *myself=dataInterface->getMyself();
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÒª×ª»»µÄÁé»ê£º"));
+    tipArea->setMsg(tr("è¯·é€‰æ‹©è¦è½¬æ¢çš„çµé­‚ï¼š"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 
     if(myself->getToken(0)>0)
-        tipArea->addBoxItem(tr("1.½«»Æ»ê×ª»¯ÎªÀ¶»ê"));
+        tipArea->addBoxItem(tr("1.å°†é»„é­‚è½¬åŒ–ä¸ºè“é­‚"));
     if(myself->getToken(1)>0)
-        tipArea->addBoxItem(tr("2.½«À¶»ê×ª»¯Îª»Æ»ê"));
+        tipArea->addBoxItem(tr("2.å°†è“é­‚è½¬åŒ–ä¸ºé»„é­‚"));
     tipArea->showBox();
 }
 
@@ -130,7 +130,7 @@ void LingHun::LingHunLianJie(int harmPoint)
     Player *myself=dataInterface->getMyself();
     decisionArea->enable(1);
     if(!lianJieUsed){
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯Áé»êÁ¬½Ó£¿ÈçÊÇÇëÑ¡ÔñÄ¿±ê"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨çµé­‚è¿æ¥ï¼Ÿå¦‚æ˜¯è¯·é€‰æ‹©ç›®æ ‡"));
     playerArea->setQuota(1);
     decisionArea->disable(0);
     QList<Card*> handcards=dataInterface->getHandCards();
@@ -157,7 +157,7 @@ void LingHun::LingHunLianJie(int harmPoint)
     else
     {
         decisionArea->enable(0);
-        tipArea->setMsg(tr("ÇëÑ¡ÔñÒª×ªÒÆµÄÉËº¦£º"));
+        tipArea->setMsg(tr("è¯·é€‰æ‹©è¦è½¬ç§»çš„ä¼¤å®³ï¼š"));
         int min=myself->getToken(1)<harmPoint?myself->getToken(1):harmPoint;
         for(;min>=0;min--)
             tipArea->addBoxItem(QString::number(min));
@@ -169,7 +169,7 @@ void LingHun::LingHunZengFu()
 {
     state=2207;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯Áé»êÔö·ù£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨çµé­‚å¢å¹…ï¼Ÿ"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();
     bool flag=true;
@@ -338,11 +338,11 @@ void LingHun::onCancelClicked()
 void LingHun::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("Áé»ê×ª»»"))
+    if(skill==tr("çµé­‚è½¬æ¢"))
         LingHunZhuanHuan();
-    else if(skill==tr("Áé»êÁ´½Ó"))
+    else if(skill==tr("çµé­‚é“¾æ¥"))
         LingHunLianJie(command.split(';').at(3).toInt());
-    else if(skill==tr("Áé»êÔö·ù"))
+    else if(skill==tr("çµé­‚å¢å¹…"))
         LingHunZengFu();
 }
 

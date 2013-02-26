@@ -31,35 +31,35 @@ void DataInterface::initCardDB()
 void DataInterface::initRoleList()
 {
     roleList<<NULL;
-    roleList<<tr("[½£Ê¥]");
-    roleList<<tr("[¿ñÕ½Ê¿]");
-    roleList<<tr("[¹­Ö®Å®Éñ]");
-    roleList<<tr("[·âÓ¡Ê¦]");
-    roleList<<tr("[°µÉ±Õß]");
-    roleList<<tr("[Ê¥Å®]");
-    roleList<<tr("[ÌìÊ¹]");
-    roleList<<tr("[Ä§µ¼Ê¦]");
-    roleList<<tr("[Ä§½£]");
-    roleList<<tr("[Ê¥Ç¹]");
-    roleList<<tr("[ÔªËØÊ¦]");
-    roleList<<tr("[Ã°ÏÕ¼Ò]");
-    roleList<<tr("[ËÀÁé·¨Ê¦]");
-    roleList<<tr("[ÖÙ²ÃÕß]");
-    roleList<<tr("[Éñ¹Ù]");
-    roleList<<tr("[Æíµ»Ê¦]");
-    roleList<<tr("[ÏÍÕß]");
-    roleList<<tr("[Áé·ûÊ¦]");
-    roleList<<tr("[½£µÛ]");
-    roleList<<tr("[¸ñ¶·¼Ò]");
-    roleList<<tr("[ÓÂÕß]");
-    roleList<<tr("[Áé»êÊõÊ¿]");
-    roleList<<tr("[Î×Å®]");
-    roleList<<tr("[µûÎèÕß]");
+    roleList<<tr("[å‰‘åœ£]");
+    roleList<<tr("[ç‹‚æˆ˜å£«]");
+    roleList<<tr("[å¼“ä¹‹å¥³ç¥ž]");
+    roleList<<tr("[å°å°å¸ˆ]");
+    roleList<<tr("[æš—æ€è€…]");
+    roleList<<tr("[åœ£å¥³]");
+    roleList<<tr("[å¤©ä½¿]");
+    roleList<<tr("[é­”å¯¼å¸ˆ]");
+    roleList<<tr("[é­”å‰‘]");
+    roleList<<tr("[åœ£æžª]");
+    roleList<<tr("[å…ƒç´ å¸ˆ]");
+    roleList<<tr("[å†’é™©å®¶]");
+    roleList<<tr("[æ­»çµæ³•å¸ˆ]");
+    roleList<<tr("[ä»²è£è€…]");
+    roleList<<tr("[ç¥žå®˜]");
+    roleList<<tr("[ç¥ˆç¥·å¸ˆ]");
+    roleList<<tr("[è´¤è€…]");
+    roleList<<tr("[çµç¬¦å¸ˆ]");
+    roleList<<tr("[å‰‘å¸]");
+    roleList<<tr("[æ ¼æ–—å®¶]");
+    roleList<<tr("[å‹‡è€…]");
+    roleList<<tr("[çµé­‚æœ¯å£«]");
+    roleList<<tr("[å·«å¥³]");
+    roleList<<tr("[è¶èˆžè€…]");
     roleList<<tr("[]");
-    roleList<<tr("[Ä§¹­]");
+    roleList<<tr("[é­”å¼“]");
     roleList<<tr("[]");
-    roleList<<tr("[ºìÁ«ÆïÊ¿]");
-    roleList<<tr("[Ä§Ç¹]");
+    roleList<<tr("[çº¢èŽ²éª‘å£«]");
+    roleList<<tr("[é­”æžª]");
 }
 
 void DataInterface::initPlayerList(QString msg)
@@ -71,7 +71,7 @@ void DataInterface::initPlayerList(QString msg)
         if(msg[i].digitValue()==id)
             break;
     myPos=i;
-    //ÉèÖÃ×ù´Î£¬·Ö¶Ó    
+    //è®¾ç½®åº§æ¬¡ï¼Œåˆ†é˜Ÿ    
     for(;i<playerMax;i++)
     {
         pID=msg[i].digitValue();

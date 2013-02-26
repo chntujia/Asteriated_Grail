@@ -14,20 +14,20 @@ void GeDouJia::CangYanXuLi()
     decisionArea->enable(1);
     if(myself->getTap()==0)
         baiShiUsed=false;
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÒª·¢¶¯µÄ¼¼ÄÜ£º"));
+    tipArea->setMsg(tr("è¯·é€‰æ‹©è¦å‘åŠ¨çš„æŠ€èƒ½ï¼š"));
     if(myself->getToken(0)<6 && !baiShiUsed)
-        tipArea->addBoxItem(tr("1.ĞîÁ¦Ò»»÷"));
+        tipArea->addBoxItem(tr("1.è“„åŠ›ä¸€å‡»"));
     if(myself->getToken(0)<6 && baiShiUsed)
-        tipArea->addBoxItem(tr("1.ĞîÁ¦Ò»»÷£¬ÇÒÍË³ö¡¾°ÙÊ½»ÃÁúÈ­¡¿"));
+        tipArea->addBoxItem(tr("1.è“„åŠ›ä¸€å‡»ï¼Œä¸”é€€å‡ºã€ç™¾å¼å¹»é¾™æ‹³ã€‘"));
     if(myself->getToken(0)>0)
-        tipArea->addBoxItem(tr("2.²ÔÑ×Ö®»ê"));
+        tipArea->addBoxItem(tr("2.è‹ç‚ä¹‹é­‚"));
     tipArea->showBox();
 }
 
 void GeDouJia::NianDan1()
 {
     state=2002;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯Äîµ¯£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨å¿µå¼¹ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -51,7 +51,7 @@ void GeDouJia::BaiShiHuanLongQuan()
 {
     state=2003;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯°ÙÊ½»ÃÁúÈ­£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨ç™¾å¼å¹»é¾™æ‹³ï¼Ÿ"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();
     bool flag=true;
@@ -76,7 +76,7 @@ void GeDouJia::DouShenTianQu()
 {
     state=2004;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯¶·ÉñÌìÇı£¿ÈçÊÇ£¬ÇëÑ¡ÔñÒªÆúµÄÅÆ"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨æ–—ç¥å¤©é©±ï¼Ÿå¦‚æ˜¯ï¼Œè¯·é€‰æ‹©è¦å¼ƒçš„ç‰Œ"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();
     cardReady=false;
@@ -142,7 +142,7 @@ void GeDouJia::playerAnalyse()
             tipArea->reset();
             if(selectedCards[0]->getType()=="magic")
             {
-                tipArea->setMsg(tr("Õâ»áÍË³ö¡¾°ÙÊ½»ÃÁúÈ­¡¿£¬ÊÇ·ñÈ·¶¨£¿"));
+                tipArea->setMsg(tr("è¿™ä¼šé€€å‡ºã€ç™¾å¼å¹»é¾™æ‹³ã€‘ï¼Œæ˜¯å¦ç¡®å®šï¼Ÿ"));
             }
             else if(baiShiFirst)
             {
@@ -150,7 +150,7 @@ void GeDouJia::playerAnalyse()
             }
             else if(selectedPlayers[0]->getID()!=baiShiTargetID)
             {
-                tipArea->setMsg(tr("Õâ»áÍË³ö¡¾°ÙÊ½»ÃÁúÈ­¡¿£¬ÊÇ·ñÈ·¶¨£¿"));
+                tipArea->setMsg(tr("è¿™ä¼šé€€å‡ºã€ç™¾å¼å¹»é¾™æ‹³ã€‘ï¼Œæ˜¯å¦ç¡®å®šï¼Ÿ"));
             }
             decisionArea->enable(0);
         }
@@ -180,17 +180,17 @@ void GeDouJia::buy()
         tipArea->reset();
 
         if(energy<4)
-            tipArea->setMsg(tr("Äã½«»áÍË³ö¡¾°ÙÊ½»ÃÁúÈ­¡¿,Ö´ĞĞ¡¾¹ºÂò¡¿"));
+            tipArea->setMsg(tr("ä½ å°†ä¼šé€€å‡ºã€ç™¾å¼å¹»é¾™æ‹³ã€‘,æ‰§è¡Œã€è´­ä¹°ã€‘"));
         if(energy==4)
         {
-            tipArea->setMsg(tr("Äã½«»áÍË³ö¡¾°ÙÊ½»ÃÁúÈ­¡¿,Ö´ĞĞ¡¾¹ºÂò¡¿"));
-            tipArea->addBoxItem(tr("1.Ò»¸ö±¦Ê¯"));
-            tipArea->addBoxItem(tr("2.Ò»¸öË®¾§"));
+            tipArea->setMsg(tr("ä½ å°†ä¼šé€€å‡ºã€ç™¾å¼å¹»é¾™æ‹³ã€‘,æ‰§è¡Œã€è´­ä¹°ã€‘"));
+            tipArea->addBoxItem(tr("1.ä¸€ä¸ªå®çŸ³"));
+            tipArea->addBoxItem(tr("2.ä¸€ä¸ªæ°´æ™¶"));
             tipArea->showBox();
         }
         if(energy==5)
         {
-            tipArea->setMsg(tr("Äã½«»áÍË³ö¡¾°ÙÊ½»ÃÁúÈ­¡¿,Ö´ĞĞ¡¾¹ºÂò¡¿"));
+            tipArea->setMsg(tr("ä½ å°†ä¼šé€€å‡ºã€ç™¾å¼å¹»é¾™æ‹³ã€‘,æ‰§è¡Œã€è´­ä¹°ã€‘"));
         }
     }
 }
@@ -219,15 +219,15 @@ void GeDouJia::synthetize()
         handArea->reset();
         playerArea->reset();
 
-        tipArea->setMsg(tr("Äã½«»áÍË³ö¡¾°ÙÊ½»ÃÁúÈ­¡¿,Ö´ĞĞ¡¾ºÏ³É¡¿"));
+        tipArea->setMsg(tr("ä½ å°†ä¼šé€€å‡ºã€ç™¾å¼å¹»é¾™æ‹³ã€‘,æ‰§è¡Œã€åˆæˆã€‘"));
         if(crystal>=3)
-            tipArea->addBoxItem(tr("1.Èı¸öË®¾§"));
+            tipArea->addBoxItem(tr("1.ä¸‰ä¸ªæ°´æ™¶"));
         if(crystal>=2&&gem>=1)
-            tipArea->addBoxItem(tr("2.Á½¸öË®¾§ºÍÒ»¸ö±¦Ê¯"));
+            tipArea->addBoxItem(tr("2.ä¸¤ä¸ªæ°´æ™¶å’Œä¸€ä¸ªå®çŸ³"));
         if(crystal>=1&&gem>=2)
-            tipArea->addBoxItem(tr("3.Ò»¸öË®¾§ºÍÁ½¸ö±¦Ê¯"));
+            tipArea->addBoxItem(tr("3.ä¸€ä¸ªæ°´æ™¶å’Œä¸¤ä¸ªå®çŸ³"));
         if(gem>=3)
-            tipArea->addBoxItem(tr("4.Èı¸ö±¦Ê¯"));
+            tipArea->addBoxItem(tr("4.ä¸‰ä¸ªå®çŸ³"));
         tipArea->showBox();
     }
 }
@@ -257,23 +257,23 @@ void GeDouJia::extract()
         handArea->reset();
         playerArea->reset();
 
-        tipArea->setMsg(tr("Äã½«»áÍË³ö¡¾°ÙÊ½»ÃÁúÈ­¡¿,Ö´ĞĞ¡¾ÌáÁ¶¡¿"));
+        tipArea->setMsg(tr("ä½ å°†ä¼šé€€å‡ºã€ç™¾å¼å¹»é¾™æ‹³ã€‘,æ‰§è¡Œã€æç‚¼ã€‘"));
         switch(myself->getEnergyMax()-myself->getEnergy())
         {
         case 4:
         case 3:
         case 2:
             if(gem>=2)
-                tipArea->addBoxItem(tr("1.Á½¸ö±¦Ê¯"));
+                tipArea->addBoxItem(tr("1.ä¸¤ä¸ªå®çŸ³"));
             if(crystal>=2)
-                tipArea->addBoxItem(tr("2.Á½¸öË®¾§"));
+                tipArea->addBoxItem(tr("2.ä¸¤ä¸ªæ°´æ™¶"));
             if(gem>=1&&crystal>=1)
-                tipArea->addBoxItem(tr("3.Ò»¸ö±¦Ê¯ºÍÒ»¸öË®¾§"));
+                tipArea->addBoxItem(tr("3.ä¸€ä¸ªå®çŸ³å’Œä¸€ä¸ªæ°´æ™¶"));
         case 1:
             if(gem>=1)
-                tipArea->addBoxItem(tr("4.Ò»¸ö±¦Ê¯"));
+                tipArea->addBoxItem(tr("4.ä¸€ä¸ªå®çŸ³"));
             if(crystal>=1)
-                tipArea->addBoxItem(tr("5.Ò»¸öË®¾§"));
+                tipArea->addBoxItem(tr("5.ä¸€ä¸ªæ°´æ™¶"));
         }
         tipArea->showBox();
     }
@@ -378,13 +378,13 @@ void GeDouJia::onCancelClicked()
 void GeDouJia::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("²ÔÑ×ĞîÁ¦"))
+    if(skill==tr("è‹ç‚è“„åŠ›"))
         CangYanXuLi();
-    else if(skill==tr("Äîµ¯"))
+    else if(skill==tr("å¿µå¼¹"))
         NianDan1();
-    else if(skill==tr("°ÙÊ½»ÃÁúÈ­"))
+    else if(skill==tr("ç™¾å¼å¹»é¾™æ‹³"))
         BaiShiHuanLongQuan();
-    else if(skill==tr("¶·ÉñÌìÇı"))
+    else if(skill==tr("æ–—ç¥å¤©é©±"))
         DouShenTianQu();
 }
 

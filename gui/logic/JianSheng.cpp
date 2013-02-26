@@ -9,14 +9,14 @@ JianSheng::JianSheng()
 void JianSheng::LieFengJi()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÁÒ·ç¼¼£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨çƒˆé£ŽæŠ€ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
 
 void JianSheng::LianXuJi()
 {
-    //ÏÈ½èÓÃ»ùÀàµÄ¶îÍâ¹¥»÷ÐÐ¶¯×´Ì¬
+    //å…ˆå€Ÿç”¨åŸºç±»çš„é¢å¤–æ”»å‡»è¡ŒåŠ¨çŠ¶æ€
     state=10;
     onceUsed=true;
     gui->reset();
@@ -44,13 +44,13 @@ void JianSheng::onOkClicked()
     {
 //NORMALACTION
     case 1:
-//×·¼ÓÐÐ¶¯
+//è¿½åŠ è¡ŒåŠ¨
     case 10:
     case 12:
-        if(usedCard && usedCard->getSpecialityList().contains(tr("¼²·ç¼¼")))
+        if(usedCard && usedCard->getSpecialityList().contains(tr("ç–¾é£ŽæŠ€")))
             JiFengJi++;
         break;
-//¶îÍâÐÐ¶¯Ñ¯ÎÊ
+//é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();        
         switch (text[0].digitValue()){
@@ -74,7 +74,7 @@ void JianSheng::onOkClicked()
 void JianSheng::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ÁÒ·ç¼¼"))
+    if(skill==tr("çƒˆé£ŽæŠ€"))
         LieFengJi();
 }
 
@@ -82,11 +82,11 @@ void JianSheng::additionalAction()
 {
     Role::additionalAction();
     if(JiFengJi>0)
-        tipArea->addBoxItem(tr("1.¹¥»÷ÐÐ¶¯£¨¼²·ç¼¼£©"));
+        tipArea->addBoxItem(tr("1.æ”»å‡»è¡ŒåŠ¨ï¼ˆç–¾é£ŽæŠ€ï¼‰"));
     if(!onceUsed&&usedAttack)
-        tipArea->addBoxItem(tr("2.Á¬Ðø¼¼"));
+        tipArea->addBoxItem(tr("2.è¿žç»­æŠ€"));
     if(!onceUsed2 && dataInterface->getMyself()->getEnergy()>0 &&usedAttack)
-        tipArea->addBoxItem(tr("3.½£Ó°"));
+        tipArea->addBoxItem(tr("3.å‰‘å½±"));
 }
 void JianSheng::turnBegin()
 {

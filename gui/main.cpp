@@ -1,4 +1,5 @@
 #include <QtGui>
+#include <QApplication>
 #include "widget/Animation.h"
 #include "widget/RoomView.h"
 #include "data/DataInterface.h"
@@ -9,10 +10,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QTextCodec *codec = QTextCodec::codecForName("system");
+    QTextCodec *codec = QTextCodec::codecForName("utf-8");
     QTextCodec::setCodecForLocale(codec);
-    QTextCodec::setCodecForCStrings(codec);
-    QTextCodec::setCodecForTr(codec);
+//    QTextCodec::setCodecForCStrings(codec);
+//    QTextCodec::setCodecForTr(codec);
     a.setFont(QFont("simsun", 9));
     dataInterface=new DataInterface;
     logic=new Logic;
@@ -29,7 +30,7 @@ int main(int argc, char *argv[])
         animation->setRoomScene(view.getScene());
 
         view.show();
-//GUI³õÊ¼»¯Íê³É
+//GUIåˆå§‹åŒ–å®Œæˆ
         /**/
         logic->readyToStart();
 

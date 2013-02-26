@@ -6,19 +6,19 @@ QiDao::QiDao()
     setMyRole(this);
 
     Button *weiLi,*xunJie,*guangHui,*qiHei;
-    weiLi=new Button(3,tr("ÍşÁ¦´Í¸£"));
+    weiLi=new Button(3,tr("å¨åŠ›èµç¦"));
     buttonArea->addButton(weiLi);
     connect(weiLi,SIGNAL(buttonSelected(int)),this,SLOT(WeiLiCiFu()));
 
-    xunJie=new Button(4,tr("Ñ¸½İ´Í¸£"));
+    xunJie=new Button(4,tr("è¿…æ·èµç¦"));
     buttonArea->addButton(xunJie);
     connect(xunJie,SIGNAL(buttonSelected(int)),this,SLOT(XunJieCiFu()));
 
-    guangHui=new Button(5,tr("¹â»ÔĞÅÑö"));
+    guangHui=new Button(5,tr("å…‰è¾‰ä¿¡ä»°"));
     buttonArea->addButton(guangHui);
     connect(guangHui,SIGNAL(buttonSelected(int)),this,SLOT(GuangHuiXinYang()));
 
-    qiHei=new Button(6,tr("ÆáºÚĞÅÑö"));
+    qiHei=new Button(6,tr("æ¼†é»‘ä¿¡ä»°"));
     buttonArea->addButton(qiHei);
     connect(qiHei,SIGNAL(buttonSelected(int)),this,SLOT(QiHeiXinYang()));
 }
@@ -28,9 +28,9 @@ void QiDao::normal()
     Role::normal();
     Player* myself=dataInterface->getMyself();
 
-    if (handArea->checkSpecility(tr("ÍşÁ¦´Í¸£")))
+    if (handArea->checkSpecility(tr("å¨åŠ›èµç¦")))
         buttonArea->enable(3);
-    if (handArea->checkSpecility(tr("Ñ¸½İ´Í¸£")))
+    if (handArea->checkSpecility(tr("è¿…æ·èµç¦")))
         buttonArea->enable(4);
     if(myself->getTap()&&myself->getToken(0)>0)
     {
@@ -45,9 +45,9 @@ void QiDao::magicAction()
     Role::magicAction();
     Player* myself=dataInterface->getMyself();
 
-    if (handArea->checkSpecility(tr("ÍşÁ¦´Í¸£")))
+    if (handArea->checkSpecility(tr("å¨åŠ›èµç¦")))
         buttonArea->enable(3);
-    if (handArea->checkSpecility(tr("Ñ¸½İ´Í¸£")))
+    if (handArea->checkSpecility(tr("è¿…æ·èµç¦")))
         buttonArea->enable(4);
     if(myself->getTap()&&myself->getToken(0)>0)
     {
@@ -60,7 +60,7 @@ void QiDao::QiDong()
 {
     state=1601;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯Æíµ»£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨ç¥ˆç¥·ï¼Ÿ"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
     int i;
@@ -93,7 +93,7 @@ void QiDao::WeiLiCiFu()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("ÍşÁ¦´Í¸£"));
+    handArea->enableSpecility(tr("å¨åŠ›èµç¦"));
 }
 
 void QiDao::XunJieCiFu()
@@ -109,7 +109,7 @@ void QiDao::XunJieCiFu()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("Ñ¸½İ´Í¸£"));
+    handArea->enableSpecility(tr("è¿…æ·èµç¦"));
 }
 
 void QiDao::GuangHuiXinYang()
@@ -150,21 +150,21 @@ void QiDao::cardAnalyse()
     QList<Player*>players=dataInterface->getPlayerList();
     switch (state)
     {
-//ÍşÁ¦´Í¸£
+//å¨åŠ›èµç¦
     case 1602:
         playerArea->enableMate();
         for(int i=0;i<players.size();i++)
            if(players[i]->checkStatus(4))
                playerArea->disablePlayerItem(i);
         break;
-//Ñ¸½İ´Í¸£
+//è¿…æ·èµç¦
     case 1603:
         playerArea->enableMate();
         for(int i=0;i<players.size();i++)
            if(players[i]->checkStatus(5))
                playerArea->disablePlayerItem(i);
         break;
-//¹â»ÔĞÅÑö
+//å…‰è¾‰ä¿¡ä»°
     case 1604:
         playerArea->enableMate();
         break;
@@ -188,7 +188,7 @@ void QiDao::onOkClicked()
 
     switch(state)
     {
-//¶îÍâĞĞ¶¯Ñ¯ÎÊ
+//é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
@@ -198,14 +198,14 @@ void QiDao::onOkClicked()
 
         }
         break;
-//Æíµ»
+//ç¥ˆç¥·
     case 1601:
         command="1601;1;";
         start = true;
         emit sendCommand(command);
         gui->reset();
         break;
-//ÍşÁ¦´Í¸£
+//å¨åŠ›èµç¦
     case 1602:
         command="1602;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -217,7 +217,7 @@ void QiDao::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//Ñ¸½İ´Í¸£
+//è¿…æ·èµç¦
     case 1603:
         command="1603;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -229,7 +229,7 @@ void QiDao::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//¹â»ÔĞÅÑö
+//å…‰è¾‰ä¿¡ä»°
     case 1604:
         command="1604;";
         sourceID=QString::number(myID);
@@ -245,7 +245,7 @@ void QiDao::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÆáºÚĞÅÑö
+//æ¼†é»‘ä¿¡ä»°
     case 1605:
         command="1605;";
         sourceID=QString::number(myID);
@@ -264,19 +264,19 @@ void QiDao::onCancelClicked()
     QString command;
     switch(state)
     {
-//Æíµ»
+//ç¥ˆç¥·
     case 1601:
         command="1601;0;;";
         emit sendCommand(command);
         gui->reset();
         break;
-//ÍşÁ¦´Í¸£
+//å¨åŠ›èµç¦
     case 1602:
-//Ñ¸½İ´Í¸£
+//è¿…æ·èµç¦
     case 1603:
-//¹â»ÔĞÅÑö
+//å…‰è¾‰ä¿¡ä»°
     case 1604:
-//ÆáºÚĞÅÑö
+//æ¼†é»‘ä¿¡ä»°
     case 1605:
         if(actionFlag==0)
             normal();
@@ -288,12 +288,12 @@ void QiDao::onCancelClicked()
 void QiDao::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("Æíµ»"))
+    if(skill==tr("ç¥ˆç¥·"))
         QiDong();
 }
 void QiDao::additionalAction()
 {
     Role::additionalAction();
     if(usedMagic && dataInterface->getMyself()->getEnergy()>0 && !onceUsed)
-        tipArea->addBoxItem(tr("1.·¨Á¦³±Ï«"));
+        tipArea->addBoxItem(tr("1.æ³•åŠ›æ½®æ±"));
 }

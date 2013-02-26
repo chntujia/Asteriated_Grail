@@ -6,15 +6,15 @@ MoDao::MoDao()
     setMyRole(this);
 
     Button *moDanRongHe,*moBaoChongJi,*huiMeiFengBao;
-    moDanRongHe=new Button(3,tr("Ä§µ¯ÈÚºÏ"));
+    moDanRongHe=new Button(3,tr("é­”å¼¹èåˆ"));
     buttonArea->addButton(moDanRongHe);
     connect(moDanRongHe,SIGNAL(buttonSelected(int)),this,SLOT(MoDanRongHe()));
 
-    moBaoChongJi=new Button(4,tr("Ä§±¬³å»÷"));
+    moBaoChongJi=new Button(4,tr("é­”çˆ†å†²å‡»"));
     buttonArea->addButton(moBaoChongJi);
     connect(moBaoChongJi,SIGNAL(buttonSelected(int)),this,SLOT(MoBaoChongJi()));
 
-    huiMeiFengBao=new Button(5,tr("»ÙÃğ·ç±©"));
+    huiMeiFengBao=new Button(5,tr("æ¯ç­é£æš´"));
     buttonArea->addButton(huiMeiFengBao);
     connect(huiMeiFengBao,SIGNAL(buttonSelected(int)),this,SLOT(HuiMeiFengBao()));
 
@@ -97,13 +97,13 @@ void MoDao::normal()
 {
     Role::normal();
     Player* myself=dataInterface->getMyself();
-//Ä§µ¯ÈÚºÏ
+//é­”å¼¹èåˆ
     if (handArea->checkElement("earth")||handArea->checkElement("fire"))
         buttonArea->enable(3);
-//Ä§±¬³å»÷
+//é­”çˆ†å†²å‡»
     if (handArea->checkType("magic"))
         buttonArea->enable(4);
-//»ÙÃğ·ç±©
+//æ¯ç­é£æš´
     if(myself->getGem()>0)
         buttonArea->enable(5);
     unactionalCheck();
@@ -136,19 +136,19 @@ void MoDao::cardAnalyse()
 //normal action
     case 1:
         cardName=selectedCards[0]->getName();
-        if(cardName==tr("Ä§µ¯"))
-            playerArea->enablePlayerItem(nextClockwise);//¶îÍâÔÙ¼¤»îÒ»¸öÉÏ¼ÒµĞÈË
+        if(cardName==tr("é­”å¼¹"))
+            playerArea->enablePlayerItem(nextClockwise);//é¢å¤–å†æ¿€æ´»ä¸€ä¸ªä¸Šå®¶æ•Œäºº
         break;
-//Ä§µ¯ÈÚºÏ(Ê×´ÎÄ§µ¯£©
+//é­”å¼¹èåˆ(é¦–æ¬¡é­”å¼¹ï¼‰
     case 801:
         playerArea->enablePlayerItem(nextClockwise);
         playerArea->enablePlayerItem(nextCounterClockwise);
         break;
-//Ä§µ¯ÈÚºÏ(·ÇÊ×´Î£©
+//é­”å¼¹èåˆ(éé¦–æ¬¡ï¼‰
     case 802:
         playerArea->enablePlayerItem(moDanNextID);
         break;
-//Ä§±¬³å»÷
+//é­”çˆ†å†²å‡»
     case 803:
         playerArea->enableEnemy();
         break;
@@ -172,7 +172,7 @@ void MoDao::onOkClicked()
 
     switch(state)
     {
-//Ä§µ¯ÈÚºÏ(»ØºÏÄÚ£©
+//é­”å¼¹èåˆ(å›åˆå†…ï¼‰
     case 801:        
         command="801;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -183,7 +183,7 @@ void MoDao::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//Ä§µ¯ÈÚºÏ(»ØºÏÍâ£©
+//é­”å¼¹èåˆ(å›åˆå¤–ï¼‰
     case 802:
         command="802;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -194,7 +194,7 @@ void MoDao::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//Ä§±¬³å»÷
+//é­”çˆ†å†²å‡»
     case 803:
         command="803;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -206,7 +206,7 @@ void MoDao::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//»ÙÃğ·ç±©
+//æ¯ç­é£æš´
     case 804:
         command="804;";
         sourceID=QString::number(myID);
@@ -225,15 +225,15 @@ void MoDao::onCancelClicked()
     Role::onCancelClicked();
     switch(state)
     {
-//Ä§µ¯ÈÚºÏ(»ØºÏÄÚ£©
+//é­”å¼¹èåˆ(å›åˆå†…ï¼‰
     case 801:
-//Ä§±¬³å»÷
+//é­”çˆ†å†²å‡»
     case 803:
-//»ÙÃğ·ç±©
+//æ¯ç­é£æš´
     case 804:
         normal();
         break;
-//Ä§µ¯ÈÚºÏ(»ØºÏÍâ£©
+//é­”å¼¹èåˆ(å›åˆå¤–ï¼‰
     case 802:
         moDaned(moDanNextID,sourceID,moDanHarm);
         break;

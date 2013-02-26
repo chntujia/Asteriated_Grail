@@ -75,7 +75,7 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     int offset=13;
     int morale=red->getMorale();
     painter->drawPixmap(0, 0, background);
-    for(i=0;i<morale/avg;i++) //Ê¿Æø
+    for(i=0;i<morale/avg;i++) //å£«æ°”
         painter->drawPixmap(i*(Rdice[1].width()+2)+offset,17,Rdice[avg-1]);
     offset+=i*(Rdice[1].width()+2);
     if(morale%avg!=0)
@@ -86,15 +86,15 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->drawPixmap(offset+Num[0].width(),4,Num[morale%10]);
 
     offset=145;
-    for(i=0;i<red->getGrail();i++) //±­
+    for(i=0;i<red->getGrail();i++) //æ¯
         painter->drawPixmap(Rgrail.width()*i+offset,5,Rgrail);
 
     offset+=Rgrail.width()*5+9;
-    for(i=0;i<red->getCrystal();i++) //Ë®¾§
+    for(i=0;i<red->getCrystal();i++) //æ°´æ™¶
         painter->drawPixmap((Pcrystal.width()+4)*i+offset,4,Pcrystal);
 
     offset+=(Pcrystal.width()+4)*i;
-    for(i=0;i<red->getGem();i++) //±¦Ê¯
+    for(i=0;i<red->getGem();i++) //å®çŸ³
         painter->drawPixmap((Pgem.width()+4)*i+offset,4,Pgem);
 
     offset=420;
@@ -102,15 +102,15 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->drawPixmap(offset+Num[0].width(),2,Num[round%10]);
 
     offset=459;
-    for(i=0;i<blue->getCrystal();i++) //Ë®¾§
+    for(i=0;i<blue->getCrystal();i++) //æ°´æ™¶
         painter->drawPixmap((Pcrystal.width()+4)*i+offset,4,Pcrystal);
 
     offset+=(Pcrystal.width()+4)*i;
-    for(i=0;i<blue->getGem();i++) //±¦Ê¯
+    for(i=0;i<blue->getGem();i++) //å®çŸ³
         painter->drawPixmap((Pgem.width()+4)*i+offset,4,Pgem);
 
     offset=598;
-    for(i=0;i<blue->getGrail();i++) //±­
+    for(i=0;i<blue->getGrail();i++) //æ¯
         painter->drawPixmap(Rgrail.width()*i+offset,5,Bgrail);
 
     morale=blue->getMorale();
@@ -120,7 +120,7 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
     offset=788;
 
-    for(i=0;i<morale/avg;i++) //Ê¿Æø
+    for(i=0;i<morale/avg;i++) //å£«æ°”
         painter->drawPixmap(i*(Bdice[1].width()+2)+offset,17,Bdice[avg-1]);
     offset+=i*(Bdice[1].width()+2);
     if(morale%avg!=0)

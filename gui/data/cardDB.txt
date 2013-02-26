@@ -1,150 +1,150 @@
-0	magic	earth	»Ã	Ê¥¶Ü	card/shengDunDi.png		0		
-1	magic	earth	Ê¥	Ê¥¶Ü	card/shengDunDi.png		0		
-2	magic	earth	Ó½	Ê¥¶Ü	card/shengDunDi.png		0		
-3	magic	earth	¼¼	ÐéÈõ	card/xuRuoDi.png		0		
-4	magic	earth	Ó½	ÖÐ¶¾	card/zhongDuDi.png		0		
-5	magic	wind	»Ã	Ä§µ¯	card/moDanFeng.png		0		
-6	magic	wind	Ê¥	Ê¥¶Ü	card/shengDunFeng.png		0		
-7	magic	wind	Ñª	Ê¥¶Ü	card/shengDunFeng.png		0		
-8	magic	wind	Ó½	Ê¥¶Ü	card/shengDunFeng.png		0		
-9	magic	wind	»Ã	ÐéÈõ	card/xuRuoFeng.png		0		
-10	magic	wind	Ê¥	ÖÐ¶¾	card/zhongDuFeng.png		0		
-11	magic	light	Ê¥	Ê¥¹â	card/shengGuang.png	¡¾ÖÎÁÆÊõ¡¿#Ä¿±ê½ÇÉ«+2ÖÎÁÆ¡£	1	ÖÎÁÆÊõ	
-12	magic	light	Ê¥	Ê¥¹â	card/shengGuang.png	¡¾ÖÎÁÆÊõ¡¿#Ä¿±ê½ÇÉ«+2ÖÎÁÆ¡£	1	ÖÎÁÆÊõ	
-13	magic	light	Ê¥	Ê¥¹â	card/shengGuang.png	¡¾ÖÎÓúÖ®¹â¡¿#Ö¸¶¨×î¶à3Ãû½ÇÉ«¸÷+1¡¾ÖÎÁÆ¡¿¡£	1	ÖÎÓúÖ®¹â	
-14	magic	light	»Ã	Ê¥¹â	card/shengGuang.png		0		
-15	magic	light	»Ã	Ê¥¹â	card/shengGuang.png		0		
-16	magic	light	¼¼	Ê¥¹â	card/shengGuang.png		0		
-17	magic	light	¼¼	Ê¥¹â	card/shengGuang.png		0		
-18	magic	light	¼¼	Ê¥¹â	card/shengGuang.png		0		
-19	magic	light	Ñª	Ê¥¹â	card/shengGuang.png		0		
-20	magic	light	Ñª	Ê¥¹â	card/shengGuang.png		0		
-21	magic	light	Ñª	Ê¥¹â	card/shengGuang.png		0		
-22	magic	fire	Ó½	Ä§µ¯	card/moDanHuo.png		0		
-23	magic	fire	¼¼	Ê¥¶Ü	card/shengDunHuo.png		0		
-24	magic	fire	Ñª	Ê¥¶Ü	card/shengDunHuo.png		0		
-25	magic	fire	Ê¥	ÐéÈõ	card/xuRuoHuo.png		0		
-26	magic	fire	Ñª	ÐéÈõ	card/xuRuoHuo.png		0		
-27	magic	thunder	¼¼	Ä§µ¯	card/moDanLei.png		0		
-28	magic	thunder	Ê¥	Ä§µ¯	card/moDanLei.png		0		
-29	magic	thunder	»Ã	Ê¥¶Ü	card/shengDunLei.png		0		
-30	magic	thunder	Ñª	Ê¥¶Ü	card/shengDunLei.png		0		
-31	magic	thunder	¼¼	ÖÐ¶¾	card/zhongDuLei.png		0		
-32	magic	water	»Ã	Ä§µ¯	card/moDanShui.png		0		
-33	magic	water	Ñª	Ä§µ¯	card/moDanShui.png		0		
-34	magic	water	Ñª	ÐéÈõ	card/xuRuoShui.png		0		
-35	magic	water	Ó½	ÐéÈõ	card/xuRuoShui.png		0		
-36	magic	water	»Ã	ÖÐ¶¾	card/zhongDuShui.png		0		
-37	magic	water	¼¼	ÖÐ¶¾	card/zhongDuShui.png		0		
-38	magic	water	Ê¥	ÖÐ¶¾	card/zhongDuShui.png		0		
-39	attack	darkness	Ê¥	°µÃð	card/anMie.png		0		
-40	attack	darkness	Ê¥	°µÃð	card/anMie.png		0		
-41	attack	darkness	Ê¥	°µÃð	card/anMie.png		0		
-42	attack	darkness	Ê¥	°µÃð	card/anMie.png		0		
-43	attack	darkness	Ó½	°µÃð	card/anMie.png		0		
-44	attack	darkness	Ó½	°µÃð	card/anMie.png		0		
-45	attack	earth	»Ã	µØÁÑÕ¶	card/diLieZhan.png	¡¾µØÖ®·âÓ¡¡¿#£¨½«¡¾µØÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öµØÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»ê´ÍÓè¡¿#£¨ÒÆ³ý3µã¡¾À¶É«Áé»ê¡¿£©Ä¿±ê½ÇÉ«+2¡¾±¦Ê¯¡¿¡£	2	µØÖ®·âÓ¡	Áé»ê´ÍÓè
-46	attack	earth	»Ã	µØÁÑÕ¶	card/diLieZhan.png	¡¾µØÖ®·âÓ¡¡¿#£¨½«¡¾µØÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öµØÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»ê´ÍÓè¡¿#£¨ÒÆ³ý3µã¡¾À¶É«Áé»ê¡¿£©Ä¿±ê½ÇÉ«+2¡¾±¦Ê¯¡¿¡£	2	µØÖ®·âÓ¡	Áé»ê´ÍÓè
-47	attack	earth	»Ã	µØÁÑÕ¶	card/diLieZhan.png	¡¾µØÖ®·âÓ¡¡¿#£¨½«¡¾µØÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öµØÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	µØÖ®·âÓ¡	Áé»êÕð±¬
-48	attack	earth	»Ã	µØÁÑÕ¶	card/diLieZhan.png	¡¾µØÖ®·âÓ¡¡¿#£¨½«¡¾µØÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öµØÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	µØÖ®·âÓ¡	Áé»êÕð±¬
-49	attack	earth	¼¼	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÁÒ·ç¼¼¡¿#£¨¹¥»÷µÄÄ¿±êÓµÓÐÊ¥¶ÜÊ±·¢¶¯£©ÎÞÊÓ¶Ô·½Ê¥¶ÜµÄÐ§¹û£¬ÇÒ´Ë¹¥»÷¶Ô·½ÎÞ·¨Ó¦Õ½¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-50	attack	earth	¼¼	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÁÒ·ç¼¼¡¿#£¨¹¥»÷µÄÄ¿±êÓµÓÐÊ¥¶ÜÊ±·¢¶¯£©ÎÞÊÓ¶Ô·½Ê¥¶ÜµÄÐ§¹û£¬ÇÒ´Ë¹¥»÷¶Ô·½ÎÞ·¨Ó¦Õ½¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-51	attack	earth	¼¼	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÁÒ·ç¼¼¡¿#£¨¹¥»÷µÄÄ¿±êÓµÓÐÊ¥¶ÜÊ±·¢¶¯£©ÎÞÊÓ¶Ô·½Ê¥¶ÜµÄÐ§¹û£¬ÇÒ´Ë¹¥»÷¶Ô·½ÎÞ·¨Ó¦Õ½¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-52	attack	earth	¼¼	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÁÒ·ç¼¼¡¿#£¨¹¥»÷µÄÄ¿±êÓµÓÐÊ¥¶ÜÊ±·¢¶¯£©ÎÞÊÓ¶Ô·½Ê¥¶ÜµÄÐ§¹û£¬ÇÒ´Ë¹¥»÷¶Ô·½ÎÞ·¨Ó¦Õ½¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-53	attack	earth	¼¼	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÁÒ·ç¼¼¡¿#£¨¹¥»÷µÄÄ¿±êÓµÓÐÊ¥¶ÜÊ±·¢¶¯£©ÎÞÊÓ¶Ô·½Ê¥¶ÜµÄÐ§¹û£¬ÇÒ´Ë¹¥»÷¶Ô·½ÎÞ·¨Ó¦Õ½¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-54	attack	earth	Ê¥	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÓúÖ®¹â¡¿#Ö¸¶¨×î¶à3Ãû½ÇÉ«¸÷+1¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-55	attack	earth	Ó½	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾ÔÉÊ¯¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬¶îÍâ+1¡¾·¨ÊõÐÐ¶¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅµØÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	ÔÉÊ¯
-56	attack	earth	Ó½	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾ÔÉÊ¯¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬¶îÍâ+1¡¾·¨ÊõÐÐ¶¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅµØÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	ÔÉÊ¯
-57	attack	earth	Ñª	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÑªÐÈÅØÏø¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©Èô¹¥»÷µÄÄ¿±êÓµÓÐµÄ¡¾ÖÎÁÆ¡¿Îª2£¬Ôò±¾´Î¹¥»÷Ç¿ÖÆÃüÖÐ¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÐÈÅØÏø	ÑªÖ®±¯Ãù
-58	attack	earth	Ñª	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÑªÐÈÅØÏø¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©Èô¹¥»÷µÄÄ¿±êÓµÓÐµÄ¡¾ÖÎÁÆ¡¿Îª2£¬Ôò±¾´Î¹¥»÷Ç¿ÖÆÃüÖÐ¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÐÈÅØÏø	ÑªÖ®±¯Ãù
-59	attack	earth	Ñª	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-60	attack	earth	Ñª	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-61	attack	earth	Ñª	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-62	attack	earth	Ó½	µØÁÑÕ¶	card/diLieZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾ÔÉÊ¯¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬¶îÍâ+1¡¾·¨ÊõÐÐ¶¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅµØÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	ÔÉÊ¯
-63	attack	earth	Ó½	µØÁÑÕ¶	card/diLieZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾ÔÉÊ¯¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬¶îÍâ+1¡¾·¨ÊõÐÐ¶¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅµØÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	ÔÉÊ¯
-64	attack	earth	Ê¥	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÖÎÓúÖ®¹â¡¿#Ö¸¶¨×î¶à3Ãû½ÇÉ«¸÷+1¡¾ÖÎÁÆ¡¿¡£	1	ÖÎÓúÖ®¹â	
-65	attack	earth	Ê¥	µØÁÑÕ¶	card/diLieZhan.png	¡¾ÖÎÓúÖ®¹â¡¿#Ö¸¶¨×î¶à3Ãû½ÇÉ«¸÷+1¡¾ÖÎÁÆ¡¿¡£	1	ÖÎÓúÖ®¹â	
-66	attack	wind	»Ã	·çÉñÕ¶	card/fengShenZhan.png	¡¾·çÖ®·âÓ¡¡¿#£¨½«¡¾·çÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö·çÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»ê´ÍÓè¡¿#£¨ÒÆ³ý3µã¡¾À¶É«Áé»ê¡¿£©Ä¿±ê½ÇÉ«+2¡¾±¦Ê¯¡¿¡£	2	·çÖ®·âÓ¡	Áé»ê´ÍÓè
-67	attack	wind	»Ã	·çÉñÕ¶	card/fengShenZhan.png	¡¾·çÖ®·âÓ¡¡¿#£¨½«¡¾·çÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö·çÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»ê´ÍÓè¡¿#£¨ÒÆ³ý3µã¡¾À¶É«Áé»ê¡¿£©Ä¿±ê½ÇÉ«+2¡¾±¦Ê¯¡¿¡£	2	·çÖ®·âÓ¡	Áé»ê´ÍÓè
-68	attack	wind	»Ã	·çÉñÕ¶	card/fengShenZhan.png	¡¾·çÖ®·âÓ¡¡¿#£¨½«¡¾·çÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö·çÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»ê´ÍÓè¡¿#£¨ÒÆ³ý3µã¡¾À¶É«Áé»ê¡¿£©Ä¿±ê½ÇÉ«+2¡¾±¦Ê¯¡¿¡£	2	·çÖ®·âÓ¡	Áé»ê´ÍÓè
-69	attack	wind	»Ã	·çÉñÕ¶	card/fengShenZhan.png	¡¾·çÖ®·âÓ¡¡¿#£¨½«¡¾·çÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö·çÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»ê´ÍÓè¡¿#£¨ÒÆ³ý3µã¡¾À¶É«Áé»ê¡¿£©Ä¿±ê½ÇÉ«+2¡¾±¦Ê¯¡¿¡£	2	·çÖ®·âÓ¡	Áé»ê´ÍÓè
-70	attack	wind	¼¼	·çÉñÕ¶	card/fengShenZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	¼²·ç¼¼	¾«×¼Éä»÷
-71	attack	wind	¼¼	·çÉñÕ¶	card/fengShenZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	¼²·ç¼¼	¾«×¼Éä»÷
-72	attack	wind	¼¼	·çÉñÕ¶	card/fengShenZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	¼²·ç¼¼	¾«×¼Éä»÷
-73	attack	wind	¼¼	·çÉñÕ¶	card/fengShenZhan.png	¡¾ÁÒ·ç¼¼¡¿#£¨¹¥»÷µÄÄ¿±êÓµÓÐÊ¥¶ÜÊ±·¢¶¯£©ÎÞÊÓ¶Ô·½Ê¥¶ÜµÄÐ§¹û£¬ÇÒ´Ë¹¥»÷¶Ô·½ÎÞ·¨Ó¦Õ½¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-74	attack	wind	¼¼	·çÉñÕ¶	card/fengShenZhan.png	¡¾ÁÒ·ç¼¼¡¿#£¨¹¥»÷µÄÄ¿±êÓµÓÐÊ¥¶ÜÊ±·¢¶¯£©ÎÞÊÓ¶Ô·½Ê¥¶ÜµÄÐ§¹û£¬ÇÒ´Ë¹¥»÷¶Ô·½ÎÞ·¨Ó¦Õ½¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-75	attack	wind	Ê¥	·çÉñÕ¶	card/fengShenZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÓúÖ®¹â¡¿#Ö¸¶¨×î¶à3Ãû½ÇÉ«¸÷+1¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-76	attack	wind	Ê¥	·çÉñÕ¶	card/fengShenZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÓúÖ®¹â¡¿#Ö¸¶¨×î¶à3Ãû½ÇÉ«¸÷+1¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-77	attack	wind	Ê¥	·çÉñÕ¶	card/fengShenZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÓúÖ®¹â¡¿#Ö¸¶¨×î¶à3Ãû½ÇÉ«¸÷+1¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-78	attack	wind	Ñª	·çÉñÕ¶	card/fengShenZhan.png	¡¾ÑªÐÈÅØÏø¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©Èô¹¥»÷µÄÄ¿±êÓµÓÐµÄ¡¾ÖÎÁÆ¡¿Îª2£¬Ôò±¾´Î¹¥»÷Ç¿ÖÆÃüÖÐ¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÐÈÅØÏø	ÑªÖ®±¯Ãù
-79	attack	wind	Ñª	·çÉñÕ¶	card/fengShenZhan.png	¡¾ÑªÐÈÅØÏø¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©Èô¹¥»÷µÄÄ¿±êÓµÓÐµÄ¡¾ÖÎÁÆ¡¿Îª2£¬Ôò±¾´Î¹¥»÷Ç¿ÖÆÃüÖÐ¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÐÈÅØÏø	ÑªÖ®±¯Ãù
-80	attack	wind	Ñª	·çÉñÕ¶	card/fengShenZhan.png	¡¾ÑªÐÈÅØÏø¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©Èô¹¥»÷µÄÄ¿±êÓµÓÐµÄ¡¾ÖÎÁÆ¡¿Îª2£¬Ôò±¾´Î¹¥»÷Ç¿ÖÆÃüÖÐ¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÐÈÅØÏø	ÑªÖ®±¯Ãù
-81	attack	wind	Ñª	·çÉñÕ¶	card/fengShenZhan.png	¡¾ÑªÐÈÅØÏø¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©Èô¹¥»÷µÄÄ¿±êÓµÓÐµÄ¡¾ÖÎÁÆ¡¿Îª2£¬Ôò±¾´Î¹¥»÷Ç¿ÖÆÃüÖÐ¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÐÈÅØÏø	ÑªÖ®±¯Ãù
-82	attack	wind	Ó½	·çÉñÕ¶	card/fengShenZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾·çÈÐ¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅ·çÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	·çÈÐ
-83	attack	wind	Ó½	·çÉñÕ¶	card/fengShenZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾·çÈÐ¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅ·çÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	·çÈÐ
-84	attack	wind	Ó½	·çÉñÕ¶	card/fengShenZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾·çÈÐ¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅ·çÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	·çÈÐ
-85	attack	wind	Ó½	·çÉñÕ¶	card/fengShenZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾·çÈÐ¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅ·çÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	·çÈÐ
-86	attack	wind	Ó½	·çÉñÕ¶	card/fengShenZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾·çÈÐ¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅ·çÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	·çÈÐ
-87	attack	fire	»Ã	»ðÑæÕ¶	card/huoYanZhan.png	¡¾»ðÖ®·âÓ¡¡¿#£¨½«¡¾»ðÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö»ðÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	»ðÖ®·âÓ¡	Áé»êÕð±¬
-88	attack	fire	»Ã	»ðÑæÕ¶	card/huoYanZhan.png	¡¾»ðÖ®·âÓ¡¡¿#£¨½«¡¾»ðÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö»ðÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	»ðÖ®·âÓ¡	Áé»êÕð±¬
-89	attack	fire	»Ã	»ðÑæÕ¶	card/huoYanZhan.png	¡¾»ðÖ®·âÓ¡¡¿#£¨½«¡¾»ðÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö»ðÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	»ðÖ®·âÓ¡	Áé»êÕð±¬
-90	attack	fire	»Ã	»ðÑæÕ¶	card/huoYanZhan.png	¡¾»ðÖ®·âÓ¡¡¿#£¨½«¡¾»ðÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö»ðÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	»ðÖ®·âÓ¡	Áé»êÕð±¬
-91	attack	fire	»Ã	»ðÑæÕ¶	card/huoYanZhan.png	¡¾»ðÖ®·âÓ¡¡¿#£¨½«¡¾»ðÖ®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö»ðÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	»ðÖ®·âÓ¡	Áé»êÕð±¬
-92	attack	fire	¼¼	»ðÑæÕ¶	card/huoYanZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾ÉÁ¹âÏÝÚå¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û¡£	2	¼²·ç¼¼	ÉÁ¹âÏÝÚå
-93	attack	fire	¼¼	»ðÑæÕ¶	card/huoYanZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾ÉÁ¹âÏÝÚå¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û¡£	2	¼²·ç¼¼	ÉÁ¹âÏÝÚå
-94	attack	fire	¼¼	»ðÑæÕ¶	card/huoYanZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾ÉÁ¹âÏÝÚå¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û¡£	2	¼²·ç¼¼	ÉÁ¹âÏÝÚå
-95	attack	fire	¼¼	»ðÑæÕ¶	card/huoYanZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾ÉÁ¹âÏÝÚå¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û¡£	2	¼²·ç¼¼	ÉÁ¹âÏÝÚå
-96	attack	fire	Ê¥	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÁÆÊõ¡¿#Ä¿±ê½ÇÉ«+2¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÁÆÊõ
-97	attack	fire	Ê¥	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÁÆÊõ¡¿#Ä¿±ê½ÇÉ«+2¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÁÆÊõ
-98	attack	fire	Ê¥	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÁÆÊõ¡¿#Ä¿±ê½ÇÉ«+2¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÁÆÊõ
-99	attack	fire	Ê¥	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÁÆÊõ¡¿#Ä¿±ê½ÇÉ«+2¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÁÆÊõ
-100	attack	fire	Ó½	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾»ðÇò¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û£»#£¨ÈôÄã¶îÍâÆú1ÕÅ»ðÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	»ðÇò
-101	attack	fire	Ó½	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾»ðÇò¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û£»#£¨ÈôÄã¶îÍâÆú1ÕÅ»ðÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	»ðÇò
-102	attack	fire	Ó½	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾»ðÇò¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û£»#£¨ÈôÄã¶îÍâÆú1ÕÅ»ðÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	»ðÇò
-103	attack	fire	Ó½	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾»ðÇò¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û£»#£¨ÈôÄã¶îÍâÆú1ÕÅ»ðÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	»ðÇò
-104	attack	fire	Ñª	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÑªÐÈÅØÏø¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©Èô¹¥»÷µÄÄ¿±êÓµÓÐµÄ¡¾ÖÎÁÆ¡¿Îª2£¬Ôò±¾´Î¹¥»÷Ç¿ÖÆÃüÖÐ¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÐÈÅØÏø	ÑªÖ®±¯Ãù
-105	attack	fire	Ñª	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÑªÐÈÅØÏø¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©Èô¹¥»÷µÄÄ¿±êÓµÓÐµÄ¡¾ÖÎÁÆ¡¿Îª2£¬Ôò±¾´Î¹¥»÷Ç¿ÖÆÃüÖÐ¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÐÈÅØÏø	ÑªÖ®±¯Ãù
-106	attack	fire	Ñª	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÑªÐÈÅØÏø¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©Èô¹¥»÷µÄÄ¿±êÓµÓÐµÄ¡¾ÖÎÁÆ¡¿Îª2£¬Ôò±¾´Î¹¥»÷Ç¿ÖÆÃüÖÐ¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÐÈÅØÏø	ÑªÖ®±¯Ãù
-107	attack	fire	Ñª	»ðÑæÕ¶	card/huoYanZhan.png	¡¾ÑªÐÈÅØÏø¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©Èô¹¥»÷µÄÄ¿±êÓµÓÐµÄ¡¾ÖÎÁÆ¡¿Îª2£¬Ôò±¾´Î¹¥»÷Ç¿ÖÆÃüÖÐ¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÐÈÅØÏø	ÑªÖ®±¯Ãù
-108	attack	thunder	¼¼	À×¹âÕ¶	card/leiGuangZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	¼²·ç¼¼	¾«×¼Éä»÷
-109	attack	thunder	¼¼	À×¹âÕ¶	card/leiGuangZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	¼²·ç¼¼	¾«×¼Éä»÷
-110	attack	thunder	»Ã	À×¹âÕ¶	card/leiGuangZhan.png	¡¾À×Ö®·âÓ¡¡¿#£¨½«¡¾À×Ö®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öÀ×ÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	À×Ö®·âÓ¡	Áé»êÕð±¬
-111	attack	thunder	»Ã	À×¹âÕ¶	card/leiGuangZhan.png	¡¾À×Ö®·âÓ¡¡¿#£¨½«¡¾À×Ö®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öÀ×ÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	À×Ö®·âÓ¡	Áé»êÕð±¬
-112	attack	thunder	»Ã	À×¹âÕ¶	card/leiGuangZhan.png	¡¾À×Ö®·âÓ¡¡¿#£¨½«¡¾À×Ö®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öÀ×ÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	À×Ö®·âÓ¡	Áé»êÕð±¬
-113	attack	thunder	»Ã	À×¹âÕ¶	card/leiGuangZhan.png	¡¾À×Ö®·âÓ¡¡¿#£¨½«¡¾À×Ö®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öÀ×ÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	À×Ö®·âÓ¡	Áé»êÕð±¬
-114	attack	thunder	»Ã	À×¹âÕ¶	card/leiGuangZhan.png	¡¾À×Ö®·âÓ¡¡¿#£¨½«¡¾À×Ö®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öÀ×ÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	À×Ö®·âÓ¡	Áé»êÕð±¬
-115	attack	thunder	¼¼	À×¹âÕ¶	card/leiGuangZhan.png	¡¾ÁÒ·ç¼¼¡¿#£¨¹¥»÷µÄÄ¿±êÓµÓÐÊ¥¶ÜÊ±·¢¶¯£©ÎÞÊÓ¶Ô·½Ê¥¶ÜµÄÐ§¹û£¬ÇÒ´Ë¹¥»÷¶Ô·½ÎÞ·¨Ó¦Õ½¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-116	attack	thunder	¼¼	À×¹âÕ¶	card/leiGuangZhan.png	¡¾ÁÒ·ç¼¼¡¿#£¨¹¥»÷µÄÄ¿±êÓµÓÐÊ¥¶ÜÊ±·¢¶¯£©ÎÞÊÓ¶Ô·½Ê¥¶ÜµÄÐ§¹û£¬ÇÒ´Ë¹¥»÷¶Ô·½ÎÞ·¨Ó¦Õ½¡£#¡¾¾«×¼Éä»÷¡¿#´Ë¹¥»÷Ç¿ÖÆÃüÖÐ£¬µ«±¾´Î¹¥»÷ÉËº¦-1¡£	2	ÁÒ·ç¼¼	¾«×¼Éä»÷
-117	attack	thunder	Ê¥	À×¹âÕ¶	card/leiGuangZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÁÆÊõ¡¿#Ä¿±ê½ÇÉ«+2¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÁÆÊõ
-118	attack	thunder	Ê¥	À×¹âÕ¶	card/leiGuangZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÁÆÊõ¡¿#Ä¿±ê½ÇÉ«+2¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÁÆÊõ
-119	attack	thunder	Ê¥	À×¹âÕ¶	card/leiGuangZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÁÆÊõ¡¿#Ä¿±ê½ÇÉ«+2¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÁÆÊõ
-120	attack	thunder	Ê¥	À×¹âÕ¶	card/leiGuangZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÁÆÊõ¡¿#Ä¿±ê½ÇÉ«+2¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÁÆÊõ
-121	attack	thunder	Ñª	À×¹âÕ¶	card/leiGuangZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-122	attack	thunder	Ñª	À×¹âÕ¶	card/leiGuangZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-123	attack	thunder	Ñª	À×¹âÕ¶	card/leiGuangZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-124	attack	thunder	Ñª	À×¹âÕ¶	card/leiGuangZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-125	attack	thunder	Ó½	À×¹âÕ¶	card/leiGuangZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾À×»÷¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬ÎÒ·½¡¾Õ½¼¨Çø¡¿+1¡¾±¦Ê¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅÀ×ÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	À×»÷
-126	attack	thunder	Ó½	À×¹âÕ¶	card/leiGuangZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾À×»÷¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬ÎÒ·½¡¾Õ½¼¨Çø¡¿+1¡¾±¦Ê¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅÀ×ÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	À×»÷
-127	attack	thunder	Ó½	À×¹âÕ¶	card/leiGuangZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾À×»÷¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬ÎÒ·½¡¾Õ½¼¨Çø¡¿+1¡¾±¦Ê¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅÀ×ÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	À×»÷
-128	attack	thunder	Ó½	À×¹âÕ¶	card/leiGuangZhan.png	¡¾Ñ¸½Ý´Í¸£¡¿#£¨½«¡¾Ñ¸½Ý´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¡¾·¨ÊõÐÐ¶¯¡¿»ò¡¾¹¥»÷ÐÐ¶¯¡¿½áÊøÊ±¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯£©£º#¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾À×»÷¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬ÎÒ·½¡¾Õ½¼¨Çø¡¿+1¡¾±¦Ê¯¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅÀ×ÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	Ñ¸½Ý´Í¸£	À×»÷
-129	attack	water	¼¼	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾ÉÁ¹âÏÝÚå¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û¡£	2	¼²·ç¼¼	ÉÁ¹âÏÝÚå
-130	attack	water	¼¼	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾ÉÁ¹âÏÝÚå¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û¡£	2	¼²·ç¼¼	ÉÁ¹âÏÝÚå
-131	attack	water	¼¼	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾ÉÁ¹âÏÝÚå¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û¡£	2	¼²·ç¼¼	ÉÁ¹âÏÝÚå
-132	attack	water	¼¼	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾¼²·ç¼¼¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©¶îÍâ+1¡¾¹¥»÷ÐÐ¶¯¡¿¡£#¡¾ÉÁ¹âÏÝÚå¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦¢Û¡£	2	¼²·ç¼¼	ÉÁ¹âÏÝÚå
-133	attack	water	»Ã	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾Ë®Ö®·âÓ¡¡¿#£¨½«¡¾Ë®Ö®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö·çÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»ê´ÍÓè¡¿#£¨ÒÆ³ý3µã¡¾À¶É«Áé»ê¡¿£©Ä¿±ê½ÇÉ«+2¡¾±¦Ê¯¡¿¡£	2	Ë®Ö®·âÓ¡	Áé»ê´ÍÓè
-134	attack	water	»Ã	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾Ë®Ö®·âÓ¡¡¿#£¨½«¡¾Ë®Ö®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³ö·çÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»ê´ÍÓè¡¿#£¨ÒÆ³ý3µã¡¾À¶É«Áé»ê¡¿£©Ä¿±ê½ÇÉ«+2¡¾±¦Ê¯¡¿¡£	2	Ë®Ö®·âÓ¡	Áé»ê´ÍÓè
-135	attack	water	»Ã	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾Ë®Ö®·âÓ¡¡¿#£¨½«¡¾Ë®Ö®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öË®ÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	Ë®Ö®·âÓ¡	Áé»êÕð±¬
-136	attack	water	»Ã	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾Ë®Ö®·âÓ¡¡¿#£¨½«¡¾Ë®Ö®·âÓ¡¡¿·ÅÖÃÓÚÄ¿±ê¶ÔÊÖÃæÇ°£©#¸Ã¶ÔÊÖ»ñµÃ£¨Ö±µ½Ëý´ÓÊÖÖÐ´ò³ö»òÕ¹Ê¾³öË®ÏµÅÆÊ±Ç¿ÖÆ´¥·¢£©:#¶ÔËûÔì³É3µã·¨ÊõÉËº¦¢Û£¬´¥·¢ºóÒÆ³ý´ËÅÆ¡£#¡¾Áé»êÕð±¬¡¿#£¨ÒÆ³ý3µã¡¾»ÆÉ«Áé»ê¡¿£©¶ÔÄ¿±ê½ÇÉ«Ôì³É3µã·¨ÊõÉËº¦¢Û¡£#ÈôËûµÄÊÖÅÆ£¼3ÇÒÊÖÅÆÉÏÏÞ£¾5£¬Ôò´ËÉËº¦¶øÍâ+2¡£	2	Ë®Ö®·âÓ¡	Áé»êÕð±¬
-137	attack	water	Ê¥	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÓúÖ®¹â¡¿#Ö¸¶¨×î¶à3Ãû½ÇÉ«¸÷+1¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-138	attack	water	Ê¥	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÓúÖ®¹â¡¿#Ö¸¶¨×î¶à3Ãû½ÇÉ«¸÷+1¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-139	attack	water	Ê¥	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÌìÊ¹Ö®Ç½¡¿#¿É×÷Îª¡¾Ê¥¶Ü¡¿Ê¹ÓÃ¡£#¡¾ÖÎÓúÖ®¹â¡¿#Ö¸¶¨×î¶à3Ãû½ÇÉ«¸÷+1¡¾ÖÎÁÆ¡¿¡£	2	ÌìÊ¹Ö®Ç½	ÖÎÓúÖ®¹â
-140	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾±ù¶³¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬²¢Ö¸¶¨1Ãû½ÇÉ«+1¡¾ÖÎÁÆ¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅË®ÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	±ù¶³
-141	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾±ù¶³¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬²¢Ö¸¶¨1Ãû½ÇÉ«+1¡¾ÖÎÁÆ¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅË®ÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	±ù¶³
-142	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾±ù¶³¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬²¢Ö¸¶¨1Ãû½ÇÉ«+1¡¾ÖÎÁÆ¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅË®ÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	±ù¶³
-143	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾±ù¶³¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬²¢Ö¸¶¨1Ãû½ÇÉ«+1¡¾ÖÎÁÆ¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅË®ÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	±ù¶³
-144	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾±ù¶³¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬²¢Ö¸¶¨1Ãû½ÇÉ«+1¡¾ÖÎÁÆ¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅË®ÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	±ù¶³
-145	attack	water	Ó½	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÍþÁ¦´Í¸£¡¿#£¨½«¡¾ÍþÁ¦´Í¸£¡¿·ÅÖÃÓÚÄ¿±ê¶ÓÓÑÃæÇ°£©¸Ã¶ÓÓÑ»ñµÃ#£¨¹¥»÷ÃüÖÐºó¿ÉÒÔÒÆ³ý´ËÅÆ·¢¶¯¢Ú£©£º#±¾´Î¹¥»÷ÉËº¦¶îÍâ+2¡£#¡¾±ù¶³¡¿#¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦¢Û£¬²¢Ö¸¶¨1Ãû½ÇÉ«+1¡¾ÖÎÁÆ¡¿£»#£¨ÈôÄã¶îÍâÆú1ÕÅË®ÏµÅÆ¡¾Õ¹Ê¾¡¿¢Ù£©±¾´ÎÉËº¦¶îÍâ+1¡£	2	ÍþÁ¦´Í¸£	±ù¶³
-146	attack	water	Ñª	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-147	attack	water	Ñª	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-148	attack	water	Ñª	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
-149	attack	water	Ñª	Ë®Á°Õ¶	card/shuiLianZhan.png	¡¾ÑªÓ°¿ñµ¶¡¿#£¨×÷ÎªÖ÷¶¯¹¥»÷´ò³öÊ±·¢¶¯£©#ÈôÃüÖÐÊÖÅÆÎª2µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+2£»#ÈôÃüÖÐÊÖÅÆÎª3µÄ¶ÔÊÖ¢Ú£¬±¾´Î¹¥»÷ÉËº¦¶îÍâ+1¡£#¡¾ÑªÖ®±¯Ãù¡¿#£¨½ö¡¾Á÷ÑªÐÎÌ¬¡¿ÏÂ·¢¶¯£©¶ÔÄ¿±ê½ÇÉ«ºÍ×Ô¼º#¸÷Ôì³É1~3µã·¨ÊõÉËº¦¢Û£¬ÊýÖµÓÉÄã¾ö¶¨¡£	2	ÑªÓ°¿ñµ¶	ÑªÖ®±¯Ãù
+0	magic	earth	å¹»	åœ£ç›¾	card/shengDunDi.png		0		
+1	magic	earth	åœ£	åœ£ç›¾	card/shengDunDi.png		0		
+2	magic	earth	å’	åœ£ç›¾	card/shengDunDi.png		0		
+3	magic	earth	æŠ€	è™šå¼±	card/xuRuoDi.png		0		
+4	magic	earth	å’	ä¸­æ¯’	card/zhongDuDi.png		0		
+5	magic	wind	å¹»	é­”å¼¹	card/moDanFeng.png		0		
+6	magic	wind	åœ£	åœ£ç›¾	card/shengDunFeng.png		0		
+7	magic	wind	è¡€	åœ£ç›¾	card/shengDunFeng.png		0		
+8	magic	wind	å’	åœ£ç›¾	card/shengDunFeng.png		0		
+9	magic	wind	å¹»	è™šå¼±	card/xuRuoFeng.png		0		
+10	magic	wind	åœ£	ä¸­æ¯’	card/zhongDuFeng.png		0		
+11	magic	light	åœ£	åœ£å…‰	card/shengGuang.png	ã€æ²»ç–—æœ¯ã€‘#ç›®æ ‡è§’è‰²+2æ²»ç–—ã€‚	1	æ²»ç–—æœ¯	
+12	magic	light	åœ£	åœ£å…‰	card/shengGuang.png	ã€æ²»ç–—æœ¯ã€‘#ç›®æ ‡è§’è‰²+2æ²»ç–—ã€‚	1	æ²»ç–—æœ¯	
+13	magic	light	åœ£	åœ£å…‰	card/shengGuang.png	ã€æ²»æ„ˆä¹‹å…‰ã€‘#æŒ‡å®šæœ€å¤š3åè§’è‰²å„+1ã€æ²»ç–—ã€‘ã€‚	1	æ²»æ„ˆä¹‹å…‰	
+14	magic	light	å¹»	åœ£å…‰	card/shengGuang.png		0		
+15	magic	light	å¹»	åœ£å…‰	card/shengGuang.png		0		
+16	magic	light	æŠ€	åœ£å…‰	card/shengGuang.png		0		
+17	magic	light	æŠ€	åœ£å…‰	card/shengGuang.png		0		
+18	magic	light	æŠ€	åœ£å…‰	card/shengGuang.png		0		
+19	magic	light	è¡€	åœ£å…‰	card/shengGuang.png		0		
+20	magic	light	è¡€	åœ£å…‰	card/shengGuang.png		0		
+21	magic	light	è¡€	åœ£å…‰	card/shengGuang.png		0		
+22	magic	fire	å’	é­”å¼¹	card/moDanHuo.png		0		
+23	magic	fire	æŠ€	åœ£ç›¾	card/shengDunHuo.png		0		
+24	magic	fire	è¡€	åœ£ç›¾	card/shengDunHuo.png		0		
+25	magic	fire	åœ£	è™šå¼±	card/xuRuoHuo.png		0		
+26	magic	fire	è¡€	è™šå¼±	card/xuRuoHuo.png		0		
+27	magic	thunder	æŠ€	é­”å¼¹	card/moDanLei.png		0		
+28	magic	thunder	åœ£	é­”å¼¹	card/moDanLei.png		0		
+29	magic	thunder	å¹»	åœ£ç›¾	card/shengDunLei.png		0		
+30	magic	thunder	è¡€	åœ£ç›¾	card/shengDunLei.png		0		
+31	magic	thunder	æŠ€	ä¸­æ¯’	card/zhongDuLei.png		0		
+32	magic	water	å¹»	é­”å¼¹	card/moDanShui.png		0		
+33	magic	water	è¡€	é­”å¼¹	card/moDanShui.png		0		
+34	magic	water	è¡€	è™šå¼±	card/xuRuoShui.png		0		
+35	magic	water	å’	è™šå¼±	card/xuRuoShui.png		0		
+36	magic	water	å¹»	ä¸­æ¯’	card/zhongDuShui.png		0		
+37	magic	water	æŠ€	ä¸­æ¯’	card/zhongDuShui.png		0		
+38	magic	water	åœ£	ä¸­æ¯’	card/zhongDuShui.png		0		
+39	attack	darkness	åœ£	æš—ç­	card/anMie.png		0		
+40	attack	darkness	åœ£	æš—ç­	card/anMie.png		0		
+41	attack	darkness	åœ£	æš—ç­	card/anMie.png		0		
+42	attack	darkness	åœ£	æš—ç­	card/anMie.png		0		
+43	attack	darkness	å’	æš—ç­	card/anMie.png		0		
+44	attack	darkness	å’	æš—ç­	card/anMie.png		0		
+45	attack	earth	å¹»	åœ°è£‚æ–©	card/diLieZhan.png	ã€åœ°ä¹‹å°å°ã€‘#ï¼ˆå°†ã€åœ°ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºåœ°ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚èµäºˆã€‘#ï¼ˆç§»é™¤3ç‚¹ã€è“è‰²çµé­‚ã€‘ï¼‰ç›®æ ‡è§’è‰²+2ã€å®çŸ³ã€‘ã€‚	2	åœ°ä¹‹å°å°	çµé­‚èµäºˆ
+46	attack	earth	å¹»	åœ°è£‚æ–©	card/diLieZhan.png	ã€åœ°ä¹‹å°å°ã€‘#ï¼ˆå°†ã€åœ°ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºåœ°ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚èµäºˆã€‘#ï¼ˆç§»é™¤3ç‚¹ã€è“è‰²çµé­‚ã€‘ï¼‰ç›®æ ‡è§’è‰²+2ã€å®çŸ³ã€‘ã€‚	2	åœ°ä¹‹å°å°	çµé­‚èµäºˆ
+47	attack	earth	å¹»	åœ°è£‚æ–©	card/diLieZhan.png	ã€åœ°ä¹‹å°å°ã€‘#ï¼ˆå°†ã€åœ°ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºåœ°ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	åœ°ä¹‹å°å°	çµé­‚éœ‡çˆ†
+48	attack	earth	å¹»	åœ°è£‚æ–©	card/diLieZhan.png	ã€åœ°ä¹‹å°å°ã€‘#ï¼ˆå°†ã€åœ°ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºåœ°ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	åœ°ä¹‹å°å°	çµé­‚éœ‡çˆ†
+49	attack	earth	æŠ€	åœ°è£‚æ–©	card/diLieZhan.png	ã€çƒˆé£ŽæŠ€ã€‘#ï¼ˆæ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰åœ£ç›¾æ—¶å‘åŠ¨ï¼‰æ— è§†å¯¹æ–¹åœ£ç›¾çš„æ•ˆæžœï¼Œä¸”æ­¤æ”»å‡»å¯¹æ–¹æ— æ³•åº”æˆ˜ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	çƒˆé£ŽæŠ€	ç²¾å‡†å°„å‡»
+50	attack	earth	æŠ€	åœ°è£‚æ–©	card/diLieZhan.png	ã€çƒˆé£ŽæŠ€ã€‘#ï¼ˆæ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰åœ£ç›¾æ—¶å‘åŠ¨ï¼‰æ— è§†å¯¹æ–¹åœ£ç›¾çš„æ•ˆæžœï¼Œä¸”æ­¤æ”»å‡»å¯¹æ–¹æ— æ³•åº”æˆ˜ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	çƒˆé£ŽæŠ€	ç²¾å‡†å°„å‡»
+51	attack	earth	æŠ€	åœ°è£‚æ–©	card/diLieZhan.png	ã€çƒˆé£ŽæŠ€ã€‘#ï¼ˆæ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰åœ£ç›¾æ—¶å‘åŠ¨ï¼‰æ— è§†å¯¹æ–¹åœ£ç›¾çš„æ•ˆæžœï¼Œä¸”æ­¤æ”»å‡»å¯¹æ–¹æ— æ³•åº”æˆ˜ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	çƒˆé£ŽæŠ€	ç²¾å‡†å°„å‡»
+52	attack	earth	æŠ€	åœ°è£‚æ–©	card/diLieZhan.png	ã€çƒˆé£ŽæŠ€ã€‘#ï¼ˆæ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰åœ£ç›¾æ—¶å‘åŠ¨ï¼‰æ— è§†å¯¹æ–¹åœ£ç›¾çš„æ•ˆæžœï¼Œä¸”æ­¤æ”»å‡»å¯¹æ–¹æ— æ³•åº”æˆ˜ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	çƒˆé£ŽæŠ€	ç²¾å‡†å°„å‡»
+53	attack	earth	æŠ€	åœ°è£‚æ–©	card/diLieZhan.png	ã€çƒˆé£ŽæŠ€ã€‘#ï¼ˆæ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰åœ£ç›¾æ—¶å‘åŠ¨ï¼‰æ— è§†å¯¹æ–¹åœ£ç›¾çš„æ•ˆæžœï¼Œä¸”æ­¤æ”»å‡»å¯¹æ–¹æ— æ³•åº”æˆ˜ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	çƒˆé£ŽæŠ€	ç²¾å‡†å°„å‡»
+54	attack	earth	åœ£	åœ°è£‚æ–©	card/diLieZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»æ„ˆä¹‹å…‰ã€‘#æŒ‡å®šæœ€å¤š3åè§’è‰²å„+1ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+55	attack	earth	å’	åœ°è£‚æ–©	card/diLieZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€é™¨çŸ³ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œé¢å¤–+1ã€æ³•æœ¯è¡ŒåŠ¨ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ åœ°ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	é™¨çŸ³
+56	attack	earth	å’	åœ°è£‚æ–©	card/diLieZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€é™¨çŸ³ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œé¢å¤–+1ã€æ³•æœ¯è¡ŒåŠ¨ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ åœ°ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	é™¨çŸ³
+57	attack	earth	è¡€	åœ°è£‚æ–©	card/diLieZhan.png	ã€è¡€è…¥å’†å“®ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰è‹¥æ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰çš„ã€æ²»ç–—ã€‘ä¸º2ï¼Œåˆ™æœ¬æ¬¡æ”»å‡»å¼ºåˆ¶å‘½ä¸­ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+58	attack	earth	è¡€	åœ°è£‚æ–©	card/diLieZhan.png	ã€è¡€è…¥å’†å“®ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰è‹¥æ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰çš„ã€æ²»ç–—ã€‘ä¸º2ï¼Œåˆ™æœ¬æ¬¡æ”»å‡»å¼ºåˆ¶å‘½ä¸­ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+59	attack	earth	è¡€	åœ°è£‚æ–©	card/diLieZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+60	attack	earth	è¡€	åœ°è£‚æ–©	card/diLieZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+61	attack	earth	è¡€	åœ°è£‚æ–©	card/diLieZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+62	attack	earth	å’	åœ°è£‚æ–©	card/diLieZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é™¨çŸ³ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œé¢å¤–+1ã€æ³•æœ¯è¡ŒåŠ¨ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ åœ°ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é™¨çŸ³
+63	attack	earth	å’	åœ°è£‚æ–©	card/diLieZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é™¨çŸ³ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œé¢å¤–+1ã€æ³•æœ¯è¡ŒåŠ¨ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ åœ°ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é™¨çŸ³
+64	attack	earth	åœ£	åœ°è£‚æ–©	card/diLieZhan.png	ã€æ²»æ„ˆä¹‹å…‰ã€‘#æŒ‡å®šæœ€å¤š3åè§’è‰²å„+1ã€æ²»ç–—ã€‘ã€‚	1	æ²»æ„ˆä¹‹å…‰	
+65	attack	earth	åœ£	åœ°è£‚æ–©	card/diLieZhan.png	ã€æ²»æ„ˆä¹‹å…‰ã€‘#æŒ‡å®šæœ€å¤š3åè§’è‰²å„+1ã€æ²»ç–—ã€‘ã€‚	1	æ²»æ„ˆä¹‹å…‰	
+66	attack	wind	å¹»	é£Žç¥žæ–©	card/fengShenZhan.png	ã€é£Žä¹‹å°å°ã€‘#ï¼ˆå°†ã€é£Žä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé£Žç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚èµäºˆã€‘#ï¼ˆç§»é™¤3ç‚¹ã€è“è‰²çµé­‚ã€‘ï¼‰ç›®æ ‡è§’è‰²+2ã€å®çŸ³ã€‘ã€‚	2	é£Žä¹‹å°å°	çµé­‚èµäºˆ
+67	attack	wind	å¹»	é£Žç¥žæ–©	card/fengShenZhan.png	ã€é£Žä¹‹å°å°ã€‘#ï¼ˆå°†ã€é£Žä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé£Žç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚èµäºˆã€‘#ï¼ˆç§»é™¤3ç‚¹ã€è“è‰²çµé­‚ã€‘ï¼‰ç›®æ ‡è§’è‰²+2ã€å®çŸ³ã€‘ã€‚	2	é£Žä¹‹å°å°	çµé­‚èµäºˆ
+68	attack	wind	å¹»	é£Žç¥žæ–©	card/fengShenZhan.png	ã€é£Žä¹‹å°å°ã€‘#ï¼ˆå°†ã€é£Žä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé£Žç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚èµäºˆã€‘#ï¼ˆç§»é™¤3ç‚¹ã€è“è‰²çµé­‚ã€‘ï¼‰ç›®æ ‡è§’è‰²+2ã€å®çŸ³ã€‘ã€‚	2	é£Žä¹‹å°å°	çµé­‚èµäºˆ
+69	attack	wind	å¹»	é£Žç¥žæ–©	card/fengShenZhan.png	ã€é£Žä¹‹å°å°ã€‘#ï¼ˆå°†ã€é£Žä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé£Žç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚èµäºˆã€‘#ï¼ˆç§»é™¤3ç‚¹ã€è“è‰²çµé­‚ã€‘ï¼‰ç›®æ ‡è§’è‰²+2ã€å®çŸ³ã€‘ã€‚	2	é£Žä¹‹å°å°	çµé­‚èµäºˆ
+70	attack	wind	æŠ€	é£Žç¥žæ–©	card/fengShenZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	ç–¾é£ŽæŠ€	ç²¾å‡†å°„å‡»
+71	attack	wind	æŠ€	é£Žç¥žæ–©	card/fengShenZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	ç–¾é£ŽæŠ€	ç²¾å‡†å°„å‡»
+72	attack	wind	æŠ€	é£Žç¥žæ–©	card/fengShenZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	ç–¾é£ŽæŠ€	ç²¾å‡†å°„å‡»
+73	attack	wind	æŠ€	é£Žç¥žæ–©	card/fengShenZhan.png	ã€çƒˆé£ŽæŠ€ã€‘#ï¼ˆæ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰åœ£ç›¾æ—¶å‘åŠ¨ï¼‰æ— è§†å¯¹æ–¹åœ£ç›¾çš„æ•ˆæžœï¼Œä¸”æ­¤æ”»å‡»å¯¹æ–¹æ— æ³•åº”æˆ˜ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	çƒˆé£ŽæŠ€	ç²¾å‡†å°„å‡»
+74	attack	wind	æŠ€	é£Žç¥žæ–©	card/fengShenZhan.png	ã€çƒˆé£ŽæŠ€ã€‘#ï¼ˆæ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰åœ£ç›¾æ—¶å‘åŠ¨ï¼‰æ— è§†å¯¹æ–¹åœ£ç›¾çš„æ•ˆæžœï¼Œä¸”æ­¤æ”»å‡»å¯¹æ–¹æ— æ³•åº”æˆ˜ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	çƒˆé£ŽæŠ€	ç²¾å‡†å°„å‡»
+75	attack	wind	åœ£	é£Žç¥žæ–©	card/fengShenZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»æ„ˆä¹‹å…‰ã€‘#æŒ‡å®šæœ€å¤š3åè§’è‰²å„+1ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+76	attack	wind	åœ£	é£Žç¥žæ–©	card/fengShenZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»æ„ˆä¹‹å…‰ã€‘#æŒ‡å®šæœ€å¤š3åè§’è‰²å„+1ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+77	attack	wind	åœ£	é£Žç¥žæ–©	card/fengShenZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»æ„ˆä¹‹å…‰ã€‘#æŒ‡å®šæœ€å¤š3åè§’è‰²å„+1ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+78	attack	wind	è¡€	é£Žç¥žæ–©	card/fengShenZhan.png	ã€è¡€è…¥å’†å“®ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰è‹¥æ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰çš„ã€æ²»ç–—ã€‘ä¸º2ï¼Œåˆ™æœ¬æ¬¡æ”»å‡»å¼ºåˆ¶å‘½ä¸­ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+79	attack	wind	è¡€	é£Žç¥žæ–©	card/fengShenZhan.png	ã€è¡€è…¥å’†å“®ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰è‹¥æ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰çš„ã€æ²»ç–—ã€‘ä¸º2ï¼Œåˆ™æœ¬æ¬¡æ”»å‡»å¼ºåˆ¶å‘½ä¸­ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+80	attack	wind	è¡€	é£Žç¥žæ–©	card/fengShenZhan.png	ã€è¡€è…¥å’†å“®ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰è‹¥æ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰çš„ã€æ²»ç–—ã€‘ä¸º2ï¼Œåˆ™æœ¬æ¬¡æ”»å‡»å¼ºåˆ¶å‘½ä¸­ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+81	attack	wind	è¡€	é£Žç¥žæ–©	card/fengShenZhan.png	ã€è¡€è…¥å’†å“®ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰è‹¥æ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰çš„ã€æ²»ç–—ã€‘ä¸º2ï¼Œåˆ™æœ¬æ¬¡æ”»å‡»å¼ºåˆ¶å‘½ä¸­ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+82	attack	wind	å’	é£Žç¥žæ–©	card/fengShenZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é£Žåˆƒã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œé¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ é£Žç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é£Žåˆƒ
+83	attack	wind	å’	é£Žç¥žæ–©	card/fengShenZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é£Žåˆƒã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œé¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ é£Žç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é£Žåˆƒ
+84	attack	wind	å’	é£Žç¥žæ–©	card/fengShenZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é£Žåˆƒã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œé¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ é£Žç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é£Žåˆƒ
+85	attack	wind	å’	é£Žç¥žæ–©	card/fengShenZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é£Žåˆƒã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œé¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ é£Žç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é£Žåˆƒ
+86	attack	wind	å’	é£Žç¥žæ–©	card/fengShenZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é£Žåˆƒã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œé¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ é£Žç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é£Žåˆƒ
+87	attack	fire	å¹»	ç«ç„°æ–©	card/huoYanZhan.png	ã€ç«ä¹‹å°å°ã€‘#ï¼ˆå°†ã€ç«ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºç«ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	ç«ä¹‹å°å°	çµé­‚éœ‡çˆ†
+88	attack	fire	å¹»	ç«ç„°æ–©	card/huoYanZhan.png	ã€ç«ä¹‹å°å°ã€‘#ï¼ˆå°†ã€ç«ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºç«ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	ç«ä¹‹å°å°	çµé­‚éœ‡çˆ†
+89	attack	fire	å¹»	ç«ç„°æ–©	card/huoYanZhan.png	ã€ç«ä¹‹å°å°ã€‘#ï¼ˆå°†ã€ç«ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºç«ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	ç«ä¹‹å°å°	çµé­‚éœ‡çˆ†
+90	attack	fire	å¹»	ç«ç„°æ–©	card/huoYanZhan.png	ã€ç«ä¹‹å°å°ã€‘#ï¼ˆå°†ã€ç«ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºç«ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	ç«ä¹‹å°å°	çµé­‚éœ‡çˆ†
+91	attack	fire	å¹»	ç«ç„°æ–©	card/huoYanZhan.png	ã€ç«ä¹‹å°å°ã€‘#ï¼ˆå°†ã€ç«ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºç«ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	ç«ä¹‹å°å°	çµé­‚éœ‡çˆ†
+92	attack	fire	æŠ€	ç«ç„°æ–©	card/huoYanZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é—ªå…‰é™·é˜±ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚	2	ç–¾é£ŽæŠ€	é—ªå…‰é™·é˜±
+93	attack	fire	æŠ€	ç«ç„°æ–©	card/huoYanZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é—ªå…‰é™·é˜±ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚	2	ç–¾é£ŽæŠ€	é—ªå…‰é™·é˜±
+94	attack	fire	æŠ€	ç«ç„°æ–©	card/huoYanZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é—ªå…‰é™·é˜±ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚	2	ç–¾é£ŽæŠ€	é—ªå…‰é™·é˜±
+95	attack	fire	æŠ€	ç«ç„°æ–©	card/huoYanZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é—ªå…‰é™·é˜±ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚	2	ç–¾é£ŽæŠ€	é—ªå…‰é™·é˜±
+96	attack	fire	åœ£	ç«ç„°æ–©	card/huoYanZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»ç–—æœ¯ã€‘#ç›®æ ‡è§’è‰²+2ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»ç–—æœ¯
+97	attack	fire	åœ£	ç«ç„°æ–©	card/huoYanZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»ç–—æœ¯ã€‘#ç›®æ ‡è§’è‰²+2ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»ç–—æœ¯
+98	attack	fire	åœ£	ç«ç„°æ–©	card/huoYanZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»ç–—æœ¯ã€‘#ç›®æ ‡è§’è‰²+2ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»ç–—æœ¯
+99	attack	fire	åœ£	ç«ç„°æ–©	card/huoYanZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»ç–—æœ¯ã€‘#ç›®æ ‡è§’è‰²+2ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»ç–—æœ¯
+100	attack	fire	å’	ç«ç„°æ–©	card/huoYanZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€ç«çƒã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ ç«ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	ç«çƒ
+101	attack	fire	å’	ç«ç„°æ–©	card/huoYanZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€ç«çƒã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ ç«ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	ç«çƒ
+102	attack	fire	å’	ç«ç„°æ–©	card/huoYanZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€ç«çƒã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ ç«ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	ç«çƒ
+103	attack	fire	å’	ç«ç„°æ–©	card/huoYanZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€ç«çƒã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ ç«ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	ç«çƒ
+104	attack	fire	è¡€	ç«ç„°æ–©	card/huoYanZhan.png	ã€è¡€è…¥å’†å“®ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰è‹¥æ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰çš„ã€æ²»ç–—ã€‘ä¸º2ï¼Œåˆ™æœ¬æ¬¡æ”»å‡»å¼ºåˆ¶å‘½ä¸­ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+105	attack	fire	è¡€	ç«ç„°æ–©	card/huoYanZhan.png	ã€è¡€è…¥å’†å“®ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰è‹¥æ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰çš„ã€æ²»ç–—ã€‘ä¸º2ï¼Œåˆ™æœ¬æ¬¡æ”»å‡»å¼ºåˆ¶å‘½ä¸­ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+106	attack	fire	è¡€	ç«ç„°æ–©	card/huoYanZhan.png	ã€è¡€è…¥å’†å“®ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰è‹¥æ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰çš„ã€æ²»ç–—ã€‘ä¸º2ï¼Œåˆ™æœ¬æ¬¡æ”»å‡»å¼ºåˆ¶å‘½ä¸­ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+107	attack	fire	è¡€	ç«ç„°æ–©	card/huoYanZhan.png	ã€è¡€è…¥å’†å“®ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰è‹¥æ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰çš„ã€æ²»ç–—ã€‘ä¸º2ï¼Œåˆ™æœ¬æ¬¡æ”»å‡»å¼ºåˆ¶å‘½ä¸­ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€è…¥å’†å“®	è¡€ä¹‹æ‚²é¸£
+108	attack	thunder	æŠ€	é›·å…‰æ–©	card/leiGuangZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	ç–¾é£ŽæŠ€	ç²¾å‡†å°„å‡»
+109	attack	thunder	æŠ€	é›·å…‰æ–©	card/leiGuangZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	ç–¾é£ŽæŠ€	ç²¾å‡†å°„å‡»
+110	attack	thunder	å¹»	é›·å…‰æ–©	card/leiGuangZhan.png	ã€é›·ä¹‹å°å°ã€‘#ï¼ˆå°†ã€é›·ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé›·ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	é›·ä¹‹å°å°	çµé­‚éœ‡çˆ†
+111	attack	thunder	å¹»	é›·å…‰æ–©	card/leiGuangZhan.png	ã€é›·ä¹‹å°å°ã€‘#ï¼ˆå°†ã€é›·ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé›·ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	é›·ä¹‹å°å°	çµé­‚éœ‡çˆ†
+112	attack	thunder	å¹»	é›·å…‰æ–©	card/leiGuangZhan.png	ã€é›·ä¹‹å°å°ã€‘#ï¼ˆå°†ã€é›·ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé›·ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	é›·ä¹‹å°å°	çµé­‚éœ‡çˆ†
+113	attack	thunder	å¹»	é›·å…‰æ–©	card/leiGuangZhan.png	ã€é›·ä¹‹å°å°ã€‘#ï¼ˆå°†ã€é›·ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé›·ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	é›·ä¹‹å°å°	çµé­‚éœ‡çˆ†
+114	attack	thunder	å¹»	é›·å…‰æ–©	card/leiGuangZhan.png	ã€é›·ä¹‹å°å°ã€‘#ï¼ˆå°†ã€é›·ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé›·ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	é›·ä¹‹å°å°	çµé­‚éœ‡çˆ†
+115	attack	thunder	æŠ€	é›·å…‰æ–©	card/leiGuangZhan.png	ã€çƒˆé£ŽæŠ€ã€‘#ï¼ˆæ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰åœ£ç›¾æ—¶å‘åŠ¨ï¼‰æ— è§†å¯¹æ–¹åœ£ç›¾çš„æ•ˆæžœï¼Œä¸”æ­¤æ”»å‡»å¯¹æ–¹æ— æ³•åº”æˆ˜ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	çƒˆé£ŽæŠ€	ç²¾å‡†å°„å‡»
+116	attack	thunder	æŠ€	é›·å…‰æ–©	card/leiGuangZhan.png	ã€çƒˆé£ŽæŠ€ã€‘#ï¼ˆæ”»å‡»çš„ç›®æ ‡æ‹¥æœ‰åœ£ç›¾æ—¶å‘åŠ¨ï¼‰æ— è§†å¯¹æ–¹åœ£ç›¾çš„æ•ˆæžœï¼Œä¸”æ­¤æ”»å‡»å¯¹æ–¹æ— æ³•åº”æˆ˜ã€‚#ã€ç²¾å‡†å°„å‡»ã€‘#æ­¤æ”»å‡»å¼ºåˆ¶å‘½ä¸­ï¼Œä½†æœ¬æ¬¡æ”»å‡»ä¼¤å®³-1ã€‚	2	çƒˆé£ŽæŠ€	ç²¾å‡†å°„å‡»
+117	attack	thunder	åœ£	é›·å…‰æ–©	card/leiGuangZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»ç–—æœ¯ã€‘#ç›®æ ‡è§’è‰²+2ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»ç–—æœ¯
+118	attack	thunder	åœ£	é›·å…‰æ–©	card/leiGuangZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»ç–—æœ¯ã€‘#ç›®æ ‡è§’è‰²+2ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»ç–—æœ¯
+119	attack	thunder	åœ£	é›·å…‰æ–©	card/leiGuangZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»ç–—æœ¯ã€‘#ç›®æ ‡è§’è‰²+2ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»ç–—æœ¯
+120	attack	thunder	åœ£	é›·å…‰æ–©	card/leiGuangZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»ç–—æœ¯ã€‘#ç›®æ ‡è§’è‰²+2ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»ç–—æœ¯
+121	attack	thunder	è¡€	é›·å…‰æ–©	card/leiGuangZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+122	attack	thunder	è¡€	é›·å…‰æ–©	card/leiGuangZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+123	attack	thunder	è¡€	é›·å…‰æ–©	card/leiGuangZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+124	attack	thunder	è¡€	é›·å…‰æ–©	card/leiGuangZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+125	attack	thunder	å’	é›·å…‰æ–©	card/leiGuangZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é›·å‡»ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæˆ‘æ–¹ã€æˆ˜ç»©åŒºã€‘+1ã€å®çŸ³ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ é›·ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é›·å‡»
+126	attack	thunder	å’	é›·å…‰æ–©	card/leiGuangZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é›·å‡»ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæˆ‘æ–¹ã€æˆ˜ç»©åŒºã€‘+1ã€å®çŸ³ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ é›·ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é›·å‡»
+127	attack	thunder	å’	é›·å…‰æ–©	card/leiGuangZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é›·å‡»ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæˆ‘æ–¹ã€æˆ˜ç»©åŒºã€‘+1ã€å®çŸ³ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ é›·ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é›·å‡»
+128	attack	thunder	å’	é›·å…‰æ–©	card/leiGuangZhan.png	ã€è¿…æ·èµç¦ã€‘#ï¼ˆå°†ã€è¿…æ·èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆã€æ³•æœ¯è¡ŒåŠ¨ã€‘æˆ–ã€æ”»å‡»è¡ŒåŠ¨ã€‘ç»“æŸæ—¶å¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨ï¼‰ï¼š#é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é›·å‡»ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæˆ‘æ–¹ã€æˆ˜ç»©åŒºã€‘+1ã€å®çŸ³ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ é›·ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	è¿…æ·èµç¦	é›·å‡»
+129	attack	water	æŠ€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é—ªå…‰é™·é˜±ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚	2	ç–¾é£ŽæŠ€	é—ªå…‰é™·é˜±
+130	attack	water	æŠ€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é—ªå…‰é™·é˜±ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚	2	ç–¾é£ŽæŠ€	é—ªå…‰é™·é˜±
+131	attack	water	æŠ€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é—ªå…‰é™·é˜±ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚	2	ç–¾é£ŽæŠ€	é—ªå…‰é™·é˜±
+132	attack	water	æŠ€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€ç–¾é£ŽæŠ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰é¢å¤–+1ã€æ”»å‡»è¡ŒåŠ¨ã€‘ã€‚#ã€é—ªå…‰é™·é˜±ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚	2	ç–¾é£ŽæŠ€	é—ªå…‰é™·é˜±
+133	attack	water	å¹»	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€æ°´ä¹‹å°å°ã€‘#ï¼ˆå°†ã€æ°´ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé£Žç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚èµäºˆã€‘#ï¼ˆç§»é™¤3ç‚¹ã€è“è‰²çµé­‚ã€‘ï¼‰ç›®æ ‡è§’è‰²+2ã€å®çŸ³ã€‘ã€‚	2	æ°´ä¹‹å°å°	çµé­‚èµäºˆ
+134	attack	water	å¹»	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€æ°´ä¹‹å°å°ã€‘#ï¼ˆå°†ã€æ°´ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºé£Žç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚èµäºˆã€‘#ï¼ˆç§»é™¤3ç‚¹ã€è“è‰²çµé­‚ã€‘ï¼‰ç›®æ ‡è§’è‰²+2ã€å®çŸ³ã€‘ã€‚	2	æ°´ä¹‹å°å°	çµé­‚èµäºˆ
+135	attack	water	å¹»	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€æ°´ä¹‹å°å°ã€‘#ï¼ˆå°†ã€æ°´ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºæ°´ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	æ°´ä¹‹å°å°	çµé­‚éœ‡çˆ†
+136	attack	water	å¹»	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€æ°´ä¹‹å°å°ã€‘#ï¼ˆå°†ã€æ°´ä¹‹å°å°ã€‘æ”¾ç½®äºŽç›®æ ‡å¯¹æ‰‹é¢å‰ï¼‰#è¯¥å¯¹æ‰‹èŽ·å¾—ï¼ˆç›´åˆ°å¥¹ä»Žæ‰‹ä¸­æ‰“å‡ºæˆ–å±•ç¤ºå‡ºæ°´ç³»ç‰Œæ—¶å¼ºåˆ¶è§¦å‘ï¼‰:#å¯¹ä»–é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œè§¦å‘åŽç§»é™¤æ­¤ç‰Œã€‚#ã€çµé­‚éœ‡çˆ†ã€‘#ï¼ˆç§»é™¤3ç‚¹ã€é»„è‰²çµé­‚ã€‘ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ã€‚#è‹¥ä»–çš„æ‰‹ç‰Œï¼œ3ä¸”æ‰‹ç‰Œä¸Šé™ï¼ž5ï¼Œåˆ™æ­¤ä¼¤å®³è€Œå¤–+2ã€‚	2	æ°´ä¹‹å°å°	çµé­‚éœ‡çˆ†
+137	attack	water	åœ£	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»æ„ˆä¹‹å…‰ã€‘#æŒ‡å®šæœ€å¤š3åè§’è‰²å„+1ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+138	attack	water	åœ£	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»æ„ˆä¹‹å…‰ã€‘#æŒ‡å®šæœ€å¤š3åè§’è‰²å„+1ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+139	attack	water	åœ£	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€å¤©ä½¿ä¹‹å¢™ã€‘#å¯ä½œä¸ºã€åœ£ç›¾ã€‘ä½¿ç”¨ã€‚#ã€æ²»æ„ˆä¹‹å…‰ã€‘#æŒ‡å®šæœ€å¤š3åè§’è‰²å„+1ã€æ²»ç–—ã€‘ã€‚	2	å¤©ä½¿ä¹‹å¢™	æ²»æ„ˆä¹‹å…‰
+140	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€å†°å†»ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œå¹¶æŒ‡å®š1åè§’è‰²+1ã€æ²»ç–—ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ æ°´ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	å†°å†»
+141	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€å†°å†»ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œå¹¶æŒ‡å®š1åè§’è‰²+1ã€æ²»ç–—ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ æ°´ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	å†°å†»
+142	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€å†°å†»ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œå¹¶æŒ‡å®š1åè§’è‰²+1ã€æ²»ç–—ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ æ°´ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	å†°å†»
+143	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€å†°å†»ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œå¹¶æŒ‡å®š1åè§’è‰²+1ã€æ²»ç–—ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ æ°´ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	å†°å†»
+144	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€å†°å†»ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œå¹¶æŒ‡å®š1åè§’è‰²+1ã€æ²»ç–—ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ æ°´ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	å†°å†»
+145	attack	water	å’	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€å¨åŠ›èµç¦ã€‘#ï¼ˆå°†ã€å¨åŠ›èµç¦ã€‘æ”¾ç½®äºŽç›®æ ‡é˜Ÿå‹é¢å‰ï¼‰è¯¥é˜Ÿå‹èŽ·å¾—#ï¼ˆæ”»å‡»å‘½ä¸­åŽå¯ä»¥ç§»é™¤æ­¤ç‰Œå‘åŠ¨â‘¡ï¼‰ï¼š#æœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ã€‚#ã€å†°å†»ã€‘#å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œå¹¶æŒ‡å®š1åè§’è‰²+1ã€æ²»ç–—ã€‘ï¼›#ï¼ˆè‹¥ä½ é¢å¤–å¼ƒ1å¼ æ°´ç³»ç‰Œã€å±•ç¤ºã€‘â‘ ï¼‰æœ¬æ¬¡ä¼¤å®³é¢å¤–+1ã€‚	2	å¨åŠ›èµç¦	å†°å†»
+146	attack	water	è¡€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+147	attack	water	è¡€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+148	attack	water	è¡€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£
+149	attack	water	è¡€	æ°´æ¶Ÿæ–©	card/shuiLianZhan.png	ã€è¡€å½±ç‹‚åˆ€ã€‘#ï¼ˆä½œä¸ºä¸»åŠ¨æ”»å‡»æ‰“å‡ºæ—¶å‘åŠ¨ï¼‰#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º2çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+2ï¼›#è‹¥å‘½ä¸­æ‰‹ç‰Œä¸º3çš„å¯¹æ‰‹â‘¡ï¼Œæœ¬æ¬¡æ”»å‡»ä¼¤å®³é¢å¤–+1ã€‚#ã€è¡€ä¹‹æ‚²é¸£ã€‘#ï¼ˆä»…ã€æµè¡€å½¢æ€ã€‘ä¸‹å‘åŠ¨ï¼‰å¯¹ç›®æ ‡è§’è‰²å’Œè‡ªå·±#å„é€ æˆ1~3ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼Œæ•°å€¼ç”±ä½ å†³å®šã€‚	2	è¡€å½±ç‹‚åˆ€	è¡€ä¹‹æ‚²é¸£

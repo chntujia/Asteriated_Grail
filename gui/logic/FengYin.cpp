@@ -7,15 +7,15 @@ setMyRole(this);
     connect(playerArea,SIGNAL(playerUnready()),this,SLOT(onUnready()));
 
     Button *fengYinFaShu,*wuXiShuFu,*fengYinPoSui;
-    fengYinFaShu=new Button(3,tr("·âÓ¡·¨Êõ"));
+    fengYinFaShu=new Button(3,tr("å°å°æ³•æœ¯"));
     buttonArea->addButton(fengYinFaShu);
     connect(fengYinFaShu,SIGNAL(buttonSelected(int)),this,SLOT(FengYinFaShu()));
 
-    wuXiShuFu=new Button(4,tr("ÎåÏµÊø¸¿"));
+    wuXiShuFu=new Button(4,tr("äº”ç³»æŸç¼š"));
     buttonArea->addButton(wuXiShuFu);
     connect(wuXiShuFu,SIGNAL(buttonSelected(int)),this,SLOT(WuXiShuFu()));
 
-    fengYinPoSui=new Button(5,tr("·âÓ¡ÆÆËé"));
+    fengYinPoSui=new Button(5,tr("å°å°ç ´ç¢"));
     buttonArea->addButton(fengYinPoSui);
     connect(fengYinPoSui,SIGNAL(buttonSelected(int)),this,SLOT(FengYinPoSui()));
 }
@@ -24,14 +24,14 @@ void FengYin::normal()
 {
     Role::normal();
     Player* myself=dataInterface->getMyself();
-//·âÓ¡·¨Êõ
+//å°å°æ³•æœ¯
     foreach(Card*ptr, dataInterface->getHandCards())
-        if (ptr->getType()=="attack"&&ptr->getProperty()==tr("»Ã"))
+        if (ptr->getType()=="attack"&&ptr->getProperty()==tr("å¹»"))
             buttonArea->enable(3);
-//ÎåÏµÊø¸¿
+//äº”ç³»æŸç¼š
     if(myself->getEnergy()>0)
         buttonArea->enable(4);
-//·âÓ¡ÆÆËé
+//å°å°ç ´ç¢
     if(myself->getEnergy()>0)
         foreach(Player*ptr,dataInterface->getPlayerList())
             if(ptr->hasStatus()){
@@ -54,7 +54,7 @@ void FengYin::FengYinFaShu()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableProperty(tr("»Ã"));
+    handArea->enableProperty(tr("å¹»"));
     handArea->disableMagic();
 }
 
@@ -76,11 +76,11 @@ void FengYin::WuXiShuFu()
     playerArea->setQuota(1);
     playerArea->enableEnemy();
 
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÊ¹ÓÃµÄÄÜÁ¿£º"));
+    tipArea->setMsg(tr("è¯·é€‰æ‹©ä½¿ç”¨çš„èƒ½é‡ï¼š"));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("1.Ë®¾§"));
+        tipArea->addBoxItem(tr("1.æ°´æ™¶"));
     if(gem>=1)
-        tipArea->addBoxItem(tr("2.±¦Ê¯"));
+        tipArea->addBoxItem(tr("2.å®çŸ³"));
 
     tipArea->showBox();
 }
@@ -106,11 +106,11 @@ void FengYin::FengYinPoSui()
         if(players[i]->hasStatus())
             playerArea->enablePlayerItem(i);
 
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÊ¹ÓÃµÄÄÜÁ¿£º"));
+    tipArea->setMsg(tr("è¯·é€‰æ‹©ä½¿ç”¨çš„èƒ½é‡ï¼š"));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("1.Ë®¾§"));
+        tipArea->addBoxItem(tr("1.æ°´æ™¶"));
     if(gem>=1)
-        tipArea->addBoxItem(tr("2.±¦Ê¯"));
+        tipArea->addBoxItem(tr("2.å®çŸ³"));
 
     tipArea->showBox();
 }
@@ -130,7 +130,7 @@ void FengYin::additionalAction()
 {
     Role::additionalAction();
     if(usedMagic)
-        tipArea->addBoxItem(tr("1.·¨Êõ¼¤µ´"));
+        tipArea->addBoxItem(tr("1.æ³•æœ¯æ¿€è¡"));
 }
 
 void FengYin::cardAnalyse()
@@ -186,7 +186,7 @@ void FengYin::onOkClicked()
 
     switch(state)
     {
-//¶îÍâĞĞ¶¯Ñ¯ÎÊ
+//é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0].digitValue()==1){
@@ -194,7 +194,7 @@ void FengYin::onOkClicked()
             attackAction();
         }
         break;
-//·âÓ¡·¨Êõ
+//å°å°æ³•æœ¯
     case 401:
         command="401;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -206,7 +206,7 @@ void FengYin::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÎåÏµÊø¸¿
+//äº”ç³»æŸç¼š
     case 402:
         command="402;";
         text=tipArea->getBoxCurrentText();
@@ -221,7 +221,7 @@ void FengYin::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//·âÓ¡ÆÆËé
+//å°å°ç ´ç¢
     case 403:
         command="403;";
         if(usedGem)
@@ -244,11 +244,11 @@ void FengYin::onCancelClicked()
     Role::onCancelClicked();
     switch(state)
     {
-//·âÓ¡·¨Êõ
+//å°å°æ³•æœ¯
     case 401:
-//ÎåÏµÊø¸¿
+//äº”ç³»æŸç¼š
     case 402:
-//·âÓ¡ÆÆËé
+//å°å°ç ´ç¢
     case 403:
         normal();
         break;

@@ -6,12 +6,12 @@ XianZhe::XianZhe()
     setMyRole(this);
 
     Button *moDaoFaDian;
-    moDaoFaDian=new Button(3,"Ä§µÀ·¨µä");
+    moDaoFaDian=new Button(3,"é­”é“æ³•å…¸");
     buttonArea->addButton(moDaoFaDian);
     connect(moDaoFaDian,SIGNAL(buttonSelected(int)),this,SLOT(MoDaoFaDian()));
 
     Button *shengJieFaDian;
-    shengJieFaDian=new Button(4,"Ê¥½à·¨µä");
+    shengJieFaDian=new Button(4,"åœ£æ´æ³•å…¸");
     buttonArea->addButton(shengJieFaDian);
     connect(shengJieFaDian,SIGNAL(buttonSelected(int)),this,SLOT(ShengJieFaDian()));
 }
@@ -33,7 +33,7 @@ void XianZhe::normal()
 void XianZhe::FaShuFanTan1()
 {
     state=1701;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯·¨Êõ·´µ¯£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨æ³•æœ¯åå¼¹ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -256,7 +256,7 @@ void XianZhe::onCancelClicked()
 void XianZhe::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("·¨Êõ·´µ¯"))
+    if(skill==tr("æ³•æœ¯åå¼¹"))
         FaShuFanTan1();
 }
 

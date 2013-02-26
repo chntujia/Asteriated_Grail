@@ -6,14 +6,14 @@ MoGong::MoGong()
     setMyRole(this);
 
     Button *moGuangChongJi, *leiGuangSanShe, *checkCover;
-    moGuangChongJi=new Button(3,"Ä§¹á³å»÷");
+    moGuangChongJi=new Button(3,"é­”è´¯å†²å‡»");
     buttonArea->addButton(moGuangChongJi);
     connect(moGuangChongJi,SIGNAL(buttonSelected(int)),this,SLOT(MoGuanChongJi()));
-    leiGuangSanShe=new Button(4,"À×¹âÉ¢Éä");
+    leiGuangSanShe=new Button(4,"é›·å…‰æ•£å°„");
     buttonArea->addButton(leiGuangSanShe);
     connect(leiGuangSanShe,SIGNAL(buttonSelected(int)),this,SLOT(LeiGuangSanShe()));
 
-    checkCover = new Button(10,tr("²é¿´³äÄÜ"));
+    checkCover = new Button(10,tr("æŸ¥çœ‹å……èƒ½"));
     buttonArea->addOutsideTurnButton(checkCover);
     checkCover->setVisible(true);
     checkCover->setEnabled(true);
@@ -52,7 +52,7 @@ void MoGong::MoGuanChongJi()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
-    tipArea->setMsg("ÇëÑ¡Ôñ»ğÏµ³äÄÜ");
+    tipArea->setMsg("è¯·é€‰æ‹©ç«ç³»å……èƒ½");
     gui->showCoverArea(true);
     coverArea->reset();
     coverArea->enableElement("fire");
@@ -63,7 +63,7 @@ void MoGong::MoGuanChongJi()
 void MoGong::MoGuanChongJiHit()
 {
     state = 2602;
-    tipArea->setMsg("¹¥»÷ÃüÖĞ£¬¶îÍâÒÆ³ı1»ğÏµ³äÄÜÉËº¦¼Ó1");
+    tipArea->setMsg("æ”»å‡»å‘½ä¸­ï¼Œé¢å¤–ç§»é™¤1ç«ç³»å……èƒ½ä¼¤å®³åŠ 1");
     gui->showCoverArea(true);
     coverArea->reset();
     coverArea->enableElement("fire");
@@ -78,7 +78,7 @@ void MoGong::LeiGuangSanShe()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
-    tipArea->setMsg("ÇëÑ¡ÔñÀ×Ïµ³äÄÜ");
+    tipArea->setMsg("è¯·é€‰æ‹©é›·ç³»å……èƒ½");
     gui->showCoverArea(true);
     coverArea->reset();
     coverArea->enableElement("thunder");
@@ -95,7 +95,7 @@ void MoGong::DuoChongSheJi()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
-    tipArea->setMsg("ÇëÑ¡Ôñ·çÏµ³äÄÜ");
+    tipArea->setMsg("è¯·é€‰æ‹©é£ç³»å……èƒ½");
     gui->showCoverArea(true);
     coverArea->reset();
     coverArea->enableElement("wind");
@@ -107,12 +107,12 @@ void MoGong::ChongNengMoYan1()
 {
     state = 2661;
     gui->reset();
-    tipArea->setMsg("ÊÇ·ñ·¢¶¯³äÄÜ/Ä§ÑÛ£¿");
+    tipArea->setMsg("æ˜¯å¦å‘åŠ¨å……èƒ½/é­”çœ¼ï¼Ÿ");
     Player* myself = dataInterface->getMyself();
     if(myself->getEnergy()>0)
-        tipArea->addBoxItem("1.³äÄÜ");
+        tipArea->addBoxItem("1.å……èƒ½");
     if(myself->getGem()>0)
-        tipArea->addBoxItem("2.Ä§ÑÛ");
+        tipArea->addBoxItem("2.é­”çœ¼");
     tipArea->showBox();
     decisionArea->enable(1);
     if(myself->getEnergy()>0)
@@ -128,7 +128,7 @@ void MoGong::ChongNengMoYan2()
     Player* myself = dataInterface->getMyself();
     if(startChoice==1)
     {
-        tipArea->setMsg("Æúµ½4ÕÅÊÖÅÆ£¬²¢Ñ¡ÔñÃşÅÆÊıÁ¿");
+        tipArea->setMsg("å¼ƒåˆ°4å¼ æ‰‹ç‰Œï¼Œå¹¶é€‰æ‹©æ‘¸ç‰Œæ•°é‡");
         for(int i = 1; i < 5; i ++)
             tipArea->addBoxItem(QString::number(i));
         tipArea->showBox();
@@ -144,7 +144,7 @@ void MoGong::ChongNengMoYan2()
     }
     else
     {
-        tipArea->setMsg("¡¾Ñ¡ÔñÄ¿±ê½ÇÉ«¡¿Æú1ÕÅÅÆ»ò¡¾²»Ñ¡ÔñÄ¿±ê¡¿ÄãÃş3ÕÅÅÆ");
+        tipArea->setMsg("ã€é€‰æ‹©ç›®æ ‡è§’è‰²ã€‘å¼ƒ1å¼ ç‰Œæˆ–ã€ä¸é€‰æ‹©ç›®æ ‡ã€‘ä½ æ‘¸3å¼ ç‰Œ");
         playerArea->enableAll();
         playerArea->setQuota(1);
         decisionArea->enable(0);
@@ -158,7 +158,7 @@ void MoGong::ChongNengGaiPai()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
-    tipArea->setMsg("ÇëÑ¡Ôñ×î¶à"+QString::number(chongnengNum)+"ÕÅÊÖÅÆ¸Ç×ö³äÄÜ");
+    tipArea->setMsg("è¯·é€‰æ‹©æœ€å¤š"+QString::number(chongnengNum)+"å¼ æ‰‹ç‰Œç›–åšå……èƒ½");
     handArea->enableAll();
     handArea->setQuota(0,chongnengNum);
     decisionArea->enable(0);
@@ -170,7 +170,7 @@ void MoGong::MoYanGaiPai()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
-    tipArea->setMsg(("ÇëÑ¡ÔñÒ»ÕÅÊÖÅÆ¸Ç×ö³äÄÜ"));
+    tipArea->setMsg(("è¯·é€‰æ‹©ä¸€å¼ æ‰‹ç‰Œç›–åšå……èƒ½"));
     handArea->enableAll();
     handArea->setQuota(1);
     if(dataInterface->getHandCards().size()==0)
@@ -268,14 +268,14 @@ void MoGong::onOkClicked()
     {
 //NORMALACTION
     case 1:
-//×·¼ÓĞĞ¶¯
+//è¿½åŠ è¡ŒåŠ¨
     case 10:
     case 11:
     case 12:
         if(selectedCards.size()>0&&selectedCards[0]->getType()=="attack")
             lastTarget = selectedPlayers[0]->getID();
         break;
-//¶îÍâĞĞ¶¯Ñ¯ÎÊ
+//é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();
         switch (text[0].digitValue()){
@@ -445,7 +445,7 @@ void MoGong::additionalAction()
 {
     Role::additionalAction();
     if(!MoGuanChongJiUsed&&dataInterface->getCoverCards().size()>0)
-        tipArea->addBoxItem(tr("1.¶àÖØÉä»÷"));
+        tipArea->addBoxItem(tr("1.å¤šé‡å°„å‡»"));
 }
 
 void MoGong::turnBegin()
@@ -459,13 +459,13 @@ void MoGong::turnBegin()
 void MoGong::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("³äÄÜ/Ä§ÑÛ"))
+    if(skill==tr("å……èƒ½/é­”çœ¼"))
         ChongNengMoYan1();
-    else if(skill==tr("Ä§¹á³å»÷ÃüÖĞ"))
+    else if(skill==tr("é­”è´¯å†²å‡»å‘½ä¸­"))
         MoGuanChongJiHit();
-    else if(skill==tr("³äÄÜ¸ÇÅÆ"))
+    else if(skill==tr("å……èƒ½ç›–ç‰Œ"))
         ChongNengGaiPai();
-    else if(skill==tr("Ä§ÑÛ¸ÇÅÆ"))
+    else if(skill==tr("é­”çœ¼ç›–ç‰Œ"))
         MoYanGaiPai();
 }
 

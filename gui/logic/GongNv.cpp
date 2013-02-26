@@ -5,11 +5,11 @@ GongNv::GongNv()
 setMyRole(this);
 
     Button *shanGuangXianJing,*juJi;
-    shanGuangXianJing=new Button(3,tr("ÉÁ¹âÏÝÚå"));
+    shanGuangXianJing=new Button(3,tr("é—ªå…‰é™·é˜±"));
     buttonArea->addButton(shanGuangXianJing);
     connect(shanGuangXianJing,SIGNAL(buttonSelected(int)),this,SLOT(ShanGuangXianJing()));
 
-    juJi=new Button(4,tr("¾Ñ »÷"));
+    juJi=new Button(4,tr("ç‹™ å‡»"));
     buttonArea->addButton(juJi);
     connect(juJi,SIGNAL(buttonSelected(int)),this,SLOT(JuJi()));
 }
@@ -18,11 +18,11 @@ void GongNv::normal()
 {
     Role::normal();
     Player* myself=dataInterface->getMyself();
-//ÉÁ¹âÏÝÚå
-    if (handArea->checkSpecility(tr("ÉÁ¹âÏÝÚå")))
+//é—ªå…‰é™·é˜±
+    if (handArea->checkSpecility(tr("é—ªå…‰é™·é˜±")))
         buttonArea->enable(3);
 
-//¾Ñ»÷
+//ç‹™å‡»
     if(myself->getEnergy()>0)
         buttonArea->enable(4);
     unactionalCheck();
@@ -31,9 +31,9 @@ void GongNv::normal()
 void GongNv::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("¹á´©Éä»÷"))
+    if(skill==tr("è´¯ç©¿å°„å‡»"))
         GuanChuanSheJi();
-    else if(skill==tr("¾«×¼Éä»÷"))
+    else if(skill==tr("ç²¾å‡†å°„å‡»"))
         JingZhunSheJi();
 }
 
@@ -41,13 +41,13 @@ void GongNv::additionalAction()
 {
     Role::additionalAction();
     if(JuJiAdditon)
-        tipArea->addBoxItem(tr("1.¹¥»÷ÐÐ¶¯£¨¾Ñ»÷£©"));
+        tipArea->addBoxItem(tr("1.æ”»å‡»è¡ŒåŠ¨ï¼ˆç‹™å‡»ï¼‰"));
 }
 
 void GongNv::GuanChuanSheJi()
 {
     state=301;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯¹á´©Éä»÷£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨è´¯ç©¿å°„å‡»ï¼Ÿ"));
     handArea->setQuota(1);
     handArea->enableMagic();
     decisionArea->enable(1);
@@ -56,7 +56,7 @@ void GongNv::GuanChuanSheJi()
 void GongNv::JingZhunSheJi()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯¾«×¼Éä»÷£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨ç²¾å‡†å°„å‡»ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -74,7 +74,7 @@ void GongNv::ShanGuangXianJing()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("ÉÁ¹âÏÝÚå"));
+    handArea->enableSpecility(tr("é—ªå…‰é™·é˜±"));
 }
 
 void GongNv::JuJi()
@@ -95,11 +95,11 @@ void GongNv::JuJi()
     playerArea->setQuota(1);
     playerArea->enableAll();
 
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÊ¹ÓÃµÄÄÜÁ¿£º"));
+    tipArea->setMsg(tr("è¯·é€‰æ‹©ä½¿ç”¨çš„èƒ½é‡ï¼š"));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("1.Ë®¾§"));
+        tipArea->addBoxItem(tr("1.æ°´æ™¶"));
     if(gem>=1)
-        tipArea->addBoxItem(tr("2.±¦Ê¯"));
+        tipArea->addBoxItem(tr("2.å®çŸ³"));
 
     tipArea->showBox();
 }
@@ -137,7 +137,7 @@ void GongNv::onOkClicked()
 
     switch(state)
     {
-//¶îÍâÐÐ¶¯Ñ¯ÎÊ
+//é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){                        
@@ -146,7 +146,7 @@ void GongNv::onOkClicked()
             attackAction();
         }
         break;
-//¹á´©Ñ¯ÎÊ
+//è´¯ç©¿è¯¢é—®
     case 301:
         command="301;1;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -155,7 +155,7 @@ void GongNv::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;   
-//ÉÁ¹âÏÝÚå
+//é—ªå…‰é™·é˜±
     case 302:
         command="302;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -166,7 +166,7 @@ void GongNv::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//¾Ñ»÷
+//ç‹™å‡»
     case 303:
         JuJiAdditon=true;
         command="303;";
@@ -191,15 +191,15 @@ void GongNv::onCancelClicked()
     QString command;
     switch(state)
     {
-//¹á´©Ñ¯ÎÊ
+//è´¯ç©¿è¯¢é—®
     case 301:
         command="301;0;;";
         emit sendCommand(command);
         gui->reset();
         break;
-//ÉÁ¹âÏÝÚå
+//é—ªå…‰é™·é˜±
     case 302:
-//¾Ñ»÷
+//ç‹™å‡»
     case 303:
         normal();
         break;

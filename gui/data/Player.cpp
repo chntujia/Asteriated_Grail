@@ -19,133 +19,133 @@ void Player::setRole(int roleID)
     switch(roleID)
     {
     case 1:
-        name=tr("[½£Ê¥]");
+        name=tr("[å‰‘åœ£]");
         break;
     case 2:
-        name=tr("[¿ñÕ½Ê¿]");
+        name=tr("[ç‹‚æˆ˜å£«]");
         break;
     case 3:
-        name=tr("[¹­Ö®Å®Éñ]");
+        name=tr("[å¼“ä¹‹å¥³ç¥]");
         break;
     case 4:
-        name=tr("[·âÓ¡Ê¦]");
+        name=tr("[å°å°å¸ˆ]");
         break;
     case 5:
-        name=tr("[°µÉ±Õß]");
+        name=tr("[æš—æ€è€…]");
         tapSource="resource/qianxing.png";
         break;
     case 6:
-        name=tr("[Ê¥Å®]");
+        name=tr("[åœ£å¥³]");
         tapSource="resource/lianmin.png";
         break;
     case 7:
-        name=tr("[ÌìÊ¹]");
+        name=tr("[å¤©ä½¿]");
         break;
     case 8:
-        name=tr("[Ä§µ¼Ê¦]");
+        name=tr("[é­”å¯¼å¸ˆ]");
         break;
     case 9:
-        name=tr("[Ä§½£]");
+        name=tr("[é­”å‰‘]");
         tapSource="resource/anying.png";
         break;    
     case 10:
-        name=tr("[Ê¥Ç¹]");
+        name=tr("[åœ£æª]");
         crossMax=3;
         break;
     case 11:
-        name=tr("[ÔªËØÊ¦]");
-        tokenName[0]=tr("ÔªËØ");
+        name=tr("[å…ƒç´ å¸ˆ]");
+        tokenName[0]=tr("å…ƒç´ ");
         tokenMax[0]=3;
         break;
     case 12:
-        name=tr("[Ã°ÏÕ¼Ò]");
+        name=tr("[å†’é™©å®¶]");
         break;
     case 13:
-        name=tr("[ËÀÁé·¨Ê¦]");
+        name=tr("[æ­»çµæ³•å¸ˆ]");
         crossMax = 5;
         break;
     case 14:
-        name=tr("[ÖÙ²ÃÕß]");
+        name=tr("[ä»²è£è€…]");
         tapSource="resource/shenpan.png";
-        tokenName[0]=tr("ÉóÅĞ");
+        tokenName[0]=tr("å®¡åˆ¤");
         tokenMax[0]=4;
         crystal=2;
         break;
     case 15:
-        name=tr("[Éñ¹Ù]");
+        name=tr("[ç¥å®˜]");
         crossMax=6;
         break;
     case 16:
-        name=tr("[Æíµ»Ê¦]");
+        name=tr("[ç¥ˆç¥·å¸ˆ]");
         tapSource="resource/qidao.png";
-        tokenName[0]=tr("·ûÎÄ");
+        tokenName[0]=tr("ç¬¦æ–‡");
         tokenMax[0]=3;
         break;
     case 17:
-        name=tr("[ÏÍÕß]");
+        name=tr("[è´¤è€…]");
         energyMax=4;
         break;
     case 18:
-        name = tr("[Áé·ûÊ¦]");
-        tokenName[2] = tr("ÑıÁ¦");
+        name = tr("[çµç¬¦å¸ˆ]");
+        tokenName[2] = tr("å¦–åŠ›");
         tokenMax[2] = 2;
         break;
     case 19:
-        name=tr("[½£µÛ]");
-        tokenName[0]=tr("½£Æø");
+        name=tr("[å‰‘å¸]");
+        tokenName[0]=tr("å‰‘æ°”");
         tokenMax[0]=5;
-        tokenName[2]=tr("½£»ê");
+        tokenName[2]=tr("å‰‘é­‚");
         tokenMax[2]=3;
         break;
     case 20:
-        name=tr("[¸ñ¶·¼Ò]");
+        name=tr("[æ ¼æ–—å®¶]");
         tapSource="resource/baishi.png";
-        tokenName[0]=tr("¶·Æø");
+        tokenName[0]=tr("æ–—æ°”");
         tokenMax[0]=6;
         break;
 
     case 21:
-        name=tr("[ÓÂÕß]");
+        name=tr("[å‹‡è€…]");
         tapSource="resource/jingpilijie.png";
-        tokenName[0]=tr("Å­Æø");
+        tokenName[0]=tr("æ€’æ°”");
         tokenMax[0]=4;
-        tokenName[1]=tr("ÖªĞÔ");
+        tokenName[1]=tr("çŸ¥æ€§");
         tokenMax[1]=4;
         crystal=2;
         break;
     case 22:
-        name=tr("[Áé»êÊõÊ¿]");
-        tokenName[0]=tr("»Æ»ê");
+        name=tr("[çµé­‚æœ¯å£«]");
+        tokenName[0]=tr("é»„é­‚");
         tokenMax[0]=6;
-        tokenName[1]=tr("À¶»ê");
+        tokenName[1]=tr("è“é­‚");
         tokenMax[1]=6;
         break;
     case 23:
-        name=tr("[Î×Å®]");
+        name=tr("[å·«å¥³]");
         tapSource="resource/liuxue.png";
         break;
     case 24:
-        name=("[µûÎèÕß]");
+        name=("[è¶èˆè€…]");
         tapSource="resource/diaoling.png";
-        tokenName[0]=tr("Ó¼");
+        tokenName[0]=tr("è›¹");
         tokenMax[0]=20;
-        tokenName[2]=tr("¼ë");
+        tokenName[2]=tr("èŒ§");
         tokenMax[2]=8;
         break;
     case 26:
-        name=("[Ä§¹­]");
-        tokenName[2]=tr("³äÄÜ");
+        name=("[é­”å¼“]");
+        tokenName[2]=tr("å……èƒ½");
         tokenMax[2]=8;
         break;
     case 28:
-        name=tr("[ºìÁ«ÆïÊ¿]");
+        name=tr("[çº¢è²éª‘å£«]");
         tapSource="resource/rexuefeiteng.png";
-        tokenName[0]=tr("ÑªÓ¡");
+        tokenName[0]=tr("è¡€å°");
         tokenMax[0]=2;
         crossMax=4;
         break;
     case 29:
-        name=tr("[Ä§Ç¹]");
+        name=tr("[é­”æª]");
         tapSource="resource/huanying.png";
         break;
     }

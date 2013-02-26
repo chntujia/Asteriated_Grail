@@ -6,15 +6,15 @@ ShenGuan::ShenGuan()
     makeConnection();
     setMyRole(this);
     Button *shenShengQiFu, *shuiZhiShenLi, *shenShengLingYu;
-    shenShengQiFu = new Button(3,tr("ÉñÊ¥Æí¸£"));
+    shenShengQiFu = new Button(3,tr("ç¥åœ£ç¥ˆç¦"));
     buttonArea->addButton(shenShengQiFu);
     connect(shenShengQiFu,SIGNAL(buttonSelected(int)),this,SLOT(ShenShengQiFu()));
 
-    shuiZhiShenLi = new Button(4,tr("Ë®Ö®ÉñÁ¦"));
+    shuiZhiShenLi = new Button(4,tr("æ°´ä¹‹ç¥åŠ›"));
     buttonArea->addButton(shuiZhiShenLi);
     connect(shuiZhiShenLi,SIGNAL(buttonSelected(int)),this,SLOT(ShuiZhiShenLi1()));
 
-    shenShengLingYu = new Button(5,tr("ÉñÊ¥ÁìÓò"));
+    shenShengLingYu = new Button(5,tr("ç¥åœ£é¢†åŸŸ"));
     buttonArea->addButton(shenShengLingYu);
     connect(shenShengLingYu,SIGNAL(buttonSelected(int)),this,SLOT(ShenShengLingYu1()));
 }
@@ -42,7 +42,7 @@ void ShenGuan::normal()
 void ShenGuan::ShenShengQiShi()
 {
     state = 36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÉñÊ¥ÆôÊ¾£¿"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨ç¥åœ£å¯ç¤ºï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -85,7 +85,7 @@ void ShenGuan::ShuiZhiShenLi2()
     playerArea->reset();
     tipArea->reset();
 
-    tipArea->setMsg("Çë¸øÄ¿±ê½ÇÉ«Ò»ÕÅÅÆ");
+    tipArea->setMsg("è¯·ç»™ç›®æ ‡è§’è‰²ä¸€å¼ ç‰Œ");
 
     handArea->setQuota(1);
     decisionArea->enable(1);
@@ -98,7 +98,7 @@ void ShenGuan::ShenShengQiYue1()
 {
     state = 1541;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÉñÊ¥ÆõÔ¼"));
+    tipArea->setMsg(tr("æ˜¯å¦å‘åŠ¨ç¥åœ£å¥‘çº¦"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag = false;
     switch(handcards.size())
@@ -132,7 +132,7 @@ void ShenGuan::ShenShengQiYue2()
         cross = 4;
     for(;cross>0;cross--)
         tipArea->addBoxItem(QString::number(cross));
-    tipArea->setMsg("ÇëÑ¡ÔñÒª×ªÒÆµÄÖÎÁÆÊıÄ¿");
+    tipArea->setMsg("è¯·é€‰æ‹©è¦è½¬ç§»çš„æ²»ç–—æ•°ç›®");
     tipArea->showBox();
 
     playerArea->setQuota(1);
@@ -152,10 +152,10 @@ void ShenGuan::ShenShengLingYu1()
     decisionArea->enable(1);
     decisionArea->enable(0);
 
-    tipArea->setMsg(tr("ÇëÏÈÑ¡ÔñÒ»Ïî£º"));
+    tipArea->setMsg(tr("è¯·å…ˆé€‰æ‹©ä¸€é¡¹ï¼š"));
     if(dataInterface->getMyself()->getCrossNum()>0)
-        tipArea->addBoxItem(tr("1.£¨ÒÆ³ı1ÖÎÁÆ£©¶ÔÄ¿±ê½ÇÉ«Ôì³É2µã·¨ÊõÉËº¦"));
-    tipArea->addBoxItem(tr("2.Ôö¼Ó2ÖÎÁÆ£¬Ä¿±ê¶ÓÓÑÔö¼Ó1ÖÎÁÆ"));
+        tipArea->addBoxItem(tr("1.ï¼ˆç§»é™¤1æ²»ç–—ï¼‰å¯¹ç›®æ ‡è§’è‰²é€ æˆ2ç‚¹æ³•æœ¯ä¼¤å®³"));
+    tipArea->addBoxItem(tr("2.å¢åŠ 2æ²»ç–—ï¼Œç›®æ ‡é˜Ÿå‹å¢åŠ 1æ²»ç–—"));
     tipArea->showBox();
 }
 
@@ -319,10 +319,10 @@ void ShenGuan::onCancelClicked()
 void ShenGuan::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ÉñÊ¥ÆôÊ¾"))
+    if(skill==tr("ç¥åœ£å¯ç¤º"))
         ShenShengQiShi();
-    else if(skill==tr("ÉñÊ¥ÆõÔ¼"))
+    else if(skill==tr("ç¥åœ£å¥‘çº¦"))
         ShenShengQiYue1();
-    else if(skill==tr("Ë®Ö®ÉñÁ¦¸øÅÆ"))
+    else if(skill==tr("æ°´ä¹‹ç¥åŠ›ç»™ç‰Œ"))
         ShuiZhiShenLi2();
 }

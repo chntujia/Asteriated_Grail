@@ -17,7 +17,7 @@ QRectF StatusItem::boundingRect() const
     return QRectF(0, 0, 15, 15);
 }
 
-//ÖĞ¶¾0ĞéÈõ1Ê¥¶Ü2
+//ä¸­æ¯’0è™šå¼±1åœ£ç›¾2
 void StatusItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     switch(status->type)
@@ -76,15 +76,15 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     painter->drawText(0.15*width,0.1*height,QString::number(player->getID()));
 
-    QString entry=tr("ÊÖÅÆ£º");
+    QString entry=tr("æ‰‹ç‰Œï¼š");
     entry+=QString::number(player->getHandCardNum())+'/'+QString::number(player->getHandCardMax());
     painter->drawText(width*0.12,height*0.73,entry);
 
-    entry=tr("ÖÎÁÆ£º");
+    entry=tr("æ²»ç–—ï¼š");
     entry+=QString::number(player->getCrossNum())+'/'+QString::number(player->getCrossMax());
     painter->drawText(width*0.12,height*0.82,entry);
     int i,offset;
-    painter->drawText(width*0.12,height*0.92,tr("ÄÜÁ¿£º"));
+    painter->drawText(width*0.12,height*0.92,tr("èƒ½é‡ï¼š"));
     for(i=0;i<player->getGem();i++)
         painter->drawPixmap(width*0.35+i*9,height*0.86,gem.scaled(9,13));
     offset=width*0.35+i*9;
@@ -93,23 +93,23 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     if(player->getTokenMax(0)>0)
     {
         painter->drawPixmap(0,0,QPixmap("resource/token1.png"));
-        entry=player->getTokenName(0)+"£º";
+        entry=player->getTokenName(0)+"ï¼š";
         entry+=QString::number(player->getToken(0))+'/'+QString::number(player->getTokenMax(0));
         painter->drawText(width*0.55,height*0.73,entry);
     }
     if(player->getTokenMax(1)>0)
     {
         painter->drawPixmap(0,0,QPixmap("resource/token2.png"));
-        entry=player->getTokenName(1)+"£º";
+        entry=player->getTokenName(1)+"ï¼š";
         entry+=QString::number(player->getToken(1))+'/'+QString::number(player->getTokenMax(1));
         painter->drawText(width*0.55,height*0.82,entry);
     }
     if(player->getTokenMax(2)>0)
     {
         painter->drawPixmap(0,0,QPixmap("resource/token3.png"));
-        entry=player->getTokenName(2)+"£º";
+        entry=player->getTokenName(2)+"ï¼š";
         if(player->getTokenMax(2)==20)
-            entry+=QString::number(player->getToken(2))+"/¡Ş";
+            entry+=QString::number(player->getToken(2))+"/âˆ";
         else
             entry+=QString::number(player->getToken(2))+'/'+QString::number(player->getTokenMax(2));
         painter->drawText(width*0.55,height*0.92,entry);

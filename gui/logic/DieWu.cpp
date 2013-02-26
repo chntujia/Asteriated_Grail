@@ -5,19 +5,19 @@ DieWu::DieWu()
     makeConnection();
     setMyRole(this);
     Button *wuDong, *yongHua, *daoNiZhiDie, *checkCover;
-    wuDong = new Button(3,tr("Îè¶¯"));
+    wuDong = new Button(3,tr("èˆåŠ¨"));
     buttonArea->addButton(wuDong);
     connect(wuDong,SIGNAL(buttonSelected(int)),this,SLOT(WuDong1()));
 
-    yongHua = new Button(4,tr("Ó¼»¯"));
+    yongHua = new Button(4,tr("è›¹åŒ–"));
     buttonArea->addButton(yongHua);
     connect(yongHua,SIGNAL(buttonSelected(int)),this,SLOT(YongHua()));
 
-    daoNiZhiDie = new Button(5,tr("µ¹ÄæÖ®µû"));
+    daoNiZhiDie = new Button(5,tr("å€’é€†ä¹‹è¶"));
     buttonArea->addButton(daoNiZhiDie);
     connect(daoNiZhiDie,SIGNAL(buttonSelected(int)),this,SLOT(DaoNiZhiDie1()));
 
-    checkCover = new Button(10,tr("²é¿´¼ë"));
+    checkCover = new Button(10,tr("æŸ¥çœ‹èŒ§"));
     buttonArea->addOutsideTurnButton(checkCover);
     checkCover->setVisible(true);
     checkCover->setEnabled(true);
@@ -48,9 +48,9 @@ void DieWu::WuDong1()
     decisionArea->enable(1);
     decisionArea->enable(0);
 
-    tipArea->setMsg(tr("ÇëÏÈÑ¡ÔñÒ»Ïî£º"));
-    tipArea->addBoxItem(tr("1.Ãş1ÕÅÅÆ¡¾Ç¿ÖÆ¡¿"));
-    tipArea->addBoxItem(tr("2.Æú1ÕÅÅÆ¡¾Ç¿ÖÆ¡¿"));
+    tipArea->setMsg(tr("è¯·å…ˆé€‰æ‹©ä¸€é¡¹ï¼š"));
+    tipArea->addBoxItem(tr("1.æ‘¸1å¼ ç‰Œã€å¼ºåˆ¶ã€‘"));
+    tipArea->addBoxItem(tr("2.å¼ƒ1å¼ ç‰Œã€å¼ºåˆ¶ã€‘"));
     tipArea->showBox();
 }
 
@@ -72,7 +72,7 @@ void DieWu::WuDong2()
 void DieWu::DuFen()
 {
     state = 2402;
-    tipArea->setMsg("ÊÇ·ñ·¢¶¯¶¾·Û£¿");
+    tipArea->setMsg("æ˜¯å¦å‘åŠ¨æ¯’ç²‰ï¼Ÿ");
 
     gui->showCoverArea(true);
     HandArea *coverArea = gui->getCoverArea();
@@ -85,7 +85,7 @@ void DieWu::DuFen()
 void DieWu::ChaoSheng()
 {
     state = 2403;
-    tipArea->setMsg("ÊÇ·ñ·¢¶¯³¯Ê¥£¿");
+    tipArea->setMsg("æ˜¯å¦å‘åŠ¨æœåœ£ï¼Ÿ");
 
     gui->showCoverArea(true);
     HandArea *coverArea = gui->getCoverArea();
@@ -98,7 +98,7 @@ void DieWu::ChaoSheng()
 void DieWu::JingHuaShuiYue()
 {
     state = 2404;
-    tipArea->setMsg("ÊÇ·ñ·¢¶¯¾µ»¨Ë®ÔÂ£¿");
+    tipArea->setMsg("æ˜¯å¦å‘åŠ¨é•œèŠ±æ°´æœˆï¼Ÿ");
 
     gui->showCoverArea(true);
     HandArea *coverArea = gui->getCoverArea();
@@ -113,13 +113,13 @@ void DieWu::DiaoLing()
     state = 2405;
     if(diaoLingFlag)
     {
-        tipArea->setMsg("ÊÇ·ñ·¢¶¯µòÁã£¿");
+        tipArea->setMsg("æ˜¯å¦å‘åŠ¨å‡‹é›¶ï¼Ÿ");
         playerArea->enableAll();
         playerArea->setQuota(1);
     }
     else
     {
-        tipArea->setMsg("·Ç·¨Êõ¼ë£¬ÎŞ·¨·¢¶¯µòÁã£¬ÇëÑ¡ÔñÈ¡Ïû");
+        tipArea->setMsg("éæ³•æœ¯èŒ§ï¼Œæ— æ³•å‘åŠ¨å‡‹é›¶ï¼Œè¯·é€‰æ‹©å–æ¶ˆ");
     }
     decisionArea->enable(1);
 }
@@ -140,12 +140,12 @@ void DieWu::DaoNiZhiDie1()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
-    tipArea->setMsg("ÄãÆú2ÕÅÅÆ£¬ÔÙÑ¡ÔñÒ»Ïî£º");
-    tipArea->addBoxItem("1.¶ÔÄ¿±ê½ÇÉ«Ôì³É1µã·¨ÊõÉËº¦£¬¸ÃÉËº¦²»ÄÜÓÃÖÎÁÆµÖÓù");
+    tipArea->setMsg("ä½ å¼ƒ2å¼ ç‰Œï¼Œå†é€‰æ‹©ä¸€é¡¹ï¼š");
+    tipArea->addBoxItem("1.å¯¹ç›®æ ‡è§’è‰²é€ æˆ1ç‚¹æ³•æœ¯ä¼¤å®³ï¼Œè¯¥ä¼¤å®³ä¸èƒ½ç”¨æ²»ç–—æŠµå¾¡");
     if(dataInterface->getMyself()->getToken(2)>0)
     {
-        tipArea->addBoxItem("2.£¨ÒÆ³ı2¸ö¡¾¼ë¡¿£©ÒÆ³ı1¸ö¡¾Ó¼¡¿");
-        tipArea->addBoxItem("3.£¨×Ô¼ºÔì³É4µã·¨ÊõÉËº¦¢Û£©ÒÆ³ı1¸ö¡¾Ó¼¡¿");
+        tipArea->addBoxItem("2.ï¼ˆç§»é™¤2ä¸ªã€èŒ§ã€‘ï¼‰ç§»é™¤1ä¸ªã€è›¹ã€‘");
+        tipArea->addBoxItem("3.ï¼ˆè‡ªå·±é€ æˆ4ç‚¹æ³•æœ¯ä¼¤å®³â‘¢ï¼‰ç§»é™¤1ä¸ªã€è›¹ã€‘");
     }
     tipArea->showBox();
     QList<Card*> handcards=dataInterface->getHandCards();
@@ -394,11 +394,11 @@ void DieWu::coverCardAnalyse()
 void DieWu::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("¶¾·Û"))
+    if(skill==tr("æ¯’ç²‰"))
         DuFen();
-    else if(skill==tr("³¯Ê¥"))
+    else if(skill==tr("æœåœ£"))
         ChaoSheng();
-    else if(skill==tr("¾µ»¨Ë®ÔÂ"))
+    else if(skill==tr("é•œèŠ±æ°´æœˆ"))
         JingHuaShuiYue();
 }
 
@@ -411,12 +411,12 @@ void DieWu::decipher(QString command)
 
     switch(arg[0].toInt())
     {
-    //·¨ÊõÅÆµòÁãÑ¯ÎÊ
+    //æ³•æœ¯ç‰Œå‡‹é›¶è¯¢é—®
     case 2451:
         diaoLingFlag = true;
         DiaoLing();
         break;
-    //·Ç·¨ÊõÅÆµòÁãÑ¯ÎÊ
+    //éæ³•æœ¯ç‰Œå‡‹é›¶è¯¢é—®
     case 2452:
         diaoLingFlag = false;
         DiaoLing();
