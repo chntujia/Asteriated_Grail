@@ -3275,6 +3275,8 @@ void LingHun::LingHunTunShi(int harmed, int *howMany, PlayerEntity *dst)
 {
     if(dst->getColor()!=color || *howMany==0)
         return;
+    if(engine->checkEnd())
+        return;
     setToken(0,token[0]+*howMany);
     coder.tokenNotice(id,0,token[0]);
     coder.notice(tr("灵魂术士发动【灵魂吞噬】"));
@@ -3291,6 +3293,8 @@ void LingHun::LingHunTunShi2(QList<void *> args)
 void LingHun::LingHunTunShi3(int harmed, int *howMany, PlayerEntity *dst)
 {
     if(!HeCheng||*howMany==0)
+        return;
+    if(engine->checkEnd())
         return;
     HeCheng=false;
     if(dst->getColor()==color)
