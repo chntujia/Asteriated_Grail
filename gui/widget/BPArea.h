@@ -19,7 +19,8 @@ public:
     void setQuota(int howMany){least=most=howMany;}
     void setQuota(int least,int most){this->least=least;this->most=most;}
     QList<int> getSelectedRoles();
-    void choose(int roleID);
+    void ban(int playerID, int roleID);
+    void choose(int playerID, int roleID);
     RoleItem *getRoleByID(int ID);
     void reset();
     bool checkOver();

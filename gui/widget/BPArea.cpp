@@ -122,13 +122,14 @@ RoleItem *BPArea::getRoleByID(int ID)
     }
 }
 
-void BPArea::choose(int roleID)
+void BPArea::choose(int playerID,int roleID)
 {
     RoleItem* choice = getRoleByID(roleID);
     choice->setEnabled(0);
     choice->setOpacity(0.8);
     choice->setY(choice->y()-20);
     currentSum++;
+    remove(roleID);
 }
 
 void BPArea::reset()

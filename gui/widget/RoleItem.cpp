@@ -4,7 +4,7 @@
 RoleItem::RoleItem(int roleID)
 {
     this->roleID=roleID;
-    pixmap=QPixmap("role/"+QString::number(roleID)+".jpg");
+    pixmap=QPixmap("role2/"+QString::number(roleID)+".png");
 
     this->width=pixmap.width();
     this->height=pixmap.height();
