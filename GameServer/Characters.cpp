@@ -3275,6 +3275,8 @@ void LingHun::LingHunTunShi(int harmed, int *howMany, PlayerEntity *dst)
 {
     if(dst->getColor()!=color || *howMany==0)
         return;
+    if(engine->checkEnd())
+        return;
     setToken(0,token[0]+*howMany);
     coder.tokenNotice(id,0,token[0]);
     coder.notice(tr("¡ÈªÍ ı ø∑¢∂Ø°æ¡ÈªÍÕÃ …°ø"));
@@ -3291,6 +3293,8 @@ void LingHun::LingHunTunShi2(QList<void *> args)
 void LingHun::LingHunTunShi3(int harmed, int *howMany, PlayerEntity *dst)
 {
     if(!HeCheng||*howMany==0)
+        return;
+    if(engine->checkEnd())
         return;
     HeCheng=false;
     if(dst->getColor()==color)
@@ -3969,6 +3973,7 @@ MoQiang::MoQiang(BackgroundEngine *engine, int id, int color):PlayerEntity(engin
     StartUsed=false;
     ChongYingUsed=false;
     AddAttackPoint=0;
+    FirstTrun=false;
     makeConnection(engine);
 }
 
@@ -4005,6 +4010,7 @@ void MoQiang::AnZhiJieFang1(QList<void *> args)
     JieFangUsed=true;
     JieFangFirst=true;
     StartUsed=true;
+    FirstTrun=true;
 }
 
 void MoQiang::AnZhiJieFang2(QList<void *> args)
@@ -4073,11 +4079,13 @@ void MoQiang::HuanYingXingChen(QList<void *> args)
         harm.type=MAGICHARM;
         coder.notice(tr("ƒß«π∂‘ÕÊº“")+QString::number(huanying2.dstID)+tr("∑¢∂Ø°æª√”∞–«≥Ω°ø"));
         engine->timeLine3(harm,this,dst,"ª√”∞–«≥Ω");
+        if(engine->checkEnd())
+            return;
     }
     StartUsed=true;
     JieFangUsed=false;
     JieFangFirst=false;
-
+    FirstTrun=false;
 }
 
 void MoQiang::HuanYingXingChen2(int harmed, int *howMany, PlayerEntity *dst)
@@ -4130,7 +4138,7 @@ void MoQiang::QiHeiZhiQiang(QList<void *> args)
     PlayerEntity*dst=(PlayerEntity*)args[1];
     if(dst->getHandCards().size()<1 || dst->getHandCards().size()>2)
         return;
-    if(!JieFangUsed || JieFangFirst)
+    if(!JieFangUsed || FirstTrun)
         return;
     coder.askForSkill(id,"∆·∫⁄÷Æ«π");
     BatInfor bat=messageBuffer::readBatInfor();
@@ -4229,6 +4237,7 @@ void MoQiang::skillReset(QList<void *> args)
     ChongYingUsed=false;
     JieFangFirst=false;
     HuanYingUsed=false;
+    FirstTrun=false;
     AddAttackPoint=0;
 }
 

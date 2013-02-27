@@ -1085,7 +1085,10 @@ void BackgroundEngine::timeLine3(Harm harm, PlayerEntity *src, PlayerEntity *dst
         coder.attackHurtNotice(dst->getID(),harm.harmPoint,src->getID());
     else if(harm.type == MAGIC)
         coder.magicHurtNotice(dst->getID(),harm.harmPoint,src->getID(),magicReason);
-    timeLine4(harm,src,dst, magicReason);
+    if(magicReason=="µ¹ÄæÖ®µû")
+        timeLine5(harm,src,dst,0);
+    else
+        timeLine4(harm,src,dst, magicReason);
 }
 
 void BackgroundEngine::timeLine4(Harm harm,PlayerEntity *src,PlayerEntity *dst,QString magicReason)

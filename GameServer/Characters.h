@@ -554,6 +554,7 @@ public slots:
 private:
     bool JieFangUsed;
     bool JieFangFirst;
+    bool FirstTrun;
     bool HuanYingUsed;
     bool ChongYingUsed;
     bool StartUsed;
