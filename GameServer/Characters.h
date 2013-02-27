@@ -372,7 +372,7 @@ public slots:
     void ShenShengQiShi(QList<void*> args);
     void ShenShengQiFu(QList<void*> args);
     void ShuiZhiShenLi(QList<void*> args);
-    void ShengShiShouHu(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable);
+    void ShengShiShouHu(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
     void ShenShengQiYue(QList<void*> args);
     void ShenShengLingYu(QList<void*> args);
 };
@@ -386,7 +386,7 @@ public:
     void makeConnection(BackgroundEngine *engine);
 public slots:
     void BuXiu(QList<void*> args);
-    void ShengDu(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable);
+    void ShengDu(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
     void WenYi(QList<void*> args);
     void SiWangZhiChu(QList<void*> args);
     void MuBeiYunLuo(QList<void*> args);
@@ -458,6 +458,7 @@ public slots:
     void NiLiu(QList<void*> args);
     void XueZhiBeiMing(QList<void*> args);
     void XueZhiZuZhou(QList<void*> args);
+    void StartJudge(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
 private:
     int TongShengID;
 };
@@ -471,7 +472,7 @@ public:
     void makeConnection(BackgroundEngine *engine);
 public slots:
     void XingHongShengYue(QList<void*> args);
-    void XingHongXinYang(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable);
+    void XingHongXinYang(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
     void XueXingDaoYan(QList<void*> args);
     void ShaLuShengYan(QList<void*> args);
     void ToReXueFeiTeng(int harmed, int* howMany, PlayerEntity* dst);
@@ -558,4 +559,80 @@ private:
     bool StartUsed;
     int AddAttackPoint;
 };
+
+
+//剑帝
+class JianDi : public PlayerEntity
+{
+    Q_OBJECT
+public:
+    JianDi(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void JianHunShouHu(QList<void*> args);
+    void YangGong(QList<void*> args);
+    void JianQiZhan(QList<void*> args);
+    void TianYuEMo(QList<void*> args);
+    void TianShiZhiHun(QList<void*> args);
+    void TianShiZhiHun1(QList<void *> args);
+    void TianShiZhiHun2(QList<void *> args);
+    void EMoZhiHun(QList<void*> args);
+    void EMoZhiHun1(QList<void *> args);
+    void EMoZhiHun2(QList<void *> args);
+    void BuQuYiZhi(QList<void*> args);
+    void BuQuYiZhi2(QList<void *> args);
+private:
+    int TianshiOrEmo;//0-皆不是，1-天使，2-恶魔
+    bool HunUsed;
+};
+
+
+class DieWu: public PlayerEntity
+{
+    Q_OBJECT
+public:
+    DieWu(BackgroundEngine* engine,int id,int color);
+    void makeConnection(BackgroundEngine *engine);
+    void DiaoLing(int cardID, bool removed);
+public slots:
+    void WuDong(QList<void*> args);
+    void DuFen(QList<void*> args);
+    void ChaoSheng(QList<void*> args);
+    void JingHuaShuiYue(QList<void*> args);
+    void DiaoLingFix(int harmed, int* howMany, PlayerEntity* dst);
+    void DiaoLingFixHeCheng(int harmed, int* howMany, PlayerEntity* dst);
+    void YongHua(QList<void*> args);
+    void DaoNiZhiDie(QList<void*> args);
+    void DaoNiZhiDieJudge(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
+    void skillReset(QList<void*> args);
+private:
+
+};
+
+class MoGong: public PlayerEntity
+{
+    Q_OBJECT
+public:
+    MoGong(BackgroundEngine* engine, int id, int color);
+    void makeConnection(BackgroundEngine *engine);
+public slots:
+    void MoGuanChongJi(QList<void*> args);
+    void MoGuanChongJiHit(QList<void*> args);
+    void MoGuanChongJiMiss(QList<void *> args);
+    void LeiGuangSanShe(QList<void*> args);
+    void DuoChongSheJi1(QList<void*> args);
+    void DuoChongSheJi2(QList<void*> args);
+    void DuoChongSheJiHarm(QList<void*> args);
+    void ChongNengMoYan(QList<void*> args);
+    void skillReset(QList<void*> args);
+private:
+    bool ChongNengUsed;
+    bool MoYanUsed;
+    bool MoGuanChongJiUsed;
+    bool MoGuanCHongJiUsing;
+    bool DuoChongSheJiUsed;
+    bool DuoChongSheJiUsing;
+};
+
+
 #endif // CHARACTERS_H

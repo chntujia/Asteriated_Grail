@@ -23,6 +23,7 @@ public:
     virtual void cure(int cross,int harmPoint,int type, int crossAvailable);
     virtual void askForSkill(QString skill);
     void drop(int howMany);
+    void dropCover(int howMany);
     void unactionalCheck();
     void TianShiZhuFu(int n);
     void MoBaoChongJi();

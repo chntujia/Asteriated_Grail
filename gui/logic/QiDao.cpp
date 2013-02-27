@@ -59,6 +59,7 @@ void QiDao::magicAction()
 void QiDao::QiDong()
 {
     state=1601;
+    gui->reset();
     tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯Æíµ»£¿"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
@@ -153,14 +154,14 @@ void QiDao::cardAnalyse()
     case 1602:
         playerArea->enableMate();
         for(int i=0;i<players.size();i++)
-           if(players[i]->checkStatus(4))
+           if(players[i]->checkBasicStatus(4))
                playerArea->disablePlayerItem(i);
         break;
 //Ñ¸½Ý´Í¸£
     case 1603:
         playerArea->enableMate();
         for(int i=0;i<players.size();i++)
-           if(players[i]->checkStatus(5))
+           if(players[i]->checkBasicStatus(5))
                playerArea->disablePlayerItem(i);
         break;
 //¹â»ÔÐÅÑö
@@ -238,6 +239,8 @@ void QiDao::onOkClicked()
             command+=QString::number(ptr->getID())+";";
             dataInterface->removeHandCard(ptr);
         }
+        for(int i=0;i<(2-selectedCards.size());i++)
+            command+="-1;";
         usedMagic=true;
         emit sendCommand(command);
         gui->reset();

@@ -107,6 +107,7 @@ public:
     void turnBegineNotice(int ID){emit this->sendMessage(-1,"3;" + TOQSTR(ID) + ";");}
     void askForReBat(int type,int cardID,int dstID,int srcID){emit this->sendMessage(-1,combMessage("5",TOQSTR(type),TOQSTR(cardID),TOQSTR(dstID),TOQSTR(srcID)));}
     void askForDiscard(int ID,int sum,QString show){emit this->sendMessage(-1,combMessage("7",TOQSTR(ID),TOQSTR(sum),show));}
+    void askForDiscover(int ID, int sum,QString show){emit this->sendMessage(-1,combMessage("49",TOQSTR(ID),TOQSTR(sum),show));}
     void drawNotice(int ID,int sum,QList<CardEntity*> cards);
     void reshuffleNotice(int howManyNew){emit this->sendMessage(-1,combMessage("10",TOQSTR(howManyNew)));}
     void moraleNotice(int color,int value){emit this->sendMessage(-1,combMessage("11",TOQSTR(color),TOQSTR(value)));}
@@ -143,6 +144,11 @@ public:
     void askForRolePick(int ID,int howMany,QList<int> *roles);
     void coverCardNotice(int playerID,int howMany,QList<CardEntity*> cards,bool remove,bool show);
     void askForSkillNumber(int playerID,int skillNum){emit this->sendMessage(playerID,combMessage(TOQSTR(skillNum)));}
+    void optionalRoleNotice(int num, QList<int> *roles);
+    void askForBan(int ID);
+    void banNotice(int ID, int role);
+    void askForPick(int ID);
+    void pickNotice(int ID, int role);
 signals:
     void sendMessage(int,QString);
 

@@ -33,6 +33,7 @@ void MoJian::normal()
 void MoJian::AnYingNingJu()
 {
     state=903;
+    gui->reset();
     tipArea->setMsg(tr("是否发动暗影凝聚？"));
     decisionArea->enable(0);
     decisionArea->enable(1);

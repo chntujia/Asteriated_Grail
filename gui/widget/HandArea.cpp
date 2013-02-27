@@ -3,7 +3,7 @@
 #include "HandArea.h"
 #include "data/DataInterface.h"
 #include "logic/Logic.h"
-
+#include "PlayerItem.h"
 
 static QRectF HandAreaRect(0, 0, 750, 150);
 

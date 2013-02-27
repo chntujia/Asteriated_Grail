@@ -159,6 +159,15 @@ void DataInterface::removeCoverCard(Card *card)
     coverCards.removeOne(card);
     gui->getCoverArea()->removeCardItem(card);
 }
+Player* DataInterface::getPlayerById(int id)
+{
+    for(int i = 0;i < playerList.length();i++)
+    {
+        if(id == playerList[i]->getID())
+            return playerList[i];
+    }
+    return NULL;
+}
 
 Card* DataInterface::getCard(int id)
 {
@@ -181,6 +190,11 @@ QList<Player*> DataInterface::getPlayerList()
 QList<Card*> DataInterface::getHandCards()
 {
     return handcards;
+}
+
+QList<Card*> DataInterface::getCoverCards()
+{
+    return coverCards;
 }
 
 Player* DataInterface::getMyself()

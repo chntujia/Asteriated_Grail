@@ -19,6 +19,7 @@ signals:
 public slots:
     void onOkClicked();
     void getCommand(QString command);
+    void roleAnalyse();
 private:
     Client* socket;
     int count;

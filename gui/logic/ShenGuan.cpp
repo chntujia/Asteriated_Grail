@@ -97,6 +97,7 @@ void ShenGuan::ShuiZhiShenLi2()
 void ShenGuan::ShenShengQiYue1()
 {
     state = 1541;
+    gui->reset();
     tipArea->setMsg(tr("是否发动神圣契约"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag = false;

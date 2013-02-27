@@ -9,6 +9,8 @@
 #include "TipArea.h"
 #include "ButtonArea.h"
 #include "LogArea.h"
+#include "BPArea.h"
+#include "Animation.h"
 
 class GUI : public QObject
 {
@@ -26,6 +28,7 @@ public:
     void setLogArea(LogArea* logArea);
     void setEnable(bool flag);
     void setCoverArea(HandArea* coverArea){this->coverArea = coverArea;}
+    void setBPArea(BPArea* bpArea){this->bpArea = bpArea;}
     void reset();
 
     HandArea* getHandArea();
@@ -37,6 +40,7 @@ public:
     ButtonArea* getButtonArea();
     void logAppend(QString msg);
     HandArea* getCoverArea(){return coverArea;}
+    BPArea* getBPArea(){return bpArea;}
 public slots:
     void showCoverArea(bool show);
     void showCoverArea();
@@ -52,6 +56,7 @@ private:
     LogArea* logArea;
 
     HandArea* coverArea;
+    BPArea* bpArea;
 };
 extern GUI* gui;
 

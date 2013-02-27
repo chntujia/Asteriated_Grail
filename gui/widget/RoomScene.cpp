@@ -10,7 +10,7 @@ static const QPointF TeamAreaPos(2,3);
 static const QPointF DecisionAreaPos(725,450);
 static const QPointF ButtonAreaPos(190,650);
 static const QPointF LogAreaPos(901,30);
-
+static const QPointF BPAreaPos(0,0);
 RoomScene::RoomScene()
 {
     setBackgroundBrush(QBrush(QPixmap("resource/background.png")));
@@ -62,6 +62,9 @@ RoomScene::RoomScene()
     logAreaProxy->setPos(LogAreaPos);
     gui->setLogArea(logArea);
 
-
+    bpArea=new BPArea();
+    addItem(bpArea);
+    bpArea->setPos(BPAreaPos);
+    gui->setBPArea(bpArea);
 
 }

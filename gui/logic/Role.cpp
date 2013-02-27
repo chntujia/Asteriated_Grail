@@ -5,6 +5,10 @@
 #include "data/DataInterface.h"
 #include "widget/GUI.h"
 #include "logic/Logic.h"
+#include "widget/Animation.h"
+#include <windows.h>
+
+QPointF PlayerPos[]={QPointF(10,500),QPointF(740,260),QPointF(545,60),QPointF(380,60),QPointF(210,60),QPointF(10,260)};
 
 Role::Role(QObject *parent) :
     QObject(parent)
@@ -60,7 +64,12 @@ void Role::makeConnection()
 
 void Role::coverCardAnalyse()
 {
-
+    switch(state)
+    {
+    case 50:
+        decisionArea->enable(0);
+        break;
+    }
 }
 
 void Role::cardAnalyse()
@@ -85,14 +94,14 @@ void Role::cardAnalyse()
             {
                 playerArea->reset();
                 for(i=0;i<dataInterface->getPlayerMax();i++)
-                    if(!dataInterface->getPlayerList().at(i)->checkStatus(1))
+                    if(!dataInterface->getPlayerList().at(i)->checkBasicStatus(1))
                         playerArea->enablePlayerItem(i);
             }
             if(cardName==tr("圣盾"))
             {
                 playerArea->reset();
                 for(i=0;i<dataInterface->getPlayerMax();i++)
-                    if(!dataInterface->getPlayerList().at(i)->checkStatus(2))
+                    if(!dataInterface->getPlayerList().at(i)->checkBasicStatus(2))
                         playerArea->enablePlayerItem(i);
             }
             if(cardName==tr("魔弹"))
@@ -310,6 +319,18 @@ void Role::drop(int howMany)
 
 }
 
+void Role::dropCover(int howMany)
+{
+    state = 50;
+    gui->showCoverArea(true);
+    HandArea *coverArea = gui->getCoverArea();
+    coverArea->reset();
+    coverArea->setQuota(howMany);
+    coverArea->enableAll();
+    QApplication::alert((QWidget*)playerArea->window());
+
+}
+
 void Role::buy()
 {
     Team*team=dataInterface->getMyTeam();
@@ -456,7 +477,7 @@ void Role::turnBegin()
 void Role::additionalAction(){
     gui->reset();
     tipArea->setMsg(tr("是否执行额外行动？"));
-    if(dataInterface->getMyself()->checkStatus(5))
+    if(dataInterface->getMyself()->checkBasicStatus(5))
         gui->getTipArea()->addBoxItem("0.迅捷赐福");
     state=42;
     tipArea->showBox();
@@ -528,6 +549,7 @@ void Role::ChongYing(int color)
         handArea->setQuota(1);
     }
     decisionArea->disable(0);
+    QApplication::alert((QWidget*)playerArea->window());
 }
 
 void Role::onCancelClicked()
@@ -786,6 +808,26 @@ void Role::onOkClicked()
             myRole->attackAction();
         }
         break;
+//弃盖牌
+    case 50:
+        selectedCards = coverArea->getSelectedCards();
+        cardID=QString::number(selectedCards[0]->getID());
+        command="50;"+cardID;
+        for(i=1;i<selectedCards.count();i++)
+        {
+            cardID=QString::number(selectedCards[i]->getID());
+            command+=","+cardID;
+        }
+        command+=";";
+        for(i=0;i<selectedCards.count();i++)
+        {
+            dataInterface->removeHandCard(selectedCards[i]);
+        }
+        coverArea->reset();
+        gui->showCoverArea(false);
+        gui->reset();
+        emit sendCommand(command);
+        break;
 //天使祝福
     case 751:
         command="751;"+QString::number(selectedCards.size())+";";
@@ -846,6 +888,8 @@ void Role::decipher(QString command)
     QString flag;
     QString cardName;
     QList<Player*>playerList=dataInterface->getPlayerList();
+    QList<QGraphicsObject*>* tempList;
+    PictureContainer* picture;
     ShowArea* showArea=gui->getShowArea();
 
     switch (arg[0].toInt())
@@ -856,6 +900,12 @@ void Role::decipher(QString command)
         gui->logAppend("-----------------------------------");
         gui->logAppend(playerList[targetID]->getName()+tr("回合开始"));
         playerArea->setCurrentPlayerID(targetID);
+
+        tempList = animation->getTempItems();
+        picture = new PictureContainer();
+        picture->setPixmap(playerList[targetID]->getFaceSource());
+        animation->itemFlash(picture,PlayerPos[playerList[targetID]->getPos()].x()+picture->boundingRect().width()/2,PlayerPos[playerList[targetID]->getPos()].y()+picture->boundingRect().height()/2)->start(QAbstractAnimation::DeleteWhenStopped);
+
         if(targetID==dataInterface->getFirstPlayerID())
             teamArea->addRoundBy1();
         if(targetID!=myID)
@@ -988,6 +1038,7 @@ void Role::decipher(QString command)
                 cards<<card;
             }
             showArea->showCards(cards);
+
         }
         gui->logAppend(msg);
         break;
@@ -1066,7 +1117,7 @@ void Role::decipher(QString command)
             case 5:
                 cardID=cardIDList[0].toInt();
                 card=dataInterface->getCard(cardID);
-                playerList[sourceID]->removeStatus(card);
+                playerList[sourceID]->removeBasicStatus(card);
                 break;
             case 6:
                 player = playerList.at(sourceID);
@@ -1088,17 +1139,17 @@ void Role::decipher(QString command)
                 card=dataInterface->getCard(cardID);
                 cardName=card->getName();
                 if(cardName==tr("中毒"))
-                    playerList[targetID]->addStatus(0,card);
+                    playerList[targetID]->addBasicStatus(0,card);
                 if(cardName==tr("虚弱"))
-                    playerList[targetID]->addStatus(1,card);
+                    playerList[targetID]->addBasicStatus(1,card);
                 if(cardName==tr("圣盾")||card->getSpecialityList().contains(tr("天使之墙")))
-                    playerList[targetID]->addStatus(2,card);
+                    playerList[targetID]->addBasicStatus(2,card);
                 if(card->getType()=="attack"&&card->getProperty()==tr("幻"))
-                    playerList[targetID]->addStatus(3,card);
+                    playerList[targetID]->addBasicStatus(3,card);
                 if(card->getSpecialityList().contains(tr("威力赐福")))
-                    playerList[targetID]->addStatus(4,card);
+                    playerList[targetID]->addBasicStatus(4,card);
                 if(card->getSpecialityList().contains(tr("迅捷赐福")))
-                    playerList[targetID]->addStatus(5,card);
+                    playerList[targetID]->addBasicStatus(5,card);
                 QSound::play("sound/Equip.wav");
                 break;
             case 6:
@@ -1202,6 +1253,7 @@ void Role::decipher(QString command)
             cards.clear();
             cards<<card;
             showArea->showCards(cards);
+
         }
         if(card->getElement()!="light")
             gui->logAppend(playerList[sourceID]->getName()+tr("对")+playerList[targetID]->getName()+tr("使用了")+cardName);
@@ -1349,19 +1401,19 @@ void Role::decipher(QString command)
                 show = arg[5].toInt();
                 cardIDList=arg[3].split(',');
 
-        //        if(targetID==myID)
-        //        {
+                if(targetID==myID)
+                {
 
-        //            for(i=0;i<howMany;i++)
-        //            {
-        //                cardID=cardIDList[i].toInt();
-        //                card=dataInterface->getCard(cardID);
-        //                if(dir == 0)
-        //                    dataInterface->addCoverCard(card);
-        //                else
-        //                    dataInterface->removeCoverCard(card);
-        //            }
-        //        }
+                    for(i=0;i<howMany;i++)
+                    {
+                        cardID=cardIDList[i].toInt();
+                        card=dataInterface->getCard(cardID);
+                        if(dir == 0)
+                            dataInterface->addCoverCard(card);
+                        else
+                            dataInterface->removeCoverCard(card);
+                    }
+                }
 
                 if(dir == 0)
                     gui->logAppend(arg[2]+tr("张牌加入玩家") + playerList[targetID]->getName()+tr("盖牌区"));
@@ -1381,6 +1433,8 @@ void Role::decipher(QString command)
                         }
                         gui->logAppend(log);
                         showArea->showCards(cards);
+
+
                     }
                 }
 
@@ -1393,6 +1447,28 @@ void Role::decipher(QString command)
         howMany=arg[3].toInt();
         playerList.at(targetID)->setToken(flag.toInt(),howMany);
         playerArea->update();
+        break;
+//盖牌弃牌
+    case 49:
+        targetID=arg[1].toInt();
+        howMany=arg[2].toInt();
+        flag=arg[3];
+        msg=playerList[targetID]->getName()+tr("需要弃")+arg[2]+tr("张盖牌");
+        if(flag=="y")
+            gui->logAppend(msg+tr("(明弃)"));
+        else
+            gui->logAppend(msg+tr("(暗弃)"));
+        if(targetID!=myID)
+        {
+            gui->setEnable(0);
+        }
+        else
+        {
+            gui->setEnable(1);
+            gui->reset();
+            dropCover(howMany);
+            tipArea->setMsg(tr("你需要弃")+arg[2]+tr("张盖牌"));
+        }
         break;
 //天使祝福
     case 750:

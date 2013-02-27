@@ -27,6 +27,7 @@ private:
     bool jieFangFirst;
     bool chongYingUsed;
     int huanYingFlag;
+    bool cardReady;
 };
 
 #endif // MOQIANG_H

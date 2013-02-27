@@ -158,8 +158,7 @@ void Server::incomingConnection ( int socketDescriptor )
     temp += ";";
     this->sendMessage(this->clientSocketList.size()-1,temp);
 
-//    if(howMany == playerSum)
-    if(howMany == 1)
+    if(howMany == playerSum)
         emit this->seatArrangeSIG();
     else
         sendMessage(-1,tr("现有")+QString::number(howMany)+tr("名玩家进入房间，请耐心等候"));
@@ -316,7 +315,13 @@ void Server::decoder(int id, QString message)
         messageBuffer::writeCardInfor(cards);
 
     break;
-
+//盖牌超出上限弃牌通告
+    case 50:
+        chosenCards = infor.at(1).split(",");
+        for(int i = 0;i < chosenCards.size();i++)
+            cards << chosenCards.at(i).toInt();
+        messageBuffer::writeCardInfor(cards);
+    break;
     case READYBEGIN:
         ready[id] = true;
         for(int i = 0;i < ready.size();i++)
@@ -335,7 +340,12 @@ void Server::decoder(int id, QString message)
         emit roleNoticeSIG();
         emit gameStartSIG();
         break;
-
+    case 53:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
+    case 56:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
     case WEAKCOMMAND:
         messageBuffer::writeInfor(infor[1].toInt());
     break;
@@ -764,6 +774,7 @@ void Server::decoder(int id, QString message)
 //冒险者天堂
     case 1204:
         action.reply = SPECIAL;
+        action.CardID = 4;//表示为非正常的特殊行动
         action.infor1 = 1204;
         action.dstID = infor[1].toInt();
         action.srcID = infor[2].toInt();
@@ -907,10 +918,8 @@ void Server::decoder(int id, QString message)
         ans.dstID = infor[1].toInt();
         ans.srcID = infor[2].toInt();
         howMany=infor[3].toInt();
-        if(howMany>0)
-            ans.CardID = infor[4].toInt();
-        if(howMany>1)
-            ans.infor2 = infor[5].toInt();
+        ans.CardID = infor[4].toInt();
+        ans.infor2 = infor[5].toInt();
         messageBuffer::writeBatInfor(ans);
         break;
 //漆黑信仰
@@ -1227,8 +1236,181 @@ void Server::decoder(int id, QString message)
             messageBuffer::writeInfor(infor[1].toInt());
             break;
 
+//剑魂守护
+    case 1901:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
+//剑气斩
+    case 1902:
+        ans.reply = infor[1].toInt();
+        if(ans.reply!=0)
+        {
+            ans.dstID = infor[2].toInt();
+            ans.infor1 = infor[3].toInt();
+        }
+        messageBuffer::writeBatInfor(ans);
+        break;
+//天使之魂
+    case 1903:
+        ans.reply = infor[1].toInt();
+        if(ans.reply!=0)
+            ans.CardID = infor[2].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//恶魔之魂
+    case 1904:
+        ans.reply = infor[1].toInt();
+        if(ans.reply!=0)
+            ans.CardID = infor[2].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//不屈意志
+    case 1905:
+        messageBuffer::writeInfor(infor[1].toInt());
+        break;
+    case 1906:
+        ans.reply = ATTACK;
+        ans.infor1 = 1906;
+        ans.srcID = infor[1].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
 
 
+
+//蝶舞 24
+//舞动
+    case 2401:
+        action.reply = MAGIC;
+        action.infor1 = 2401;
+        action.infor2 = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.CardID = infor[3].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//毒粉
+    case 2402:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2402;
+        ans.srcID = infor[2].toInt();
+        ans.CardID = infor[3].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//朝圣
+    case 2403:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2403;
+        ans.srcID = infor[2].toInt();
+        ans.CardID = infor[3].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//镜花水月
+    case 2404:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2404;
+        ans.srcID = infor[2].toInt();
+        ans.CardID = infor[3].toInt();
+        ans.infor2 = infor[4].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//凋零
+    case 2405:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2405;
+        ans.srcID = infor[2].toInt();
+        ans.dstID = infor[3].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//蛹化
+    case 2406:
+        action.reply = MAGIC;
+        action.infor1 = 2406;
+        action.srcID = infor[1].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//倒逆之蝶
+    case 2407:
+        action.reply =MAGIC;
+        action.infor1 = 2407;
+        action.CardID = infor[1].toInt();
+        action.infor3 = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        action.srcID = infor[4].toInt();
+        action.dstID = infor[5].toInt();
+        action.infor4 = infor[6].toInt();
+        action.infor5 = infor[7].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//魔弓
+//魔贯冲击
+    case 2601:
+        action.reply=ATTACKSKILL;
+        action.CardID = infor[1].toInt();
+        action.dstID = infor[2].toInt();
+        action.srcID = infor[3].toInt();
+        action.infor1=2601;
+        action.infor2=infor[4].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//魔贯冲击命中询问
+    case 2602:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2602;
+        ans.CardID = infor[2].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//雷光散射
+    case 2603:
+        action.reply = MAGIC;
+        action.infor1 = 2603;
+        action.dstID = infor[1].toInt();
+        action.srcID = infor[2].toInt();
+        action.infor2 = infor[3].toInt();
+        action.inforstr = infor[4];
+        messageBuffer::writeBatInfor(action);
+        break;
+    case 2604:
+        ans.reply = ATTACKSKILL;
+        ans.infor1=2604;
+        ans.srcID=infor[1].toInt();
+        messageBuffer::writeBatInfor(ans);
+        break;
+//多重射击
+    case 2605:
+        action.reply=ATTACKSKILL;
+        action.infor1 = 2605;
+        action.CardID = infor[1].toInt();
+        action.dstID = infor[2].toInt();
+        action.srcID = infor[3].toInt();
+        action.infor2 = infor[4].toInt();
+        messageBuffer::writeBatInfor(action);
+        break;
+//充能魔眼询问
+    case 2606:
+        ans.reply = infor[1].toInt();
+        ans.infor1 = 2606;
+        if(ans.reply == 1)
+        {
+            ans.infor2 = infor[2].toInt();
+            ans.inforstr = infor[3];
+            ans.infor3 = infor[4].toInt();
+            ans.srcID = infor[5].toInt();
+        }
+        if(ans.reply == 2)
+        {
+            ans.dstID = infor[2].toInt();
+            ans.srcID = infor[3].toInt();
+        }
+        messageBuffer::writeBatInfor(ans);
+        break;
+//充能弃牌
+    case 2607:
+        messageBuffer::writeMsg(message);
+        break;
+//魔眼弃牌
+    case 2608:
+        cards<<infor[1].toInt();
+        messageBuffer::writeCardInfor(cards);
+        break;
     }
 
 }

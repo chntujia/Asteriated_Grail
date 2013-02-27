@@ -250,6 +250,8 @@ void BowLady::snipe(QList<void *> args)
 
 void BowLady::snipe2(QList<void*>args)
 {
+    if(engine->checkEnd())
+        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(skill->srcID!=id || skill->infor1!=304)
         return;
@@ -1011,6 +1013,8 @@ void FengYin::FaShuJiDang1(QList<void *> args)
 }
 void FengYin::FaShuJiDang2(QList<void *> args)
 {
+    if(engine->checkEnd())
+        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(id != skill->srcID||skill->infor1!=404)
         return;
@@ -1324,9 +1328,9 @@ void MaoXian::TouTianHuanRi(QList<void *> args)
 void MaoXian::TouTianHuanRi2(QList<void *> args)
 {
     BatInfor *skill = (BatInfor*)args[0];
-    if(skill->srcID!=id || skill->infor1!=1203)
+    if(skill->srcID!=id || skill->infor1!=1206)
         return;
-    coder.notice("冒险家使用【偷天换日】的额外攻击行动");
+    coder.notice("冒险家使用【偷天换日】的额外攻击或法术行动");
 }
 
 //特殊加工
@@ -1352,9 +1356,9 @@ void MaoXian::TeShuJiaGong(QList<void *> args)
 void MaoXian::TeShuJiaGong2(QList<void *> args)
 {
     BatInfor *skill = (BatInfor*)args[0];
-    if(skill->srcID!=id || skill->infor1!=1203)
+    if(skill->srcID!=id || skill->infor1!=1205)
         return;
-    coder.notice("冒险家使用【偷天换日】的额外攻击行动");
+    coder.notice("冒险家使用【特殊加工】的额外攻击或法术行动");
 }
 //冒险者天堂
 void MaoXian::MaoXianZheTianTang(QList<void *> args)
@@ -1368,8 +1372,8 @@ void MaoXian::MaoXianZheTianTang(QList<void *> args)
     PlayerEntity*dst=engine->getPlayerByID(magic->dstID);
     dst->setGem(dst->getGem()+magic->infor2);
     dst->setCrystal(dst->getCrystal()+magic->infor3);
-    teamArea.setGem(color,teamArea.getGem(color)-magic->infor2);
-    teamArea.setCrystal(color,teamArea.getCrystal(color)-magic->infor3);
+    teamArea.setGem(color,(teamArea.getGem(color)-magic->infor2));
+    teamArea.setCrystal(color,(teamArea.getCrystal(color)-magic->infor3));
     coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
     coder.energyNotice(magic->dstID,dst->getGem(),dst->getCrystal());
 }
@@ -1473,6 +1477,8 @@ void YuanSu::YuanSuFaShu(QList<void*> args)
 }
 void YuanSu::YuanSuFaShu2(QList<void*> args)
 {
+    if(engine->checkEnd())
+        return;
     BatInfor *skill = (BatInfor*)args[0];
     if(skill->srcID!=id)
         return;
@@ -1947,6 +1953,8 @@ void YongZhe::JingPiLiJie2(QList<void *> args)
     jingpilijie.harmPoint=3;
     jingpilijie.type=MAGICHARM;
     engine->timeLine3(jingpilijie,this,this,"精疲力竭");
+    if(engine->checkEnd())
+        return;
 }
 void YongZhe::JingPiLiJie3(QList<void *> args)
 {
@@ -2255,8 +2263,10 @@ void QiDao::GuangHuiXinYang(QList<void*> args)
     token[0]--;
     coder.tokenNotice(id,0,token[0]);
     QList<CardEntity*> cards;
-    cards << getCardByID(magic->CardID);
-    cards << getCardByID(magic->infor2);
+    if(magic->CardID!=-1)
+        cards << getCardByID(magic->CardID);
+    if(magic->infor2!=-1)
+        cards << getCardByID(magic->infor2);
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
     coder.discardNotice(id,cards.size(),"n",cards);
     this->removeHandCards(cards,false);
@@ -2378,7 +2388,7 @@ void ShenGuan::ShenShengQiFu(QList<void *> args)
     this->addCrossNum(2);
     coder.crossChangeNotice(this->getID(), getCrossNum());
 }
-void ShenGuan::ShengShiShouHu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable)
+void ShenGuan::ShengShiShouHu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable,QString magicReason)
 {
     if(dst!=this)
         return;
@@ -2451,22 +2461,12 @@ void ShenGuan::ShenShengLingYu(QList<void *> args)
     coder.notice("神官对玩家"+QString::number(magic->dstID)+"发动神圣领域");
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
     QList<CardEntity*> cards;
-    int n = 0;
     if(magic->CardID!=-1)
-    {
         cards << getCardByID(magic->CardID);
-        n++;
-    }
     if(magic->infor3!=-1)
-    {
         cards << getCardByID(magic->infor3);
-        n++;
-    }
-    if(n>0)
-    {
-        this->removeHandCards(cards,true);
-        coder.discardNotice(this->getID(), n, "n", cards);
-    }
+    this->removeHandCards(cards,false);
+    coder.discardNotice(this->getID(), cards.size(), "n", cards);
     if(magic->infor2 == 1)
     {
         this->subCrossNum(1);
@@ -2490,7 +2490,7 @@ void ShenGuan::ShenShengLingYu(QList<void *> args)
 void ShenGuan::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(specialFinishSIG(QList<void*>)),this,SLOT(ShenShengQiShi(QList<void*>)));
-    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*)),this,SLOT(ShengShiShouHu(Harm,PlayerEntity*,PlayerEntity*,int*)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(ShengShiShouHu(Harm,PlayerEntity*,PlayerEntity*,int*)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShenShengQiFu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ShuiZhiShenLi(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(ShenShengQiYue(QList<void*>)));
@@ -2525,7 +2525,7 @@ void SiLing::BuXiu(QList<void *> args)
     coder.notice("死灵发动【不朽】，增加1治疗");
 }
 
-void SiLing::ShengDu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable)
+void SiLing::ShengDu(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable, QString magicReason)
 {
     if(dst!=this)
         return;
@@ -2618,7 +2618,7 @@ void SiLing::skillReset(QList<void *> args)
 void SiLing::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(magicFinishSIG(QList<void*>)),this,SLOT(BuXiu(QList<void*>)));
-    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*)),this,SLOT(ShengDu(Harm,PlayerEntity*,PlayerEntity*,int*)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(ShengDu(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(WenYi(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(SiWangZhiChu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(MuBeiYunLuo(QList<void*>)));
@@ -3024,6 +3024,7 @@ void WuNv::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(NiLiu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XueZhiBeiMing(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XueZhiZuZhou(QList<void*>)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(StartJudge(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
 }
 
 void WuNv::TongShengGongSi(QList<void *> args)
@@ -3230,6 +3231,14 @@ void WuNv::XueZhiZuZhou(QList<void *> args)
     }
 }
 
+void WuNv::StartJudge(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable, QString magicReason)
+{
+    if(dst != this&&src!=this)
+        return;
+    if(magicReason==tr("血之哀伤")&&getHandCardNum()==0&&harm.harmPoint<=*crossAvailable)
+        *crossAvailable = harm.harmPoint-1;
+}
+
 //灵魂 ps.仲裁【审判浪潮】加发动广播 格斗【念弹】,【苍炎蓄力】小修
 LingHun::LingHun(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
 {
@@ -3281,7 +3290,7 @@ void LingHun::LingHunTunShi2(QList<void *> args)
 
 void LingHun::LingHunTunShi3(int harmed, int *howMany, PlayerEntity *dst)
 {
-    if(!HeCheng)
+    if(!HeCheng||*howMany==0)
         return;
     HeCheng=false;
     if(dst->getColor()==color)
@@ -3321,8 +3330,8 @@ void LingHun::LingHunJingXiang(QList<void *> args)
     {
         for(int i=0;i<magic->infor2;i++)
             cards.append(getCardByID(cardNum[i].toInt()));
-        coder.discardNotice(id,magic->infor2,"y",cards);
-        this->removeHandCards(cards,true);
+        coder.discardNotice(id,magic->infor2,"n",cards);
+        this->removeHandCards(cards,false);
     }
     else
     {
@@ -3558,7 +3567,7 @@ HongLian::HongLian(BackgroundEngine *engine, int id, int color):PlayerEntity(eng
 void HongLian::makeConnection(BackgroundEngine *engine)
 {
     connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(XingHongShengYue(QList<void*>)));
-    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*)),this,SLOT(XingHongXinYang(Harm,PlayerEntity*,PlayerEntity*,int*)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(XingHongXinYang(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(XueXingDaoYan(QList<void*>)));
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(ShaLuShengYan(QList<void*>)));
     connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(ToReXueFeiTeng(int,int*,PlayerEntity*)));
@@ -3579,22 +3588,25 @@ void HongLian::XingHongShengYue(QList<void *> args)
         return;
     if(XingHongShengYueUsed)
         return;
-    coder.askForSkill(this->getID(), "猩红圣约");
+    coder.askForSkill(this->getID(), "腥红圣约");
     if(messageBuffer::readInfor() == 0)
         return;
 
     XingHongShengYueUsed = true;
     this->addCrossNum(1);
     coder.crossChangeNotice(this->getID(), crossNum);
-    coder.notice("红莲骑士发动【猩红圣约】，增加1治疗");
+    coder.notice("红莲骑士发动【腥红圣约】，增加1治疗");
 }
 
-void HongLian::XingHongXinYang(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable)
+void HongLian::XingHongXinYang(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable,QString magicReason)
 {
     if(dst!=this)
         return;
     if(src!=this)
         *crossAvailable = 0;
+    else
+        if(magicReason==tr("血腥祷言")&&getHandCardNum()==0&&harm.harmPoint<=*crossAvailable)
+            *crossAvailable = harm.harmPoint-1;
 }
 
 void HongLian::XueXingDaoYan(QList<void *> args)
@@ -3716,7 +3728,7 @@ void HongLian::XingHongShiZi(QList<void *> args)
     else
         gem--;
     coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
-    coder.notice("红莲骑士对玩家"+QString::number(magic->dstID)+"发动【猩红十字】");
+    coder.notice("红莲骑士对玩家"+QString::number(magic->dstID)+"发动【腥红十字】");
     setToken(0,token[0]-1);
     coder.tokenNotice(this->getID(),0,token[0]);
     QList<CardEntity*> cards;
@@ -3728,12 +3740,12 @@ void HongLian::XingHongShiZi(QList<void *> args)
     Harm selfHarm;
     selfHarm.harmPoint = 4;
     selfHarm.type = MAGIC;
-    engine->timeLine3(selfHarm,this,this,"猩红十字");
+    engine->timeLine3(selfHarm,this,this,"腥红十字");
 
     Harm harm;
     harm.harmPoint = 3;
     harm.type = MAGIC;
-    engine->timeLine3(harm,this,engine->getPlayerByID(magic->dstID),"猩红十字");
+    engine->timeLine3(harm,this,engine->getPlayerByID(magic->dstID),"腥红十字");
 }
 
 void HongLian::skillReset(QList<void *> args)
@@ -3747,7 +3759,7 @@ LingFu::LingFu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,
     this->characterID = 18;
     this->star = 4;
     this->makeConnection(engine);
-
+    tokenMax[2]=2;
 }
 
 void LingFu::nianZhou(QList<void *> args)
@@ -3801,6 +3813,8 @@ void LingFu::leiMing(QList<void *> args)
         if(target->getID() != action->infor2 && target->getID() != action->infor3)
             continue;
         engine->timeLine3(harm,this,target,"灵符-雷鸣");
+        if(engine->checkEnd())
+            break;
         counter++;
     }
 
@@ -3919,6 +3933,8 @@ void LingFu::baiGuiYeXing(QList<void *> args)
                 if(target->getID() == dst1->getID() || target->getID() == dst2->getID())
                     continue;
                 engine->timeLine3(hurt,this,target,"百鬼夜行");
+                if(engine->checkEnd())
+                    break;
             }
             return;
         }
@@ -4037,10 +4053,12 @@ void MoQiang::HuanYingXingChen(QList<void *> args)
         harm.type=MAGICHARM;
         HuanYingUsed=true;
         engine->timeLine3(harm,this,this,"幻影星辰");
+        if(engine->checkEnd())
+            return;
         coder.notice(tr("魔枪发动【幻影星辰】"));
         setTap(0);
         coder.tapNotice(id,0,"【正常形态】");
-        setHandCardsMaxFixed(true);
+        setHandCardsMaxFixed(false);
         coder.handcardMaxNotice(id,handCardsMax);
     }
     if(HuanYingUsed){
@@ -4212,4 +4230,769 @@ void MoQiang::skillReset(QList<void *> args)
     JieFangFirst=false;
     HuanYingUsed=false;
     AddAttackPoint=0;
+}
+
+
+//剑帝
+JianDi::JianDi(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=19;
+    this->star=4.5;
+    tokenMax[0]=5;
+    HunUsed=false;
+    TianshiOrEmo=0;
+    this->makeConnection(engine);
+}
+
+void JianDi::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(JianHunShouHu(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(YangGong(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(JianQiZhan(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1ProSIG(QList<void*>)),this,SLOT(TianYuEMo(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(TianShiZhiHun(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(TianShiZhiHun1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(TianShiZhiHun2(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(EMoZhiHun(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(EMoZhiHun1(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(EMoZhiHun2(QList<void*>)));
+    connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(BuQuYiZhi(QList<void*>)));
+    connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(BuQuYiZhi2(QList<void*>)));
+}
+
+void JianDi::JianHunShouHu(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->coverCards.count()>=3)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(HunUsed)
+        return;
+    CardEntity* jianHun=(CardEntity*)args[3];
+    coder.askForSkill(id,"剑魂守护",QString::number(jianHun->getID()));
+    if(messageBuffer::readInfor()==0)
+        return;
+    coder.notice("剑帝发动【剑魂守护】");
+
+
+    QList<CardEntity*> jianHuns;
+    jianHuns << jianHun;
+
+    engine->moveCardFrom(jianHun);
+    engine->moveCardToCover(jianHun,this->getID());
+    coder.moveCardNotice(1,jianHuns,-1,DISCARDPILE,this->id,COVERED);
+    coder.coverCardNotice(this->id,1,jianHuns,false,false);
+
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+}
+
+void JianDi::YangGong(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(this->getToken(0)==5)
+        return;
+    coder.notice(tr("剑帝发动【佯攻】"));
+    setToken(0,token[0]+1);
+    coder.tokenNotice(id,0,token[0]);
+}
+
+void JianDi::JianQiZhan(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->getToken(0)==0)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    PlayerEntity* dst=(PlayerEntity*)args[1];
+    coder.askForSkill(id,"剑气斩",QString::number(dst->getID()));
+    BatInfor skill=messageBuffer::readBatInfor();
+    if(skill.reply==0)
+        return;
+    coder.notice(tr("剑帝对玩家")+QString::number(skill.dstID)+tr("发动【剑气斩】"));
+    setToken(0,token[0]-skill.infor1);
+    coder.tokenNotice(id,0,token[0]);
+    Harm harm;
+    harm.harmPoint=skill.infor1;
+    harm.type=MAGICHARM;
+    engine->timeLine3(harm,this,engine->getPlayerByID(skill.dstID),"剑气斩");
+}
+
+void JianDi::TianYuEMo(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->getEnergy()==0)
+        TianshiOrEmo=0;
+    else if(this->getEnergy()==2)
+        TianshiOrEmo=2;
+    else
+        TianshiOrEmo=1;
+}
+
+void JianDi::TianShiZhiHun(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->coverCards.size()==0)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=1)
+        return;
+    coder.askForSkill(id,"天使之魂");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+    CardEntity *jianhun = getCardByID(ans.CardID);
+    QList<CardEntity*> jianhuns;
+    jianhuns << jianhun;
+    engine->moveCardFromCoverToDiscard(jianhun,false);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),1,jianhuns,true,false);
+    coder.notice("剑帝发动【天使之魂】");
+    HunUsed=true;
+}
+
+void JianDi::TianShiZhiHun1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=1 || !HunUsed)
+        return;
+    this->addCrossNum(2);
+    coder.crossChangeNotice(this->getID(), crossNum);
+    coder.notice(tr("剑帝为自己+2治疗"));
+    HunUsed=false;
+}
+
+void JianDi::TianShiZhiHun2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=1 || !HunUsed)
+        return;
+    if(teamArea.getMorale(this->getColor())<15)
+    {
+        int morale=teamArea.getMorale(this->getColor())+1;
+        teamArea.setMorale(this->getColor(),morale);
+        coder.moraleNotice(this->getColor(),morale);
+        coder.notice(tr("己方+1士气"));
+    }
+    HunUsed=false;
+}
+
+void JianDi::EMoZhiHun(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->coverCards.size()==0)
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=2)
+        return;
+    coder.askForSkill(id,"恶魔之魂");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+    CardEntity *jianhun = getCardByID(ans.CardID);
+    QList<CardEntity*> jianhuns;
+    jianhuns << jianhun;
+    engine->moveCardFromCoverToDiscard(jianhun,false);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),1,jianhuns,true,false);
+    coder.notice("剑帝发动【恶魔之魂】");
+    HunUsed=true;
+}
+
+void JianDi::EMoZhiHun1(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=2 || !HunUsed)
+        return;
+    Harm* harm=(Harm*)args[2];
+    harm->harmPoint++;
+    HunUsed=false;
+}
+
+void JianDi::EMoZhiHun2(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(!*(bool*)args[4])
+        return;
+    if(TianshiOrEmo!=2 || !HunUsed)
+        return;
+    setToken(0,token[0]+2);
+    coder.tokenNotice(id,0,token[0]);
+    HunUsed=false;
+}
+
+void JianDi::BuQuYiZhi(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(this->getEnergy()==0)
+        return;
+    coder.askForSkill(id,"不屈意志");
+    if(messageBuffer::readInfor()==0)
+        return;
+    if(this->getCrystal()>0)
+        crystal--;
+    else
+        gem--;
+    setGem(gem);
+    setCrystal(crystal);
+    coder.energyNotice(id,gem,crystal);
+    coder.notice(tr("剑帝发动【不屈意志】"));
+    engine->drawCards(1,0,this);
+    setToken(0,token[0]+1);
+    coder.tokenNotice(id,0,token[0]);
+    engine->addActionNum(ATTACK);
+}
+
+void JianDi::BuQuYiZhi2(QList<void *> args)
+{
+    if(engine->checkEnd())
+        return;
+    BatInfor *skill = (BatInfor*)args[0];
+    if(id != skill->srcID||skill->infor1!=1906)
+        return;
+    coder.notice("剑帝使用【不屈意志】的攻击行动");
+}
+//蝶舞 24
+DieWu::DieWu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=25;
+    this->star=5;
+    handCardsMin = 3;
+    tokenMax[2]=8;
+    tokenMax[0]=20;
+    makeConnection(engine);
+}
+
+void DieWu::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(WuDong(QList<void*>)));
+    connect(engine,SIGNAL(timeLine5SIG(QList<void*>)),this,SLOT(DuFen(QList<void*>)));
+    connect(engine,SIGNAL(timeLine6SIG(QList<void*>)),this,SLOT(ChaoSheng(QList<void*>)));
+    connect(engine,SIGNAL(timeLine5SIG(QList<void*>)),this,SLOT(JingHuaShuiYue(QList<void*>)));
+    connect(engine,SIGNAL(beforeLoseMoralSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFix(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(YongHua(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(DaoNiZhiDie(QList<void*>)));
+    connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(DaoNiZhiDieJudge(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
+    connect(engine,SIGNAL(fixMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFix(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(fixMoralHeChengSIG(int,int*,PlayerEntity*)),this,SLOT(DiaoLingFixHeCheng(int,int*,PlayerEntity*)));
+}
+
+void DieWu::WuDong(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2401)
+        return;
+    QList<CardEntity*> cards;
+
+    if(magic->infor2==1)
+    {
+        coder.notice("蝶舞发动【舞动】，弃一张手牌");
+        if(magic->CardID!=-1)
+        {
+            cards << getCardByID(magic->CardID);
+            this->removeHandCards(cards,false);
+        }
+    }
+    else
+    {
+        coder.notice("蝶舞发动【舞动】，摸一张手牌");
+        engine->drawCards(1,0,this);
+    }
+    QList<CardEntity*> jian = engine->drwaCardsForCover(1);
+    engine->moveCardFrom(jian[0]);
+    engine->moveCardToCover(jian[0],this->getID());
+    coder.moveCardNotice(1,jian,-1,PILE,this->id,COVERED);
+    this->setToken(2,this->getCoverCards().count());
+    if(getCoverCards().count()>tokenMax[2])
+        this->coverOverLoad();
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->id,1,jian,false,false);
+}
+
+void DieWu::DuFen(QList<void *> args)
+{
+    Harm* harm = (Harm*)args[2];
+    if(harm->type!=MAGIC||harm->harmPoint!=1||coverCards.size()==0)
+        return;
+    coder.askForSkill(this->getID(),"毒粉");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply==0)
+        return;
+
+    coder.notice("蝶舞者发动毒粉，该次伤害加1");
+
+    this->DiaoLing(ans.CardID, false);
+    harm->harmPoint = 0;
+
+    Harm newHarm;
+    newHarm.harmPoint = 2;
+    newHarm.type = MAGIC;
+    engine->timeLine5(newHarm, (PlayerEntity*)args[0],(PlayerEntity*)args[1],0);
+}
+
+void DieWu::ChaoSheng(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[1]||coverCards.size()==0)
+        return;
+    Harm* harm = (Harm*)args[2];
+    coder.askForSkill(this->getID(),"朝圣");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply==0)
+        return;
+
+    coder.notice("蝶舞者发动朝圣，该次伤害减1");
+    this->DiaoLing(ans.CardID, false);
+    harm->harmPoint-=1;
+}
+
+void DieWu::JingHuaShuiYue(QList<void *> args)
+{
+    Harm* harm = (Harm*)args[2];
+    if(harm->type!=MAGIC||harm->harmPoint!=2||coverCards.size()<2)
+        return;
+    coder.askForSkill(this->getID(),"镜花水月");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply==0)
+        return;
+
+    QList<CardEntity*> jian;
+    jian << getCardByID(ans.CardID);
+    jian << getCardByID(ans.infor2);
+    for(int i = 0; i<2;i++)
+        engine->moveCardFromCoverToDiscard(jian[i],true);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),2,jian,true,true);
+
+    this->DiaoLing(ans.CardID, true);
+    this->DiaoLing(ans.infor2, true);
+    harm->harmPoint = 0;
+
+    Harm newHarm;
+    newHarm.harmPoint = 1;
+    newHarm.type = MAGIC;
+    engine->timeLine3(newHarm,this, (PlayerEntity*)args[1],"镜花水月");
+    if(engine->checkEnd())
+        return;
+    engine->timeLine3(newHarm, this, (PlayerEntity*)args[1],"镜花水月");
+}
+
+void DieWu::DiaoLing(int cardID, bool removed)
+{
+    if(getCardByID(cardID)->getType()==tr("magic"))
+        coder.askForSkillNumber(this->getID(),2451);
+    else
+        coder.askForSkillNumber(this->getID(),2452);
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(!removed)
+    {
+        QList<CardEntity*> jian;
+        jian << getCardByID(cardID);
+        engine->moveCardFromCoverToDiscard(jian[0],ans.reply);
+        this->setToken(2,this->getCoverCards().count());
+        coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+        coder.coverCardNotice(this->getID(),1,jian,true,ans.reply);
+    }
+    if(ans.reply == 0)
+        return;
+    tap = true;
+    coder.tapNotice(this->getID(),1,"凋零");
+    coder.notice("蝶舞者对玩家"+QString::number(ans.dstID)+"发动凋零");
+    Harm harm;
+    harm.harmPoint = 1;
+    harm.type = MAGIC;
+    engine->timeLine3(harm, this, engine->getPlayerByID(ans.dstID), "凋零");
+    harm.harmPoint = 2;
+    engine->timeLine3(harm, this, this, "凋零");
+}
+
+void DieWu::YongHua(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2406||getGem()<=0)
+        return;
+    gem--;
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+    coder.notice("蝶舞者发动【蛹化】");
+
+    QList<CardEntity*> jian = engine->drwaCardsForCover(4);
+    for(int i= 0;i <4; i ++)
+        engine->moveCardToCover(jian[i],this->getID());
+    coder.moveCardNotice(4,jian,-1,PILE,this->id,COVERED);
+    coder.coverCardNotice(this->id,4,jian,false,false);
+
+    this->setToken(2,this->getCoverCards().count());
+    if(getCoverCards().count()>tokenMax[2])
+        this->coverOverLoad();
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+
+    this->setToken(0,token[0]+1);
+    coder.tokenNotice(this->getID(),0,token[0]);
+
+    this->addHandCardsRange(-1);
+    coder.handcardMaxNotice(this->getID(), this->getHandCardMax());
+}
+
+void DieWu::DaoNiZhiDie(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != id || magic->infor1 != 2407||getEnergy()<=0)
+        return;
+    if(crystal>0)
+        crystal--;
+    else
+        gem--;
+    coder.energyNotice(this->getID(),this->getGem(),this->getCrystal());
+    QList<CardEntity*> cards;
+    if(magic->CardID!=-1)
+        cards << getCardByID(magic->CardID);
+    if(magic->infor3!=-1)
+        cards << getCardByID(magic->infor3);
+    coder.discardNotice(id,cards.size(),"n",cards);
+    this->removeHandCards(cards,false);
+    PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
+    if(magic->infor2 == 1)
+    {
+        coder.notice("蝶舞者对玩家"+QString::number(magic->dstID)+"发动【倒逆之蝶】");
+        Harm harm;
+        harm.harmPoint = 1;
+        harm.type = MAGIC;
+        engine->timeLine3(harm,this,dst,"倒逆之蝶");
+    }
+    else
+    {
+        if(magic->infor2==2)
+        {
+            coder.notice("蝶舞者发动【倒逆之蝶】，移除2个【茧】，移除1个【蛹】");
+            DiaoLing(magic->infor4, false);
+            DiaoLing(magic->infor5, false);
+        }
+        else
+        {
+            coder.notice("蝶舞者发动【倒逆之蝶】，对自己造成4点法术伤害，移除1个【蛹】");
+            Harm harm;
+            harm.harmPoint = 4;
+            harm.type = MAGIC;
+            engine->timeLine3(harm,this,this,"倒逆之蝶自伤");
+        }
+        this->setToken(0,token[0]-1);
+        coder.tokenNotice(this->getID(),0,token[0]);
+
+        this->addHandCardsRange(1);
+        coder.handcardMaxNotice(this->getID(), this->getHandCardMax());
+    }
+}
+
+void DieWu::DaoNiZhiDieJudge(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable, QString magicReason)
+{
+    if(src!=this||magicReason!=tr("倒逆之蝶"))
+        return;
+    *crossAvailable=0;
+}
+
+void DieWu::DiaoLingFix(int harmed, int *howMany, PlayerEntity *dst)
+{
+    if(!tap||dst->getColor()==this->getColor())
+        return;
+    if(teamArea.getMorale(!this->getColor())<=*howMany)
+    {
+        *howMany = teamArea.getMorale(!this->getColor())-1;
+        coder.notice("蝶舞本回合发动过凋零，对方士气锁1");
+    }
+}
+
+void DieWu::DiaoLingFixHeCheng(int harmed, int *howMany, PlayerEntity *dst)
+{
+    if(!tap||dst->getColor()!=this->getColor())
+        return;
+    if(teamArea.getMorale(!this->getColor())<=*howMany)
+    {
+        *howMany = teamArea.getMorale(!this->getColor())-1;
+        coder.notice("蝶舞本回合发动过凋零，对方士气锁1");
+    }
+}
+
+void DieWu::skillReset(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    if(tap)
+    {
+        tap = false;
+        coder.tapNotice(this->getID(),0,"解除凋零");
+    }
+
+}
+
+MoGong::MoGong(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
+{
+    this->characterID=26;
+    this->star=4;
+    tokenMax[2]=8;
+    makeConnection(engine);
+}
+
+void MoGong::makeConnection(BackgroundEngine *engine)
+{
+    connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(MoGuanChongJi(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(MoGuanChongJiHit(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(MoGuanChongJiMiss(QList<void*>)));
+    connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(LeiGuangSanShe(QList<void*>)));
+    connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(DuoChongSheJi1(QList<void*>)));
+    connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(DuoChongSheJi2(QList<void*>)));
+    connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(ChongNengMoYan(QList<void*>)));
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+    connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(DuoChongSheJiHarm(QList<void*>)));
+}
+
+void MoGong::MoGuanChongJi(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(skill->srcID != id || skill->infor1 != 2601)
+        return;
+    MoGuanChongJiUsed = true;
+    MoGuanCHongJiUsing = true;
+    coder.notice("魔弓发动【魔贯冲击】");
+
+    QList<CardEntity*> chongNeng;
+    chongNeng << getCardByID(skill->infor2);
+    engine->moveCardFromCoverToDiscard(chongNeng[0],true);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),1,chongNeng,true,true);
+}
+
+void MoGong::MoGuanChongJiHit(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0])||!MoGuanCHongJiUsing)
+        return;
+    BatInfor ans;
+    ans.reply = 0;
+    if(coverCards.size()>0)
+    {
+        coder.askForSkill(this->getID(),"魔贯冲击命中");
+        ans = messageBuffer::readBatInfor();
+    }
+    Harm *harm = (Harm*)args[2];
+    if(ans.reply==1)
+    {
+        coder.notice("魔弓发动【魔贯冲击】，额外移除一张火系充能，本次攻击伤害加2");
+        QList<CardEntity*> chongNeng;
+        chongNeng << getCardByID(ans.CardID);
+        engine->moveCardFromCoverToDiscard(chongNeng[0],true);
+        this->setToken(2,this->getCoverCards().count());
+        coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+        coder.coverCardNotice(this->getID(),1,chongNeng,true,true);
+        harm->harmPoint+=2;
+    }
+    else
+    {
+        coder.notice("魔弓发动【魔贯冲击】，本次攻击加1");
+        harm->harmPoint++;
+    }
+    MoGuanCHongJiUsing = false;
+}
+
+void MoGong::MoGuanChongJiMiss(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0])||!MoGuanCHongJiUsing)
+        return;
+    coder.notice("魔弓发动【魔贯冲击】");
+    Harm harm;
+    harm.harmPoint = 3;
+    harm.type = MAGIC;
+    engine->timeLine3(harm,this,(PlayerEntity*)args[1],"魔贯冲击");
+    MoGuanCHongJiUsing = false;
+}
+
+void MoGong::LeiGuangSanShe(QList<void *> args)
+{
+    BatInfor *magic = (BatInfor*)args[0];
+    if(magic->srcID != this->getID()||magic->infor1!=2603)
+        return;
+
+    QStringList cardNum = magic->inforstr.split(":");
+    QList<CardEntity*> chongneng;
+    for(int i=0;i<magic->infor2;i++)
+        chongneng << getCardByID(cardNum[i].toInt());
+    if(magic->dstID!=-1)
+        coder.notice("魔弓发动【雷光散射】，额外弃"+QString::number(magic->infor2-1)+"张雷系充能，指定目标为玩家"+QString::number(magic->dstID));
+    else
+        coder.notice("魔弓发动【雷光散射】");
+    for(int i = 0; i<magic->infor2;i++)
+        engine->moveCardFromCoverToDiscard(chongneng[i],true);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),chongneng.size(),chongneng,true,true);
+
+    Harm harm;
+    harm.type = MAGIC;
+    PlayerEntity* player = this->getNext();
+    while(player!=this)
+    {
+        if(player->getColor()!=this->getColor())
+        {
+            if(player->getID()!=magic->dstID)
+                harm.harmPoint=1;
+            else
+                harm.harmPoint=magic->infor2;
+            this->engine->timeLine3(harm,this,player,"雷光散射");
+            if(engine->checkEnd())
+                return;
+        }
+        player = player->getNext();
+    }
+}
+
+void MoGong::DuoChongSheJi1(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0])||coverCards.size()==0||MoGuanChongJiUsed)
+        return;
+    engine->addActionNum(ATTACK);
+
+}
+
+void MoGong::DuoChongSheJi2(QList<void *> args)
+{
+    BatInfor *skill = (BatInfor*)args[0];
+    if(id != skill->srcID||skill->infor1!=2605)
+        return;
+    coder.notice("魔弓发动【多重射击】");
+    *(int*)args[1]=0;
+    DuoChongSheJiUsed=true;
+    DuoChongSheJiUsing=true;
+    QList<CardEntity*> chongNeng;
+    chongNeng << getCardByID(skill->infor2);
+    engine->moveCardFromCoverToDiscard(chongNeng[0],true);
+    this->setToken(2,this->getCoverCards().count());
+    coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    coder.coverCardNotice(this->getID(),1,chongNeng,true,true);
+}
+
+void MoGong::DuoChongSheJiHarm(QList<void *> args)
+{
+    if(this != ((PlayerEntity*)args[0])||!DuoChongSheJiUsed||!DuoChongSheJiUsing)
+        return;
+    coder.notice("本次攻击为【多重射击】，伤害减1");
+    Harm *harm = (Harm*)args[2];
+    harm->harmPoint--;
+    DuoChongSheJiUsing = false;
+}
+
+void MoGong::ChongNengMoYan(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0]||this->getEnergy()<=0)
+        return;
+    coder.askForSkill(this->getID(),"充能/魔眼");
+    BatInfor start = messageBuffer::readBatInfor();
+    if(start.reply == 0)
+        return;
+    if(start.reply == 1)
+    {
+        if(crystal>0)
+            crystal--;
+        else
+            gem--;
+        coder.energyNotice(this->getID(),gem,crystal);
+        ChongNengUsed = true;
+        if(start.infor2>0)
+        {
+            QStringList cardNum = start.inforstr.split(":");
+            QList<CardEntity*> cards;
+            for(int i=0;i<start.infor2;i++)
+                cards << getCardByID(cardNum[i].toInt());
+            coder.discardNotice(id,cards.size(),"n",cards);
+            this->removeHandCards(cards,false);
+        }
+        engine->drawCards(start.infor3,0,this);
+        coder.askForSkill(this->getID(),"充能盖牌");
+        QString msg=messageBuffer::readMsg();
+        QStringList arg=msg.split(";");
+        QList<CardEntity*> chongneng;
+        for(int i=0;i<arg[1].toInt();i++)
+        {
+            chongneng << getCardByID(arg[i+2].toInt());
+            engine->moveCardFrom(chongneng[i]);
+            engine->moveCardToCover(chongneng[i],this->getID());
+        }
+        coder.moveCardNotice(arg[1].toInt(),chongneng,this->getID(),HAND,this->id,COVERED);
+        coder.coverCardNotice(this->id,arg[1].toInt(),chongneng,false,false);
+
+        this->setToken(2,this->getCoverCards().count());
+        if(getCoverCards().count()>tokenMax[2])
+            this->coverOverLoad();
+        coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+    }
+    else
+    {
+        gem--;
+        coder.energyNotice(this->getID(),gem,crystal);
+        MoYanUsed = true;
+        PlayerEntity* dst;
+        if(start.dstID==-1)
+            engine->drawCards(3,0,this);
+        else
+        {
+            dst = engine->getPlayerByID(start.dstID);
+            if(dst->getHandCardNum()>0)
+                coder.askForDiscard(start.dstID,1,false);
+            QList<CardEntity*> cardChosen;
+            cardChosen = messageBuffer::readCardID(1);
+            dst->removeHandCards(cardChosen,false);
+            coder.discardNotice(start.dstID,1,"n",cardChosen);
+        }
+        if(this->getHandCardNum()>0)
+        {
+            coder.askForSkill(this->getID(),"魔眼盖牌");
+            QList<CardEntity*> chongneng;
+            chongneng = messageBuffer::readCardID(1);
+            engine->moveCardFrom(chongneng[0]);
+            engine->moveCardToCover(chongneng[0],this->getID());
+            coder.moveCardNotice(1,chongneng,this->getID(),HAND,this->id,COVERED);
+            coder.coverCardNotice(this->id,1,chongneng,false,false);
+            this->setToken(2,this->getCoverCards().count());
+            if(getCoverCards().count()>tokenMax[2])
+                this->coverOverLoad();
+            coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
+        }
+        crystal++;
+        coder.energyNotice(this->getID(),gem,crystal);
+    }
+}
+
+void MoGong::skillReset(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    MoGuanChongJiUsed = false;
+    MoGuanCHongJiUsing = false;
+    DuoChongSheJiUsed = false;
+    MoYanUsed = false;
+    ChongNengUsed = false;
+    DuoChongSheJiUsing = false;
 }

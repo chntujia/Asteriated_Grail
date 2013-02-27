@@ -55,8 +55,8 @@ void WuNv::TongShengGongSi()
 void WuNv::XueZhiAiShang()
 {
     state = 2302;
-    tipArea->setMsg(tr("是否发动血之哀伤？不选择目标并确定为移除【同生共死】"));
-
+    gui->reset();
+    tipArea->setMsg(tr("是否发动血之哀伤？【直接确定】为移除同生共死"));
     playerArea->setQuota(0,1);
     playerArea->enableAll();
     if(tongShengID!=-1)

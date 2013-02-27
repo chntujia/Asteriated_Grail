@@ -41,6 +41,7 @@ void ZhongCai::normal()
 void ZhongCai::YiShiZhongDuan()
 {
     state=1401;
+    gui->reset();
     tipArea->setMsg(tr("是否发动仪式中断？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();
@@ -57,7 +58,7 @@ void ZhongCai::YiShiZhongDuan()
                 flag=true;
                 break;
             }
-        if(myself->getToken(0)>0)
+        if(myself->getToken(0)>0 || myself->getEnergy()>0)
             flag=true;
     }
     if(flag)
@@ -67,6 +68,7 @@ void ZhongCai::YiShiZhongDuan()
 void ZhongCai::ZhongCaiYiShi()
 {
     state=1402;
+    gui->reset();
     tipArea->setMsg(tr("是否发动仲裁仪式？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();
@@ -83,7 +85,7 @@ void ZhongCai::ZhongCaiYiShi()
                 flag=true;
                 break;
             }
-        if(myself->getToken(0)>0)
+        if(myself->getToken(0)>0 || myself->getEnergy()>0)
             flag=true;
     }
     if(flag)

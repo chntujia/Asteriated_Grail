@@ -24,7 +24,7 @@ public:
     void setMyself(Player* player);
     void setID(int id);
     void setPlayerMax(int playerMax);
-
+    Player* getPlayerById(int id);
     Card* getCard(int id);
     int getID();
     int getFirstPlayerID(){return firstPlayerID;}
@@ -33,6 +33,7 @@ public:
     Team* getOtherTeam(){return otherTeam;}
     int getPlayerMax();
     QList<Card*> getHandCards();
+    QList<Card*> getCoverCards();
     QList<Player*> getPlayerList();
     Team* getRedTeam();
     Team* getBlueTeam();

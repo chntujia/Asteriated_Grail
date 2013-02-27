@@ -14,6 +14,8 @@ CardItem::CardItem(Card* card)
 CardItem::~CardItem()
 {
 }
+
+
 QRectF CardItem::boundingRect() const
 {
     return QRectF(0, 0, width, height);

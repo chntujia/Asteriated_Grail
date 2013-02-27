@@ -9,6 +9,7 @@
 #include "TipArea.h"
 #include "ButtonArea.h"
 #include "LogArea.h"
+#include "BPArea.h"
 #include <QGraphicsProxyWidget>
 class RoomScene : public QGraphicsScene
 {
@@ -29,5 +30,6 @@ private:
     QGraphicsProxyWidget* logAreaProxy;
 
     HandArea *coverArea;
+    BPArea* bpArea;
 };
 #endif // ROOMSCENE_H

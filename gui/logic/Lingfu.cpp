@@ -33,7 +33,6 @@ LingFu::LingFu()
 void LingFu::normal()
 {
     Role::normal();
-    Player* myself=dataInterface->getMyself();
     //Áé·û
     if (handArea->checkElement("thunder"))
         buttonArea->enable(3);
@@ -65,7 +64,6 @@ void LingFu::onOkClicked()
         command += QString::number(selectedCards[0]->getID()) + ";";
 
         dataInterface->removeHandCard(selectedCards[0]);
-        dataInterface->addCoverCard(selectedCards[0]);
         emit sendCommand(command);
         gui->reset();
         break;

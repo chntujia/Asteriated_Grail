@@ -8,11 +8,18 @@ class StatusItem : public QGraphicsObject
 {
     friend class PlayerItem;
 public:
-    StatusItem(Status*status);
+    StatusItem(BasicStatus*status);
+    StatusItem(Token *token);
+    StatusItem(int specialStatusID);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 private:
-    Status*status;
+    BasicStatus*status;
+    Token*token;
+    int specialStatusID;
+    QPixmap Num[10];
+    QPixmap pic;
+    int type;
 };
 
 class PlayerItem : public QGraphicsObject
@@ -30,8 +37,11 @@ public:
     void adjustStatusItems();
 
 public slots:
-    void addStatusItem(Status* status);
-    void removeStatusItem(Status* status);
+    void addBasicStatusItem(BasicStatus* status);
+    void removeBasicStatusItem(BasicStatus *status);
+    void addSpecialStatusItem(int specialStatusID);
+    void removeSpecialStatusItem(int specialStatusID);
+    void addTokenItem(Token*);
 signals:
     void playerSelected(int);
     void playerUnselected(int);
@@ -44,7 +54,9 @@ private:
     QPixmap card;
     QPixmap overflow;
     QPixmap heal;
-    QPixmap remain;
+    QPixmap cardRemain;
+    QPixmap healRemain;
+    QPixmap energyRemain;
     int width;
     int height;
     bool selected;

@@ -4,6 +4,7 @@ GUI* gui=NULL;
 GUI::GUI(QObject *parent) :
     QObject(parent)
 {
+
 }
 void GUI::reset()
 {

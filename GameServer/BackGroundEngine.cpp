@@ -109,12 +109,14 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
     case 17:
         return new XianZhe(engine,id,color);
         break;
-
+    case 19:
+        return new JianDi(engine,id,color);
+        break;
     case 20:
         return new GeDouJia(engine,id,color);
         break;
     case 18:
-        return new LingFu(engine,id,color);  //debugó?
+        return new LingFu(engine,id,color);
         break;
     case 21:
         return new YongZhe(engine,id,color);
@@ -124,6 +126,12 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
         break;
     case 23:
         return new WuNv(engine,id,color);
+        break;
+    case 24:
+        return new DieWu(engine,id,color);
+        break;
+    case 26:
+        return new MoGong(engine,id,color);
         break;
     case 28:
         return new HongLian(engine,id,color);
@@ -186,14 +194,13 @@ void BackgroundEngine::seatArrange()
     for(int i = 0;i < this->getPlayerNum();i++)
         playerList << NULL;
 
-    for(int i=1; i<= 18 ;i++)
+    for(int i=1; i<= 24 ;i++)
         roles<<i;
-    roles<<21;
-    roles<<20;
-    roles<<22;
-    roles<<23;
+
+    roles<<26;
     roles<<28;
     roles<<29;
+
     randomize(&roles);
 
 }
@@ -212,7 +219,6 @@ void BackgroundEngine::roleRandom()
     for(int i=0;i<playerSum;i++){
         playerList[i]=setRole(roles[i],this,queue[i].digitValue(),queue[i+playerSum].digitValue());
         coder.roleNotice(queue[i].digitValue(),roles[i]);
-        coder.energyNotice(queue[i].digitValue(),1,1);
     }
     seatPostarrange();
     gameStart();
@@ -234,6 +240,45 @@ void BackgroundEngine::role3Pick1Reply(int id,int roleID)
         }
 }
 
+void BackgroundEngine::BP()
+{
+    coder.optionalRoleNotice(16, &roles);
+    int red = 0, blue = 0,choice,player;
+    for(int i = 0;i <playerSum/2;i++)
+    {
+        while(queue[red+playerSum].digitValue()!=1)
+            red ++;
+        player = queue[red].digitValue();
+        coder.askForBan(player);
+        choice = messageBuffer::readInfor();
+        coder.banNotice(player, choice);
+
+        while(queue[blue+playerSum].digitValue()!=0)
+            blue ++;
+        player = queue[blue].digitValue();
+        coder.askForBan(player);
+        choice = messageBuffer::readInfor();
+        coder.banNotice(player, choice);
+
+        player = queue[red].digitValue();
+        coder.askForPick(player);
+        choice = messageBuffer::readInfor();
+        coder.pickNotice(player, choice);
+        playerList[red]=setRole(choice,this,player,1);
+        coder.roleNotice(player,choice,1);
+        red++;
+
+        player = queue[blue].digitValue();
+        coder.askForPick(player);
+        choice = messageBuffer::readInfor();
+        coder.pickNotice(player, choice);
+        playerList[blue]=setRole(choice,this,player,0);
+        coder.roleNotice(player,choice,1);
+        blue++;
+    }
+    seatPostarrange();
+    gameStart();
+}
 
 
 //游戏开始,游戏流程控制
@@ -455,6 +500,21 @@ void BackgroundEngine::drawCards(int num,int harmed,PlayerEntity* player)
     //命令该玩家增加手牌
     player->addHandCards(newCards,harmed);
 }
+QList<CardEntity *> BackgroundEngine::drwaCardsForCover(int num)
+{
+    QList<CardEntity*> newCards;
+    for(int i = 0;i < num;i++)
+    {
+        if(this->pile.isEmpty())
+        {
+            shuffle(true);
+        }
+        newCards << this->pile.takeLast();
+    }
+    return newCards;
+}
+
+
 //中毒处理
 void BackgroundEngine::posionProcess(PlayerEntity* player,CardEntity* card)
 {
@@ -475,7 +535,11 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
 
     if(reply == 0)
     {
-        //ì???
+
+        //跳过
+
+
+
         this->attackLeft = 0;
         this->magicLeft = 0;
         this->specialLeft = 0;
@@ -486,13 +550,21 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
     }
     else if(reply == 1)
     {
-        //????
+
+        //强摸
+
+
+
         coder.weakNotice(player->getID(),1,howMany);
         this->drawCards(howMany,0,player);
     }
 }
 
-//??????ê?ê±?ì?a”±?°í??ò???°”??ù???§???í??ê??§??
+
+//回合开始时检测当前玩家面前的基础效果和专属效果
+
+
+
 void BackgroundEngine::checkEffect(PlayerEntity* player)
 {
     for(int i = 0;i < player->getBasicEffect().size();i++)
@@ -516,7 +588,7 @@ void BackgroundEngine::checkEffect(PlayerEntity* player)
         }    
 }
 
-//回合开始时检测当前玩家面前的基础效果和专属效果
+
 void BackgroundEngine::acted(int kind)
 {
     if(kind == ATTACK)
@@ -729,12 +801,15 @@ void BackgroundEngine::actionPhase()
                 teamArea.setGem(color,teamArea.getGem(color) - bat.infor1);
                 teamArea.setCrystal(color,teamArea.getCrystal(color) - bat.infor2);
                 teamArea.setCup(color,teamArea.getCup(color) + 1);
-                teamArea.setMorale(!color,teamArea.getMorale(!color) - 1);                
+                int n=1;
+                emit fixMoralHeChengSIG(0,&n,currentPlayer);
+                teamArea.setMorale(!color,teamArea.getMorale(!color) - n);
+
                 coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
                 coder.cupNotice(color,teamArea.getCup(color));
                 coder.moraleNotice(!color,teamArea.getMorale(!color));
                 emit specialFinishSIG(args);
-                int n=1;
+
                 emit loseMoraleHeChengSIG(0,&n,currentPlayer);
                 this->checkEnd();
             }
@@ -944,7 +1019,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         for(int i = 0;i < dst->getBasicEffect().size()&& checkShield;i++)
         {
             //检查是否有圣盾
-            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("ììê?????")))
+            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
             {
                 coder.shieldNotic(dst->getID());
                 dst->removeBasicEffect(dst->getBasicEffect()[i]);
@@ -1010,14 +1085,14 @@ void BackgroundEngine::timeLine3(Harm harm, PlayerEntity *src, PlayerEntity *dst
         coder.attackHurtNotice(dst->getID(),harm.harmPoint,src->getID());
     else if(harm.type == MAGIC)
         coder.magicHurtNotice(dst->getID(),harm.harmPoint,src->getID(),magicReason);
-    timeLine4(harm,src,dst);
+    timeLine4(harm,src,dst, magicReason);
 }
 
-void BackgroundEngine::timeLine4(Harm harm,PlayerEntity *src,PlayerEntity *dst)
+void BackgroundEngine::timeLine4(Harm harm,PlayerEntity *src,PlayerEntity *dst,QString magicReason)
 {
     int crossUsed = 0;
     int crossAvailable = dst->getCrossNum();
-    emit askForHeal(harm,src,dst,&crossAvailable);
+    emit askForHeal(harm,src,dst,&crossAvailable, magicReason);
     if(crossAvailable != 0)
     {
         coder.askForCross(dst->getID(),harm.harmPoint,harm.type, crossAvailable);
@@ -1037,9 +1112,13 @@ void BackgroundEngine::timeLine5(Harm harm,PlayerEntity *src,PlayerEntity *dst,i
     }
     if(harm.harmPoint == 0)
         return;
-    //emit timeLine5SIG();
-
-    timeLine6(harm,src,dst);
+    QList<void*> arg;
+    arg << src;
+    arg << dst;
+    arg << &harm;
+    emit timeLine5SIG(arg);
+    if(harm.harmPoint>0)
+        timeLine6(harm,src,dst);
 }
 
 void BackgroundEngine::timeLine6(Harm harm,PlayerEntity *src,PlayerEntity *dst)
@@ -1167,7 +1246,7 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
             //检查圣盾
             for(int i = 0;i < dstPlayer->getBasicEffect().size();i++)
             {
-                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(tr("ììê?????")))
+                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
                 {
                     coder.shieldNotic(dst);
                     dstPlayer->removeBasicEffect(dstPlayer->getBasicEffect()[i]);

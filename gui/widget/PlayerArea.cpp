@@ -17,6 +17,7 @@ PlayerArea::PlayerArea():least(1),most(1)
         connect(playerItems[i],SIGNAL(playerUnselected(int)),this,SLOT(onPlayerUnselected(int)));
         playerItems[i]->setParentItem(this);
         playerItems[i]->setPos(PlayerPos[i]);
+        playerList[i]->setPos(i);
     }
     //¸ù¾ÝIDÅÅÐò
     sortPlayerItems();
