@@ -170,13 +170,7 @@ void LingHun::LingHunZengFu()
     state=2207;
     gui->reset();
     tipArea->setMsg(tr("是否发动灵魂增幅？"));
-    QList<Card*> handcards=dataInterface->getHandCards();
-    Player *myself=dataInterface->getMyself();
-    bool flag=true;
-    int i;
-    int n=handcards.size();
     decisionArea->enable(1);
-
     decisionArea->enable(0);
 }
 
@@ -207,7 +201,6 @@ void LingHun::onOkClicked()
     QString sourceID;
     QString targetID;
     QString text;
-    int flag;
 
     selectedCards=handArea->getSelectedCards();
     selectedPlayers=playerArea->getSelectedPlayers();

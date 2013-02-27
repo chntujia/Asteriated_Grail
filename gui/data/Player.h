@@ -3,16 +3,29 @@
 
 #include <QGraphicsObject>
 #include "data/Card.h"
-class Status
+class BasicStatus
 {
     friend class StatusItem;
     friend class Player;
 public:
-    Status(int type,Card*card){this->type=type;this->card=card;}
+    BasicStatus(int type,Card*card){this->type=type;this->card=card;}
     Card* getCard(){return card;}
 private:
     int type;
     Card*card;
+};
+
+class Token
+{
+    friend class StatusItem;
+    friend class Player;
+public:
+    Token(QString name,int max,int type):tokenName(name),max(max),num(0),type(type){}
+private:
+    QString tokenName;
+    int max;
+    int num;
+    int type;
 };
 
 class Player:public QObject
@@ -29,18 +42,18 @@ public:
     void setRole(int roleID);
     void setTap(bool flag){tap=flag;}
     void setSpecial(int type,bool flag);
-    void setToken(int id,int howMany){token[id]=howMany;}
+    void setToken(int id,int howMany){token[id]->num=howMany;}
+    void addToken(int id,Token *token){this->token[id]=token;emit addTokenSIG(token);}
     void changeHandCardNum(int increase){handCardsNum+=increase;}
     void changeCoverCardNum(int increase){coverCardsNum += increase;}
-    void addStatus(int type,Card* card);
-    void removeStatus(Card* card);
-    bool checkStatus(int type);
-    bool checkStatus(QString status);
-    bool hasStatus(){return !statusList.isEmpty();}
+    void addBasicStatus(int type,Card* card);
+    void removeBasicStatus(Card* card);
+    bool checkBasicStatus(int type);
+    bool checkBasicStatus(QString status);
+    bool hasStatus(){return !BasicStatusList.isEmpty();}
     void setName(QString name){this->name=name;}
     int getID();
     QString getName();
-    QString getTokenName(int id){return tokenName[id];}
     int getHandCardMax();
     int getHandCardNum();
     int getCoverCardMax(){return this->coverCardsMax;}
@@ -53,18 +66,20 @@ public:
     int getEnergyMax();
     int getColor();
     int getRoleID(){return roleID;}
-    int getToken(int id){return token[id];}
-    int getTokenMax(int id){return tokenMax[id];}
+    int getToken(int id){return token[id]->num;}
     bool getSpecial(int type){return specials[type];}
     bool getTap(){return tap;}
     QString getFaceSource(){return faceSource;}
     QString getTapSource(){return tapSource;}
-    QList<Status*> getStatus(){return statusList;}
+    QList<BasicStatus*> getBasicStatus(){return BasicStatusList;}
     void setPos(int pos){this->pos = pos;}
     int getPos(){return pos;}
 signals:
-    void addStatusSIG(Status *status);
-    void removeStatusSIG(Status *status);
+    void addBasicStatusSIG(BasicStatus *status);
+    void removeBasicStatusSIG(BasicStatus *status);
+    void addSpecialStatusSIG(int type);
+    void removeSpecialStatusSIG(int type);
+    void addTokenSIG(Token*);
 protected:
     int id;
     int pos;
@@ -79,16 +94,13 @@ protected:
     int crystal;
     int energyMax;
     int color;
-    int roleID;
-    int tokenMax[3];
-    int token[3];
+    int roleID;    
     bool tap;
     bool specials[5];
-    QList<Status*> statusList;
+    QList<BasicStatus*> BasicStatusList;
+    Token* token[3];
     QString faceSource;
     QString tapSource;
-    QString tokenName[3];
-
 };
 
 

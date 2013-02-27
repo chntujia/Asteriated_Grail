@@ -154,14 +154,14 @@ void QiDao::cardAnalyse()
     case 1602:
         playerArea->enableMate();
         for(int i=0;i<players.size();i++)
-           if(players[i]->checkStatus(4))
+           if(players[i]->checkBasicStatus(4))
                playerArea->disablePlayerItem(i);
         break;
 //Ñ¸½Ý´Í¸£
     case 1603:
         playerArea->enableMate();
         for(int i=0;i<players.size();i++)
-           if(players[i]->checkStatus(5))
+           if(players[i]->checkBasicStatus(5))
                playerArea->disablePlayerItem(i);
         break;
 //¹â»ÔÐÅÑö

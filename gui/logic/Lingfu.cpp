@@ -33,7 +33,6 @@ LingFu::LingFu()
 void LingFu::normal()
 {
     Role::normal();
-    Player* myself=dataInterface->getMyself();
     //Áé·û
     if (handArea->checkElement("thunder"))
         buttonArea->enable(3);

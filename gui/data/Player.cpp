@@ -3,17 +3,19 @@
 #include <QFile>
 Player::Player(int ID, int isRed):id(ID),handCardsMax(6),crossNum(0),crossMax(2),energyMax(3),color(isRed),tap(0)
 {
+    roleID=0;
     gem=0;
     crystal=0;
     handCardsNum=0;
     coverCardsMax = 0;
     coverCardsNum = 0;
-    tokenMax[2]=tokenMax[1]=tokenMax[0]=token[2]=token[1]=token[0]=0;
     for(int i=0;i<5;i++ )
         specials[i]=false;
 }
 void Player::setRole(int roleID)
 {
+    if(this->roleID!=0)
+        return;
     this->roleID=roleID;
     faceSource="role/"+QString::number(roleID)+".png";
     switch(roleID)
@@ -32,11 +34,11 @@ void Player::setRole(int roleID)
         break;
     case 5:
         name=tr("[°µÉ±Õß]");
-        tapSource="resource/qianxing.png";
+        tapSource="resource/tap/QianXing.png";
         break;
     case 6:
         name=tr("[Ê¥Å®]");
-        tapSource="resource/lianmin.png";
+        tapSource="resource/tap/LianMin.png";
         break;
     case 7:
         name=tr("[ÌìÊ¹]");
@@ -46,7 +48,7 @@ void Player::setRole(int roleID)
         break;
     case 9:
         name=tr("[Ä§½£]");
-        tapSource="resource/anying.png";
+        tapSource="resource/tap/AnYing.png";
         break;    
     case 10:
         name=tr("[Ê¥Ç¹]");
@@ -54,8 +56,7 @@ void Player::setRole(int roleID)
         break;
     case 11:
         name=tr("[ÔªËØÊ¦]");
-        tokenName[0]=tr("ÔªËØ");
-        tokenMax[0]=3;
+        addToken(0,new Token(tr("ÔªËØ"),3,0));
         break;
     case 12:
         name=tr("[Ã°ÏÕ¼Ò]");
@@ -66,10 +67,9 @@ void Player::setRole(int roleID)
         break;
     case 14:
         name=tr("[ÖÙ²ÃÕß]");
-        tapSource="resource/shenpan.png";
-        tokenName[0]=tr("ÉóÅÐ");
-        tokenMax[0]=4;
+        tapSource="resource/tap/ShenPan.png";
         crystal=2;
+        addToken(0,new Token(tr("ÉóÅÐ"),4,0));
         break;
     case 15:
         name=tr("[Éñ¹Ù]");
@@ -77,9 +77,8 @@ void Player::setRole(int roleID)
         break;
     case 16:
         name=tr("[Æíµ»Ê¦]");
-        tapSource="resource/qidao.png";
-        tokenName[0]=tr("·ûÎÄ");
-        tokenMax[0]=3;
+        tapSource="resource/tap/QiDao.png";
+        addToken(0,new Token(tr("·ûÎÄ"),3,0));
         break;
     case 17:
         name=tr("[ÏÍÕß]");
@@ -87,99 +86,99 @@ void Player::setRole(int roleID)
         break;
     case 18:
         name = tr("[Áé·ûÊ¦]");
-        tokenName[2] = tr("ÑýÁ¦");
-        tokenMax[2] = 2;
+        addToken(2,new Token(tr("ÑýÁ¦"),2,2));
         break;
     case 19:
         name=tr("[½£µÛ]");
-        tokenName[0]=tr("½£Æø");
-        tokenMax[0]=5;
-        tokenName[2]=tr("½£»ê");
-        tokenMax[2]=3;
+        addToken(0,new Token(tr("½£Æø"),5,0));
+        addToken(2,new Token(tr("½£»ê"),3,2));
         break;
     case 20:
         name=tr("[¸ñ¶·¼Ò]");
-        tapSource="resource/baishi.png";
-        tokenName[0]=tr("¶·Æø");
-        tokenMax[0]=6;
+        tapSource="resource/tap/BaiShi.png";
+        addToken(0,new Token(tr("¶·Æø"),6,0));
         break;
-
     case 21:
         name=tr("[ÓÂÕß]");
-        tapSource="resource/jingpilijie.png";
-        tokenName[0]=tr("Å­Æø");
-        tokenMax[0]=4;
-        tokenName[1]=tr("ÖªÐÔ");
-        tokenMax[1]=4;
+        tapSource="resource/tap/JingPiLiJie.png";
         crystal=2;
+        addToken(0,new Token(tr("Å­Æø"),4,0));
+        addToken(1,new Token(tr("ÖªÐÔ"),4,1));
         break;
     case 22:
         name=tr("[Áé»êÊõÊ¿]");
-        tokenName[0]=tr("»Æ»ê");
-        tokenMax[0]=6;
-        tokenName[1]=tr("À¶»ê");
-        tokenMax[1]=6;
+        addToken(0,new Token(tr("»Æ»ê"),6,0));
+        addToken(1,new Token(tr("À¶»ê"),6,1));
         break;
     case 23:
         name=tr("[Î×Å®]");
-        tapSource="resource/liuxue.png";
+        tapSource="resource/tap/LiuXue.png";
         break;
     case 24:
         name=("[µûÎèÕß]");
-        tapSource="resource/diaoling.png";
-        tokenName[0]=tr("Ó¼");
-        tokenMax[0]=20;
-        tokenName[2]=tr("¼ë");
-        tokenMax[2]=8;
+        tapSource="resource/tap/DiaoLing.png";
+        addToken(0,new Token(tr("Ó¼"),99,0));
+        addToken(2,new Token(tr("¼ë"),8,2));
         break;
     case 26:
         name=("[Ä§¹­]");
-        tokenName[2]=tr("³äÄÜ");
-        tokenMax[2]=8;
+        addToken(2,new Token(tr("³äÄÜ"),8,2));
         break;
     case 28:
         name=tr("[ºìÁ«ÆïÊ¿]");
-        tapSource="resource/rexuefeiteng.png";
-        tokenName[0]=tr("ÑªÓ¡");
-        tokenMax[0]=2;
+        tapSource="resource/tap/ReXueFeiTeng.png";
+        addToken(0,new Token(tr("ÑªÓ¡"),2,0));
         crossMax=4;
         break;
     case 29:
         name=tr("[Ä§Ç¹]");
-        tapSource="resource/huanying.png";
+        tapSource="resource/tap/HuanYing.png";
         break;
     }
 }
 
-void Player::addStatus(int type,Card* card)
+void Player::addBasicStatus(int type,Card* card)
 {
-    Status*status=new Status(type,card);
-    statusList<<status;
-    emit addStatusSIG(status);
+    if(type==3)
+    {
+        if(card->getElement()=="wind")
+            type=31;
+        else if(card->getElement()=="water")
+            type=32;
+        else if(card->getElement()=="fire")
+            type=33;
+        else if(card->getElement()=="earth")
+            type=34;
+        else if(card->getElement()=="thunder")
+            type=35;
+    }
+    BasicStatus*status=new BasicStatus(type,card);
+    BasicStatusList<<status;
+    emit addBasicStatusSIG(status);
 }
 
-void Player::removeStatus(Card* card)
+void Player::removeBasicStatus(Card* card)
 {
     int i;
-    for(i=0;i<statusList.count();i++)
-        if(statusList.at(i)->card==card)
+    for(i=0;i<BasicStatusList.count();i++)
+        if(BasicStatusList.at(i)->card==card)
         {
-            emit removeStatusSIG(statusList.at(i));
-            statusList.removeAt(i);
+            emit removeBasicStatusSIG(BasicStatusList.at(i));
+            BasicStatusList.removeAt(i);
         }
 }
 
-bool Player::checkStatus(int type)
+bool Player::checkBasicStatus(int type)
 {
-    foreach(Status* ptr,statusList)
+    foreach(BasicStatus* ptr,BasicStatusList)
         if(ptr->type==type)
             return 1;
     return 0;
 }
 
-bool Player::checkStatus(QString status)
+bool Player::checkBasicStatus(QString status)
 {
-    foreach(Status* ptr,statusList)
+    foreach(BasicStatus* ptr,BasicStatusList)
         if(ptr->getCard()->getSpecialityList().contains(status))
             return 1;
     return 0;
@@ -213,6 +212,10 @@ void Player::setEnergyMax(int howMany)
 void Player::setSpecial(int type,bool flag)
 {
     specials[type]=flag;
+    if(flag)
+        emit addSpecialStatusSIG(type);
+    else
+        emit removeSpecialStatusSIG(type);
 }
 
 int Player::getID()

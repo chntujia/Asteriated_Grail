@@ -211,7 +211,7 @@ void TianShi::cardAnalyse()
         break;
     case 703:
         for(i=0;i<dataInterface->getPlayerMax();i++)
-            if(!dataInterface->getPlayerList().at(i)->checkStatus(2))
+            if(!dataInterface->getPlayerList().at(i)->checkBasicStatus(2))
                 playerArea->enablePlayerItem(i);
         break;
     }

@@ -2,14 +2,103 @@
 #include "data/DataInterface.h"
 #include <QPainter>
 #include <QPushButton.h>
-StatusItem::StatusItem(Status* status)
+
+StatusItem::StatusItem(BasicStatus* status)
 {
     this->status=status;
+    type=0;
     Card*card=status->card;
     QString tip=card->getName()+'-'+card->getProperty();
     for(int i=0;i<card->getHasSpeciality();i++)
         tip+='\n'+card->getSpecialityList().at(i);
     setToolTip(tip);
+    switch(status->type)
+    {
+    case 0:
+        pic=QPixmap("resource/status/du.png");
+        break;
+    case 1:
+        pic=QPixmap("resource/status/xu.png");
+        break;
+    case 2:
+        pic=QPixmap("resource/status/dun.png");
+        break;
+    case 31:
+        pic=QPixmap("resource/status/fengFeng.png");
+        break;
+    case 32:
+        pic=QPixmap("resource/status/shuiFeng.png");
+        break;
+    case 33:
+        pic=QPixmap("resource/status/huoFeng.png");
+        break;
+    case 34:
+        pic=QPixmap("resource/status/diFeng.png");
+        break;
+    case 35:
+        pic=QPixmap("resource/status/leiFeng.png");
+        break;
+    case 4:
+        pic=QPixmap("resource/status/wei.png");
+        break;
+    case 5:
+        pic=QPixmap("resource/status/xun.png");
+        break;
+    }
+}
+
+StatusItem::StatusItem(int specialStatusID)
+{
+    type=1;
+    this->specialStatusID=specialStatusID;
+    switch(specialStatusID)
+    {
+    case 0:
+        pic=QPixmap("resource/status/ShuFu.png");
+        setToolTip(tr("五系束缚"));
+        break;
+    case 1:
+        pic=QPixmap("resource/status/TiaoXin.png");
+        setToolTip(tr("挑衅"));
+        break;
+    case 2:
+        pic=QPixmap("resource/status/LianJie.png");
+        setToolTip(tr("灵魂链接"));
+        break;
+    case 3:
+        pic=QPixmap("resource/status/TongSheng.png");
+        setToolTip(tr("同生共死"));
+        break;
+    }
+}
+
+StatusItem::StatusItem(Token* token)
+{
+    type=2;
+    this->token=token;
+    switch(token->type)
+    {
+    case 0:
+        pic=QPixmap("resource/status/token0.png");
+        break;
+    case 1:
+        pic=QPixmap("resource/status/token1.png");
+        break;
+    case 2:
+        pic=QPixmap("resource/status/token2.png");
+        break;
+    }
+    setToolTip(token->tokenName+tr("(上限为")+QString::number(token->max)+")");
+    Num[0]=QPixmap("resource/SmallNumber/Small0.png");
+    Num[1]=QPixmap("resource/SmallNumber/Small1.png");
+    Num[2]=QPixmap("resource/SmallNumber/Small2.png");
+    Num[3]=QPixmap("resource/SmallNumber/Small3.png");
+    Num[4]=QPixmap("resource/SmallNumber/Small4.png");
+    Num[5]=QPixmap("resource/SmallNumber/Small5.png");
+    Num[6]=QPixmap("resource/SmallNumber/Small6.png");
+    Num[7]=QPixmap("resource/SmallNumber/Small7.png");
+    Num[8]=QPixmap("resource/SmallNumber/Small8.png");
+    Num[9]=QPixmap("resource/SmallNumber/Small9.png");
 }
 
 QRectF StatusItem::boundingRect() const
@@ -17,38 +106,22 @@ QRectF StatusItem::boundingRect() const
     return QRectF(0, 0, 15, 15);
 }
 
-//中毒0虚弱1圣盾2
 void StatusItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    switch(status->type)
-    {
-    case 0:
-        painter->drawPixmap(0,0,QPixmap("resource/du.png"));
-        break;
-    case 1:
-        painter->drawPixmap(0,0,QPixmap("resource/xu.png"));
-        break;
-    case 2:
-        painter->drawPixmap(0,0,QPixmap("resource/dun.png"));
-        break;
-    case 3:
-        painter->drawPixmap(0,0,QPixmap("resource/feng.png"));
-        break;
-    case 4:
-        painter->drawPixmap(0,0,QPixmap("resource/wei.png"));
-        break;
-    case 5:
-        painter->drawPixmap(0,0,QPixmap("resource/xun.png"));
-        break;
-    }
-
+     painter->drawPixmap(0, 0, pic);
+     if(type!=2)
+         return;
+     painter->drawPixmap(0, 0, Num[token->num]);
 }
 
 PlayerItem::PlayerItem(Player* player):selected(0)
 {
     this->player=player;
-    connect(player,SIGNAL(addStatusSIG(Status*)),this,SLOT(addStatusItem(Status*)));
-    connect(player,SIGNAL(removeStatusSIG(Status*)),this,SLOT(removeStatusItem(Status*)));
+    connect(player,SIGNAL(addBasicStatusSIG(BasicStatus*)),this,SLOT(addBasicStatusItem(BasicStatus*)));
+    connect(player,SIGNAL(removeBasicStatusSIG(BasicStatus*)),this,SLOT(removeBasicStatusItem(BasicStatus*)));
+    connect(player,SIGNAL(addTokenSIG(Token*)),this,SLOT(addTokenItem(Token*)));
+    connect(player,SIGNAL(addSpecialStatusSIG(int)),this,SLOT(addSpecialStatusItem(int)));
+    connect(player,SIGNAL(removeSpecialStatusSIG(int)),this,SLOT(removeSpecialStatusItem(int)));
     if(player->getColor())
         frame=QPixmap("resource/playerFrameRed.png");
     else
@@ -57,9 +130,12 @@ PlayerItem::PlayerItem(Player* player):selected(0)
     this->height=frame.height();
     gem=QPixmap("resource/Egem.png");
     crystal=QPixmap("resource/Ecrystal.png");
-
-
-
+    energyRemain=QPixmap("resource/energyRemain.png");
+    card=QPixmap("resource/card.png");
+    overflow=QPixmap("resource/overflow.png");
+    heal=QPixmap("resource/heal.png");
+    cardRemain=QPixmap("resource/cardRemain.png");
+    healRemain=QPixmap("resource/healRemain.png");
 }
 QRectF PlayerItem::boundingRect() const
 {
@@ -67,81 +143,73 @@ QRectF PlayerItem::boundingRect() const
 }
 void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    if(selected)
+        painter->drawPixmap(-5,-3,QPixmap("resource/playerSelected.png"));
     painter->drawPixmap(0, 0, frame);
-    painter->drawPixmap(16,20,player->getFaceSource());
+    painter->drawPixmap(2,6,player->getFaceSource());
 
     QFont font;
     font.setBold(1);
     painter->setFont(font);
 
-    painter->drawText(0.15*width,0.1*height,QString::number(player->getID()));
+    painter->drawText(0.3*width,0.11*height,QString::number(player->getID()));
 
-    QString entry=tr("手牌：");
-    entry+=QString::number(player->getHandCardNum())+'/'+QString::number(player->getHandCardMax());
-    painter->drawText(width*0.12,height*0.73,entry);
-
-    entry=tr("治疗：");
-    entry+=QString::number(player->getCrossNum())+'/'+QString::number(player->getCrossMax());
-    painter->drawText(width*0.12,height*0.82,entry);
+    int num=player->getHandCardNum();
+    int max=player->getHandCardMax();
+    QString entry=QString::number(num)+'/'+QString::number(max);
+    painter->drawText(width*0.42,height*0.24,entry);
     int i,offset;
-    painter->drawText(width*0.12,height*0.92,tr("能量："));
-    for(i=0;i<player->getGem();i++)
-        painter->drawPixmap(width*0.35+i*9,height*0.86,gem.scaled(9,13));
-    offset=width*0.35+i*9;
-    for(i=0;i<player->getCrystal();i++)
-        painter->drawPixmap(i*9+offset,height*0.86,crystal.scaled(9,13));
-    if(player->getTokenMax(0)>0)
-    {
-        painter->drawPixmap(0,0,QPixmap("resource/token1.png"));
-        entry=player->getTokenName(0)+"：";
-        entry+=QString::number(player->getToken(0))+'/'+QString::number(player->getTokenMax(0));
-        painter->drawText(width*0.55,height*0.73,entry);
-    }
-    if(player->getTokenMax(1)>0)
-    {
-        painter->drawPixmap(0,0,QPixmap("resource/token2.png"));
-        entry=player->getTokenName(1)+"：";
-        entry+=QString::number(player->getToken(1))+'/'+QString::number(player->getTokenMax(1));
-        painter->drawText(width*0.55,height*0.82,entry);
-    }
-    if(player->getTokenMax(2)>0)
-    {
-        painter->drawPixmap(0,0,QPixmap("resource/token3.png"));
-        entry=player->getTokenName(2)+"：";
-        if(player->getTokenMax(2)==20)
-            entry+=QString::number(player->getToken(2))+"/∞";
+    for(i=0;num<=max && i<max;i++)
+        if(i<num)
+            painter->drawPixmap(width*0.62+card.width()*i,height*0.16, card);
         else
-            entry+=QString::number(player->getToken(2))+'/'+QString::number(player->getTokenMax(2));
-        painter->drawText(width*0.55,height*0.92,entry);
-    }
-    if(player->getTap())
-        painter->drawPixmap(0,0,QPixmap(player->getTapSource()));
-    if(player->getSpecial(0))
-        painter->drawPixmap(115,20,QPixmap("resource/shufu.png"));
-    if(player->getSpecial(1))
-        painter->drawPixmap(115,35,QPixmap("resource/tiaoxin.png"));
-    if(player->getSpecial(2))
-        painter->drawPixmap(115,50,QPixmap("resource/lianjie.png"));
-    if(player->getSpecial(3))
-        painter->drawPixmap(115,65,QPixmap("resource/tongsheng.png"));
-    if(selected)
-        painter->drawPixmap(-5,-5,QPixmap("resource/playerSelected.png"));
+            painter->drawPixmap(width*0.62+card.width()*i,height*0.16, cardRemain);
+    for(i=0;num>max && i<max;i++)
+        painter->drawPixmap(width*0.62+card.width()*i,height*0.16, overflow);
 
+    num=player->getCrossNum();
+    max=player->getCrossMax();
+    entry=QString::number(num)+'/'+QString::number(max);
+    painter->drawText(width*0.42,height*0.37,entry);
+    for(i=0;i<max;i++)
+        if(i<num)
+            painter->drawPixmap(width*0.62+card.width()*i,height*0.27, heal);
+        else
+            painter->drawPixmap(width*0.62+card.width()*i,height*0.27, healRemain);
+    for(i=0;i<num-max;i++)
+        painter->drawPixmap(width*0.62+card.width()*i,height*0.27, heal);
+
+    if(player->getEnergyMax()==4)
+    {
+        offset=width*0.74-gem.width()+1;
+        painter->drawPixmap(offset,height*0.37,energyRemain);
+    }
+    else
+        offset=width*0.74;
+    for(i=0;i<player->getGem();i++)
+        painter->drawPixmap(offset+i*(gem.width()-1),height*0.37,gem);
+
+    offset=width*0.74+i*(gem.width()-1);
+    for(i=0;i<player->getCrystal();i++)
+        painter->drawPixmap(i*(crystal.width()-1)+offset,height*0.37,crystal);
+
+    if(player->getTap())
+        painter->drawPixmap(0.265*width,0.4*height,QPixmap(player->getTapSource()));
 }
-void PlayerItem::addStatusItem(Status *status)
+
+void PlayerItem::addBasicStatusItem(BasicStatus *status)
 {
     StatusItem *statusItem=new StatusItem(status);
     statusItem->setParentItem(this);
-    statusItem->setY(85);
     statusItems<<statusItem;
     adjustStatusItems();
 }
 
-void PlayerItem::removeStatusItem(Status *status)
+void PlayerItem::removeBasicStatusItem(BasicStatus *status)
 {
     int i;
     for(i=0;i<statusItems.count();i++)
-        if(statusItems[i]->status==status)
+        if(statusItems[i]->type==0 && statusItems[i]->status==status)
         {
             delete statusItems[i];
             statusItems.removeAt(i);
@@ -149,13 +217,49 @@ void PlayerItem::removeStatusItem(Status *status)
     adjustStatusItems();
 }
 
-void PlayerItem::adjustStatusItems()
+void PlayerItem::addSpecialStatusItem(int specialStatusID)
+{
+    StatusItem *statusItem=new StatusItem(specialStatusID);
+    statusItem->setParentItem(this);
+    statusItems<<statusItem;
+    adjustStatusItems();
+}
+
+void PlayerItem::removeSpecialStatusItem(int specialStatusID)
 {
     int i;
     for(i=0;i<statusItems.count();i++)
+        if(statusItems[i]->type==1 && statusItems[i]->specialStatusID==specialStatusID)
+        {
+            delete statusItems[i];
+            statusItems.removeAt(i);
+        }
+    adjustStatusItems();
+}
+
+void PlayerItem::addTokenItem(Token*token)
+{
+    StatusItem *statusItem=new StatusItem(token);
+    statusItem->setParentItem(this);
+    statusItems<<statusItem;
+    adjustStatusItems();
+}
+
+void PlayerItem::adjustStatusItems()
+{
+    int i,j;
+    int left;
+    int row=statusItems.count()/6;
+    if(statusItems.count()%6!=0)
+        row++;
+    for(i=0;i<row;i++)
     {
-        statusItems[i]->setX(i*15);
-        statusItems[i]->setY(height-8);
+        left=statusItems.count()-i*6;
+        for(j=0;j<left;j++)
+        {
+            statusItems[i*6+j]->setX(0.25*width+j*(20+1));
+            statusItems[i*6+j]->setY(0.5*height+i*(20+1));
+        }
     }
 }
 
@@ -163,6 +267,7 @@ Player* PlayerItem::getPlayer()
 {
     return player;
 }
+
 void PlayerItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if(!this->selected)

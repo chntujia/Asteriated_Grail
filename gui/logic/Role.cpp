@@ -94,14 +94,14 @@ void Role::cardAnalyse()
             {
                 playerArea->reset();
                 for(i=0;i<dataInterface->getPlayerMax();i++)
-                    if(!dataInterface->getPlayerList().at(i)->checkStatus(1))
+                    if(!dataInterface->getPlayerList().at(i)->checkBasicStatus(1))
                         playerArea->enablePlayerItem(i);
             }
             if(cardName==tr("Ê¥¶Ü"))
             {
                 playerArea->reset();
                 for(i=0;i<dataInterface->getPlayerMax();i++)
-                    if(!dataInterface->getPlayerList().at(i)->checkStatus(2))
+                    if(!dataInterface->getPlayerList().at(i)->checkBasicStatus(2))
                         playerArea->enablePlayerItem(i);
             }
             if(cardName==tr("Ä§µ¯"))
@@ -477,7 +477,7 @@ void Role::turnBegin()
 void Role::additionalAction(){
     gui->reset();
     tipArea->setMsg(tr("ÊÇ·ñÖ´ÐÐ¶îÍâÐÐ¶¯£¿"));
-    if(dataInterface->getMyself()->checkStatus(5))
+    if(dataInterface->getMyself()->checkBasicStatus(5))
         gui->getTipArea()->addBoxItem("0.Ñ¸½Ý´Í¸£");
     state=42;
     tipArea->showBox();
@@ -878,8 +878,6 @@ void Role::decipher(QString command)
     int i,howMany;
     int team,gem,crystal;
     int dir,show;
-    int card_skip;
-    int offset=0;
 
     Card*card;
     Player*player;
@@ -892,7 +890,6 @@ void Role::decipher(QString command)
     QList<Player*>playerList=dataInterface->getPlayerList();
     QList<QGraphicsObject*>* tempList;
     PictureContainer* picture;
-    int pos;
     ShowArea* showArea=gui->getShowArea();
 
     switch (arg[0].toInt())
@@ -1120,7 +1117,7 @@ void Role::decipher(QString command)
             case 5:
                 cardID=cardIDList[0].toInt();
                 card=dataInterface->getCard(cardID);
-                playerList[sourceID]->removeStatus(card);
+                playerList[sourceID]->removeBasicStatus(card);
                 break;
             case 6:
                 player = playerList.at(sourceID);
@@ -1142,17 +1139,17 @@ void Role::decipher(QString command)
                 card=dataInterface->getCard(cardID);
                 cardName=card->getName();
                 if(cardName==tr("ÖÐ¶¾"))
-                    playerList[targetID]->addStatus(0,card);
+                    playerList[targetID]->addBasicStatus(0,card);
                 if(cardName==tr("ÐéÈõ"))
-                    playerList[targetID]->addStatus(1,card);
+                    playerList[targetID]->addBasicStatus(1,card);
                 if(cardName==tr("Ê¥¶Ü")||card->getSpecialityList().contains(tr("ÌìÊ¹Ö®Ç½")))
-                    playerList[targetID]->addStatus(2,card);
+                    playerList[targetID]->addBasicStatus(2,card);
                 if(card->getType()=="attack"&&card->getProperty()==tr("»Ã"))
-                    playerList[targetID]->addStatus(3,card);
+                    playerList[targetID]->addBasicStatus(3,card);
                 if(card->getSpecialityList().contains(tr("ÍþÁ¦´Í¸£")))
-                    playerList[targetID]->addStatus(4,card);
+                    playerList[targetID]->addBasicStatus(4,card);
                 if(card->getSpecialityList().contains(tr("Ñ¸½Ý´Í¸£")))
-                    playerList[targetID]->addStatus(5,card);
+                    playerList[targetID]->addBasicStatus(5,card);
                 QSound::play("sound/Equip.wav");
                 break;
             case 6:
