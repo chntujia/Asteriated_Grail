@@ -4,7 +4,7 @@
 #include "testuiex.h"
 #include "Server.h"
 #include "dialog.h"
-Q_DECLARE_METATYPE(QList<CardEntity*>);
+Q_DECLARE_METATYPE(QList<CardEntity*>)
 
 QList<int> shieldCardID;
 QList<int> weakCardID;
