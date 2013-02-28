@@ -3,7 +3,7 @@
 
 Button::Button(int id,QString msg)
 {
-    background=QPixmap("resource/button.png");
+    background=QPixmap("resource/button1.png");
     height=background.height();
     width=background.width();
     selected=0;

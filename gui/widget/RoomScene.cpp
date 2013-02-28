@@ -8,7 +8,7 @@ static const QPointF ShowAreaPos(190,260);
 static const QPointF TipAreaPos(203,230);
 static const QPointF TeamAreaPos(2,3);
 static const QPointF DecisionAreaPos(725,450);
-static const QPointF ButtonAreaPos(190,650);
+static const QPointF ButtonAreaPos(10,650);
 static const QPointF LogAreaPos(901,30);
 static const QPointF BPAreaPos(0,0);
 RoomScene::RoomScene()
