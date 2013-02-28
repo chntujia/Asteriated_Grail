@@ -242,11 +242,11 @@ void Logic::getCommand(QString command)
         break;
     case 54:
         bpArea = gui->getBPArea();
-        bpArea->ban(arg[1].toInt(),arg[2].toInt());
+        bpArea->ban(arg[1].toInt(), arg[2].toInt());
         break;
     case 57:
         bpArea = gui->getBPArea();
-        bpArea->choose(arg[1].toInt(),arg[2].toInt());
+        bpArea->choose(arg[1].toInt(), arg[2].toInt());
         decisionArea = gui->getDecisionArea();
         if(bpArea->checkOver())
         {

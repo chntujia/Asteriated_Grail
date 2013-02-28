@@ -27,6 +27,8 @@ public:
     void remove(int roleID);
     void disablaAll();
     void enableAll();
+    int getColor(int playerID);
+    int getOrderInTeam(int playerID);
 public slots:
     void onRoleSelected(int id);
     void onRoleUnselected(int id);
@@ -41,6 +43,9 @@ private:
     QList<int> selectedRoles;
     QList<RoleItem*> roleItems;
     QList<int> left;
+    QList<int> playerIDs;
+    QList<int> color;
+    QList<int> orderInTeam;
 signals:
     void roleReady();
     void roleUnready();
