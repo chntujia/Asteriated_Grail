@@ -1,7 +1,7 @@
 #include "data/Player.h"
 #include <QTextStream>
 #include <QFile>
-Player::Player(int ID, int isRed):id(ID),handCardsMax(6),crossNum(0),crossMax(2),energyMax(3),color(isRed),tap(0)
+Player::Player(int ID, int isRed, QString nickname):id(ID),handCardsMax(6),crossNum(0),crossMax(2),energyMax(3),color(isRed),tap(0)
 {
     roleID=0;
     gem=0;
@@ -9,6 +9,7 @@ Player::Player(int ID, int isRed):id(ID),handCardsMax(6),crossNum(0),crossMax(2)
     handCardsNum=0;
     coverCardsMax = 0;
     coverCardsNum = 0;
+    this->nickname=nickname;
     for(int i=0;i<5;i++ )
         specials[i]=false;
 }
@@ -21,117 +22,117 @@ void Player::setRole(int roleID)
     switch(roleID)
     {
     case 1:
-        name=tr("[剑圣]");
+        roleName=tr("[剑圣]");
         break;
     case 2:
-        name=tr("[狂战士]");
+        roleName=tr("[狂战士]");
         break;
     case 3:
-        name=tr("[弓之女神]");
+        roleName=tr("[弓之女神]");
         break;
     case 4:
-        name=tr("[封印师]");
+        roleName=tr("[封印师]");
         break;
     case 5:
-        name=tr("[暗杀者]");
+        roleName=tr("[暗杀者]");
         tapSource="resource/tap/QianXing.png";
         break;
     case 6:
-        name=tr("[圣女]");
+        roleName=tr("[圣女]");
         tapSource="resource/tap/LianMin.png";
         break;
     case 7:
-        name=tr("[天使]");
+        roleName=tr("[天使]");
         break;
     case 8:
-        name=tr("[魔导师]");
+        roleName=tr("[魔导师]");
         break;
     case 9:
-        name=tr("[魔剑]");
+        roleName=tr("[魔剑]");
         tapSource="resource/tap/AnYing.png";
         break;    
     case 10:
-        name=tr("[圣枪]");
+        roleName=tr("[圣枪]");
         crossMax=3;
         break;
     case 11:
-        name=tr("[元素师]");
+        roleName=tr("[元素师]");
         addToken(0,new Token(tr("元素"),3,0));
         break;
     case 12:
-        name=tr("[冒险家]");
+        roleName=tr("[冒险家]");
         break;
     case 13:
-        name=tr("[死灵法师]");
+        roleName=tr("[死灵法师]");
         crossMax = 5;
         break;
     case 14:
-        name=tr("[仲裁者]");
+        roleName=tr("[仲裁者]");
         tapSource="resource/tap/ShenPan.png";
         crystal=2;
         addToken(0,new Token(tr("审判"),4,0));
         break;
     case 15:
-        name=tr("[神官]");
+        roleName=tr("[神官]");
         crossMax=6;
         break;
     case 16:
-        name=tr("[祈祷师]");
+        roleName=tr("[祈祷师]");
         tapSource="resource/tap/QiDao.png";
         addToken(0,new Token(tr("符文"),3,0));
         break;
     case 17:
-        name=tr("[贤者]");
+        roleName=tr("[贤者]");
         energyMax=4;
         break;
     case 18:
-        name = tr("[灵符师]");
+        roleName = tr("[灵符师]");
         addToken(2,new Token(tr("妖力"),2,2));
         break;
     case 19:
-        name=tr("[剑帝]");
+        roleName=tr("[剑帝]");
         addToken(0,new Token(tr("剑气"),5,0));
         addToken(2,new Token(tr("剑魂"),3,2));
         break;
     case 20:
-        name=tr("[格斗家]");
+        roleName=tr("[格斗家]");
         tapSource="resource/tap/BaiShi.png";
         addToken(0,new Token(tr("斗气"),6,0));
         break;
     case 21:
-        name=tr("[勇者]");
+        roleName=tr("[勇者]");
         tapSource="resource/tap/JingPiLiJie.png";
         crystal=2;
         addToken(0,new Token(tr("怒气"),4,0));
         addToken(1,new Token(tr("知性"),4,1));
         break;
     case 22:
-        name=tr("[灵魂术士]");
+        roleName=tr("[灵魂术士]");
         addToken(0,new Token(tr("黄魂"),6,0));
         addToken(1,new Token(tr("蓝魂"),6,1));
         break;
     case 23:
-        name=tr("[巫女]");
+        roleName=tr("[巫女]");
         tapSource="resource/tap/LiuXue.png";
         break;
     case 24:
-        name=("[蝶舞者]");
+        roleName=tr("[蝶舞者]");
         tapSource="resource/tap/DiaoLing.png";
         addToken(0,new Token(tr("蛹"),99,0));
         addToken(2,new Token(tr("茧"),8,2));
         break;
     case 26:
-        name=("[魔弓]");
+        roleName=tr("[魔弓]");
         addToken(2,new Token(tr("充能"),8,2));
         break;
     case 28:
-        name=tr("[红莲骑士]");
+        roleName=tr("[红莲骑士]");
         tapSource="resource/tap/ReXueFeiTeng.png";
         addToken(0,new Token(tr("血印"),2,0));
         crossMax=4;
         break;
     case 29:
-        name=tr("[魔枪]");
+        roleName=tr("[魔枪]");
         tapSource="resource/tap/HuanYing.png";
         break;
     }
@@ -221,11 +222,6 @@ void Player::setSpecial(int type,bool flag)
 int Player::getID()
 {
     return id;
-}
-
-QString Player::getName()
-{
-    return name;
 }
 
 int Player::getHandCardMax()

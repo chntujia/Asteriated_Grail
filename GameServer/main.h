@@ -149,6 +149,7 @@ public:
     void banNotice(int ID, int role);
     void askForPick(int ID);
     void pickNotice(int ID, int role);
+    void nicknameNotice(int id,QString name){emit sendMessage(-1,combMessage("58",TOQSTR(id),name));}
 signals:
     void sendMessage(int,QString);
 

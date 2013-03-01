@@ -23,8 +23,8 @@ ClientUI::ClientUI(QWidget *parent) :
     ui->port->setText("50000");
     ui->board->setText(tr("请连接服务器。若要抢队，请先选择队伍再连接"));
     ui->comboBox->addItem(tr("随机"));
-    ui->comboBox->addItem(tr("红队"));
     ui->comboBox->addItem(tr("蓝队"));
+    ui->comboBox->addItem(tr("红队"));
 }
 
 ClientUI::~ClientUI()
@@ -58,10 +58,7 @@ void ClientUI::link()
 {
     tcpSocket->link(ui->addr->text(),ui->port->text().toInt());
     ui->connectButton->setEnabled(0);
-    if(ui->comboBox->currentIndex()==1)
-        tcpSocket->sendMessage("0;1;");
-    else if(ui->comboBox->currentIndex()==2)
-        tcpSocket->sendMessage("0;0;");
+    tcpSocket->sendMessage("0;"+QString::number(ui->comboBox->currentIndex()-1)+";"+ui->nickname->text()+";");
 }
 
 void ClientUI::displayError(QAbstractSocket::SocketError)

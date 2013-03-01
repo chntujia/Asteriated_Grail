@@ -20,10 +20,9 @@ public:
     void enableMate(bool includeYou=false);
     void disableAll();
     void reset();
-    void setCurrentPlayerID(int id){currentPlayerID=id;}
+    void setCurrentPlayerID(int id);
     void setQuota(int howMany){least=most=howMany;}
     void setQuota(int least,int most){this->least=least;this->most=most;}
-    int getCurrentPlayerID(){return currentPlayerID;}
     QList<Player*> getSelectedPlayers();
 public slots:
     void onPlayerSelected(int id);

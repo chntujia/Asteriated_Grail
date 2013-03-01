@@ -152,7 +152,7 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     font.setBold(1);
     painter->setFont(font);
 
-    painter->drawText(0.3*width,0.11*height,QString::number(player->getID()));
+    painter->drawText(0.3*width,0.11*height,QString::number(player->getID())+" - "+player->getNickname());
 
     int num=player->getHandCardNum();
     int max=player->getHandCardMax();
@@ -249,12 +249,16 @@ void PlayerItem::adjustStatusItems()
 {
     int i,j;
     int left;
-    int row=statusItems.count()/6;
-    if(statusItems.count()%6!=0)
+    int howMany=statusItems.count();
+    int row=howMany/6;
+    if(howMany%6!=0)
         row++;
     for(i=0;i<row;i++)
     {
-        left=statusItems.count()-i*6;
+        if(howMany-i*6>=6)
+            left=6;
+        else
+            left=howMany%6;
         for(j=0;j<left;j++)
         {
             statusItems[i*6+j]->setX(0.25*width+j*(20+1));

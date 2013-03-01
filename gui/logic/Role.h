@@ -54,6 +54,7 @@ protected:
     bool isMyTurn;
     bool onceUsed;
     int actionFlag;
+    QList<Player*>playerList;
     HandArea*handArea;
     HandArea *coverArea;
     PlayerArea*playerArea;
@@ -61,9 +62,11 @@ protected:
     DecisionArea*decisionArea;
     TipArea*tipArea;
     TeamArea*teamArea;
+    ShowArea* showArea;
     bool usedAttack,usedMagic,usedSpecial,start;
     QString command;
     Role* myRole;
+    Team*blue,*red;
 };
 
 

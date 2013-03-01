@@ -142,6 +142,7 @@ void Logic::getCommand(QString command)
     BPArea* bpArea;
     QList<int> roleIDs;
     PlayerArea* playerArea;
+    QStringList nicknames;
     int playerMax,targetID,roleID,howMany,num;
 
     switch (arg[0].toInt())
@@ -153,7 +154,8 @@ void Logic::getCommand(QString command)
     case GAMESTART:
         playerMax=arg[1].count()/2;
         dataInterface->setPlayerMax(playerMax);
-        dataInterface->initPlayerList(arg[1]);
+        nicknames=arg[2].split(',');
+        dataInterface->initPlayerList(arg[1],nicknames);
         if (playerMax==8)
             dataInterface->initTeam(18);
         else
@@ -179,7 +181,7 @@ void Logic::getCommand(QString command)
             gui->getPlayerArea()->update();
         }
         count++;
-        if(count==6)
+        if(count==dataInterface->getPlayerMax())
         {
             disconnect(getClient(),0,this,0);
             if(!hasShownRole){

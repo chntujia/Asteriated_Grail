@@ -32,7 +32,7 @@ class Player:public QObject
 {
     Q_OBJECT
 public:
-    Player(int id,int color);
+    Player(int id,int color,QString nickname);
     void setHandCardsMax(int howMany);
     void setCoverCardsMax(int howMany){this->coverCardsMax = howMany;}
     void setCrossNum(int howMany);
@@ -51,9 +51,10 @@ public:
     bool checkBasicStatus(int type);
     bool checkBasicStatus(QString status);
     bool hasStatus(){return !BasicStatusList.isEmpty();}
-    void setName(QString name){this->name=name;}
+    void setNickname(QString name){this->nickname=name;}
     int getID();
-    QString getName();
+    QString getNickname(){return nickname;}
+    QString getRoleName(){return roleName;}
     int getHandCardMax();
     int getHandCardNum();
     int getCoverCardMax(){return this->coverCardsMax;}
@@ -83,7 +84,8 @@ signals:
 protected:
     int id;
     int pos;
-    QString name;
+    QString nickname;
+    QString roleName;
     int handCardsMax;
     int handCardsNum;
     int coverCardsMax;

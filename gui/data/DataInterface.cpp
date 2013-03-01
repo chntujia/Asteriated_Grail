@@ -62,7 +62,7 @@ void DataInterface::initRoleList()
     roleList<<tr("[ħǹ]");
 }
 
-void DataInterface::initPlayerList(QString msg)
+void DataInterface::initPlayerList(QString msg,QStringList nicknames)
 {
     int i,isRed,pID,myPos;
     queue=msg;
@@ -76,7 +76,7 @@ void DataInterface::initPlayerList(QString msg)
     {
         pID=msg[i].digitValue();
         isRed=msg[i+playerMax].digitValue();
-        playerList<<new Player(pID,isRed);
+        playerList<<new Player(pID,isRed,nicknames[i]);
 
     }
 
@@ -87,7 +87,7 @@ void DataInterface::initPlayerList(QString msg)
     {
         pID=msg[i].digitValue();
         isRed=msg[i+playerMax].digitValue();
-        playerList<<new Player(pID,isRed);
+        playerList<<new Player(pID,isRed,nicknames[i]);
 
     }
     myself=playerList[0];
