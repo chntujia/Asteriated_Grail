@@ -227,7 +227,7 @@ void Logic::getCommand(QString command)
     case 52:
         state = 52;
         bpArea = gui->getBPArea();
-        bpArea->setMsg("请ban一角色");
+        bpArea->setMsg("请禁一角色");
         bpArea->setQuota(1);
         bpArea->enableAll();
         playerArea = gui->getPlayerArea();
@@ -244,13 +244,11 @@ void Logic::getCommand(QString command)
         break;
     case 54:
         bpArea = gui->getBPArea();
-        bpArea->disableRoleItem(arg[2].toInt());
-        bpArea->remove(arg[2].toInt());
+        bpArea->ban(arg[1].toInt(), arg[2].toInt());
         break;
     case 57:
         bpArea = gui->getBPArea();
-        bpArea->choose(arg[2].toInt());
-        bpArea->remove(arg[2].toInt());
+        bpArea->choose(arg[1].toInt(), arg[2].toInt());
         decisionArea = gui->getDecisionArea();
         if(bpArea->checkOver())
         {

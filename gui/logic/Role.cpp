@@ -1000,14 +1000,8 @@ void Role::decipher(QString command)
         break;
 //游戏结束
     case 12:
-        team=arg[1].toInt();
-        msg=tr("游戏结束,");        
-        if(team)
-            msg+=tr("红队获胜");
-        else
-            msg+=tr("蓝队获胜");
-        gui->logAppend(msg);
-        tipArea->setMsg(msg);
+        team=arg[1].toInt();    
+        tipArea->win(team);
         QSound::play("sound/KO.wav");
         break;
 //弃牌公告

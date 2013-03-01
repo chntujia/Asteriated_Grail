@@ -17,6 +17,7 @@ TipArea::TipArea():selectedCard(NULL)
     boxItem->setParentItem(this);
     boxItem->setPos(0.35*width,0.5*height);
     boxItem->setVisible(0);
+    winflag ==false;
 }
 QRectF TipArea::boundingRect() const
 {
@@ -29,7 +30,10 @@ void TipArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     font.setPixelSize(20);
     painter->setFont(font);
     painter->setPen(QColor(Qt::white));
-    painter->drawPixmap(0, 0, background);
+    if(!winflag)
+        painter->drawPixmap(0, 0, background);
+    else
+        painter->drawPixmap(35,10,winpix);
     painter->drawText(QRectF(0, 0, width, height*0.9),Qt::AlignCenter,msg);
 }
 
@@ -133,4 +137,16 @@ void TipArea::adjustCards()
         cardItems[i]->setZValue(0.1 * i);
         cardItems[i]->setPos(QPointF(offset+i*card_skip, 40));
     }
+}
+
+void TipArea::win(int team)
+{
+    if(team==1)
+        winpix.load("resource/GameWinRed.png");
+    else
+        winpix.load("resource/GameWinBlue.png");
+    winflag = true;
+    setMsg("");
+    setVisible(1);
+    update();
 }

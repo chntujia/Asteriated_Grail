@@ -19,13 +19,16 @@ public:
     void setQuota(int howMany){least=most=howMany;}
     void setQuota(int least,int most){this->least=least;this->most=most;}
     QList<int> getSelectedRoles();
-    void choose(int roleID);
+    void ban(int playerID, int roleID);
+    void choose(int playerID, int roleID);
     RoleItem *getRoleByID(int ID);
     void reset();
     bool checkOver();
     void remove(int roleID);
     void disablaAll();
     void enableAll();
+    int getColor(int playerID);
+    int getOrderInTeam(int playerID);
 public slots:
     void onRoleSelected(int id);
     void onRoleUnselected(int id);
@@ -40,6 +43,9 @@ private:
     QList<int> selectedRoles;
     QList<RoleItem*> roleItems;
     QList<int> left;
+    QList<int> playerIDs;
+    QList<int> color;
+    QList<int> orderInTeam;
 signals:
     void roleReady();
     void roleUnready();

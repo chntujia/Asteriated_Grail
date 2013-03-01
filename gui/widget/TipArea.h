@@ -22,7 +22,7 @@ public:
     int getBoxCurrentIndex(){return box->currentIndex();}
     QString getBoxCurrentText(){return box->currentText();}
     int getSelectedCardID(){return selectedCard->getID();}
-
+    void win(int team);
 
 public slots:
     void onCardSelected(int id);
@@ -30,7 +30,9 @@ public slots:
 private:
     int width;
     int height;
+    bool winflag;
     QPixmap background;
+    QPixmap winpix;
     QString msg;
     QComboBox *box;
     QGraphicsProxyWidget *boxItem;
