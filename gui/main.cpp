@@ -10,8 +10,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QTextCodec *codec = QTextCodec::codecForName("utf-8");
-    QTextCodec::setCodecForLocale(codec);
+//    QTextCodec *codec = QTextCodec::codecForName("utf-8");
+//    QTextCodec::setCodecForLocale(codec);
 //    QTextCodec::setCodecForCStrings(codec);
 //    QTextCodec::setCodecForTr(codec);
     a.setFont(QFont("simsun", 9));

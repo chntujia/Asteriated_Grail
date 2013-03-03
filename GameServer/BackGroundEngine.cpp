@@ -350,8 +350,8 @@ void BackgroundEngine::initial()
     QFile fp("./cardDB.txt");
 
     QTextStream in(&fp);
-    QTextCodec *codec=QTextCodec::codecForName("utf-8");
-    in.setCodec(codec);
+//    QTextCodec *codec=QTextCodec::codecForName("utf-8");
+//    in.setCodec(codec);
 
     if (!fp.open(QIODevice::ReadOnly)) {
             out << "Cannot open file for reading. ";
