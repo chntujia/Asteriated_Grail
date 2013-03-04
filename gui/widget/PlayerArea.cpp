@@ -4,19 +4,25 @@
 #include "data/Player.h"
 #include <QPainter>
 static QRectF PlayerAreaRect(0, 0, 1000, 700);
-static const QPointF PlayerPos[]={QPointF(10,500),QPointF(740,260),QPointF(545,60),QPointF(380,60),QPointF(210,60),QPointF(10,260)};
+static const QPointF PlayerPos6[]={QPointF(5,510),QPointF(698,280),QPointF(550,60),QPointF(347,60),QPointF(145,60),QPointF(5,280)};
+static const QPointF PlayerPos4[]={QPointF(5,510),QPointF(698,280),QPointF(347,60),QPointF(5,280)};
 PlayerArea::PlayerArea():least(1),most(1)
 {
     int i;
     //根据座次建立
     QList<Player*> playerList=dataInterface->getPlayerList();
-    for(i=0;i<playerList.count();i++)
+    int playerSum=playerList.count();
+    qDebug("%d",playerSum);
+    for(i=0;i<playerSum;i++)
     {
         playerItems<<new PlayerItem(playerList[i]);
         connect(playerItems[i],SIGNAL(playerSelected(int)),this,SLOT(onPlayerSelected(int)));
         connect(playerItems[i],SIGNAL(playerUnselected(int)),this,SLOT(onPlayerUnselected(int)));
         playerItems[i]->setParentItem(this);
-        playerItems[i]->setPos(PlayerPos[i]);
+        if(playerSum==4)
+            playerItems[i]->setPos(PlayerPos4[i]);
+        else
+            playerItems[i]->setPos(PlayerPos6[i]);
         playerList[i]->setPos(i);
     }
     //根据ID排序
@@ -50,7 +56,21 @@ void PlayerArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 {
     PlayerItem* currentPlayerItem;
     currentPlayerItem=playerItems[currentPlayerID];
-    painter->drawPixmap(currentPlayerItem->x()-5,currentPlayerItem->y()-5,QPixmap("resource/yourTurn.png"));
+    painter->drawPixmap(currentPlayerItem->x()-5,currentPlayerItem->y()-3,QPixmap("resource/yourTurn.png"));
+}
+
+void PlayerArea::setCurrentPlayerID(int id)
+{
+    QList<QGraphicsObject*>* tempList;
+    PictureContainer* picture;
+    PlayerItem* currentPlayerItem;
+    currentPlayerID=id;
+    currentPlayerItem=playerItems[currentPlayerID];
+
+    tempList = animation->getTempItems();
+    picture = new PictureContainer();
+    picture->setPixmap(currentPlayerItem->getPlayer()->getFaceSource());
+    animation->itemFlash(picture,currentPlayerItem->x()+picture->boundingRect().width()/2,currentPlayerItem->y()+picture->boundingRect().height()/2)->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
 void PlayerArea::sortPlayerItems()

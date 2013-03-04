@@ -1,12 +1,3 @@
-/********************************************************************************
-** Form generated from reading UI file 'ClientUI.ui'
-**
-** Created: Wed Jan 23 15:22:30 2013
-**      by: Qt User Interface Compiler version 4.8.1
-**
-** WARNING! All changes made in this file will be lost when recompiling UI file!
-********************************************************************************/
-
 #ifndef UI_CLIENTUI_H
 #define UI_CLIENTUI_H
 
@@ -36,6 +27,9 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *laber2;
     QLineEdit *port;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_2;
+    QLineEdit *nickname;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label;
     QComboBox *comboBox;
@@ -86,6 +80,22 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        label_2 = new QLabel(ClientUI);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        horizontalLayout_5->addWidget(label_2);
+
+        nickname = new QLineEdit(ClientUI);
+        nickname->setObjectName(QString::fromUtf8("nickname"));
+
+        horizontalLayout_5->addWidget(nickname);
+
+
+        verticalLayout->addLayout(horizontalLayout_5);
+
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
@@ -132,6 +142,7 @@ public:
 #ifndef QT_NO_SHORTCUT
         label1->setBuddy(addr);
         laber2->setBuddy(port);
+        label_2->setBuddy(nickname);
         label->setBuddy(comboBox);
 #endif // QT_NO_SHORTCUT
         QWidget::setTabOrder(addr, port);
@@ -149,6 +160,7 @@ public:
         ClientUI->setWindowTitle(QApplication::translate("ClientUI", "ClientUI"));
         label1->setText(QApplication::translate("ClientUI", "Host Addr:"));
         laber2->setText(QApplication::translate("ClientUI", "Host Port:"));
+        label_2->setText(QApplication::translate("ClientUI", "\346\230\265\347\247\260:"));
         label->setText(QApplication::translate("ClientUI", "\346\212\242\351\230\237\357\274\210\344\270\215\344\270\200\345\256\232\346\210\220\345\212\237\357\274\211"));
         connectButton->setText(QApplication::translate("ClientUI", "Connect"));
         startButton->setText(QApplication::translate("ClientUI", "Start"));

@@ -14,7 +14,7 @@ QList<int> missileCardID;
 QList<CardEntity*> cardList;
 TeamArea teamArea;
 Coder coder;
-int playerSum = 6;
+int playerSum;
 //以下为编码器函数,具体可参见通讯协议
 void Coder::askForAction(int playerID, int actionTypeAllowed,bool acted)
 {
@@ -196,7 +196,7 @@ MyRoom::MyRoom(Server *server):QObject()
     connect(backEngine,SIGNAL(toInforDisplay(QString)),testUI,SLOT(toDisplay(QString)));
 
     connect(serverModule,SIGNAL(seatArrangeSIG()),backEngine,SLOT(seatArrange()));
-    connect(serverModule,SIGNAL(seatPrearrangeSIG(int,bool)),backEngine,SLOT(seatPrearrange(int,bool)));
+    connect(serverModule,SIGNAL(seatPrearrangeSIG(int,int,QString)),backEngine,SLOT(seatPrearrange(int,int,QString)));
     connect(this->serverModule,SIGNAL(toDisplay(QString)),this->testUI,SLOT(toDisplay(QString)));
     connect(backEngine,SIGNAL(sendMessageSIG(int,QString)),this->serverModule,SLOT(sendMessage(int,QString)));
     connect(&coder,SIGNAL(sendMessage(int,QString)),this->serverModule,SLOT(sendMessage(int,QString)));

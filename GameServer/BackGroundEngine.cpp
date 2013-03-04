@@ -156,12 +156,13 @@ void BackgroundEngine::randomize(QList<int> *queue)
     }
 }
 
-void BackgroundEngine::seatPrearrange(int id, bool isRed)
+void BackgroundEngine::seatPrearrange(int id, int isRed,QString name)
 {
-    if(isRed && red.size()<playerSum/2)
+    if(isRed==1 && red.size()<playerSum/2)
         red<<id;
-    if(!isRed && blue.size()<playerSum/2)
+    if(isRed==0 && blue.size()<playerSum/2)
         blue<<id;
+    nicknames[id]=name;
 }
 
 void BackgroundEngine::seatArrange()
@@ -190,7 +191,14 @@ void BackgroundEngine::seatArrange()
         else
             queue+=QString::number(blue.takeFirst());
     }
-    queue+="101001";
+    if(playerSum==4)
+        queue+="1010;";
+    else
+        queue+="101001;";
+    int i;
+    for(i=0;i<playerSum-1;i++)
+        queue+=nicknames[queue[i].digitValue()]+",";
+    queue+=nicknames[queue[i].digitValue()]+";";
     coder.beginNotice(queue);
     playerList.clear();
     for(int i = 0;i < this->getPlayerNum();i++)
@@ -202,6 +210,7 @@ void BackgroundEngine::seatArrange()
     roles<<26;
     roles<<28;
     roles<<29;
+
     randomize(&roles);
 
 }
@@ -213,6 +222,7 @@ void BackgroundEngine::seatPostarrange()
     this->playerList.at(this->getPlayerNum()-1)->setNext(this->playerList.at(0));
     for(int i = 0;i < this->playerList.size();i++)
         this->playerList[i]->setSeatNum(i);
+
 }
 
 void BackgroundEngine::roleRandom()
@@ -337,6 +347,8 @@ void BackgroundEngine::clearData()
 //初始化函数
 void BackgroundEngine::initial()
 {
+    for(int i=0;i<8;i++)
+        nicknames<<NULL;
     this->pile.clear();
     this->discardPile.clear();
     this->discardPileCovered.clear();
@@ -1389,4 +1401,3 @@ void BackgroundEngine::moveCardFromCoverToDiscard(CardEntity* card,bool show)
         this->discardPileCovered << card;
     }
 }
-

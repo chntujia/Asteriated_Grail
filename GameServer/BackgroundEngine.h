@@ -110,7 +110,7 @@ public slots:
     //游戏开始槽
     void gameStart();
     //位次排列槽
-    void seatPrearrange(int id, bool isRed);
+    void seatPrearrange(int id, int isRed, QString name);
     void seatArrange();
     void role3Pick1();
     void role3Pick1Reply(int id,int roleID);
@@ -203,6 +203,7 @@ private:
     QList<int> red,blue;
     QString queue;
     QList<int> roles;
+    QStringList nicknames;
 };
 
 #endif // BACKGROUNDENGINE_H

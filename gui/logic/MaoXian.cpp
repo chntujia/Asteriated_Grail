@@ -427,6 +427,7 @@ void MaoXian::additionalAction()
 void MaoXian::turnBegin()
 {
     Role::turnBegin();
+    TeShuJiaGongAddition=TouTianHuanRiAddition=false;
     onceUsed2=false;
     qizha=false;
 }

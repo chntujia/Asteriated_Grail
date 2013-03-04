@@ -22,8 +22,19 @@ BPArea::BPArea():least(1),most(1)
 
 void BPArea::BPStart(int num, QList<int> roles)
 {
+    QString queue = dataInterface->getQueue();
+    int red =0, blue = 0, max = queue.size()/2;
+    for(int i =0;i<max;i++)
+    {
+        playerIDs << queue[i].digitValue();
+        color << queue[i+max].digitValue();
+        if(queue[i+max].digitValue()==1)
+            orderInTeam << ++red;
+        else
+            orderInTeam << ++blue;
+    }
     gui->reset();
-    left = roles;
+     left = roles;
     currentSum = 0;
     for(int i=0;i<num;i++)
     {
@@ -32,16 +43,15 @@ void BPArea::BPStart(int num, QList<int> roles)
         connect(roleItems[i],SIGNAL(roleUnselected(int)),this,SLOT(onRoleUnselected(int)));
         if(i<8)
         {
-            roleItems[i]->setX(160+73*i);
+            roleItems[i]->setX(195+65*i);
             roleItems[i]->setY(230);
         }
         else
         {
-            roleItems[i]->setX(160+73*(i-8));
+            roleItems[i]->setX(195+65*(i-8));
             roleItems[i]->setY(480);
         }
         roleItems[i]->setParentItem(this);
-        roleItems[i]->setZValue(0.1*i);
     }
     setVisible(true);
     reset();
@@ -73,7 +83,6 @@ void BPArea::disableRoleItem(int roleID)
     RoleItem* role = getRoleByID(roleID);
     role->setEnabled(0);
     role->setOpacity(0.5);
-    role->setY(role->y()+20);
 }
 
 void BPArea::onRoleSelected(int id)
@@ -122,14 +131,25 @@ RoleItem *BPArea::getRoleByID(int ID)
     }
 }
 
-void BPArea::choose(int roleID)
+void BPArea::choose(int playerID, int roleID)
 {
+    currentSum++;
     RoleItem* choice = getRoleByID(roleID);
     choice->setEnabled(0);
     choice->setOpacity(0.8);
-    choice->setY(choice->y()-20);
-    currentSum++;
+    choice->setBPMsg(playerID,1);
+    remove(roleID);
 }
+
+void BPArea::ban(int playerID, int roleID)
+{
+    RoleItem* ban = getRoleByID(roleID);
+    ban->setEnabled(0);
+    ban->ban();
+    ban->setBPMsg(playerID,0);
+    remove(roleID);
+}
+
 
 void BPArea::reset()
 {
@@ -166,4 +186,18 @@ void BPArea::enableAll()
     {
         getRoleByID(ptr)->setEnabled(1);
     }
+}
+
+int BPArea::getColor(int playerID)
+{
+    for(int i=0;i<playerIDs.size();i++)
+        if(playerIDs[i]==playerID)
+            return color[i];
+}
+
+int BPArea::getOrderInTeam(int playerID)
+{
+    for(int i=0;i<playerIDs.size();i++)
+        if(playerIDs[i]==playerID)
+            return orderInTeam[i];
 }

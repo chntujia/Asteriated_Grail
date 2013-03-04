@@ -58,13 +58,13 @@ class Server : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit Server(QObject *parent = 0, bool isIPv6=1, int port=0,int roleStrategy=1);
+    explicit Server(QObject *parent = 0, bool isIPv6=1, int port=0,int roleStrategy=1, int playerNum=6);
     void toDisplayPublic(QString content){emit this->toDisplay(content);}
     int getRoleStrategy(){return roleStrategy;}
 
 signals:
     void gameStartSIG();
-    void seatPrearrangeSIG(int id, bool isRed);
+    void seatPrearrangeSIG(int id, int isRed,QString name);
     void seatArrangeSIG();
     void roleStrategySIG();
     void role3Pick1ReplySIG(int id,int roleID);

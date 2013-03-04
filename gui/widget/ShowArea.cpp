@@ -20,7 +20,7 @@ void ShowArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     int card_skip;
     int offset=0;
     if(n > 5)
-        card_skip = 450/(n-1);        
+        card_skip = 410/(n-1);
     else
     {
         card_skip = 100;

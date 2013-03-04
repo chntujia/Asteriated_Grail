@@ -12,7 +12,7 @@ class DataInterface : public QObject
 public:
     explicit DataInterface(QObject *parent = 0);    
     void initCardDB();
-    void initPlayerList(QString msg);
+    void initPlayerList(QString msg, QStringList nicknames);
     void initRoleList();
     void initTeam(int moraleMax);
     void sortPlayers();

@@ -225,8 +225,8 @@ void HandArea::adjustCards()
         return;
     int n = cardItems.size();
     int card_skip;
-    if(n > 7)
-        card_skip = 630/(n-1);
+    if(n > 6)
+        card_skip = 600/(n-1);
     else
         card_skip = 100;
 

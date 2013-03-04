@@ -19,6 +19,8 @@ public:
     int getRoleID();
     bool isSelected();
     void setSelected(bool yes);
+    void ban();
+    void setBPMsg(int playerID, int flag);
 signals:
     void roleSelected(int);
     void roleUnselected(int);
@@ -26,9 +28,11 @@ private:
     int roleID;
     int width;
     int height;
+    int bpFlag;
     bool selected;
     QPixmap pixmap;
-
+    QPixmap player;
+    QPixmap action;
 };
 
 #endif // ROLEITEM_H

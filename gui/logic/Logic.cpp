@@ -142,6 +142,7 @@ void Logic::getCommand(QString command)
     BPArea* bpArea;
     QList<int> roleIDs;
     PlayerArea* playerArea;
+    QStringList nicknames;
     int playerMax,targetID,roleID,howMany,num;
 
     switch (arg[0].toInt())
@@ -153,7 +154,8 @@ void Logic::getCommand(QString command)
     case GAMESTART:
         playerMax=arg[1].count()/2;
         dataInterface->setPlayerMax(playerMax);
-        dataInterface->initPlayerList(arg[1]);
+        nicknames=arg[2].split(',');
+        dataInterface->initPlayerList(arg[1],nicknames);
         if (playerMax==8)
             dataInterface->initTeam(18);
         else
@@ -179,7 +181,7 @@ void Logic::getCommand(QString command)
             gui->getPlayerArea()->update();
         }
         count++;
-        if(count==6)
+        if(count==dataInterface->getPlayerMax())
         {
             disconnect(getClient(),0,this,0);
             if(!hasShownRole){
@@ -225,7 +227,7 @@ void Logic::getCommand(QString command)
     case 52:
         state = 52;
         bpArea = gui->getBPArea();
-        bpArea->setMsg("请ban一角色");
+        bpArea->setMsg("请禁用一角色");
         bpArea->setQuota(1);
         bpArea->enableAll();
         playerArea = gui->getPlayerArea();
@@ -242,13 +244,11 @@ void Logic::getCommand(QString command)
         break;
     case 54:
         bpArea = gui->getBPArea();
-        bpArea->disableRoleItem(arg[2].toInt());
-        bpArea->remove(arg[2].toInt());
+        bpArea->ban(arg[1].toInt(), arg[2].toInt());
         break;
     case 57:
         bpArea = gui->getBPArea();
-        bpArea->choose(arg[2].toInt());
-        bpArea->remove(arg[2].toInt());
+        bpArea->choose(arg[1].toInt(), arg[2].toInt());
         decisionArea = gui->getDecisionArea();
         if(bpArea->checkOver())
         {

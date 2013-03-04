@@ -122,9 +122,10 @@ void ClientSocket::readMessage()
         //将接收到的数据存放到变量中
  }
 
-Server::Server(QObject *parent,bool isIPv6,int port, int roleStrategy) :
+Server::Server(QObject *parent,bool isIPv6,int port, int roleStrategy,int playerNum) :
     QTcpServer(parent)
 {
+    playerSum=playerNum;
     this->clientSocketList.clear();
     this->ready.clear();
     if(!isIPv6)
@@ -152,16 +153,10 @@ void Server::incomingConnection ( qintptr socketDescriptor )
     connect(newSocket,SIGNAL(readyRead()),newSocket,SLOT(readMessage()));
     connect(newSocket,SIGNAL(getMessage(int,QString)),this,SLOT(decoder(int,QString)));
 
-    QString temp = "1;";
-    int howMany=clientSocketList.size();
+    QString temp = "1;";    
     temp += QString::number(this->clientSocketList.size()-1);
     temp += ";";
     this->sendMessage(this->clientSocketList.size()-1,temp);
-
-    if(howMany == playerSum)
-        emit this->seatArrangeSIG();
-    else
-        sendMessage(-1,tr("现有")+QString::number(howMany)+tr("名玩家进入房间，请耐心等候"));
 }
 
 //num=-1表示广播
@@ -233,7 +228,11 @@ void Server::decoder(int id, QString message)
     switch(infor.at(0).toInt())
     {
     case 0:
-        emit seatPrearrangeSIG(id,infor.at(1).toInt());
+        emit seatPrearrangeSIG(id,infor.at(1).toInt(),infor.at(2));
+        howMany=clientSocketList.size();
+        sendMessage(-1,tr("现有")+QString::number(howMany)+tr("名玩家进入房间，请耐心等候"));
+        if(howMany == playerSum)
+            emit this->seatArrangeSIG();
         break;
     case ACTIONCOMMAND:
 

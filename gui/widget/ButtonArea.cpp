@@ -140,12 +140,12 @@ ButtonArea::ButtonArea()
 
     button=new Button(1,tr("合 成"));
     button->setParentItem(this);
-    button->setPos(80,0);
+    button->setPos(82,0);
     buttons<<button;
 
     button=new Button(2,tr("提 炼"));
     button->setParentItem(this);
-    button->setPos(160,0);
+    button->setPos(164,0);
     buttons<<button;
 
 
@@ -179,7 +179,7 @@ void ButtonArea::onButtonSelected(int id)
 void ButtonArea::addButton(Button* button)
 {
     button->setParentItem(this);
-    button->setPos(80*button->id,0);
+    button->setPos(82*button->id,0);
     buttons<<button;
     connect(button,SIGNAL(buttonSelected(int)),this,SLOT(onButtonSelected(int)));
     connect(button,SIGNAL(buttonUnselected(int)),this,SLOT(onButtonUnselected(int)));

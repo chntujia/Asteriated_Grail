@@ -11,6 +11,9 @@ Dialog::Dialog(QWidget *parent) :
     ui->comboBox_2->addItem(tr("éšæœº"));
     ui->comboBox_2->addItem(tr("3é€‰1"));
     ui->comboBox_2->addItem(tr("BP"));
+
+    ui->comboBox_3->addItem(tr("6ÈË¾Ö"));
+    ui->comboBox_3->addItem(tr("4ÈË¾Ö"));
     ui->lineEdit->setText("50000");
 
    connect(ui->buttonBox,SIGNAL(accepted()), this, SLOT(onOK()));
@@ -19,7 +22,12 @@ Dialog::Dialog(QWidget *parent) :
 
 void Dialog::onOK()
 {
-    server=new Server(0,ui->comboBox->currentIndex(),ui->lineEdit->text().toInt(),ui->comboBox_2->currentIndex());
+    int playerNum;
+    if(ui->comboBox_3->currentIndex()==0)
+        playerNum=6;
+    else
+        playerNum=4;
+    server=new Server(0,ui->comboBox->currentIndex(),ui->lineEdit->text().toInt(),ui->comboBox_2->currentIndex(),playerNum);
 }
 
 Dialog::~Dialog()

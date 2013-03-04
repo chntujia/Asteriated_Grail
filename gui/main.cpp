@@ -55,11 +55,11 @@ int main(int argc, char *argv[])
         gui->logAppend("text");
         gui->logAppend("text");
         gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");gui->logAppend("text");
-        dataInterface->getPlayerList().at(3)->addStatus(1,dataInterface->getCard(0));
-        dataInterface->getPlayerList().at(2)->addStatus(2,dataInterface->getCard(3));
-        dataInterface->getPlayerList().at(3)->addStatus(1,dataInterface->getCard(4));
-        dataInterface->getPlayerList().at(5)->addStatus(0,dataInterface->getCard(45));
-        dataInterface->getPlayerList().at(1)->removeStatus(dataInterface->getCard(3));
+        dataInterface->getPlayerList().at(3)->addBasicStatus(1,dataInterface->getCard(0));
+        dataInterface->getPlayerList().at(2)->addBasicStatus(2,dataInterface->getCard(3));
+        dataInterface->getPlayerList().at(3)->addBasicStatus(1,dataInterface->getCard(4));
+        dataInterface->getPlayerList().at(5)->addBasicStatus(0,dataInterface->getCard(45));
+        dataInterface->getPlayerList().at(1)->removeBasicStatus(dataInterface->getCard(3));
 */
         return a.exec();
     }

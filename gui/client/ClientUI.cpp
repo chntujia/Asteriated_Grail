@@ -57,10 +57,7 @@ void ClientUI::link()
 {
     tcpSocket->link(ui->addr->text(),ui->port->text().toInt());
     ui->connectButton->setEnabled(0);
-    if(ui->comboBox->currentIndex()==1)
-        tcpSocket->sendMessage("0;1;");
-    else if(ui->comboBox->currentIndex()==2)
-        tcpSocket->sendMessage("0;0;");
+    tcpSocket->sendMessage("0;"+QString::number(ui->comboBox->currentIndex()-1)+";"+ui->nickname->text()+";");
 }
 
 void ClientUI::displayError(QAbstractSocket::SocketError)

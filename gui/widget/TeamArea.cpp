@@ -44,16 +44,16 @@ TeamArea::TeamArea()
     Bdice[4]=QPixmap("resource/S5.png");
     Bdice[5]=QPixmap("resource/S6.png");
 
-    Num[0]=QPixmap("resource/0.png");
-    Num[1]=QPixmap("resource/1.png");
-    Num[2]=QPixmap("resource/2.png");
-    Num[3]=QPixmap("resource/3.png");
-    Num[4]=QPixmap("resource/4.png");
-    Num[5]=QPixmap("resource/5.png");
-    Num[6]=QPixmap("resource/6.png");
-    Num[7]=QPixmap("resource/7.png");
-    Num[8]=QPixmap("resource/8.png");
-    Num[9]=QPixmap("resource/9.png");
+    Num[0]=QPixmap("resource/number/0.png");
+    Num[1]=QPixmap("resource/number/1.png");
+    Num[2]=QPixmap("resource/number/2.png");
+    Num[3]=QPixmap("resource/number/3.png");
+    Num[4]=QPixmap("resource/number/4.png");
+    Num[5]=QPixmap("resource/number/5.png");
+    Num[6]=QPixmap("resource/number/6.png");
+    Num[7]=QPixmap("resource/number/7.png");
+    Num[8]=QPixmap("resource/number/8.png");
+    Num[9]=QPixmap("resource/number/9.png");
 
     if(red->getMoraleMax()==15)
         avg=5;
@@ -72,24 +72,24 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 {
     int i;
 
-    int offset=13;
+    int offset=21;
     int morale=red->getMorale();
     painter->drawPixmap(0, 0, background);
     for(i=0;i<morale/avg;i++) //士气
-        painter->drawPixmap(i*(Rdice[1].width()+2)+offset,17,Rdice[avg-1]);
+        painter->drawPixmap(i*(Rdice[1].width()+2)+offset,19,Rdice[avg-1]);
     offset+=i*(Rdice[1].width()+2);
     if(morale%avg!=0)
-        painter->drawPixmap(offset,17,Rdice[morale%avg-1]);
+        painter->drawPixmap(offset,19,Rdice[morale%avg-1]);
 
     offset=100;
     painter->drawPixmap(offset,4,Num[morale/10]);
     painter->drawPixmap(offset+Num[0].width(),4,Num[morale%10]);
 
-    offset=145;
+    offset=146;
     for(i=0;i<red->getGrail();i++) //杯
-        painter->drawPixmap(Rgrail.width()*i+offset,5,Rgrail);
+        painter->drawPixmap((Rgrail.width()+4)*i+offset,4,Rgrail);
 
-    offset+=Rgrail.width()*5+9;
+    offset+=(Rgrail.width()+4)*5+8;
     for(i=0;i<red->getCrystal();i++) //水晶
         painter->drawPixmap((Pcrystal.width()+4)*i+offset,4,Pcrystal);
 
@@ -97,9 +97,9 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     for(i=0;i<red->getGem();i++) //宝石
         painter->drawPixmap((Pgem.width()+4)*i+offset,4,Pgem);
 
-    offset=420;
+    offset=422;
     painter->drawPixmap(offset,2,Num[round/10]);
-    painter->drawPixmap(offset+Num[0].width(),2,Num[round%10]);
+    painter->drawPixmap(offset+18,2,Num[round%10]);
 
     offset=459;
     for(i=0;i<blue->getCrystal();i++) //水晶
@@ -109,26 +109,26 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     for(i=0;i<blue->getGem();i++) //宝石
         painter->drawPixmap((Pgem.width()+4)*i+offset,4,Pgem);
 
-    offset=598;
+    offset=602;
     for(i=0;i<blue->getGrail();i++) //杯
-        painter->drawPixmap(Rgrail.width()*i+offset,5,Bgrail);
+        painter->drawPixmap((Rgrail.width()+4)*i+offset,4,Bgrail);
 
     morale=blue->getMorale();
     offset=737;
     painter->drawPixmap(offset,4,Num[morale/10]);
     painter->drawPixmap(offset+Num[0].width(),4,Num[morale%10]);
 
-    offset=788;
+    offset=796;
 
     for(i=0;i<morale/avg;i++) //士气
-        painter->drawPixmap(i*(Bdice[1].width()+2)+offset,17,Bdice[avg-1]);
+        painter->drawPixmap(i*(Bdice[1].width()+2)+offset,19,Bdice[avg-1]);
     offset+=i*(Bdice[1].width()+2);
     if(morale%avg!=0)
-        painter->drawPixmap(offset,17,Bdice[morale%avg-1]);
+        painter->drawPixmap(offset,19,Bdice[morale%avg-1]);
 
     QFont font;
     font.setBold(1);
     painter->setFont(font);
-    painter->drawText(width+90,20,QString::number(leftCardNum));
-    painter->drawText(width+230,20,QString::number(droppedCardNum));
+    painter->drawText(width+90,15,QString::number(leftCardNum));
+    painter->drawText(width+220,15,QString::number(droppedCardNum));
 }
