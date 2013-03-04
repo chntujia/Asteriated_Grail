@@ -50,7 +50,8 @@ void DieWu::WuDong1()
 
     tipArea->setMsg(tr("请先选择一项："));
     tipArea->addBoxItem(tr("1.摸1张牌【强制】"));
-    tipArea->addBoxItem(tr("2.弃1张牌【强制】"));
+    if(dataInterface->getHandCards().size()!=0)
+        tipArea->addBoxItem(tr("2.弃1张牌【强制】"));
     tipArea->showBox();
 }
 
@@ -60,12 +61,8 @@ void DieWu::WuDong2()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
-    if(dataInterface->getHandCards().size()==0)
-        decisionArea->enable(0);
-    else
-        handArea->setQuota(1);
+    handArea->setQuota(1);
     handArea->enableAll();
-
     decisionArea->enable(1);
 }
 
@@ -211,13 +208,8 @@ void DieWu::onOkClicked()
         break;
     case 2412:
         command="2401;1;";
-        if(dataInterface->getHandCards().size()!=0)
-        {
-            cardID = QString::number(selectedCards[0]->getID());
-            dataInterface->removeHandCard(selectedCards[0]);
-        }
-        else
-            cardID = -1;
+        cardID = QString::number(selectedCards[0]->getID());
+        dataInterface->removeHandCard(selectedCards[0]);
         command+=sourceID+";"+cardID+";";
         emit sendCommand(command);
         gui->reset();
