@@ -17,7 +17,7 @@ TipArea::TipArea():selectedCard(NULL)
     boxItem->setParentItem(this);
     boxItem->setPos(0.35*width,0.5*height);
     boxItem->setVisible(0);
-    winflag ==false;
+    winflag=false;
 }
 QRectF TipArea::boundingRect() const
 {

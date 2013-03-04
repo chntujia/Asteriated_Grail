@@ -8,12 +8,13 @@ Dialog::Dialog(QWidget *parent) :
     ui->setupUi(this);
     ui->comboBox->addItem("ipv4");
     ui->comboBox->addItem("ipv6");
+
     ui->comboBox_2->addItem(tr("随机"));
     ui->comboBox_2->addItem(tr("3选1"));
     ui->comboBox_2->addItem(tr("BP"));
 
-    ui->comboBox_3->addItem(tr("6�˾�"));
-    ui->comboBox_3->addItem(tr("4�˾�"));
+    ui->comboBox_3->addItem(tr("6人局"));
+    ui->comboBox_3->addItem(tr("4人局"));
     ui->lineEdit->setText("50000");
 
    connect(ui->buttonBox,SIGNAL(accepted()), this, SLOT(onOK()));
