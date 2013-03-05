@@ -4911,7 +4911,7 @@ void MoGong::DuoChongSheJi2(QList<void *> args)
 
 void MoGong::DuoChongSheJiHarm(QList<void *> args)
 {
-    if(this != ((PlayerEntity*)args[0])||!DuoChongSheJiUsed||!DuoChongSheJiUsing)
+    if(this != ((PlayerEntity*)args[0])||!*(bool*)args[4]||!DuoChongSheJiUsed||!DuoChongSheJiUsing)
         return;
     coder.notice("本次攻击为【多重射击】，伤害减1");
     Harm *harm = (Harm*)args[2];

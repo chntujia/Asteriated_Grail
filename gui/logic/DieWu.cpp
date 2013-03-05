@@ -50,7 +50,8 @@ void DieWu::WuDong1()
 
     tipArea->setMsg(tr("请先选择一项："));
     tipArea->addBoxItem(tr("1.摸1张牌【强制】"));
-    tipArea->addBoxItem(tr("2.弃1张牌【强制】"));
+    if(dataInterface->getHandCards().size()!=0)
+        tipArea->addBoxItem(tr("2.弃1张牌【强制】"));
     tipArea->showBox();
 }
 
@@ -60,12 +61,8 @@ void DieWu::WuDong2()
     handArea->reset();
     playerArea->reset();
     tipArea->reset();
-    if(dataInterface->getHandCards().size()==0)
-        decisionArea->enable(0);
-    else
-        handArea->setQuota(1);
+    handArea->setQuota(1);
     handArea->enableAll();
-
     decisionArea->enable(1);
 }
 
@@ -144,7 +141,8 @@ void DieWu::DaoNiZhiDie1()
     tipArea->addBoxItem("1.对目标角色造成1点法术伤害，该伤害不能用治疗抵御");
     if(dataInterface->getMyself()->getToken(2)>0)
     {
-        tipArea->addBoxItem("2.（移除2个【茧】）移除1个【蛹】");
+        if(dataInterface->getCoverCards().size()>1)
+            tipArea->addBoxItem("2.（移除2个【茧】）移除1个【蛹】");
         tipArea->addBoxItem("3.（自己造成4点法术伤害③）移除1个【蛹】");
     }
     tipArea->showBox();
@@ -211,13 +209,8 @@ void DieWu::onOkClicked()
         break;
     case 2412:
         command="2401;1;";
-        if(dataInterface->getHandCards().size()!=0)
-        {
-            cardID = QString::number(selectedCards[0]->getID());
-            dataInterface->removeHandCard(selectedCards[0]);
-        }
-        else
-            cardID = -1;
+        cardID = QString::number(selectedCards[0]->getID());
+        dataInterface->removeHandCard(selectedCards[0]);
         command+=sourceID+";"+cardID+";";
         emit sendCommand(command);
         gui->reset();
@@ -295,12 +288,10 @@ void DieWu::onOkClicked()
         else
         {
             command+="-1;";
-            foreach(Card*ptr,selectedCards){
+            foreach(Card*ptr,selectedCoverCards){
                 command+=QString::number(ptr->getID())+";";
                 dataInterface->removeHandCard(ptr);
             }
-            for(int i=0;i<(2-selectedCards.size());i++)
-                command+="-1;";
             coverArea->reset();
             gui->showCoverArea(false);
         }
@@ -318,6 +309,7 @@ void DieWu::onCancelClicked()
     case 2411:
     case 2406:
     case 2471:
+        gui->reset();
         normal();
         break;
     case 2402:
