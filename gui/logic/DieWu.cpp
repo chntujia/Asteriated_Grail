@@ -141,7 +141,8 @@ void DieWu::DaoNiZhiDie1()
     tipArea->addBoxItem("1.对目标角色造成1点法术伤害，该伤害不能用治疗抵御");
     if(dataInterface->getMyself()->getToken(2)>0)
     {
-        tipArea->addBoxItem("2.（移除2个【茧】）移除1个【蛹】");
+        if(dataInterface->getCoverCards().size()>1)
+            tipArea->addBoxItem("2.（移除2个【茧】）移除1个【蛹】");
         tipArea->addBoxItem("3.（自己造成4点法术伤害③）移除1个【蛹】");
     }
     tipArea->showBox();
@@ -287,12 +288,10 @@ void DieWu::onOkClicked()
         else
         {
             command+="-1;";
-            foreach(Card*ptr,selectedCards){
+            foreach(Card*ptr,selectedCoverCards){
                 command+=QString::number(ptr->getID())+";";
                 dataInterface->removeHandCard(ptr);
             }
-            for(int i=0;i<(2-selectedCards.size());i++)
-                command+="-1;";
             coverArea->reset();
             gui->showCoverArea(false);
         }
@@ -310,6 +309,7 @@ void DieWu::onCancelClicked()
     case 2411:
     case 2406:
     case 2471:
+        gui->reset();
         normal();
         break;
     case 2402:
