@@ -184,10 +184,27 @@ void MoGong::cardAnalyse()
     switch(state)
     {
     case 2601:
+        playerArea->enableEnemy();
+        int i;
+        QList<Player*> players=dataInterface->getPlayerList();
+        for(i=0;i<players.size();i++)
+            if(players[i]->getRoleID()==5 && players[i]->getTap()==1){
+                playerArea->disablePlayerItem(i);
+                break;
+            }
+        if(myself->getSpecial(1) == 1)
+        {
+            playerArea->disableAll();
+            for(i=0;i<players.size();i++)
+                if(players[i]->getRoleID()==21){
+                    playerArea->enablePlayerItem(i);
+                    break;
+                }
+        }
         foreach(Player*ptr,dataInterface->getPlayerList())
         {
-            if(ptr->getColor()!=myself->getColor()&&ptr->getHandCardNum()<ptr->getHandCardMax())
-                playerArea->enablePlayerItem(ptr->getID());
+            if(ptr->getHandCardNum()==ptr->getHandCardMax())
+                playerArea->disablePlayerItem(ptr->getID());
         }
         playerArea->setQuota(1);
         break;
