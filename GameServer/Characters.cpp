@@ -3487,8 +3487,11 @@ void LingHun::LingHunLianJie2(QList<void *> args)
             zhuanyi2.type=harm->type;
             zhuanyi2.harmPoint=harm->harmPoint;
             if(dst->getID()==this->getID())
-                engine->timeLine6(zhuanyi2,src,this);
-            else
+            {
+                if(zhuanyi2.harmPoint!=0)
+                    engine->timeLine6(zhuanyi2,src,this);
+            }
+            else if(zhuanyi1.harmPoint!=0)
                 engine->timeLine6(zhuanyi1,src,this);
             if(engine->checkEnd())
                 break;
@@ -3504,8 +3507,11 @@ void LingHun::LingHunLianJie2(QList<void *> args)
             zhuanyi2.type=harm->type;
             zhuanyi2.harmPoint=harm->harmPoint;
             if(dst->getID()==LianJieID)
-                engine->timeLine6(zhuanyi2,src,engine->getPlayerByID(LianJieID));
-            else
+            {
+                if(zhuanyi2.harmPoint!=0)
+                    engine->timeLine6(zhuanyi2,src,engine->getPlayerByID(LianJieID));
+            }
+            else if(zhuanyi1.harmPoint!=0)
                 engine->timeLine6(zhuanyi1,src,engine->getPlayerByID(LianJieID));
             if(engine->checkEnd())
                 break;
