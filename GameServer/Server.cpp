@@ -230,7 +230,7 @@ void Server::decoder(int id, QString message)
     case 0:
         emit seatPrearrangeSIG(id,infor.at(1).toInt(),infor.at(2));
         howMany=clientSocketList.size();
-        sendMessage(-1,tr("现有")+QString::number(howMany)+tr("名玩家进入房间，请耐心等候"));
+        sendMessage(-1,QStringLiteral("现有")+QString::number(howMany)+QStringLiteral("名玩家进入房间，请耐心等候"));
         if(howMany == playerSum)
             emit this->seatArrangeSIG();
         break;

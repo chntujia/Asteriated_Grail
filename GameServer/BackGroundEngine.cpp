@@ -362,8 +362,6 @@ void BackgroundEngine::initial()
     QFile fp("./cardDB.txt");
 
     QTextStream in(&fp);
-//    QTextCodec *codec=QTextCodec::codecForName("utf-8");
-//    in.setCodec(codec);
 
     if (!fp.open(QIODevice::ReadOnly)) {
             out << "Cannot open file for reading. ";
@@ -864,7 +862,7 @@ bool BackgroundEngine::canAct()
         return true;
     for(int i = 0;i < this->currentPlayer->getHandCards().length();i++)
     {
-        if(this->currentPlayer->getHandCards().at(i)->getName() != tr("圣光"))
+        if(this->currentPlayer->getHandCards().at(i)->getName() != QStringLiteral("圣光"))
             return true;
     }
     return false;
@@ -893,7 +891,7 @@ void BackgroundEngine::effectApply(CardEntity* card,PlayerEntity* user,PlayerEnt
     user->removeHandCards(cards,true,false);
     coder.moveCardNotice(1,cards,userID,HAND,dstID,EFFECT);
     dst->addBasicEffect(card);
-    if(card->getName()==tr("圣盾")||card->getSpecialityList().contains(tr("天使之墙")))
+    if(card->getName()==QStringLiteral("圣盾")||card->getSpecialityList().contains(QStringLiteral("天使之墙")))
         emit usedShield(userID);
 
 }
@@ -1032,7 +1030,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         for(int i = 0;i < dst->getBasicEffect().size()&& checkShield;i++)
         {
             //检查是否有圣盾
-            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
+            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(QStringLiteral("天使之墙")))
             {
                 coder.shieldNotic(dst->getID());
                 dst->removeBasicEffect(dst->getBasicEffect()[i]);
@@ -1259,7 +1257,7 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
             //检查圣盾
             for(int i = 0;i < dstPlayer->getBasicEffect().size();i++)
             {
-                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
+                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(QStringLiteral("天使之墙")))
                 {
                     coder.shieldNotic(dst);
                     dstPlayer->removeBasicEffect(dstPlayer->getBasicEffect()[i]);

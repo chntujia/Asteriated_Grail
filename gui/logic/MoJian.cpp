@@ -6,7 +6,7 @@ MoJian::MoJian()
     setMyRole(this);
 
     Button *anYingLiuXing;
-    anYingLiuXing=new Button(3,tr("暗影流星"));
+    anYingLiuXing=new Button(3,QStringLiteral("暗影流星"));
     buttonArea->addButton(anYingLiuXing);
     connect(anYingLiuXing,SIGNAL(buttonSelected(int)),this,SLOT(AnYingLiuXing()));
 }
@@ -34,7 +34,7 @@ void MoJian::AnYingNingJu()
 {
     state=903;
     gui->reset();
-    tipArea->setMsg(tr("是否发动暗影凝聚？"));
+    tipArea->setMsg(QStringLiteral("是否发动暗影凝聚？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -68,7 +68,7 @@ void MoJian::AnYingLiuXing()
 void MoJian::HeiAnZhenChan()
 {
     state=36;
-    tipArea->setMsg(tr("是否发动黑暗震颤？"));
+    tipArea->setMsg(QStringLiteral("是否发动黑暗震颤？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -155,9 +155,9 @@ void MoJian::onCancelClicked()
 void MoJian::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("暗影凝聚"))
+    if(skill==QStringLiteral("暗影凝聚"))
         AnYingNingJu();
-    else if(skill==tr("黑暗震颤"))
+    else if(skill==QStringLiteral("黑暗震颤"))
         HeiAnZhenChan();
 }
 
@@ -165,7 +165,7 @@ void MoJian::additionalAction()
 {
     Role::additionalAction();
     if(usedAttack&&!onceUsed)
-        tipArea->addBoxItem(tr("1.修罗连斩"));
+        tipArea->addBoxItem(QStringLiteral("1.修罗连斩"));
 }
 
 void MoJian::attacked(QString element, int hitRate)

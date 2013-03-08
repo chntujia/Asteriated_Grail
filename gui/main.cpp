@@ -10,10 +10,6 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-//    QTextCodec *codec = QTextCodec::codecForName("utf-8");
-//    QTextCodec::setCodecForLocale(codec);
-//    QTextCodec::setCodecForCStrings(codec);
-//    QTextCodec::setCodecForTr(codec);
     a.setFont(QFont("simsun", 9));
     dataInterface=new DataInterface;
     logic=new Logic;
@@ -35,15 +31,12 @@ int main(int argc, char *argv[])
         logic->readyToStart();
 
 /*
-
-
         dataInterface->getPlayerList().at(4)->setGem(1);
         dataInterface->getPlayerList().at(3)->setCrystal(1);
         dataInterface->getPlayerList().at(3)->setGem(2);
         dataInterface->getPlayerList().at(0)->setCrystal(3);
         dataInterface->getPlayerList().at(1)->setGem(4);
-
-//        dataInterface->getPlayerList().at(3)->setCrossNum(23);
+        dataInterface->getPlayerList().at(3)->setCrossNum(23);
         dataInterface->addHandCard(dataInterface->getCard(45));
         dataInterface->addHandCard(dataInterface->getCard(84));
         dataInterface->addHandCard(dataInterface->getCard(75));

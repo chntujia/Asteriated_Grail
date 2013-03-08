@@ -14,20 +14,20 @@ void GeDouJia::CangYanXuLi()
     decisionArea->enable(1);
     if(myself->getTap()==0)
         baiShiUsed=false;
-    tipArea->setMsg(tr("请选择要发动的技能："));
+    tipArea->setMsg(QStringLiteral("请选择要发动的技能："));
     if(myself->getToken(0)<6 && !baiShiUsed)
-        tipArea->addBoxItem(tr("1.蓄力一击"));
+        tipArea->addBoxItem(QStringLiteral("1.蓄力一击"));
     if(myself->getToken(0)<6 && baiShiUsed)
-        tipArea->addBoxItem(tr("1.蓄力一击，且退出【百式幻龙拳】"));
+        tipArea->addBoxItem(QStringLiteral("1.蓄力一击，且退出【百式幻龙拳】"));
     if(myself->getToken(0)>0)
-        tipArea->addBoxItem(tr("2.苍炎之魂"));
+        tipArea->addBoxItem(QStringLiteral("2.苍炎之魂"));
     tipArea->showBox();
 }
 
 void GeDouJia::NianDan1()
 {
     state=2002;
-    tipArea->setMsg(tr("是否发动念弹？"));
+    tipArea->setMsg(QStringLiteral("是否发动念弹？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -51,7 +51,7 @@ void GeDouJia::BaiShiHuanLongQuan()
 {
     state=2003;
     gui->reset();
-    tipArea->setMsg(tr("是否发动百式幻龙拳？"));
+    tipArea->setMsg(QStringLiteral("是否发动百式幻龙拳？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
     int i;
@@ -75,7 +75,7 @@ void GeDouJia::DouShenTianQu()
 {
     state=2004;
     gui->reset();
-    tipArea->setMsg(tr("是否发动斗神天驱？如是，请选择要弃的牌"));
+    tipArea->setMsg(QStringLiteral("是否发动斗神天驱？如是，请选择要弃的牌"));
     QList<Card*> handcards=dataInterface->getHandCards();
     cardReady=false;
     bool flag=true;
@@ -139,7 +139,7 @@ void GeDouJia::playerAnalyse()
             tipArea->reset();
             if(selectedCards[0]->getType()=="magic")
             {
-                tipArea->setMsg(tr("这会退出【百式幻龙拳】，是否确定？"));
+                tipArea->setMsg(QStringLiteral("这会退出【百式幻龙拳】，是否确定？"));
             }
             else if(baiShiFirst)
             {
@@ -147,7 +147,7 @@ void GeDouJia::playerAnalyse()
             }
             else if(selectedPlayers[0]->getID()!=baiShiTargetID)
             {
-                tipArea->setMsg(tr("这会退出【百式幻龙拳】，是否确定？"));
+                tipArea->setMsg(QStringLiteral("这会退出【百式幻龙拳】，是否确定？"));
             }
             decisionArea->enable(0);
         }
@@ -177,17 +177,17 @@ void GeDouJia::buy()
         tipArea->reset();
 
         if(energy<4)
-            tipArea->setMsg(tr("你将会退出【百式幻龙拳】,执行【购买】"));
+            tipArea->setMsg(QStringLiteral("你将会退出【百式幻龙拳】,执行【购买】"));
         if(energy==4)
         {
-            tipArea->setMsg(tr("你将会退出【百式幻龙拳】,执行【购买】"));
-            tipArea->addBoxItem(tr("1.一个宝石"));
-            tipArea->addBoxItem(tr("2.一个水晶"));
+            tipArea->setMsg(QStringLiteral("你将会退出【百式幻龙拳】,执行【购买】"));
+            tipArea->addBoxItem(QStringLiteral("1.一个宝石"));
+            tipArea->addBoxItem(QStringLiteral("2.一个水晶"));
             tipArea->showBox();
         }
         if(energy==5)
         {
-            tipArea->setMsg(tr("你将会退出【百式幻龙拳】,执行【购买】"));
+            tipArea->setMsg(QStringLiteral("你将会退出【百式幻龙拳】,执行【购买】"));
         }
     }
 }
@@ -216,15 +216,15 @@ void GeDouJia::synthetize()
         handArea->reset();
         playerArea->reset();
 
-        tipArea->setMsg(tr("你将会退出【百式幻龙拳】,执行【合成】"));
+        tipArea->setMsg(QStringLiteral("你将会退出【百式幻龙拳】,执行【合成】"));
         if(crystal>=3)
-            tipArea->addBoxItem(tr("1.三个水晶"));
+            tipArea->addBoxItem(QStringLiteral("1.三个水晶"));
         if(crystal>=2&&gem>=1)
-            tipArea->addBoxItem(tr("2.两个水晶和一个宝石"));
+            tipArea->addBoxItem(QStringLiteral("2.两个水晶和一个宝石"));
         if(crystal>=1&&gem>=2)
-            tipArea->addBoxItem(tr("3.一个水晶和两个宝石"));
+            tipArea->addBoxItem(QStringLiteral("3.一个水晶和两个宝石"));
         if(gem>=3)
-            tipArea->addBoxItem(tr("4.三个宝石"));
+            tipArea->addBoxItem(QStringLiteral("4.三个宝石"));
         tipArea->showBox();
     }
 }
@@ -254,23 +254,23 @@ void GeDouJia::extract()
         handArea->reset();
         playerArea->reset();
 
-        tipArea->setMsg(tr("你将会退出【百式幻龙拳】,执行【提炼】"));
+        tipArea->setMsg(QStringLiteral("你将会退出【百式幻龙拳】,执行【提炼】"));
         switch(myself->getEnergyMax()-myself->getEnergy())
         {
         case 4:
         case 3:
         case 2:
             if(gem>=2)
-                tipArea->addBoxItem(tr("1.两个宝石"));
+                tipArea->addBoxItem(QStringLiteral("1.两个宝石"));
             if(crystal>=2)
-                tipArea->addBoxItem(tr("2.两个水晶"));
+                tipArea->addBoxItem(QStringLiteral("2.两个水晶"));
             if(gem>=1&&crystal>=1)
-                tipArea->addBoxItem(tr("3.一个宝石和一个水晶"));
+                tipArea->addBoxItem(QStringLiteral("3.一个宝石和一个水晶"));
         case 1:
             if(gem>=1)
-                tipArea->addBoxItem(tr("4.一个宝石"));
+                tipArea->addBoxItem(QStringLiteral("4.一个宝石"));
             if(crystal>=1)
-                tipArea->addBoxItem(tr("5.一个水晶"));
+                tipArea->addBoxItem(QStringLiteral("5.一个水晶"));
         }
         tipArea->showBox();
     }
@@ -375,13 +375,13 @@ void GeDouJia::onCancelClicked()
 void GeDouJia::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("苍炎蓄力"))
+    if(skill==QStringLiteral("苍炎蓄力"))
         CangYanXuLi();
-    else if(skill==tr("念弹"))
+    else if(skill==QStringLiteral("念弹"))
         NianDan1();
-    else if(skill==tr("百式幻龙拳"))
+    else if(skill==QStringLiteral("百式幻龙拳"))
         BaiShiHuanLongQuan();
-    else if(skill==tr("斗神天驱"))
+    else if(skill==QStringLiteral("斗神天驱"))
         DouShenTianQu();
 }
 

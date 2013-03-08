@@ -3,23 +3,23 @@
 #include "widget/GUI.h"
 DecisionArea::DecisionArea()
 {
-    okButton=new Button(0,tr("确 定"));
+    okButton=new Button(0,QStringLiteral("确 定"));
     okButton->setParentItem(this);
     okButton->setPos(0,0);
     connect(okButton,SIGNAL(buttonSelected(int)),this,SLOT(onButtonSelected(int)));
 
-    cancelButton=new Button(1,tr("取 消"));
+    cancelButton=new Button(1,QStringLiteral("取 消"));
     cancelButton->setParentItem(this);
     cancelButton->setPos(80,0);
     connect(cancelButton,SIGNAL(buttonSelected(int)),this,SLOT(onButtonSelected(int)));
 
-    exchangeButton=new Button(2,tr("无法行动"));
+    exchangeButton=new Button(2,QStringLiteral("无法行动"));
     exchangeButton->setParentItem(this);
     exchangeButton->setPos(-80,0);
     exchangeButton->setOpacity(0);
     connect(exchangeButton,SIGNAL(buttonSelected(int)),this,SLOT(onButtonSelected(int)));
 
-    resignButton=new Button(3,tr("放弃行动"));
+    resignButton=new Button(3,QStringLiteral("放弃行动"));
     resignButton->setParentItem(this);
     resignButton->setPos(-80,0);
     resignButton->setOpacity(0);
@@ -133,17 +133,17 @@ void DecisionArea::reset()
 ButtonArea::ButtonArea()
 {
     Button *button;
-    button=new Button(0,tr("购 买"));
+    button=new Button(0,QStringLiteral("购 买"));
     button->setParentItem(this);
     button->setPos(0,0);
     buttons<<button;
 
-    button=new Button(1,tr("合 成"));
+    button=new Button(1,QStringLiteral("合 成"));
     button->setParentItem(this);
     button->setPos(82,0);
     buttons<<button;
 
-    button=new Button(2,tr("提 炼"));
+    button=new Button(2,QStringLiteral("提 炼"));
     button->setParentItem(this);
     button->setPos(164,0);
     buttons<<button;

@@ -6,7 +6,7 @@ JianDi::JianDi()
     setMyRole(this);
 
     Button *checkCover;
-    checkCover = new Button(10,tr("查看剑魂"));
+    checkCover = new Button(10,QStringLiteral("查看剑魂"));
     buttonArea->addOutsideTurnButton(checkCover);
 
     checkCover->setVisible(true);
@@ -18,7 +18,7 @@ JianDi::JianDi()
 void JianDi::JianHunShouHu(int cardID)
 {
     state=1901;
-    tipArea->setMsg(tr("是否发动剑魂守护？"));
+    tipArea->setMsg(QStringLiteral("是否发动剑魂守护？"));
     shouhuID=cardID;
     decisionArea->enable(0);
     decisionArea->enable(1);
@@ -28,7 +28,7 @@ void JianDi::JianQiZhan(int targetID)
 {
     Player* myself=dataInterface->getMyself();
     state=1902;
-    tipArea->setMsg(tr("请选择要移除的剑气数："));
+    tipArea->setMsg(QStringLiteral("请选择要移除的剑气数："));
     int min=myself->getToken(0)<3?myself->getToken(0):3;
     for(;min>0;min--)
         tipArea->addBoxItem(QString::number(min));
@@ -56,7 +56,7 @@ void JianDi::JianQiZhan2()
 void JianDi::TianShiZhiHun()
 {
     state=1903;
-    tipArea->setMsg(tr("是否发动天使之魂？如发动请选择剑魂："));
+    tipArea->setMsg(QStringLiteral("是否发动天使之魂？如发动请选择剑魂："));
     decisionArea->enable(1);
     decisionArea->disable(0);
     gui->showCoverArea(true);
@@ -69,7 +69,7 @@ void JianDi::TianShiZhiHun()
 void JianDi::EMoZhiHun()
 {
     state=1904;
-    tipArea->setMsg(tr("是否发动恶魔之魂？如发动请选择剑魂："));
+    tipArea->setMsg(QStringLiteral("是否发动恶魔之魂？如发动请选择剑魂："));
     decisionArea->enable(1);
     decisionArea->disable(0);
     gui->showCoverArea(true);
@@ -82,7 +82,7 @@ void JianDi::EMoZhiHun()
 void JianDi::BuQuYiZhi()
 {
     state=1905;
-    tipArea->setMsg(tr("是否发动不屈意志？"));
+    tipArea->setMsg(QStringLiteral("是否发动不屈意志？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -90,15 +90,15 @@ void JianDi::BuQuYiZhi()
 void JianDi::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("剑魂守护"))
+    if(skill==QStringLiteral("剑魂守护"))
         JianHunShouHu(command.split(';').at(3).toInt());
-    else if(skill==tr("剑气斩"))
+    else if(skill==QStringLiteral("剑气斩"))
         JianQiZhan(command.split(';').at(3).toInt());
-    else if(skill==tr("天使之魂"))
+    else if(skill==QStringLiteral("天使之魂"))
         TianShiZhiHun();
-    else if(skill==tr("恶魔之魂"))
+    else if(skill==QStringLiteral("恶魔之魂"))
         EMoZhiHun();
-    else if(skill==tr("不屈意志"))
+    else if(skill==QStringLiteral("不屈意志"))
         BuQuYiZhi();
 }
 
@@ -106,7 +106,7 @@ void JianDi::additionalAction()
 {
     Role::additionalAction();
     if(buquUsed)
-        tipArea->addBoxItem(tr("1.攻击行动（不屈意志）"));
+        tipArea->addBoxItem(QStringLiteral("1.攻击行动（不屈意志）"));
 }
 
 void JianDi::coverCardAnalyse()

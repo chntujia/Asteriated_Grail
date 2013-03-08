@@ -50,9 +50,9 @@ void Berserker::wildBladeAsk(QList<void*> args)
     CardEntity *card = (CardEntity*)args[3];
     if(!card->getHasSpeciality())
         return;
-    if(card->getProperty() != tr("血"))
+    if(card->getProperty() != QStringLiteral("血"))
         return;
-    if(!card->getSpecialityList().contains(tr("血影狂刀")))
+    if(!card->getSpecialityList().contains(QStringLiteral("血影狂刀")))
         return;
     int handNum = ((PlayerEntity*)args[1])->getHandCardNum();
     if(handNum != 2 && handNum != 3)
@@ -72,9 +72,9 @@ void Berserker::wildBlade(QList<void *> args)
     CardEntity *card = (CardEntity*)args[3];
     if(!card->getHasSpeciality())
         return;
-    if(card->getProperty() != tr("血"))
+    if(card->getProperty() != QStringLiteral("血"))
         return;
-    if(card->getSpecialityList().contains(tr("血影狂刀")))
+    if(card->getSpecialityList().contains(QStringLiteral("血影狂刀")))
     {
         if(!this->wildBladeUsed)
             return;
@@ -101,10 +101,10 @@ void Berserker::roar(QList<void *> args)
     CardEntity *card = (CardEntity*)args[3];
     if(!card->getHasSpeciality())
         return;
-    if(card->getProperty() != tr("血"))
+    if(card->getProperty() != QStringLiteral("血"))
         return;
 
-    if(card->getSpecialityList().contains(tr("血腥咆哮")))
+    if(card->getSpecialityList().contains(QStringLiteral("血腥咆哮")))
     {
         if(((PlayerEntity*)args[1])->getCrossNum() == 2)
         {
@@ -139,7 +139,7 @@ void BowLady::thunderArrow(QList<void *> args)
     if(this != (PlayerEntity*)args[0])
         return;
     CardEntity* card = (CardEntity*)args[3];
-    if(card->getElement() == tr("thunder"))
+    if(card->getElement() == QStringLiteral("thunder"))
     {
         *((int*)args[5]) = NOREPLY;
         coder.notice("弓之女神发动【闪电箭】");
@@ -178,11 +178,11 @@ void BowLady::accurateShoot(QList<void *> args)
     if(this !=  (PlayerEntity*)args[0])
         return;
     CardEntity* card = (CardEntity*)args[3];
-    if(card->getProperty() != tr("技"))
+    if(card->getProperty() != QStringLiteral("技"))
         return;
     if(card->getHasSpeciality() == 0)
         return;
-    if(card->getSpecialityList().contains(tr("精准射击")))
+    if(card->getSpecialityList().contains(QStringLiteral("精准射击")))
     {
         //此处使用35号通讯协议询问client是否发动技能
         coder.askForSkill(this->getID(),"精准射击");
@@ -713,7 +713,7 @@ void Saintness::prayerOfFrost(QList<void *> args)
     if(this != (PlayerEntity*)args[0])
         return;
     CardEntity* card = (CardEntity*)args[3];
-    if(card->getElement() != tr("water"))
+    if(card->getElement() != QStringLiteral("water"))
         return;
     coder.askForSkill(this->getID(),"冰霜祷言");
     BatInfor ans = messageBuffer::readBatInfor();
@@ -873,12 +873,12 @@ void JianSheng::LieFengJi1(QList<void*> args)
     if(this != (PlayerEntity*)args[0])
         return;
     CardEntity* card = (CardEntity*)args[3];
-    if(!card->getSpecialityList().contains(tr("烈风技")))
+    if(!card->getSpecialityList().contains(QStringLiteral("烈风技")))
         return;
     PlayerEntity* dst=(PlayerEntity*)args[1];
     bool flag=false;
     for(int i = 0;i < dst->getBasicEffect().size();i++)
-        if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("天使之墙")))
+        if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(QStringLiteral("天使之墙")))
         {
             flag=true;
             break;
@@ -909,7 +909,7 @@ void JianSheng::JiFengJi1(QList<void *> args)
     if(this != myself ||!*(bool*)args[4])
         return;
     CardEntity* card = (CardEntity*)args[3];
-    if(!card->getSpecialityList().contains(tr("疾风技")))
+    if(!card->getSpecialityList().contains(QStringLiteral("疾风技")))
         return;
     coder.notice("剑圣发动【疾风技】");
     engine->addActionNum(ATTACK);
@@ -1036,7 +1036,7 @@ void FengYin::FengYinFaShu1(QList<void*> args)
 void FengYin::FengYinFaShu2(QList<CardEntity*> cards,PlayerEntity* user)
 {
     foreach(CardEntity*fengYin, user->getBasicEffect())
-        if(fengYin->getType()=="attack" && fengYin->getProperty()==tr("幻"))
+        if(fengYin->getType()=="attack" && fengYin->getProperty()==QStringLiteral("幻"))
             foreach(CardEntity*ptr, cards)
                 if(ptr->getElement()==fengYin->getElement())
                 {
@@ -1077,7 +1077,7 @@ void FengYin::WuXiShuFu2(PlayerEntity* player, bool* withoutTrap)
     for(int i=0;i<engine->getPlayerNum();i++)
     { 
         foreach(CardEntity*card,ptr->getBasicEffect())
-            if(card->getType()=="attack"&& card->getProperty()==tr("幻"))
+            if(card->getType()=="attack"&& card->getProperty()==QStringLiteral("幻"))
                 howMany++;
         ptr=ptr->getNext();
     }
@@ -1661,7 +1661,7 @@ void ZhongCai::ShenPanLangChao(QList<void *> args)
 {
     if(this != (PlayerEntity*)args[1])
         return;
-    coder.notice(tr("仲裁者发动【审判浪潮】"));
+    coder.notice(QStringLiteral("仲裁者发动【审判浪潮】"));
     setToken(0,token[0]+1);
     coder.tokenNotice(this->getID(),0,token[0]);
 }
@@ -1802,7 +1802,7 @@ void YongZhe::JinDuanZhiLi1(QList<void *> args)
             fireNum++;
     }
     coder.tokenNotice(id,0,token[0]);
-    coder.discardNotice(this->getID(),this->getHandCards().length(),tr("y"),this->getHandCards());
+    coder.discardNotice(this->getID(),this->getHandCards().length(),QStringLiteral("y"),this->getHandCards());
     this->removeHandCards(this->getHandCards(),true,true);
     Harm* harm=(Harm*)args[2];
     harm->harmPoint+=fireNum;
@@ -1852,7 +1852,7 @@ void YongZhe::JinDuanZhiLi2(QList<void *> args)
     }
     coder.tokenNotice(id,0,token[0]);
     coder.tokenNotice(id,1,token[1]);
-    coder.discardNotice(this->getID(),this->getHandCards().length(),tr("y"),this->getHandCards());
+    coder.discardNotice(this->getID(),this->getHandCards().length(),QStringLiteral("y"),this->getHandCards());
     this->removeHandCards(this->getHandCards(),true,true);
     setTap(1);
 }
@@ -2201,7 +2201,7 @@ void QiDao::WeiLiCiFu2(QList<void*> args)
 {
     PlayerEntity*user=(PlayerEntity*)args[0];
     foreach(CardEntity*weili, user->getBasicEffect())
-        if(weili->getSpecialityList().contains(tr("威力赐福")))
+        if(weili->getSpecialityList().contains(QStringLiteral("威力赐福")))
         {
             //此处询问是否使用
             coder.askForSkill(user->getID(),"威力赐福");
@@ -2233,7 +2233,7 @@ void QiDao::XunJieCiFu2(QList<void*> args)
         return;
     PlayerEntity*user=(PlayerEntity*)args[0];
     foreach(CardEntity*xunjie, user->getBasicEffect())
-        if(xunjie->getSpecialityList().contains(tr("迅捷赐福"))){
+        if(xunjie->getSpecialityList().contains(QStringLiteral("迅捷赐福"))){
             engine->addActionNum(ATTACK);
             XunJieCounted=true;
             break;
@@ -2246,7 +2246,7 @@ void QiDao::XunJieCiFu3(QList<void *> args)
         return;
     PlayerEntity*user=engine->getPlayerByID(skill->srcID);
     foreach(CardEntity*xunjie, user->getBasicEffect())
-        if(xunjie->getSpecialityList().contains(tr("迅捷赐福"))){
+        if(xunjie->getSpecialityList().contains(QStringLiteral("迅捷赐福"))){
             user->removeBasicEffect(xunjie);
             break;
         }
@@ -2779,7 +2779,7 @@ void GeDouJia::NianQiLiChang(QList<void *> args)
         return;
     Harm* harm= (Harm*)args[2];
     harm->harmPoint=4;
-    coder.notice(tr("格斗家发动【念气力场】"));
+    coder.notice(QStringLiteral("格斗家发动【念气力场】"));
 }
 
 void GeDouJia::CangYanXuLi(QList<void *> args)
@@ -2800,7 +2800,7 @@ void GeDouJia::CangYanXuLi(QList<void *> args)
         setTap(0);
         coder.tapNotice(id,0,"【普通形态】");
     }
-    coder.notice(tr("格斗家发动【蓄力一击】"));
+    coder.notice(QStringLiteral("格斗家发动【蓄力一击】"));
     setToken(0,token[0]+1);
     coder.tokenNotice(id,0,token[0]);
     XuLiUesd=true;
@@ -2809,7 +2809,7 @@ void GeDouJia::CangYanXuLi(QList<void *> args)
     {
         setToken(0,token[0]-1);
         coder.tokenNotice(id,0,token[0]);
-        coder.notice(tr("格斗家发动【苍炎之魂】"));
+        coder.notice(QStringLiteral("格斗家发动【苍炎之魂】"));
         *(int*)args[5]=NOREPLY;
         CangYanUsed=true;
     }
@@ -2879,7 +2879,7 @@ void GeDouJia::BaiShiHuanLingQuan1(QList<void *> args)
         return;
     setToken(0,token[0]-3);
     coder.tokenNotice(id,0,token[0]);
-    coder.notice(tr("格斗家发动【百式幻龙拳】"));
+    coder.notice(QStringLiteral("格斗家发动【百式幻龙拳】"));
     setTap(1);
     coder.tapNotice(id,1,"【百式幻龙拳】");
     BaiShiUsed=true;
@@ -2893,7 +2893,7 @@ void GeDouJia::BaiShiHuanLingQuan2(QList<void *> args)
         return;
     if(!*(bool*)args[4])
         return;
-    coder.notice(tr("格斗家发动【百式幻龙拳】"));
+    coder.notice(QStringLiteral("格斗家发动【百式幻龙拳】"));
     Harm* harm=(Harm*)args[2];
     harm->harmPoint+=2;
 }
@@ -2904,7 +2904,7 @@ void GeDouJia::BaiShiHuanLingQuan3(QList<void *> args)
         return;
     if(*(bool*)args[4])
         return;
-    coder.notice(tr("格斗家发动【百式幻龙拳】"));
+    coder.notice(QStringLiteral("格斗家发动【百式幻龙拳】"));
     Harm* harm=(Harm*)args[2];
     harm->harmPoint++;
 }
@@ -2938,7 +2938,7 @@ void GeDouJia::DouShenTianQu(QList<void *> args)
     setGem(gem);
     setCrystal(crystal);
     coder.energyNotice(id,gem,crystal);
-    coder.notice(tr("格斗家发动【斗神天驱】"));
+    coder.notice(QStringLiteral("格斗家发动【斗神天驱】"));
     QList<CardEntity*>cards;
     for(int i=0;i<arg[2].toInt();i++)
         cards.append(getCardByID(arg[i+3].toInt()));
@@ -3235,7 +3235,7 @@ void WuNv::StartJudge(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *cros
 {
     if(dst != this&&src!=this)
         return;
-    if(magicReason==tr("血之哀伤")&&getHandCardNum()==0&&harm.harmPoint<=*crossAvailable)
+    if(magicReason==QStringLiteral("血之哀伤")&&getHandCardNum()==0&&harm.harmPoint<=*crossAvailable)
         *crossAvailable = harm.harmPoint-1;
 }
 
@@ -3279,7 +3279,7 @@ void LingHun::LingHunTunShi(int harmed, int *howMany, PlayerEntity *dst)
         return;
     setToken(0,token[0]+*howMany);
     coder.tokenNotice(id,0,token[0]);
-    coder.notice(tr("灵魂术士发动【灵魂吞噬】"));
+    coder.notice(QStringLiteral("灵魂术士发动【灵魂吞噬】"));
 }
 
 void LingHun::LingHunTunShi2(QList<void *> args)
@@ -3301,7 +3301,7 @@ void LingHun::LingHunTunShi3(int harmed, int *howMany, PlayerEntity *dst)
         return;
     setToken(0,token[0]+*howMany);
     coder.tokenNotice(id,0,token[0]);
-    coder.notice(tr("灵魂术士发动【灵魂吞噬】"));
+    coder.notice(QStringLiteral("灵魂术士发动【灵魂吞噬】"));
 }
 
 void LingHun::LingHunZhaoHuan(QList<void *> args)
@@ -3315,7 +3315,7 @@ void LingHun::LingHunZhaoHuan(QList<void *> args)
         cards.append(getCardByID(cardNum[i].toInt()));
     coder.discardNotice(id,magic->infor2,"y",cards);
     this->removeHandCards(cards,true);
-    coder.notice(tr("灵魂术士发动【灵魂召还】"));
+    coder.notice(QStringLiteral("灵魂术士发动【灵魂召还】"));
     setToken(1,token[1]+1+magic->infor2);
     coder.tokenNotice(id,1,token[1]);
 }
@@ -3329,7 +3329,7 @@ void LingHun::LingHunJingXiang(QList<void *> args)
     coder.tokenNotice(id,0,token[0]);
     QStringList cardNum = magic->inforstr.split(":");
     QList<CardEntity*>cards;
-    coder.notice(tr("灵魂术士发动【灵魂镜像】"));
+    coder.notice(QStringLiteral("灵魂术士发动【灵魂镜像】"));
     if(magic->infor2 != 0)
     {
         for(int i=0;i<magic->infor2;i++)
@@ -3405,14 +3405,14 @@ void LingHun::LingHunZhuanHuan(QList<void *> args)
     QStringList arg=msg.split(";");
     if(arg[1].toInt() == 0)
         return;
-    coder.notice(tr("灵魂术士发动【灵魂转换】"));
+    coder.notice(QStringLiteral("灵魂术士发动【灵魂转换】"));
     if(arg[2].toInt() == 0)
     {
         setToken(0,token[0]-1);
         setToken(1,token[1]+1);
         coder.tokenNotice(id,0,token[0]);
         coder.tokenNotice(id,1,token[1]);
-        coder.notice(tr("灵魂术士转换1点黄魂"));
+        coder.notice(QStringLiteral("灵魂术士转换1点黄魂"));
     }
     else
     {
@@ -3420,7 +3420,7 @@ void LingHun::LingHunZhuanHuan(QList<void *> args)
         setToken(1,token[1]-1);
         coder.tokenNotice(id,0,token[0]);
         coder.tokenNotice(id,1,token[1]);
-        coder.notice(tr("灵魂术士转换1点蓝魂"));
+        coder.notice(QStringLiteral("灵魂术士转换1点蓝魂"));
     }
 }
 
@@ -3540,7 +3540,7 @@ void LingHun::LingHunZengFu(QList<void *> args)
         return;
     setGem(gem-1);
     coder.energyNotice(id,gem,crystal);
-    coder.notice(tr("灵魂术士发动【灵魂增幅】"));
+    coder.notice(QStringLiteral("灵魂术士发动【灵魂增幅】"));
     StartUsed=true;
     setToken(0,token[0]+2);
     setToken(1,token[1]+2);
@@ -3609,7 +3609,7 @@ void HongLian::XingHongXinYang(Harm harm, PlayerEntity *src, PlayerEntity *dst, 
     if(src!=this)
         *crossAvailable = 0;
     else
-        if(magicReason==tr("血腥祷言")&&getHandCardNum()==0&&harm.harmPoint<=*crossAvailable)
+        if(magicReason==QStringLiteral("血腥祷言")&&getHandCardNum()==0&&harm.harmPoint<=*crossAvailable)
             *crossAvailable = harm.harmPoint-1;
 }
 
@@ -4002,7 +4002,7 @@ void MoQiang::AnZhiJieFang1(QList<void *> args)
     coder.askForSkill(id,"暗之解放");
     if(messageBuffer::readInfor() == 0)
         return;
-    coder.notice(tr("魔枪发动【暗之解放】"));
+    coder.notice(QStringLiteral("魔枪发动【暗之解放】"));
     setTap(1);
     coder.tapNotice(id,1,"【幻影形态】");
     setHandCardsMaxFixed(true,5);
@@ -4021,7 +4021,7 @@ void MoQiang::AnZhiJieFang2(QList<void *> args)
         return;
     if(!*(bool*)args[4])
         return;
-    coder.notice(tr("魔枪发动【暗之解放】"));
+    coder.notice(QStringLiteral("魔枪发动【暗之解放】"));
     Harm* harm=(Harm*)args[2];
     harm->harmPoint+=2;
     JieFangFirst=false;
@@ -4061,7 +4061,7 @@ void MoQiang::HuanYingXingChen(QList<void *> args)
         engine->timeLine3(harm,this,this,"幻影星辰");
         if(engine->checkEnd())
             return;
-        coder.notice(tr("魔枪发动【幻影星辰】"));
+        coder.notice(QStringLiteral("魔枪发动【幻影星辰】"));
         setTap(0);
         coder.tapNotice(id,0,"【正常形态】");
         setHandCardsMaxFixed(false);
@@ -4077,7 +4077,7 @@ void MoQiang::HuanYingXingChen(QList<void *> args)
         Harm harm;
         harm.harmPoint=2;
         harm.type=MAGICHARM;
-        coder.notice(tr("魔枪对玩家")+QString::number(huanying2.dstID)+tr("发动【幻影星辰】"));
+        coder.notice(QStringLiteral("魔枪对玩家")+QString::number(huanying2.dstID)+QStringLiteral("发动【幻影星辰】"));
         engine->timeLine3(harm,this,dst,"幻影星辰");
         if(engine->checkEnd())
             return;
@@ -4154,7 +4154,7 @@ void MoQiang::QiHeiZhiQiang(QList<void *> args)
         setGem(gem-n);
     }
     coder.energyNotice(id,gem,crystal);
-    coder.notice(tr("魔枪发动【漆黑之枪】"));
+    coder.notice(QStringLiteral("魔枪发动【漆黑之枪】"));
     Harm* harm=(Harm*)args[2];
     harm->harmPoint+=bat.infor1;
     harm->harmPoint+=2;
@@ -4169,7 +4169,7 @@ void MoQiang::ChongYing1(QList<void *> args)
     cards<<getCardByID(magic->CardID);
     this->removeHandCards(cards,true);
     coder.discardNotice(this->getID(),1,"y",cards);
-    coder.notice(tr("魔枪发动【充盈】"));
+    coder.notice(QStringLiteral("魔枪发动【充盈】"));
     coder.askForChongYing(id,color);
     BatInfor ans=messageBuffer::readBatInfor();
     if(ans.reply==1){
@@ -4192,7 +4192,7 @@ void MoQiang::ChongYing1(QList<void *> args)
             AddAttackPoint++;
         }
     }
-    coder.notice(tr("魔枪本回合下一次主动攻击将额外+")+QString::number(AddAttackPoint)+tr("点伤害"));
+    coder.notice(QStringLiteral("魔枪本回合下一次主动攻击将额外+")+QString::number(AddAttackPoint)+QStringLiteral("点伤害"));
     ChongYingUsed=true;
     engine->addActionNum(ATTACK);
 }
@@ -4306,7 +4306,7 @@ void JianDi::YangGong(QList<void *> args)
         return;
     if(this->getToken(0)==5)
         return;
-    coder.notice(tr("剑帝发动【佯攻】"));
+    coder.notice(QStringLiteral("剑帝发动【佯攻】"));
     setToken(0,token[0]+1);
     coder.tokenNotice(id,0,token[0]);
 }
@@ -4324,7 +4324,7 @@ void JianDi::JianQiZhan(QList<void *> args)
     BatInfor skill=messageBuffer::readBatInfor();
     if(skill.reply==0)
         return;
-    coder.notice(tr("剑帝对玩家")+QString::number(skill.dstID)+tr("发动【剑气斩】"));
+    coder.notice(QStringLiteral("剑帝对玩家")+QString::number(skill.dstID)+QStringLiteral("发动【剑气斩】"));
     setToken(0,token[0]-skill.infor1);
     coder.tokenNotice(id,0,token[0]);
     Harm harm;
@@ -4380,7 +4380,7 @@ void JianDi::TianShiZhiHun1(QList<void *> args)
         return;
     this->addCrossNum(2);
     coder.crossChangeNotice(this->getID(), crossNum);
-    coder.notice(tr("剑帝为自己+2治疗"));
+    coder.notice(QStringLiteral("剑帝为自己+2治疗"));
     HunUsed=false;
 }
 
@@ -4397,7 +4397,7 @@ void JianDi::TianShiZhiHun2(QList<void *> args)
         int morale=teamArea.getMorale(this->getColor())+1;
         teamArea.setMorale(this->getColor(),morale);
         coder.moraleNotice(this->getColor(),morale);
-        coder.notice(tr("己方+1士气"));
+        coder.notice(QStringLiteral("己方+1士气"));
     }
     HunUsed=false;
 }
@@ -4469,7 +4469,7 @@ void JianDi::BuQuYiZhi(QList<void *> args)
     setGem(gem);
     setCrystal(crystal);
     coder.energyNotice(id,gem,crystal);
-    coder.notice(tr("剑帝发动【不屈意志】"));
+    coder.notice(QStringLiteral("剑帝发动【不屈意志】"));
     engine->drawCards(1,0,this);
     setToken(0,token[0]+1);
     coder.tokenNotice(id,0,token[0]);
@@ -4613,7 +4613,7 @@ void DieWu::JingHuaShuiYue(QList<void *> args)
 
 void DieWu::DiaoLing(int cardID, bool removed)
 {
-    if(getCardByID(cardID)->getType()==tr("magic"))
+    if(getCardByID(cardID)->getType()==QStringLiteral("magic"))
         coder.askForSkillNumber(this->getID(),2451);
     else
         coder.askForSkillNumber(this->getID(),2452);
@@ -4719,7 +4719,7 @@ void DieWu::DaoNiZhiDie(QList<void *> args)
 
 void DieWu::DaoNiZhiDieJudge(Harm harm, PlayerEntity *src, PlayerEntity *dst, int *crossAvailable, QString magicReason)
 {
-    if(src!=this||magicReason!=tr("倒逆之蝶"))
+    if(src!=this||magicReason!=QStringLiteral("倒逆之蝶"))
         return;
     *crossAvailable=0;
 }

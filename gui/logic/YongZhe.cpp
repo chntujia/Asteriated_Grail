@@ -6,7 +6,7 @@ YongZhe::YongZhe()
 setMyRole(this);
 
     Button *tiaoXin;
-    tiaoXin=new Button(3,tr("挑衅"));
+    tiaoXin=new Button(3,QStringLiteral("挑衅"));
     buttonArea->addButton(tiaoXin);
     connect(tiaoXin,SIGNAL(buttonSelected(int)),this,SLOT(TiaoXin()));
 }
@@ -29,7 +29,7 @@ void YongZhe::normal()
 void YongZhe::NuHou()
 {
     state=36;
-    tipArea->setMsg(tr("是否发动怒吼？"));
+    tipArea->setMsg(QStringLiteral("是否发动怒吼？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -37,7 +37,7 @@ void YongZhe::NuHou()
 void YongZhe::MingJingZhiShui()
 {
     state=36;
-    tipArea->setMsg(tr("是否发动明镜止水？"));
+    tipArea->setMsg(QStringLiteral("是否发动明镜止水？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -45,7 +45,7 @@ void YongZhe::MingJingZhiShui()
 void YongZhe::JinDuanZhiLi()
 {
     state=2102;
-    tipArea->setMsg(tr("是否发动禁断之力？"));
+    tipArea->setMsg(QStringLiteral("是否发动禁断之力？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -53,7 +53,7 @@ void YongZhe::JinDuanZhiLi()
 void YongZhe::SiDou()
 {
     state=36;
-    tipArea->setMsg(tr("是否发动死斗？"));
+    tipArea->setMsg(QStringLiteral("是否发动死斗？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -146,13 +146,13 @@ void YongZhe::turnBegin()
 void YongZhe::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("怒吼"))
+    if(skill==QStringLiteral("怒吼"))
         NuHou();
-    else if(skill==tr("明镜止水"))
+    else if(skill==QStringLiteral("明镜止水"))
         MingJingZhiShui();
-    else if(skill==tr("禁断之力"))
+    else if(skill==QStringLiteral("禁断之力"))
         JinDuanZhiLi();
-    else if(skill==tr("死斗"))
+    else if(skill==QStringLiteral("死斗"))
         SiDou();
 }
 
@@ -160,6 +160,6 @@ void YongZhe::additionalAction()
 {
     Role::additionalAction();
     if(jinDuanZhiLi>0)
-        tipArea->addBoxItem(tr("1.攻击行动（精疲力竭）"));
+        tipArea->addBoxItem(QStringLiteral("1.攻击行动（精疲力竭）"));
 }
 

@@ -5,11 +5,11 @@ GongNv::GongNv()
 setMyRole(this);
 
     Button *shanGuangXianJing,*juJi;
-    shanGuangXianJing=new Button(3,tr("闪光陷阱"));
+    shanGuangXianJing=new Button(3,QStringLiteral("闪光陷阱"));
     buttonArea->addButton(shanGuangXianJing);
     connect(shanGuangXianJing,SIGNAL(buttonSelected(int)),this,SLOT(ShanGuangXianJing()));
 
-    juJi=new Button(4,tr("狙 击"));
+    juJi=new Button(4,QStringLiteral("狙 击"));
     buttonArea->addButton(juJi);
     connect(juJi,SIGNAL(buttonSelected(int)),this,SLOT(JuJi()));
 }
@@ -19,7 +19,7 @@ void GongNv::normal()
     Role::normal();
     Player* myself=dataInterface->getMyself();
 //闪光陷阱
-    if (handArea->checkSpecility(tr("闪光陷阱")))
+    if (handArea->checkSpecility(QStringLiteral("闪光陷阱")))
         buttonArea->enable(3);
 
 //狙击
@@ -31,9 +31,9 @@ void GongNv::normal()
 void GongNv::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("贯穿射击"))
+    if(skill==QStringLiteral("贯穿射击"))
         GuanChuanSheJi();
-    else if(skill==tr("精准射击"))
+    else if(skill==QStringLiteral("精准射击"))
         JingZhunSheJi();
 }
 
@@ -41,13 +41,13 @@ void GongNv::additionalAction()
 {
     Role::additionalAction();
     if(JuJiAdditon)
-        tipArea->addBoxItem(tr("1.攻击行动（狙击）"));
+        tipArea->addBoxItem(QStringLiteral("1.攻击行动（狙击）"));
 }
 
 void GongNv::GuanChuanSheJi()
 {
     state=301;
-    tipArea->setMsg(tr("是否发动贯穿射击？"));
+    tipArea->setMsg(QStringLiteral("是否发动贯穿射击？"));
     handArea->setQuota(1);
     handArea->enableMagic();
     decisionArea->enable(1);
@@ -56,7 +56,7 @@ void GongNv::GuanChuanSheJi()
 void GongNv::JingZhunSheJi()
 {
     state=36;
-    tipArea->setMsg(tr("是否发动精准射击？"));
+    tipArea->setMsg(QStringLiteral("是否发动精准射击？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -74,7 +74,7 @@ void GongNv::ShanGuangXianJing()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("闪光陷阱"));
+    handArea->enableSpecility(QStringLiteral("闪光陷阱"));
 }
 
 void GongNv::JuJi()
@@ -95,11 +95,11 @@ void GongNv::JuJi()
     playerArea->setQuota(1);
     playerArea->enableAll();
 
-    tipArea->setMsg(tr("请选择使用的能量："));
+    tipArea->setMsg(QStringLiteral("请选择使用的能量："));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("1.水晶"));
+        tipArea->addBoxItem(QStringLiteral("1.水晶"));
     if(gem>=1)
-        tipArea->addBoxItem(tr("2.宝石"));
+        tipArea->addBoxItem(QStringLiteral("2.宝石"));
 
     tipArea->showBox();
 }

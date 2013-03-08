@@ -5,15 +5,15 @@ ShengNv::ShengNv()
     makeConnection();
 setMyRole(this);
     Button *zhiLiaoShu, *zhiYuZhiGuang, *shengLiao;
-    zhiLiaoShu = new Button(3,tr("治疗术"));
+    zhiLiaoShu = new Button(3,QStringLiteral("治疗术"));
     buttonArea->addButton(zhiLiaoShu);
     connect(zhiLiaoShu,SIGNAL(buttonSelected(int)),this,SLOT(ZhiLiaoShu()));
 
-    zhiYuZhiGuang=new Button(4, tr("治愈之光"));
+    zhiYuZhiGuang=new Button(4, QStringLiteral("治愈之光"));
     buttonArea->addButton(zhiYuZhiGuang);
     connect(zhiYuZhiGuang,SIGNAL(buttonSelected(int)),this,SLOT(ZhiYuZhiGuang()));
 
-    shengLiao=new Button(5,tr("圣 疗"));
+    shengLiao=new Button(5,QStringLiteral("圣 疗"));
     buttonArea->addButton(shengLiao);
     connect(shengLiao,SIGNAL(buttonSelected(int)),this,SLOT(ShengLiao()));
 }
@@ -23,9 +23,9 @@ void ShengNv::normal()
     Role::normal();
     Player* myself=dataInterface->getMyself();
 
-    if (handArea->checkSpecility(tr("治疗术")))
+    if (handArea->checkSpecility(QStringLiteral("治疗术")))
         buttonArea->enable(3);
-    if (handArea->checkSpecility(tr("治愈之光")))
+    if (handArea->checkSpecility(QStringLiteral("治愈之光")))
         buttonArea->enable(4);
     //圣疗
     if (myself->getEnergy()>0 && !onceUsed)
@@ -38,9 +38,9 @@ void ShengNv::attackOrMagic()
 {
     Role::attackOrMagic();
     Player* myself=dataInterface->getMyself();
-    if (handArea->checkSpecility(tr("治疗术")))
+    if (handArea->checkSpecility(QStringLiteral("治疗术")))
         buttonArea->enable(3);
-    if (handArea->checkSpecility(tr("治愈之光")))
+    if (handArea->checkSpecility(QStringLiteral("治愈之光")))
         buttonArea->enable(4);
     if (myself->getEnergy()>0 && !onceUsed)
         buttonArea->enable(5);
@@ -60,7 +60,7 @@ void ShengNv::ZhiLiaoShu()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("治疗术"));
+    handArea->enableSpecility(QStringLiteral("治疗术"));
 }
 
 void ShengNv::ZhiYuZhiGuang()
@@ -76,14 +76,14 @@ void ShengNv::ZhiYuZhiGuang()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("治愈之光"));
+    handArea->enableSpecility(QStringLiteral("治愈之光"));
 }
 
 void ShengNv::LianMin()
 {
     state=604;
     gui->reset();
-    tipArea->setMsg(tr("是否发动怜悯？"));
+    tipArea->setMsg(QStringLiteral("是否发动怜悯？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
     int i;
@@ -98,7 +98,7 @@ void ShengNv::LianMin()
                 flag=true;
                 break;
             }
-            else if(handcards[i]->getProperty()==tr("圣"))
+            else if(handcards[i]->getProperty()==QStringLiteral("圣"))
             {
                 flag=true;
                 break;
@@ -124,11 +124,11 @@ void ShengNv::ShengLiao()
     playerArea->setQuota(1);
     playerArea->enableAll();
 
-    tipArea->setMsg(tr("每次点选一人分配一点治疗，共三次"));
+    tipArea->setMsg(QStringLiteral("每次点选一人分配一点治疗，共三次"));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("1.水晶"));
+        tipArea->addBoxItem(QStringLiteral("1.水晶"));
     if(gem>=1)
-        tipArea->addBoxItem(tr("2.宝石"));
+        tipArea->addBoxItem(QStringLiteral("2.宝石"));
 
     tipArea->showBox();
 }
@@ -141,7 +141,7 @@ void ShengNv::ShengLiao2()
     tipArea->reset();
     buttonArea->reset();
 
-    tipArea->setMsg(tr("请选择分配第二点治疗"));
+    tipArea->setMsg(QStringLiteral("请选择分配第二点治疗"));
     playerArea->enableAll();
     playerArea->setQuota(1);
     handArea->setQuota(1);
@@ -158,7 +158,7 @@ void ShengNv::ShengLiao3()
     tipArea->reset();
     buttonArea->reset();
 
-    tipArea->setMsg(tr("请选择分配第三点治疗"));
+    tipArea->setMsg(QStringLiteral("请选择分配第三点治疗"));
     playerArea->enableAll();
     playerArea->setQuota(1);
     handArea->setQuota(1);
@@ -171,7 +171,7 @@ void ShengNv::BingShuangDaoYan()
 {
     state=601;
 
-    tipArea->setMsg(tr("请选择冰霜祷言的目标"));
+    tipArea->setMsg(QStringLiteral("请选择冰霜祷言的目标"));
     playerArea->enableAll();
     playerArea->setQuota(1);
 
@@ -320,9 +320,9 @@ void ShengNv::onCancelClicked()
 void ShengNv::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("冰霜祷言"))
+    if(skill==QStringLiteral("冰霜祷言"))
         BingShuangDaoYan();
-    else if(skill==tr("怜悯"))
+    else if(skill==QStringLiteral("怜悯"))
         LianMin();
 }
 
@@ -330,7 +330,7 @@ void ShengNv::additionalAction()
 {
     Role::additionalAction();
     if(ShengLiaoAddition)
-        tipArea->addBoxItem(tr("1.攻击或法术行动（圣疗）"));
+        tipArea->addBoxItem(QStringLiteral("1.攻击或法术行动（圣疗）"));
 }
 
 void ShengNv::turnBegin()

@@ -6,19 +6,19 @@ QiDao::QiDao()
     setMyRole(this);
 
     Button *weiLi,*xunJie,*guangHui,*qiHei;
-    weiLi=new Button(3,tr("威力赐福"));
+    weiLi=new Button(3,QStringLiteral("威力赐福"));
     buttonArea->addButton(weiLi);
     connect(weiLi,SIGNAL(buttonSelected(int)),this,SLOT(WeiLiCiFu()));
 
-    xunJie=new Button(4,tr("迅捷赐福"));
+    xunJie=new Button(4,QStringLiteral("迅捷赐福"));
     buttonArea->addButton(xunJie);
     connect(xunJie,SIGNAL(buttonSelected(int)),this,SLOT(XunJieCiFu()));
 
-    guangHui=new Button(5,tr("光辉信仰"));
+    guangHui=new Button(5,QStringLiteral("光辉信仰"));
     buttonArea->addButton(guangHui);
     connect(guangHui,SIGNAL(buttonSelected(int)),this,SLOT(GuangHuiXinYang()));
 
-    qiHei=new Button(6,tr("漆黑信仰"));
+    qiHei=new Button(6,QStringLiteral("漆黑信仰"));
     buttonArea->addButton(qiHei);
     connect(qiHei,SIGNAL(buttonSelected(int)),this,SLOT(QiHeiXinYang()));
 }
@@ -28,9 +28,9 @@ void QiDao::normal()
     Role::normal();
     Player* myself=dataInterface->getMyself();
 
-    if (handArea->checkSpecility(tr("威力赐福")))
+    if (handArea->checkSpecility(QStringLiteral("威力赐福")))
         buttonArea->enable(3);
-    if (handArea->checkSpecility(tr("迅捷赐福")))
+    if (handArea->checkSpecility(QStringLiteral("迅捷赐福")))
         buttonArea->enable(4);
     if(myself->getTap()&&myself->getToken(0)>0)
     {
@@ -45,9 +45,9 @@ void QiDao::magicAction()
     Role::magicAction();
     Player* myself=dataInterface->getMyself();
 
-    if (handArea->checkSpecility(tr("威力赐福")))
+    if (handArea->checkSpecility(QStringLiteral("威力赐福")))
         buttonArea->enable(3);
-    if (handArea->checkSpecility(tr("迅捷赐福")))
+    if (handArea->checkSpecility(QStringLiteral("迅捷赐福")))
         buttonArea->enable(4);
     if(myself->getTap()&&myself->getToken(0)>0)
     {
@@ -60,7 +60,7 @@ void QiDao::QiDong()
 {
     state=1601;
     gui->reset();
-    tipArea->setMsg(tr("是否发动祈祷？"));
+    tipArea->setMsg(QStringLiteral("是否发动祈祷？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
     int i;
@@ -93,7 +93,7 @@ void QiDao::WeiLiCiFu()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("威力赐福"));
+    handArea->enableSpecility(QStringLiteral("威力赐福"));
 }
 
 void QiDao::XunJieCiFu()
@@ -109,7 +109,7 @@ void QiDao::XunJieCiFu()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("迅捷赐福"));
+    handArea->enableSpecility(QStringLiteral("迅捷赐福"));
 }
 
 void QiDao::GuangHuiXinYang()
@@ -288,12 +288,12 @@ void QiDao::onCancelClicked()
 void QiDao::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("祈祷"))
+    if(skill==QStringLiteral("祈祷"))
         QiDong();
 }
 void QiDao::additionalAction()
 {
     Role::additionalAction();
     if(usedMagic && dataInterface->getMyself()->getEnergy()>0 && !onceUsed)
-        tipArea->addBoxItem(tr("1.法力潮汐"));
+        tipArea->addBoxItem(QStringLiteral("1.法力潮汐"));
 }

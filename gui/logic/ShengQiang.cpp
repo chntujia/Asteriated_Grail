@@ -5,15 +5,15 @@ ShengQiang::ShengQiang()
     makeConnection();
 setMyRole(this);
     Button *huiYao, *chengJie, *shengGuangQiYu;
-    huiYao = new Button(3,tr("辉耀"));
+    huiYao = new Button(3,QStringLiteral("辉耀"));
     buttonArea->addButton(huiYao);
     connect(huiYao,SIGNAL(buttonSelected(int)),this,SLOT(HuiYao()));
 
-    chengJie = new Button(4,tr("惩戒"));
+    chengJie = new Button(4,QStringLiteral("惩戒"));
     buttonArea->addButton(chengJie);
     connect(chengJie,SIGNAL(buttonSelected(int)),this,SLOT(ChengJie()));
 
-    shengGuangQiYu = new Button(5,tr("圣光祈愈"));
+    shengGuangQiYu = new Button(5,QStringLiteral("圣光祈愈"));
     buttonArea->addButton(shengGuangQiYu);
     connect(shengGuangQiYu,SIGNAL(buttonSelected(int)),this,SLOT(ShengGuangQiYu()));
 }
@@ -77,7 +77,7 @@ void ShengQiang::ChengJie()
 void ShengQiang::TianQiang()
 {
     state=36;
-    tipArea->setMsg(tr("是否发动天枪？"));
+    tipArea->setMsg(QStringLiteral("是否发动天枪？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -85,7 +85,7 @@ void ShengQiang::TianQiang()
 void ShengQiang::DiQiang()
 {
     state=1005;
-    tipArea->setMsg(tr("请选择发动地枪使用的治疗点数，取消将发动圣击"));
+    tipArea->setMsg(QStringLiteral("请选择发动地枪使用的治疗点数，取消将发动圣击"));
     decisionArea->enable(0);
     decisionArea->enable(1);
     Player* myself=dataInterface->getMyself();
@@ -229,20 +229,20 @@ void ShengQiang::onCancelClicked()
 void ShengQiang::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("天枪"))
+    if(skill==QStringLiteral("天枪"))
         TianQiang();
-    else if(skill==tr("地枪"))
+    else if(skill==QStringLiteral("地枪"))
         DiQiang();
 }
 void ShengQiang::additionalAction()
 {
     Role::additionalAction();
     if(HuiYaoAddition)
-        tipArea->addBoxItem(tr("1.攻击行动(辉耀)"));
+        tipArea->addBoxItem(QStringLiteral("1.攻击行动(辉耀)"));
     if(ChengJieAddition)
-        tipArea->addBoxItem(tr("2.攻击行动(惩戒)"));
+        tipArea->addBoxItem(QStringLiteral("2.攻击行动(惩戒)"));
     if(ShengGuangQiYuAddition)
-        tipArea->addBoxItem(tr("3.攻击行动(圣光祈愈)"));
+        tipArea->addBoxItem(QStringLiteral("3.攻击行动(圣光祈愈)"));
 
 }
 

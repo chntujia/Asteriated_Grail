@@ -55,19 +55,19 @@ StatusItem::StatusItem(int specialStatusID)
     {
     case 0:
         pic=QPixmap("resource/status/ShuFu.png");
-        setToolTip(tr("五系束缚"));
+        setToolTip(QStringLiteral("五系束缚"));
         break;
     case 1:
         pic=QPixmap("resource/status/TiaoXin.png");
-        setToolTip(tr("挑衅"));
+        setToolTip(QStringLiteral("挑衅"));
         break;
     case 2:
         pic=QPixmap("resource/status/LianJie.png");
-        setToolTip(tr("灵魂链接"));
+        setToolTip(QStringLiteral("灵魂链接"));
         break;
     case 3:
         pic=QPixmap("resource/status/TongSheng.png");
-        setToolTip(tr("同生共死"));
+        setToolTip(QStringLiteral("同生共死"));
         break;
     }
 }
@@ -88,7 +88,7 @@ StatusItem::StatusItem(Token* token)
         pic=QPixmap("resource/status/token2.png");
         break;
     }
-    setToolTip(token->tokenName+tr("上限为")+QString::number(token->max)+")");
+    setToolTip(token->tokenName+QStringLiteral("上限为")+QString::number(token->max)+")");
     Num[0]=QPixmap("resource/SmallNumber/Small0.png");
     Num[1]=QPixmap("resource/SmallNumber/Small1.png");
     Num[2]=QPixmap("resource/SmallNumber/Small2.png");

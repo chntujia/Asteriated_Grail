@@ -6,15 +6,15 @@ MaoXian::MaoXian()
     connect(playerArea,SIGNAL(playerUnready()),this,SLOT(onUnready()));
 
     Button *qiZha,*touTianHuanRi,*teShuJiaGong;
-    qiZha=new Button(3,tr("欺 诈"));
+    qiZha=new Button(3,QStringLiteral("欺 诈"));
     buttonArea->addButton(qiZha);
     connect(qiZha,SIGNAL(buttonSelected(int)),this,SLOT(QiZha()));
 
-    touTianHuanRi=new Button(4,tr("偷天换日"));
+    touTianHuanRi=new Button(4,QStringLiteral("偷天换日"));
     buttonArea->addButton(touTianHuanRi);
     connect(touTianHuanRi,SIGNAL(buttonSelected(int)),this,SLOT(TouTianHuanRi()));
 
-    teShuJiaGong=new Button(5,tr("特殊加工"));
+    teShuJiaGong=new Button(5,QStringLiteral("特殊加工"));
     buttonArea->addButton(teShuJiaGong);
     connect(teShuJiaGong,SIGNAL(buttonSelected(int)),this,SLOT(TeShuJiaGong()));
 }
@@ -33,11 +33,11 @@ void MaoXian::buy()
     tipArea->reset();
 
     if(energy<4)
-        tipArea->setMsg(tr("你摸3张牌，你方战绩区加两宝石"));
+        tipArea->setMsg(QStringLiteral("你摸3张牌，你方战绩区加两宝石"));
     if(energy==4)
-        tipArea->setMsg(tr("战绩区星石已有4个，购买只增加一宝石"));
+        tipArea->setMsg(QStringLiteral("战绩区星石已有4个，购买只增加一宝石"));
     if(energy==5)
-        tipArea->setMsg(tr("战绩区星石数目已达上限，购买将不再增加星石"));
+        tipArea->setMsg(QStringLiteral("战绩区星石数目已达上限，购买将不再增加星石"));
 }
 
 void MaoXian::extract()
@@ -50,7 +50,7 @@ void MaoXian::extract()
     decisionArea->enable(1);
     playerArea->enableMate(true);
     playerArea->setQuota(1);
-    tipArea->setMsg(tr("请先选择要给予的对象"));
+    tipArea->setMsg(QStringLiteral("请先选择要给予的对象"));
 }
 
 void MaoXian::normal()
@@ -125,12 +125,12 @@ void MaoXian::QiZha()
     decisionArea->disable(0);
 
     handArea->enableAll();
-    tipArea->setMsg(tr("请选择欺诈的属性（3张同系自动视为暗灭）："));
-    tipArea->addBoxItem(tr("1.风"));
-    tipArea->addBoxItem(tr("2.水"));
-    tipArea->addBoxItem(tr("3.火"));
-    tipArea->addBoxItem(tr("4.地"));
-    tipArea->addBoxItem(tr("5.雷"));
+    tipArea->setMsg(QStringLiteral("请选择欺诈的属性（3张同系自动视为暗灭）："));
+    tipArea->addBoxItem(QStringLiteral("1.风"));
+    tipArea->addBoxItem(QStringLiteral("2.水"));
+    tipArea->addBoxItem(QStringLiteral("3.火"));
+    tipArea->addBoxItem(QStringLiteral("4.地"));
+    tipArea->addBoxItem(QStringLiteral("5.雷"));
     tipArea->showBox();
 }
 
@@ -146,11 +146,11 @@ void MaoXian::TeShuJiaGong()
     decisionArea->enable(1);
     decisionArea->enable(0);
 
-    tipArea->setMsg(tr("请选择使用的能量："));
+    tipArea->setMsg(QStringLiteral("请选择使用的能量："));
     if(myself->getCrystal()>=1)
-        tipArea->addBoxItem(tr("1.水晶"));
+        tipArea->addBoxItem(QStringLiteral("1.水晶"));
     if(myself->getGem()>=1)
-        tipArea->addBoxItem(tr("2.宝石"));
+        tipArea->addBoxItem(QStringLiteral("2.宝石"));
 
     tipArea->showBox();
 }
@@ -167,11 +167,11 @@ void MaoXian::TouTianHuanRi()
     decisionArea->enable(1);
     decisionArea->enable(0);
 
-    tipArea->setMsg(tr("请选择使用的能量："));
+    tipArea->setMsg(QStringLiteral("请选择使用的能量："));
     if(myself->getCrystal()>=1)
-        tipArea->addBoxItem(tr("1.水晶"));
+        tipArea->addBoxItem(QStringLiteral("1.水晶"));
     if(myself->getGem()>=1)
-        tipArea->addBoxItem(tr("2.宝石"));
+        tipArea->addBoxItem(QStringLiteral("2.宝石"));
 
     tipArea->showBox();
 }
@@ -206,23 +206,23 @@ void MaoXian::playerAnalyse()
         crystal=dataInterface->getMyTeam()->getCrystal();
         decisionArea->enable(0);
         tipArea->reset();
-        tipArea->setMsg(tr("请选择要提取的星石数："));
+        tipArea->setMsg(QStringLiteral("请选择要提取的星石数："));
         switch(dst->getEnergyMax()-dst->getEnergy())
         {
         case 4:
         case 3:
         case 2:
             if(gem>=2)
-                tipArea->addBoxItem(tr("1.两个宝石"));
+                tipArea->addBoxItem(QStringLiteral("1.两个宝石"));
             if(crystal>=2)
-                tipArea->addBoxItem(tr("2.两个水晶"));
+                tipArea->addBoxItem(QStringLiteral("2.两个水晶"));
             if(gem>=1&&crystal>=1)
-                tipArea->addBoxItem(tr("3.一个宝石和一个水晶"));
+                tipArea->addBoxItem(QStringLiteral("3.一个宝石和一个水晶"));
         case 1:
             if(gem>=1)
-                tipArea->addBoxItem(tr("4.一个宝石"));
+                tipArea->addBoxItem(QStringLiteral("4.一个宝石"));
             if(crystal>=1)
-                tipArea->addBoxItem(tr("5.一个水晶"));
+                tipArea->addBoxItem(QStringLiteral("5.一个水晶"));
         }
         tipArea->showBox();
         break;
@@ -419,9 +419,9 @@ void MaoXian::additionalAction()
 {
     Role::additionalAction();
     if(TeShuJiaGongAddition)
-        tipArea->addBoxItem(tr("1.攻击或法术行动（特殊加工）"));
+        tipArea->addBoxItem(QStringLiteral("1.攻击或法术行动（特殊加工）"));
     if(TouTianHuanRiAddition)
-        tipArea->addBoxItem(tr("2.攻击或法术行动（偷天换日）"));
+        tipArea->addBoxItem(QStringLiteral("2.攻击或法术行动（偷天换日）"));
 }
 
 void MaoXian::turnBegin()

@@ -5,15 +5,15 @@ SiLing::SiLing()
     makeConnection();
     setMyRole(this);
     Button *wenYi, *siWangZhiChu, *muBeiYunLuo;
-    wenYi = new Button(3,tr("瘟疫"));
+    wenYi = new Button(3,QStringLiteral("瘟疫"));
     buttonArea->addButton(wenYi);
     connect(wenYi,SIGNAL(buttonSelected(int)),this,SLOT(WenYi()));
 
-    siWangZhiChu = new Button(4,tr("死亡之触"));
+    siWangZhiChu = new Button(4,QStringLiteral("死亡之触"));
     buttonArea->addButton(siWangZhiChu);
     connect(siWangZhiChu,SIGNAL(buttonSelected(int)),this,SLOT(SiWangZhiChu()));
 
-    muBeiYunLuo = new Button(5,tr("墓碑陨落"));
+    muBeiYunLuo = new Button(5,QStringLiteral("墓碑陨落"));
     buttonArea->addButton(muBeiYunLuo);
     connect(muBeiYunLuo,SIGNAL(buttonSelected(int)),this,SLOT(MuBeiYunLuo()));
 }
@@ -41,7 +41,7 @@ void SiLing::normal()
 void SiLing::BuXiu()
 {
     state = 36;
-    tipArea->setMsg(tr("是否发动不朽？"));
+    tipArea->setMsg(QStringLiteral("是否发动不朽？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -185,6 +185,6 @@ void SiLing::onCancelClicked()
 void SiLing::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("不朽"))
+    if(skill==QStringLiteral("不朽"))
         BuXiu();
 }

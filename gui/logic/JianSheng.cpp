@@ -9,7 +9,7 @@ JianSheng::JianSheng()
 void JianSheng::LieFengJi()
 {
     state=36;
-    tipArea->setMsg(tr("是否发动烈风技？"));
+    tipArea->setMsg(QStringLiteral("是否发动烈风技？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -47,7 +47,7 @@ void JianSheng::onOkClicked()
 //追加行动
     case 10:
     case 12:
-        if(usedCard && usedCard->getSpecialityList().contains(tr("疾风技")))
+        if(usedCard && usedCard->getSpecialityList().contains(QStringLiteral("疾风技")))
             JiFengJi++;
         break;
 //额外行动询问
@@ -74,7 +74,7 @@ void JianSheng::onOkClicked()
 void JianSheng::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("烈风技"))
+    if(skill==QStringLiteral("烈风技"))
         LieFengJi();
 }
 
@@ -82,11 +82,11 @@ void JianSheng::additionalAction()
 {
     Role::additionalAction();
     if(JiFengJi>0)
-        tipArea->addBoxItem(tr("1.攻击行动（疾风技）"));
+        tipArea->addBoxItem(QStringLiteral("1.攻击行动（疾风技）"));
     if(!onceUsed&&usedAttack)
-        tipArea->addBoxItem(tr("2.连续技"));
+        tipArea->addBoxItem(QStringLiteral("2.连续技"));
     if(!onceUsed2 && dataInterface->getMyself()->getEnergy()>0 &&usedAttack)
-        tipArea->addBoxItem(tr("3.剑影"));
+        tipArea->addBoxItem(QStringLiteral("3.剑影"));
 }
 void JianSheng::turnBegin()
 {

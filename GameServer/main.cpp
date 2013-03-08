@@ -146,10 +146,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     messageBuffer::init();
-//    QTextCodec *codec = QTextCodec::codecForName("utf-8");
-//    QTextCodec::setCodecForLocale(codec);
-//    QTextCodec::setCodecForCStrings(codec);
-//    QTextCodec::setCodecForTr(codec);
     /*
     int initialArray[28] = {0,1,2,6,7,8,23,24,29,30,3,9,25,26,34,35,4,10,31,36,37,38,5,22,27,28,32,33};
     for(int i = 0;i < 28;i++)

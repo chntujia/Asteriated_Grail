@@ -6,19 +6,19 @@ WuNv::WuNv()
     setMyRole(this);
     tongShengID = -1;
     Button *tongShengGongSi, *niLiu, *xueZhiBeiMing, *xueZhiZuZhou;
-    tongShengGongSi = new Button(3,tr("同生共死"));
+    tongShengGongSi = new Button(3,QStringLiteral("同生共死"));
     buttonArea->addButton(tongShengGongSi);
     connect(tongShengGongSi,SIGNAL(buttonSelected(int)),this,SLOT(TongShengGongSi()));
 
-    niLiu = new Button(4,tr("逆流"));
+    niLiu = new Button(4,QStringLiteral("逆流"));
     buttonArea->addButton(niLiu);
     connect(niLiu,SIGNAL(buttonSelected(int)),this,SLOT(NiLiu()));
 
-    xueZhiBeiMing = new Button(5,tr("血之悲鸣"));
+    xueZhiBeiMing = new Button(5,QStringLiteral("血之悲鸣"));
     buttonArea->addButton(xueZhiBeiMing);
     connect(xueZhiBeiMing,SIGNAL(buttonSelected(int)),this,SLOT(XueZhiBeiMing()));
 
-    xueZhiZuZhou = new Button(6,tr("血之诅咒"));
+    xueZhiZuZhou = new Button(6,QStringLiteral("血之诅咒"));
     buttonArea->addButton(xueZhiZuZhou);
     connect(xueZhiZuZhou,SIGNAL(buttonSelected(int)),this,SLOT(XueZhiZuZhou()));
 }
@@ -31,7 +31,7 @@ void WuNv::normal()
         buttonArea->enable(3);
     if(myself->getTap())
         buttonArea->enable(4);
-    if(myself->getTap()&&handArea->checkSpecility(tr("血之悲鸣")))
+    if(myself->getTap()&&handArea->checkSpecility(QStringLiteral("血之悲鸣")))
         buttonArea->enable(5);
     if(myself->getGem()>0)
         buttonArea->enable(6);
@@ -56,7 +56,7 @@ void WuNv::XueZhiAiShang()
 {
     state = 2302;
     gui->reset();
-    tipArea->setMsg(tr("是否发动血之哀伤？【直接确定】为移除同生共死"));
+    tipArea->setMsg(QStringLiteral("是否发动血之哀伤？【直接确定】为移除同生共死"));
     playerArea->setQuota(0,1);
     playerArea->enableAll();
     if(tongShengID!=-1)
@@ -93,7 +93,7 @@ void WuNv::XueZhiBeiMing()
     tipArea->showBox();
 
     handArea->setQuota(1);
-    handArea->enableSpecility(tr("血之悲鸣"));
+    handArea->enableSpecility(QStringLiteral("血之悲鸣"));
     playerArea->setQuota(1);
 
     decisionArea->enable(1);
@@ -245,6 +245,6 @@ void WuNv::onCancelClicked()
 void WuNv::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("血之哀伤"))
+    if(skill==QStringLiteral("血之哀伤"))
         XueZhiAiShang();
 }

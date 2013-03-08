@@ -5,7 +5,7 @@ HongLian::HongLian()
     makeConnection();
     setMyRole(this);
     Button *xingHongShiZi;
-    xingHongShiZi = new Button(3,tr("腥红十字"));
+    xingHongShiZi = new Button(3,QStringLiteral("腥红十字"));
     buttonArea->addButton(xingHongShiZi);
     connect(xingHongShiZi,SIGNAL(buttonSelected(int)),this,SLOT(XingHongShiZi()));
 }
@@ -18,7 +18,7 @@ void HongLian::normal()
     int magic = 0;
     for(int i=0; i<handcards.size();i++)
     {
-        if(handcards[i]->getType() == tr("magic"))
+        if(handcards[i]->getType() == QStringLiteral("magic"))
             magic++;
     }
     if(magic>1&&myself->getToken(0)>0&&myself->getEnergy()>0)
@@ -29,7 +29,7 @@ void HongLian::normal()
 void HongLian::XingHongShengYue()
 {
     state = 36;
-    tipArea->setMsg(tr("是否发动腥红圣约？"));
+    tipArea->setMsg(QStringLiteral("是否发动腥红圣约？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -40,7 +40,7 @@ void HongLian::XueXingDaoYan1()
     gui->reset();
     Player* myself=dataInterface->getMyself();
 
-    tipArea->setMsg(tr("【血腥祷言】请选择分给第一人的治疗"));
+    tipArea->setMsg(QStringLiteral("【血腥祷言】请选择分给第一人的治疗"));
     for(int i = 1;i<=myself->getCrossNum();i++)
         tipArea->addBoxItem(QString::number(i));
     tipArea->showBox();
@@ -59,7 +59,7 @@ void HongLian::XueXingDaoYan2()
     playerArea->reset();
     tipArea->reset();
     Player* myself=dataInterface->getMyself();
-    tipArea->setMsg(tr("【血腥祷言】请选择分给第二人的治疗或直接确认"));
+    tipArea->setMsg(QStringLiteral("【血腥祷言】请选择分给第二人的治疗或直接确认"));
     for(int i = 1;i<=(myself->getCrossNum()-cross[0]);i++)
         tipArea->addBoxItem(QString::number(i));
     tipArea->showBox();
@@ -73,7 +73,7 @@ void HongLian::XueXingDaoYan2()
 void HongLian::ShaLuShengYan()
 {
     state = 36;
-    tipArea->setMsg(tr("是否发动杀戮盛宴？"));
+    tipArea->setMsg(QStringLiteral("是否发动杀戮盛宴？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -81,7 +81,7 @@ void HongLian::ShaLuShengYan()
 void HongLian::JieJiaoJieZao()
 {
     state = 2802;
-    tipArea->setMsg(tr("是否发动戒骄戒躁？"));
+    tipArea->setMsg(QStringLiteral("是否发动戒骄戒躁？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -212,7 +212,7 @@ void HongLian::attackOrMagic()
     int magic = 0;
     for(int i=0; i<handcards.size();i++)
     {
-        if(handcards[i]->getType() == tr("magic"))
+        if(handcards[i]->getType() == QStringLiteral("magic"))
             magic++;
     }
     if(magic>1&&myself->getToken(0)>0&&myself->getEnergy()>0)
@@ -223,13 +223,13 @@ void HongLian::attackOrMagic()
 void HongLian::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("腥红圣约"))
+    if(skill==QStringLiteral("腥红圣约"))
         XingHongShengYue();
-    else if(skill==tr("杀戮盛宴"))
+    else if(skill==QStringLiteral("杀戮盛宴"))
         ShaLuShengYan();
-    else if(skill==tr("血腥祷言"))
+    else if(skill==QStringLiteral("血腥祷言"))
         XueXingDaoYan1();
-    else if(skill==tr("戒骄戒躁"))
+    else if(skill==QStringLiteral("戒骄戒躁"))
         JieJiaoJieZao();
 }
 
@@ -237,7 +237,7 @@ void HongLian::additionalAction()
 {
     Role::additionalAction();
     if(JieJiaoJieZaoUsed)
-        tipArea->addBoxItem(tr("1.额外攻击或法术（戒骄戒躁）"));
+        tipArea->addBoxItem(QStringLiteral("1.额外攻击或法术（戒骄戒躁）"));
 }
 
 void HongLian::turnBegin()

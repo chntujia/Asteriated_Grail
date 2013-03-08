@@ -31,35 +31,35 @@ void DataInterface::initCardDB()
 void DataInterface::initRoleList()
 {
     roleList<<NULL;
-    roleList<<tr("[剑圣]");
-    roleList<<tr("[狂战士]");
-    roleList<<tr("[弓之女神]");
-    roleList<<tr("[封印师]");
-    roleList<<tr("[暗杀者]");
-    roleList<<tr("[圣女]");
-    roleList<<tr("[天使]");
-    roleList<<tr("[魔导师]");
-    roleList<<tr("[魔剑]");
-    roleList<<tr("[圣枪]");
-    roleList<<tr("[元素师]");
-    roleList<<tr("[冒险家]");
-    roleList<<tr("[死灵法师]");
-    roleList<<tr("[仲裁者]");
-    roleList<<tr("[神官]");
-    roleList<<tr("[祈祷师]");
-    roleList<<tr("[贤者]");
-    roleList<<tr("[灵符师]");
-    roleList<<tr("[剑帝]");
-    roleList<<tr("[格斗家]");
-    roleList<<tr("[勇者]");
-    roleList<<tr("[灵魂术士]");
-    roleList<<tr("[巫女]");
-    roleList<<tr("[蝶舞者]");
-    roleList<<tr("[]");
-    roleList<<tr("[魔弓]");
-    roleList<<tr("[]");
-    roleList<<tr("[红莲骑士]");
-    roleList<<tr("[魔枪]");
+    roleList<<QStringLiteral("[剑圣]");
+    roleList<<QStringLiteral("[狂战士]");
+    roleList<<QStringLiteral("[弓之女神]");
+    roleList<<QStringLiteral("[封印师]");
+    roleList<<QStringLiteral("[暗杀者]");
+    roleList<<QStringLiteral("[圣女]");
+    roleList<<QStringLiteral("[天使]");
+    roleList<<QStringLiteral("[魔导师]");
+    roleList<<QStringLiteral("[魔剑]");
+    roleList<<QStringLiteral("[圣枪]");
+    roleList<<QStringLiteral("[元素师]");
+    roleList<<QStringLiteral("[冒险家]");
+    roleList<<QStringLiteral("[死灵法师]");
+    roleList<<QStringLiteral("[仲裁者]");
+    roleList<<QStringLiteral("[神官]");
+    roleList<<QStringLiteral("[祈祷师]");
+    roleList<<QStringLiteral("[贤者]");
+    roleList<<QStringLiteral("[灵符师]");
+    roleList<<QStringLiteral("[剑帝]");
+    roleList<<QStringLiteral("[格斗家]");
+    roleList<<QStringLiteral("[勇者]");
+    roleList<<QStringLiteral("[灵魂术士]");
+    roleList<<QStringLiteral("[巫女]");
+    roleList<<QStringLiteral("[蝶舞者]");
+    roleList<<QStringLiteral("[]");
+    roleList<<QStringLiteral("[魔弓]");
+    roleList<<QStringLiteral("[]");
+    roleList<<QStringLiteral("[红莲骑士]");
+    roleList<<QStringLiteral("[魔枪]");
 }
 
 void DataInterface::initPlayerList(QString msg,QStringList nicknames)

@@ -5,19 +5,19 @@ DieWu::DieWu()
     makeConnection();
     setMyRole(this);
     Button *wuDong, *yongHua, *daoNiZhiDie, *checkCover;
-    wuDong = new Button(3,tr("舞动"));
+    wuDong = new Button(3,QStringLiteral("舞动"));
     buttonArea->addButton(wuDong);
     connect(wuDong,SIGNAL(buttonSelected(int)),this,SLOT(WuDong1()));
 
-    yongHua = new Button(4,tr("蛹化"));
+    yongHua = new Button(4,QStringLiteral("蛹化"));
     buttonArea->addButton(yongHua);
     connect(yongHua,SIGNAL(buttonSelected(int)),this,SLOT(YongHua()));
 
-    daoNiZhiDie = new Button(5,tr("倒逆之蝶"));
+    daoNiZhiDie = new Button(5,QStringLiteral("倒逆之蝶"));
     buttonArea->addButton(daoNiZhiDie);
     connect(daoNiZhiDie,SIGNAL(buttonSelected(int)),this,SLOT(DaoNiZhiDie1()));
 
-    checkCover = new Button(10,tr("查看茧"));
+    checkCover = new Button(10,QStringLiteral("查看茧"));
     buttonArea->addOutsideTurnButton(checkCover);
     checkCover->setVisible(true);
     checkCover->setEnabled(true);
@@ -48,9 +48,9 @@ void DieWu::WuDong1()
     decisionArea->enable(1);
     decisionArea->enable(0);
 
-    tipArea->setMsg(tr("请先选择一项："));
-    tipArea->addBoxItem(tr("1.摸1张牌【强制】"));
-    tipArea->addBoxItem(tr("2.弃1张牌【强制】"));
+    tipArea->setMsg(QStringLiteral("请先选择一项："));
+    tipArea->addBoxItem(QStringLiteral("1.摸1张牌【强制】"));
+    tipArea->addBoxItem(QStringLiteral("2.弃1张牌【强制】"));
     tipArea->showBox();
 }
 
@@ -394,11 +394,11 @@ void DieWu::coverCardAnalyse()
 void DieWu::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("毒粉"))
+    if(skill==QStringLiteral("毒粉"))
         DuFen();
-    else if(skill==tr("朝圣"))
+    else if(skill==QStringLiteral("朝圣"))
         ChaoSheng();
-    else if(skill==tr("镜花水月"))
+    else if(skill==QStringLiteral("镜花水月"))
         JingHuaShuiYue();
 }
 

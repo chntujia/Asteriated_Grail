@@ -9,15 +9,15 @@ setMyRole(this);
     connect(handArea,SIGNAL(cardUnready()),this,SLOT(onUnready()));
 
     Button *fengZhiJieJin,*tianShiZhuFu,*tianShiZhiQiang;
-    fengZhiJieJin=new Button(3,tr("风之洁净"));
+    fengZhiJieJin=new Button(3,QStringLiteral("风之洁净"));
     buttonArea->addButton(fengZhiJieJin);
     connect(fengZhiJieJin,SIGNAL(buttonSelected(int)),this,SLOT(FengZhiJieJin()));
 
-    tianShiZhuFu=new Button(4,tr("天使祝福"));
+    tianShiZhuFu=new Button(4,QStringLiteral("天使祝福"));
     buttonArea->addButton(tianShiZhuFu);
     connect(tianShiZhuFu,SIGNAL(buttonSelected(int)),this,SLOT(TianShiZhuFu()));
 
-    tianShiZhiQiang=new Button(5,tr("天使之墙"));
+    tianShiZhiQiang=new Button(5,QStringLiteral("天使之墙"));
     buttonArea->addButton(tianShiZhiQiang);
     connect(tianShiZhiQiang,SIGNAL(buttonSelected(int)),this,SLOT(TianShiZhiQiang()));
 }
@@ -27,7 +27,7 @@ void TianShi::TianShiJiBan()
     tipArea->reset();
 
     state=707;
-    tipArea->setMsg(tr("发动天使羁绊"));
+    tipArea->setMsg(QStringLiteral("发动天使羁绊"));
     playerArea->setQuota(1);
     playerArea->enableAll();
 
@@ -79,7 +79,7 @@ void TianShi::TianShiZhiQiang()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("天使之墙"));
+    handArea->enableSpecility(QStringLiteral("天使之墙"));
 }
 
 void TianShi::TianShiZhiGe1()
@@ -91,11 +91,11 @@ void TianShi::TianShiZhiGe1()
     gem=myself->getGem();
     crystal=myself->getCrystal();
     state=704;
-    tipArea->setMsg(tr("是否发动天使之歌？"));
+    tipArea->setMsg(QStringLiteral("是否发动天使之歌？"));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("1.水晶"));
+        tipArea->addBoxItem(QStringLiteral("1.水晶"));
     if(gem>=1)
-        tipArea->addBoxItem(tr("2.宝石"));
+        tipArea->addBoxItem(QStringLiteral("2.宝石"));
 
     tipArea->showBox();
     decisionArea->enable(0);
@@ -131,31 +131,31 @@ void TianShi::ShenZhiBiHu(int reduce)
     playerArea->reset();
     decisionArea->enable(0);
     decisionArea->enable(1);
-    tipArea->setMsg(tr("是否发动神之庇护？"));
+    tipArea->setMsg(QStringLiteral("是否发动神之庇护？"));
     if(reduce>=3)
     {
         if(gem==3)
-            tipArea->addBoxItem(tr("1.三个宝石"));
+            tipArea->addBoxItem(QStringLiteral("1.三个宝石"));
         if(crystal==3)
-            tipArea->addBoxItem(tr("2.三个水晶"));
+            tipArea->addBoxItem(QStringLiteral("2.三个水晶"));
         if(gem==2&&crystal==1)
-            tipArea->addBoxItem(tr("3.两个宝石和一个水晶"));
+            tipArea->addBoxItem(QStringLiteral("3.两个宝石和一个水晶"));
         if(gem==1&&crystal==2)
-            tipArea->addBoxItem(tr("4.一个宝石和两个水晶"));
+            tipArea->addBoxItem(QStringLiteral("4.一个宝石和两个水晶"));
     }
     if(reduce>=2)
     {
         if(gem>=2)
-            tipArea->addBoxItem(tr("5.两个宝石"));
+            tipArea->addBoxItem(QStringLiteral("5.两个宝石"));
         if(crystal>=2)
-            tipArea->addBoxItem(tr("6.两个水晶"));
+            tipArea->addBoxItem(QStringLiteral("6.两个水晶"));
         if(gem>=1&&crystal>=1)
-            tipArea->addBoxItem(tr("7.一个宝石和一个水晶"));
+            tipArea->addBoxItem(QStringLiteral("7.一个宝石和一个水晶"));
     }
     if(gem>=1)
-        tipArea->addBoxItem(tr("8.一个宝石"));
+        tipArea->addBoxItem(QStringLiteral("8.一个宝石"));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("9.一个水晶"));
+        tipArea->addBoxItem(QStringLiteral("9.一个水晶"));
     tipArea->showBox();
 }
 
@@ -173,7 +173,7 @@ void TianShi::normal()
     if (handArea->checkElement("water"))
         buttonArea->enable(4);
 //天使之墙
-    if (handArea->checkSpecility(tr("天使之墙")))
+    if (handArea->checkSpecility(QStringLiteral("天使之墙")))
         buttonArea->enable(5);
     unactionalCheck();
 }
@@ -290,15 +290,15 @@ void TianShi::onOkClicked()
         break;
 //神之庇护
         /*
-            tipArea->addBoxItem(tr("1.三个宝石"));
-            tipArea->addBoxItem(tr("2.三个水晶"));
-            tipArea->addBoxItem(tr("3.两个宝石和一个水晶"));
-            tipArea->addBoxItem(tr("4.一个宝石和两个水晶"));
-            tipArea->addBoxItem(tr("5.两个宝石"));
-            tipArea->addBoxItem(tr("6.两个水晶"));
-            tipArea->addBoxItem(tr("7.一个宝石和一个水晶"));
-    tipArea->addBoxItem(tr("8.一个宝石"));
-    tipArea->addBoxItem(tr("9.一个水晶"));*/
+            tipArea->addBoxItem(QStringLiteral("1.三个宝石"));
+            tipArea->addBoxItem(QStringLiteral("2.三个水晶"));
+            tipArea->addBoxItem(QStringLiteral("3.两个宝石和一个水晶"));
+            tipArea->addBoxItem(QStringLiteral("4.一个宝石和两个水晶"));
+            tipArea->addBoxItem(QStringLiteral("5.两个宝石"));
+            tipArea->addBoxItem(QStringLiteral("6.两个水晶"));
+            tipArea->addBoxItem(QStringLiteral("7.一个宝石和一个水晶"));
+    tipArea->addBoxItem(QStringLiteral("8.一个宝石"));
+    tipArea->addBoxItem(QStringLiteral("9.一个水晶"));*/
     case 705:
         command="705;1;";
         text=tipArea->getBoxCurrentText();
@@ -409,10 +409,10 @@ void TianShi::onUnready()
 void TianShi::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("天使之歌"))
+    if(skill==QStringLiteral("天使之歌"))
         TianShiZhiGe1();
-    else if(skill==tr("神之庇护"))
+    else if(skill==QStringLiteral("神之庇护"))
         ShenZhiBiHu(command.split(';').at(3).toInt());
-    else if(skill==tr("天使羁绊"))
+    else if(skill==QStringLiteral("天使羁绊"))
         TianShiJiBan();
 }

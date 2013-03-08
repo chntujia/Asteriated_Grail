@@ -33,7 +33,7 @@ void XianZhe::normal()
 void XianZhe::FaShuFanTan1()
 {
     state=1701;
-    tipArea->setMsg(tr("是否发动法术反弹？"));
+    tipArea->setMsg(QStringLiteral("是否发动法术反弹？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -256,7 +256,7 @@ void XianZhe::onCancelClicked()
 void XianZhe::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("法术反弹"))
+    if(skill==QStringLiteral("法术反弹"))
         FaShuFanTan1();
 }
 

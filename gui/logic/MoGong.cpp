@@ -13,7 +13,7 @@ MoGong::MoGong()
     buttonArea->addButton(leiGuangSanShe);
     connect(leiGuangSanShe,SIGNAL(buttonSelected(int)),this,SLOT(LeiGuangSanShe()));
 
-    checkCover = new Button(10,tr("查看充能"));
+    checkCover = new Button(10,QStringLiteral("查看充能"));
     buttonArea->addOutsideTurnButton(checkCover);
     checkCover->setVisible(true);
     checkCover->setEnabled(true);
@@ -445,7 +445,7 @@ void MoGong::additionalAction()
 {
     Role::additionalAction();
     if(!MoGuanChongJiUsed&&dataInterface->getCoverCards().size()>0)
-        tipArea->addBoxItem(tr("1.多重射击"));
+        tipArea->addBoxItem(QStringLiteral("1.多重射击"));
 }
 
 void MoGong::turnBegin()
@@ -459,13 +459,13 @@ void MoGong::turnBegin()
 void MoGong::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("充能/魔眼"))
+    if(skill==QStringLiteral("充能/魔眼"))
         ChongNengMoYan1();
-    else if(skill==tr("魔贯冲击命中"))
+    else if(skill==QStringLiteral("魔贯冲击命中"))
         MoGuanChongJiHit();
-    else if(skill==tr("充能盖牌"))
+    else if(skill==QStringLiteral("充能盖牌"))
         ChongNengGaiPai();
-    else if(skill==tr("魔眼盖牌"))
+    else if(skill==QStringLiteral("魔眼盖牌"))
         MoYanGaiPai();
 }
 

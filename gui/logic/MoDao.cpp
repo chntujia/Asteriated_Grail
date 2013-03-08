@@ -6,15 +6,15 @@ MoDao::MoDao()
     setMyRole(this);
 
     Button *moDanRongHe,*moBaoChongJi,*huiMeiFengBao;
-    moDanRongHe=new Button(3,tr("魔弹融合"));
+    moDanRongHe=new Button(3,QStringLiteral("魔弹融合"));
     buttonArea->addButton(moDanRongHe);
     connect(moDanRongHe,SIGNAL(buttonSelected(int)),this,SLOT(MoDanRongHe()));
 
-    moBaoChongJi=new Button(4,tr("魔爆冲击"));
+    moBaoChongJi=new Button(4,QStringLiteral("魔爆冲击"));
     buttonArea->addButton(moBaoChongJi);
     connect(moBaoChongJi,SIGNAL(buttonSelected(int)),this,SLOT(MoBaoChongJi()));
 
-    huiMeiFengBao=new Button(5,tr("毁灭风暴"));
+    huiMeiFengBao=new Button(5,QStringLiteral("毁灭风暴"));
     buttonArea->addButton(huiMeiFengBao);
     connect(huiMeiFengBao,SIGNAL(buttonSelected(int)),this,SLOT(HuiMeiFengBao()));
 
@@ -136,7 +136,7 @@ void MoDao::cardAnalyse()
 //normal action
     case 1:
         cardName=selectedCards[0]->getName();
-        if(cardName==tr("魔弹"))
+        if(cardName==QStringLiteral("魔弹"))
             playerArea->enablePlayerItem(nextClockwise);//额外再激活一个上家敌人
         break;
 //魔弹融合(首次魔弹）

@@ -6,15 +6,15 @@ ShenGuan::ShenGuan()
     makeConnection();
     setMyRole(this);
     Button *shenShengQiFu, *shuiZhiShenLi, *shenShengLingYu;
-    shenShengQiFu = new Button(3,tr("神圣祈福"));
+    shenShengQiFu = new Button(3,QStringLiteral("神圣祈福"));
     buttonArea->addButton(shenShengQiFu);
     connect(shenShengQiFu,SIGNAL(buttonSelected(int)),this,SLOT(ShenShengQiFu()));
 
-    shuiZhiShenLi = new Button(4,tr("水之神力"));
+    shuiZhiShenLi = new Button(4,QStringLiteral("水之神力"));
     buttonArea->addButton(shuiZhiShenLi);
     connect(shuiZhiShenLi,SIGNAL(buttonSelected(int)),this,SLOT(ShuiZhiShenLi1()));
 
-    shenShengLingYu = new Button(5,tr("神圣领域"));
+    shenShengLingYu = new Button(5,QStringLiteral("神圣领域"));
     buttonArea->addButton(shenShengLingYu);
     connect(shenShengLingYu,SIGNAL(buttonSelected(int)),this,SLOT(ShenShengLingYu1()));
 }
@@ -27,7 +27,7 @@ void ShenGuan::normal()
     int qiFu = 0;
     for(int i=0; i<handcards.size();i++)
     {
-        if(handcards[i]->getType() == tr("magic"))
+        if(handcards[i]->getType() == QStringLiteral("magic"))
             qiFu++;
     }
     if(qiFu>1)
@@ -42,7 +42,7 @@ void ShenGuan::normal()
 void ShenGuan::ShenShengQiShi()
 {
     state = 36;
-    tipArea->setMsg(tr("是否发动神圣启示？"));
+    tipArea->setMsg(QStringLiteral("是否发动神圣启示？"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -98,7 +98,7 @@ void ShenGuan::ShenShengQiYue1()
 {
     state = 1541;
     gui->reset();
-    tipArea->setMsg(tr("是否发动神圣契约"));
+    tipArea->setMsg(QStringLiteral("是否发动神圣契约"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag = false;
     switch(handcards.size())
@@ -152,10 +152,10 @@ void ShenGuan::ShenShengLingYu1()
     decisionArea->enable(1);
     decisionArea->enable(0);
 
-    tipArea->setMsg(tr("请先选择一项："));
+    tipArea->setMsg(QStringLiteral("请先选择一项："));
     if(dataInterface->getMyself()->getCrossNum()>0)
-        tipArea->addBoxItem(tr("1.（移除1治疗）对目标角色造成2点法术伤害"));
-    tipArea->addBoxItem(tr("2.增加2治疗，目标队友增加1治疗"));
+        tipArea->addBoxItem(QStringLiteral("1.（移除1治疗）对目标角色造成2点法术伤害"));
+    tipArea->addBoxItem(QStringLiteral("2.增加2治疗，目标队友增加1治疗"));
     tipArea->showBox();
 }
 
@@ -319,10 +319,10 @@ void ShenGuan::onCancelClicked()
 void ShenGuan::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("神圣启示"))
+    if(skill==QStringLiteral("神圣启示"))
         ShenShengQiShi();
-    else if(skill==tr("神圣契约"))
+    else if(skill==QStringLiteral("神圣契约"))
         ShenShengQiYue1();
-    else if(skill==tr("水之神力给牌"))
+    else if(skill==QStringLiteral("水之神力给牌"))
         ShuiZhiShenLi2();
 }

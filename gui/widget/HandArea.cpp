@@ -134,7 +134,7 @@ void HandArea::enableProperty(QString property)
 void HandArea::enableMoDan()
 {
     foreach(CardItem *ptr,cardItems)
-        if(ptr->getCard()->getName()==tr("魔弹"))
+        if(ptr->getCard()->getName()==QStringLiteral("魔弹"))
         {
             ptr->setEnabled(1);
             ptr->setOpacity(1);

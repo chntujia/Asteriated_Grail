@@ -7,15 +7,15 @@ setMyRole(this);
     connect(playerArea,SIGNAL(playerUnready()),this,SLOT(onUnready()));
 
     Button *fengYinFaShu,*wuXiShuFu,*fengYinPoSui;
-    fengYinFaShu=new Button(3,tr("封印法术"));
+    fengYinFaShu=new Button(3,QStringLiteral("封印法术"));
     buttonArea->addButton(fengYinFaShu);
     connect(fengYinFaShu,SIGNAL(buttonSelected(int)),this,SLOT(FengYinFaShu()));
 
-    wuXiShuFu=new Button(4,tr("五系束缚"));
+    wuXiShuFu=new Button(4,QStringLiteral("五系束缚"));
     buttonArea->addButton(wuXiShuFu);
     connect(wuXiShuFu,SIGNAL(buttonSelected(int)),this,SLOT(WuXiShuFu()));
 
-    fengYinPoSui=new Button(5,tr("封印破碎"));
+    fengYinPoSui=new Button(5,QStringLiteral("封印破碎"));
     buttonArea->addButton(fengYinPoSui);
     connect(fengYinPoSui,SIGNAL(buttonSelected(int)),this,SLOT(FengYinPoSui()));
 }
@@ -26,7 +26,7 @@ void FengYin::normal()
     Player* myself=dataInterface->getMyself();
 //封印法术
     foreach(Card*ptr, dataInterface->getHandCards())
-        if (ptr->getType()=="attack"&&ptr->getProperty()==tr("幻"))
+        if (ptr->getType()=="attack"&&ptr->getProperty()==QStringLiteral("幻"))
             buttonArea->enable(3);
 //五系束缚
     if(myself->getEnergy()>0)
@@ -54,7 +54,7 @@ void FengYin::FengYinFaShu()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableProperty(tr("幻"));
+    handArea->enableProperty(QStringLiteral("幻"));
     handArea->disableMagic();
 }
 
@@ -76,11 +76,11 @@ void FengYin::WuXiShuFu()
     playerArea->setQuota(1);
     playerArea->enableEnemy();
 
-    tipArea->setMsg(tr("请选择使用的能量："));
+    tipArea->setMsg(QStringLiteral("请选择使用的能量："));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("1.水晶"));
+        tipArea->addBoxItem(QStringLiteral("1.水晶"));
     if(gem>=1)
-        tipArea->addBoxItem(tr("2.宝石"));
+        tipArea->addBoxItem(QStringLiteral("2.宝石"));
 
     tipArea->showBox();
 }
@@ -106,11 +106,11 @@ void FengYin::FengYinPoSui()
         if(players[i]->hasStatus())
             playerArea->enablePlayerItem(i);
 
-    tipArea->setMsg(tr("请选择使用的能量："));
+    tipArea->setMsg(QStringLiteral("请选择使用的能量："));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("1.水晶"));
+        tipArea->addBoxItem(QStringLiteral("1.水晶"));
     if(gem>=1)
-        tipArea->addBoxItem(tr("2.宝石"));
+        tipArea->addBoxItem(QStringLiteral("2.宝石"));
 
     tipArea->showBox();
 }
@@ -130,7 +130,7 @@ void FengYin::additionalAction()
 {
     Role::additionalAction();
     if(usedMagic)
-        tipArea->addBoxItem(tr("1.法术激荡"));
+        tipArea->addBoxItem(QStringLiteral("1.法术激荡"));
 }
 
 void FengYin::cardAnalyse()

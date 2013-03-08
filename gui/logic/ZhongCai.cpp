@@ -6,12 +6,12 @@ ZhongCai::ZhongCai()
 setMyRole(this);
 
     Button *moRiShenPan;
-    moRiShenPan=new Button(3,tr("末日审判"));
+    moRiShenPan=new Button(3,QStringLiteral("末日审判"));
     buttonArea->addButton(moRiShenPan);
     connect(moRiShenPan,SIGNAL(buttonSelected(int)),this,SLOT(MoRiShenPan()));
 
     Button *panJueTianPing;
-    panJueTianPing=new Button(4,tr("判决天平"));
+    panJueTianPing=new Button(4,QStringLiteral("判决天平"));
     buttonArea->addButton(panJueTianPing);
     connect(panJueTianPing,SIGNAL(buttonSelected(int)),this,SLOT(PanJueTianPing()));
 }
@@ -42,7 +42,7 @@ void ZhongCai::YiShiZhongDuan()
 {
     state=1401;
     gui->reset();
-    tipArea->setMsg(tr("是否发动仪式中断？"));
+    tipArea->setMsg(QStringLiteral("是否发动仪式中断？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();
     bool flag=true;
@@ -69,7 +69,7 @@ void ZhongCai::ZhongCaiYiShi()
 {
     state=1402;
     gui->reset();
-    tipArea->setMsg(tr("是否发动仲裁仪式？"));
+    tipArea->setMsg(QStringLiteral("是否发动仲裁仪式？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     Player *myself=dataInterface->getMyself();
     bool flag=true;
@@ -116,9 +116,9 @@ void ZhongCai::PanJueTianPing()
     decisionArea->enable(0);
     decisionArea->enable(1);
 
-    tipArea->setMsg(tr("请选择一项："));
-    tipArea->addBoxItem(tr("1.弃掉你的所有手牌"));
-    tipArea->addBoxItem(tr("2.将手牌补到上限，【战绩区】+1【宝石】"));
+    tipArea->setMsg(QStringLiteral("请选择一项："));
+    tipArea->addBoxItem(QStringLiteral("1.弃掉你的所有手牌"));
+    tipArea->addBoxItem(QStringLiteral("2.将手牌补到上限，【战绩区】+1【宝石】"));
     tipArea->showBox();
 }
 
@@ -202,8 +202,8 @@ void ZhongCai::onCancelClicked()
 void ZhongCai::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("仪式中断"))
+    if(skill==QStringLiteral("仪式中断"))
         YiShiZhongDuan();
-    else if(skill==tr("仲裁仪式"))
+    else if(skill==QStringLiteral("仲裁仪式"))
         ZhongCaiYiShi();
 }

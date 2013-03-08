@@ -26,7 +26,7 @@ void MoQiang::AnZhiJieFang()
 {
     state=2901;
     gui->reset();
-    tipArea->setMsg(tr("是否发动暗之解放？"));
+    tipArea->setMsg(QStringLiteral("是否发动暗之解放？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
     int i;
@@ -52,7 +52,7 @@ void MoQiang::HuanYingXingChen(int flag)
     gui->reset();
     huanYingFlag=flag;
     if(flag==0){
-    tipArea->setMsg(tr("是否发动幻影星辰？"));
+    tipArea->setMsg(QStringLiteral("是否发动幻影星辰？"));
     decisionArea->enable(1);
     decisionArea->enable(0);
     }
@@ -69,7 +69,7 @@ void MoQiang::HuanYingXingChen(int flag)
 void MoQiang::AnZhiBiZhang()
 {
     state=2903;
-    tipArea->setMsg(tr("是否发动暗之壁障？"));
+    tipArea->setMsg(QStringLiteral("是否发动暗之壁障？"));
     handArea->setQuota(1,7);
 
     decisionArea->enable(1);
@@ -83,7 +83,7 @@ void MoQiang::QiHeiZhiQiang()
 {
     state=2904;
     tipArea->reset();
-    tipArea->setMsg(tr("是否发动漆黑之枪？如是请选择发动能量数："));
+    tipArea->setMsg(QStringLiteral("是否发动漆黑之枪？如是请选择发动能量数："));
     decisionArea->enable(0);
     decisionArea->enable(1);
 
@@ -186,13 +186,13 @@ void MoQiang::attacked(QString element, int hitRate)
 void MoQiang::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("暗之解放"))
+    if(skill==QStringLiteral("暗之解放"))
         AnZhiJieFang();
-    else if(skill==tr("幻影星辰"))
+    else if(skill==QStringLiteral("幻影星辰"))
         HuanYingXingChen(command.split(';').at(3).toInt());
-    else if(skill==tr("暗之壁障"))
+    else if(skill==QStringLiteral("暗之壁障"))
         AnZhiBiZhang();
-    else if(skill==tr("漆黑之枪"))
+    else if(skill==QStringLiteral("漆黑之枪"))
         QiHeiZhiQiang();
 }
 

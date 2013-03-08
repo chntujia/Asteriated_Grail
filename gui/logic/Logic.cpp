@@ -203,7 +203,7 @@ void Logic::getCommand(QString command)
             roleID=arg[2+i].toInt();
             tipArea->addBoxItem(QString::number(roleID)+"."+dataInterface->getRoleList().at(roleID));
         }
-        tipArea->setMsg(tr("请选择角色："));
+        tipArea->setMsg(QStringLiteral("请选择角色："));
         tipArea->showBox();
         decisionArea->enable(0);
         break;

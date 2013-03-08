@@ -35,9 +35,9 @@ void LingHun::normal()
         buttonArea->enable(3);
     if(myself->getToken(0)>=2)
         buttonArea->enable(4);
-    if (handArea->checkSpecility(tr("灵魂震爆")) && myself->getToken(0)>=3)
+    if (handArea->checkSpecility(QStringLiteral("灵魂震爆")) && myself->getToken(0)>=3)
         buttonArea->enable(5);
-    if (handArea->checkSpecility(tr("灵魂赐予")) && myself->getToken(1)>=3)
+    if (handArea->checkSpecility(QStringLiteral("灵魂赐予")) && myself->getToken(1)>=3)
         buttonArea->enable(6);
     unactionalCheck();
 }
@@ -85,7 +85,7 @@ void LingHun::LingHunZhenBao()
 
     playerArea->setQuota(1);
 
-    handArea->enableSpecility(tr("灵魂震爆"));
+    handArea->enableSpecility(QStringLiteral("灵魂震爆"));
     handArea->setQuota(1);
 
     decisionArea->enable(1);
@@ -101,7 +101,7 @@ void LingHun::LingHunCiYu()
 
     playerArea->setQuota(1);
 
-    handArea->enableSpecility(tr("灵魂赐予"));
+    handArea->enableSpecility(QStringLiteral("灵魂赐予"));
     handArea->setQuota(1);
 
     decisionArea->enable(1);
@@ -112,14 +112,14 @@ void LingHun::LingHunZhuanHuan()
 {
     state=2205;
     Player *myself=dataInterface->getMyself();
-    tipArea->setMsg(tr("请选择要转换的灵魂："));
+    tipArea->setMsg(QStringLiteral("请选择要转换的灵魂："));
     decisionArea->enable(0);
     decisionArea->enable(1);
 
     if(myself->getToken(0)>0)
-        tipArea->addBoxItem(tr("1.将黄魂转化为蓝魂"));
+        tipArea->addBoxItem(QStringLiteral("1.将黄魂转化为蓝魂"));
     if(myself->getToken(1)>0)
-        tipArea->addBoxItem(tr("2.将蓝魂转化为黄魂"));
+        tipArea->addBoxItem(QStringLiteral("2.将蓝魂转化为黄魂"));
     tipArea->showBox();
 }
 
@@ -130,7 +130,7 @@ void LingHun::LingHunLianJie(int harmPoint)
     Player *myself=dataInterface->getMyself();
     decisionArea->enable(1);
     if(!lianJieUsed){
-    tipArea->setMsg(tr("是否发动灵魂连接？如是请选择目标"));
+    tipArea->setMsg(QStringLiteral("是否发动灵魂连接？如是请选择目标"));
     playerArea->setQuota(1);
     decisionArea->disable(0);
     QList<Card*> handcards=dataInterface->getHandCards();
@@ -157,7 +157,7 @@ void LingHun::LingHunLianJie(int harmPoint)
     else
     {
         decisionArea->enable(0);
-        tipArea->setMsg(tr("请选择要转移的伤害："));
+        tipArea->setMsg(QStringLiteral("请选择要转移的伤害："));
         int min=myself->getToken(1)<harmPoint?myself->getToken(1):harmPoint;
         for(;min>=0;min--)
             tipArea->addBoxItem(QString::number(min));
@@ -169,7 +169,7 @@ void LingHun::LingHunZengFu()
 {
     state=2207;
     gui->reset();
-    tipArea->setMsg(tr("是否发动灵魂增幅？"));
+    tipArea->setMsg(QStringLiteral("是否发动灵魂增幅？"));
     decisionArea->enable(1);
     decisionArea->enable(0);
 }
@@ -331,11 +331,11 @@ void LingHun::onCancelClicked()
 void LingHun::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("灵魂转换"))
+    if(skill==QStringLiteral("灵魂转换"))
         LingHunZhuanHuan();
-    else if(skill==tr("灵魂链接"))
+    else if(skill==QStringLiteral("灵魂链接"))
         LingHunLianJie(command.split(';').at(3).toInt());
-    else if(skill==tr("灵魂增幅"))
+    else if(skill==QStringLiteral("灵魂增幅"))
         LingHunZengFu();
 }
 

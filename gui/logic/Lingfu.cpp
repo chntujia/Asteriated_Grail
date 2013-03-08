@@ -10,8 +10,8 @@ LingFu::LingFu()
     setMyRole(this);
 
     Button *leiMing,*fengXing,*checkCover;
-    leiMing=new Button(3,tr("灵符-雷鸣"));
-    fengXing = new Button(4,tr("灵符-风行"));
+    leiMing=new Button(3,QStringLiteral("灵符-雷鸣"));
+    fengXing = new Button(4,QStringLiteral("灵符-风行"));
 
     buttonArea->addButton(leiMing);
     buttonArea->addButton(fengXing);
@@ -19,7 +19,7 @@ LingFu::LingFu()
     connect(leiMing,SIGNAL(buttonSelected(int)),this,SLOT(leiMing()));
     connect(fengXing,SIGNAL(buttonSelected(int)),this,SLOT(fengXing()));
 
-    checkCover = new Button(10,tr("查看妖力"));
+    checkCover = new Button(10,QStringLiteral("查看妖力"));
     buttonArea->addOutsideTurnButton(checkCover);
 
     checkCover->setVisible(true);
@@ -202,7 +202,7 @@ void LingFu::leiMing()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableElement(tr("thunder"));
+    handArea->enableElement(QStringLiteral("thunder"));
 }
 
 void LingFu::fengXing()
@@ -218,13 +218,13 @@ void LingFu::fengXing()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableElement(tr("wind"));
+    handArea->enableElement(QStringLiteral("wind"));
 }
 
 void LingFu::nianZhou()
 {
     state=1801;
-    tipArea->setMsg(tr("是否发动念咒？"));
+    tipArea->setMsg(QStringLiteral("是否发动念咒？"));
     handArea->setQuota(1);
     handArea->enableAll();
     decisionArea->enable(1);
@@ -233,19 +233,19 @@ void LingFu::nianZhou()
 void LingFu::lingLiBengJie()
 {
     state=1804;
-    tipArea->setMsg(tr("是否发动灵力崩解？"));
+    tipArea->setMsg(QStringLiteral("是否发动灵力崩解？"));
 
 
     decisionArea->enable(0);
 
     if(dataInterface->getMyself()->getCrystal()>=1)
     {
-        tipArea->addBoxItem(tr("1.水晶"));
+        tipArea->addBoxItem(QStringLiteral("1.水晶"));
         decisionArea->enable(1);
     }
     if(dataInterface->getMyself()->getGem()>=1)
     {
-        tipArea->addBoxItem(tr("2.宝石"));
+        tipArea->addBoxItem(QStringLiteral("2.宝石"));
         decisionArea->enable(1);
     }
     tipArea->showBox();
@@ -254,7 +254,7 @@ void LingFu::lingLiBengJie()
 void LingFu::baiGuiYeXing()
 {
     state = 1805;
-    tipArea->setMsg(tr("是否发动百鬼夜行？要发动请选择妖力"));
+    tipArea->setMsg(QStringLiteral("是否发动百鬼夜行？要发动请选择妖力"));
 
     gui->showCoverArea(true);
     HandArea *coverArea = gui->getCoverArea();
@@ -267,7 +267,7 @@ void LingFu::baiGuiYeXing()
 void LingFu::baiGuiYeXing2()
 {
     state = 18050201;
-    tipArea->setMsg(tr("是否展示火属性妖力？"));
+    tipArea->setMsg(QStringLiteral("是否展示火属性妖力？"));
 
     decisionArea->enable(0);
     decisionArea->enable(1);
@@ -304,11 +304,11 @@ void LingFu::baiGuiYeXing4()
 void LingFu::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("念咒"))
+    if(skill==QStringLiteral("念咒"))
         nianZhou();
-    else if(skill==tr("灵力崩解"))
+    else if(skill==QStringLiteral("灵力崩解"))
         lingLiBengJie();
-    else if(skill == tr("百鬼夜行"))
+    else if(skill == QStringLiteral("百鬼夜行"))
         baiGuiYeXing();
 }
 

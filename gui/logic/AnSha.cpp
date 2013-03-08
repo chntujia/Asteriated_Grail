@@ -9,7 +9,7 @@ setMyRole(this);
 void AnSha::ShuiYing()
 {
     state=502;
-    tipArea->setMsg(tr("是否发动水影？"));
+    tipArea->setMsg(QStringLiteral("是否发动水影？"));
     handArea->setQuota(1,7);
 
     decisionArea->enable(1);
@@ -22,7 +22,7 @@ void AnSha::QianXing()
 {
     state=503;
     gui->reset();
-    tipArea->setMsg(tr("是否发动潜行？"));
+    tipArea->setMsg(QStringLiteral("是否发动潜行？"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
     int i;
@@ -45,9 +45,9 @@ void AnSha::QianXing()
 void AnSha::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("水影"))
+    if(skill==QStringLiteral("水影"))
         ShuiYing();
-    else if(skill==tr("潜行"))
+    else if(skill==QStringLiteral("潜行"))
         QianXing();
 }
 

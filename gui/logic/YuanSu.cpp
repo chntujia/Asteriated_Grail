@@ -6,15 +6,15 @@ YuanSu::YuanSu()
 setMyRole(this);
 
     Button *yuanSuFaShu,*yuanSuDianRan,*yueGuang;
-    yuanSuFaShu=new Button(3,tr("元素法术"));
+    yuanSuFaShu=new Button(3,QStringLiteral("元素法术"));
     buttonArea->addButton(yuanSuFaShu);
     connect(yuanSuFaShu,SIGNAL(buttonSelected(int)),this,SLOT(YuanSuFaShu1()));
 
-    yuanSuDianRan=new Button(4,tr("元素点燃"));
+    yuanSuDianRan=new Button(4,QStringLiteral("元素点燃"));
     buttonArea->addButton(yuanSuDianRan);
     connect(yuanSuDianRan,SIGNAL(buttonSelected(int)),this,SLOT(YuanSuDianRan()));
 
-    yueGuang=new Button(5,tr("月光"));
+    yueGuang=new Button(5,QStringLiteral("月光"));
     buttonArea->addButton(yueGuang);
     connect(yueGuang,SIGNAL(buttonSelected(int)),this,SLOT(YueGuang()));
 }
@@ -26,14 +26,14 @@ void YuanSu::YuanSuFaShu1()
     playerArea->reset();
     tipArea->reset();
 
-    tipArea->setMsg(tr("请先选择咏系牌和法伤目标"));
+    tipArea->setMsg(QStringLiteral("请先选择咏系牌和法伤目标"));
     playerArea->setQuota(1);
     handArea->setQuota(1);
 
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableProperty(tr("咏"));
+    handArea->enableProperty(QStringLiteral("咏"));
     handArea->disableElement("darkness");
     handArea->disableMagic();
 }
@@ -59,10 +59,10 @@ void YuanSu::YuanSuFaShu2()
     {
         playerArea->enableAll();        
         decisionArea->disable(0);
-        tipArea->setMsg(tr("请选择治疗目标；若多弃1张同系牌，本次伤害+1"));
+        tipArea->setMsg(QStringLiteral("请选择治疗目标；若多弃1张同系牌，本次伤害+1"));
     }
     else
-        tipArea->setMsg(tr("若多弃1张同系牌，本次伤害+1"));
+        tipArea->setMsg(QStringLiteral("若多弃1张同系牌，本次伤害+1"));
 }
 
 void YuanSu::YuanSuDianRan()
@@ -97,7 +97,7 @@ void YuanSu::normal()
     Player* myself=dataInterface->getMyself();
 //元素法术
     foreach(Card*ptr, dataInterface->getHandCards())
-        if (ptr->getType()=="attack"&&ptr->getProperty()==tr("咏")&&ptr->getElement()!="darkness")
+        if (ptr->getType()=="attack"&&ptr->getProperty()==QStringLiteral("咏")&&ptr->getElement()!="darkness")
             buttonArea->enable(3);
 //元素点燃
     if(myself->getToken(0)==3)
@@ -113,7 +113,7 @@ void YuanSu::magicAction()
     Player* myself=dataInterface->getMyself();
 //元素法术
     foreach(Card*ptr, dataInterface->getHandCards())
-        if (ptr->getType()=="attack"&&ptr->getProperty()==tr("咏")&&ptr->getElement()!="darkness")
+        if (ptr->getType()=="attack"&&ptr->getProperty()==QStringLiteral("咏")&&ptr->getElement()!="darkness")
             buttonArea->enable(3);
 //元素点燃
     if(myself->getToken(0)==3)
@@ -258,11 +258,11 @@ void YuanSu::additionalAction()
 {
     Role::additionalAction();
     if(earth)
-        tipArea->addBoxItem(tr("1.法术行动（陨石）"));
+        tipArea->addBoxItem(QStringLiteral("1.法术行动（陨石）"));
     if(ignite)
-        tipArea->addBoxItem(tr("2.法术行动（元素点燃）"));
+        tipArea->addBoxItem(QStringLiteral("2.法术行动（元素点燃）"));
     if(wind)
-        tipArea->addBoxItem(tr("3.攻击行动（风刃）"));
+        tipArea->addBoxItem(QStringLiteral("3.攻击行动（风刃）"));
 }
 
 void YuanSu::turnBegin()
