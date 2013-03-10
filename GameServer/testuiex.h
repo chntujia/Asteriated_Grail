@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "ui_testuiex.h"
 
-//这是客户端测试的UI,内容可以忽略
+//杩欐槸瀹㈡埛绔祴璇曠殑UI,鍐呭鍙互蹇界暐
 namespace Ui {
     class TestUIex;
 }

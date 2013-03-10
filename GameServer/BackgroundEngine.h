@@ -7,60 +7,60 @@
 
 //class PlayerEntity;
 
-//ÉËº¦½á¹¹Ìå
+//ä¼¤å®³ç»“æ„ä½“
 struct Harm
 {
-    int harmPoint;//ÉËº¦µãÊı
-    int type;//ATTACK¹¥»÷ÉËº¦£¬MAGIC·¨ÊõÉËº¦
+    int harmPoint;//ä¼¤å®³ç‚¹æ•°
+    int type;//ATTACKæ”»å‡»ä¼¤å®³ï¼ŒMAGICæ³•æœ¯ä¼¤å®³
 };
 
-//ÓÎÏ·ºóÌ¨Àà
+//æ¸¸æˆåå°ç±»
 class BackgroundEngine:public QObject
 {
     Q_OBJECT
 public:
     BackgroundEngine();
     void randomize(QList<int> *queue);
-    //»ñÈ¡ÏÂÒ»¸öÍæ¼Ò
+    //è·å–ä¸‹ä¸€ä¸ªç©å®¶
     PlayerEntity* getNext(PlayerEntity* player){return player->getNext();}
-    //»ñÈ¡Ç°Ò»¸öÍí¼ä
+    //è·å–å‰ä¸€ä¸ªæ™šé—´
     PlayerEntity* getFront(PlayerEntity* player);
-    //ĞéÈõ´¦Àí
+    //è™šå¼±å¤„ç†
     void weakProcess(PlayerEntity* player, int howMany=3);
-    //Ä§µ¯´¦Àí
+    //é­”å¼¹å¤„ç†
     void missileProcess(CardEntity* card,int src,int dst);
-    //Ä§µ¯´«µİ
+    //é­”å¼¹ä¼ é€’
     void missilePass(bool rightOrder,int dst,int src,bool *passed,int missilePoint);
-    //ÃşÅÆº¯Êı
+    //æ‘¸ç‰Œå‡½æ•°
     void drawCards(int num,int harmed,PlayerEntity *player);
-    //ÃşÅÆÖÃÓÚ¸ÇÅÆÖĞ
+    //æ‘¸ç‰Œç½®äºç›–ç‰Œä¸­
     QList<CardEntity*> drwaCardsForCover(int num);
-    //³õÊ¼»¯
+    //åˆå§‹åŒ–
     void initial();
-    //Ï´ÅÆ
+    //æ´—ç‰Œ
     void shuffle(bool reShuffle);
-    //Çå³ı±¾¾ÖÊı¾İ
+    //æ¸…é™¤æœ¬å±€æ•°æ®
     void clearData();
-    //ÖĞ¶¾´¦Àí
+    //ä¸­æ¯’å¤„ç†
     void posionProcess(PlayerEntity* player,CardEntity* card);
-    //ÉèÖÃ»ù±¾Ğ§¹û
+    //è®¾ç½®åŸºæœ¬æ•ˆæœ
     void effectApply(CardEntity* card,PlayerEntity* user,PlayerEntity* dst);
-    //»ØºÏ¿ªÊ¼Ê±¼ì²éÊÇ·ñÓĞĞ§¹û´¥·¢µÄº¯Êı
+    //å›åˆå¼€å§‹æ—¶æ£€æŸ¥æ˜¯å¦æœ‰æ•ˆæœè§¦å‘çš„å‡½æ•°
     void checkEffect(PlayerEntity* player);
-    //Éè¶¨µ±Ç°Íæ¼Ò
+    //è®¾å®šå½“å‰ç©å®¶
     void setCurrentPlayer(class PlayerEntity* currentPlayer){this->currentPlayer = currentPlayer;}
-    //»ñÈ¡µ±Ç°Íæ¼Ò
+    //è·å–å½“å‰ç©å®¶
     PlayerEntity* getCurrentPlayer(){return this->currentPlayer;}
-    //»ØºÏ¿ªÊ¼½×¶Îº¯Êı
+    //å›åˆå¼€å§‹é˜¶æ®µå‡½æ•°
     void turnBeginPhase(PlayerEntity* currentPlayer);
-    //ĞĞ¶¯½×¶Îº¯Êı
+    //è¡ŒåŠ¨é˜¶æ®µå‡½æ•°
     void actionPhase();
-    //Ôö¼ÓÖ¸¶¨ÀàĞÍĞĞ¶¯´ÎÊı,²ÎÊıÎªattackLeft,magicLeft,specialLeft,attackOrMagicLeft,actionLeftÖ®Ò»
+    //å¢åŠ æŒ‡å®šç±»å‹è¡ŒåŠ¨æ¬¡æ•°,å‚æ•°ä¸ºattackLeft,magicLeft,specialLeft,attackOrMagicLeft,actionLeftä¹‹ä¸€
     void addActionNum(int kind);
     //void minusActionNum(int kind);
-    //»ØºÏ½áÊø½×¶Îº¯Êı
+    //å›åˆç»“æŸé˜¶æ®µå‡½æ•°
     void turnEndPhase();
-    //ÖØÖÃÊ£ÓàĞĞ¶¯´ÎÊı
+    //é‡ç½®å‰©ä½™è¡ŒåŠ¨æ¬¡æ•°
     void resetActionNum(){
                         this->attackLeft = 0;
                         this->magicLeft = 0;
@@ -68,29 +68,29 @@ public:
                         this->attackOrMagicLeft = 0;
                         this->actionLeft = 1;
                         }
-    //Ä³ÀàĞÍĞĞ¶¯ºóµ÷ÓÃ,¼õÉÙÊ£ÓàĞĞ¶¯´ÎÊı.²ÎÊıÎªATTACK,MAGIC,SPECIALÖ®Ò»
+    //æŸç±»å‹è¡ŒåŠ¨åè°ƒç”¨,å‡å°‘å‰©ä½™è¡ŒåŠ¨æ¬¡æ•°.å‚æ•°ä¸ºATTACK,MAGIC,SPECIALä¹‹ä¸€
     void acted(int kind);
-    //´ÓÊÖÉÏÊ¹ÓÃ¿¨ÅÆÊ±µ÷ÓÃ´Ëº¯Êı.¿ÉÄÜ´¥·¢"Õ¹Ê¾Ä³ÅÆÊ±"Ö®ÀàµÄĞÅºÅ
+    //ä»æ‰‹ä¸Šä½¿ç”¨å¡ç‰Œæ—¶è°ƒç”¨æ­¤å‡½æ•°.å¯èƒ½è§¦å‘"å±•ç¤ºæŸç‰Œæ—¶"ä¹‹ç±»çš„ä¿¡å·
     void useCard(QList<CardEntity*> cards,PlayerEntity* user,PlayerEntity* dst = NULL,bool stay = false,int realCard=1);
-    //´Ó¿¨ÅÆÉÏ»ñµÃ»ù´¡ÉËº¦Êı¾İ.Ä¿Ç°Ö»ÄÜ´Ó¹¥»÷ÅÆÉÏ»ñµÃÊı¾İ.
-    Harm getHarmFromCard(CardEntity* card);//´Ó¿¨ÅÆÉÏ»ñµÃ»ù´¡µÄÉËº¦ĞÅÏ¢
-    //¸ù¾İID²éÕÒÍæ¼Ò
+    //ä»å¡ç‰Œä¸Šè·å¾—åŸºç¡€ä¼¤å®³æ•°æ®.ç›®å‰åªèƒ½ä»æ”»å‡»ç‰Œä¸Šè·å¾—æ•°æ®.
+    Harm getHarmFromCard(CardEntity* card);//ä»å¡ç‰Œä¸Šè·å¾—åŸºç¡€çš„ä¼¤å®³ä¿¡æ¯
+    //æ ¹æ®IDæŸ¥æ‰¾ç©å®¶
     PlayerEntity* getPlayerByID(int ID);
-    //ÒÔÏÂº¯ÊıÅĞ¶Ïµ±Ç°Íæ¼ÒÊÇ·ñÓĞÈ¨½øĞĞÏàÓ¦ĞĞ¶¯
+    //ä»¥ä¸‹å‡½æ•°åˆ¤æ–­å½“å‰ç©å®¶æ˜¯å¦æœ‰æƒè¿›è¡Œç›¸åº”è¡ŒåŠ¨
     bool allowAttack();
     bool allowMagic();
     bool allowSpecial();
-    //»ñÈ¡Íæ¼Ò×ÜÊı
+    //è·å–ç©å®¶æ€»æ•°
     int getPlayerNum(){return this->playerNum;}
-    //ÉèÖÃÍæ¼Ò×ÜÊı
+    //è®¾ç½®ç©å®¶æ€»æ•°
     void setPlayerNum(int num){this->playerNum = num;}
 
 
 
-    bool canAct();//ÅĞ¶¨ÊÇ·ñ¿ÉÒÔĞĞ¶¯,´ıÍê³É
-    void reDraw();//ÎŞ·¨ĞĞ¶¯£¬ÖØÃş.´ıÍê³É
+    bool canAct();//åˆ¤å®šæ˜¯å¦å¯ä»¥è¡ŒåŠ¨,å¾…å®Œæˆ
+    void reDraw();//æ— æ³•è¡ŒåŠ¨ï¼Œé‡æ‘¸.å¾…å®Œæˆ
 
-    //ÒÔÏÂÎªÉËº¦Ê±¼äÖáº¯Êı
+    //ä»¥ä¸‹ä¸ºä¼¤å®³æ—¶é—´è½´å‡½æ•°
     void timeLine1(CardEntity* attackCard,PlayerEntity* src,PlayerEntity* dst,bool isActiveAttack);
     void timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEntity* dst,bool isActiveAttack,int attackType,Harm harm);
     void timeLine3(Harm harm, PlayerEntity *src,PlayerEntity *dst,QString magicReason = "");
@@ -98,29 +98,29 @@ public:
     void timeLine5(Harm harm,PlayerEntity *src,PlayerEntity *dst,int cross);
     void timeLine6(Harm harm,PlayerEntity *src,PlayerEntity *dst);
 
-    //·¨ÊõÅÆ´¦Àíº¯Êı
+    //æ³•æœ¯ç‰Œå¤„ç†å‡½æ•°
     void useMagicCard(int cardID,int srcID,int dstID = -1);
-    //ÒÔÏÂÎªµ÷ÊÔÓÃº¯Êı
+    //ä»¥ä¸‹ä¸ºè°ƒè¯•ç”¨å‡½æ•°
     void showTest();
     PlayerEntity* setRole(int roleID, BackgroundEngine *engine, int id, int color);
 
 public slots:
-    //µ÷ÊÔÓÃ²Û
+    //è°ƒè¯•ç”¨æ§½
     void testSLOT(){qDebug()<<"test by backEngine";}
-    //ÓÎÏ·¿ªÊ¼²Û
+    //æ¸¸æˆå¼€å§‹æ§½
     void gameStart();
-    //Î»´ÎÅÅÁĞ²Û
+    //ä½æ¬¡æ’åˆ—æ§½
     void seatPrearrange(int id, int isRed, QString name);
     void seatArrange();
     void role3Pick1();
     void role3Pick1Reply(int id,int roleID);
-    //Ìá¹©ºòÑ¡½ÇÉ«
+    //æä¾›å€™é€‰è§’è‰²
     void BP();
     void roleRandom();
     void seatPostarrange();
-    //ÓÎÏ·½áÊø¼ì²é²Û
+    //æ¸¸æˆç»“æŸæ£€æŸ¥æ§½
     bool checkEnd();
-    //ÆúÅÆ¼ÓÈëÆúÅÆ¶Ñ²Û
+    //å¼ƒç‰ŒåŠ å…¥å¼ƒç‰Œå †æ§½
     void toDiscardPileSLOT(QList<CardEntity*> cards,bool show);
 
     void moveCardFrom(CardEntity* card);
@@ -128,77 +128,77 @@ public slots:
     void moveCardFromCoverToDiscard(CardEntity* card,bool show);
 
 signals:
-    //ÒÔÏÂ¸÷Ê±¼äµãµÄĞÅºÅ
+    //ä»¥ä¸‹å„æ—¶é—´ç‚¹çš„ä¿¡å·
     void timeLine1ProSIG(QList<void*> args);
     void timeLine1SIG(QList<void*> args);
-    //Ê±¼äÖá2-Î´ÃüÖĞ
+    //æ—¶é—´è½´2-æœªå‘½ä¸­
     void timeLine2missedSIG(QList<void*> args);
-    //Ê±¼äÖá2-ÃüÖĞ
+    //æ—¶é—´è½´2-å‘½ä¸­
     void timeLine2hitSIG(QList<void*> args);
     void timeLine3SIG(QList<void*> args);
     void timeLine4SIG(QList<void*> args);
     void timeLine5SIG(QList<void*> args);
     void timeLine6SIG(QList<void*> args);
     void timeLine6DrawedSIG(QList<void*> args);
-    //»ØºÏ¿ªÊ¼½×¶ÎĞÅºÅ
+    //å›åˆå¼€å§‹é˜¶æ®µä¿¡å·
     void turnBeginPhaseSIG(QList<void*> args);
-    //»ØºÏ½áÊø½×¶ÎĞÅºÅ
+    //å›åˆç»“æŸé˜¶æ®µä¿¡å·
     void turnEndPhaseSIG(PlayerEntity*);
-    //ĞĞ¶¯½×¶ÎĞÅºÅ
+    //è¡ŒåŠ¨é˜¶æ®µä¿¡å·
     void weakSIG(PlayerEntity*, bool*);
     void actionPhaseSIG(QList<void*> args);
     void additonalActionSIG(QList<void*> args);
     void tiaoXinPhaseSIG(PlayerEntity*, int*,bool*);
-    //Á¬½ÓÍæ¼Ò¶ÔÏóĞÅºÅ-²ÛµÄĞÅºÅ
+    //è¿æ¥ç©å®¶å¯¹è±¡ä¿¡å·-æ§½çš„ä¿¡å·
     void makePlayerConnectSIG(int);
-    //·¢ËÍÍ¨Ñ¶ĞÅÏ¢
+    //å‘é€é€šè®¯ä¿¡æ¯
     void sendMessageSIG(int playerID,QString content);
-    //Ê¹ÓÃ·¨Êõ¼¼ÄÜĞÅºÅ
+    //ä½¿ç”¨æ³•æœ¯æŠ€èƒ½ä¿¡å·
     void skillMagic(QList<void*> args);
     void skillAttack(QList<void*> args);
     void skillSpecial(QList<void*> args);
     void shieldSIG(QList<void*> args);
     void showHandCards(QList<CardEntity*> cards,PlayerEntity* user);
 
-    //ÊÖÅÆ±ä»¯ĞÅºÅ£¨Î×Å®Ê¹ÓÃ£©
+    //æ‰‹ç‰Œå˜åŒ–ä¿¡å·ï¼ˆå·«å¥³ä½¿ç”¨ï¼‰
     void handCardsChange(PlayerEntity* dst);
 
-    //ÒÔÏÂĞÅºÅÔİÎŞ×÷ÓÃ
-    //Ñ¯ÎÊÓ¦Õ½¶¯×÷ĞÅºÅ
+    //ä»¥ä¸‹ä¿¡å·æš‚æ— ä½œç”¨
+    //è¯¢é—®åº”æˆ˜åŠ¨ä½œä¿¡å·
     void askForReply(QList<CardEntity*> hand,QString element,int userID);
-    //Ñ¯ÎÊÖÎÁÆÏìÓ¦ĞÅºÅ
+    //è¯¢é—®æ²»ç–—å“åº”ä¿¡å·
     void askForHeal(Harm harm, PlayerEntity* src, PlayerEntity* dst, int *crossAvailable,QString magicReason = "");
-    //Ñ¯ÎÊĞĞ¶¯ĞÅºÅ
+    //è¯¢é—®è¡ŒåŠ¨ä¿¡å·
     void askForActSIG(QList<CardEntity*> hand,int currentID);
 
-    //ÒÔÏÂÎª¸÷ÀàĞĞ¶¯½áÊøĞÅºÅ
+    //ä»¥ä¸‹ä¸ºå„ç±»è¡ŒåŠ¨ç»“æŸä¿¡å·
     void attackFinishSIG(QList<void*> args);
     void magicFinishSIG(QList<void*> args);
     void specialFinishSIG(QList<void*> args);
-    //·¨ÊõĞĞ¶¯ÉúĞ§Ç°
+    //æ³•æœ¯è¡ŒåŠ¨ç”Ÿæ•ˆå‰
     void beforeMagicSIG(QList<void*> args);
-    //Ê¿ÆøÏÂ½µÇ°£¨ºìÁ«ÆïÊ¿ÈÈÑª·ĞÌÚ×´Ì¬£©
+    //å£«æ°”ä¸‹é™å‰ï¼ˆçº¢è²éª‘å£«çƒ­è¡€æ²¸è…¾çŠ¶æ€ï¼‰
     void beforeLoseMoralSIG(int harmed, int *howMany, PlayerEntity *dst);
-    //Ê¿ÆøÏÂ½µĞÅºÅ
+    //å£«æ°”ä¸‹é™ä¿¡å·
     void loseMoraleHeChengSIG(int harmed, int *howMany, PlayerEntity *dst);
     void loseMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
-    //µûÎèËøÊ¿ÆøĞÅºÅ
+    //è¶èˆé”å£«æ°”ä¿¡å·
     void fixMoralHeChengSIG(int harmed, int *howMany, PlayerEntity *dst);
     void fixMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
-    //ÕæÊµÊ¿ÆøÏÂ½µĞÅºÅ£¨Î×Å®ºìÁ«½øÈë×´Ì¬Ê¹ÓÃ¡¢Áé»ê³¤»Æ»êÊ¹ÓÃ¡¢Ä§Ç¹»ÃÓ°ĞÇ³½¡¾£¿¡¿£©
+    //çœŸå®å£«æ°”ä¸‹é™ä¿¡å·ï¼ˆå·«å¥³çº¢è²è¿›å…¥çŠ¶æ€ä½¿ç”¨ã€çµé­‚é•¿é»„é­‚ä½¿ç”¨ã€é­”æªå¹»å½±æ˜Ÿè¾°ã€ï¼Ÿã€‘ï¼‰
     void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst);
     void toInforDisplay(QString content);
     void usedShield(int userID);
 private:
-    //ÅÆ¶ÑÓëÆúÅÆ¶Ñ
+    //ç‰Œå †ä¸å¼ƒç‰Œå †
     QList<CardEntity*> pile,discardPile,discardPileCovered;
-    //Íæ¼ÒÃÇ
+    //ç©å®¶ä»¬
     QList<PlayerEntity*> playerList;
     PlayerEntity *currentPlayer;
-    //¹¥»÷ĞĞ¶¯¡¢·¨ÊõĞĞ¶¯¡¢ÌØÊâĞĞ¶¯¡¢¹¥»÷»ò·¨ÊõĞĞ¶¯¡¢ÈÎÒâĞĞ¶¯µÄÊ£Óà´ÎÊı
+    //æ”»å‡»è¡ŒåŠ¨ã€æ³•æœ¯è¡ŒåŠ¨ã€ç‰¹æ®Šè¡ŒåŠ¨ã€æ”»å‡»æˆ–æ³•æœ¯è¡ŒåŠ¨ã€ä»»æ„è¡ŒåŠ¨çš„å‰©ä½™æ¬¡æ•°
     int attackLeft,magicLeft,specialLeft,attackOrMagicLeft,actionLeft;
     int playerNum;
-    //ÓÎÏ·½øĞĞÖĞ±ê¼Ç
+    //æ¸¸æˆè¿›è¡Œä¸­æ ‡è®°
     bool playing;
     QList<int> red,blue;
     QString queue;

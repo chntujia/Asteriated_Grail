@@ -55,19 +55,19 @@ StatusItem::StatusItem(int specialStatusID)
     {
     case 0:
         pic=QPixmap("resource/status/ShuFu.png");
-        setToolTip(tr("ÎåÏµÊø¸¿"));
+        setToolTip(QStringLiteral("äº”ç³»æŸç¼š"));
         break;
     case 1:
         pic=QPixmap("resource/status/TiaoXin.png");
-        setToolTip(tr("ÌôÐÆ"));
+        setToolTip(QStringLiteral("æŒ‘è¡…"));
         break;
     case 2:
         pic=QPixmap("resource/status/LianJie.png");
-        setToolTip(tr("Áé»êÁ´½Ó"));
+        setToolTip(QStringLiteral("çµé­‚é“¾æŽ¥"));
         break;
     case 3:
         pic=QPixmap("resource/status/TongSheng.png");
-        setToolTip(tr("Í¬Éú¹²ËÀ"));
+        setToolTip(QStringLiteral("åŒç”Ÿå…±æ­»"));
         break;
     }
 }
@@ -88,7 +88,7 @@ StatusItem::StatusItem(Token* token)
         pic=QPixmap("resource/status/token2.png");
         break;
     }
-    setToolTip(token->tokenName+tr("(ÉÏÏÞÎª")+QString::number(token->max)+")");
+    setToolTip(token->tokenName+QStringLiteral("ä¸Šé™ä¸º")+QString::number(token->max)+")");
     Num[0]=QPixmap("resource/SmallNumber/Small0.png");
     Num[1]=QPixmap("resource/SmallNumber/Small1.png");
     Num[2]=QPixmap("resource/SmallNumber/Small2.png");

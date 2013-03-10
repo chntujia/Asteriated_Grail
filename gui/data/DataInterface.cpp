@@ -31,35 +31,35 @@ void DataInterface::initCardDB()
 void DataInterface::initRoleList()
 {
     roleList<<NULL;
-    roleList<<tr("[½£Ê¥]");
-    roleList<<tr("[¿ñÕ½Ê¿]");
-    roleList<<tr("[¹­Ö®Å®Éñ]");
-    roleList<<tr("[·âÓ¡Ê¦]");
-    roleList<<tr("[°µÉ±Õß]");
-    roleList<<tr("[Ê¥Å®]");
-    roleList<<tr("[ÌìÊ¹]");
-    roleList<<tr("[Ä§µ¼Ê¦]");
-    roleList<<tr("[Ä§½£]");
-    roleList<<tr("[Ê¥Ç¹]");
-    roleList<<tr("[ÔªËØÊ¦]");
-    roleList<<tr("[Ã°ÏÕ¼Ò]");
-    roleList<<tr("[ËÀÁé·¨Ê¦]");
-    roleList<<tr("[ÖÙ²ÃÕß]");
-    roleList<<tr("[Éñ¹Ù]");
-    roleList<<tr("[Æíµ»Ê¦]");
-    roleList<<tr("[ÏÍÕß]");
-    roleList<<tr("[Áé·ûÊ¦]");
-    roleList<<tr("[½£µÛ]");
-    roleList<<tr("[¸ñ¶·¼Ò]");
-    roleList<<tr("[ÓÂÕß]");
-    roleList<<tr("[Áé»êÊõÊ¿]");
-    roleList<<tr("[Î×Å®]");
-    roleList<<tr("[µûÎèÕß]");
-    roleList<<tr("[]");
-    roleList<<tr("[Ä§¹­]");
-    roleList<<tr("[]");
-    roleList<<tr("[ºìÁ«ÆïÊ¿]");
-    roleList<<tr("[Ä§Ç¹]");
+    roleList<<QStringLiteral("[å‰‘åœ£]");
+    roleList<<QStringLiteral("[ç‹‚æˆ˜å£«]");
+    roleList<<QStringLiteral("[å¼“ä¹‹å¥³ç¥ž]");
+    roleList<<QStringLiteral("[å°å°å¸ˆ]");
+    roleList<<QStringLiteral("[æš—æ€è€…]");
+    roleList<<QStringLiteral("[åœ£å¥³]");
+    roleList<<QStringLiteral("[å¤©ä½¿]");
+    roleList<<QStringLiteral("[é­”å¯¼å¸ˆ]");
+    roleList<<QStringLiteral("[é­”å‰‘]");
+    roleList<<QStringLiteral("[åœ£æžª]");
+    roleList<<QStringLiteral("[å…ƒç´ å¸ˆ]");
+    roleList<<QStringLiteral("[å†’é™©å®¶]");
+    roleList<<QStringLiteral("[æ­»çµæ³•å¸ˆ]");
+    roleList<<QStringLiteral("[ä»²è£è€…]");
+    roleList<<QStringLiteral("[ç¥žå®˜]");
+    roleList<<QStringLiteral("[ç¥ˆç¥·å¸ˆ]");
+    roleList<<QStringLiteral("[è´¤è€…]");
+    roleList<<QStringLiteral("[çµç¬¦å¸ˆ]");
+    roleList<<QStringLiteral("[å‰‘å¸]");
+    roleList<<QStringLiteral("[æ ¼æ–—å®¶]");
+    roleList<<QStringLiteral("[å‹‡è€…]");
+    roleList<<QStringLiteral("[çµé­‚æœ¯å£«]");
+    roleList<<QStringLiteral("[å·«å¥³]");
+    roleList<<QStringLiteral("[è¶èˆžè€…]");
+    roleList<<QStringLiteral("[]");
+    roleList<<QStringLiteral("[é­”å¼“]");
+    roleList<<QStringLiteral("[]");
+    roleList<<QStringLiteral("[çº¢èŽ²éª‘å£«]");
+    roleList<<QStringLiteral("[é­”æžª]");
 }
 
 void DataInterface::initPlayerList(QString msg,QStringList nicknames)
@@ -71,7 +71,7 @@ void DataInterface::initPlayerList(QString msg,QStringList nicknames)
         if(msg[i].digitValue()==id)
             break;
     myPos=i;
-    //ÉèÖÃ×ù´Î£¬·Ö¶Ó    
+    //è®¾ç½®åº§æ¬¡ï¼Œåˆ†é˜Ÿ    
     for(;i<playerMax;i++)
     {
         pID=msg[i].digitValue();

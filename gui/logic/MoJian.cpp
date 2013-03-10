@@ -6,7 +6,7 @@ MoJian::MoJian()
     setMyRole(this);
 
     Button *anYingLiuXing;
-    anYingLiuXing=new Button(3,tr("°µÓ°Á÷ÐÇ"));
+    anYingLiuXing=new Button(3,QStringLiteral("æš—å½±æµæ˜Ÿ"));
     buttonArea->addButton(anYingLiuXing);
     connect(anYingLiuXing,SIGNAL(buttonSelected(int)),this,SLOT(AnYingLiuXing()));
 }
@@ -34,14 +34,14 @@ void MoJian::AnYingNingJu()
 {
     state=903;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯°µÓ°Äý¾Û£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨æš—å½±å‡èšï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
 
 void MoJian::XiuLuoLianZhan()
 {
-    //ÏÈ½èÓÃ»ùÀàµÄ¶îÍâ¹¥»÷ÐÐ¶¯×´Ì¬
+    //å…ˆå€Ÿç”¨åŸºç±»çš„é¢å¤–æ”»å‡»è¡ŒåŠ¨çŠ¶æ€
     state=10;
     onceUsed=true;
     gui->reset();
@@ -68,7 +68,7 @@ void MoJian::AnYingLiuXing()
 void MoJian::HeiAnZhenChan()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ºÚ°µÕð²ü£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨é»‘æš—éœ‡é¢¤ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -102,7 +102,7 @@ void MoJian::onOkClicked()
 
     switch(state)
     {
-//¶îÍâÐÐ¶¯Ñ¯ÎÊ
+//é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
@@ -110,7 +110,7 @@ void MoJian::onOkClicked()
             XiuLuoLianZhan();
         }
         break;
-//°µÓ°Á÷ÐÇ
+//æš—å½±æµæ˜Ÿ
     case 902:
         command="902;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -123,7 +123,7 @@ void MoJian::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//°µÓ°Äý¾Û
+//æš—å½±å‡èš
     case 903:
         command="903;1;";
         start=true;
@@ -139,11 +139,11 @@ void MoJian::onCancelClicked()
     QString command;
     switch(state)
     {
-//°µÓ°Á÷ÐÇ
+//æš—å½±æµæ˜Ÿ
     case 902:
         normal();
         break;
-//°µÓ°Äý¾Û
+//æš—å½±å‡èš
     case 903:
         command="903;0;";
         start=false;
@@ -155,9 +155,9 @@ void MoJian::onCancelClicked()
 void MoJian::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("°µÓ°Äý¾Û"))
+    if(skill==QStringLiteral("æš—å½±å‡èš"))
         AnYingNingJu();
-    else if(skill==tr("ºÚ°µÕð²ü"))
+    else if(skill==QStringLiteral("é»‘æš—éœ‡é¢¤"))
         HeiAnZhenChan();
 }
 
@@ -165,7 +165,7 @@ void MoJian::additionalAction()
 {
     Role::additionalAction();
     if(usedAttack&&!onceUsed)
-        tipArea->addBoxItem(tr("1.ÐÞÂÞÁ¬Õ¶"));
+        tipArea->addBoxItem(QStringLiteral("1.ä¿®ç½—è¿žæ–©"));
 }
 
 void MoJian::attacked(QString element, int hitRate)

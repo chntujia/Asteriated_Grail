@@ -1,7 +1,7 @@
 #include "ShowArea.h"
 #include "Animation.h"
 #include <QPainter>
-#include <windows.h>
+//#include <windows.h>
 
 static QRectF ShowAreaRect(0, 0, 500, 150);
 ShowArea::ShowArea()
@@ -69,7 +69,7 @@ void ShowArea::showCards(QList<Card *> cards)
         cardItem = new CardItem(cards[i]);
 
         (*list) << cardItem;
-        animation->itemFlash(list->at(i),165 + offset+card_skip*i + cardItem->boundingRect().width()/2,260+cardItem->boundingRect().height()/2)->start(QAbstractAnimation::DeleteWhenStopped);
+        animation->itemFlash(list->at(i),x() + offset+card_skip*i + cardItem->boundingRect().width()/2,y()+cardItem->boundingRect().height()/2)->start(QAbstractAnimation::DeleteWhenStopped);
     }
 
 }

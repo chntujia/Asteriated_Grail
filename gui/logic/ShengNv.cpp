@@ -5,15 +5,15 @@ ShengNv::ShengNv()
     makeConnection();
 setMyRole(this);
     Button *zhiLiaoShu, *zhiYuZhiGuang, *shengLiao;
-    zhiLiaoShu = new Button(3,tr("ÖÎÁÆÊõ"));
+    zhiLiaoShu = new Button(3,QStringLiteral("æ²»ç–—æœ¯"));
     buttonArea->addButton(zhiLiaoShu);
     connect(zhiLiaoShu,SIGNAL(buttonSelected(int)),this,SLOT(ZhiLiaoShu()));
 
-    zhiYuZhiGuang=new Button(4, tr("ÖÎÓúÖ®¹â"));
+    zhiYuZhiGuang=new Button(4, QStringLiteral("æ²»æ„ˆä¹‹å…‰"));
     buttonArea->addButton(zhiYuZhiGuang);
     connect(zhiYuZhiGuang,SIGNAL(buttonSelected(int)),this,SLOT(ZhiYuZhiGuang()));
 
-    shengLiao=new Button(5,tr("Ê¥ ÁÆ"));
+    shengLiao=new Button(5,QStringLiteral("åœ£ ç–—"));
     buttonArea->addButton(shengLiao);
     connect(shengLiao,SIGNAL(buttonSelected(int)),this,SLOT(ShengLiao()));
 }
@@ -23,11 +23,11 @@ void ShengNv::normal()
     Role::normal();
     Player* myself=dataInterface->getMyself();
 
-    if (handArea->checkSpecility(tr("ÖÎÁÆÊõ")))
+    if (handArea->checkSpecility(QStringLiteral("æ²»ç–—æœ¯")))
         buttonArea->enable(3);
-    if (handArea->checkSpecility(tr("ÖÎÓúÖ®¹â")))
+    if (handArea->checkSpecility(QStringLiteral("æ²»æ„ˆä¹‹å…‰")))
         buttonArea->enable(4);
-    //Ê¥ÁÆ
+    //åœ£ç–—
     if (myself->getEnergy()>0 && !onceUsed)
         buttonArea->enable(5);
     unactionalCheck();
@@ -38,9 +38,9 @@ void ShengNv::attackOrMagic()
 {
     Role::attackOrMagic();
     Player* myself=dataInterface->getMyself();
-    if (handArea->checkSpecility(tr("ÖÎÁÆÊõ")))
+    if (handArea->checkSpecility(QStringLiteral("æ²»ç–—æœ¯")))
         buttonArea->enable(3);
-    if (handArea->checkSpecility(tr("ÖÎÓúÖ®¹â")))
+    if (handArea->checkSpecility(QStringLiteral("æ²»æ„ˆä¹‹å…‰")))
         buttonArea->enable(4);
     if (myself->getEnergy()>0 && !onceUsed)
         buttonArea->enable(5);
@@ -60,7 +60,7 @@ void ShengNv::ZhiLiaoShu()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("ÖÎÁÆÊõ"));
+    handArea->enableSpecility(QStringLiteral("æ²»ç–—æœ¯"));
 }
 
 void ShengNv::ZhiYuZhiGuang()
@@ -76,14 +76,14 @@ void ShengNv::ZhiYuZhiGuang()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("ÖÎÓúÖ®¹â"));
+    handArea->enableSpecility(QStringLiteral("æ²»æ„ˆä¹‹å…‰"));
 }
 
 void ShengNv::LianMin()
 {
     state=604;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯Á¯Ãõ£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨æ€œæ‚¯ï¼Ÿ"));
     QList<Card*> handcards=dataInterface->getHandCards();
     bool flag=true;
     int i;
@@ -98,7 +98,7 @@ void ShengNv::LianMin()
                 flag=true;
                 break;
             }
-            else if(handcards[i]->getProperty()==tr("Ê¥"))
+            else if(handcards[i]->getProperty()==QStringLiteral("åœ£"))
             {
                 flag=true;
                 break;
@@ -124,11 +124,11 @@ void ShengNv::ShengLiao()
     playerArea->setQuota(1);
     playerArea->enableAll();
 
-    tipArea->setMsg(tr("Ã¿´ÎµãÑ¡Ò»ÈË·ÖÅäÒ»µãÖÎÁÆ£¬¹²Èı´Î"));
+    tipArea->setMsg(QStringLiteral("æ¯æ¬¡ç‚¹é€‰ä¸€äººåˆ†é…ä¸€ç‚¹æ²»ç–—ï¼Œå…±ä¸‰æ¬¡"));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("1.Ë®¾§"));
+        tipArea->addBoxItem(QStringLiteral("1.æ°´æ™¶"));
     if(gem>=1)
-        tipArea->addBoxItem(tr("2.±¦Ê¯"));
+        tipArea->addBoxItem(QStringLiteral("2.å®çŸ³"));
 
     tipArea->showBox();
 }
@@ -141,7 +141,7 @@ void ShengNv::ShengLiao2()
     tipArea->reset();
     buttonArea->reset();
 
-    tipArea->setMsg(tr("ÇëÑ¡Ôñ·ÖÅäµÚ¶şµãÖÎÁÆ"));
+    tipArea->setMsg(QStringLiteral("è¯·é€‰æ‹©åˆ†é…ç¬¬äºŒç‚¹æ²»ç–—"));
     playerArea->enableAll();
     playerArea->setQuota(1);
     handArea->setQuota(1);
@@ -158,7 +158,7 @@ void ShengNv::ShengLiao3()
     tipArea->reset();
     buttonArea->reset();
 
-    tipArea->setMsg(tr("ÇëÑ¡Ôñ·ÖÅäµÚÈıµãÖÎÁÆ"));
+    tipArea->setMsg(QStringLiteral("è¯·é€‰æ‹©åˆ†é…ç¬¬ä¸‰ç‚¹æ²»ç–—"));
     playerArea->enableAll();
     playerArea->setQuota(1);
     handArea->setQuota(1);
@@ -171,7 +171,7 @@ void ShengNv::BingShuangDaoYan()
 {
     state=601;
 
-    tipArea->setMsg(tr("ÇëÑ¡Ôñ±ùËªµ»ÑÔµÄÄ¿±ê"));
+    tipArea->setMsg(QStringLiteral("è¯·é€‰æ‹©å†°éœœç¥·è¨€çš„ç›®æ ‡"));
     playerArea->enableAll();
     playerArea->setQuota(1);
 
@@ -210,17 +210,17 @@ void ShengNv::onOkClicked()
 
     switch(state)
     {
-//¶îÍâĞĞ¶¯Ñ¯ÎÊ
+//é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();
-        //¹¥»÷»ò·¨ÊõĞĞ¶¯
+        //æ”»å‡»æˆ–æ³•æœ¯è¡ŒåŠ¨
         if(text[0]=='1'){
             ShengLiaoAddition=false;
             emit sendCommand("606;"+QString::number(myID)+";");
             attackOrMagic();
         }
         break;
-//±ùËªµ»ÑÔ
+//å†°éœœç¥·è¨€
     case 601:
         command="601;";
         targetID=QString::number(selectedPlayers[0]->getID());
@@ -228,7 +228,7 @@ void ShengNv::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÖÎÁÆÊõ
+//æ²»ç–—æœ¯
     case 602:
         command="602;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -239,7 +239,7 @@ void ShengNv::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÖÎÓúÖ®¹â
+//æ²»æ„ˆä¹‹å…‰
     case 603:
         command="603;";
         int n;
@@ -253,14 +253,14 @@ void ShengNv::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//Á¯Ãõ
+//æ€œæ‚¯
     case 604:
         start=true;
         command="604;1;";
         emit sendCommand(command);
         gui->reset();
         break;
-//Ê¥ÁÆ
+//åœ£ç–—
     case 651:        
         command="605;";
         text=tipArea->getBoxCurrentText();
@@ -296,18 +296,18 @@ void ShengNv::onCancelClicked()
     QString command;
     switch(state)
     {
-//Á¯Ãõ
+//æ€œæ‚¯
     case 604:
         command="604;0;";
         emit sendCommand(command);
         gui->reset();
         break;
-//±ùËªµ»ÑÔ
-//ÖÎÁÆÊõ
+//å†°éœœç¥·è¨€
+//æ²»ç–—æœ¯
     case 602:
-//ÖÎÓúÖ®¹â
+//æ²»æ„ˆä¹‹å…‰
     case 603:
-//Ê¥ÁÆ
+//åœ£ç–—
     case 651:
         if(actionFlag==0)
             normal();
@@ -320,9 +320,9 @@ void ShengNv::onCancelClicked()
 void ShengNv::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("±ùËªµ»ÑÔ"))
+    if(skill==QStringLiteral("å†°éœœç¥·è¨€"))
         BingShuangDaoYan();
-    else if(skill==tr("Á¯Ãõ"))
+    else if(skill==QStringLiteral("æ€œæ‚¯"))
         LianMin();
 }
 
@@ -330,7 +330,7 @@ void ShengNv::additionalAction()
 {
     Role::additionalAction();
     if(ShengLiaoAddition)
-        tipArea->addBoxItem(tr("1.¹¥»÷»ò·¨ÊõĞĞ¶¯£¨Ê¥ÁÆ£©"));
+        tipArea->addBoxItem(QStringLiteral("1.æ”»å‡»æˆ–æ³•æœ¯è¡ŒåŠ¨ï¼ˆåœ£ç–—ï¼‰"));
 }
 
 void ShengNv::turnBegin()

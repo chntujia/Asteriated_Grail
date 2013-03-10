@@ -3,23 +3,23 @@
 #include "widget/GUI.h"
 DecisionArea::DecisionArea()
 {
-    okButton=new Button(0,tr("È· ¶¨"));
+    okButton=new Button(0,QStringLiteral("ç¡® å®š"));
     okButton->setParentItem(this);
     okButton->setPos(0,0);
     connect(okButton,SIGNAL(buttonSelected(int)),this,SLOT(onButtonSelected(int)));
 
-    cancelButton=new Button(1,tr("È¡ Ïû"));
+    cancelButton=new Button(1,QStringLiteral("å– æ¶ˆ"));
     cancelButton->setParentItem(this);
     cancelButton->setPos(80,0);
     connect(cancelButton,SIGNAL(buttonSelected(int)),this,SLOT(onButtonSelected(int)));
 
-    exchangeButton=new Button(2,tr("ÎÞ·¨ÐÐ¶¯"));
+    exchangeButton=new Button(2,QStringLiteral("æ— æ³•è¡ŒåŠ¨"));
     exchangeButton->setParentItem(this);
     exchangeButton->setPos(-80,0);
     exchangeButton->setOpacity(0);
     connect(exchangeButton,SIGNAL(buttonSelected(int)),this,SLOT(onButtonSelected(int)));
 
-    resignButton=new Button(3,tr("·ÅÆúÐÐ¶¯"));
+    resignButton=new Button(3,QStringLiteral("æ”¾å¼ƒè¡ŒåŠ¨"));
     resignButton->setParentItem(this);
     resignButton->setPos(-80,0);
     resignButton->setOpacity(0);
@@ -133,17 +133,17 @@ void DecisionArea::reset()
 ButtonArea::ButtonArea()
 {
     Button *button;
-    button=new Button(0,tr("¹º Âò"));
+    button=new Button(0,QStringLiteral("è´­ ä¹°"));
     button->setParentItem(this);
     button->setPos(0,0);
     buttons<<button;
 
-    button=new Button(1,tr("ºÏ ³É"));
+    button=new Button(1,QStringLiteral("åˆ æˆ"));
     button->setParentItem(this);
     button->setPos(82,0);
     buttons<<button;
 
-    button=new Button(2,tr("Ìá Á¶"));
+    button=new Button(2,QStringLiteral("æ ç‚¼"));
     button->setParentItem(this);
     button->setPos(164,0);
     buttons<<button;

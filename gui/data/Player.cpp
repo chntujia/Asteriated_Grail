@@ -22,117 +22,117 @@ void Player::setRole(int roleID)
     switch(roleID)
     {
     case 1:
-        roleName=tr("[½£Ê¥]");
+        roleName=QStringLiteral("[å‰‘åœ£]");
         break;
     case 2:
-        roleName=tr("[¿ñÕ½Ê¿]");
+        roleName=QStringLiteral("[ç‹‚æˆ˜å£«]");
         break;
     case 3:
-        roleName=tr("[¹­Ö®Å®Éñ]");
+        roleName=QStringLiteral("[å¼“ä¹‹å¥³ç¥]");
         break;
     case 4:
-        roleName=tr("[·âÓ¡Ê¦]");
+        roleName=QStringLiteral("[å°å°å¸ˆ]");
         break;
     case 5:
-        roleName=tr("[°µÉ±Õß]");
+        roleName=QStringLiteral("[æš—æ€è€…]");
         tapSource="resource/tap/QianXing.png";
         break;
     case 6:
-        roleName=tr("[Ê¥Å®]");
+        roleName=QStringLiteral("[åœ£å¥³]");
         tapSource="resource/tap/LianMin.png";
         break;
     case 7:
-        roleName=tr("[ÌìÊ¹]");
+        roleName=QStringLiteral("[å¤©ä½¿]");
         break;
     case 8:
-        roleName=tr("[Ä§µ¼Ê¦]");
+        roleName=QStringLiteral("[é­”å¯¼å¸ˆ]");
         break;
     case 9:
-        roleName=tr("[Ä§½£]");
+        roleName=QStringLiteral("[é­”å‰‘]");
         tapSource="resource/tap/AnYing.png";
         break;    
     case 10:
-        roleName=tr("[Ê¥Ç¹]");
+        roleName=QStringLiteral("[åœ£æª]");
         crossMax=3;
         break;
     case 11:
-        roleName=tr("[ÔªËØÊ¦]");
-        addToken(0,new Token(tr("ÔªËØ"),3,0));
+        roleName=QStringLiteral("[å…ƒç´ å¸ˆ]");
+        addToken(0,new Token(QStringLiteral("å…ƒç´ "),3,0));
         break;
     case 12:
-        roleName=tr("[Ã°ÏÕ¼Ò]");
+        roleName=QStringLiteral("[å†’é™©å®¶]");
         break;
     case 13:
-        roleName=tr("[ËÀÁé·¨Ê¦]");
+        roleName=QStringLiteral("[æ­»çµæ³•å¸ˆ]");
         crossMax = 5;
         break;
     case 14:
-        roleName=tr("[ÖÙ²ÃÕß]");
+        roleName=QStringLiteral("[ä»²è£è€…]");
         tapSource="resource/tap/ShenPan.png";
+        addToken(0,new Token(QStringLiteral("å®¡åˆ¤"),4,0));
         crystal=2;
-        addToken(0,new Token(tr("ÉóÅĞ"),4,0));
         break;
     case 15:
-        roleName=tr("[Éñ¹Ù]");
+        roleName=QStringLiteral("[ç¥å®˜]");
         crossMax=6;
         break;
     case 16:
-        roleName=tr("[Æíµ»Ê¦]");
+        roleName=QStringLiteral("[ç¥ˆç¥·å¸ˆ]");
         tapSource="resource/tap/QiDao.png";
-        addToken(0,new Token(tr("·ûÎÄ"),3,0));
+        addToken(0,new Token(QStringLiteral("ç¬¦æ–‡"),3,0));
         break;
     case 17:
-        roleName=tr("[ÏÍÕß]");
+        roleName=QStringLiteral("[è´¤è€…]");
         energyMax=4;
         break;
     case 18:
-        roleName = tr("[Áé·ûÊ¦]");
-        addToken(2,new Token(tr("ÑıÁ¦"),2,2));
+        roleName=QStringLiteral("[çµç¬¦å¸ˆ]");
+        addToken(2,new Token(QStringLiteral("å¦–åŠ›"),2,2));
         break;
     case 19:
-        roleName=tr("[½£µÛ]");
-        addToken(0,new Token(tr("½£Æø"),5,0));
-        addToken(2,new Token(tr("½£»ê"),3,2));
+        roleName=QStringLiteral("[å‰‘å¸]");
+        addToken(0,new Token(QStringLiteral("å‰‘æ°”"),5,0));
+        addToken(2,new Token(QStringLiteral("å‰‘é­‚"),3,2));
         break;
     case 20:
-        roleName=tr("[¸ñ¶·¼Ò]");
+        roleName=QStringLiteral("[æ ¼æ–—å®¶]");
         tapSource="resource/tap/BaiShi.png";
-        addToken(0,new Token(tr("¶·Æø"),6,0));
+        addToken(0,new Token(QStringLiteral("æ–—æ°”"),6,0));
         break;
     case 21:
-        roleName=tr("[ÓÂÕß]");
+        roleName=QStringLiteral("[å‹‡è€…]");
         tapSource="resource/tap/JingPiLiJie.png";
         crystal=2;
-        addToken(0,new Token(tr("Å­Æø"),4,0));
-        addToken(1,new Token(tr("ÖªĞÔ"),4,1));
+        addToken(0,new Token(QStringLiteral("æ€’æ°”"),4,0));
+        addToken(1,new Token(QStringLiteral("çŸ¥æ€§"),4,1));
         break;
     case 22:
-        roleName=tr("[Áé»êÊõÊ¿]");
-        addToken(0,new Token(tr("»Æ»ê"),6,0));
-        addToken(1,new Token(tr("À¶»ê"),6,1));
+        roleName=QStringLiteral("[çµé­‚æœ¯å£«]");
+        addToken(0,new Token(QStringLiteral("é»„é­‚"),6,0));
+        addToken(1,new Token(QStringLiteral("è“é­‚"),6,1));
         break;
     case 23:
-        roleName=tr("[Î×Å®]");
+        roleName=QStringLiteral("[å·«å¥³]");
         tapSource="resource/tap/LiuXue.png";
         break;
     case 24:
-        roleName=tr("[µûÎèÕß]");
+        roleName=("[è¶èˆè€…]");
         tapSource="resource/tap/DiaoLing.png";
-        addToken(0,new Token(tr("Ó¼"),99,0));
-        addToken(2,new Token(tr("¼ë"),8,2));
+        addToken(0,new Token(QStringLiteral("è›¹"),99,0));
+        addToken(2,new Token(QStringLiteral("èŒ§"),8,2));
         break;
     case 26:
-        roleName=tr("[Ä§¹­]");
-        addToken(2,new Token(tr("³äÄÜ"),8,2));
+        roleName=("[é­”å¼“]");
+        addToken(2,new Token(QStringLiteral("å……èƒ½"),8,2));
         break;
     case 28:
-        roleName=tr("[ºìÁ«ÆïÊ¿]");
+        roleName=QStringLiteral("[çº¢è²éª‘å£«]");
         tapSource="resource/tap/ReXueFeiTeng.png";
-        addToken(0,new Token(tr("ÑªÓ¡"),2,0));
+        addToken(0,new Token(QStringLiteral("è¡€å°"),2,0));
         crossMax=4;
         break;
     case 29:
-        roleName=tr("[Ä§Ç¹]");
+        roleName=QStringLiteral("[é­”æª]");
         tapSource="resource/tap/HuanYing.png";
         break;
     }

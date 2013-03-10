@@ -5,7 +5,7 @@ HongLian::HongLian()
     makeConnection();
     setMyRole(this);
     Button *xingHongShiZi;
-    xingHongShiZi = new Button(3,tr("ĞÈºìÊ®×Ö"));
+    xingHongShiZi = new Button(3,QStringLiteral("è…¥çº¢åå­—"));
     buttonArea->addButton(xingHongShiZi);
     connect(xingHongShiZi,SIGNAL(buttonSelected(int)),this,SLOT(XingHongShiZi()));
 }
@@ -18,7 +18,7 @@ void HongLian::normal()
     int magic = 0;
     for(int i=0; i<handcards.size();i++)
     {
-        if(handcards[i]->getType() == tr("magic"))
+        if(handcards[i]->getType() == QStringLiteral("magic"))
             magic++;
     }
     if(magic>1&&myself->getToken(0)>0&&myself->getEnergy()>0)
@@ -29,7 +29,7 @@ void HongLian::normal()
 void HongLian::XingHongShengYue()
 {
     state = 36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ĞÈºìÊ¥Ô¼£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨è…¥çº¢åœ£çº¦ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -40,7 +40,7 @@ void HongLian::XueXingDaoYan1()
     gui->reset();
     Player* myself=dataInterface->getMyself();
 
-    tipArea->setMsg(tr("¡¾ÑªĞÈµ»ÑÔ¡¿ÇëÑ¡Ôñ·Ö¸øµÚÒ»ÈËµÄÖÎÁÆ"));
+    tipArea->setMsg(QStringLiteral("ã€è¡€è…¥ç¥·è¨€ã€‘è¯·é€‰æ‹©åˆ†ç»™ç¬¬ä¸€äººçš„æ²»ç–—"));
     for(int i = 1;i<=myself->getCrossNum();i++)
         tipArea->addBoxItem(QString::number(i));
     tipArea->showBox();
@@ -59,7 +59,7 @@ void HongLian::XueXingDaoYan2()
     playerArea->reset();
     tipArea->reset();
     Player* myself=dataInterface->getMyself();
-    tipArea->setMsg(tr("¡¾ÑªĞÈµ»ÑÔ¡¿ÇëÑ¡Ôñ·Ö¸øµÚ¶şÈËµÄÖÎÁÆ»òÖ±½ÓÈ·ÈÏ"));
+    tipArea->setMsg(QStringLiteral("ã€è¡€è…¥ç¥·è¨€ã€‘è¯·é€‰æ‹©åˆ†ç»™ç¬¬äºŒäººçš„æ²»ç–—æˆ–ç›´æ¥ç¡®è®¤"));
     for(int i = 1;i<=(myself->getCrossNum()-cross[0]);i++)
         tipArea->addBoxItem(QString::number(i));
     tipArea->showBox();
@@ -73,7 +73,7 @@ void HongLian::XueXingDaoYan2()
 void HongLian::ShaLuShengYan()
 {
     state = 36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯É±Â¾Ê¢Ñç£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨æ€æˆ®ç››å®´ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -81,7 +81,7 @@ void HongLian::ShaLuShengYan()
 void HongLian::JieJiaoJieZao()
 {
     state = 2802;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯½ä½¾½äÔê£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨æˆ’éª„æˆ’èºï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -125,7 +125,7 @@ void HongLian::onOkClicked()
 
     switch(state)
     {
-    //¶îÍâĞĞ¶¯Ñ¯ÎÊ
+    //é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();
         switch (text[0].digitValue()){
@@ -212,7 +212,7 @@ void HongLian::attackOrMagic()
     int magic = 0;
     for(int i=0; i<handcards.size();i++)
     {
-        if(handcards[i]->getType() == tr("magic"))
+        if(handcards[i]->getType() == QStringLiteral("magic"))
             magic++;
     }
     if(magic>1&&myself->getToken(0)>0&&myself->getEnergy()>0)
@@ -223,13 +223,13 @@ void HongLian::attackOrMagic()
 void HongLian::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ĞÈºìÊ¥Ô¼"))
+    if(skill==QStringLiteral("è…¥çº¢åœ£çº¦"))
         XingHongShengYue();
-    else if(skill==tr("É±Â¾Ê¢Ñç"))
+    else if(skill==QStringLiteral("æ€æˆ®ç››å®´"))
         ShaLuShengYan();
-    else if(skill==tr("ÑªĞÈµ»ÑÔ"))
+    else if(skill==QStringLiteral("è¡€è…¥ç¥·è¨€"))
         XueXingDaoYan1();
-    else if(skill==tr("½ä½¾½äÔê"))
+    else if(skill==QStringLiteral("æˆ’éª„æˆ’èº"))
         JieJiaoJieZao();
 }
 
@@ -237,7 +237,7 @@ void HongLian::additionalAction()
 {
     Role::additionalAction();
     if(JieJiaoJieZaoUsed)
-        tipArea->addBoxItem(tr("1.¶îÍâ¹¥»÷»ò·¨Êõ£¨½ä½¾½äÔê£©"));
+        tipArea->addBoxItem(QStringLiteral("1.é¢å¤–æ”»å‡»æˆ–æ³•æœ¯ï¼ˆæˆ’éª„æˆ’èºï¼‰"));
 }
 
 void HongLian::turnBegin()

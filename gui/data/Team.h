@@ -21,8 +21,8 @@ private:
     int grail;
     int crystal;
     int gem;
-    int morale; //Ê¿ÆøÖµ
-    int moraleMax; //Ê¿Æø×î´óÖµ
+    int morale; //å£«æ°”å€¼
+    int moraleMax; //å£«æ°”æœ€å¤§å€¼
 };
 
 #endif // TEAM_H

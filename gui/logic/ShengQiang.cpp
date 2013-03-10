@@ -5,15 +5,15 @@ ShengQiang::ShengQiang()
     makeConnection();
 setMyRole(this);
     Button *huiYao, *chengJie, *shengGuangQiYu;
-    huiYao = new Button(3,tr("»ÔÒ«"));
+    huiYao = new Button(3,QStringLiteral("è¾‰è€€"));
     buttonArea->addButton(huiYao);
     connect(huiYao,SIGNAL(buttonSelected(int)),this,SLOT(HuiYao()));
 
-    chengJie = new Button(4,tr("³Í½ä"));
+    chengJie = new Button(4,QStringLiteral("æƒ©æˆ’"));
     buttonArea->addButton(chengJie);
     connect(chengJie,SIGNAL(buttonSelected(int)),this,SLOT(ChengJie()));
 
-    shengGuangQiYu = new Button(5,tr("Ê¥¹âÆíÓú"));
+    shengGuangQiYu = new Button(5,QStringLiteral("åœ£å…‰ç¥ˆæ„ˆ"));
     buttonArea->addButton(shengGuangQiYu);
     connect(shengGuangQiYu,SIGNAL(buttonSelected(int)),this,SLOT(ShengGuangQiYu()));
 }
@@ -77,7 +77,7 @@ void ShengQiang::ChengJie()
 void ShengQiang::TianQiang()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÌìÇ¹£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨å¤©æžªï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -85,7 +85,7 @@ void ShengQiang::TianQiang()
 void ShengQiang::DiQiang()
 {
     state=1005;
-    tipArea->setMsg(tr("ÇëÑ¡Ôñ·¢¶¯µØÇ¹Ê¹ÓÃµÄÖÎÁÆµãÊý£¬È¡Ïû½«·¢¶¯Ê¥»÷"));
+    tipArea->setMsg(QStringLiteral("è¯·é€‰æ‹©å‘åŠ¨åœ°æžªä½¿ç”¨çš„æ²»ç–—ç‚¹æ•°ï¼Œå–æ¶ˆå°†å‘åŠ¨åœ£å‡»"));
     decisionArea->enable(0);
     decisionArea->enable(1);
     Player* myself=dataInterface->getMyself();
@@ -229,20 +229,20 @@ void ShengQiang::onCancelClicked()
 void ShengQiang::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ÌìÇ¹"))
+    if(skill==QStringLiteral("å¤©æžª"))
         TianQiang();
-    else if(skill==tr("µØÇ¹"))
+    else if(skill==QStringLiteral("åœ°æžª"))
         DiQiang();
 }
 void ShengQiang::additionalAction()
 {
     Role::additionalAction();
     if(HuiYaoAddition)
-        tipArea->addBoxItem(tr("1.¹¥»÷ÐÐ¶¯(»ÔÒ«)"));
+        tipArea->addBoxItem(QStringLiteral("1.æ”»å‡»è¡ŒåŠ¨(è¾‰è€€)"));
     if(ChengJieAddition)
-        tipArea->addBoxItem(tr("2.¹¥»÷ÐÐ¶¯(³Í½ä)"));
+        tipArea->addBoxItem(QStringLiteral("2.æ”»å‡»è¡ŒåŠ¨(æƒ©æˆ’)"));
     if(ShengGuangQiYuAddition)
-        tipArea->addBoxItem(tr("3.¹¥»÷ÐÐ¶¯(Ê¥¹âÆíÓú)"));
+        tipArea->addBoxItem(QStringLiteral("3.æ”»å‡»è¡ŒåŠ¨(åœ£å…‰ç¥ˆæ„ˆ)"));
 
 }
 

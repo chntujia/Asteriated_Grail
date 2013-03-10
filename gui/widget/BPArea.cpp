@@ -129,6 +129,7 @@ RoleItem *BPArea::getRoleByID(int ID)
         if(ptr->getRoleID() ==ID)
             return ptr;
     }
+return 0;
 }
 
 void BPArea::choose(int playerID, int roleID)
@@ -193,6 +194,7 @@ int BPArea::getColor(int playerID)
     for(int i=0;i<playerIDs.size();i++)
         if(playerIDs[i]==playerID)
             return color[i];
+return 0;
 }
 
 int BPArea::getOrderInTeam(int playerID)
@@ -200,4 +202,5 @@ int BPArea::getOrderInTeam(int playerID)
     for(int i=0;i<playerIDs.size();i++)
         if(playerIDs[i]==playerID)
             return orderInTeam[i];
+return 0;
 }

@@ -31,7 +31,7 @@ void TestUIex::actSLOT(QList<CardEntity*> hand,int currentID)
     {
         infor.reply = MAGIC;
         infor.srcID = currentID;
-        //´ıÍê³É
+        //å¾…å®Œæˆ
     }
 
     batBufferFree.acquire(1);

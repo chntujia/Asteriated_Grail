@@ -11,17 +11,13 @@ public:
     void JianQiZhan2();
     void TianShiZhiHun();
     void EMoZhiHun();
-    void BuQuYiZhi();
     void askForSkill(QString skill);
     void additionalAction();
     void coverCardAnalyse();
-    void playerAnalyse();
-    void turnBegin();
 public slots:
     void onOkClicked();
     void onCancelClicked();
 private:
-    bool buquUsed;
     int shouhuID;
     int jianqiID;
     QString jianqiPoint;

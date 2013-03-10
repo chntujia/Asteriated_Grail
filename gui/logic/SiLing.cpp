@@ -5,15 +5,15 @@ SiLing::SiLing()
     makeConnection();
     setMyRole(this);
     Button *wenYi, *siWangZhiChu, *muBeiYunLuo;
-    wenYi = new Button(3,tr("Œ¡“ﬂ"));
+    wenYi = new Button(3,QStringLiteral("ÁòüÁñ´"));
     buttonArea->addButton(wenYi);
     connect(wenYi,SIGNAL(buttonSelected(int)),this,SLOT(WenYi()));
 
-    siWangZhiChu = new Button(4,tr("À¿Õˆ÷Æ¥•"));
+    siWangZhiChu = new Button(4,QStringLiteral("Ê≠ª‰∫°‰πãËß¶"));
     buttonArea->addButton(siWangZhiChu);
     connect(siWangZhiChu,SIGNAL(buttonSelected(int)),this,SLOT(SiWangZhiChu()));
 
-    muBeiYunLuo = new Button(5,tr("ƒπ±Æ‘…¬‰"));
+    muBeiYunLuo = new Button(5,QStringLiteral("Â¢ìÁ¢ëÈô®ËêΩ"));
     buttonArea->addButton(muBeiYunLuo);
     connect(muBeiYunLuo,SIGNAL(buttonSelected(int)),this,SLOT(MuBeiYunLuo()));
 }
@@ -41,7 +41,7 @@ void SiLing::normal()
 void SiLing::BuXiu()
 {
     state = 36;
-    tipArea->setMsg(tr(" «∑Ò∑¢∂Ø≤ª–‡£ø"));
+    tipArea->setMsg(QStringLiteral("ÊòØÂê¶ÂèëÂä®‰∏çÊúΩÔºü"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -77,7 +77,7 @@ void SiLing::SiWangZhiChu()
 
     handArea->enableAll();
 
-    tipArea->setMsg("«Î—°‘Ò“∆≥˝µƒ÷Œ¡∆£¨◊Ó…ŸŒ™2");
+    tipArea->setMsg("ËØ∑ÈÄâÊã©ÁßªÈô§ÁöÑÊ≤ªÁñóÔºåÊúÄÂ∞ë‰∏∫2");
     int cross = myself->getCrossNum();
     for(;cross>1;cross--)
         tipArea->addBoxItem(QString::number(cross));
@@ -185,6 +185,6 @@ void SiLing::onCancelClicked()
 void SiLing::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("≤ª–‡"))
+    if(skill==QStringLiteral("‰∏çÊúΩ"))
         BuXiu();
 }

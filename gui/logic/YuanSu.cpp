@@ -6,15 +6,15 @@ YuanSu::YuanSu()
 setMyRole(this);
 
     Button *yuanSuFaShu,*yuanSuDianRan,*yueGuang;
-    yuanSuFaShu=new Button(3,tr("ÔªËØ·¨Êõ"));
+    yuanSuFaShu=new Button(3,QStringLiteral("å…ƒç´ æ³•æœ¯"));
     buttonArea->addButton(yuanSuFaShu);
     connect(yuanSuFaShu,SIGNAL(buttonSelected(int)),this,SLOT(YuanSuFaShu1()));
 
-    yuanSuDianRan=new Button(4,tr("ÔªËØµãÈ¼"));
+    yuanSuDianRan=new Button(4,QStringLiteral("å…ƒç´ ç‚¹ç‡ƒ"));
     buttonArea->addButton(yuanSuDianRan);
     connect(yuanSuDianRan,SIGNAL(buttonSelected(int)),this,SLOT(YuanSuDianRan()));
 
-    yueGuang=new Button(5,tr("ÔÂ¹â"));
+    yueGuang=new Button(5,QStringLiteral("æœˆå…‰"));
     buttonArea->addButton(yueGuang);
     connect(yueGuang,SIGNAL(buttonSelected(int)),this,SLOT(YueGuang()));
 }
@@ -26,14 +26,14 @@ void YuanSu::YuanSuFaShu1()
     playerArea->reset();
     tipArea->reset();
 
-    tipArea->setMsg(tr("ÇëÏÈÑ¡ÔñÓ½ÏµÅÆºÍ·¨ÉËÄ¿±ê"));
+    tipArea->setMsg(QStringLiteral("è¯·å…ˆé€‰æ‹©å’ç³»ç‰Œå’Œæ³•ä¼¤ç›®æ ‡"));
     playerArea->setQuota(1);
     handArea->setQuota(1);
 
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableProperty(tr("Ó½"));
+    handArea->enableProperty(QStringLiteral("å’"));
     handArea->disableElement("darkness");
     handArea->disableMagic();
 }
@@ -59,10 +59,10 @@ void YuanSu::YuanSuFaShu2()
     {
         playerArea->enableAll();        
         decisionArea->disable(0);
-        tipArea->setMsg(tr("ÇëÑ¡ÔñÖÎÁÆÄ¿±ê£»Èô¶àÆú1ÕÅÍ¬ÏµÅÆ£¬±¾´ÎÉËº¦+1"));
+        tipArea->setMsg(QStringLiteral("è¯·é€‰æ‹©æ²»ç–—ç›®æ ‡ï¼›è‹¥å¤šå¼ƒ1å¼ åŒç³»ç‰Œï¼Œæœ¬æ¬¡ä¼¤å®³+1"));
     }
     else
-        tipArea->setMsg(tr("Èô¶àÆú1ÕÅÍ¬ÏµÅÆ£¬±¾´ÎÉËº¦+1"));
+        tipArea->setMsg(QStringLiteral("è‹¥å¤šå¼ƒ1å¼ åŒç³»ç‰Œï¼Œæœ¬æ¬¡ä¼¤å®³+1"));
 }
 
 void YuanSu::YuanSuDianRan()
@@ -95,14 +95,14 @@ void YuanSu::normal()
 {
     Role::normal();
     Player* myself=dataInterface->getMyself();
-//ÔªËØ·¨Êõ
+//å…ƒç´ æ³•æœ¯
     foreach(Card*ptr, dataInterface->getHandCards())
-        if (ptr->getType()=="attack"&&ptr->getProperty()==tr("Ó½")&&ptr->getElement()!="darkness")
+        if (ptr->getType()=="attack"&&ptr->getProperty()==QStringLiteral("å’")&&ptr->getElement()!="darkness")
             buttonArea->enable(3);
-//ÔªËØµãÈ¼
+//å…ƒç´ ç‚¹ç‡ƒ
     if(myself->getToken(0)==3)
         buttonArea->enable(4);
-//ÔÂ¹â
+//æœˆå…‰
     if(myself->getGem()>0)
         buttonArea->enable(5);
 }
@@ -111,14 +111,14 @@ void YuanSu::magicAction()
 {
     Role::magicAction();
     Player* myself=dataInterface->getMyself();
-//ÔªËØ·¨Êõ
+//å…ƒç´ æ³•æœ¯
     foreach(Card*ptr, dataInterface->getHandCards())
-        if (ptr->getType()=="attack"&&ptr->getProperty()==tr("Ó½")&&ptr->getElement()!="darkness")
+        if (ptr->getType()=="attack"&&ptr->getProperty()==QStringLiteral("å’")&&ptr->getElement()!="darkness")
             buttonArea->enable(3);
-//ÔªËØµãÈ¼
+//å…ƒç´ ç‚¹ç‡ƒ
     if(myself->getToken(0)==3)
         buttonArea->enable(4);
-//ÔÂ¹â
+//æœˆå…‰
     if(myself->getGem()>0)
         buttonArea->enable(5);
 }
@@ -129,7 +129,7 @@ void YuanSu::cardAnalyse()
 
     switch (state)
     {
-//ÔªËØ·¨Êõ1
+//å…ƒç´ æ³•æœ¯1
     case 1100:
         playerArea->enableAll();
         break;
@@ -153,7 +153,7 @@ void YuanSu::onOkClicked()
 
     switch(state)
     {
-//¶îÍâÐÐ¶¯Ñ¯ÎÊ
+//é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();
         switch(text[0].digitValue())
@@ -175,11 +175,11 @@ void YuanSu::onOkClicked()
             break;
         }
         break;
-//ÔªËØ·¨Êõ1
+//å…ƒç´ æ³•æœ¯1
     case 1100:
         YuanSuFaShu2();
         break;
-//ÔªËØ·¨Êõ2
+//å…ƒç´ æ³•æœ¯2
     case 1101:
         command="1101;";
         if(magicCard->getElement()=="wind"){
@@ -214,7 +214,7 @@ void YuanSu::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÔªËØµãÈ¼
+//å…ƒç´ ç‚¹ç‡ƒ
     case 1102:
         command="1102;";
         sourceID=QString::number(myID);
@@ -224,7 +224,7 @@ void YuanSu::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÔÂ¹â
+//æœˆå…‰
     case 1103:
         command="1103;";
         sourceID=QString::number(myID);
@@ -258,11 +258,11 @@ void YuanSu::additionalAction()
 {
     Role::additionalAction();
     if(earth)
-        tipArea->addBoxItem(tr("1.·¨ÊõÐÐ¶¯£¨ÔÉÊ¯£©"));
+        tipArea->addBoxItem(QStringLiteral("1.æ³•æœ¯è¡ŒåŠ¨ï¼ˆé™¨çŸ³ï¼‰"));
     if(ignite)
-        tipArea->addBoxItem(tr("2.·¨ÊõÐÐ¶¯£¨ÔªËØµãÈ¼£©"));
+        tipArea->addBoxItem(QStringLiteral("2.æ³•æœ¯è¡ŒåŠ¨ï¼ˆå…ƒç´ ç‚¹ç‡ƒï¼‰"));
     if(wind)
-        tipArea->addBoxItem(tr("3.¹¥»÷ÐÐ¶¯£¨·çÈÐ£©"));
+        tipArea->addBoxItem(QStringLiteral("3.æ”»å‡»è¡ŒåŠ¨ï¼ˆé£Žåˆƒï¼‰"));
 }
 
 void YuanSu::turnBegin()

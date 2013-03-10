@@ -80,29 +80,29 @@ void Role::cardAnalyse()
     {
 //normal action
     case 1:
-//×·¼Ó¹¥»÷»ò·¨ÊõÐÐ¶¯
+//è¿½åŠ æ”»å‡»æˆ–æ³•æœ¯è¡ŒåŠ¨
     case 11:
     case 12:
         if(selectedCards[0]->getType()=="magic" )
         {
             cardName=selectedCards[0]->getName();
-            if(cardName==tr("ÖÐ¶¾"))
+            if(cardName==QStringLiteral("ä¸­æ¯’"))
                 playerArea->enableAll();
-            if(cardName==tr("ÐéÈõ"))
+            if(cardName==QStringLiteral("è™šå¼±"))
             {
                 playerArea->reset();
                 for(i=0;i<dataInterface->getPlayerMax();i++)
                     if(!dataInterface->getPlayerList().at(i)->checkBasicStatus(1))
                         playerArea->enablePlayerItem(i);
             }
-            if(cardName==tr("Ê¥¶Ü"))
+            if(cardName==QStringLiteral("åœ£ç›¾"))
             {
                 playerArea->reset();
                 for(i=0;i<dataInterface->getPlayerMax();i++)
                     if(!dataInterface->getPlayerList().at(i)->checkBasicStatus(2))
                         playerArea->enablePlayerItem(i);
             }
-            if(cardName==tr("Ä§µ¯"))
+            if(cardName==QStringLiteral("é­”å¼¹"))
             {
                 playerArea->reset();
                 playerArea->enablePlayerItem(nextCounterClockwise);
@@ -148,22 +148,22 @@ void Role::cardAnalyse()
     break;
 //drop cards
     case 3:
-//ÌìÊ¹×£¸£¸øÅÆ
+//å¤©ä½¿ç¥ç¦ç»™ç‰Œ
     case 751:
-//Ä§±¬³å»÷ÆúÅÆ,³äÓ¯
+//é­”çˆ†å†²å‡»å¼ƒç‰Œ,å……ç›ˆ
     case 851:
     case 2951:
         decisionArea->enable(0);
     break;
-//Ä§µ¯reply
+//é­”å¼¹reply
     case 8:
         cardName=selectedCards[0]->getName();
-        if(cardName==tr("Ä§µ¯"))
+        if(cardName==QStringLiteral("é­”å¼¹"))
         {
             playerArea->reset();
             playerArea->enablePlayerItem(moDanNextID);
         }
-        else if(cardName==tr("Ê¥¹â"))
+        else if(cardName==QStringLiteral("åœ£å…‰"))
         {
             playerArea->reset();
             decisionArea->enable(0);
@@ -194,7 +194,7 @@ void Role::resign()
     gui->reset();
 }
 
-//Õý³£ÐÐ¶¯
+//æ­£å¸¸è¡ŒåŠ¨
 void Role::normal()
 {
     gui->reset();
@@ -214,20 +214,20 @@ void Role::normal()
 
     if(n+3 <= myself->getHandCardMax() && start==false)
     {
-//¹ºÂò
+//è´­ä¹°
         buttonArea->enable(0);
         if(myTeam->getEnergy()>=3)
-//ºÏ³É
+//åˆæˆ
             buttonArea->enable(1);
     }
-//ÌáÁ¶
+//æç‚¼
     if(myself->getEnergy()<myself->getEnergyMax() && myTeam->getEnergy()>0 && start==false)
         buttonArea->enable(2);
-    tipArea->setMsg(tr("ÂÖµ½ÄãÁË"));
+    tipArea->setMsg(QStringLiteral("è½®åˆ°ä½ äº†"));
     unactionalCheck();
 }
 
-//ÎÞ·¨ÐÐ¶¯¼ì²â
+//æ— æ³•è¡ŒåŠ¨æ£€æµ‹
 void Role::unactionalCheck()
 {
     bool actional=false;
@@ -343,17 +343,17 @@ void Role::buy()
     tipArea->reset();
 
     if(energy<4)
-        tipArea->setMsg(tr("ÄãÃþ3ÕÅÅÆ£¬Äã·½Õ½¼¨Çø¼ÓÒ»±¦Ê¯Ò»Ë®¾§"));
+        tipArea->setMsg(QStringLiteral("ä½ æ‘¸3å¼ ç‰Œï¼Œä½ æ–¹æˆ˜ç»©åŒºåŠ ä¸€å®çŸ³ä¸€æ°´æ™¶"));
     if(energy==4)
     {
-        tipArea->setMsg(tr("Õ½¼¨ÇøÐÇÊ¯ÒÑÓÐ4¸ö£¬ÇëÑ¡ÔñÒª¹ºÂòµÄÐÇÊ¯£º"));
-        tipArea->addBoxItem(tr("1.Ò»¸ö±¦Ê¯"));
-        tipArea->addBoxItem(tr("2.Ò»¸öË®¾§"));
+        tipArea->setMsg(QStringLiteral("æˆ˜ç»©åŒºæ˜ŸçŸ³å·²æœ‰4ä¸ªï¼Œè¯·é€‰æ‹©è¦è´­ä¹°çš„æ˜ŸçŸ³ï¼š"));
+        tipArea->addBoxItem(QStringLiteral("1.ä¸€ä¸ªå®çŸ³"));
+        tipArea->addBoxItem(QStringLiteral("2.ä¸€ä¸ªæ°´æ™¶"));
         tipArea->showBox();
     }
     if(energy==5)
     {
-        tipArea->setMsg(tr("Õ½¼¨ÇøÐÇÊ¯ÊýÄ¿ÒÑ´ïÉÏÏÞ£¬¹ºÂò½«²»ÔÙÔö¼ÓÐÇÊ¯"));
+        tipArea->setMsg(QStringLiteral("æˆ˜ç»©åŒºæ˜ŸçŸ³æ•°ç›®å·²è¾¾ä¸Šé™ï¼Œè´­ä¹°å°†ä¸å†å¢žåŠ æ˜ŸçŸ³"));
     }
 }
 
@@ -373,15 +373,15 @@ void Role::synthetize()
     handArea->reset();
     playerArea->reset();
 
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÓÃÀ´ºÏ³ÉµÄÐÇÊ¯£º"));
+    tipArea->setMsg(QStringLiteral("è¯·é€‰æ‹©ç”¨æ¥åˆæˆçš„æ˜ŸçŸ³ï¼š"));
     if(crystal>=3)
-        tipArea->addBoxItem(tr("1.Èý¸öË®¾§"));
+        tipArea->addBoxItem(QStringLiteral("1.ä¸‰ä¸ªæ°´æ™¶"));
     if(crystal>=2&&gem>=1)
-        tipArea->addBoxItem(tr("2.Á½¸öË®¾§ºÍÒ»¸ö±¦Ê¯"));
+        tipArea->addBoxItem(QStringLiteral("2.ä¸¤ä¸ªæ°´æ™¶å’Œä¸€ä¸ªå®çŸ³"));
     if(crystal>=1&&gem>=2)
-        tipArea->addBoxItem(tr("3.Ò»¸öË®¾§ºÍÁ½¸ö±¦Ê¯"));
+        tipArea->addBoxItem(QStringLiteral("3.ä¸€ä¸ªæ°´æ™¶å’Œä¸¤ä¸ªå®çŸ³"));
     if(gem>=3)
-        tipArea->addBoxItem(tr("4.Èý¸ö±¦Ê¯"));
+        tipArea->addBoxItem(QStringLiteral("4.ä¸‰ä¸ªå®çŸ³"));
     tipArea->showBox();
 }
 
@@ -402,23 +402,23 @@ void Role::extract()
     handArea->reset();
     playerArea->reset();
 
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÒªÌáÈ¡µÄÐÇÊ¯Êý£º"));
+    tipArea->setMsg(QStringLiteral("è¯·é€‰æ‹©è¦æå–çš„æ˜ŸçŸ³æ•°ï¼š"));
     switch(myself->getEnergyMax()-myself->getEnergy())
     {
     case 4:
     case 3:
     case 2:
         if(gem>=2)
-            tipArea->addBoxItem(tr("1.Á½¸ö±¦Ê¯"));
+            tipArea->addBoxItem(QStringLiteral("1.ä¸¤ä¸ªå®çŸ³"));
         if(crystal>=2)
-            tipArea->addBoxItem(tr("2.Á½¸öË®¾§"));
+            tipArea->addBoxItem(QStringLiteral("2.ä¸¤ä¸ªæ°´æ™¶"));
         if(gem>=1&&crystal>=1)
-            tipArea->addBoxItem(tr("3.Ò»¸ö±¦Ê¯ºÍÒ»¸öË®¾§"));
+            tipArea->addBoxItem(QStringLiteral("3.ä¸€ä¸ªå®çŸ³å’Œä¸€ä¸ªæ°´æ™¶"));
     case 1:
         if(gem>=1)
-            tipArea->addBoxItem(tr("4.Ò»¸ö±¦Ê¯"));
+            tipArea->addBoxItem(QStringLiteral("4.ä¸€ä¸ªå®çŸ³"));
         if(crystal>=1)
-            tipArea->addBoxItem(tr("5.Ò»¸öË®¾§"));
+            tipArea->addBoxItem(QStringLiteral("5.ä¸€ä¸ªæ°´æ™¶"));
     }
     tipArea->showBox();
 }
@@ -427,7 +427,7 @@ void Role::moDaned(int nextID,int sourceID,int howMany)
 {
     state=8;
     gui->reset();
-    QString msg=dataInterface->getPlayerList().at(sourceID)->getRoleName()+tr("¶Ô")+tr("Äã")+tr("Ê¹ÓÃÁËÄ§µ¯£¬Ä¿Ç°ÉËº¦Îª£º")+QString::number(howMany)+tr("µã");
+    QString msg=dataInterface->getPlayerList().at(sourceID)->getRoleName()+QStringLiteral("å¯¹")+QStringLiteral("ä½ ")+QStringLiteral("ä½¿ç”¨äº†é­”å¼¹ï¼Œç›®å‰ä¼¤å®³ä¸ºï¼š")+QString::number(howMany)+QStringLiteral("ç‚¹");
     tipArea->setMsg(msg);
     playerArea->setQuota(1);
     handArea->setQuota(1);
@@ -443,12 +443,12 @@ void Role::moDaned(int nextID,int sourceID,int howMany)
 void Role::cure(int cross,int harmPoint, int type, int crossAvailable)
 {
     int min=crossAvailable<harmPoint?crossAvailable:harmPoint;
-    QString msg=tr("ÄãÊÜµ½")+QString::number(harmPoint)+tr("µã");
+    QString msg=QStringLiteral("ä½ å—åˆ°")+QString::number(harmPoint)+QStringLiteral("ç‚¹");
     if(type==1)
-        msg+=tr("¹¥»÷");
+        msg+=QStringLiteral("æ”»å‡»");
     else
-        msg+=tr("·¨Êõ");
-    msg+=tr("ÉËº¦£¬ÒªÊ¹ÓÃ¶àÉÙ¸öÖÎÁÆµÖÓùÖ®£¿");
+        msg+=QStringLiteral("æ³•æœ¯");
+    msg+=QStringLiteral("ä¼¤å®³ï¼Œè¦ä½¿ç”¨å¤šå°‘ä¸ªæ²»ç–—æŠµå¾¡ä¹‹ï¼Ÿ");
 
     state=9;
     decisionArea->enable(0);
@@ -474,9 +474,9 @@ void Role::turnBegin()
 
 void Role::additionalAction(){
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñÖ´ÐÐ¶îÍâÐÐ¶¯£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦æ‰§è¡Œé¢å¤–è¡ŒåŠ¨ï¼Ÿ"));
     if(dataInterface->getMyself()->checkBasicStatus(5))
-        gui->getTipArea()->addBoxItem("0.Ñ¸½Ý´Í¸£");
+        gui->getTipArea()->addBoxItem("0.è¿…æ·èµç¦");
     state=42;
     tipArea->showBox();
     decisionArea->enable(0);
@@ -487,7 +487,7 @@ void Role::additionalAction(){
 
 void Role::askForSkill(QString skill)
 {
-    if(skill==tr("ÍþÁ¦´Í¸£"))
+    if(skill==QStringLiteral("å¨åŠ›èµç¦"))
         WeiLi();
     QApplication::alert((QWidget*)playerArea->window());
     QSound::play("sound/Warning.wav");
@@ -497,7 +497,7 @@ void Role::TianShiZhuFu(int n)
 {
     gui->reset();
     state=751;
-    tipArea->setMsg(tr("¸øÓèÌìÊ¹")+QString::number(n)+tr("ÕÅÅÆ"));
+    tipArea->setMsg(QStringLiteral("ç»™äºˆå¤©ä½¿")+QString::number(n)+QStringLiteral("å¼ ç‰Œ"));
     handArea->setQuota(n);
     handArea->enableAll();
     QApplication::alert((QWidget*)playerArea->window());
@@ -508,7 +508,7 @@ void Role::MoBaoChongJi()
 {
     gui->reset();
     state=851;
-    tipArea->setMsg(tr("ÆúÒ»ÕÅ·¨ÊõÅÆ»òÊÜµ½Á½µã·¨ÊõÉËº¦"));
+    tipArea->setMsg(QStringLiteral("å¼ƒä¸€å¼ æ³•æœ¯ç‰Œæˆ–å—åˆ°ä¸¤ç‚¹æ³•æœ¯ä¼¤å®³"));
     handArea->setQuota(1);
     handArea->enableMagic();
     decisionArea->enable(1);
@@ -519,7 +519,7 @@ void Role::MoBaoChongJi()
 void Role::WeiLi()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÍþÁ¦´Í¸££¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨å¨åŠ›èµç¦ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -529,10 +529,10 @@ void Role::ChongYing(int color)
     gui->reset();
     state=2951;
     Player* myself=dataInterface->getMyself();
-    if(myself->getRoleName()!=tr("[Ä§Ç¹]"))
-        tipArea->setMsg(tr("ÆúÒ»ÕÅÅÆ£¬·¨Êõ»òÀ×½«»áÎªÄ§Ç¹¼Ó1ÉËº¦"));
+    if(myself->getRoleName()!=QStringLiteral("[é­”æžª]"))
+        tipArea->setMsg(QStringLiteral("å¼ƒä¸€å¼ ç‰Œï¼Œæ³•æœ¯æˆ–é›·å°†ä¼šä¸ºé­”æžªåŠ 1ä¼¤å®³"));
     else
-        tipArea->setMsg(tr("ÆúÒ»ÕÅÅÆ"));
+        tipArea->setMsg(QStringLiteral("å¼ƒä¸€å¼ ç‰Œ"));
     if(handArea->getHandCardItems().size()==0)
         decisionArea->enable(3);
     else if(color==myself->getColor())
@@ -569,37 +569,37 @@ void Role::onCancelClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÐéÈõ
+//è™šå¼±
     case 7:
         command="23;1;";
         emit sendCommand(command);
         gui->reset();
         break;
-//Ä§µ¯Ó¦´ð
+//é­”å¼¹åº”ç­”
     case 8:
         command="27;2;;;";
         emit sendCommand(command);
         gui->reset();
         break;
-//ÖÎÁÆÓ¦´ð
+//æ²»ç–—åº”ç­”
     case 9:
         command="34;0;";
         emit sendCommand(command);
         gui->reset();
         break;
-//¼òµ¥µÄ¼¼ÄÜ·¢¶¯Ñ¯ÎÊ
+//ç®€å•çš„æŠ€èƒ½å‘åŠ¨è¯¢é—®
     case 36:
         command="36;0;";
         emit sendCommand(command);
         gui->reset();
         break;
-//Ä§±¬³å»÷ÆúÅÆ
+//é­”çˆ†å†²å‡»å¼ƒç‰Œ
     case 851:
         command="851;0;";
         emit sendCommand(command);
         gui->reset();
         break;
-//³äÓ¯ÆúÅÆ
+//å……ç›ˆå¼ƒç‰Œ
     case 2951:
         command="2951;0;";
         emit sendCommand(command);
@@ -627,7 +627,7 @@ void Role::onOkClicked()
     {
 //NORMALACTION
     case 1:
-//×·¼ÓÐÐ¶¯
+//è¿½åŠ è¡ŒåŠ¨
     case 10:
     case 11:
     case 12:
@@ -643,7 +643,7 @@ void Role::onOkClicked()
         {
             QString cardName;
             cardName=selectedCards[0]->getName();
-            if(cardName==tr("ÖÐ¶¾")||cardName==tr("ÐéÈõ")||cardName==tr("Ê¥¶Ü")||cardName==tr("Ä§µ¯"))
+            if(cardName==QStringLiteral("ä¸­æ¯’")||cardName==QStringLiteral("è™šå¼±")||cardName==QStringLiteral("åœ£ç›¾")||cardName==QStringLiteral("é­”å¼¹"))
                 command="4;2;0;"+cardID+";"+targetID+";"+sourceID+";";
             usedMagic=true;
             usedAttack=usedSpecial=false;
@@ -761,20 +761,20 @@ void Role::onOkClicked()
         usedAttack=usedMagic=false;
         emit sendCommand(command);
         break;
-//ÐéÈõ
+//è™šå¼±
     case 7:
         command="23;0;";
         gui->reset();
         emit sendCommand(command);
         break;
-//Ä§µ¯Ó¦´ð
+//é­”å¼¹åº”ç­”
     case 8:
-        if(selectedCards[0]->getName()==tr("Ê¥¹â"))
+        if(selectedCards[0]->getName()==QStringLiteral("åœ£å…‰"))
         {
             cardID=QString::number(selectedCards[0]->getID());
             command="27;1;"+cardID+";;";
         }
-        else if(selectedCards[0]->getName()==tr("Ä§µ¯"))
+        else if(selectedCards[0]->getName()==QStringLiteral("é­”å¼¹"))
         {
             cardID=QString::number(selectedCards[0]->getID());
             command="27;0;"+cardID+";";
@@ -785,20 +785,20 @@ void Role::onOkClicked()
         gui->reset();
         emit sendCommand(command);
         break;
-//ÖÎÁÆÓ¦´ð
+//æ²»ç–—åº”ç­”
     case 9:
         text=tipArea->getBoxCurrentText();
         command="34;"+text+";";
         gui->reset();
         emit sendCommand(command);
         break;
-//¼òµ¥µÄ¼¼ÄÜ·¢¶¯Ñ¯ÎÊ
+//ç®€å•çš„æŠ€èƒ½å‘åŠ¨è¯¢é—®
     case 36:
         command="36;1;";
         emit sendCommand(command);
         gui->reset();
         break;
-//¶îÍâÐÐ¶¯£¨Ñ¸½Ý£©
+//é¢å¤–è¡ŒåŠ¨ï¼ˆè¿…æ·ï¼‰
     case 42:
         if(tipArea->getBoxCurrentText().at(0).digitValue()==0)
         {
@@ -806,7 +806,7 @@ void Role::onOkClicked()
             myRole->attackAction();
         }
         break;
-//Æú¸ÇÅÆ
+//å¼ƒç›–ç‰Œ
     case 50:
         selectedCards = coverArea->getSelectedCards();
         cardID=QString::number(selectedCards[0]->getID());
@@ -826,7 +826,7 @@ void Role::onOkClicked()
         gui->reset();
         emit sendCommand(command);
         break;
-//ÌìÊ¹×£¸£
+//å¤©ä½¿ç¥ç¦
     case 751:
         command="751;"+QString::number(selectedCards.size())+";";
         cardID=QString::number(selectedCards[0]->getID());
@@ -841,7 +841,7 @@ void Role::onOkClicked()
         gui->reset();
         emit sendCommand(command);
         break;
-//Ä§±¬³å»÷
+//é­”çˆ†å†²å‡»
     case 851:
         cardID=QString::number(selectedCards[0]->getID());
         command="851;1;"+cardID+";";
@@ -849,7 +849,7 @@ void Role::onOkClicked()
         gui->reset();
         emit sendCommand(command);
         break;
-//³äÓ¯
+//å……ç›ˆ
     case 2951:
         cardID=QString::number(selectedCards[0]->getID());
         command="2951;1;"+cardID+";";
@@ -887,12 +887,12 @@ void Role::decipher(QString command)
 
     switch (arg[0].toInt())
     {
-//»ØºÏ¿ªÊ¼
+//å›žåˆå¼€å§‹
     case 3:
         targetID=arg[1].toInt();
         gui->logAppend("-----------------------------------");
-        gui->logAppend(playerList[targetID]->getRoleName()+tr("»ØºÏ¿ªÊ¼"));
-        playerArea->setCurrentPlayerID(targetID);        
+        gui->logAppend(playerList[targetID]->getRoleName()+QStringLiteral("å›žåˆå¼€å§‹"));
+        playerArea->setCurrentPlayerID(targetID);
 
         if(targetID==dataInterface->getFirstPlayerID())
             teamArea->addRoundBy1();
@@ -905,7 +905,7 @@ void Role::decipher(QString command)
             myRole->turnBegin();
         }
         break;
-//Ó¦Õ½Ñ¯ÎÊ
+//åº”æˆ˜è¯¢é—®
     case 5:
         hitRate=arg[1].toInt();
         cardID=arg[2].toInt();
@@ -921,28 +921,28 @@ void Role::decipher(QString command)
         else
         {
             gui->setEnable(1);
-            msg=playerList[sourceID]->getRoleName()+tr("¶Ô")+tr("Äã")+tr("Ê¹ÓÃÁË")+card->getName();
+            msg=playerList[sourceID]->getRoleName()+QStringLiteral("å¯¹")+QStringLiteral("ä½ ")+QStringLiteral("ä½¿ç”¨äº†")+card->getName();
             if (hitRate==2)
                 return;
 
             if(hitRate==1)
-                msg+=tr("£¬¸Ã¹¥»÷ÎÞ·¨Ó¦Õ½");
+                msg+=QStringLiteral("ï¼Œè¯¥æ”»å‡»æ— æ³•åº”æˆ˜");
 
             gui->reset();
             tipArea->setMsg(msg);
             myRole->attacked(card->getElement(),hitRate);
         }
         break;
-//ÆúÅÆÑ¯ÎÊ
+//å¼ƒç‰Œè¯¢é—®
     case 7:
         targetID=arg[1].toInt();
         howMany=arg[2].toInt();
         flag=arg[3];
-        msg=playerList[targetID]->getRoleName()+tr("ÐèÒªÆú")+arg[2]+tr("ÕÅÊÖÅÆ");
+        msg=playerList[targetID]->getRoleName()+QStringLiteral("éœ€è¦å¼ƒ")+arg[2]+QStringLiteral("å¼ æ‰‹ç‰Œ");
         if(flag=="y")
-            gui->logAppend(msg+tr("(Ã÷Æú)"));
+            gui->logAppend(msg+QStringLiteral("(æ˜Žå¼ƒ)"));
         else
-            gui->logAppend(msg+tr("(°µÆú)"));
+            gui->logAppend(msg+QStringLiteral("(æš—å¼ƒ)"));
         if(targetID!=myID)
         {
             gui->setEnable(0);
@@ -952,14 +952,14 @@ void Role::decipher(QString command)
             gui->setEnable(1);
             gui->reset();
             drop(howMany);
-            tipArea->setMsg(tr("ÄãÐèÒªÆú")+arg[2]+tr("ÕÅÊÖÅÆ"));
+            tipArea->setMsg(QStringLiteral("ä½ éœ€è¦å¼ƒ")+arg[2]+QStringLiteral("å¼ æ‰‹ç‰Œ"));
         }
         break;
-//ÃþÅÆ
+//æ‘¸ç‰Œ
     case 9:
         targetID=arg[1].toInt();
         howMany=arg[2].toInt();
-        gui->logAppend(playerList[targetID]->getRoleName()+tr("ÃþÈ¡")+arg[2]+tr("ÕÅÊÖÅÆ"));
+        gui->logAppend(playerList[targetID]->getRoleName()+QStringLiteral("æ‘¸å–")+arg[2]+QStringLiteral("å¼ æ‰‹ç‰Œ"));
 
         if(targetID==myID)
         {
@@ -972,14 +972,14 @@ void Role::decipher(QString command)
             }
         }
         break;
-//ÅÆ¶ÑÖØÏ´
+//ç‰Œå †é‡æ´—
     case 10:
-        gui->logAppend(tr("ÅÆ¶ÑÒÑÖØÏ´"));
+        gui->logAppend(QStringLiteral("ç‰Œå †å·²é‡æ´—"));
         teamArea->setLeftCardNum(arg[1].toInt());
         teamArea->setDroppedCardNum(0);
         QSound::play("sound/Shuffle.wav");
         break;
-//Ê¿Æø¸Ä±ä
+//å£«æ°”æ”¹å˜
     case 11:
         team=arg[1].toInt();
         howMany=arg[2].toInt();
@@ -995,18 +995,18 @@ void Role::decipher(QString command)
         }
         QSound::play("sound/Morale.wav");
         break;
-//ÓÎÏ·½áÊø
+//æ¸¸æˆç»“æŸ
     case 12:
         team=arg[1].toInt();    
         tipArea->win(team);
         QSound::play("sound/KO.wav");
         break;
-//ÆúÅÆ¹«¸æ
+//å¼ƒç‰Œå…¬å‘Š
     case 13:
         targetID=arg[1].toInt();
         howMany=arg[2].toInt();
         flag=arg[3];
-        msg=playerList[targetID]->getRoleName()+tr("¶ªÆúÁË")+arg[2]+tr("ÕÅÊÖÅÆ");
+        msg=playerList[targetID]->getRoleName()+QStringLiteral("ä¸¢å¼ƒäº†")+arg[2]+QStringLiteral("å¼ æ‰‹ç‰Œ");
         if(flag=="y")
         {
             cardIDList=arg[4].split(',');
@@ -1024,19 +1024,19 @@ void Role::decipher(QString command)
         }
         gui->logAppend(msg);
         break;
-//ÃüÖÐ¹«¸æ
+//å‘½ä¸­å…¬å‘Š
     case 14:
         flag=arg[1];
         targetID=arg[3].toInt();
         sourceID=arg[4].toInt();        
         if(flag=="1")
-            msg=playerList[sourceID]->getRoleName()+tr("Î´ÃüÖÐ")+playerList[targetID]->getRoleName();
+            msg=playerList[sourceID]->getRoleName()+QStringLiteral("æœªå‘½ä¸­")+playerList[targetID]->getRoleName();
         else
-            msg=playerList[sourceID]->getRoleName()+tr("ÃüÖÐ")+playerList[targetID]->getRoleName();
+            msg=playerList[sourceID]->getRoleName()+QStringLiteral("å‘½ä¸­")+playerList[targetID]->getRoleName();
         gui->logAppend(msg);
         QSound::play("sound/Hit.wav");
         break;
-//ÐÇÊ¯¸Ä±ä
+//æ˜ŸçŸ³æ”¹å˜
     case 15:
         team=arg[1].toInt();
         gem=arg[2].toInt();
@@ -1055,7 +1055,7 @@ void Role::decipher(QString command)
         }
         QSound::play("sound/Stone.wav");
         break;
-//ÐÇ±­¸Ä±ä
+//æ˜Ÿæ¯æ”¹å˜
     case 17:
         team=arg[1].toInt();
         howMany=arg[2].toInt();
@@ -1070,7 +1070,7 @@ void Role::decipher(QString command)
             teamArea->update();
         }
         break;
-//ÄÜÁ¿¸Ä±ä
+//èƒ½é‡æ”¹å˜
     case 18:
         targetID=arg[1].toInt();
         gem=arg[2].toInt();
@@ -1080,7 +1080,7 @@ void Role::decipher(QString command)
         player->setCrystal(crystal);
         playerArea->update();
         break;
-//ÒÆÅÆÍ¨¸æ
+//ç§»ç‰Œé€šå‘Š
     case 19:
         howMany=arg[1].toInt();
         cardIDList=arg[2].split(",");
@@ -1120,17 +1120,17 @@ void Role::decipher(QString command)
                 cardID=cardIDList[0].toInt();
                 card=dataInterface->getCard(cardID);
                 cardName=card->getName();
-                if(cardName==tr("ÖÐ¶¾"))
+                if(cardName==QStringLiteral("ä¸­æ¯’"))
                     playerList[targetID]->addBasicStatus(0,card);
-                if(cardName==tr("ÐéÈõ"))
+                if(cardName==QStringLiteral("è™šå¼±"))
                     playerList[targetID]->addBasicStatus(1,card);
-                if(cardName==tr("Ê¥¶Ü")||card->getSpecialityList().contains(tr("ÌìÊ¹Ö®Ç½")))
+                if(cardName==QStringLiteral("åœ£ç›¾")||card->getSpecialityList().contains(QStringLiteral("å¤©ä½¿ä¹‹å¢™")))
                     playerList[targetID]->addBasicStatus(2,card);
-                if(card->getType()=="attack"&&card->getProperty()==tr("»Ã"))
+                if(card->getType()=="attack"&&card->getProperty()==QStringLiteral("å¹»"))
                     playerList[targetID]->addBasicStatus(3,card);
-                if(card->getSpecialityList().contains(tr("ÍþÁ¦´Í¸£")))
+                if(card->getSpecialityList().contains(QStringLiteral("å¨åŠ›èµç¦")))
                     playerList[targetID]->addBasicStatus(4,card);
-                if(card->getSpecialityList().contains(tr("Ñ¸½Ý´Í¸£")))
+                if(card->getSpecialityList().contains(QStringLiteral("è¿…æ·èµç¦")))
                     playerList[targetID]->addBasicStatus(5,card);
                 QSound::play("sound/Equip.wav");
                 break;
@@ -1162,22 +1162,22 @@ void Role::decipher(QString command)
 
         playerArea->update();
         break;
-//ÎïÉËÍ¨¸æ
+//ç‰©ä¼¤é€šå‘Š
     case 20:
         targetID=arg[1].toInt();
         sourceID=arg[3].toInt();
-        gui->logAppend(playerList[sourceID]->getRoleName()+tr("¶Ô")+playerList[targetID]->getRoleName()+tr("Ôì³ÉÁË")+arg[2]+tr("µã¹¥»÷ÉËº¦"));
+        gui->logAppend(playerList[sourceID]->getRoleName()+QStringLiteral("å¯¹")+playerList[targetID]->getRoleName()+QStringLiteral("é€ æˆäº†")+arg[2]+QStringLiteral("ç‚¹æ”»å‡»ä¼¤å®³"));
         break;
-//·¨ÊõÍ¨¸æ
+//æ³•æœ¯é€šå‘Š
     case 21:
         targetID=arg[1].toInt();
         sourceID=arg[3].toInt();
-        gui->logAppend(playerList[sourceID]->getRoleName()+tr("¶Ô")+playerList[targetID]->getRoleName()+tr("Ê¹ÓÃµÄ")+arg[4]+tr("Ôì³ÉÁË")+arg[2]+tr("µã·¨ÊõÉËº¦"));
+        gui->logAppend(playerList[sourceID]->getRoleName()+QStringLiteral("å¯¹")+playerList[targetID]->getRoleName()+QStringLiteral("ä½¿ç”¨çš„")+arg[4]+QStringLiteral("é€ æˆäº†")+arg[2]+QStringLiteral("ç‚¹æ³•æœ¯ä¼¤å®³"));
         break;
-//ÐéÈõÑ¯ÎÊ
+//è™šå¼±è¯¢é—®
     case 22:
         targetID=arg[1].toInt();
-        gui->logAppend(tr("µÈ´ý")+playerList[targetID]->getRoleName()+tr("ÐéÈõÏìÓ¦"));
+        gui->logAppend(QStringLiteral("ç­‰å¾…")+playerList[targetID]->getRoleName()+QStringLiteral("è™šå¼±å“åº”"));
         if(targetID!=myID)
         {
             gui->setEnable(0);
@@ -1189,30 +1189,30 @@ void Role::decipher(QString command)
             state=7;
             decisionArea->enable(0);
             decisionArea->enable(1);
-            tipArea->setMsg(tr("Äã±»ÐéÈõÁË£¬Ñ¡ÊÇÌø¹ýÐÐ¶¯½×¶Î£¬Ñ¡·ñÃþ")+arg[2]+tr("ÕÅÅÆ"));
+            tipArea->setMsg(QStringLiteral("ä½ è¢«è™šå¼±äº†ï¼Œé€‰æ˜¯è·³è¿‡è¡ŒåŠ¨é˜¶æ®µï¼Œé€‰å¦æ‘¸")+arg[2]+QStringLiteral("å¼ ç‰Œ"));
         }
         break;
-//ÐéÈõ½á¹û
+//è™šå¼±ç»“æžœ
     case 24:
         targetID=arg[1].toInt();
         if(arg[2]=="0")
-            gui->logAppend(playerList[targetID]->getRoleName()+tr("Ñ¡ÔñÌø¹ýÐÐ¶¯½×¶Î"));
+            gui->logAppend(playerList[targetID]->getRoleName()+QStringLiteral("é€‰æ‹©è·³è¿‡è¡ŒåŠ¨é˜¶æ®µ"));
         else
-            gui->logAppend(playerList[targetID]->getRoleName()+tr("Ñ¡ÔñÃþ")+arg[3]+tr("ÕÅÅÆÕõÍÑ"));
+            gui->logAppend(playerList[targetID]->getRoleName()+QStringLiteral("é€‰æ‹©æ‘¸")+arg[3]+QStringLiteral("å¼ ç‰ŒæŒ£è„±"));
         break;
-//Ê¥¶ÜÒÆ³ýÍ¨¸æ
+//åœ£ç›¾ç§»é™¤é€šå‘Š
     case 25:
         targetID=arg[1].toInt();
-        gui->logAppend(playerList[targetID]->getRoleName()+tr("µÄÊ¥¶Ü±»ÒÆ³ý"));
+        gui->logAppend(playerList[targetID]->getRoleName()+QStringLiteral("çš„åœ£ç›¾è¢«ç§»é™¤"));
         break;
-//Ä§µ¯Ñ¯ÎÊ
+//é­”å¼¹è¯¢é—®
     case 26:
         int nextID;
         targetID=arg[1].toInt();
         sourceID=arg[2].toInt();
         howMany=arg[3].toInt();
         nextID=arg[4].toInt();
-        gui->logAppend(playerList[sourceID]->getRoleName()+tr("¶Ô")+playerList[targetID]->getRoleName()+tr("Ê¹ÓÃÁËÄ§µ¯£¬Ä¿Ç°ÉËº¦Îª£º")+arg[3]+tr("µã"));
+        gui->logAppend(playerList[sourceID]->getRoleName()+QStringLiteral("å¯¹")+playerList[targetID]->getRoleName()+QStringLiteral("ä½¿ç”¨äº†é­”å¼¹ï¼Œç›®å‰ä¼¤å®³ä¸ºï¼š")+arg[3]+QStringLiteral("ç‚¹"));
         if(targetID!=myID)
         {
             gui->setEnable(0);
@@ -1223,7 +1223,7 @@ void Role::decipher(QString command)
             myRole->moDaned(nextID,sourceID,howMany);
         }
         break;
-//¿¨ÅÆÍ¨¸æ
+//å¡ç‰Œé€šå‘Š
     case 28:
         cardID=arg[1].toInt();
         targetID=arg[2].toInt();
@@ -1238,11 +1238,11 @@ void Role::decipher(QString command)
 
         }
         if(card->getElement()!="light")
-            gui->logAppend(playerList[sourceID]->getRoleName()+tr("¶Ô")+playerList[targetID]->getRoleName()+tr("Ê¹ÓÃÁË")+cardName);
+            gui->logAppend(playerList[sourceID]->getRoleName()+QStringLiteral("å¯¹")+playerList[targetID]->getRoleName()+QStringLiteral("ä½¿ç”¨äº†")+cardName);
         else
-            gui->logAppend(playerList[sourceID]->getRoleName()+tr("Ê¹ÓÃÊ¥¹âµÖÓù"));
+            gui->logAppend(playerList[sourceID]->getRoleName()+QStringLiteral("ä½¿ç”¨åœ£å…‰æŠµå¾¡"));
         break;
-//ÐÐ¶¯½×¶Î flag 0-ËùÓÐÐÐ¶¯£¬1-¹¥»÷ÐÐ¶¯£¬2-·¨ÊõÐÐ¶¯£¬3-ÌØÊâÐÐ¶¯£¬4-¹¥»÷»ò·¨ÊõÐÐ¶¯
+//è¡ŒåŠ¨é˜¶æ®µ flag 0-æ‰€æœ‰è¡ŒåŠ¨ï¼Œ1-æ”»å‡»è¡ŒåŠ¨ï¼Œ2-æ³•æœ¯è¡ŒåŠ¨ï¼Œ3-ç‰¹æ®Šè¡ŒåŠ¨ï¼Œ4-æ”»å‡»æˆ–æ³•æœ¯è¡ŒåŠ¨
     case 29:
         targetID=arg[1].toInt();
         flag=arg[2];
@@ -1267,13 +1267,13 @@ void Role::decipher(QString command)
                 decisionArea->enable(3);
         }
         break;
-//ÎÞ·¨ÐÐ¶¯¹«¸æ
+//æ— æ³•è¡ŒåŠ¨å…¬å‘Š
     case 31:
         targetID=arg[1].toInt();
-        msg=playerList[targetID]->getRoleName()+tr("Ðû¸æÎÞ·¨ÐÐ¶¯");
+        msg=playerList[targetID]->getRoleName()+QStringLiteral("å®£å‘Šæ— æ³•è¡ŒåŠ¨");
         gui->logAppend(msg);
         break;
-//ÖÎÁÆ¸Ä±ä
+//æ²»ç–—æ”¹å˜
     case 32:
         targetID=arg[1].toInt();
         howMany=arg[2].toInt();
@@ -1281,7 +1281,7 @@ void Role::decipher(QString command)
         playerArea->update();
         QSound::play("sound/Cure.wav");
         break;
-//ÖÎÁÆÑ¯ÎÊ
+//æ²»ç–—è¯¢é—®
     case 33:
         targetID=arg[1].toInt();
         howMany=arg[2].toInt();
@@ -1290,11 +1290,11 @@ void Role::decipher(QString command)
         if(targetID==myID)
             myRole->cure(playerList[myID]->getCrossNum(),howMany,flag.toInt(),arg[4].toInt());
         break;
-//¼¼ÄÜÏìÓ¦Ñ¯ÎÊ
+//æŠ€èƒ½å“åº”è¯¢é—®
     case 35:
         targetID=arg[1].toInt();
         flag=arg[2];
-        msg=tr("µÈ´ý")+playerList[targetID]->getRoleName()+flag+tr("ÏìÓ¦");
+        msg=QStringLiteral("ç­‰å¾…")+playerList[targetID]->getRoleName()+flag+QStringLiteral("å“åº”");
         gui->logAppend(msg);
         gui->reset();
         gui->setEnable(0);
@@ -1306,44 +1306,44 @@ void Role::decipher(QString command)
         else
             gui->setEnable(0);
         break;
-//ÐÅÏ¢Í¨¸æ
+//ä¿¡æ¯é€šå‘Š
     case 38:
         gui->logAppend(arg[1]);
-        if(arg[1].contains(tr("·¢¶¯")))
+        if(arg[1].contains(QStringLiteral("å‘åŠ¨")))
             QSound::play("sound/Skill.wav");
         break;
-//½ÇÉ«ÐÎÌ¬×ª»»Í¨Öª
+//è§’è‰²å½¢æ€è½¬æ¢é€šçŸ¥
     case 39:
         targetID=arg[1].toInt();
         flag=arg[2];
         if(flag=="0")
         {
             playerList[targetID]->setTap(0);
-            msg=playerList[targetID]->getRoleName()+tr("·µ»Ø")+arg[3];
+            msg=playerList[targetID]->getRoleName()+QStringLiteral("è¿”å›ž")+arg[3];
         }
         else
         {
             playerList[targetID]->setTap(1);
-            msg=playerList[targetID]->getRoleName()+tr("½øÈë")+arg[3];
+            msg=playerList[targetID]->getRoleName()+QStringLiteral("è¿›å…¥")+arg[3];
         }
         playerArea->update();
         gui->logAppend(msg);
         gui->reset();
         gui->setEnable(0);
         break;
-//ÊÖÅÆÉÏÏÞ±ä¸üÍ¨Öª
+//æ‰‹ç‰Œä¸Šé™å˜æ›´é€šçŸ¥
     case 40:
         targetID=arg[1].toInt();
         howMany=arg[2].toInt();
         playerList[targetID]->setHandCardsMax(howMany);
         playerArea->update();
         break;
-//»ñµÃÊÖÅÆÍ¨¸æ
+//èŽ·å¾—æ‰‹ç‰Œé€šå‘Š
     case 41:
         targetID=arg[1].toInt();
         flag=arg[2];
         howMany=arg[3].toInt();
-        gui->logAppend(playerList[targetID]->getRoleName()+tr("»ñµÃ")+arg[3]+tr("ÕÅÊÖÅÆ"));
+        gui->logAppend(playerList[targetID]->getRoleName()+QStringLiteral("èŽ·å¾—")+arg[3]+QStringLiteral("å¼ æ‰‹ç‰Œ"));
 
         if(targetID==myID)
         {
@@ -1356,10 +1356,10 @@ void Role::decipher(QString command)
             }
         }
         break;
-//¶îÍâÐÐ¶¯Ñ¯ÎÊ
+//é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         targetID=arg[1].toInt();
-        gui->logAppend(tr("µÈ´ý")+playerList[targetID]->getRoleName()+tr("¶îÍâÐÐ¶¯ÏìÓ¦"));
+        gui->logAppend(QStringLiteral("ç­‰å¾…")+playerList[targetID]->getRoleName()+QStringLiteral("é¢å¤–è¡ŒåŠ¨å“åº”"));
         if(targetID==myID)
         {
             gui->setEnable(1);
@@ -1368,7 +1368,7 @@ void Role::decipher(QString command)
         else
             gui->setEnable(0);
         break;
-//×¨Êô±ä¸ü
+//ä¸“å±žå˜æ›´
     case 43:
         targetID=arg[1].toInt();
         msg=arg[2];
@@ -1376,7 +1376,7 @@ void Role::decipher(QString command)
         playerArea->update();
         break;
 
-        //¸ÇÅÆÍ¨¸æ
+        //ç›–ç‰Œé€šå‘Š
             case 48:
                 targetID=arg[1].toInt();
                 howMany=arg[2].toInt();
@@ -1399,20 +1399,20 @@ void Role::decipher(QString command)
                 }
 
                 if(dir == 0)
-                    gui->logAppend(arg[2]+tr("ÕÅÅÆ¼ÓÈëÍæ¼Ò") + playerList[targetID]->getRoleName()+tr("¸ÇÅÆÇø"));
+                    gui->logAppend(arg[2]+QStringLiteral("å¼ ç‰ŒåŠ å…¥çŽ©å®¶") + playerList[targetID]->getRoleName()+QStringLiteral("ç›–ç‰ŒåŒº"));
                 else
                 {
                     if(show == 0)
-                        gui->logAppend(tr("Íæ¼Ò") + playerList[targetID]->getRoleName() + tr("ÒÆ³ý") + arg[2] + tr("ÕÅ¸ÇÅÆ"));
+                        gui->logAppend(QStringLiteral("çŽ©å®¶") + playerList[targetID]->getRoleName() + QStringLiteral("ç§»é™¤") + arg[2] + QStringLiteral("å¼ ç›–ç‰Œ"));
                     else
                     {
                         QList<Card*> cards;
 
-                        QString log = tr("Íæ¼Ò") + playerList[targetID]->getRoleName() + tr("ÒÆ³ý") + arg[2] + tr("ÕÅ¸ÇÅÆ:");
+                        QString log = QStringLiteral("çŽ©å®¶") + playerList[targetID]->getRoleName() + QStringLiteral("ç§»é™¤") + arg[2] + QStringLiteral("å¼ ç›–ç‰Œ:");
                         for(int i = 0;i < howMany;i++)
                         {
                             cards << dataInterface->getCard(cardIDList[i].toInt());
-                            log += tr("[") + cards.at(i)->getName() + tr("]");
+                            log += QStringLiteral("[") + cards.at(i)->getName() + QStringLiteral("]");
                         }
                         gui->logAppend(log);
                         showArea->showCards(cards);
@@ -1423,7 +1423,7 @@ void Role::decipher(QString command)
 
                 break;
 
-//±ê¼Ç±ä¸ü
+//æ ‡è®°å˜æ›´
     case 45:
         targetID=arg[1].toInt();
         flag=arg[2];
@@ -1431,16 +1431,16 @@ void Role::decipher(QString command)
         playerList.at(targetID)->setToken(flag.toInt(),howMany);
         playerArea->update();
         break;
-//¸ÇÅÆÆúÅÆ
+//ç›–ç‰Œå¼ƒç‰Œ
     case 49:
         targetID=arg[1].toInt();
         howMany=arg[2].toInt();
         flag=arg[3];
-        msg=playerList[targetID]->getRoleName()+tr("ÐèÒªÆú")+arg[2]+tr("ÕÅ¸ÇÅÆ");
+        msg=playerList[targetID]->getRoleName()+QStringLiteral("éœ€è¦å¼ƒ")+arg[2]+QStringLiteral("å¼ ç›–ç‰Œ");
         if(flag=="y")
-            gui->logAppend(msg+tr("(Ã÷Æú)"));
+            gui->logAppend(msg+QStringLiteral("(æ˜Žå¼ƒ)"));
         else
-            gui->logAppend(msg+tr("(°µÆú)"));
+            gui->logAppend(msg+QStringLiteral("(æš—å¼ƒ)"));
         if(targetID!=myID)
         {
             gui->setEnable(0);
@@ -1450,14 +1450,14 @@ void Role::decipher(QString command)
             gui->setEnable(1);
             gui->reset();
             dropCover(howMany);
-            tipArea->setMsg(tr("ÄãÐèÒªÆú")+arg[2]+tr("ÕÅ¸ÇÅÆ"));
+            tipArea->setMsg(QStringLiteral("ä½ éœ€è¦å¼ƒ")+arg[2]+QStringLiteral("å¼ ç›–ç‰Œ"));
         }
         break;
-//ÌìÊ¹×£¸£
+//å¤©ä½¿ç¥ç¦
     case 750:
         targetID=arg[1].toInt();
         howMany=arg[2].toInt();
-        msg=tr("µÈ´ý")+playerList[targetID]->getRoleName()+tr("ÌìÊ¹×£¸££¨¸øÅÆ£©ÏìÓ¦");
+        msg=QStringLiteral("ç­‰å¾…")+playerList[targetID]->getRoleName()+QStringLiteral("å¤©ä½¿ç¥ç¦ï¼ˆç»™ç‰Œï¼‰å“åº”");
         gui->logAppend(msg);
         if(targetID!=myID)
         {
@@ -1470,10 +1470,10 @@ void Role::decipher(QString command)
             TianShiZhuFu(howMany);
         }
         break;
-//Ä§±¬³å»÷£¨ÆúÅÆ£©
+//é­”çˆ†å†²å‡»ï¼ˆå¼ƒç‰Œï¼‰
     case 850:
         targetID=arg[1].toInt();
-        msg=tr("µÈ´ý")+playerList[targetID]->getRoleName()+tr("Ä§±¬³å»÷£¨ÆúÅÆ£©ÏìÓ¦");
+        msg=QStringLiteral("ç­‰å¾…")+playerList[targetID]->getRoleName()+QStringLiteral("é­”çˆ†å†²å‡»ï¼ˆå¼ƒç‰Œï¼‰å“åº”");
         gui->logAppend(msg);
         if(targetID!=myID)
         {
@@ -1486,11 +1486,11 @@ void Role::decipher(QString command)
             MoBaoChongJi();
         }
         break;
-//³äÓ¯£¨ÆúÅÆ£©
+//å……ç›ˆï¼ˆå¼ƒç‰Œï¼‰
     case 2950:
         targetID=arg[1].toInt();
         int color=arg[2].toInt();
-        msg=tr("µÈ´ý")+playerList[targetID]->getRoleName()+tr("³äÓ¯£¨ÆúÅÆ£©ÏìÓ¦");
+        msg=QStringLiteral("ç­‰å¾…")+playerList[targetID]->getRoleName()+QStringLiteral("å……ç›ˆï¼ˆå¼ƒç‰Œï¼‰å“åº”");
         gui->logAppend(msg);
         if(targetID!=myID)
         {

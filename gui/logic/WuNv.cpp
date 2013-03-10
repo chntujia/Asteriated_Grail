@@ -6,19 +6,19 @@ WuNv::WuNv()
     setMyRole(this);
     tongShengID = -1;
     Button *tongShengGongSi, *niLiu, *xueZhiBeiMing, *xueZhiZuZhou;
-    tongShengGongSi = new Button(3,tr("Í¬Éú¹²ËÀ"));
+    tongShengGongSi = new Button(3,QStringLiteral("åŒç”Ÿå…±æ­»"));
     buttonArea->addButton(tongShengGongSi);
     connect(tongShengGongSi,SIGNAL(buttonSelected(int)),this,SLOT(TongShengGongSi()));
 
-    niLiu = new Button(4,tr("ÄæÁ÷"));
+    niLiu = new Button(4,QStringLiteral("é€†æµ"));
     buttonArea->addButton(niLiu);
     connect(niLiu,SIGNAL(buttonSelected(int)),this,SLOT(NiLiu()));
 
-    xueZhiBeiMing = new Button(5,tr("ÑªÖ®±¯Ãù"));
+    xueZhiBeiMing = new Button(5,QStringLiteral("è¡€ä¹‹æ‚²é¸£"));
     buttonArea->addButton(xueZhiBeiMing);
     connect(xueZhiBeiMing,SIGNAL(buttonSelected(int)),this,SLOT(XueZhiBeiMing()));
 
-    xueZhiZuZhou = new Button(6,tr("ÑªÖ®×çÖä"));
+    xueZhiZuZhou = new Button(6,QStringLiteral("è¡€ä¹‹è¯…å’’"));
     buttonArea->addButton(xueZhiZuZhou);
     connect(xueZhiZuZhou,SIGNAL(buttonSelected(int)),this,SLOT(XueZhiZuZhou()));
 }
@@ -31,7 +31,7 @@ void WuNv::normal()
         buttonArea->enable(3);
     if(myself->getTap())
         buttonArea->enable(4);
-    if(myself->getTap()&&handArea->checkSpecility(tr("ÑªÖ®±¯Ãù")))
+    if(myself->getTap()&&handArea->checkSpecility(QStringLiteral("è¡€ä¹‹æ‚²é¸£")))
         buttonArea->enable(5);
     if(myself->getGem()>0)
         buttonArea->enable(6);
@@ -56,7 +56,7 @@ void WuNv::XueZhiAiShang()
 {
     state = 2302;
     gui->reset();
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÑªÖ®°§ÉË£¿¡¾Ö±½ÓÈ·¶¨¡¿ÎªÒÆ³ýÍ¬Éú¹²ËÀ"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨è¡€ä¹‹å“€ä¼¤ï¼Ÿã€ç›´æŽ¥ç¡®å®šã€‘ä¸ºç§»é™¤åŒç”Ÿå…±æ­»"));
     playerArea->setQuota(0,1);
     playerArea->enableAll();
     if(tongShengID!=-1)
@@ -87,13 +87,13 @@ void WuNv::XueZhiBeiMing()
     playerArea->reset();
     tipArea->reset();
 
-    tipArea->setMsg("ÇëÑ¡Ôñ¡¾ÑªÖ®±¯Ãù¡¿ÉËº¦");
+    tipArea->setMsg("è¯·é€‰æ‹©ã€è¡€ä¹‹æ‚²é¸£ã€‘ä¼¤å®³");
     for(int i =3;i>0;i--)
         tipArea->addBoxItem(QString::number(i));
     tipArea->showBox();
 
     handArea->setQuota(1);
-    handArea->enableSpecility(tr("ÑªÖ®±¯Ãù"));
+    handArea->enableSpecility(QStringLiteral("è¡€ä¹‹æ‚²é¸£"));
     playerArea->setQuota(1);
 
     decisionArea->enable(1);
@@ -245,6 +245,6 @@ void WuNv::onCancelClicked()
 void WuNv::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ÑªÖ®°§ÉË"))
+    if(skill==QStringLiteral("è¡€ä¹‹å“€ä¼¤"))
         XueZhiAiShang();
 }

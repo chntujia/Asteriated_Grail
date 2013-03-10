@@ -26,43 +26,43 @@ extern QList<int> weakCardID;
 extern QList<int> poisonCardID;
 extern QList<int> missileCardID;
 
-//¿¨ÅÆÀà
+//å¡ç‰Œç±»
 class CardEntity:public QObject
 {
     Q_OBJECT
 public:
-    //¹¹Ôì,ÊäÈë²ÎÊıÊÇ°üº¬¿¨ÅÆĞÅÏ¢µÄÒ»ÁĞString
+    //æ„é€ ,è¾“å…¥å‚æ•°æ˜¯åŒ…å«å¡ç‰Œä¿¡æ¯çš„ä¸€åˆ—String
     CardEntity(QStringList *cardEntry);
 
     int getID();
-    //»ñÈ¡¿¨ÅÆ¶ÀÓĞ¼¼ĞÅÏ¢
+    //è·å–å¡ç‰Œç‹¬æœ‰æŠ€ä¿¡æ¯
     int getHasSpeciality();
-    //»ñÈ¡¹¥»÷/·¨ÊõÀà±ğ
+    //è·å–æ”»å‡»/æ³•æœ¯ç±»åˆ«
     QString getType();
-    //»ñÈ¡¿¨ÅÆÊôĞÔ
+    //è·å–å¡ç‰Œå±æ€§
     QString getElement();
-    //»ñÈ¡¿¨ÅÆ¼¼¡¢Ñª¡¢Ó½¡¢Ê¥¡¢»ÃÀà±ğ
+    //è·å–å¡ç‰ŒæŠ€ã€è¡€ã€å’ã€åœ£ã€å¹»ç±»åˆ«
     QString getProperty();
-    //»ñÈ¡¿¨ÅÆÃû³Æ£¬×¢ÒâÊÇÖĞÎÄ
+    //è·å–å¡ç‰Œåç§°ï¼Œæ³¨æ„æ˜¯ä¸­æ–‡
     QString getName();
-    //»ñÈ¡¿¨ÅÆÍ¼Æ¬µØÖ·
+    //è·å–å¡ç‰Œå›¾ç‰‡åœ°å€
     QString getSource();
-    //»ñÈ¡¿¨ÅÆ¶ÀÓĞ¼¼ÁĞ±í
+    //è·å–å¡ç‰Œç‹¬æœ‰æŠ€åˆ—è¡¨
     QStringList getSpecialityList();
-    //½«·¨ÊõÅÆÃû³Æ×ªÎªint
+    //å°†æ³•æœ¯ç‰Œåç§°è½¬ä¸ºint
     int getMagicName(){return this->magicName;}
     void setMagicName(int name){this->magicName = name;}
-    //»ñÈ¡Ê¹ÓÃÕß
+    //è·å–ä½¿ç”¨è€…
     int getSrcUser(){return this->srcUser;}
-    //»ñÈ¡¿¨ÅÆµ±Ç°Ëù´¦Î»ÖÃ£¨ÊÖÅÆ¡¢¸ÇÅÆ¡¢Ğ§¹ûÇø¡¢ÅÆ¶Ñ¡¢Ã÷ÆúÅÆ¶Ñ¡¢°µÆúÅÆ¶Ñ£©
+    //è·å–å¡ç‰Œå½“å‰æ‰€å¤„ä½ç½®ï¼ˆæ‰‹ç‰Œã€ç›–ç‰Œã€æ•ˆæœåŒºã€ç‰Œå †ã€æ˜å¼ƒç‰Œå †ã€æš—å¼ƒç‰Œå †ï¼‰
     int getPlace(){return this->place;}
-    //»ñÈ¡¿¨ÅÆµ±Ç°´¦ÓÚË­µÄÇøÓò£¨°üÀ¨ÊÖÅÆ¡¢¸ÇÅÆ¡¢Ğ§¹ûÇøµÈ£©£¨A¶ÔBÊ¹ÓÃÖĞ¶¾£¬ÖĞ¶¾µÄsrcUserÊÇA£¬ownerÊÇB£©
+    //è·å–å¡ç‰Œå½“å‰å¤„äºè°çš„åŒºåŸŸï¼ˆåŒ…æ‹¬æ‰‹ç‰Œã€ç›–ç‰Œã€æ•ˆæœåŒºç­‰ï¼‰ï¼ˆAå¯¹Bä½¿ç”¨ä¸­æ¯’ï¼Œä¸­æ¯’çš„srcUseræ˜¯Aï¼Œowneræ˜¯Bï¼‰
     int getOwner(){return this->owner;}
 
     void setPlace(int newPlace){this->place = newPlace;}
     void setOwner(int newOwner){this->owner = newOwner;}
     void setSrcUser(int srcID){this->srcUser = srcID;}
-    //ºË²é¿¨ÅÆÊÇ·ñÊÇ»ù±¾·¨ÊõÅÆ
+    //æ ¸æŸ¥å¡ç‰Œæ˜¯å¦æ˜¯åŸºæœ¬æ³•æœ¯ç‰Œ
     int checkBasicMagic(QString cardName);
 protected:
     int id;

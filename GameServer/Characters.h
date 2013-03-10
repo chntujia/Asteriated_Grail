@@ -6,7 +6,7 @@
 
 struct Harm;
 class BackgroundEntity;
-//¿ñÕ½Ê¿
+//ç‹‚æˆ˜å£«
 class Berserker :public PlayerEntity
 {
     Q_OBJECT
@@ -14,21 +14,21 @@ public :
     Berserker(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine* engine);
 public slots:
-    //¿ñ»¯
+    //ç‹‚åŒ–
     void wild(QList<void*> args);
-    //ËºÁÑ
+    //æ’•è£‚
     void tear(QList<void*> args);
-    //ÑªÓ°¿ñµ¶
+    //è¡€å½±ç‹‚åˆ€
     void wildBlade(QList<void*> args);
     void wildBladeAsk(QList<void*> args);
-    //ÑªĞÈÅØÏø
+    //è¡€è…¥å’†å“®
     void roar(QList<void*> args);
 signals:
 private:
     bool wildBladeUsed;
 };
 
-//¹­Ö®Å®Éñ
+//å¼“ä¹‹å¥³ç¥
 class BowLady : public PlayerEntity
 {
     Q_OBJECT
@@ -36,15 +36,15 @@ public :
     BowLady(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine* engine);
 public slots:
-    //ÉÁµç¼ı
+    //é—ªç”µç®­
     void thunderArrow(QList<void*> args);
-    //¹á´©Éä»÷
+    //è´¯ç©¿å°„å‡»
     void transfixtion(QList<void*> args);
-    //ÉÁ¹âÏİÚå
+    //é—ªå…‰é™·é˜±
     void trap(QList<void*> args);
-    //¾«×¼Éä»÷
+    //ç²¾å‡†å°„å‡»
     void accurateShoot(QList<void*> args);
-    //¾Ñ»÷
+    //ç‹™å‡»
     void snipe(QList<void*> args);
     void snipe2(QList<void*> args);
 signals:
@@ -107,22 +107,22 @@ public:
     Saintness(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine *engine);
 public slots:
-    //±ùËªµ»ÑÔ
+    //å†°éœœç¥·è¨€
     void prayerOfFrost(QList<void*> args);
-    //ÖÎÁÆÊõ
+    //æ²»ç–—æœ¯
     void cure(QList<void*> args);
-    //ÖÎÓúÖ®¹â
+    //æ²»æ„ˆä¹‹å…‰
     void healingLight(QList<void*> args);
-    //Á¯Ãõ
+    //æ€œæ‚¯
     void mercy(QList<void*> args);
-    //Ê¥ÁÆ
+    //åœ£ç–—
     void layOnHands(QList<void*> args);
     void layOnHands2(QList<void*> args);
 private:
     bool layOnHandsUsed;
 };
 
-//½£Ê¥
+//å‰‘åœ£
 class JianSheng :public PlayerEntity
 {
     Q_OBJECT
@@ -130,19 +130,19 @@ public :
     JianSheng(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine* engine);
 public slots:
-    //ÁÒ·ç¼¼
+    //çƒˆé£æŠ€
     void LieFengJi1(QList<void*> args);
     void LieFengJi2(QList<void*> args);
-    //¼²·ç¼¼
+    //ç–¾é£æŠ€
     void JiFengJi1(QList<void*> args);
     void JiFengJi2(QList<void*> args);
-    //Á¬Ğø¼¼
+    //è¿ç»­æŠ€
     void LianXuJi1(QList<void*> args);
     void LianXuJi2(QList<void*> args);
-    //½£Ó°
+    //å‰‘å½±
     void JianYing1(QList<void*> args);
     void JianYing2(QList<void*> args);
-    //Ê¥½£
+    //åœ£å‰‘
     void ShengJian(QList<void*> args);
     void skillReset(QList<void*> args);
 
@@ -151,7 +151,7 @@ private:
     bool LieFengJiUsed,LianXuJiUsed,JianYingUsed;
 };
 
-//·âÓ¡
+//å°å°
 class FengYin : public PlayerEntity
 {
     Q_OBJECT
@@ -159,23 +159,23 @@ public :
     FengYin(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine* engine);
 public slots:
-    //·¨Êõ¼¤µ´
+    //æ³•æœ¯æ¿€è¡
     void FaShuJiDang1(QList<void*> args);
     void FaShuJiDang2(QList<void*> args);
-    //·âÓ¡·¨Êõ
+    //å°å°æ³•æœ¯
     void FengYinFaShu1(QList<void*> args);
     void FengYinFaShu2(QList<CardEntity *> cards, PlayerEntity *user);
-    //ÎåÏµÊø¸¿
+    //äº”ç³»æŸç¼š
     void WuXiShuFu1(QList<void*> args);
     void WuXiShuFu2(PlayerEntity*,bool*);
-    //·âÓ¡ÆÆËé
+    //å°å°ç ´ç¢
     void FengYinPoSui(QList<void*> args);
 
 private:
     int shuFuID;
 };
 
-//Ä§½£
+//é­”å‰‘
 class MoJian :public PlayerEntity
 {
     Q_OBJECT
@@ -183,24 +183,24 @@ public :
     MoJian(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine* engine);
 public slots:
-    //ºÚ°µÕğ²ü
+    //é»‘æš—éœ‡é¢¤
     void HeiAnZhenChan1(QList<void*> args);
     void HeiAnZhenChan2(QList<void*> args);
     void HeiAnZhenChan3(QList<void *> args);
-    //ĞŞÂŞÁ¬Õ¶
+    //ä¿®ç½—è¿æ–©
     void XiuLuoLianZhan1(QList<void*> args);
     void XiuLuoLianZhan2(QList<void*> args);
-    //°µÓ°Á÷ĞÇ
+    //æš—å½±æµæ˜Ÿ
     void AnYingLiuXing(QList<void*> args);
-    //°µÓ°Äı¾Û
+    //æš—å½±å‡èš
     void AnYingNingJu(QList<void*> args);
-    //°µÓ°Ö®Á¦
+    //æš—å½±ä¹‹åŠ›
     void AnYingZhiLi(QList<void*> args);
     void skillReset(QList<void*> args);
 private:
     bool HeiAnZhenChanUsed,XiuLuoLianZhanUsed,isHeiAnZhenChan;
 };
-//Ã°ÏÕ
+//å†’é™©
 class MaoXian : public PlayerEntity
 {
     Q_OBJECT
@@ -208,15 +208,15 @@ public :
     MaoXian(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine* engine);
 public slots:
-    //ÆÛÕ©
+    //æ¬ºè¯ˆ
     void QiZha(QList<void*> args);
-    //ÍµÌì»»ÈÕ
+    //å·å¤©æ¢æ—¥
     void TouTianHuanRi(QList<void*> args);
     void TouTianHuanRi2(QList<void*> args);
-    //ÌØÊâ¼Ó¹¤
+    //ç‰¹æ®ŠåŠ å·¥
     void TeShuJiaGong(QList<void*> args);
     void TeShuJiaGong2(QList<void*> args);
-    //Ã°ÏÕÕßÌìÌÃ
+    //å†’é™©è€…å¤©å ‚
     void MaoXianZheTianTang(QList<void*> args);
 signals:
 private:
@@ -224,7 +224,7 @@ private:
 };
 
 
-//ÔªËØ
+//å…ƒç´ 
 class YuanSu : public PlayerEntity
 {
     Q_OBJECT
@@ -232,15 +232,15 @@ public :
     YuanSu(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine* engine);
 public slots:
-    //ÔªËØÎüÊÕ
+    //å…ƒç´ å¸æ”¶
     void YuanSuXiShou(QList<void*> args);
-    //ÔªËØ·¨Êõ
+    //å…ƒç´ æ³•æœ¯
     void YuanSuFaShu(QList<void*> args);
     void YuanSuFaShu2(QList<void*> args);
-    //ÔªËØµãÈ¼
+    //å…ƒç´ ç‚¹ç‡ƒ
     void YuanSuDianRan(QList<void*> args);
     void YuanSuDianRan2(QList<void*> args);
-    //ÔÂ¹â
+    //æœˆå…‰
     void YueGuang(QList<void*> args);
 
 signals:
@@ -248,7 +248,7 @@ private:
     bool ignite;
     
 };
-//ÖÙ²Ã
+//ä»²è£
 class ZhongCai : public PlayerEntity
 {
     Q_OBJECT
@@ -256,25 +256,25 @@ public:
     ZhongCai(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine *engine);
 public slots:
-    //ÒÇÊ½ÖĞ¶Ï
+    //ä»ªå¼ä¸­æ–­
     void YiShiZhongDuan(QList<void*> args);
-    //Ä©ÈÕÉóÅĞ
+    //æœ«æ—¥å®¡åˆ¤
     void MoRiShenPan(QList<void*> args);
-    //ÉóÅĞÀË³±
+    //å®¡åˆ¤æµªæ½®
     void ShenPanLangChao(QList<void*> args);
-    //ÖÙ²ÃÒÇÊ½
+    //ä»²è£ä»ªå¼
     void ZhongCaiYiShi1(QList<void*> args);
     void ZhongCaiYiShi2(QList<void *> args);
-    //ÅĞ¾öÌìÆ½
+    //åˆ¤å†³å¤©å¹³
     void PanJueTianPing(QList<void*> args);
-    //ÖØÖÃÆô¶¯´ÎÊı
+    //é‡ç½®å¯åŠ¨æ¬¡æ•°
     void skillReset(QList<void*> args);
 signals:
 private:
     bool startUsed;
 };
 
-//ÓÂÕß
+//å‹‡è€…
 class YongZhe : public PlayerEntity
 {
     Q_OBJECT
@@ -282,23 +282,23 @@ public:
     YongZhe(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine *engine);
 public slots:
-    //Å­ºğ
+    //æ€’å¼
     void NuHou(QList<void*> args);
     void NuHou1(QList<void*> args);
     void NuHou2(QList<void*> args);
-    //Ã÷¾µÖ¹Ë®
+    //æ˜é•œæ­¢æ°´
     void MingJingZhiShui(QList<void*> args);
-    //½û¶ÏÖ®Á¦
+    //ç¦æ–­ä¹‹åŠ›
     void JinDuanZhiLi1(QList<void*> args);
     void JinDuanZhiLi2(QList<void*> args);
-    //ËÀ¶·
+    //æ­»æ–—
     void SiDou(QList<void*> args);
-    //ÌôĞÆ
+    //æŒ‘è¡…
     void TiaoXin1(QList<void*> args);
     void TiaoXin2(PlayerEntity*,int*, bool *canGiveUp);
     void TiaoXin3(PlayerEntity*);
     //void TiaoXin4(QList<void *> args);
-    //¾«Æ£Á¦½ß
+    //ç²¾ç–²åŠ›ç«­
     void JingPiLiJie1(QList<void*> args);
     void JingPiLiJie2(QList<void *> args);
     void JingPiLiJie3(QList<void *> args);
@@ -308,7 +308,7 @@ private:
     bool jinDuanUsed;
 };
 
-//Ê¥Ç¹
+//åœ£æª
 class ShengQiang: public PlayerEntity
 {
     Q_OBJECT
@@ -330,7 +330,7 @@ private:
     bool ShengGuangQiYuUsed;
     bool TianQiangUsed;
 };
-//Æíµ»Ê¦
+//ç¥ˆç¥·å¸ˆ
 class QiDao : public PlayerEntity
 {
     Q_OBJECT
@@ -338,21 +338,21 @@ public :
     QiDao(BackgroundEngine* engine,int id,int color);
     void makeConnection(BackgroundEngine* engine);
 public slots:
-    //ÍşÁ¦´Í¸£
+    //å¨åŠ›èµç¦
     void WeiLiCiFu1(QList<void*> args);
     void WeiLiCiFu2(QList<void*> args);
-    //Ñ¸½İ´Í¸£
+    //è¿…æ·èµç¦
     void XunJieCiFu1(QList<void*> args);
     void XunJieCiFu2(QList<void*> args);
     void XunJieCiFu3(QList<void *> args);
-    //¹â»ÔĞÅÑö
+    //å…‰è¾‰ä¿¡ä»°
     void GuangHuiXinYang(QList<void*> args);
-    //ÆáºÚĞÅÑö
+    //æ¼†é»‘ä¿¡ä»°
     void QiHeiXinYang(QList<void*> args);
-    //·¨Á¦³±Ï«
+    //æ³•åŠ›æ½®æ±
     void FaLiChaoXi1(QList<void*> args);
     void FaLiChaoXi2(QList<void*> args);
-    //Æô¶¯ Æíµ»
+    //å¯åŠ¨ ç¥ˆç¥·
     void Pray1(QList<void*> args);
     void Pray2(QList<void*> args);
     void skillReset(QList<void*> args);
@@ -361,7 +361,7 @@ private:
     bool FaLiChaoXiUsed;
 };
 
-//Éñ¹Ù
+//ç¥å®˜
 class ShenGuan: public PlayerEntity
 {
     Q_OBJECT
@@ -377,7 +377,7 @@ public slots:
     void ShenShengLingYu(QList<void*> args);
 };
 
-//ËÀÁé
+//æ­»çµ
 class SiLing: public PlayerEntity
 {
     Q_OBJECT
@@ -394,7 +394,7 @@ public slots:
 private:
     bool SiWangZhiChuUsed;
 };
-//ÏÍÕß
+//è´¤è€…
 class XianZhe : public PlayerEntity
 {
     Q_OBJECT
@@ -410,7 +410,7 @@ private:
 };
 
 
-//¸ñ¶·
+//æ ¼æ–—
 class GeDouJia : public PlayerEntity
 {
     Q_OBJECT
@@ -429,9 +429,9 @@ public slots:
     void BaiShiHuanLingQuan3(QList<void *> args);
     void DouShenTianQu(QList<void*> args);
     void BaiShiTargetSet(QList<void*>args);
-    void BaiShiQuXiao1(QList<void*> args);//¹¥»÷ÆäËûÈË¡£¡£t2
-    void BaiShiQuXiao2(QList<void *> args);//·¨ÊõĞĞ¶¯
-    void BaiShiQuXiao3(QList<void *> args);//ÌØÊâĞĞ¶¯¡£¡£
+    void BaiShiQuXiao1(QList<void*> args);//æ”»å‡»å…¶ä»–äººã€‚ã€‚t2
+    void BaiShiQuXiao2(QList<void *> args);//æ³•æœ¯è¡ŒåŠ¨
+    void BaiShiQuXiao3(QList<void *> args);//ç‰¹æ®Šè¡ŒåŠ¨ã€‚ã€‚
     void skillReset(QList<void*> args);
 private:
     int BaiShiTargetID;
@@ -442,7 +442,7 @@ private:
     bool CangYanUsed;
 };
 
-//Î×Å®
+//å·«å¥³
 class WuNv: public PlayerEntity
 {
     Q_OBJECT
@@ -463,7 +463,7 @@ private:
     int TongShengID;
 };
 
-//ºìÁ«ÆïÊ¿ 28
+//çº¢è²éª‘å£« 28
 class HongLian:public PlayerEntity
 {
     Q_OBJECT
@@ -486,7 +486,7 @@ private:
     bool XingHongShengYueUsed;
 };
 
-//Áé»ê
+//çµé­‚
 class LingHun : public PlayerEntity
 {
     Q_OBJECT
@@ -531,7 +531,7 @@ private:
 
 };
 
-//Ä§Ç¹
+//é­”æª
 class MoQiang : public PlayerEntity
 {
     Q_OBJECT
@@ -562,7 +562,7 @@ private:
 };
 
 
-//½£µÛ
+//å‰‘å¸
 class JianDi : public PlayerEntity
 {
     Q_OBJECT
@@ -583,7 +583,7 @@ public slots:
     void BuQuYiZhi(QList<void*> args);
     void BuQuYiZhi2(QList<void *> args);
 private:
-    int TianshiOrEmo;//0-½Ô²»ÊÇ£¬1-ÌìÊ¹£¬2-¶ñÄ§
+    int TianshiOrEmo;//0-çš†ä¸æ˜¯ï¼Œ1-å¤©ä½¿ï¼Œ2-æ¶é­”
     bool HunUsed;
 };
 

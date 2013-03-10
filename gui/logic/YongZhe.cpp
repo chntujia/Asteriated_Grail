@@ -6,7 +6,7 @@ YongZhe::YongZhe()
 setMyRole(this);
 
     Button *tiaoXin;
-    tiaoXin=new Button(3,tr("ÌôÐÆ"));
+    tiaoXin=new Button(3,QStringLiteral("æŒ‘è¡…"));
     buttonArea->addButton(tiaoXin);
     connect(tiaoXin,SIGNAL(buttonSelected(int)),this,SLOT(TiaoXin()));
 }
@@ -15,7 +15,7 @@ void YongZhe::normal()
 {
     Role::normal();
     Player* myself=dataInterface->getMyself();
-    //ÌôÐÆ
+    //æŒ‘è¡…
     if(myself->getToken(0)>0)
         buttonArea->enable(3);
         foreach(Player* ptr,dataInterface->getPlayerList())
@@ -29,7 +29,7 @@ void YongZhe::normal()
 void YongZhe::NuHou()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯Å­ºð£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨æ€’å¼ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -37,7 +37,7 @@ void YongZhe::NuHou()
 void YongZhe::MingJingZhiShui()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯Ã÷¾µÖ¹Ë®£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨æ˜Žé•œæ­¢æ°´ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -45,7 +45,7 @@ void YongZhe::MingJingZhiShui()
 void YongZhe::JinDuanZhiLi()
 {
     state=2102;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯½û¶ÏÖ®Á¦£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨ç¦æ–­ä¹‹åŠ›ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -53,7 +53,7 @@ void YongZhe::JinDuanZhiLi()
 void YongZhe::SiDou()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ËÀ¶·£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨æ­»æ–—ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -87,7 +87,7 @@ void YongZhe::onOkClicked()
 
     switch(state)
     {
-    //¶îÍâÐÐ¶¯Ñ¯ÎÊ
+    //é¢å¤–è¡ŒåŠ¨è¯¢é—®
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0].digitValue()==1)
@@ -97,7 +97,7 @@ void YongZhe::onOkClicked()
             attackAction();
         }
         break;
-    //ÌôÐÆ
+    //æŒ‘è¡…
     case 2101:
         command="2101;";
         sourceID=QString::number(myID);
@@ -106,7 +106,7 @@ void YongZhe::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-    //½û¶ÏÖ®Á¦
+    //ç¦æ–­ä¹‹åŠ›
     case 2102:
         jinDuanZhiLi++;
         command="2102;1;";
@@ -127,7 +127,7 @@ void YongZhe::onCancelClicked()
     case 2101:
         normal();
         break;
-    //½û¶ÏÖ®Á¦
+    //ç¦æ–­ä¹‹åŠ›
     case 2102:
         if(jinDuanZhiLi>0)
             jinDuanZhiLi=0;
@@ -146,13 +146,13 @@ void YongZhe::turnBegin()
 void YongZhe::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("Å­ºð"))
+    if(skill==QStringLiteral("æ€’å¼"))
         NuHou();
-    else if(skill==tr("Ã÷¾µÖ¹Ë®"))
+    else if(skill==QStringLiteral("æ˜Žé•œæ­¢æ°´"))
         MingJingZhiShui();
-    else if(skill==tr("½û¶ÏÖ®Á¦"))
+    else if(skill==QStringLiteral("ç¦æ–­ä¹‹åŠ›"))
         JinDuanZhiLi();
-    else if(skill==tr("ËÀ¶·"))
+    else if(skill==QStringLiteral("æ­»æ–—"))
         SiDou();
 }
 
@@ -160,6 +160,6 @@ void YongZhe::additionalAction()
 {
     Role::additionalAction();
     if(jinDuanZhiLi>0)
-        tipArea->addBoxItem(tr("1.¹¥»÷ÐÐ¶¯£¨¾«Æ£Á¦½ß£©"));
+        tipArea->addBoxItem(QStringLiteral("1.æ”»å‡»è¡ŒåŠ¨ï¼ˆç²¾ç–²åŠ›ç«­ï¼‰"));
 }
 

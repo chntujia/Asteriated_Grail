@@ -6,7 +6,7 @@ JianDi::JianDi()
     setMyRole(this);
 
     Button *checkCover;
-    checkCover = new Button(10,tr("²é¿´½£»ê"));
+    checkCover = new Button(10,QStringLiteral("æŸ¥çœ‹å‰‘é­‚"));
     buttonArea->addOutsideTurnButton(checkCover);
 
     checkCover->setVisible(true);
@@ -18,7 +18,7 @@ JianDi::JianDi()
 void JianDi::JianHunShouHu(int cardID)
 {
     state=1901;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯½£»êÊØ»¤£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨å‰‘é­‚å®ˆæŠ¤ï¼Ÿ"));
     shouhuID=cardID;
     decisionArea->enable(0);
     decisionArea->enable(1);
@@ -28,7 +28,7 @@ void JianDi::JianQiZhan(int targetID)
 {
     Player* myself=dataInterface->getMyself();
     state=1902;
-    tipArea->setMsg(tr("ÇëÑ¡ÔñÒªÒÆ³ıµÄ½£ÆøÊı£º"));
+    tipArea->setMsg(QStringLiteral("è¯·é€‰æ‹©è¦ç§»é™¤çš„å‰‘æ°”æ•°ï¼š"));
     int min=myself->getToken(0)<3?myself->getToken(0):3;
     for(;min>0;min--)
         tipArea->addBoxItem(QString::number(min));
@@ -56,7 +56,7 @@ void JianDi::JianQiZhan2()
 void JianDi::TianShiZhiHun()
 {
     state=1903;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÌìÊ¹Ö®»ê£¿Èç·¢¶¯ÇëÑ¡Ôñ½£»ê£º"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨å¤©ä½¿ä¹‹é­‚ï¼Ÿå¦‚å‘åŠ¨è¯·é€‰æ‹©å‰‘é­‚ï¼š"));
     decisionArea->enable(1);
     decisionArea->disable(0);
     gui->showCoverArea(true);
@@ -69,7 +69,7 @@ void JianDi::TianShiZhiHun()
 void JianDi::EMoZhiHun()
 {
     state=1904;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯¶ñÄ§Ö®»ê£¿Èç·¢¶¯ÇëÑ¡Ôñ½£»ê£º"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨æ¶é­”ä¹‹é­‚ï¼Ÿå¦‚å‘åŠ¨è¯·é€‰æ‹©å‰‘é­‚ï¼š"));
     decisionArea->enable(1);
     decisionArea->disable(0);
     gui->showCoverArea(true);
@@ -79,34 +79,25 @@ void JianDi::EMoZhiHun()
     coverArea->setQuota(1);
 }
 
-void JianDi::BuQuYiZhi()
-{
-    state=1905;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯²»ÇüÒâÖ¾£¿"));
-    decisionArea->enable(0);
-    decisionArea->enable(1);
-}
-
 void JianDi::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("½£»êÊØ»¤"))
+    if(skill==QStringLiteral("å‰‘é­‚å®ˆæŠ¤"))
         JianHunShouHu(command.split(';').at(3).toInt());
-    else if(skill==tr("½£ÆøÕ¶"))
+    else if(skill==QStringLiteral("å‰‘æ°”æ–©"))
         JianQiZhan(command.split(';').at(3).toInt());
-    else if(skill==tr("ÌìÊ¹Ö®»ê"))
+    else if(skill==QStringLiteral("å¤©ä½¿ä¹‹é­‚"))
         TianShiZhiHun();
-    else if(skill==tr("¶ñÄ§Ö®»ê"))
+    else if(skill==QStringLiteral("æ¶é­”ä¹‹é­‚"))
         EMoZhiHun();
-    else if(skill==tr("²»ÇüÒâÖ¾"))
-        BuQuYiZhi();
+
 }
 
 void JianDi::additionalAction()
 {
     Role::additionalAction();
-    if(buquUsed)
-        tipArea->addBoxItem(tr("1.¹¥»÷ĞĞ¶¯£¨²»ÇüÒâÖ¾£©"));
+    if(usedAttack)
+        tipArea->addBoxItem(QStringLiteral("1.ä¸å±ˆæ„å¿—"));
 }
 
 void JianDi::coverCardAnalyse()
@@ -118,23 +109,6 @@ void JianDi::coverCardAnalyse()
         decisionArea->enable(0);
         break;
     }
-}
-
-void JianDi::playerAnalyse()
-{
-    Role::playerAnalyse();
-    switch(state)
-    {
-    case 1902:
-        decisionArea->enable(0);
-        break;
-    }
-}
-
-void JianDi::turnBegin()
-{
-    Role::turnBegin();
-    buquUsed=false;
 }
 
 void JianDi::onOkClicked()
@@ -154,7 +128,6 @@ void JianDi::onOkClicked()
     case 42:
         text=tipArea->getBoxCurrentText();
         if(text[0]=='1'){
-            buquUsed=false;
             emit sendCommand("1906;"+QString::number(myID)+";");
             attackAction();
         }
@@ -197,12 +170,6 @@ void JianDi::onOkClicked()
         gui->showCoverArea(false);
         gui->reset();
         break;
-    case 1905:
-        command="1905;1;";
-        buquUsed=true;
-        emit sendCommand(command);
-        gui->reset();
-        break;
     }
     gui->showCoverArea(false);
 }
@@ -233,11 +200,6 @@ void JianDi::onCancelClicked()
         break;
     case 1904:
         command="1904;0;";
-        emit sendCommand(command);
-        gui->reset();
-        break;
-    case 1905:
-        command="1905;0;";
         emit sendCommand(command);
         gui->reset();
         break;

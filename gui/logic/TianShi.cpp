@@ -9,15 +9,15 @@ setMyRole(this);
     connect(handArea,SIGNAL(cardUnready()),this,SLOT(onUnready()));
 
     Button *fengZhiJieJin,*tianShiZhuFu,*tianShiZhiQiang;
-    fengZhiJieJin=new Button(3,tr("·çÖ®½à¾»"));
+    fengZhiJieJin=new Button(3,QStringLiteral("é£ä¹‹æ´å‡€"));
     buttonArea->addButton(fengZhiJieJin);
     connect(fengZhiJieJin,SIGNAL(buttonSelected(int)),this,SLOT(FengZhiJieJin()));
 
-    tianShiZhuFu=new Button(4,tr("ÌìÊ¹×£¸£"));
+    tianShiZhuFu=new Button(4,QStringLiteral("å¤©ä½¿ç¥ç¦"));
     buttonArea->addButton(tianShiZhuFu);
     connect(tianShiZhuFu,SIGNAL(buttonSelected(int)),this,SLOT(TianShiZhuFu()));
 
-    tianShiZhiQiang=new Button(5,tr("ÌìÊ¹Ö®Ç½"));
+    tianShiZhiQiang=new Button(5,QStringLiteral("å¤©ä½¿ä¹‹å¢™"));
     buttonArea->addButton(tianShiZhiQiang);
     connect(tianShiZhiQiang,SIGNAL(buttonSelected(int)),this,SLOT(TianShiZhiQiang()));
 }
@@ -27,7 +27,7 @@ void TianShi::TianShiJiBan()
     tipArea->reset();
 
     state=707;
-    tipArea->setMsg(tr("·¢¶¯ÌìÊ¹î¿°í"));
+    tipArea->setMsg(QStringLiteral("å‘åŠ¨å¤©ä½¿ç¾ç»Š"));
     playerArea->setQuota(1);
     playerArea->enableAll();
 
@@ -79,7 +79,7 @@ void TianShi::TianShiZhiQiang()
     decisionArea->enable(1);
     decisionArea->disable(0);
 
-    handArea->enableSpecility(tr("ÌìÊ¹Ö®Ç½"));
+    handArea->enableSpecility(QStringLiteral("å¤©ä½¿ä¹‹å¢™"));
 }
 
 void TianShi::TianShiZhiGe1()
@@ -91,11 +91,11 @@ void TianShi::TianShiZhiGe1()
     gem=myself->getGem();
     crystal=myself->getCrystal();
     state=704;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÌìÊ¹Ö®¸è£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨å¤©ä½¿ä¹‹æ­Œï¼Ÿ"));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("1.Ë®¾§"));
+        tipArea->addBoxItem(QStringLiteral("1.æ°´æ™¶"));
     if(gem>=1)
-        tipArea->addBoxItem(tr("2.±¦Ê¯"));
+        tipArea->addBoxItem(QStringLiteral("2.å®çŸ³"));
 
     tipArea->showBox();
     decisionArea->enable(0);
@@ -131,49 +131,49 @@ void TianShi::ShenZhiBiHu(int reduce)
     playerArea->reset();
     decisionArea->enable(0);
     decisionArea->enable(1);
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÉñÖ®±Ó»¤£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨ç¥ä¹‹åº‡æŠ¤ï¼Ÿ"));
     if(reduce>=3)
     {
         if(gem==3)
-            tipArea->addBoxItem(tr("1.Èı¸ö±¦Ê¯"));
+            tipArea->addBoxItem(QStringLiteral("1.ä¸‰ä¸ªå®çŸ³"));
         if(crystal==3)
-            tipArea->addBoxItem(tr("2.Èı¸öË®¾§"));
+            tipArea->addBoxItem(QStringLiteral("2.ä¸‰ä¸ªæ°´æ™¶"));
         if(gem==2&&crystal==1)
-            tipArea->addBoxItem(tr("3.Á½¸ö±¦Ê¯ºÍÒ»¸öË®¾§"));
+            tipArea->addBoxItem(QStringLiteral("3.ä¸¤ä¸ªå®çŸ³å’Œä¸€ä¸ªæ°´æ™¶"));
         if(gem==1&&crystal==2)
-            tipArea->addBoxItem(tr("4.Ò»¸ö±¦Ê¯ºÍÁ½¸öË®¾§"));
+            tipArea->addBoxItem(QStringLiteral("4.ä¸€ä¸ªå®çŸ³å’Œä¸¤ä¸ªæ°´æ™¶"));
     }
     if(reduce>=2)
     {
         if(gem>=2)
-            tipArea->addBoxItem(tr("5.Á½¸ö±¦Ê¯"));
+            tipArea->addBoxItem(QStringLiteral("5.ä¸¤ä¸ªå®çŸ³"));
         if(crystal>=2)
-            tipArea->addBoxItem(tr("6.Á½¸öË®¾§"));
+            tipArea->addBoxItem(QStringLiteral("6.ä¸¤ä¸ªæ°´æ™¶"));
         if(gem>=1&&crystal>=1)
-            tipArea->addBoxItem(tr("7.Ò»¸ö±¦Ê¯ºÍÒ»¸öË®¾§"));
+            tipArea->addBoxItem(QStringLiteral("7.ä¸€ä¸ªå®çŸ³å’Œä¸€ä¸ªæ°´æ™¶"));
     }
     if(gem>=1)
-        tipArea->addBoxItem(tr("8.Ò»¸ö±¦Ê¯"));
+        tipArea->addBoxItem(QStringLiteral("8.ä¸€ä¸ªå®çŸ³"));
     if(crystal>=1)
-        tipArea->addBoxItem(tr("9.Ò»¸öË®¾§"));
+        tipArea->addBoxItem(QStringLiteral("9.ä¸€ä¸ªæ°´æ™¶"));
     tipArea->showBox();
 }
 
 void TianShi::normal()
 {
     Role::normal();
-//·çÖ®½à¾»
+//é£ä¹‹æ´å‡€
     if (handArea->checkElement("wind"))
         foreach(Player*ptr,dataInterface->getPlayerList())
             if(ptr->hasStatus()){
                 buttonArea->enable(3);
                 break;
             }
-//ÌìÊ¹×£¸£
+//å¤©ä½¿ç¥ç¦
     if (handArea->checkElement("water"))
         buttonArea->enable(4);
-//ÌìÊ¹Ö®Ç½
-    if (handArea->checkSpecility(tr("ÌìÊ¹Ö®Ç½")))
+//å¤©ä½¿ä¹‹å¢™
+    if (handArea->checkSpecility(QStringLiteral("å¤©ä½¿ä¹‹å¢™")))
         buttonArea->enable(5);
     unactionalCheck();
 }
@@ -235,7 +235,7 @@ void TianShi::onOkClicked()
 
     switch(state)
     {
-//·çÖ®½à¾»
+//é£ä¹‹æ´å‡€
     case 701:
         command="701;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -247,7 +247,7 @@ void TianShi::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÌìÊ¹×£¸£
+//å¤©ä½¿ç¥ç¦
     case 702:
         command="702;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -262,7 +262,7 @@ void TianShi::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÌìÊ¹Ö®Ç½
+//å¤©ä½¿ä¹‹å¢™
     case 703:
         command="703;";
         cardID=QString::number(selectedCards[0]->getID());
@@ -273,7 +273,7 @@ void TianShi::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÌìÊ¹Ö®¸è1
+//å¤©ä½¿ä¹‹æ­Œ1
     case 704:
         text=tipArea->getBoxCurrentText();
         switch(text[0].digitValue())
@@ -288,17 +288,17 @@ void TianShi::onOkClicked()
         gui->reset();
         TianShiZhiGe2();
         break;
-//ÉñÖ®±Ó»¤
+//ç¥ä¹‹åº‡æŠ¤
         /*
-            tipArea->addBoxItem(tr("1.Èı¸ö±¦Ê¯"));
-            tipArea->addBoxItem(tr("2.Èı¸öË®¾§"));
-            tipArea->addBoxItem(tr("3.Á½¸ö±¦Ê¯ºÍÒ»¸öË®¾§"));
-            tipArea->addBoxItem(tr("4.Ò»¸ö±¦Ê¯ºÍÁ½¸öË®¾§"));
-            tipArea->addBoxItem(tr("5.Á½¸ö±¦Ê¯"));
-            tipArea->addBoxItem(tr("6.Á½¸öË®¾§"));
-            tipArea->addBoxItem(tr("7.Ò»¸ö±¦Ê¯ºÍÒ»¸öË®¾§"));
-    tipArea->addBoxItem(tr("8.Ò»¸ö±¦Ê¯"));
-    tipArea->addBoxItem(tr("9.Ò»¸öË®¾§"));*/
+            tipArea->addBoxItem(QStringLiteral("1.ä¸‰ä¸ªå®çŸ³"));
+            tipArea->addBoxItem(QStringLiteral("2.ä¸‰ä¸ªæ°´æ™¶"));
+            tipArea->addBoxItem(QStringLiteral("3.ä¸¤ä¸ªå®çŸ³å’Œä¸€ä¸ªæ°´æ™¶"));
+            tipArea->addBoxItem(QStringLiteral("4.ä¸€ä¸ªå®çŸ³å’Œä¸¤ä¸ªæ°´æ™¶"));
+            tipArea->addBoxItem(QStringLiteral("5.ä¸¤ä¸ªå®çŸ³"));
+            tipArea->addBoxItem(QStringLiteral("6.ä¸¤ä¸ªæ°´æ™¶"));
+            tipArea->addBoxItem(QStringLiteral("7.ä¸€ä¸ªå®çŸ³å’Œä¸€ä¸ªæ°´æ™¶"));
+    tipArea->addBoxItem(QStringLiteral("8.ä¸€ä¸ªå®çŸ³"));
+    tipArea->addBoxItem(QStringLiteral("9.ä¸€ä¸ªæ°´æ™¶"));*/
     case 705:
         command="705;1;";
         text=tipArea->getBoxCurrentText();
@@ -335,7 +335,7 @@ void TianShi::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÌìÊ¹Ö®¸è2
+//å¤©ä½¿ä¹‹æ­Œ2
     case 706:
         command="704;1;";
         if(usedGem)
@@ -347,7 +347,7 @@ void TianShi::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-//ÌìÊ¹î¿°í
+//å¤©ä½¿ç¾ç»Š
     case 707:
         command="707;";
         targetID=QString::number(selectedPlayers[0]->getID());
@@ -364,28 +364,28 @@ void TianShi::onCancelClicked()
     QString command;
     switch(state)
     {
-//·çÖ®½à¾»
+//é£ä¹‹æ´å‡€
     case 701:
-//ÌìÊ¹×£¸£
+//å¤©ä½¿ç¥ç¦
     case 702:
-//ÌìÊ¹Ö®Ç½
+//å¤©ä½¿ä¹‹å¢™
     case 703:
         gui->reset();
         normal();
         break;
-//ÌìÊ¹Ö®¸è1
+//å¤©ä½¿ä¹‹æ­Œ1
     case 704:
         command="704;0;";
         emit sendCommand(command);
         gui->reset();
         break;
-//ÉñÖ®±Ó»¤
+//ç¥ä¹‹åº‡æŠ¤
     case 705:
         command="705;0;";
         emit sendCommand(command);
         gui->reset();
         break;
-//ÌìÊ¹Ö®¸è2
+//å¤©ä½¿ä¹‹æ­Œ2
     case 706:
         gui->reset();
         TianShiZhiGe1();
@@ -409,10 +409,10 @@ void TianShi::onUnready()
 void TianShi::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ÌìÊ¹Ö®¸è"))
+    if(skill==QStringLiteral("å¤©ä½¿ä¹‹æ­Œ"))
         TianShiZhiGe1();
-    else if(skill==tr("ÉñÖ®±Ó»¤"))
+    else if(skill==QStringLiteral("ç¥ä¹‹åº‡æŠ¤"))
         ShenZhiBiHu(command.split(';').at(3).toInt());
-    else if(skill==tr("ÌìÊ¹î¿°í"))
+    else if(skill==QStringLiteral("å¤©ä½¿ç¾ç»Š"))
         TianShiJiBan();
 }

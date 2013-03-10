@@ -11,47 +11,47 @@
 
 class BackgroundEngine;
 
-//Íæ¼ÒÀà
+//ç©å®¶ç±»
 class PlayerEntity:public QObject
 {
     Q_OBJECT
 public:
     PlayerEntity(BackgroundEngine* engine,int id,int color);
-    //Á¬½ÓĞÅºÅ²Û
+    //è¿æ¥ä¿¡å·æ§½
     void makeConnection(BackgroundEngine* engine);
-    //Ôö¼ÓÊÖÅÆ²Ù×÷
+    //å¢åŠ æ‰‹ç‰Œæ“ä½œ
     void addHandCards(QList<CardEntity*> newCard,int harmed,bool fromPile=true);
-    //±©ÅÆ´¦Àí
+    //æš´ç‰Œå¤„ç†
     void cardsOverLoad(int harmed);
     void coverOverLoad();
-    //ÒÆ³ıÊÖÅÆ²Ù×÷
+    //ç§»é™¤æ‰‹ç‰Œæ“ä½œ
     void removeHandCards(QList<CardEntity*> oldCard,bool show,bool toDiscardPile = true);
-    //¸øÅÆ²Ù×÷
+    //ç»™ç‰Œæ“ä½œ
     void giveHandCards(QList<CardEntity*> oldCard,PlayerEntity* to);
 
-    //Éè¶¨ÊÖÅÆÉÏÏŞÊÇ·ñËø¶¨
+    //è®¾å®šæ‰‹ç‰Œä¸Šé™æ˜¯å¦é”å®š
     void setHandCardsMaxFixed(bool fixed, int howmany=6);
-    //ÉèÖÃÊÖÅÆ±ä»¯
+    //è®¾ç½®æ‰‹ç‰Œå˜åŒ–
     void addHandCardsRange(int howMany);
-    //ÉèÖÃÖÎÁÆ
+    //è®¾ç½®æ²»ç–—
     void addCrossNum(int howMany, int atMost=-1);
     void subCrossNum(int howMany);
 
     void setGem(int howMany);
     void setCrystal(int howMany);
-    //ÉèÖÃµ±Ç°»ØºÏÊÇ·ñÎª¸ÃÍæ¼Ò»ØºÏ
+    //è®¾ç½®å½“å‰å›åˆæ˜¯å¦ä¸ºè¯¥ç©å®¶å›åˆ
     void setYourTurn(bool yes);
     void setSeatNum(int num){this->seatNum = num;}
     int getSeatNum(){return this->seatNum;}
-    //ÉèÖÃºáÖÃ
+    //è®¾ç½®æ¨ªç½®
     void setTap(bool tap){this->tap = tap;}
     void setToken(int id,int howMany){token[id]=howMany<=tokenMax[id]?howMany:tokenMax[id];}
-    //ÉèÖÃÏÂÒ»¸öÍæ¼Ò
+    //è®¾ç½®ä¸‹ä¸€ä¸ªç©å®¶
     void setNext(PlayerEntity* nextPlayer){this->nextPlayer = nextPlayer;}
-    //ÔÚ¸ÃÍæ¼ÒÇ°Ôö¼Ó»ù´¡Ğ§¹û
+    //åœ¨è¯¥ç©å®¶å‰å¢åŠ åŸºç¡€æ•ˆæœ
     void addBasicEffect(CardEntity* effectCard){this->basicEffect << effectCard;}
 
-    //ÒÆ³ı»ù´¡Ğ§¹û
+    //ç§»é™¤åŸºç¡€æ•ˆæœ
     bool removeBasicEffect(CardEntity* effect,int toWho=-1,int toWhere=DISCARDPILE);
     int getID();
     QString getName();
@@ -65,9 +65,9 @@ public:
     int getColor();
     QList<CardEntity*> getCoverCards(){return this->coverCards;}
     int getToken(int id){return token[id];}
-    //»ñÈ¡¸ÃÍæ¼ÒÃæÇ°µÄ»ù´¡Ğ§¹ûÅÆ
+    //è·å–è¯¥ç©å®¶é¢å‰çš„åŸºç¡€æ•ˆæœç‰Œ
     QList<CardEntity*> getBasicEffect(){return this->basicEffect;}
-    //·µ»ØÍæ¼ÒĞÇÊı
+    //è¿”å›ç©å®¶æ˜Ÿæ•°
     int getStar(){return this->star;}
     PlayerEntity* getNext(){return this->nextPlayer;}
     QList<CardEntity*> getHandCards(){return this->handCards;}
@@ -84,38 +84,38 @@ public:
     void addCardsToCover(QList<CardEntity*> cards);
     void drawCardsToCover(int howMany);
 signals:
-    //±©ÅÆĞÅºÅ
+    //æš´ç‰Œä¿¡å·
     void overLoadCardsSIG();
-    //Ã÷ÆúÅÆĞÅºÅ
+    //æ˜å¼ƒç‰Œä¿¡å·
     void discardWithFaceUpSIG();
-    //±©ÅÆÑ¯ÎÊĞÅºÅ(ÆäÊµÃ»Ê²Ã´ÓÃ)
+    //æš´ç‰Œè¯¢é—®ä¿¡å·(å…¶å®æ²¡ä»€ä¹ˆç”¨)
     void askForOverLoadSIG(QList<CardEntity*> hand,int overNum);
-    //ÊÖÅÆ±ä»¯ĞÅºÅ£¨Î×Å®Ê¹ÓÃ£©
+    //æ‰‹ç‰Œå˜åŒ–ä¿¡å·ï¼ˆå·«å¥³ä½¿ç”¨ï¼‰
     void handCardsChange(PlayerEntity* dst);
-    //Ê¿ÆøÏÂ½µÇ°£¨ºìÁ«ÆïÊ¿ÈÈÑª·ĞÌÚ×´Ì¬£©
+    //å£«æ°”ä¸‹é™å‰ï¼ˆçº¢è²éª‘å£«çƒ­è¡€æ²¸è…¾çŠ¶æ€ï¼‰
     void beforeLoseMoralSIG(int harmed, int *howMany, PlayerEntity *dst);
-    //Ê¿ÆøÏÂ½µĞÅºÅ
+    //å£«æ°”ä¸‹é™ä¿¡å·
     void loseMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
-    //µûÎèËøÊ¿ÆøĞÅºÅ
+    //è¶èˆé”å£«æ°”ä¿¡å·
     void fixMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
-    //ÕæÊµÊ¿ÆøÏÂ½µĞÅºÅ£¨Î×Å®ºìÁ«½øÈë×´Ì¬Ê¹ÓÃ£©
+    //çœŸå®å£«æ°”ä¸‹é™ä¿¡å·ï¼ˆå·«å¥³çº¢è²è¿›å…¥çŠ¶æ€ä½¿ç”¨ï¼‰
     void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst);
-    //¼ì²é½áÊøĞÅºÅ
+    //æ£€æŸ¥ç»“æŸä¿¡å·
     void checkEndSIG();
-    //·¢ËÍÍ¨Ñ¶ĞÅÏ¢
+    //å‘é€é€šè®¯ä¿¡æ¯
     void sendMessageSIG(int,QString);
-    //ÒÆ¶¯¿¨ÅÆµ½ÆúÅÆÇø(Á¬½Óµ½BackgroundEngine)
+    //ç§»åŠ¨å¡ç‰Œåˆ°å¼ƒç‰ŒåŒº(è¿æ¥åˆ°BackgroundEngine)
     void toDiscardPileSIG(QList<CardEntity*> cards,bool show);
     void showHandCards(QList<CardEntity*>,PlayerEntity*);
 
 
 protected:
-    int id;//Íæ¼Òid
+    int id;//ç©å®¶id
     int characterID;
     QString name;
     int handCardsMax;
     int handCardsRange;
-    int handCardsMin;//µûÎèÉúÃüÖ®»ğÊ¹ÓÃ
+    int handCardsMin;//è¶èˆç”Ÿå‘½ä¹‹ç«ä½¿ç”¨
 
 
     int crossNum;
@@ -125,20 +125,20 @@ protected:
     int energyMax;
     int color;
     float star;
-    bool tap;//ºáÖÃ×´Ì¬
-    bool handCardsMaxFixed;//ÊÇ·ñËø¶¨ÊÖÅÆÉÏÏŞ
+    bool tap;//æ¨ªç½®çŠ¶æ€
+    bool handCardsMaxFixed;//æ˜¯å¦é”å®šæ‰‹ç‰Œä¸Šé™
     bool yourTurn;
     int seatNum;
     int token[3];
     int tokenMax[3];
-    PlayerEntity* nextPlayer;//ÏÂ¼Ò
+    PlayerEntity* nextPlayer;//ä¸‹å®¶
     //QList<Status*> status;
     //QString info;
-    QList<CardEntity*> handCards;//ÊÖÅÆ
-    QList<CardEntity*> basicEffect;//»ù´¡Ğ§¹ûÅÆ
-    QList<CardEntity*> exclusiveEffect;//×¨ÊôĞ§¹û
-    QList<CardEntity*> coverCards;//¸ÇÅÆÇø
-    //ÓÎÏ·ÒıÇæ£¬·½±ãµ÷ÓÃengineµÄ¸÷Ïî¹¦ÄÜ
+    QList<CardEntity*> handCards;//æ‰‹ç‰Œ
+    QList<CardEntity*> basicEffect;//åŸºç¡€æ•ˆæœç‰Œ
+    QList<CardEntity*> exclusiveEffect;//ä¸“å±æ•ˆæœ
+    QList<CardEntity*> coverCards;//ç›–ç‰ŒåŒº
+    //æ¸¸æˆå¼•æ“ï¼Œæ–¹ä¾¿è°ƒç”¨engineçš„å„é¡¹åŠŸèƒ½
     BackgroundEngine* engine;
 
 };

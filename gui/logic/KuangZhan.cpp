@@ -9,7 +9,7 @@ setMyRole(this);
 void KuangZhan::SiLie()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ËºÁÑ£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨æ’•è£‚ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -17,7 +17,7 @@ void KuangZhan::SiLie()
 void KuangZhan::XueXingPaoXiao()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÑªÐÈÅØÏø£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨è¡€è…¥å’†å“®ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 
@@ -26,7 +26,7 @@ void KuangZhan::XueXingPaoXiao()
 void KuangZhan::XueYingKuangDao()
 {
     state=36;
-    tipArea->setMsg(tr("ÊÇ·ñ·¢¶¯ÑªÓ°¿ñµ¶£¿"));
+    tipArea->setMsg(QStringLiteral("æ˜¯å¦å‘åŠ¨è¡€å½±ç‹‚åˆ€ï¼Ÿ"));
     decisionArea->enable(0);
     decisionArea->enable(1);
 }
@@ -34,10 +34,10 @@ void KuangZhan::XueYingKuangDao()
 void KuangZhan::askForSkill(QString skill)
 {
     Role::askForSkill(skill);
-    if(skill==tr("ËºÁÑ"))
+    if(skill==QStringLiteral("æ’•è£‚"))
         SiLie();
-    else if(skill==tr("ÑªÐÈÅØÏø"))
+    else if(skill==QStringLiteral("è¡€è…¥å’†å“®"))
         XueXingPaoXiao();
-    else if(skill==tr("ÑªÓ°¿ñµ¶"))
+    else if(skill==QStringLiteral("è¡€å½±ç‹‚åˆ€"))
         XueYingKuangDao();
 }

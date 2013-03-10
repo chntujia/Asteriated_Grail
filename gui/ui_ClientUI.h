@@ -11,18 +11,18 @@
 #define UI_CLIENTUI_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
-#include <QtGui/QDialog>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QTextBrowser>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QTextBrowser>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -166,14 +166,14 @@ public:
 
     void retranslateUi(QDialog *ClientUI)
     {
-        ClientUI->setWindowTitle(QApplication::translate("ClientUI", "ClientUI", 0, QApplication::UnicodeUTF8));
-        label1->setText(QApplication::translate("ClientUI", "Host Addr:", 0, QApplication::UnicodeUTF8));
-        laber2->setText(QApplication::translate("ClientUI", "Host Port:", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("ClientUI", "\346\230\265\347\247\260:", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("ClientUI", "\346\212\242\351\230\237\357\274\210\344\270\215\344\270\200\345\256\232\346\210\220\345\212\237\357\274\211", 0, QApplication::UnicodeUTF8));
-        connectButton->setText(QApplication::translate("ClientUI", "Connect", 0, QApplication::UnicodeUTF8));
-        startButton->setText(QApplication::translate("ClientUI", "Start", 0, QApplication::UnicodeUTF8));
-        cancelButton->setText(QApplication::translate("ClientUI", "Cancel", 0, QApplication::UnicodeUTF8));
+        ClientUI->setWindowTitle(QApplication::translate("ClientUI", "ClientUI"));
+        label1->setText(QApplication::translate("ClientUI", "Host Addr:"));
+        laber2->setText(QApplication::translate("ClientUI", "Host Port:"));
+        label_2->setText(QApplication::translate("ClientUI", "\346\230\265\347\247\260:"));
+        label->setText(QApplication::translate("ClientUI", "\346\212\242\351\230\237\357\274\210\344\270\215\344\270\200\345\256\232\346\210\220\345\212\237\357\274\211"));
+        connectButton->setText(QApplication::translate("ClientUI", "Connect"));
+        startButton->setText(QApplication::translate("ClientUI", "Start"));
+        cancelButton->setText(QApplication::translate("ClientUI", "Cancel"));
     } // retranslateUi
 
 };

@@ -20,28 +20,28 @@ void Client::readMessage()
     QDataStream in(this);
     quint16 nextBlockSize;
     QString message;
-    in.setVersion(QDataStream::Qt_4_7);
+    in.setVersion(QDataStream::Qt_5_0);
     while(1){
     if(bytesAvailable() < (int)sizeof(quint16)) return;
     in >> nextBlockSize;
     if(bytesAvailable() < nextBlockSize) return;
-    //Èç¹ûÃ»ÓĞµÃµ½È«²¿µÄÊı¾İ£¬Ôò·µ»Ø£¬¼ÌĞø½ÓÊÕÊı¾İ
+    //å¦‚æœæ²¡æœ‰å¾—åˆ°å…¨éƒ¨çš„æ•°æ®ï¼Œåˆ™è¿”å›ï¼Œç»§ç»­æ¥æ”¶æ•°æ®
     in >> message;
-    //½«½ÓÊÕµ½µÄÊı¾İ´æ·Åµ½±äÁ¿ÖĞ
+    //å°†æ¥æ”¶åˆ°çš„æ•°æ®å­˜æ”¾åˆ°å˜é‡ä¸­
     emit getMessage(message);
     }
 }
 void Client::sendMessage(QString message)
 {
-    QByteArray block; //ÓÃÓÚÔİ´æÎÒÃÇÒª·¢ËÍµÄÊı¾İ
+    QByteArray block; //ç”¨äºæš‚å­˜æˆ‘ä»¬è¦å‘é€çš„æ•°æ®
 
     QDataStream out(&block,QIODevice::WriteOnly);
 
-    //Ê¹ÓÃÊı¾İÁ÷Ğ´ÈëÊı¾İ
+    //ä½¿ç”¨æ•°æ®æµå†™å…¥æ•°æ®
 
-    out.setVersion(QDataStream::Qt_4_7);
+    out.setVersion(QDataStream::Qt_5_0);
 
-    //ÉèÖÃÊı¾İÁ÷µÄ°æ±¾£¬¿Í»§¶ËºÍ·şÎñÆ÷¶ËÊ¹ÓÃµÄ°æ±¾ÒªÏàÍ¬
+    //è®¾ç½®æ•°æ®æµçš„ç‰ˆæœ¬ï¼Œå®¢æˆ·ç«¯å’ŒæœåŠ¡å™¨ç«¯ä½¿ç”¨çš„ç‰ˆæœ¬è¦ç›¸åŒ
 
     out<<(quint16) 0;
 

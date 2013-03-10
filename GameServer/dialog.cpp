@@ -8,16 +8,16 @@ Dialog::Dialog(QWidget *parent) :
     ui->setupUi(this);
     ui->comboBox->addItem("ipv4");
     ui->comboBox->addItem("ipv6");
-    ui->comboBox_2->addItem(tr("Ëæ»ú"));
 
-    ui->comboBox_2->addItem(tr("3Ñ¡1"));
-    ui->comboBox_2->addItem(tr("BP"));
+    ui->comboBox_2->addItem(QStringLiteral("éšæœº"));
+    ui->comboBox_2->addItem(QStringLiteral("3é€‰1"));
+    ui->comboBox_2->addItem(QStringLiteral("BP"));
 
-    ui->comboBox_3->addItem(tr("6ÈË¾Ö"));
-    ui->comboBox_3->addItem(tr("4ÈË¾Ö"));
+    ui->comboBox_3->addItem(QStringLiteral("6äººå±€"));
+    ui->comboBox_3->addItem(QStringLiteral("4äººå±€"));
     ui->lineEdit->setText("50000");
 
-   connect(ui->buttonBox->button(QDialogButtonBox::Ok),SIGNAL(clicked()), this, SLOT(onOK()));
+   connect(ui->buttonBox,SIGNAL(accepted()), this, SLOT(onOK()));
 
 }
 

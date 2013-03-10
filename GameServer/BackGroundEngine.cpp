@@ -140,7 +140,7 @@ PlayerEntity* BackgroundEngine::setRole(int roleID,BackgroundEngine* engine,int 
         return new MoQiang(engine,id,color);
         break;
     }
-
+return 0;
 }
 void BackgroundEngine::randomize(QList<int> *queue)
 {
@@ -176,10 +176,12 @@ void BackgroundEngine::seatArrange()
     int colors[]={1,0,1,0,0,1};
     for(int i=0;i<playerSum;i++)
         if(!red.contains(ids[i])&& !blue.contains(ids[i]))
+        {
             if(red.size()<playerSum/2)
                 red<<ids[i];
             else
                 blue<<ids[i];
+        }
     randomize(&red);
     randomize(&blue);
     for(int i=0;i<playerSum;i++)
@@ -203,11 +205,11 @@ void BackgroundEngine::seatArrange()
         playerList << NULL;
 
     for(int i=1; i<= 24 ;i++)
-        roles<<12;
+        roles<<i;
 
-//    roles<<26;
-//    roles<<28;
-//    roles<<29;
+    roles<<26;
+    roles<<28;
+    roles<<29;
 
     randomize(&roles);
 
@@ -290,7 +292,7 @@ void BackgroundEngine::BP()
 }
 
 
-//ÓÎÏ·¿ªÊ¼,ÓÎÏ·Á÷³Ì¿ØÖÆ
+//æ¸¸æˆå¼€å§‹,æ¸¸æˆæµç¨‹æ§åˆ¶
 void BackgroundEngine::gameStart()
 {
     for(int i = 0;i < this->getPlayerNum();i++)
@@ -327,7 +329,7 @@ void BackgroundEngine::gameStart()
    }
    clearData();
 }
-//Çå¿Õ±¾¾ÖÊı¾İ
+//æ¸…ç©ºæœ¬å±€æ•°æ®
 void BackgroundEngine::clearData()
 {
     for(int i = 0;i < cardList.size();i++)
@@ -342,7 +344,7 @@ void BackgroundEngine::clearData()
     this->playerList.clear();
 }
 
-//³õÊ¼»¯º¯Êı
+//åˆå§‹åŒ–å‡½æ•°
 void BackgroundEngine::initial()
 {
     for(int i=0;i<8;i++)
@@ -350,7 +352,7 @@ void BackgroundEngine::initial()
     this->pile.clear();
     this->discardPile.clear();
     this->discardPileCovered.clear();
-    //¶ÁÈë¿¨ÅÆÎÄ¼ş
+    //è¯»å…¥å¡ç‰Œæ–‡ä»¶
     QFile log("./log.txt");
     log.open(QIODevice::WriteOnly);
     QTextStream out(&log);
@@ -360,8 +362,6 @@ void BackgroundEngine::initial()
     QFile fp("./cardDB.txt");
 
     QTextStream in(&fp);
-    QTextCodec *codec=QTextCodec::codecForName("GBK");
-    in.setCodec(codec);
 
     if (!fp.open(QIODevice::ReadOnly)) {
             out << "Cannot open file for reading. ";
@@ -378,20 +378,20 @@ void BackgroundEngine::initial()
 
     out << cardList.length();
     log.close();
-    //Ï´ÅÆ
+    //æ´—ç‰Œ
     this->shuffle(false);
     fp.close();
     setPlayerNum(playerSum);
 
 }
 
-//°ÑÅÆÏ´»ØÅÆ¶Ñ
+//æŠŠç‰Œæ´—å›ç‰Œå †
 void BackgroundEngine::shuffle(bool reShuffle)
 {
     QFile fp("./log.txt");
     fp.open(QIODevice::WriteOnly);
     QTextStream out(&fp);
-    //ÓÃÏµÍ³Ê±¼äÉèÖÃËæ»úÖÖ×Ó
+    //ç”¨ç³»ç»Ÿæ—¶é—´è®¾ç½®éšæœºç§å­
     QTime time;
     time= QTime::currentTime();
     qsrand(time.msec()+time.second()*1000);
@@ -477,7 +477,7 @@ void BackgroundEngine::shuffle(bool reShuffle)
         coder.reshuffleNotice(pile.size());
     }
 }
-//¼ì²éÊÇ·ñ½áÊøÓÎÏ·
+//æ£€æŸ¥æ˜¯å¦ç»“æŸæ¸¸æˆ
 bool BackgroundEngine::checkEnd()
 {
     if(teamArea.getMorale(RED) <= 0 || teamArea.getCup(BLUE) == 5)
@@ -494,7 +494,7 @@ bool BackgroundEngine::checkEnd()
     }
     return !playing;
 }
-//ÃşÅÆº¯Êı
+//æ‘¸ç‰Œå‡½æ•°
 void BackgroundEngine::drawCards(int num,int harmed,PlayerEntity* player)
 {
     QList<CardEntity*> newCards;
@@ -508,7 +508,7 @@ void BackgroundEngine::drawCards(int num,int harmed,PlayerEntity* player)
     }
 
     coder.drawNotice(player->getID(),num,newCards);
-    //ÃüÁî¸ÃÍæ¼ÒÔö¼ÓÊÖÅÆ
+    //å‘½ä»¤è¯¥ç©å®¶å¢åŠ æ‰‹ç‰Œ
     player->addHandCards(newCards,harmed);
 }
 QList<CardEntity *> BackgroundEngine::drwaCardsForCover(int num)
@@ -526,17 +526,17 @@ QList<CardEntity *> BackgroundEngine::drwaCardsForCover(int num)
 }
 
 
-//ÖĞ¶¾´¦Àí
+//ä¸­æ¯’å¤„ç†
 void BackgroundEngine::posionProcess(PlayerEntity* player,CardEntity* card)
 {
     Harm harm;
     harm.harmPoint = 1;
     harm.type = MAGIC;
     //coder.magicHurtNotice(player->getID(),1,card->getSrcUser(),"????");
-    this->timeLine3(harm,getPlayerByID(card->getSrcUser()),player,"ÖĞ¶¾");
+    this->timeLine3(harm,getPlayerByID(card->getSrcUser()),player,"ä¸­æ¯’");
 
 }
-//ĞéÈõ´¦Àí
+//è™šå¼±å¤„ç†
 void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
 {
     coder.askForWeak(player->getID(),howMany);
@@ -547,7 +547,7 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
     if(reply == 0)
     {
 
-        //Ìø¹ı
+        //è·³è¿‡
 
 
 
@@ -562,7 +562,7 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
     else if(reply == 1)
     {
 
-        //Ç¿Ãş
+        //å¼ºæ‘¸
 
 
 
@@ -572,7 +572,7 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
 }
 
 
-//»ØºÏ¿ªÊ¼Ê±¼ì²âµ±Ç°Íæ¼ÒÃæÇ°µÄ»ù´¡Ğ§¹ûºÍ×¨ÊôĞ§¹û
+//å›åˆå¼€å§‹æ—¶æ£€æµ‹å½“å‰ç©å®¶é¢å‰çš„åŸºç¡€æ•ˆæœå’Œä¸“å±æ•ˆæœ
 
 
 
@@ -645,7 +645,7 @@ void BackgroundEngine::turnBeginPhase(PlayerEntity* currentPlayer)
 
     //checkEffect();
 }
-//ÒÔÏÂ¸÷º¯ÊıÅĞ¶¨ÊÇ·ñÄÜÖ´ĞĞÏàÓ¦ĞĞ¶¯
+//ä»¥ä¸‹å„å‡½æ•°åˆ¤å®šæ˜¯å¦èƒ½æ‰§è¡Œç›¸åº”è¡ŒåŠ¨
 bool BackgroundEngine::allowAttack()
 {
     if(this->actionLeft != 0 || this->attackOrMagicLeft != 0 || this->attackLeft != 0)
@@ -694,10 +694,10 @@ void BackgroundEngine::addActionNum(int kind)
 
 
 
-//ĞĞ¶¯½×¶Îº¯Êı
+//è¡ŒåŠ¨é˜¶æ®µå‡½æ•°
 void BackgroundEngine::actionPhase()
 {    
-    //Õâ¸ö±ê¼Ç±íÃ÷ÊÇ·ñĞĞ¶¯¹ı£¬Èç¹ûÒÑ¾­ĞĞ¶¯¹ı£¬ÄÇÃ´×·¼ÓµÄ¸÷ÖÖĞĞ¶¯»ú»á¿ÉÒÔ·ÅÆú
+    //è¿™ä¸ªæ ‡è®°è¡¨æ˜æ˜¯å¦è¡ŒåŠ¨è¿‡ï¼Œå¦‚æœå·²ç»è¡ŒåŠ¨è¿‡ï¼Œé‚£ä¹ˆè¿½åŠ çš„å„ç§è¡ŒåŠ¨æœºä¼šå¯ä»¥æ”¾å¼ƒ
     bool acted = false;
     bool firstTime=true;
     int actionFlag=0;
@@ -710,7 +710,7 @@ void BackgroundEngine::actionPhase()
 
     while((this->allowAttack()||this->allowMagic()||this->allowSpecial())&&playing)
     {        
-        //¸ù¾İÔÊĞíµÄĞĞ¶¯Àà±ğÑ¯ÎÊclient
+        //æ ¹æ®å…è®¸çš„è¡ŒåŠ¨ç±»åˆ«è¯¢é—®client
         if(firstTime){
             emit actionPhaseSIG(args);
             emit tiaoXinPhaseSIG(currentPlayer,&actionFlag,&canGiveUp);
@@ -729,23 +729,23 @@ void BackgroundEngine::actionPhase()
             emit additonalActionSIG(args);
         }
 
-        //¶ÁÈ¡clientµÄ»Ø¸´
+        //è¯»å–clientçš„å›å¤
         BatInfor bat = messageBuffer::readBatInfor();
 
-        //·ÅÆú¶îÍâĞĞ¶¯
+        //æ”¾å¼ƒé¢å¤–è¡ŒåŠ¨
         if(bat.reply == FINISH)
             break;
-        //ÎŞ·¨ĞĞ¶¯
+        //æ— æ³•è¡ŒåŠ¨
         if(bat.reply == UNACTIONAL)
         {                        
-            ///ÆúÅÆÖØÃş
+            ///å¼ƒç‰Œé‡æ‘¸
             this->reDraw();
             continue;
         }
 
         if(bat.reply == ATTACK || bat.reply==ATTACKSKILL)
         {
-            //Ê¹ÓÃ¹¥»÷ÅÆ
+            //ä½¿ç”¨æ”»å‡»ç‰Œ
             CardEntity* usingCard = getCardByID(bat.CardID);
             PlayerEntity* dst = getPlayerByID(bat.dstID);
             PlayerEntity* src = getPlayerByID(bat.srcID);
@@ -775,7 +775,7 @@ void BackgroundEngine::actionPhase()
             args.clear();
             args<<src1;
             emit beforeMagicSIG(args);
-            //Ê¹ÓÃ·¨ÊõÅÆ
+            //ä½¿ç”¨æ³•æœ¯ç‰Œ
             if(bat.infor1 == COMMONMAGIC)
                 this->useMagicCard(bat.CardID,bat.srcID,bat.dstID);
             else
@@ -793,10 +793,10 @@ void BackgroundEngine::actionPhase()
         }
         else if(bat.reply == SPECIAL)
         {
-            //ÌØÊâĞĞ¶¯
+            //ç‰¹æ®Šè¡ŒåŠ¨
             if(bat.CardID == BUY)
             {
-                coder.notice("Ö´ĞĞ¡¾¹ºÂò¡¿");
+                coder.notice("æ‰§è¡Œã€è´­ä¹°ã€‘");
                 this->drawCards(3,0,this->getCurrentPlayer());
                 int color = this->currentPlayer->getColor();
                 teamArea.setGem(color,teamArea.getGem(color) + bat.infor1);
@@ -806,7 +806,7 @@ void BackgroundEngine::actionPhase()
             }
             else if(bat.CardID == SYNTHESIZE)
             {
-                coder.notice("Ö´ĞĞ¡¾ºÏ³É¡¿");
+                coder.notice("æ‰§è¡Œã€åˆæˆã€‘");
                 this->drawCards(3,0,currentPlayer);
                 int color = this->currentPlayer->getColor();
                 teamArea.setGem(color,teamArea.getGem(color) - bat.infor1);
@@ -826,7 +826,7 @@ void BackgroundEngine::actionPhase()
             }
             else if(bat.CardID == EXTRACT)
             {
-                coder.notice("Ö´ĞĞ¡¾ÌáÁ¶¡¿");
+                coder.notice("æ‰§è¡Œã€æç‚¼ã€‘");
                 int color = this->currentPlayer->getColor();
                 teamArea.setGem(color,teamArea.getGem(color) - bat.infor1);
                 teamArea.setCrystal(color,teamArea.getCrystal(color) - bat.infor2);
@@ -854,15 +854,15 @@ void BackgroundEngine::turnEndPhase()
 
 }
 
-//ÅĞ¶¨µ±Ç°ÊÇ·ñ¿ÉÒÔĞĞ¶¯£¨Èç4Ê¥¹âµÈÇé¿ö£©
-//´Ëº¯ÊıÎ´Ê¹ÓÃ£¬¸Ã¹¦ÄÜ½»ÓÉclientÍê³É
+//åˆ¤å®šå½“å‰æ˜¯å¦å¯ä»¥è¡ŒåŠ¨ï¼ˆå¦‚4åœ£å…‰ç­‰æƒ…å†µï¼‰
+//æ­¤å‡½æ•°æœªä½¿ç”¨ï¼Œè¯¥åŠŸèƒ½äº¤ç”±clientå®Œæˆ
 bool BackgroundEngine::canAct()
 {
     if(this->currentPlayer->getHandCards().length() <= this->currentPlayer->getHandCardMax() - 3)
         return true;
     for(int i = 0;i < this->currentPlayer->getHandCards().length();i++)
     {
-        if(this->currentPlayer->getHandCards().at(i)->getName() != tr("Ê¥¹â"))
+        if(this->currentPlayer->getHandCards().at(i)->getName() != QStringLiteral("åœ£å…‰"))
             return true;
     }
     return false;
@@ -877,7 +877,7 @@ void BackgroundEngine::reDraw()
     this->drawCards(cardNum,0,this->currentPlayer);
 }
 
-//ÉèÖÃ»ù´¡Ğ§¹ûµ½Ä³Íæ¼ÒÃæÇ°
+//è®¾ç½®åŸºç¡€æ•ˆæœåˆ°æŸç©å®¶é¢å‰
 void BackgroundEngine::effectApply(CardEntity* card,PlayerEntity* user,PlayerEntity* dst)
 {
     QList<CardEntity*> cards;
@@ -891,13 +891,13 @@ void BackgroundEngine::effectApply(CardEntity* card,PlayerEntity* user,PlayerEnt
     user->removeHandCards(cards,true,false);
     coder.moveCardNotice(1,cards,userID,HAND,dstID,EFFECT);
     dst->addBasicEffect(card);
-    if(card->getName()==tr("Ê¥¶Ü")||card->getSpecialityList().contains(tr("ÌìÊ¹Ö®Ç½")))
+    if(card->getName()==QStringLiteral("åœ£ç›¾")||card->getSpecialityList().contains(QStringLiteral("å¤©ä½¿ä¹‹å¢™")))
         emit usedShield(userID);
 
 }
 
-//"Ê¹ÓÃ"¿¨ÅÆÊ±µ÷ÓÃ´Ëº¯Êı
-//µÚËÄ¸ö²ÎÊı±íÃ÷¿¨ÅÆÊ¹ÓÃºóÊÇ·ñÁôÔÚ³¡ÉÏ£¨»ù´¡Ğ§¹û£©
+//"ä½¿ç”¨"å¡ç‰Œæ—¶è°ƒç”¨æ­¤å‡½æ•°
+//ç¬¬å››ä¸ªå‚æ•°è¡¨æ˜å¡ç‰Œä½¿ç”¨åæ˜¯å¦ç•™åœ¨åœºä¸Šï¼ˆåŸºç¡€æ•ˆæœï¼‰
 void BackgroundEngine::useCard(QList<CardEntity*> cards,PlayerEntity* user,PlayerEntity* dst,bool stay,int realCard)
 {    
     coder.useCardNotice(cards,(dst == NULL)?-1:dst->getID(),user->getID(),realCard);
@@ -942,7 +942,7 @@ void BackgroundEngine::useMagicCard(int cardID, int srcID, int dstID)
     }
 }
 
-//ÒÔÏÂÎªÊ±¼äÖáº¯Êı
+//ä»¥ä¸‹ä¸ºæ—¶é—´è½´å‡½æ•°
 void BackgroundEngine::timeLine1(CardEntity* attackCard,PlayerEntity* src,PlayerEntity* dst,bool isActiveAttack)
 {   
     Harm harm = getHarmFromCard(attackCard);
@@ -954,7 +954,7 @@ void BackgroundEngine::timeLine1(CardEntity* attackCard,PlayerEntity* src,Player
     args << attackCard;
     args << &isActiveAttack;
     args << &attackType;
-    emit timeLine1ProSIG(args);//´ËĞÅºÅÓÃÓÚÔÚÉËº¦Ê±¼äÖáÖ®Ç°ÉúĞ§µÄ¼¼ÄÜ
+    emit timeLine1ProSIG(args);//æ­¤ä¿¡å·ç”¨äºåœ¨ä¼¤å®³æ—¶é—´è½´ä¹‹å‰ç”Ÿæ•ˆçš„æŠ€èƒ½
     emit timeLine1SIG(args);
     timeLine2(attackCard,src,dst,isActiveAttack,attackType,harm);
 }
@@ -962,13 +962,13 @@ void BackgroundEngine::timeLine1(CardEntity* attackCard,PlayerEntity* src,Player
 void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEntity* dst,bool isActiveAttack,int attackType,Harm harm)
 {
     coder.askForReBat(attackType,harmCard->getID(),dst->getID(),src->getID());
-    //µ±¹¥»÷ÊÇ±ØÖĞÊ±£¬²»½ÓÊÜ¿Í»§¶Ë»ØÓ¦
+    //å½“æ”»å‡»æ˜¯å¿…ä¸­æ—¶ï¼Œä¸æ¥å—å®¢æˆ·ç«¯å›åº”
     //emit askForReply(dst->getHandCards(),element,dst->getID());
     BatInfor temp;
     bool checkShield=true;
     if(attackType != NOMISS)
     {
-        //Õ½¶·ĞÅÏ¢´æ´¢ÔÚtempÖĞ¡£ÈôÓ¦Õ½£¬Ôò±£´æ×ÅÓ¦Õ½µÄÅÆ£»ÈôµÖµ²£¬Ôò±£´æ×ÅÊ¥¹â»òÊ¥¶Ü
+        //æˆ˜æ–—ä¿¡æ¯å­˜å‚¨åœ¨tempä¸­ã€‚è‹¥åº”æˆ˜ï¼Œåˆ™ä¿å­˜ç€åº”æˆ˜çš„ç‰Œï¼›è‹¥æŠµæŒ¡ï¼Œåˆ™ä¿å­˜ç€åœ£å…‰æˆ–åœ£ç›¾
         temp = messageBuffer::readBatInfor();
     }
     else
@@ -979,8 +979,8 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
 
     if(temp.reply == REPLYBATTLE)
     {
-        //Ó¦Õ½
-        //ËÆºõ·¢ÉäĞÅºÅµÄÊ±»ú»¹ÒªÉÌÈ¶
+        //åº”æˆ˜
+        //ä¼¼ä¹å‘å°„ä¿¡å·çš„æ—¶æœºè¿˜è¦å•†æ¦·
         CardEntity* usedCard = getCardByID(temp.CardID);
         QList<CardEntity*> use;
         use<<usedCard;
@@ -998,12 +998,12 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
     }
     else if(temp.reply == BLOCKED)
     {
-        //µÖµ²
+        //æŠµæŒ¡
         CardEntity* usedCard = getCardByID(temp.CardID);
 
         if(usedCard->getPlace() == HAND)
         {
-            //Ê¥¹â
+            //åœ£å…‰
             QList<CardEntity*> use;
             use<<usedCard;
             this->useCard(use,getPlayerByID(temp.srcID));
@@ -1020,7 +1020,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
     }
     else if(temp.reply == HIT)
     {    
-        //ÃüÖĞµÄÇé¿ö
+        //å‘½ä¸­çš„æƒ…å†µ
 
         QList<void*> args;
         args << src;
@@ -1029,8 +1029,8 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         emit shieldSIG(args);
         for(int i = 0;i < dst->getBasicEffect().size()&& checkShield;i++)
         {
-            //¼ì²éÊÇ·ñÓĞÊ¥¶Ü
-            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(tr("ÌìÊ¹Ö®Ç½")))
+            //æ£€æŸ¥æ˜¯å¦æœ‰åœ£ç›¾
+            if(dst->getBasicEffect().at(i)->getMagicName() == SHIELDCARD || dst->getBasicEffect().at(i)->getSpecialityList().contains(QStringLiteral("å¤©ä½¿ä¹‹å¢™")))
             {
                 coder.shieldNotic(dst->getID());
                 dst->removeBasicEffect(dst->getBasicEffect()[i]);
@@ -1057,7 +1057,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         emit timeLine2hitSIG(args);
 
         int color = src->getColor();
-        //Ôö¼ÓĞÇÊ¯
+        //å¢åŠ æ˜ŸçŸ³
         if((teamArea.getCrystal(color) + teamArea.getGem(color)) < 5)
         {
             if(isActiveAttack)
@@ -1071,7 +1071,7 @@ void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEn
         this->timeLine3(harm,src,dst);
     }
 }
-//´Ó¿¨ÅÆÖĞ»ñÈ¡¹¥»÷ÉËº¦
+//ä»å¡ç‰Œä¸­è·å–æ”»å‡»ä¼¤å®³
 Harm BackgroundEngine::getHarmFromCard(CardEntity* card)
 {
     Harm harm;
@@ -1146,11 +1146,11 @@ void BackgroundEngine::timeLine6(Harm harm,PlayerEntity *src,PlayerEntity *dst)
         return;
     emit timeLine6DrawedSIG(arg);
 }
-///²éÕÒ¶ÔÓ¦IDµÄÍæ¼Ò
+///æŸ¥æ‰¾å¯¹åº”IDçš„ç©å®¶
 PlayerEntity* BackgroundEngine::getPlayerByID(int ID)
 {
     PlayerEntity* one;
-    //´ıĞŞ¸Ä£¬iÓ¦¸ÃĞ¡ÓÚÊµ¼ÊÍæ¼ÒÊı
+    //å¾…ä¿®æ”¹ï¼Œiåº”è¯¥å°äºå®é™…ç©å®¶æ•°
     for(int i = 0;i < this->playerNum;i++)
     {
         one = this->playerList.at(i);
@@ -1159,7 +1159,7 @@ PlayerEntity* BackgroundEngine::getPlayerByID(int ID)
     }
     return NULL;
 }
-//²âÊÔÓÃ
+//æµ‹è¯•ç”¨
 void BackgroundEngine::showTest()
 {
     PlayerEntity* player;
@@ -1187,7 +1187,7 @@ void BackgroundEngine::showTest()
     tempStr.append(temp);
     emit this->toInforDisplay(tempStr);
 }
-//»ñÈ¡ÉÏ¼Ò
+//è·å–ä¸Šå®¶
 PlayerEntity* BackgroundEngine::getFront(PlayerEntity* player)
 {
     int seat;
@@ -1197,14 +1197,14 @@ PlayerEntity* BackgroundEngine::getFront(PlayerEntity* player)
         seat = this->playerList.size() - 1;
     return this->playerList[seat];
 }
-//Ä§µ¯´¦Àí
+//é­”å¼¹å¤„ç†
 void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
 {
     bool rightOrder;
     BatInfor reply;
     PlayerEntity* nextOpponent;
 
-    //È·¶¨´«µİ·½Ïò
+    //ç¡®å®šä¼ é€’æ–¹å‘
     nextOpponent = this->getCurrentPlayer()->getNext();
     while(nextOpponent->getColor() == this->currentPlayer->getColor())
         nextOpponent = nextOpponent->getNext();
@@ -1226,15 +1226,15 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
     do
     {
         cards.clear();
-        //Ä§µ¯´«µİµ½ÏÂ¼Ò
+        //é­”å¼¹ä¼ é€’åˆ°ä¸‹å®¶
         missilePass(rightOrder,dst,src,passed,missilePoint);
 
-        //¶ÁÈ¡ÓÃ»§»Ø¸´
+        //è¯»å–ç”¨æˆ·å›å¤
         reply = messageBuffer::readBatInfor();
 
         if(reply.reply == 0)
         {
-            //¼ÌĞø´«µİ
+            //ç»§ç»­ä¼ é€’
             src = dst;
             dst = reply.dstID;
             missilePoint++;
@@ -1244,20 +1244,20 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
         }
         else if(reply.reply == 1)
         {
-            //Ê¥¹â
+            //åœ£å…‰
             cards << getCardByID(reply.CardID);
             this->useCard(cards,getPlayerByID(dst));
             break;
         }
         else if(reply.reply == 2)
         {
-            //ÎŞÓ¦¶Ô
+            //æ— åº”å¯¹
             PlayerEntity* dstPlayer = getPlayerByID(dst);
             bool shieldBlocked = false;
-            //¼ì²éÊ¥¶Ü
+            //æ£€æŸ¥åœ£ç›¾
             for(int i = 0;i < dstPlayer->getBasicEffect().size();i++)
             {
-                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(tr("ÌìÊ¹Ö®Ç½")))
+                if(dstPlayer->getBasicEffect()[i]->getMagicName() == SHIELDCARD||dstPlayer->getBasicEffect().at(i)->getSpecialityList().contains(QStringLiteral("å¤©ä½¿ä¹‹å¢™")))
                 {
                     coder.shieldNotic(dst);
                     dstPlayer->removeBasicEffect(dstPlayer->getBasicEffect()[i]);
@@ -1270,19 +1270,19 @@ void BackgroundEngine::missileProcess(CardEntity* card,int src,int dst)
             Harm missileHurt;
             missileHurt.harmPoint = missilePoint;
             missileHurt.type = MAGIC;
-            //ÎŞÊ¥¶Ü,Ôì³ÉÉËº¦
-            this->timeLine3(missileHurt,getPlayerByID(src),dstPlayer,"Ä§µ¯");
+            //æ— åœ£ç›¾,é€ æˆä¼¤å®³
+            this->timeLine3(missileHurt,getPlayerByID(src),dstPlayer,"é­”å¼¹");
             break;
         }
         else if(reply.reply == 802)
         {
-            //¼ÌĞø´«µİ
+            //ç»§ç»­ä¼ é€’
             src = dst;
             dst = reply.dstID;
             missilePoint++;
             cards << getCardByID(reply.CardID);
             useCard(cards,getPlayerByID(src),getPlayerByID(dst));
-            coder.notice("Ä§µ¼Ê¦·¢¶¯¡¾Ä§µ¯ÈÚºÏ¡¿");
+            coder.notice("é­”å¯¼å¸ˆå‘åŠ¨ã€é­”å¼¹èåˆã€‘");
             continue;
         }
 
@@ -1325,7 +1325,7 @@ void BackgroundEngine::missilePass(bool rightOrder,int dst,int src,bool* passed,
         coder.askForMissile(dst,src,missilePoint,next->getID());
     }
 }
-//½ÓÊÕ¸÷Ä£¿éÒÆ¶¯¿¨ÅÆµ½ÆúÅÆ¶ÑµÄĞÅºÅ
+//æ¥æ”¶å„æ¨¡å—ç§»åŠ¨å¡ç‰Œåˆ°å¼ƒç‰Œå †çš„ä¿¡å·
 void BackgroundEngine::toDiscardPileSLOT(QList<CardEntity*> cards,bool show)
 {
     for(int i = 0;i < cards.size();i++)
@@ -1337,7 +1337,7 @@ void BackgroundEngine::toDiscardPileSLOT(QList<CardEntity*> cards,bool show)
     }
 }
 
-//½«Ä³ÅÆ´ÓÔ­Î»ÖÃÒÆ×ß¡£²»·¢ËÍÈÎºÎĞÅÏ¢¸øclient¡£
+//å°†æŸç‰Œä»åŸä½ç½®ç§»èµ°ã€‚ä¸å‘é€ä»»ä½•ä¿¡æ¯ç»™clientã€‚
 
 void BackgroundEngine::moveCardFrom(CardEntity* card)
 {
@@ -1369,7 +1369,7 @@ void BackgroundEngine::moveCardFrom(CardEntity* card)
     }
 }
 
-//½«Ä³ÅÆÒÆÈëÄ³½ÇÉ«¸ÇÅÆÇø¡£²»·¢ËÍÈÎºÎĞÅÏ¢¸øclient¡£ÒªÇó¸Ã¿¨ÅÆÓ¦ÏÈ´ÓÆäËûÎ»ÖÃ±»ÒÆ³ı¡£
+//å°†æŸç‰Œç§»å…¥æŸè§’è‰²ç›–ç‰ŒåŒºã€‚ä¸å‘é€ä»»ä½•ä¿¡æ¯ç»™clientã€‚è¦æ±‚è¯¥å¡ç‰Œåº”å…ˆä»å…¶ä»–ä½ç½®è¢«ç§»é™¤ã€‚
 
 void BackgroundEngine::moveCardToCover(CardEntity* card,int dstPlayerID)
 {
@@ -1382,7 +1382,7 @@ void BackgroundEngine::moveCardToCover(CardEntity* card,int dstPlayerID)
 }
 
 
-//½«Ä³ÅÆ´Ó¸ÇÅÆÇøÒÆµ½ÆúÅÆ¶Ñ¡£²»·¢ËÍÈÎºÎĞÅÏ¢¸øclient¡£
+//å°†æŸç‰Œä»ç›–ç‰ŒåŒºç§»åˆ°å¼ƒç‰Œå †ã€‚ä¸å‘é€ä»»ä½•ä¿¡æ¯ç»™clientã€‚
 
 void BackgroundEngine::moveCardFromCoverToDiscard(CardEntity* card,bool show)
 {
