@@ -5,9 +5,6 @@
 #include "data/DataInterface.h"
 #include "widget/GUI.h"
 #include "logic/Logic.h"
-//#include <windows.h>
-
-QPointF PlayerPos[]={QPointF(10,500),QPointF(740,260),QPointF(545,60),QPointF(380,60),QPointF(210,60),QPointF(10,260)};
 
 Role::Role(QObject *parent) :
     QObject(parent)
@@ -1281,6 +1278,7 @@ void Role::decipher(QString command)
         targetID=arg[1].toInt();
         howMany=arg[2].toInt();
         playerList[targetID]->setCrossNum(howMany);
+        playerArea->update();
         QSound::play("sound/Cure.wav");
         break;
 //÷Œ¡∆—ØŒ 

@@ -4,7 +4,7 @@
 #include <QPainter>
 static const QPointF HandPos(190,505);
 static const QPointF PlayerAreaPos(0,0);
-static const QPointF ShowAreaPos(190,260);
+static const QPointF ShowAreaPos(193,260);
 static const QPointF TipAreaPos(203,230);
 static const QPointF TeamAreaPos(2,3);
 static const QPointF DecisionAreaPos(725,450);

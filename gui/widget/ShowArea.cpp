@@ -3,7 +3,7 @@
 #include <QPainter>
 #include <windows.h>
 
-static QRectF ShowAreaRect(0, 0, 550, 150);
+static QRectF ShowAreaRect(0, 0, 500, 150);
 ShowArea::ShowArea()
 {
 
@@ -20,11 +20,11 @@ void ShowArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     int card_skip;
     int offset=0;
     if(n > 5)
-        card_skip = 410/(n-1);
+        card_skip = 400/(n-1);
     else
     {
         card_skip = 100;
-        offset=275-n*0.5*100;
+        offset=250-n*0.5*100;
     }
     Card*card;
     QPixmap pixmap;
@@ -60,7 +60,7 @@ void ShowArea::showCards(QList<Card *> cards)
     else
     {
         card_skip = 100;
-        offset=275-howMany*0.5*100;
+        offset=250-howMany*0.5*100;
     }
     QList<QGraphicsObject*> *list = animation->getTempItems();
     for(int i = 0;i <howMany;i++)

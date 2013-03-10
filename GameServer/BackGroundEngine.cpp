@@ -203,11 +203,11 @@ void BackgroundEngine::seatArrange()
         playerList << NULL;
 
     for(int i=1; i<= 24 ;i++)
-        roles<<i;
+        roles<<12;
 
-    roles<<26;
-    roles<<28;
-    roles<<29;
+//    roles<<26;
+//    roles<<28;
+//    roles<<29;
 
     randomize(&roles);
 

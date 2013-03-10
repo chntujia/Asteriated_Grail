@@ -4,8 +4,8 @@
 #include "data/Player.h"
 #include <QPainter>
 static QRectF PlayerAreaRect(0, 0, 1000, 700);
-static const QPointF PlayerPos6[]={QPointF(5,510),QPointF(698,280),QPointF(550,60),QPointF(347,60),QPointF(145,60),QPointF(5,280)};
-static const QPointF PlayerPos4[]={QPointF(5,510),QPointF(698,280),QPointF(347,60),QPointF(5,280)};
+static const QPointF PlayerPos6[]={QPointF(5,510),QPointF(698,270),QPointF(550,60),QPointF(350,60),QPointF(145,60),QPointF(5,270)};
+static const QPointF PlayerPos4[]={QPointF(5,510),QPointF(698,270),QPointF(350,60),QPointF(5,270)};
 PlayerArea::PlayerArea():least(1),most(1)
 {
     int i;
