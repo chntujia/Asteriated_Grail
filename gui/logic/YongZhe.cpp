@@ -129,8 +129,6 @@ void YongZhe::onCancelClicked()
         break;
     //禁断之力
     case 2102:
-        if(jinDuanZhiLi>0)
-            jinDuanZhiLi=0;
         command="2102;0;";
         emit sendCommand(command);
         gui->reset();

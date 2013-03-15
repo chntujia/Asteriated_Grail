@@ -1342,12 +1342,10 @@ void Server::decoder(int id, QString message)
 //魔弓
 //魔贯冲击
     case 2601:
-        action.reply=ATTACKSKILL;
-        action.CardID = infor[1].toInt();
-        action.dstID = infor[2].toInt();
-        action.srcID = infor[3].toInt();
+        action.reply=infor[1].toInt();
         action.infor1=2601;
-        action.infor2=infor[4].toInt();
+        if(action.reply!=0)
+            action.CardID = infor[2].toInt();
         messageBuffer::writeBatInfor(action);
         break;
 //魔贯冲击命中询问

@@ -32,7 +32,7 @@ public:
     //魔弹传递
     void missilePass(bool rightOrder,int dst,int src,bool *passed,int missilePoint);
     //摸牌函数
-    void drawCards(int num,int harmed,PlayerEntity *player);
+    void drawCards(int num, int harmed, PlayerEntity *dst, PlayerEntity *src=NULL);
     //摸牌置于盖牌中
     QList<CardEntity*> drwaCardsForCover(int num);
     //初始化
@@ -186,7 +186,7 @@ signals:
     void fixMoralHeChengSIG(int harmed, int *howMany, PlayerEntity *dst);
     void fixMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
     //真实士气下降信号（巫女红莲进入状态使用、灵魂长黄魂使用、魔枪幻影星辰【？】）
-    void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst);
+    void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst,PlayerEntity* src);
     void toInforDisplay(QString content);
     void usedShield(int userID);
 private:

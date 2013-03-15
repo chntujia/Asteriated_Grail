@@ -29,7 +29,7 @@ void PlayerEntity::makeConnection(BackgroundEngine *engine)
     connect(this,SIGNAL(beforeLoseMoralSIG(int,int*,PlayerEntity*)),engine,SIGNAL(beforeLoseMoralSIG(int,int*,PlayerEntity*)));
     connect(this,SIGNAL(loseMoraleSIG(int,int*,PlayerEntity*)),engine,SIGNAL(loseMoraleSIG(int,int*,PlayerEntity*)));
     connect(this,SIGNAL(showHandCards(QList<CardEntity*>,PlayerEntity*)),engine,SIGNAL(showHandCards(QList<CardEntity*>,PlayerEntity*)));
-    connect(this,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)));
+    connect(this,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*,PlayerEntity*)),engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*,PlayerEntity*)));
     connect(this,SIGNAL(handCardsChange(PlayerEntity*)),engine,SIGNAL(handCardsChange(PlayerEntity*)));
     connect(this,SIGNAL(fixMoraleSIG(int,int*,PlayerEntity*)),engine,SIGNAL(fixMoraleSIG(int,int*,PlayerEntity*)));
 }
@@ -255,7 +255,7 @@ void PlayerEntity::removeHandCards(QList<CardEntity*> oldCard, bool show,bool to
 }
 
 //暴牌
-void PlayerEntity::cardsOverLoad(int harmed)
+void PlayerEntity::cardsOverLoad(int harmed,PlayerEntity*src)
 {
     int overNum = this->handCards.size() - this->handCardsMax;
     coder.askForDiscard(this->getID(),overNum,"n");
@@ -272,7 +272,7 @@ void PlayerEntity::cardsOverLoad(int harmed)
     coder.moraleNotice(this->color,teamArea.getMorale(this->color));
 
     emit checkEndSIG();
-    emit trueLoseMoraleSIG(harmed,&overNum,this);
+    emit trueLoseMoraleSIG(harmed,&overNum,this,src);
 }
 void PlayerEntity::coverOverLoad()
 {
@@ -289,7 +289,7 @@ void PlayerEntity::coverOverLoad()
 }
 
 //增加手牌，可能发生暴牌
-void PlayerEntity::addHandCards(QList<CardEntity*> newCard,int harmed, bool fromPile)
+void PlayerEntity::addHandCards(QList<CardEntity*> newCard,int harmed, PlayerEntity*src,bool fromPile)
 {
     if(fromPile)
         coder.moveCardNotice(newCard.size(),newCard,-1,PILE,this->getID(),HAND);
@@ -302,7 +302,7 @@ void PlayerEntity::addHandCards(QList<CardEntity*> newCard,int harmed, bool from
     }
     //qDebug("%d,%d",handCards.size(),this->getHandCardMax());
     if(handCards.size() > this->getHandCardMax())
-        cardsOverLoad(harmed);
+        cardsOverLoad(harmed,src);
 }
 
 void PlayerEntity::giveHandCards(QList<CardEntity*> cards,PlayerEntity* to)
@@ -323,7 +323,7 @@ void PlayerEntity::giveHandCards(QList<CardEntity*> cards,PlayerEntity* to)
     coder.getCardNotice(howMany,cards,toID,false);
     emit handCardsChange(this);
     if(to->getHandCardNum()>to->getHandCardMax())
-        to->cardsOverLoad(0);
+        to->cardsOverLoad(0,this);
 }
 
 void PlayerEntity::addCardsToCover(QList<CardEntity*> cards)

@@ -1,5 +1,4 @@
 #include "SiLing.h"
-#include <QApplication>
 SiLing::SiLing()
 {
     makeConnection();

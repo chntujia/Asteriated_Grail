@@ -78,14 +78,6 @@ void HongLian::ShaLuShengYan()
     decisionArea->enable(1);
 }
 
-void HongLian::JieJiaoJieZao()
-{
-    state = 2802;
-    tipArea->setMsg(QStringLiteral("是否发动戒骄戒躁？"));
-    decisionArea->enable(0);
-    decisionArea->enable(1);
-}
-
 void HongLian::XingHongShiZi()
 {
     state = 2803;
@@ -130,7 +122,6 @@ void HongLian::onOkClicked()
         text=tipArea->getBoxCurrentText();
         switch (text[0].digitValue()){
         case 1:
-            JieJiaoJieZaoUsed = false;
             emit sendCommand("2802;"+QString::number(myID)+";");
             attackOrMagic();
             break;
@@ -159,12 +150,6 @@ void HongLian::onOkClicked()
         emit sendCommand(command);
         gui->reset();
         break;
-    case 2802:
-        command = "36;1;";
-        JieJiaoJieZaoUsed = true;
-        emit sendCommand(command);
-        gui->reset();
-        break;
     case 2803:
         command = "2803;";
         command+=QString::number(selectedPlayers[0]->getID())+";"+QString::number(myID)+";";
@@ -190,11 +175,6 @@ void HongLian::onCancelClicked()
         break;
     case 2812:
         XueXingDaoYan1();
-        break;
-    case 2802:
-        command = "36;0;";
-        emit sendCommand(command);
-        gui->reset();
         break;
     case 2803:
         if(actionFlag==0)
@@ -229,19 +209,13 @@ void HongLian::askForSkill(QString skill)
         ShaLuShengYan();
     else if(skill==QStringLiteral("血腥祷言"))
         XueXingDaoYan1();
-    else if(skill==QStringLiteral("戒骄戒躁"))
-        JieJiaoJieZao();
 }
 
 void HongLian::additionalAction()
 {
     Role::additionalAction();
-    if(JieJiaoJieZaoUsed)
-        tipArea->addBoxItem(QStringLiteral("1.额外攻击或法术（戒骄戒躁）"));
+    Player* myself=dataInterface->getMyself();
+    if(myself->getEnergy()>0 && myself->getTap())
+        tipArea->addBoxItem(QStringLiteral("1.戒骄戒躁"));
 }
 
-void HongLian::turnBegin()
-{
-    Role::turnBegin();
-    JieJiaoJieZaoUsed = false;
-}

@@ -10,7 +10,6 @@ public:
     void normal();
     void askForSkill(QString skill);
     void turnBegin();
-    void attackAction();
     void additionalAction();
     void MoGuanChongJiHit();
     void DuoChongSheJi();
@@ -18,13 +17,12 @@ public:
     void ChongNengMoYan2();
     void ChongNengGaiPai();
     void MoYanGaiPai();
+    void MoGuanChongJi();
 public slots:
     void onOkClicked();
     void onCancelClicked();
     void cardAnalyse();
-    void coverCardAnalyse();
-    void resign();
-    void MoGuanChongJi();
+    void coverCardAnalyse();    
     void LeiGuangSanShe();
 private:
     bool MoGuanChongJiUsed;

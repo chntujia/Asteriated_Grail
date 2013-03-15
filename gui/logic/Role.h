@@ -22,6 +22,7 @@ public:
     virtual void moDaned(int nextID, int sourceID, int howMany);
     virtual void cure(int cross,int harmPoint,int type, int crossAvailable);
     virtual void askForSkill(QString skill);
+    void setAttackTarget();
     void drop(int howMany);
     void dropCover(int howMany);
     void unactionalCheck();

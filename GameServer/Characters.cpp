@@ -243,7 +243,7 @@ void BowLady::snipe(QList<void *> args)
     PlayerEntity* dst = this->engine->getPlayerByID(magic->dstID);
     if(dst->getHandCardNum() < 5)
     {
-        this->engine->drawCards(5 - dst->getHandCardNum(),NOTHARMED,dst);
+        this->engine->drawCards(5 - dst->getHandCardNum(),NOTHARMED,dst,this);
     }
     this->engine->addActionNum(ATTACK);
 }
@@ -501,7 +501,7 @@ void AnSha::FanShi(QList<void*> args)
     if(this != (PlayerEntity*)args[1] || ((Harm*)args[2])->type!=1)
             return;
     coder.notice("暗杀者发动【反噬】");
-    engine->drawCards(1,0,(PlayerEntity*)args[0]);
+    engine->drawCards(1,0,(PlayerEntity*)args[0],this);
 
 }
 
@@ -1162,7 +1162,7 @@ void MoJian::HeiAnZhenChan2(QList<void*> args)
     if(this != (PlayerEntity*)args[0]||!isHeiAnZhenChan)
         return;
     isHeiAnZhenChan=false;
-    engine->drawCards(getHandCardMax()-getHandCardNum(),0,this);
+    engine->drawCards(getHandCardMax()-getHandCardNum(),0,this,this);
 }
 
 void MoJian::HeiAnZhenChan3(QList<void *> args)
@@ -1645,7 +1645,7 @@ void ZhongCai::PanJueTianPing(QList<void *> args)
     if(magic->infor2)
     {
         int drawNum=this->getHandCardMax()-this->getHandCardNum();
-        engine->drawCards(drawNum,0,this);
+        engine->drawCards(drawNum,0,this,this);
         teamArea.setGem(color,teamArea.getGem(color)+1);
         coder.stoneNotice(color,teamArea.getGem(color),teamArea.getCrystal(color));
     }
@@ -3019,7 +3019,7 @@ void WuNv::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(TongShengGongSi(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(XueZhiAiShang(QList<void*>)));
     connect(engine,SIGNAL(handCardsChange(PlayerEntity*)),this,SLOT(ToPuTongXingtai(PlayerEntity*)));
-    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(ToLiuXueXingTai(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*,PlayerEntity*)),this,SLOT(ToLiuXueXingTai(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(LiuXue(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(NiLiu(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(XueZhiBeiMing(QList<void*>)));
@@ -3035,7 +3035,7 @@ void WuNv::TongShengGongSi(QList<void *> args)
     if(magic->infor1 != 2301)
         return;
     coder.notice("巫女对玩家"+QString::number(magic->dstID)+"发动【同生共死】");
-    engine->drawCards(2, 0, this);
+    engine->drawCards(2, 0, this,this);
     TongShengID = magic->dstID;
     coder.specialNotice(TongShengID,3,1);
     PlayerEntity* dst = engine->getPlayerByID(magic->dstID);
@@ -3256,7 +3256,7 @@ LingHun::LingHun(BackgroundEngine *engine, int id, int color):PlayerEntity(engin
 
 void LingHun::makeConnection(BackgroundEngine *engine)
 {
-    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(LingHunTunShi(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*,PlayerEntity*)),this,SLOT(LingHunTunShi(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(specialFinishSIG(QList<void*>)),this,SLOT(LingHunTunShi2(QList<void*>)));
     connect(engine,SIGNAL(loseMoraleHeChengSIG(int,int*,PlayerEntity*)),this,SLOT(LingHunTunShi3(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(LingHunZhaoHuan(QList<void*>)));
@@ -3345,11 +3345,11 @@ void LingHun::LingHunJingXiang(QList<void *> args)
     PlayerEntity* dst=engine->getPlayerByID(magic->dstID);
     int drawNum=3;
     if(dst->getHandCardMax()-dst->getHandCardNum()>=3)
-        engine->drawCards(drawNum,0,dst);
+        engine->drawCards(drawNum,0,dst,this);
     else
     {
         drawNum=dst->getHandCardMax()-dst->getHandCardNum();
-        engine->drawCards(drawNum,0,dst);
+        engine->drawCards(drawNum,0,dst,this);
     }
 }
 
@@ -3574,7 +3574,7 @@ void HongLian::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(askForHeal(Harm,PlayerEntity*,PlayerEntity*,int*,QString)),this,SLOT(XingHongXinYang(Harm,PlayerEntity*,PlayerEntity*,int*,QString)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(XueXingDaoYan(QList<void*>)));
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(ShaLuShengYan(QList<void*>)));
-    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(ToReXueFeiTeng(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*,PlayerEntity*)),this,SLOT(ToReXueFeiTeng(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(beforeLoseMoralSIG(int,int*,PlayerEntity*)),this,SLOT(ReXueFeiTeng(int,int*,PlayerEntity*)));
     connect(engine,SIGNAL(turnEndPhaseSIG(PlayerEntity*)),this,SLOT(OutReXueFeiTeng(PlayerEntity*)));
     connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(JieJiaoJieZao1(QList<void*>)));
@@ -3696,21 +3696,10 @@ void HongLian::OutReXueFeiTeng(PlayerEntity * currunt)
 
 void HongLian::JieJiaoJieZao1(QList<void *> args)
 {
-    if(this != ((PlayerEntity*)args[0])||this->getEnergy() <= 0||!tap)
+    if(this != ((PlayerEntity*)args[0])||this->getEnergy() <= 0||!tap||JieJiaoJieZaoCounted)
         return;
-    coder.askForSkill(this->getID(),"戒骄戒躁");
-    if(messageBuffer::readInfor() == 0)
-        return;
-    coder.notice("红莲骑士发动【戒骄戒躁】");
-    if(getCrystal()>0)
-        crystal--;
-    else
-        gem--;
-    coder.energyNotice(this->getID(),gem,crystal);
-
-    tap = false;
-    coder.tapNotice(this->getID(),0,"【普通形态】");
     engine->addActionNum(ATTACKORMAGIC);
+    JieJiaoJieZaoCounted=true;
 }
 
 void HongLian::JieJiaoJieZao2(QList<void *> args)
@@ -3718,7 +3707,16 @@ void HongLian::JieJiaoJieZao2(QList<void *> args)
     BatInfor *skill = (BatInfor*)args[0];
     if(id != skill->srcID||skill->infor1!=2802)
         return;
-    coder.notice("红莲骑士使用【戒骄戒躁】的攻击或法术行动");
+    JieJiaoJieZaoCounted=false;
+    coder.notice("红莲骑士发动【戒骄戒躁】");
+    if(getCrystal()>0)
+        crystal--;
+    else
+        gem--;
+    coder.energyNotice(id,gem,crystal);
+
+    tap = false;
+    coder.tapNotice(id,0,"【普通形态】");
 }
 
 void HongLian::XingHongShiZi(QList<void *> args)
@@ -3757,6 +3755,7 @@ void HongLian::skillReset(QList<void *> args)
     if(this != (PlayerEntity*)args[0])
         return;
     XingHongShengYueUsed = false;
+    JieJiaoJieZaoCounted=false;
 }
 LingFu::LingFu(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,id,color)
 {
@@ -3983,7 +3982,7 @@ void MoQiang::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(AnZhiJieFang2(QList<void*>)));
     connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(AnZhiJieFang3(QList<void*>)));
     connect(engine,SIGNAL(actionPhaseSIG(QList<void*>)),this,SLOT(HuanYingXingChen(QList<void*>)));
-    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*)),this,SLOT(HuanYingXingChen2(int,int*,PlayerEntity*)));
+    connect(engine,SIGNAL(trueLoseMoraleSIG(int,int*,PlayerEntity*,PlayerEntity*)),this,SLOT(HuanYingXingChen2(int,int*,PlayerEntity*,PlayerEntity*)));
     connect(engine,SIGNAL(timeLine3SIG(QList<void*>)),this,SLOT(AnZhiBiZhang(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(ChongYing1(QList<void*>)));
     connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(ChongYing2(QList<void*>)));
@@ -4045,10 +4044,9 @@ void MoQiang::HuanYingXingChen(QList<void *> args)
     if(StartUsed || !JieFangUsed)
         return;
     BatInfor huanying;
-    if(!HuanYingUsed){
     coder.askForSkill(id,"幻影星辰");
     huanying=messageBuffer::readBatInfor();
-    }
+
     BatInfor huanying2;
     if(huanying.reply==0)
         return;
@@ -4088,14 +4086,11 @@ void MoQiang::HuanYingXingChen(QList<void *> args)
     FirstTrun=false;
 }
 
-void MoQiang::HuanYingXingChen2(int harmed, int *howMany, PlayerEntity *dst)
+void MoQiang::HuanYingXingChen2(int harmed, int *howMany, PlayerEntity *dst,PlayerEntity*src)
 {
-    if(dst->getID()!=this->getID())
+    if(!HuanYingUsed||dst!=this||src!=this||*howMany==0)
         return;
-    if(*howMany==0)
-        return;
-    if(HuanYingUsed)
-        HuanYingUsed=false;
+    HuanYingUsed=false;
 }
 
 void MoQiang::AnZhiBiZhang(QList<void *> args)
@@ -4267,6 +4262,14 @@ void JianDi::makeConnection(BackgroundEngine *engine)
     connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(EMoZhiHun2(QList<void*>)));
     connect(engine,SIGNAL(attackFinishSIG(QList<void*>)),this,SLOT(BuQuYiZhi(QList<void*>)));
     connect(engine,SIGNAL(additonalActionSIG(QList<void*>)),this,SLOT(BuQuYiZhi2(QList<void*>)));
+    connect(engine,SIGNAL(turnBeginPhaseSIG(QList<void*>)),this,SLOT(skillReset(QList<void*>)));
+}
+
+void JianDi::skillReset(QList<void *> args)
+{
+    if(this != (PlayerEntity*)args[0])
+        return;
+    BuQuCounted=false;
 }
 
 void JianDi::JianHunShouHu(QList<void *> args)
@@ -4455,17 +4458,18 @@ void JianDi::EMoZhiHun2(QList<void *> args)
 
 void JianDi::BuQuYiZhi(QList<void *> args)
 {
-    if(this != (PlayerEntity*)args[0])
+    if(this != (PlayerEntity*)args[0]||BuQuCounted)
         return;
     if(this->getEnergy()==0)
         return;    
     engine->addActionNum(ATTACK);
+    BuQuCounted=true;
 }
 
 void JianDi::BuQuYiZhi2(QList<void *> args)
 {
     if(engine->checkEnd())
-        return;
+        return;    
     BatInfor *skill = (BatInfor*)args[0];
     if(id != skill->srcID||skill->infor1!=1906)
         return;
@@ -4473,11 +4477,10 @@ void JianDi::BuQuYiZhi2(QList<void *> args)
         crystal--;
     else
         gem--;
-    setGem(gem);
-    setCrystal(crystal);
+    BuQuCounted=false;
     coder.energyNotice(id,gem,crystal);
     coder.notice(QStringLiteral("剑帝发动【不屈意志】"));
-    engine->drawCards(1,0,this);
+    engine->drawCards(1,0,this,this);
     setToken(0,token[0]+1);
     coder.tokenNotice(id,0,token[0]);
 }
@@ -4526,7 +4529,7 @@ void DieWu::WuDong(QList<void *> args)
     else
     {
         coder.notice("蝶舞发动【舞动】，摸一张手牌");
-        engine->drawCards(1,0,this);
+        engine->drawCards(1,0,this,this);
     }
     QList<CardEntity*> jian = engine->drwaCardsForCover(1);
     engine->moveCardFrom(jian[0]);
@@ -4764,7 +4767,7 @@ MoGong::MoGong(BackgroundEngine *engine, int id, int color):PlayerEntity(engine,
 
 void MoGong::makeConnection(BackgroundEngine *engine)
 {
-    connect(engine,SIGNAL(skillAttack(QList<void*>)),this,SLOT(MoGuanChongJi(QList<void*>)));
+    connect(engine,SIGNAL(timeLine1SIG(QList<void*>)),this,SLOT(MoGuanChongJi(QList<void*>)));
     connect(engine,SIGNAL(timeLine2hitSIG(QList<void*>)),this,SLOT(MoGuanChongJiHit(QList<void*>)));
     connect(engine,SIGNAL(timeLine2missedSIG(QList<void*>)),this,SLOT(MoGuanChongJiMiss(QList<void*>)));
     connect(engine,SIGNAL(skillMagic(QList<void*>)),this,SLOT(LeiGuangSanShe(QList<void*>)));
@@ -4777,19 +4780,26 @@ void MoGong::makeConnection(BackgroundEngine *engine)
 
 void MoGong::MoGuanChongJi(QList<void *> args)
 {
-    BatInfor *skill = (BatInfor*)args[0];
-    if(skill->srcID != id || skill->infor1 != 2601)
+    if(this != ((PlayerEntity*)args[0])||coverCards.size()==0||ChongNengUsed||DuoChongSheJiUsed)
         return;
+    PlayerEntity* dst=(PlayerEntity*)args[1];
+    if(dst->getHandCardNum()>=dst->getHandCardMax())
+        return;
+    coder.askForSkill(id,"魔贯冲击");
+    BatInfor ans = messageBuffer::readBatInfor();
+    if(ans.reply == 0)
+        return;
+    CardEntity *chongNeng = getCardByID(ans.CardID);
+    QList<CardEntity*> chongNengs;
+    chongNengs << chongNeng;
+    engine->moveCardFromCoverToDiscard(chongNeng,true);
     MoGuanChongJiUsed = true;
     MoGuanCHongJiUsing = true;
     coder.notice("魔弓发动【魔贯冲击】");
 
-    QList<CardEntity*> chongNeng;
-    chongNeng << getCardByID(skill->infor2);
-    engine->moveCardFromCoverToDiscard(chongNeng[0],true);
     this->setToken(2,this->getCoverCards().count());
     coder.tokenNotice(this->getID(),2,this->getCoverCards().count());
-    coder.coverCardNotice(this->getID(),1,chongNeng,true,true);
+    coder.coverCardNotice(this->getID(),1,chongNengs,true,true);
 }
 
 void MoGong::MoGuanChongJiHit(QList<void *> args)
@@ -4876,10 +4886,10 @@ void MoGong::LeiGuangSanShe(QList<void *> args)
 
 void MoGong::DuoChongSheJi1(QList<void *> args)
 {
-    if(this != ((PlayerEntity*)args[0])||coverCards.size()==0||MoGuanChongJiUsed)
+    if(this != ((PlayerEntity*)args[0])||coverCards.size()==0||MoGuanChongJiUsed||DuoChongSheJiCounted)
         return;
     engine->addActionNum(ATTACK);
-
+    DuoChongSheJiCounted=true;
 }
 
 void MoGong::DuoChongSheJi2(QList<void *> args)
@@ -4887,6 +4897,7 @@ void MoGong::DuoChongSheJi2(QList<void *> args)
     BatInfor *skill = (BatInfor*)args[0];
     if(id != skill->srcID||skill->infor1!=2605)
         return;
+    DuoChongSheJiCounted=false;
     coder.notice("魔弓发动【多重射击】");
     *(int*)args[1]=0;
     DuoChongSheJiUsed=true;
@@ -4934,7 +4945,7 @@ void MoGong::ChongNengMoYan(QList<void *> args)
             coder.discardNotice(id,cards.size(),"n",cards);
             this->removeHandCards(cards,false);
         }
-        engine->drawCards(start.infor3,0,this);
+        engine->drawCards(start.infor3,0,this,this);
         coder.askForSkill(this->getID(),"充能盖牌");
         QString msg=messageBuffer::readMsg();
         QStringList arg=msg.split(";");
@@ -4960,7 +4971,7 @@ void MoGong::ChongNengMoYan(QList<void *> args)
         MoYanUsed = true;
         PlayerEntity* dst;
         if(start.dstID==-1)
-            engine->drawCards(3,0,this);
+            engine->drawCards(3,0,this,this);
         else
         {
             dst = engine->getPlayerByID(start.dstID);
@@ -5000,4 +5011,5 @@ void MoGong::skillReset(QList<void *> args)
     MoYanUsed = false;
     ChongNengUsed = false;
     DuoChongSheJiUsing = false;
+    DuoChongSheJiCounted=false;
 }

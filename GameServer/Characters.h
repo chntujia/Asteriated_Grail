@@ -484,6 +484,7 @@ public slots:
     void skillReset(QList<void*> args);
 private:
     bool XingHongShengYueUsed;
+    bool JieJiaoJieZaoCounted;
 };
 
 //灵魂
@@ -543,7 +544,7 @@ public slots:
     void AnZhiJieFang2(QList<void *> args);
     void AnZhiJieFang3(QList<void *> args);
     void HuanYingXingChen(QList<void*> args);
-    void HuanYingXingChen2(int harmed,int*howMany,PlayerEntity*dst);
+    void HuanYingXingChen2(int harmed, int*howMany, PlayerEntity*dst, PlayerEntity *src);
     void AnZhiBiZhang(QList<void*> args);
     void ChongYing1(QList<void*> args);
     void ChongYing2(QList<void *> args);
@@ -582,8 +583,10 @@ public slots:
     void EMoZhiHun2(QList<void *> args);
     void BuQuYiZhi(QList<void*> args);
     void BuQuYiZhi2(QList<void *> args);
+    void skillReset(QList<void*> args);
 private:
     int TianshiOrEmo;//0-皆不是，1-天使，2-恶魔
+    bool BuQuCounted;
     bool HunUsed;
 };
 
@@ -627,6 +630,7 @@ public slots:
     void ChongNengMoYan(QList<void*> args);
     void skillReset(QList<void*> args);
 private:
+    bool DuoChongSheJiCounted;
     bool ChongNengUsed;
     bool MoYanUsed;
     bool MoGuanChongJiUsed;

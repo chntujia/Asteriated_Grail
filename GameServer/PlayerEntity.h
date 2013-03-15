@@ -20,9 +20,9 @@ public:
     //连接信号槽
     void makeConnection(BackgroundEngine* engine);
     //增加手牌操作
-    void addHandCards(QList<CardEntity*> newCard,int harmed,bool fromPile=true);
+    void addHandCards(QList<CardEntity*> newCard, int harmed, PlayerEntity *src, bool fromPile=true);
     //暴牌处理
-    void cardsOverLoad(int harmed);
+    void cardsOverLoad(int harmed, PlayerEntity *src=NULL);
     void coverOverLoad();
     //移除手牌操作
     void removeHandCards(QList<CardEntity*> oldCard,bool show,bool toDiscardPile = true);
@@ -99,7 +99,7 @@ signals:
     //蝶舞锁士气信号
     void fixMoraleSIG(int harmed,int* howMany,PlayerEntity* dst);
     //真实士气下降信号（巫女红莲进入状态使用）
-    void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst);
+    void trueLoseMoraleSIG(int harmed, int* howMany, PlayerEntity* dst,PlayerEntity* src);
     //检查结束信号
     void checkEndSIG();
     //发送通讯信息

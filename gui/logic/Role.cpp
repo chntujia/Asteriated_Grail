@@ -108,29 +108,9 @@ void Role::cardAnalyse()
                 playerArea->enablePlayerItem(nextCounterClockwise);
             }
         }
-//        if(myself->getID()==14&&myself->getToken(0)==4)
-//            handArea->disableAll();
         else
     case 10:
-        {
-            playerArea->reset();
-            playerArea->enableEnemy();
-            QList<Player*> players=dataInterface->getPlayerList();
-            for(i=0;i<players.size();i++)
-                if(players[i]->getRoleID()==5 && players[i]->getTap()==1){
-                    playerArea->disablePlayerItem(i);
-                    break;
-                }
-            if(myself->getSpecial(1) == 1)
-            {
-                playerArea->disableAll();
-                for(i=0;i<players.size();i++)
-                    if(players[i]->getRoleID()==21){
-                        playerArea->enablePlayerItem(i);
-                        break;
-                    }
-            }
-        }
+            setAttackTarget();
     break;
 //attacked reply
     case 2:
@@ -175,6 +155,24 @@ void Role::cardAnalyse()
 void Role::playerAnalyse()
 {
     decisionArea->enable(0);
+}
+
+void Role::setAttackTarget()
+{
+    playerArea->reset();
+    playerArea->enableEnemy();
+//潜行
+    for(int i=0;i<playerList.size();i++)
+        if(playerList[i]->getRoleID()==5 && playerList[i]->getTap()==1){
+            playerArea->disablePlayerItem(i);
+            break;
+        }
+//挑衅
+    if(playerList[myID]->getSpecial(1) == 1)
+        for(int i=0;i<playerList.size();i++)
+            if(playerList[i]->getRoleID()!=21)
+                playerArea->disablePlayerItem(i);
+
 }
 
 void Role::exchangeCards()
@@ -532,7 +530,7 @@ void Role::ChongYing(int color)
     if(myself->getRoleName()!=QStringLiteral("[魔枪]"))
         tipArea->setMsg(QStringLiteral("弃一张牌，法术或雷将会为魔枪加1伤害"));
     else
-        tipArea->setMsg(QStringLiteral("弃一张牌"));
+        tipArea->setMsg(QStringLiteral("可弃一张牌"));
     if(handArea->getHandCardItems().size()==0)
         decisionArea->enable(3);
     else if(color==myself->getColor())
@@ -1189,7 +1187,7 @@ void Role::decipher(QString command)
             state=7;
             decisionArea->enable(0);
             decisionArea->enable(1);
-            tipArea->setMsg(QStringLiteral("你被虚弱了，选是跳过行动阶段，选否摸")+arg[2]+QStringLiteral("张牌"));
+            tipArea->setMsg(QStringLiteral("你被虚弱了,【确定】跳过行动阶段,【取消】摸")+arg[2]+QStringLiteral("张牌"));
         }
         break;
 //虚弱结果
@@ -1328,8 +1326,6 @@ void Role::decipher(QString command)
         }
         playerArea->update();
         gui->logAppend(msg);
-        gui->reset();
-        gui->setEnable(0);
         break;
 //手牌上限变更通知
     case 40:

@@ -1,5 +1,4 @@
 #include "ShenGuan.h"
-#include <QApplication>
 
 ShenGuan::ShenGuan()
 {

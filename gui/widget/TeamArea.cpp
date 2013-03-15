@@ -74,6 +74,7 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
     int offset=21;
     int morale=red->getMorale();
+    morale=morale>0?morale:0;
     painter->drawPixmap(0, 0, background);
     for(i=0;i<morale/avg;i++) //士气
         painter->drawPixmap(i*(Rdice[1].width()+2)+offset,19,Rdice[avg-1]);
@@ -114,6 +115,7 @@ void TeamArea::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->drawPixmap((Rgrail.width()+4)*i+offset,4,Bgrail);
 
     morale=blue->getMorale();
+    morale=morale>0?morale:0;
     offset=737;
     painter->drawPixmap(offset,4,Num[morale/10]);
     painter->drawPixmap(offset+Num[0].width(),4,Num[morale%10]);

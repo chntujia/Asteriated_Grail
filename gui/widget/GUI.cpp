@@ -15,6 +15,7 @@ void GUI::reset()
     decisionArea->reset();
 
     coverArea->reset();
+    showCoverArea(false);
 }
 
 void GUI::setEnable(bool flag)

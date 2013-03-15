@@ -96,7 +96,7 @@ void JianDi::askForSkill(QString skill)
 void JianDi::additionalAction()
 {
     Role::additionalAction();
-    if(usedAttack)
+    if(usedAttack && dataInterface->getMyself()->getEnergy()>0)
         tipArea->addBoxItem(QStringLiteral("1.不屈意志"));
 }
 
@@ -155,9 +155,6 @@ void JianDi::onOkClicked()
         cardID = QString::number(selectedCoverCards[0]->getID());
         command += cardID + ";";
         emit sendCommand(command);
-
-        coverArea->reset();
-        gui->showCoverArea(false);
         gui->reset();
         break;
     case 1904:
@@ -165,9 +162,6 @@ void JianDi::onOkClicked()
         cardID = QString::number(selectedCoverCards[0]->getID());
         command += cardID + ";";
         emit sendCommand(command);
-
-        coverArea->reset();
-        gui->showCoverArea(false);
         gui->reset();
         break;
     }

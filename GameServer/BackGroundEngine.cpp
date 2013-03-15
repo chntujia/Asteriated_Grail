@@ -3,7 +3,7 @@
 #include "Server.h"
 #include <QTextStream>
 #include <QFile>
-
+#include <QDebug>
 void TeamArea::initialTeam()
 {
     this->moraleBLUE = 15;
@@ -495,7 +495,7 @@ bool BackgroundEngine::checkEnd()
     return !playing;
 }
 //摸牌函数
-void BackgroundEngine::drawCards(int num,int harmed,PlayerEntity* player)
+void BackgroundEngine::drawCards(int num,int harmed,PlayerEntity* dst,PlayerEntity* src)
 {
     QList<CardEntity*> newCards;
     for(int i = 0;i < num;i++)
@@ -507,9 +507,9 @@ void BackgroundEngine::drawCards(int num,int harmed,PlayerEntity* player)
         newCards << this->pile.takeLast();
     }
 
-    coder.drawNotice(player->getID(),num,newCards);
+    coder.drawNotice(dst->getID(),num,newCards);
     //命令该玩家增加手牌
-    player->addHandCards(newCards,harmed);
+    dst->addHandCards(newCards,harmed,src);
 }
 QList<CardEntity *> BackgroundEngine::drwaCardsForCover(int num)
 {
@@ -561,11 +561,7 @@ void BackgroundEngine::weakProcess(PlayerEntity* player,int howMany)
     }
     else if(reply == 1)
     {
-
         //强摸
-
-
-
         coder.weakNotice(player->getID(),1,howMany);
         this->drawCards(howMany,0,player);
     }
@@ -676,12 +672,14 @@ void BackgroundEngine::addActionNum(int kind)
     {
     case ATTACK:
         this->attackLeft++;
+        qDebug()<<"ATTACK";
         break;
     case MAGIC:
         this->magicLeft++;
         break;
     case ATTACKORMAGIC:
         this->attackOrMagicLeft++;
+        qDebug()<<"ATTACKORMAGIC";
         break;
     case SPECIAL:
         this->specialLeft++;
@@ -690,6 +688,7 @@ void BackgroundEngine::addActionNum(int kind)
         this->actionLeft++;
         break;
     }
+    qDebug()<<"ATTACK"<<attackLeft<<"MAGIC"<<magicLeft<<"ATTACKORMAGIC"<<attackOrMagicLeft<<"SPECIAL"<<specialLeft<<"ALLACTION"<<actionLeft;
 }
 
 
@@ -888,8 +887,8 @@ void BackgroundEngine::effectApply(CardEntity* card,PlayerEntity* user,PlayerEnt
     card->setSrcUser(userID);
     card->setOwner(dstID);
     card->setPlace(EFFECT);
-    user->removeHandCards(cards,true,false);
     coder.moveCardNotice(1,cards,userID,HAND,dstID,EFFECT);
+    user->removeHandCards(cards,true,false);    
     dst->addBasicEffect(card);
     if(card->getName()==QStringLiteral("圣盾")||card->getSpecialityList().contains(QStringLiteral("天使之墙")))
         emit usedShield(userID);
@@ -945,6 +944,8 @@ void BackgroundEngine::useMagicCard(int cardID, int srcID, int dstID)
 //以下为时间轴函数
 void BackgroundEngine::timeLine1(CardEntity* attackCard,PlayerEntity* src,PlayerEntity* dst,bool isActiveAttack)
 {   
+    if(!playing)
+        return;
     Harm harm = getHarmFromCard(attackCard);
     int attackType = (attackCard->getElement() == "darkness")?NOREPLY:NORMAL;
     QList<void*> args;
@@ -961,6 +962,8 @@ void BackgroundEngine::timeLine1(CardEntity* attackCard,PlayerEntity* src,Player
 
 void BackgroundEngine::timeLine2(CardEntity* harmCard,PlayerEntity* src,PlayerEntity* dst,bool isActiveAttack,int attackType,Harm harm)
 {
+    if(!playing)
+        return;
     coder.askForReBat(attackType,harmCard->getID(),dst->getID(),src->getID());
     //当攻击是必中时，不接受客户端回应
     //emit askForReply(dst->getHandCards(),element,dst->getID());
@@ -1086,6 +1089,8 @@ Harm BackgroundEngine::getHarmFromCard(CardEntity* card)
 
 void BackgroundEngine::timeLine3(Harm harm, PlayerEntity *src, PlayerEntity *dst,QString magicReason)
 {
+    if(!playing)
+        return;
     QList<void*> arg;
     arg << src;
     arg << dst;
@@ -1101,6 +1106,8 @@ void BackgroundEngine::timeLine3(Harm harm, PlayerEntity *src, PlayerEntity *dst
 
 void BackgroundEngine::timeLine4(Harm harm,PlayerEntity *src,PlayerEntity *dst,QString magicReason)
 {
+    if(!playing)
+        return;
     int crossUsed = 0;
     int crossAvailable = dst->getCrossNum();
     emit askForHeal(harm,src,dst,&crossAvailable, magicReason);
@@ -1115,6 +1122,8 @@ void BackgroundEngine::timeLine4(Harm harm,PlayerEntity *src,PlayerEntity *dst,Q
 
 void BackgroundEngine::timeLine5(Harm harm,PlayerEntity *src,PlayerEntity *dst,int cross)
 {
+    if(!playing)
+        return;
     if(cross>0)
     {
         harm.harmPoint -= cross;
@@ -1134,6 +1143,8 @@ void BackgroundEngine::timeLine5(Harm harm,PlayerEntity *src,PlayerEntity *dst,i
 
 void BackgroundEngine::timeLine6(Harm harm,PlayerEntity *src,PlayerEntity *dst)
 {
+    if(!playing)
+        return;
     QList<void*> arg;
     arg << src;
     arg << dst;
@@ -1141,7 +1152,7 @@ void BackgroundEngine::timeLine6(Harm harm,PlayerEntity *src,PlayerEntity *dst)
     emit timeLine6SIG(arg);
     if(harm.harmPoint == 0)
         return;
-    this->drawCards(harm.harmPoint,harm.type,dst);
+    this->drawCards(harm.harmPoint,harm.type,dst,src);
     if(!playing)
         return;
     emit timeLine6DrawedSIG(arg);

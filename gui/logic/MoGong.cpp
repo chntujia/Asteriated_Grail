@@ -5,11 +5,9 @@ MoGong::MoGong()
     makeConnection();
     setMyRole(this);
 
-    Button *moGuangChongJi, *leiGuangSanShe, *checkCover;
-    moGuangChongJi=new Button(3,"魔贯冲击");
-    buttonArea->addButton(moGuangChongJi);
-    connect(moGuangChongJi,SIGNAL(buttonSelected(int)),this,SLOT(MoGuanChongJi()));
-    leiGuangSanShe=new Button(4,"雷光散射");
+    Button *leiGuangSanShe, *checkCover;
+
+    leiGuangSanShe=new Button(3,"雷光散射");
     buttonArea->addButton(leiGuangSanShe);
     connect(leiGuangSanShe,SIGNAL(buttonSelected(int)),this,SLOT(LeiGuangSanShe()));
 
@@ -24,37 +22,24 @@ MoGong::MoGong()
 void MoGong::normal()
 {
     Role::normal();
-    bool moguan = false;
-    bool enemyable = false;
-    Player*myself = dataInterface->getMyself();
+    bool hasThunder=false;
     foreach(Card*ptr,dataInterface->getCoverCards())
-    {
-        if(ptr->getElement()=="fire")
-            moguan = true;
         if(ptr->getElement()=="thunder")
-            buttonArea->enable(4);
-    }
-    foreach(Player*ptr,dataInterface->getPlayerList())
-    {
-        if(ptr->getColor()!=myself->getColor()&&ptr->getHandCardNum()<ptr->getHandCardMax())
-            enemyable = true;
-    }
-    if(!ChongNengUsed && !DuoChongSheJiUsed && moguan && enemyable)
+        {
+            hasThunder=true;
+            break;
+        }
+    if(hasThunder && !ChongNengUsed)
         buttonArea->enable(3);
-    if(ChongNengUsed)
-        buttonArea->disable(4);
     unactionalCheck();
 }
 
 void MoGong::MoGuanChongJi()
 {
     state=2601;
-    handArea->reset();
-    playerArea->reset();
-    tipArea->reset();
-    tipArea->setMsg("请选择火系充能");
+    gui->reset();
+    tipArea->setMsg("是否发动魔贯冲击？");
     gui->showCoverArea(true);
-    coverArea->reset();
     coverArea->enableElement("fire");
     coverArea->setQuota(1);
     decisionArea->enable(1);
@@ -180,17 +165,8 @@ void MoGong::MoYanGaiPai()
 void MoGong::cardAnalyse()
 {
     Role::cardAnalyse();
-    Player*myself=dataInterface->getMyself();
     switch(state)
     {
-    case 2601:
-        foreach(Player*ptr,dataInterface->getPlayerList())
-        {
-            if(ptr->getColor()!=myself->getColor()&&ptr->getHandCardNum()<ptr->getHandCardMax())
-                playerArea->enablePlayerItem(ptr->getID());
-        }
-        playerArea->setQuota(1);
-        break;
     case 2662:
         if(startChoice==1)
             decisionArea->enable(0);
@@ -205,14 +181,12 @@ void MoGong::cardAnalyse()
 void MoGong::coverCardAnalyse()
 {
     Role::coverCardAnalyse();
-    Player*myself=dataInterface->getMyself();
     QList<Card*> selectedCoverCards = this->coverArea->getSelectedCards();
     switch(state)
     {
     case 2601:
-        gui->showCoverArea(false);
-        handArea->enableAttack();
-        handArea->setQuota(1);
+        if(selectedCoverCards[0]->getElement()=="fire")
+            decisionArea->enable(0);
         break;
     case 2602:
         decisionArea->enable(0);
@@ -232,24 +206,8 @@ void MoGong::coverCardAnalyse()
         }
         break;
     case 2605:
-        playerArea->enableEnemy();
+        setAttackTarget();
         playerArea->disablePlayerItem(lastTarget);
-        int i;
-        QList<Player*> players=dataInterface->getPlayerList();
-        for(i=0;i<players.size();i++)
-            if(players[i]->getRoleID()==5 && players[i]->getTap()==1){
-                playerArea->disablePlayerItem(i);
-                break;
-            }
-        if(myself->getSpecial(1) == 1)
-        {
-            playerArea->disableAll();
-            for(i=0;i<players.size();i++)
-                if(players[i]->getRoleID()==21){
-                    playerArea->enablePlayerItem(i);
-                    break;
-                }
-        }
         break;
     }
 }
@@ -287,22 +245,15 @@ void MoGong::onOkClicked()
         break;
     case 2601:
         MoGuanChongJiUsed = true;
-        cardID=QString::number(selectedCards[0]->getID());
-        targetID=QString::number(selectedPlayers[0]->getID());
-        sourceID=QString::number(myID);
-        command="2601;"+cardID+";"+targetID+";"+sourceID+";"+QString::number(selectedCoverCards[0]->getID())+";";
-        lastTarget = selectedPlayers[0]->getID();
-        usedAttack=true;
-        usedMagic=usedSpecial=false;
-        dataInterface->removeHandCard(selectedCards[0]);
-        gui->reset();
+        command="2601;1;";
+        cardID = QString::number(selectedCoverCards[0]->getID());
+        command += cardID + ";";
         emit sendCommand(command);
+        gui->reset();
         break;
     case 2602:
         cardID=QString::number(selectedCoverCards[0]->getID());
         command="2602;1;"+cardID+";";
-        coverArea->reset();
-        gui->showCoverArea(false);
         gui->reset();
         emit sendCommand(command);
         break;
@@ -316,8 +267,6 @@ void MoGong::onOkClicked()
         foreach(Card*ptr,selectedCoverCards)
             command+=QString::number(ptr->getID())+":";
         command+=";";
-        coverArea->reset();
-        gui->showCoverArea(false);
         gui->reset();
         emit sendCommand(command);
         break;
@@ -328,8 +277,6 @@ void MoGong::onOkClicked()
         targetID=QString::number(selectedPlayers[0]->getID());
         sourceID=QString::number(myID);
         command="2605;"+cardID+";"+targetID+";"+sourceID+";"+QString::number(selectedCoverCards[0]->getID())+";";
-        coverArea->reset();
-        gui->showCoverArea(false);
         gui->reset();
         emit sendCommand(command);
         break;
@@ -400,13 +347,16 @@ void MoGong::onCancelClicked()
     switch(state)
     {
     case 2601:
+        MoGuanChongJiUsed = false;
+        command="2601;0;";
+        emit sendCommand(command);
+        gui->reset();
+        break;
     case 2603:
         normal();
         break;
     case 2602:
         command = "2602;0;-1;";
-        coverArea->reset();
-        gui->showCoverArea(false);
         gui->reset();
         emit sendCommand(command);
         break;
@@ -421,24 +371,6 @@ void MoGong::onCancelClicked()
         ChongNengMoYan1();
         break;
     }
-}
-
-void MoGong::attackAction()
-{
-    Role::attackAction();
-    bool moguan = false;
-    bool enemyable = false;
-    Player*myself = dataInterface->getMyself();
-    foreach(Card*ptr,dataInterface->getCoverCards())
-        if(ptr->getElement()=="fire")
-            moguan = true;
-    foreach(Player*ptr,dataInterface->getPlayerList())
-    {
-        if(ptr->getColor()!=myself->getColor()&&ptr->getHandCardNum()<ptr->getHandCardMax())
-            enemyable = true;
-    }
-    if(!ChongNengUsed && !DuoChongSheJiUsed && moguan && enemyable)
-        buttonArea->enable(3);
 }
 
 void MoGong::additionalAction()
@@ -467,11 +399,6 @@ void MoGong::askForSkill(QString skill)
         ChongNengGaiPai();
     else if(skill==QStringLiteral("魔眼盖牌"))
         MoYanGaiPai();
-}
-
-void MoGong::resign()
-{
-    Role::resign();
-    coverArea->reset();
-    gui->showCoverArea(false);
+    else if(skill==QStringLiteral("魔贯冲击"))
+        MoGuanChongJi();
 }
